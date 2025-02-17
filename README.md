@@ -2,6 +2,22 @@
 
 Se hace este proyecto para hacer pruebas de compatibilidad de recursos y definición de carpetas
 
+## Tecnologías y lenguajes
+
+- Next.js 14.2.24
+- TypeScript
+- Node.js 20.16
+- CSS modules
+- HighCharts, HighCharts Stock, Highcharts react official
+- DnD Kit (drag and drop)
+- EsLint
+- React Calendar / React datepicker
+- React CSV
+- React google maps
+- Redux tookit
+- Jest (unit test)
+- Axios (http request)
+
 ## Reglas de uso
 
 - Solicita acceso al archivo de one drive que define el uso de este proyecto
@@ -14,10 +30,6 @@ Se hace este proyecto para hacer pruebas de compatibilidad de recursos y definic
 
 **Inicio del proyecto**
 `npx create-next-app@14.2.24 prueba-blackfyre`
-
-**Librerías instaladas**
-` `
-` `
 
 **Instalar dependencias**
 `nvm install 20.16`
