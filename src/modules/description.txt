@@ -1,0 +1,18 @@
+Modulos según su funcionalidad
+
+Cada módulo puede tener estas carpetas
+/utils para funciones usadas en el módulo como de autenticación en el front
+/components
+Cada carpeta de components tiene su archivo de barril para exportar los Componentes
+Cada componente se guarda en su carpeta /miComponente
+Los archivos en /miComponente deben continuar con su nomeclatura
+miComponente.tsx -> MiComponente = () =>
+miComponente.module.css
+miComponente.model.ts
+miComponente.test.ts
+description.txt
+etc
+
+/constants para constantes usadas en el modulo
+/services para consumo de APIS relacionadas al módulo
+/state para manejar el estado global relacionado a este módulo

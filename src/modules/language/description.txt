@@ -1,0 +1,1 @@
+Manejar el lenguaje de la aplicación de manera global
