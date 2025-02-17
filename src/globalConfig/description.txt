@@ -1,0 +1,1 @@
+Aquí poner configuraciones globales para librerías
