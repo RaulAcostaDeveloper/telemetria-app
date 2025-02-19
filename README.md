@@ -36,7 +36,7 @@ Se está probando compatibilidad de recursos y definición de carpetas
 **Instalar dependencias**
 `nvm install 20.16`
 `nvm use 20`
-`node install`
+`npm install`
 
 **Levantar el proyecto en desarrollo**
 `npm run dev`
