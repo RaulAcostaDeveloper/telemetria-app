@@ -1,6 +1,7 @@
-# Prueba - Blackfyre Transtelemetrix
+# solid-snake - Blackfyre Transtelemetrix
 
-Se hace este proyecto para hacer pruebas de compatibilidad de recursos y definición de carpetas
+Se hace este proyecto para el producto Blackfyre - Transtelemetris
+Probando compatibilidad de recursos y definición de carpetas
 
 ## Tecnologías y lenguajes
 
@@ -29,7 +30,7 @@ Se hace este proyecto para hacer pruebas de compatibilidad de recursos y definic
 ## Comandos
 
 **Inicio del proyecto**
-`npx create-next-app@14.2.24 prueba-blackfyre`
+`npx create-next-app@14.2.24 solid-snake`
 
 **Instalar dependencias**
 `nvm install 20.16`
