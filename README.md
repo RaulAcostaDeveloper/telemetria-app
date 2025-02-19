@@ -1,7 +1,8 @@
 # solid-snake - Blackfyre Transtelemetrix
 
 Se hace este proyecto para el producto Blackfyre - Transtelemetris
-Probando compatibilidad de recursos y definición de carpetas
+
+Se está probando compatibilidad de recursos y definición de carpetas
 
 ## Tecnologías y lenguajes
 
@@ -43,3 +44,9 @@ Probando compatibilidad de recursos y definición de carpetas
 Abrir [http://localhost:3000](http://localhost:3000) en el navegador web para ver el proyecto en ejecución.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Ramas
+
+- production: Es la rama de despliegue a la aplicación
+
+- develop: Es la rama de pruebas pre-producción
