@@ -1,1 +1,3 @@
-Aquí poner configuraciones globales para librerías
+Aquí poner configuraciones globales
+Para elementos que no requieren su propio módulo, como las fuentes de letra
+y configuraciones de librerías

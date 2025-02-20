@@ -2,3 +2,19 @@
   padding: 0;
   margin: 0;
 }
+/* Variables para fuentes están declaradas en src\globalConfig\fonts\fonts.ts */
+
+/* Variables de CSS del proyecto */
+:root {
+  --company-color-1: #e8f7ff;
+  --company-color-2: #bdd5e1;
+  --company-color-3: #8ed2ef;
+  --company-color-4: #37718e;
+  --company-color-5: #254e70;
+  --company-color-6: #113154;
+}
+
+body {
+  font-family: var(--font-nunito);
+  font-weight: 400;
+}

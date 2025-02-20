@@ -1,0 +1,9 @@
+Esta carpeta es únicamente para páginas y rutas de la aplicación
+No meter lógica, componentes, etc.
+Si van a meter estilos, que sea estrictamente para la page.tsx, error.tsx, layout.tsx, etc.
+
+En page.tsx se renderiza lo que hay en la ruta raíz /
+El resto de rutas se deben declarar a partir de (pages)
+
+Ejemplo, para la ruta /login
+Crear page.tsx en src/app/(pages)/login
