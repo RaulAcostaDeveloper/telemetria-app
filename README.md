@@ -2,8 +2,6 @@
 
 Se hace este proyecto para el producto Blackfyre - Transtelemetris
 
-Se está probando compatibilidad de recursos y definición de carpetas
-
 ## Tecnologías y lenguajes
 
 - Next.js 14.2.24
