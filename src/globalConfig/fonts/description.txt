@@ -1,0 +1,17 @@
+Aquí vamos a declarar las fuentes de letra para este proyecto
+Las fuentes de letra (.woff, .ttl, otf, etc) se almacenan en /src/globalConfig/fonts/fonts/miFuente
+
+Exportar una constante con la configuración y la variable CSS para la fuente en el archivo fonts.ts 
+En /src/globalConfig/fonts/fonts.ts
+
+La variable de la nueva fuente debe seguir esta nomenclatura: "--font-nombre-característica"
+Ejemplo: "--font-nunito-italic"
+
+Importar en src\app\layout.tsx
+Añadir la variable al body
+
+Usar la variable en el módulo CSS deseado así:
+font-family: var(--font-nunito);
+
+La Fuente por defecto es --font-nunito
+Nota: no todas las fuentes soportan el rango de 100-900 de weight

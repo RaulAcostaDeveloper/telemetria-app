@@ -1,0 +1,3 @@
+En esta carpeta no hay un page.tsx porque es una ruta invisible
+Es solo para almacenar las rutas a partir de raíz /
+Por eso se llama (pages)
