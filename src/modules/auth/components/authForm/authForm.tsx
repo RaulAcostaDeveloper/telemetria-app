@@ -1,5 +1,5 @@
 import styles from "./authForm.module.css";
-import { LanguageSelector } from "@/modules/language/utils/languageSelector";
+import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
 
 export const AuthForm = () => {
   const LANGUAGE = LanguageSelector();

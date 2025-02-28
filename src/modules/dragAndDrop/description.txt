@@ -1,1 +1,0 @@
-Módulo para la configuración de los elementos de tipo drag and drop

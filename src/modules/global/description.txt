@@ -1,2 +1,2 @@
-Componentes globales que no están atados a un módulo en específico
-Ejemplo: barra de navegación, búsqueda global, etc.
+Configuraciones para elementos globales que no están atados a un módulo en específico.
+Ejemplo: drag and drop, tablas, configuración para el lenguaje, etc.

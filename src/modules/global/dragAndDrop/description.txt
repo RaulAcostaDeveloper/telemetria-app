@@ -1,0 +1,6 @@
+Módulo para la configuración de los elementos de tipo drag and drop
+Seguramente habrá que hacer un componente padre que reciba el children (el elemento en si)
+Además de recibir algunas opciones como los permisos,
+el tipo de elemento que está dentro (a que módulo pertenece), etc.
+
+Los Widgets van a ser utilizados en diferentes pantallas y módulos.

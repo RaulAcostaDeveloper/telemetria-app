@@ -1,4 +1,4 @@
-import { LanguageSelector } from "@/modules/language/utils/languageSelector";
+import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
 
 import Link from "next/link";
 
