@@ -1,1 +1,1 @@
-Modulo para los elementos de notificación
+Modulo para los elementos de alertas y notificación

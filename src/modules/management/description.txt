@@ -1,0 +1,1 @@
+Elementos relacionados a la gestión de recursos operativos.
