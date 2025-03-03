@@ -1,6 +1,8 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box; /*asegura que el ancho y alto incluyan padding y borde sin alterar el tamaño del contendor*/
+  font-size: 62.5%; /*Define 1rem como 10px, facilitando el cálculo y conversión de tamaños en CSS.*/
 }
 /* Variables para fuentes están declaradas en src\globalConfig\fonts\fonts.ts */
 
