@@ -1,10 +1,10 @@
 import { Header } from "../header/header";
 import { Menu } from "../menu/menu";
-import styles from "./headerContainer.module.css";
+import styles from "./mainWrapper.module.css";
 
-export const HeaderContainer = () => {
+export const MainWrapper = () => {
   return (
-    <div className={`${styles.headerContainer}`}>
+    <div className={`${styles.mainWrapper}`}>
       <Menu />
       <Header />
     </div>
