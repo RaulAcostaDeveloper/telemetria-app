@@ -1,0 +1,12 @@
+.menu {
+  background-color: var(--company-color-3);
+  height: 100vh;
+}
+
+.open {
+  width: 320px;
+}
+
+.close {
+  width: 80px;
+}
