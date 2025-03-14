@@ -1,7 +1,6 @@
 .menu {
   background-color: var(--company-color-3);
   height: 100vh;
-  float: left;
 }
 
 .open {
