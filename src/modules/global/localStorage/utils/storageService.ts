@@ -5,12 +5,12 @@ interface StorageItem<T> {
 
 // Clase para gestionar el LocalStorage
 
-export class StorageService {
+export const StorageService = {
   /**
    * Guarda un valor en localStorage con una clave específica.
    * Si se proporciona `ttl`, se establece una fecha de expiración.
    */
-  static setItem<T>(key: string, value: T, ttl?: number): void {
+  setItem<T>(key: string, value: T, ttl?: number): void {
     try {
       const data: StorageItem<T> = { value };
       if (ttl) {
@@ -20,13 +20,13 @@ export class StorageService {
     } catch (error) {
       console.error(`Error guardando ${key} en localStorage`, error);
     }
-  }
+  },
 
   /**
    * Obtiene un valor de localStorage.
    * Si tiene expiración y ya ha caducado, lo elimina y devuelve `null`.
    */
-  static getItem<T>(key: string): T | null {
+  getItem<T>(key: string): T | null {
     try {
       const item = localStorage.getItem(key);
       if (!item) return null;
@@ -43,23 +43,22 @@ export class StorageService {
       console.error(`Error obteniendo ${key} de localStorage`, error);
       return null;
     }
-  }
+  },
 
   /**
    * Elimina un ítem específico de localStorage.
    */
-  static removeItem(key: string): void {
+  removeItem(key: string): void {
     localStorage.removeItem(key);
-  }
+  },
 
   /**
    * Limpia todo el localStorage.
    */
-  static clearAllStorage(): void {
+  clearAllStorage(): void {
     localStorage.clear();
-  }
-}
-
+  },
+};
 // Ejemplo:
 // const initialCalendarDate = { // obtenerlo del calendario
 //  initialDate: "28-3-2025, 14:00:00",
