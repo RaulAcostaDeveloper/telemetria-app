@@ -1,8 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "./menu.module.css";
-import { StorageService } from "../../localStorage/utils/storageService";
 import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
+import {
+  localStorageGetItem,
+  localStorageSetItem,
+} from "../../localStorage/utils/storageService";
 
 export const Menu = () => {
   // Es importante que el valor inicial sea null
@@ -11,7 +14,7 @@ export const Menu = () => {
   useEffect(() => {
     // Inicialización del valor
     const defaultValue: boolean = true;
-    const storedValue: boolean | null = StorageService.getItem(
+    const storedValue: boolean | null = localStorageGetItem(
       STORAGE_KEYS.MENU_OPEN
     );
     // Si existe el valor en LocalStorage, lo asigna.
@@ -23,7 +26,7 @@ export const Menu = () => {
     // Actualización del elemento en LocalStorage
     // Usa el valor null para evita actualizarlo en el primer render
     if (isOpen !== null) {
-      StorageService.setItem(STORAGE_KEYS.MENU_OPEN, isOpen);
+      localStorageSetItem(STORAGE_KEYS.MENU_OPEN, isOpen);
     }
   }, [isOpen]);
 
