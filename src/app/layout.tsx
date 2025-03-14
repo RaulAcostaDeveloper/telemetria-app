@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Footer, Header, Menu } from "@/modules/global/components";
+import { Footer, HeaderContainer } from "@/modules/global/components";
 import {
   neuropolFont,
   nunitoFont,
@@ -22,8 +22,7 @@ export default function RootLayout({
       <body
         className={`${nunitoItalicFont.variable} ${nunitoFont.variable} ${neuropolFont.variable}`}
       >
-        <Header />
-        <Menu />
+        <HeaderContainer />
         {children}
         <Footer />
       </body>
