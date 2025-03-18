@@ -1,12 +1,36 @@
 .header {
   display: block;
   width: 100%;
+  min-height: 10vh;
   background-color: var(--company-color-6);
   color: white;
 }
+
 .navBar {
-  width: 85%; /* Mantiene una anchura del 80%, alineada con el contenido principal de las pantallas */
+  display: flex;
   min-height: 10vh;
+  justify-content: flex-start;
+  align-items: center;
+  width: 95%;
   margin: auto;
-  background-color: red;
+}
+
+.returnButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 10px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.returnButton:hover {
+  background-color: var(--company-color-4);
+}
+
+.returnButton svg {
+  font-size: 18px;
 }
