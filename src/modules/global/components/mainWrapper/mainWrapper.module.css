@@ -1,4 +1,5 @@
 /* Lo que hace este compmonente es solo contener a Menu y Header, procurar no meter más contenido o estilos */
 .mainWrapper {
   display: flex;
+  align-items: flex-start; /*Alinea los elementos al principio (arriba) en lugar de estirarlos verticalmente.*/
 }
