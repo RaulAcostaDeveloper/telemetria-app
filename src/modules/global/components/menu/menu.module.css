@@ -1,15 +1,40 @@
 .menu {
-  background-color: var(--company-color-3);
+  background-color: var(--company-color-6);
+  display: flex;
+  flex-direction: column;
   height: 100vh;
-  transition: 1s;
 }
 
 .open {
-  width: 320px;
   transition: 1s;
+  width: 282px;
 }
 
 .close {
-  width: 80px;
   transition: 1s;
+  width: 80px;
+}
+
+.header {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  transition: 1s;
+}
+
+.imageLogo {
+  transition: 1s;
+}
+
+.menuNavigation {
+  height: 100vh;
+}
+
+.bottom {
+  background-color: red;
+  bottom: 0;
+  position: relative;
+  width: 100%;
 }

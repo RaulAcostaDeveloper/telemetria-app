@@ -4,11 +4,17 @@ export const ENGLISH: LanguageInterface = {
   auth: {
     principalTitle: "Authentication page",
     authForm: {
-      title: "Authentication",
       name: "Name",
       password: "Password",
+      title: "Authentication",
     },
-    linkToRegister: "Go to Register",
     linkToHome: "Go to home",
+    linkToRegister: "Go to Register",
+  },
+  menu: {
+    titles: {
+      fuel: "Fuel",
+      management: "Management",
+    },
   },
 };
