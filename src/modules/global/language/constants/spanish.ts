@@ -11,4 +11,10 @@ export const SPANISH: LanguageInterface = {
     linkToRegister: "Ir a registro",
     linkToHome: "Ir al home",
   },
+  menu: {
+    titles: {
+      fuel: "Combustible",
+      management: "Recursos",
+    },
+  },
 };
