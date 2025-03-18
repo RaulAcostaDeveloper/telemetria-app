@@ -1,4 +1,3 @@
-"use client";
 import { Header } from "../header/header";
 import { Menu } from "../menu/menu";
 import styles from "./mainWrapper.module.css";
