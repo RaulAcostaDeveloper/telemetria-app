@@ -1,8 +1,36 @@
 .header {
+  display: block;
   width: 100%;
-  height: 50px;
-  background-color: black;
+  min-height: 10vh;
+  background-color: var(--company-color-6);
   color: white;
-  text-align: center;
-  padding: 10px 0;
+}
+
+.navBar {
+  display: flex;
+  min-height: 10vh;
+  justify-content: flex-start;
+  align-items: center;
+  width: 95%;
+  margin: auto;
+}
+
+.returnButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 10px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.returnButton:hover {
+  background-color: var(--company-color-4);
+}
+
+.returnButton svg {
+  font-size: 18px;
 }
