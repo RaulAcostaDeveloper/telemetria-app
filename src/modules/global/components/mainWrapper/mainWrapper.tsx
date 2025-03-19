@@ -1,12 +1,19 @@
+import styles from "./mainWrapper.module.css";
 import { Header } from "../header/header";
 import { Menu } from "../menu/menu";
-import styles from "./mainWrapper.module.css";
 
-export const MainWrapper = () => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export const MainWrapper = ({ children }: Props) => {
   return (
     <div className={`${styles.mainWrapper}`}>
       <Menu />
-      <Header />
+      <div className={`${styles.leftContent}`}>
+        <Header />
+        {children}
+      </div>
     </div>
   );
 };

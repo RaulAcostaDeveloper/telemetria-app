@@ -1,0 +1,30 @@
+.menuRoute {
+  align-items: center;
+  color: var(--company-color-1);
+  cursor: pointer;
+  display: flex;
+  height: auto;
+  justify-content: center;
+  padding: 10px;
+  text-decoration: none;
+  width: 100%;
+}
+
+.menuRoute:hover {
+  background-color: rgba(8, 8, 8, 0.2);
+}
+
+.routeName {
+  font-size: 2rem;
+  padding-left: 10px;
+  transition: 1s;
+  width: 100%;
+  overflow: hidden;
+}
+
+.selected {
+  background-color: rgba(8, 8, 8, 0.2);
+  -moz-box-shadow: 5px 0px 10px -5px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 5px 0px 10px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: 5px 0px 10px -5px rgba(0, 0, 0, 0.75);
+}
