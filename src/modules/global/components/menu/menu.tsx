@@ -35,6 +35,21 @@ export const Menu = () => {
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
 
   useEffect(() => {
+    // Handle movile
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
     const defaultValue: boolean = true;
     const storedValue: boolean | null = localStorageGetItem(
       STORAGE_KEYS.MENU_OPEN
