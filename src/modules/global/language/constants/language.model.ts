@@ -4,11 +4,22 @@ export interface LanguageInterface {
   auth: {
     principalTitle: string;
     authForm: {
-      title: string;
       name: string;
       password: string;
+      title: string;
     };
-    linkToRegister: string;
     linkToHome: string;
+    linkToRegister: string;
+  };
+  menu: {
+    titles: {
+      fuel: string;
+      management: string;
+      open: string;
+      close: string;
+    };
+    buttons: {
+      logOut: string;
+    };
   };
 }

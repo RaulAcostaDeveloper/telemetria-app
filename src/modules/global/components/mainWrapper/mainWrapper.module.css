@@ -3,3 +3,7 @@
   display: flex;
   align-items: flex-start; /*Alinea los elementos al principio (arriba) en lugar de estirarlos verticalmente.*/
 }
+
+.leftContent {
+  width: 100%;
+}
