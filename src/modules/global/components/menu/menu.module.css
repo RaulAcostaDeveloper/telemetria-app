@@ -7,7 +7,7 @@
 
 .open {
   transition: 1s;
-  width: 282px;
+  width: 228px;
 }
 
 .close {
@@ -28,13 +28,16 @@
   transition: 1s;
 }
 
-.menuNavigation {
+.menuContent {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
+  justify-content: space-between;
 }
 
 .bottom {
-  background-color: red;
-  bottom: 0;
-  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   width: 100%;
 }

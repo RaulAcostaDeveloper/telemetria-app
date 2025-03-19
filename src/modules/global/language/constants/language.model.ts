@@ -15,6 +15,11 @@ export interface LanguageInterface {
     titles: {
       fuel: string;
       management: string;
+      open: string;
+      close: string;
+    };
+    buttons: {
+      logOut: string;
     };
   };
 }

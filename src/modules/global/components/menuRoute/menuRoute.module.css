@@ -3,10 +3,8 @@
   color: var(--company-color-1);
   cursor: pointer;
   display: flex;
-  display: flex;
   height: auto;
   justify-content: center;
-  justify-content: left;
   padding: 10px;
   text-decoration: none;
   width: 100%;
