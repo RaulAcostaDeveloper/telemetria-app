@@ -15,6 +15,11 @@ export const SPANISH: LanguageInterface = {
     titles: {
       fuel: "Combustible",
       management: "Recursos",
+      open: "Abrir menú",
+      close: "Cerrar menú",
+    },
+    buttons: {
+      logOut: "Salir",
     },
   },
 };

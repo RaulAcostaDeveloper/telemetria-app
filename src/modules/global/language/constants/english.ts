@@ -15,6 +15,11 @@ export const ENGLISH: LanguageInterface = {
     titles: {
       fuel: "Fuel",
       management: "Management",
+      open: "Open menu",
+      close: "Close menu",
+    },
+    buttons: {
+      logOut: "Log out",
     },
   },
 };

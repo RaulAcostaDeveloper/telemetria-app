@@ -9,7 +9,7 @@ interface Props {
   title: string;
 }
 
-export const MenuRoute = ({ title, route, Icon, active, isOpen }: Props) => {
+export const MenuRoute = ({ Icon, active, isOpen, route, title }: Props) => {
   return (
     <Link
       className={`${styles.menuRoute} ${active ? styles.selected : ""}`}
