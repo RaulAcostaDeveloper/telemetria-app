@@ -73,7 +73,6 @@ export const Menu = () => {
         // IMAGEN PROPORCIÓN 6:1
         <Image
           alt="logo company"
-          className={`${styles.imageLogo}`}
           height={38}
           src={"/png/imagotipo_transtelemetrix_blanco.png"}
           width={228}
@@ -82,7 +81,6 @@ export const Menu = () => {
         // IMAGEN PROPORCIÓN 1:1
         <Image
           alt="logo company"
-          className={`${styles.imageLogo}`}
           height={50}
           src={"/svg/Isotipo_transtelemetris.svg"}
           width={50}

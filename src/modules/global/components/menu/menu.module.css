@@ -21,11 +21,6 @@
   display: flex;
   height: 100px;
   justify-content: center;
-  transition: 1s;
-}
-
-.imageLogo {
-  transition: 1s;
 }
 
 .menuContent {
