@@ -1,0 +1,2 @@
+Este componente cumple la función de contener el renderizado de las rutas
+El contenido se ajusta al encabezado (width 95%)
