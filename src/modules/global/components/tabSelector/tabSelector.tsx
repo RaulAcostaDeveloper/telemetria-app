@@ -1,28 +1,27 @@
 import styles from "./tabSelector.module.css";
 
-const tabOptions = [
-  { name: "Grupos" },
-  { name: "Zonas" },
-  { name: "Unidades" },
-];
-
 interface Props {
   selectedTab: string;
   setSelectedTab: (name: string) => void;
+  tabOptions: string[];
 }
 
-export const TabSelector = ({ selectedTab, setSelectedTab }: Props) => {
+export const TabSelector = ({
+  selectedTab,
+  setSelectedTab,
+  tabOptions,
+}: Props) => {
   return (
     <div className={`${styles.tabSelector}`}>
-      {tabOptions.map((el) => (
+      {tabOptions.map((name) => (
         <button
           className={`${styles.tabElement} ${
-            selectedTab === el.name ? styles.tabSelected : ""
+            selectedTab === name ? styles.tabSelected : ""
           }`}
-          onClick={() => setSelectedTab(el.name)}
-          key={el.name}
+          onClick={() => setSelectedTab(name)}
+          key={name}
         >
-          {el.name}
+          {name}
         </button>
       ))}
     </div>

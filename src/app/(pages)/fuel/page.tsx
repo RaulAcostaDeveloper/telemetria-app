@@ -1,9 +1,9 @@
-import { TabsContent } from "@/modules/global/components";
+import { FuelTabs } from "@/modules/fuel/components";
 
 export default function Fuel() {
   return (
     <div>
-      <TabsContent />
+      <FuelTabs />
     </div>
   );
 }
