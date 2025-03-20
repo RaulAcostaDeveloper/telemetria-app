@@ -4,3 +4,5 @@ export * from "./mainWrapper/mainWrapper";
 export * from "./menu/menu";
 export * from "./menuButton/menuButton";
 export * from "./menuRoute/menuRoute";
+export * from "./tabsContent/tabsContent";
+export * from "./tabSelector/tabSelector";

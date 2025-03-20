@@ -1,3 +1,9 @@
+import { TabsContent } from "@/modules/global/components";
+
 export default function Fuel() {
-  return <div>Fuel</div>;
+  return (
+    <div>
+      <TabsContent />
+    </div>
+  );
 }

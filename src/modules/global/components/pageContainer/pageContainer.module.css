@@ -1,4 +1,11 @@
 .page {
   width: 95%;
   margin: auto;
+  /* 
+    Este position relative va a ser necesario 
+    para que elementos con demasiados items a la derecha 
+    no hagan que se desborde o se extienda 
+    Por ejemplo, el selector de tabs o las tablas
+  */
+  position: relative;
 }
