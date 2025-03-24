@@ -1,1 +1,19 @@
 Contenedor para elementos agrupados en tabs
+Ejemplo de uso:
+Crear un arreglo con los nombres de los tabs:
+
+const tabOptions = ["Grupos", "Zonas", "Unidades"];
+
+En el componente que se va a renderizar, pasar en orden según el tab, los
+componentes que se van a renderizar en cada tab.
+
+Ejemplo:
+
+    <TabsContent
+      tabOptions={tabOptions}
+      tabContents={[
+        <div>Contenido de Grupos</div>,
+        <div>Contenido de Zonas</div>,
+        <div>Contenido de Unidades</div>
+        ]}
+    />
