@@ -1,0 +1,33 @@
+.columns {
+  display: flex;
+}
+
+.column {
+  display: flex;
+  padding: 5px;
+  background-color: var(--company-color-5);
+  border: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.columnTitle {
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  font-weight: 600;
+  color: var(--company-color-1);
+}
+
+.columnButton {
+  cursor: pointer;
+  font: inherit;
+}
+
+.columnButton:hover {
+  background-color: var(--company-color-5-rgba-10);
+}
+
+.columnSortIcon {
+  font-size: 1rem;
+}

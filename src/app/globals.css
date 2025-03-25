@@ -13,6 +13,12 @@
   --company-color-3: #8ed2ef;
   --company-color-4: #37718e;
   --company-color-5: #254e70;
+  /* Aplicar oscurecimiento a partir de las variables */
+  --company-color-5-rgba-10: color-mix(
+    in srgb,
+    var(--company-color-5),
+    black 10%
+  );
   --company-color-6: #113154;
 }
 

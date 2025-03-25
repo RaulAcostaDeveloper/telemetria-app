@@ -1,0 +1,31 @@
+.tableDownloadCSV {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: transparent;
+  margin-right: 10px;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  margin-bottom: 20px;
+}
+
+.title {
+  padding-right: 5px;
+}
+.tableDownloadCSV:focus {
+  outline: none;
+  -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-5);
+  -moz-box-shadow: 2px 2px 5px 0px var(--company-color-5);
+  box-shadow: 2px 2px 5px 0px var(--company-color-5);
+}
+.tableDownloadCSV:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-5);
+  -moz-box-shadow: 2px 2px 5px 0px var(--company-color-5);
+  box-shadow: 2px 2px 5px 0px var(--company-color-5);
+}
