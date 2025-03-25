@@ -1,2 +1,3 @@
+Componente reutilizable para tablas
 Todas las tablas deben poder recibir los encabezados, la data y un título de la tabla.
 Con los encabezados se generan (algunos) de los selectores de filtrado.
