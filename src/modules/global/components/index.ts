@@ -6,3 +6,5 @@ export * from "./menuButton/menuButton";
 export * from "./menuRoute/menuRoute";
 export * from "./tabsContent/tabsContent";
 export * from "./tabSelector/tabSelector";
+export * from "./reduxProvider/ReduxProvider";
+export * from "./calendar/Calendar";
