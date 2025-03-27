@@ -1,29 +1,32 @@
+import { columnsTable } from "../table/table.model";
 import styles from "./tableColumns.module.css";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
-type column = {
-  columnName: string;
-  defaultSpace: number;
-  sortBy?: boolean;
-  filter?: boolean;
-};
-
 interface Props {
-  columns: column[];
+  columns: columnsTable;
+  showActions?: boolean;
 }
 
-export const TableColumns = ({ columns }: Props) => {
+export const TableColumns = ({ columns, showActions }: Props) => {
   return (
     <div className={`${styles.columns}`}>
-      {columns.map((el) => {
+      {columns.map((el, index) => {
         const defaultSpace = {
           width: el.defaultSpace ? `${el.defaultSpace * 50}px` : "fit-content",
         };
         // Control de columnas ordenables
-        return el.sortBy ? (
+        return el.orderColumn ? (
           <button
             key={el.columnName}
-            className={`${styles.column} ${styles.columnButton}`}
+            className={`${styles.column} ${styles.columnButton} ${
+              index === 0 ? styles.firstButton : ""
+            }
+            ${
+              index === columns.length - 1 && showActions !== true
+                ? styles.lastButton
+                : ""
+            }
+            `}
             style={defaultSpace}
             title="Sort items"
           >
@@ -42,6 +45,15 @@ export const TableColumns = ({ columns }: Props) => {
           </div>
         );
       })}
+      {showActions && (
+        <div
+          className={`${styles.column} ${styles.actions} ${styles.lastButton}`}
+        >
+          <span className={`${styles.columnTitle} `}>Actions</span>
+        </div>
+      )}
     </div>
   );
 };
+
+//

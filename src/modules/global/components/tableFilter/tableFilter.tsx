@@ -4,7 +4,10 @@ interface Props {
 }
 export const TableFilter = ({ columnName }: Props) => {
   return (
-    <div className={`${styles.selector}`}>
+    <div
+      className={`${styles.selector}`}
+      title={'Filter by "' + columnName + '" column'}
+    >
       <select id="options" className={`${styles.selectInput}`}>
         <option value="">{columnName}</option>
         <option value="opcion1">Opción 1</option>
@@ -14,3 +17,4 @@ export const TableFilter = ({ columnName }: Props) => {
     </div>
   );
 };
+//

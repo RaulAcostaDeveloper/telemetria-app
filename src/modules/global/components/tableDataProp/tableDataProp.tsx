@@ -23,10 +23,11 @@ export const TableDataProp = ({ key, defaultSpace, value }: Props) => {
       key={key}
       style={defaultSpace}
       className={styles.dataProp}
-      title="Copy"
+      title={'Copy "' + value + '" to clipboard'}
       onClick={() => copyToClipboard(value)}
     >
       {value}
     </button>
   );
 };
+//

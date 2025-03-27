@@ -3,7 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 export const TableSearch = () => {
   return (
-    <div className={`${styles.tableSearch}`}>
+    <div className={`${styles.tableSearch}`} title="Search by first column">
       <div className={`${styles.icon}`}>
         <SearchIcon />
       </div>
@@ -11,3 +11,4 @@ export const TableSearch = () => {
     </div>
   );
 };
+//

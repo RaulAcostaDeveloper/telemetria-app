@@ -1,15 +1,9 @@
+import { columnsTable } from "../table/table.model";
 import { TableFilter } from "../tableFilter/tableFilter";
 import styles from "./tableFilter.module.css";
 
-type column = {
-  columnName: string;
-  defaultSpace: number;
-  sortBy?: boolean;
-  filter?: boolean;
-};
-
 interface Props {
-  columns: column[];
+  columns: columnsTable;
 }
 export const TableFilters = ({ columns }: Props) => {
   return (
@@ -20,14 +14,13 @@ export const TableFilters = ({ columns }: Props) => {
         };
         return (
           <>
-            {el.filter && (
-              <div key={el.columnName + "filter"} style={defaultSpace}>
-                <TableFilter columnName={el.columnName} />
-              </div>
-            )}
+            <div key={el.columnName + "filter"} style={defaultSpace}>
+              {el.filterOptions && <TableFilter columnName={el.columnName} />}
+            </div>
           </>
         );
       })}
     </div>
   );
 };
+//
