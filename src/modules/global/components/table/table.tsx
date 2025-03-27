@@ -1,63 +1,108 @@
 import { TableAddNewButton } from "../tableAddNewButton/tableAddNewButton";
 import { TableColumns } from "../tableColumns/tableColumns";
-import { TableDataProp } from "../tableDataProp/tableDataProp";
+import { TableDataContent } from "../tableDataContent/tableDataContent";
 import { TableDownloadCSV } from "../tableDownloadCSV/tableDownloadCSV";
-import { TableFilter } from "../tableFilter/tableFilter";
 import { TableFilters } from "../tableFilters/tableFilters";
 import { TableSearch } from "../tableSearch/tableSearch";
+import { columnsTable } from "./table.model";
 import styles from "./table.module.css";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-
-type column = {
-  columnName: string;
-  defaultSpace: number;
-  sortBy?: boolean;
-  filter?: boolean;
-};
 
 interface Props {
   title: string;
-  columns: column[];
+  showCreateButton?: boolean;
+  showEdit?: boolean;
+  showDelete?: boolean;
+  showView?: boolean;
   data: any[];
-  showNew?: boolean;
+  columns: string[];
 }
 
-export const Table = ({ title, columns, data, showNew }: Props) => {
+const columns: columnsTable = [
+  {
+    columnName: "Zona",
+    defaultSpace: 3,
+    orderColumn: true,
+    filterOptions: true,
+  },
+  {
+    columnName: "Perfil",
+    defaultSpace: 2,
+    orderColumn: true,
+    filterOptions: true,
+  },
+  { columnName: "País", defaultSpace: 2 },
+  {
+    columnName: "Estado",
+    defaultSpace: 2,
+    filterOptions: true,
+    orderColumn: true,
+  },
+];
+
+const data = [
+  {
+    zone: "alalalala",
+    profile: "asdmoad",
+    country: "asdasd",
+    state: "asdas",
+  },
+  {
+    zone: "alalalala2",
+    profile: "asdmoad",
+    country: "asdasd",
+    state: "asdas",
+  },
+  {
+    zone: "alalalala3",
+    profile: "asdmoad",
+    country: "asdasd",
+    state: "asdas",
+  },
+  {
+    zone: "alalalala4",
+    profile: "asdmoad",
+    country: "asdasd",
+    state: "asdas",
+  },
+];
+
+export const Table = ({
+  title,
+  showCreateButton,
+  showDelete,
+  showEdit,
+  showView,
+}: Props) => {
   return (
     <div className={`${styles.defaultTable}`}>
       <div className={`${styles.inside}`}>
         <h2 className={`${styles.title}`}>{title}</h2>
         <div className={`${styles.topActions}`}>
-          <TableSearch />
-          {showNew && <TableAddNewButton />}
+          {showCreateButton && <TableAddNewButton />}
           <TableDownloadCSV />
+        </div>
+        <div className={`${styles.topActions}`}>
+          <TableSearch />
         </div>
         <div className={`${styles.topActions}`}>
           <TableFilters columns={columns} />
         </div>
         <div className={`${styles.tableContent}`}>
-          {/* Columnas */}
-          <TableColumns columns={columns} />
-          {/* Data */}
           <div>
-            {data.map((dataObject, index) => (
-              <div key={index} className={styles.dataObject}>
-                {Object.entries(dataObject).map(([key, value], propIndex) => {
-                  const defaultSpace = {
-                    width: columns[propIndex].defaultSpace
-                      ? `${columns[propIndex].defaultSpace * 50}px`
-                      : "fit-content",
-                  };
-                  return (
-                    <TableDataProp
-                      key={key}
-                      value={String(value)}
-                      defaultSpace={defaultSpace}
-                    />
-                  );
-                })}
-              </div>
-            ))}
+            {/* Columnas */}
+            <TableColumns
+              columns={columns}
+              showActions={showDelete || showEdit || showView}
+            />
+            {/* Data */}
+            <TableDataContent
+              columns={columns}
+              data={data}
+              showActions={showDelete || showEdit || showView}
+              showDelete={showDelete}
+              showEdit={showEdit}
+              showView={showView}
+            />
           </div>
         </div>
       </div>

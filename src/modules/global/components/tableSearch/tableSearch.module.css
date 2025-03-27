@@ -3,6 +3,7 @@
   display: inline-block;
   margin-right: 10px;
   margin-bottom: 20px;
+  width: 100%;
 }
 
 .icon {
@@ -14,6 +15,7 @@
 }
 
 .input {
+  width: 100%;
   padding: 8px 8px 8px 32px; /* Espacio a la izquierda para el ícono */
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -36,3 +38,4 @@
   -moz-box-shadow: 2px 2px 5px 0px var(--company-color-4);
   box-shadow: 2px 2px 5px 0px var(--company-color-4);
 }
+/*  */
