@@ -23,3 +23,5 @@ export * from "./tableFilter/tableFilter";
 export * from "./tableFilters/tableFilters";
 export * from "./tableSearch/tableSearch";
 export * from "./tabsContent/tabsContent";
+export * from "./reduxProvider/ReduxProvider";
+export * from "./calendar/Calendar";
