@@ -1,5 +1,9 @@
 import localFont from "next/font/local";
 
+// Aquí declaramos las variables de fuentes de letra
+// var(--font-nunito)
+// Seguir las instrucciones de description.txt
+
 export const nunitoItalicFont = localFont({
   src: [
     {

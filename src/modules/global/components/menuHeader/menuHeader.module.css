@@ -1,0 +1,7 @@
+.header {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 100px;
+  justify-content: center;
+}

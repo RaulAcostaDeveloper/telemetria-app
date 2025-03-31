@@ -1,1 +1,3 @@
-Contiene el componente del Menú y el componente del Header
+Contiene el componente del Menú, el componente del Header
+y el <PageContainer> {children} <PageContainer/>.
+El PageContainer contiene el contenido de /app/(pages)/miPage

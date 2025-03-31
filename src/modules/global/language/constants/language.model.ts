@@ -3,10 +3,11 @@
 export interface LanguageInterface {
   menu: {
     titles: {
+      close: string;
       fuel: string;
+      logo: string;
       management: string;
       open: string;
-      close: string;
     };
     buttons: {
       logOut: string;
@@ -14,29 +15,28 @@ export interface LanguageInterface {
   };
   table: {
     buttons: {
-      create: string;
-      downloadCSV: string;
       cancel: string;
-      saveNew: string;
-      saveEdit: string;
+      create: string;
       delete: string;
+      downloadCSV: string;
+      saveEdit: string;
+      saveNew: string;
     };
     actions: {
+      close: string;
+      copy: string;
+      copyError: string;
+      deleteElement: string;
+      editElement: string;
+      filterBy: string;
       search: string;
       searchTitle: string;
-      filterBy: string;
       sortItems: string;
-      copy: string;
-      copySuccess: string;
-      copyError: string;
       viewDetail: string;
-      editElement: string;
-      deleteElement: string;
-      close: string;
     };
     elements: {
-      columns: string;
       actions: string;
+      columns: string;
       total: string;
     };
     formTitles: {
@@ -58,8 +58,8 @@ export interface LanguageInterface {
   fuel: {
     tabs: {
       groups: string;
-      zones: string;
       unitys: string;
+      zones: string;
     };
   };
 }

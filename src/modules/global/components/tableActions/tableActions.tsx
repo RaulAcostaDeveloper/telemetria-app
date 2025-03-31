@@ -1,12 +1,13 @@
 "use client";
-import styles from "./tableActions.module.css";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { TableDeleteModal } from "../tableDeleteModal/tableDeleteModa";
 import { useState } from "react";
-import { TableEditFormModal } from "../tableEditFormModal/tableEditFormModa";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+
+import styles from "./tableActions.module.css";
 import { LanguageSelector } from "../../language/utils/languageSelector";
+import { TableDeleteModal } from "../tableDeleteModal/tableDeleteModa";
+import { TableEditFormModal } from "../tableEditFormModal/tableEditFormModa";
 
 interface Props {
   showActions?: boolean;
@@ -16,12 +17,13 @@ interface Props {
 }
 
 export const TableActions = ({ showDelete, showEdit, showView }: Props) => {
+  const LANGUAGE = LanguageSelector();
   const [showDeleteModal, setShowDeleteModal] = useState<Boolean>(false);
   const [showEditModal, setShowEditModal] = useState<Boolean>(false);
-  const LANGUAGE = LanguageSelector();
 
   return (
     <div className={`${styles.tableActions}`}>
+      {/* Acciones de la tabla (Botones) */}
       {showView && (
         <button
           className={`${styles.button}`}
@@ -30,6 +32,7 @@ export const TableActions = ({ showDelete, showEdit, showView }: Props) => {
           <VisibilityIcon />
         </button>
       )}
+
       {showEdit && (
         <button
           className={`${styles.button}`}
@@ -39,6 +42,7 @@ export const TableActions = ({ showDelete, showEdit, showView }: Props) => {
           <ModeEditIcon />
         </button>
       )}
+
       {showDelete && (
         <button
           className={`${styles.button}`}
@@ -48,9 +52,12 @@ export const TableActions = ({ showDelete, showEdit, showView }: Props) => {
           <DeleteIcon />
         </button>
       )}
+
+      {/* Modales de Editar y Borrar */}
       {showDeleteModal && (
         <TableDeleteModal closeModal={() => setShowDeleteModal(false)} />
       )}
+
       {showEditModal && (
         <TableEditFormModal closeModal={() => setShowEditModal(false)} />
       )}

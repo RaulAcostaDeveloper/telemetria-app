@@ -1,7 +1,8 @@
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+
+import styles from "./tableColumns.module.css";
 import { LanguageSelector } from "../../language/utils/languageSelector";
 import { columnsTable } from "../table/table.model";
-import styles from "./tableColumns.module.css";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 interface Props {
   columns: columnsTable;
@@ -10,13 +11,15 @@ interface Props {
 
 export const TableColumns = ({ columns, showActions }: Props) => {
   const LANGUAGE = LanguageSelector();
+
   return (
     <div className={`${styles.columns}`}>
       {columns.map((el, index) => {
         const defaultSpace = {
           width: el.defaultSpace ? `${el.defaultSpace * 50}px` : "fit-content",
         };
-        // Control de columnas ordenables
+
+        // Columnas ordenables
         return el.orderColumn ? (
           <button
             key={el.columnName}
@@ -38,6 +41,7 @@ export const TableColumns = ({ columns, showActions }: Props) => {
             </div>
           </button>
         ) : (
+          // Columnas no ordenables
           <div
             key={el.columnName}
             className={styles.column}
@@ -47,6 +51,7 @@ export const TableColumns = ({ columns, showActions }: Props) => {
           </div>
         );
       })}
+      {/* Acciones de la tabla */}
       {showActions && (
         <div
           className={`${styles.column} ${styles.actions} ${styles.lastButton}`}

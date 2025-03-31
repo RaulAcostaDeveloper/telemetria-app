@@ -1,13 +1,13 @@
-.buttonElement {
-  color: white;
-  font-weight: 600;
-  letter-spacing: 1px;
+.generalButton {
   cursor: pointer;
-  border: none;
-  padding: 10px 5px;
-  font-size: 2rem;
   display: flex;
   align-items: center;
+  color: white;
+  font-weight: 600;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  padding: 10px 5px;
+  border: none;
   border-radius: 4px;
   -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
@@ -18,16 +18,16 @@
   padding-right: 5px;
 }
 
-.principal {
+.confirm {
   background-color: var(--button-color-1);
 }
 
-.principal:focus {
+.confirm:focus {
   outline: none;
   background-color: var(--button-color-1-rgba-10);
 }
 
-.principal:hover {
+.confirm:hover {
   background-color: var(--button-color-1-rgba-10);
 }
 
@@ -85,7 +85,7 @@
 
 .neutral {
   background-color: var(--button-color-6);
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.9);
 }
 
 .neutral:focus {

@@ -1,5 +1,5 @@
-import styles from "./menuRoute.module.css";
 import Link from "next/link";
+import styles from "./menuRoute.module.css";
 
 interface Props {
   Icon: React.ElementType;
@@ -9,7 +9,7 @@ interface Props {
   title: string;
 }
 
-export const MenuRoute = ({ Icon, active, isOpen, route, title }: Props) => {
+export const MenuRoute = ({ route, title, isOpen, Icon, active }: Props) => {
   return (
     <Link
       className={`${styles.menuRoute} ${active ? styles.selected : ""}`}
@@ -18,7 +18,7 @@ export const MenuRoute = ({ Icon, active, isOpen, route, title }: Props) => {
     >
       <Icon sx={{ fontSize: "3rem" }} />
       {(isOpen === null || isOpen === true) && (
-        <span className={`${styles.routeName}`}>{title}</span>
+        <span className={`${styles.title}`}>{title}</span>
       )}
     </Link>
   );

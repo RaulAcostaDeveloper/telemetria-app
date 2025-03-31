@@ -1,8 +1,9 @@
 .inside {
   padding: 5px;
+  margin: 10px;
 }
 
-.generalTitle {
+.formTitle {
   font-size: 4rem;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.9);
@@ -11,5 +12,4 @@
 .buttons {
   display: flex;
   justify-content: space-between;
-  margin: 20px;
 }

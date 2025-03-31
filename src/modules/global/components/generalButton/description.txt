@@ -1,0 +1,17 @@
+Instrucciones para el GeneralButton
+
+Usar GeneralButton cuando necesitemos un botón con aspecto "estandar" en la aplicación.
+
+Pasar el tipo del botón:
+import { ButtonTypes } from "@/modules/global/components";
+
+          <GeneralButton
+            title={LANGUAGE.table.buttons.cancel}
+            type={ButtonTypes.NEUTRAL}
+            Icon={<CloseIcon />}
+            callback={closeModal}
+          />
+
+En el parámetro Icon, pasar un icono de Material UI.
+Se puede pasar el tamaño en las props del Icono:
+<CloseIcon sx={{ fontSize: "3rem" }} />
