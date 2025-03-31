@@ -3,10 +3,11 @@ import { LanguageInterface } from "./language.model";
 export const ENGLISH: LanguageInterface = {
   menu: {
     titles: {
+      close: "Close menu",
       fuel: "Fuel",
+      logo: "Logo company",
       management: "Management",
       open: "Open menu",
-      close: "Close menu",
     },
     buttons: {
       logOut: "Log out",
@@ -14,29 +15,28 @@ export const ENGLISH: LanguageInterface = {
   },
   table: {
     buttons: {
-      create: "Create",
-      downloadCSV: "Download CSV",
       cancel: "Cancel",
-      saveNew: "Save item",
-      saveEdit: "Save changes",
+      create: "Create",
       delete: "Delete item",
+      downloadCSV: "Download CSV",
+      saveEdit: "Save changes",
+      saveNew: "Save item",
     },
     actions: {
+      close: "Close",
+      copy: "Copy text",
+      copyError: "Error on copyng text",
+      deleteElement: "Delete item",
+      editElement: "Edit item",
+      filterBy: "Filter by column",
       search: "Search",
       searchTitle: "Search by the first column of the table",
-      filterBy: "Filter by column",
       sortItems: "Sort items by",
-      copy: "Copy text",
-      copySuccess: "Text copied to clipboard",
-      copyError: "Error on copyng text",
       viewDetail: "Ver detalles",
-      editElement: "Edit item",
-      deleteElement: "Delete item",
-      close: "Close",
     },
     elements: {
-      columns: "Columns",
       actions: "Actions",
+      columns: "Columns",
       total: "Total",
     },
     formTitles: {
@@ -58,8 +58,8 @@ export const ENGLISH: LanguageInterface = {
   fuel: {
     tabs: {
       groups: "Groups",
-      zones: "Zones",
       unitys: "Unitys",
+      zones: "Zones",
     },
   },
 };

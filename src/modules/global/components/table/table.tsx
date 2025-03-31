@@ -1,3 +1,4 @@
+import styles from "./table.module.css";
 import { TableAddNewButton } from "../tableAddNewButton/tableAddNewButton";
 import { TableColumns } from "../tableColumns/tableColumns";
 import { TableDataContent } from "../tableDataContent/tableDataContent";
@@ -6,19 +7,18 @@ import { TableDownloadCSV } from "../tableDownloadCSV/tableDownloadCSV";
 import { TableFilters } from "../tableFilters/tableFilters";
 import { TableSearch } from "../tableSearch/tableSearch";
 import { columnsTable } from "./table.model";
-import styles from "./table.module.css";
 
 interface Props {
-  title?: string;
-  showCreateButton?: boolean;
-  showEdit?: boolean;
-  showDelete?: boolean;
-  showView?: boolean;
-  data: any[];
   columns: string[];
+  data: any[];
+  showCreateButton?: boolean;
+  showDelete?: boolean;
+  showEdit?: boolean;
+  showView?: boolean;
+  title?: string;
 }
 
-// Estas columnas y los datos de la tabla no son copys, son un ejemplo
+// Columnas y su configuración
 const columns: columnsTable = [
   {
     columnName: "Zona",
@@ -71,14 +71,14 @@ const data = [
 ];
 
 export const Table = ({
-  title,
   showCreateButton,
   showDelete,
   showEdit,
   showView,
+  title,
 }: Props) => {
   return (
-    <div className={`${styles.defaultTable}`}>
+    <div className={`${styles.container}`}>
       <div className={`${styles.inside}`}>
         {title && <h4 className={`${styles.title}`}>{title}</h4>}
         <div className={`${styles.topActions}`}>
@@ -98,7 +98,7 @@ export const Table = ({
               columns={columns}
               showActions={showDelete || showEdit || showView}
             />
-            {/* Data */}
+            {/* Datos de la tabla */}
             <TableDataContent
               columns={columns}
               data={data}

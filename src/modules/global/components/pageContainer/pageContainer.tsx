@@ -5,5 +5,5 @@ interface Props {
 }
 
 export const PageContainer = ({ children }: Props) => (
-  <div className={`${styles.page}`}>{children}</div>
+  <div className={`${styles.pageContainer}`}>{children}</div>
 );

@@ -1,5 +1,5 @@
-import { TabsContent } from "@/modules/global/components";
 import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
+import { TabsContent } from "@/modules/global/components";
 
 export const FuelTabs: React.FC = () => {
   const LANGUAGE = LanguageSelector();

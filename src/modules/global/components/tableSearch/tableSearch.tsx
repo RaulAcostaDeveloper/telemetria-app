@@ -1,6 +1,7 @@
-import { LanguageSelector } from "../../language/utils/languageSelector";
-import styles from "./tableSearch.module.css";
 import SearchIcon from "@mui/icons-material/Search";
+
+import styles from "./tableSearch.module.css";
+import { LanguageSelector } from "../../language/utils/languageSelector";
 
 export const TableSearch = () => {
   const LANGUAGE = LanguageSelector();
@@ -15,8 +16,8 @@ export const TableSearch = () => {
       </div>
       <input
         className={`${styles.input}`}
-        type="text"
         placeholder={LANGUAGE.table.actions.search}
+        type="text"
       />
     </div>
   );

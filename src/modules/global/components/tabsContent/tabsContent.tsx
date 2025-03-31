@@ -1,14 +1,15 @@
 "use client";
 import { useState } from "react";
-import { TabSelector } from "../tabSelector/tabSelector";
+
 import styles from "./tabsContent.module.css";
+import { TabSelector } from "../tabSelector/tabSelector";
 
 interface Props {
-  tabOptions: string[];
   tabContents: React.ReactNode[];
+  tabOptions: string[];
 }
 
-export const TabsContent = ({ tabOptions, tabContents }: Props) => {
+export const TabsContent = ({ tabContents, tabOptions }: Props) => {
   const [selectedTab, setSelectedTab] = useState<string>(tabOptions[0]);
 
   return (

@@ -14,12 +14,12 @@
   background-color: rgba(8, 8, 8, 0.2);
 }
 
-.routeName {
+.title {
   font-size: 2rem;
+  overflow: hidden;
   padding-left: 10px;
   transition: 1s;
   width: 100%;
-  overflow: hidden;
 }
 
 .selected {

@@ -1,11 +1,14 @@
-/* Lo que hace este compmonente es solo contener a Menu y Header, procurar no meter más contenido o estilos */
+/* Ordena los elementos de la izquierda a la derecha. */
 .mainWrapper {
   display: flex;
-  align-items: flex-start; /*Alinea los elementos al principio (arriba) en lugar de estirarlos verticalmente.*/
+  align-items: flex-start;
   width: 100%;
 }
 
+/* Renderizado del header y del contenido de la página */
 .rightContent {
   width: 100%;
+
+  /* Evita que se desborde el contenido en la página */
   overflow-x: auto;
 }

@@ -3,10 +3,11 @@ import { LanguageInterface } from "./language.model";
 export const SPANISH: LanguageInterface = {
   menu: {
     titles: {
+      close: "Cerrar menú",
       fuel: "Combustible",
+      logo: "Logo de la compañía",
       management: "Recursos",
       open: "Abrir menú",
-      close: "Cerrar menú",
     },
     buttons: {
       logOut: "Salir",
@@ -14,29 +15,28 @@ export const SPANISH: LanguageInterface = {
   },
   table: {
     buttons: {
-      create: "Crear",
-      downloadCSV: "Descargar CSV",
       cancel: "Cancelar",
-      saveNew: "Guardar elemento",
-      saveEdit: "Guardar edición",
+      create: "Crear",
       delete: "Eliminar elemento",
+      downloadCSV: "Descargar CSV",
+      saveEdit: "Guardar edición",
+      saveNew: "Guardar elemento",
     },
     actions: {
+      close: "Cerrar",
+      copy: "Copiar el texto",
+      copyError: "Error al copiar",
+      deleteElement: "Eliminar elemento",
+      editElement: "Editar elemento",
+      filterBy: "Filtrar por la columna",
       search: "Buscar",
       searchTitle: "Buscar por la primer columna de la tabla",
-      filterBy: "Filtrar por la columna",
       sortItems: "Ordenar elementos por",
-      copy: "Copiar el texto",
-      copySuccess: "Texto copiado al portapapeles",
-      copyError: "Error al copiar",
       viewDetail: "View details",
-      editElement: "Editar elemento",
-      deleteElement: "Eliminar elemento",
-      close: "Cerrar",
     },
     elements: {
-      columns: "Columnas",
       actions: "Acciones",
+      columns: "Columnas",
       total: "Total",
     },
     formTitles: {
@@ -48,18 +48,18 @@ export const SPANISH: LanguageInterface = {
   auth: {
     principalTitle: "Página de autenticación",
     authForm: {
-      title: "Autenticación",
       name: "Nombre",
       password: "Contraseña",
+      title: "Autenticación",
     },
-    linkToRegister: "Ir a registro",
     linkToHome: "Ir al home",
+    linkToRegister: "Ir a registro",
   },
   fuel: {
     tabs: {
       groups: "Grupos",
-      zones: "Zonas",
       unitys: "Unidades",
+      zones: "Zonas",
     },
   },
 };

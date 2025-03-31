@@ -1,10 +1,11 @@
-import { columnsTable } from "../table/table.model";
+import styles from "./tableFilters.module.css";
 import { TableFilter } from "../tableFilter/tableFilter";
-import styles from "./tableFilter.module.css";
+import { columnsTable } from "../table/table.model";
 
 interface Props {
   columns: columnsTable;
 }
+
 export const TableFilters = ({ columns }: Props) => {
   return (
     <div className={`${styles.tableFilters}`}>

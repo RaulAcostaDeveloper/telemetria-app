@@ -1,3 +1,6 @@
+/* Estilos globales para la aplicación */
+
+/* Ajustes generales para todos los elementos */
 * {
   padding: 0;
   margin: 0;
@@ -5,7 +8,14 @@
   font-size: 62.5%; /*Define 1rem como 10px, facilitando el cálculo y conversión de tamaños en CSS.*/
 }
 
-/* Nota: Las variables para fuentes de letra están declaradas en src\globalConfig\fonts\fonts.ts *A/
+body {
+  font-family: var(--font-nunito);
+  font-weight: 400;
+}
+
+/* VARIABLES CSS */
+
+/* Nota: Las variables para fuentes de letra están declaradas en src\globalConfig\fonts\fonts.ts /
 
 /* Variables de colores de la empresa (theme) */
 :root {
@@ -17,7 +27,7 @@
   --company-color-6: #113154;
 }
 
-/* Variación de color obscura para hovers de colores de la empresa (theme) */
+/*  Variables de colores de la empresa (theme) obscurecidas 10% (hovers) */
 :root {
   --company-color-1-rgba-10: color-mix(
     in srgb,
@@ -53,23 +63,29 @@
 
 /* Variables de colores de botones */
 :root {
-  /* Acción principal, Envío, Confirmación, Inicio de sesión */
+  /* Boton 1: Acción principal, Envío, Confirmación, Inicio de sesión */
   --button-color-1: #007bff;
-  /* éxito, confirmación, Aceptar, Guardar, Continuar  */
+
+  /* Boton 2: Éxito, confirmación, Aceptar, Guardar, Continuar  */
   --button-color-2: #198754;
-  /* Advertencia, Eliminación, Cancelar, Salir */
+
+  /* Boton 3: Advertencia, Eliminación, Cancelar, Salir */
   --button-color-3: #b91c1c;
-  /* Precaución, Advertencia, Atención, Reintentar, Acción riesgosa */
+
+  /* Boton 4: Precaución, Advertencia, Atención, Reintentar, Acción riesgosa */
   --button-color-4: #0000;
-  /* Llamado a la acción, Comprar ahora, Subscribirse, Empezar */
+
+  /* Boton 5: Llamado a la acción, Comprar ahora, Subscribirse, Empezar */
   --button-color-5: #0000;
-  /* Neutralidad, deshabilitado, cancelado, omitir, poca relevancia */
+
+  /* Boton 6: Neutralidad, deshabilitado, cancelado, omitir, poca relevancia */
   --button-color-6: #e5e7eb;
-  /* Alternativo, elegante, acción premium */
+
+  /* Boton 7: Alternativo, elegante, acción premium */
   --button-color-7: #f3f4f6;
 }
 
-/* Variación de color obscura para hovers de botones */
+/* Variables de colores de botones obscurecidOs 10% (hovers) */
 :root {
   --button-color-1-rgba-10: color-mix(
     in srgb,
@@ -106,9 +122,4 @@
     var(--button-color-7),
     black 10%
   );
-}
-
-body {
-  font-family: var(--font-nunito);
-  font-weight: 400;
 }

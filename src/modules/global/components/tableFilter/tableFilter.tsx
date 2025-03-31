@@ -1,8 +1,10 @@
-import { LanguageSelector } from "../../language/utils/languageSelector";
 import styles from "./tableFilter.module.css";
+import { LanguageSelector } from "../../language/utils/languageSelector";
+
 interface Props {
   columnName: string;
 }
+
 export const TableFilter = ({ columnName }: Props) => {
   const LANGUAGE = LanguageSelector();
   return (

@@ -13,6 +13,8 @@ export const MainWrapper = ({ children }: Props) => {
       <Menu />
       <div className={`${styles.rightContent}`}>
         <Header />
+
+        {/* Contenido de la página */}
         <PageContainer>{children}</PageContainer>
       </div>
     </div>

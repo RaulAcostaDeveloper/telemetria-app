@@ -1,7 +1,7 @@
-import { columnsTable, dataTable } from "../table/table.model";
+import styles from "./tableDataContent.module.css";
 import { TableActions } from "../tableActions/tableActions";
 import { TableDataProp } from "../tableDataProp/tableDataProp";
-import styles from "./tableDataContent.module.css";
+import { columnsTable, dataTable } from "../table/table.model";
 
 interface Props {
   columns: columnsTable;
@@ -13,8 +13,8 @@ interface Props {
 }
 
 export const TableDataContent = ({
-  data,
   columns,
+  data,
   showActions,
   showDelete,
   showEdit,
@@ -24,6 +24,7 @@ export const TableDataContent = ({
     <>
       {data.map((dataObject, index) => (
         <div key={index} className={styles.dataObject}>
+          {/* Datos de la tabla por columna */}
           {Object.entries(dataObject).map(([key, value], propIndex) => {
             const defaultSpace = {
               width: columns[propIndex].defaultSpace
@@ -32,12 +33,13 @@ export const TableDataContent = ({
             };
             return (
               <TableDataProp
-                key={key}
                 value={String(value)}
                 defaultSpace={defaultSpace}
               />
             );
           })}
+
+          {/* Acciones de la tabla */}
           {showActions && (
             <TableActions
               showDelete={showDelete}

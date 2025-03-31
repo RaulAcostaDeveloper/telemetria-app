@@ -14,25 +14,3 @@
   transition: 1s;
   width: 80px;
 }
-
-.header {
-  align-items: center;
-  cursor: pointer;
-  display: flex;
-  height: 100px;
-  justify-content: center;
-}
-
-.menuContent {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: space-between;
-}
-
-.bottom {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-}

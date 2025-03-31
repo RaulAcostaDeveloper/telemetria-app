@@ -1,14 +1,17 @@
 "use client";
 import { useState } from "react";
-import { GeneralButton } from "../generalButton/generalButton";
-import styles from "./tableAddNewButton.module.css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { TableAddFormModal } from "../tableAddFormModal/tableAddFormModal";
+
+import styles from "./tableAddNewButton.module.css";
+import { ButtonTypes } from "../generalButton/generalButton.model";
+import { GeneralButton } from "../generalButton/generalButton";
 import { LanguageSelector } from "../../language/utils/languageSelector";
+import { TableAddFormModal } from "../tableAddFormModal/tableAddFormModal";
 
 export const TableAddNewButton = () => {
-  const [showEditModal, setShowEditModal] = useState<Boolean>(false);
   const LANGUAGE = LanguageSelector();
+  const [showEditModal, setShowEditModal] = useState<Boolean>(false);
+
   return (
     <>
       <GeneralButton
@@ -16,7 +19,7 @@ export const TableAddNewButton = () => {
         buttonStyle={styles.tableAddNewButton}
         callback={() => setShowEditModal(true)}
         title={LANGUAGE.table.buttons.create}
-        type={1}
+        type={ButtonTypes.CONFIRM}
       />
       {showEditModal && (
         <TableAddFormModal closeModal={() => setShowEditModal(false)} />
