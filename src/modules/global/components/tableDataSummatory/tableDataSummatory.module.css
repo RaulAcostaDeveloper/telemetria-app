@@ -1,0 +1,10 @@
+.tableDataSummatory {
+  width: 100%;
+  display: flex;
+}
+
+.summatory {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+}

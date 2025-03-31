@@ -1,10 +1,10 @@
 import styles from "./menuButton.module.css";
 
 interface Props {
-  title: string;
   Icon: React.ElementType;
-  isOpen: boolean | null;
   callback: () => void;
+  isOpen: boolean | null;
+  title: string;
 }
 
 export const MenuButton = ({ Icon, callback, isOpen, title }: Props) => {

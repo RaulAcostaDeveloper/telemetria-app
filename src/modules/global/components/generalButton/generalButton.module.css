@@ -1,0 +1,111 @@
+.generalButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-weight: 600;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  padding: 10px 5px;
+  border: none;
+  border-radius: 4px;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.title {
+  padding-right: 5px;
+}
+
+.confirm {
+  background-color: var(--button-color-1);
+}
+
+.confirm:focus {
+  outline: none;
+  background-color: var(--button-color-1-rgba-10);
+}
+
+.confirm:hover {
+  background-color: var(--button-color-1-rgba-10);
+}
+
+.success {
+  background-color: var(--button-color-2);
+}
+
+.success:focus {
+  outline: none;
+  background-color: var(--button-color-2-rgba-10);
+}
+
+.success:hover {
+  background-color: var(--button-color-2-rgba-10);
+}
+
+.danger {
+  background-color: var(--button-color-3);
+}
+
+.danger:focus {
+  outline: none;
+  background-color: var(--button-color-3-rgba-10);
+}
+
+.danger:hover {
+  background-color: var(--button-color-3-rgba-10);
+}
+
+.warning {
+  background-color: var(--button-color-4);
+}
+
+.warning:focus {
+  outline: none;
+  background-color: var(--button-color-4-rgba-10);
+}
+
+.warning:hover {
+  background-color: var(--button-color-4-rgba-10);
+}
+
+.userAction {
+  background-color: var(--button-color-5);
+}
+
+.userAction:focus {
+  outline: none;
+  background-color: var(--button-color-5-rgba-10);
+}
+
+.userAction:hover {
+  background-color: var(--button-color-5-rgba-10);
+}
+
+.neutral {
+  background-color: var(--button-color-6);
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.neutral:focus {
+  outline: none;
+  background-color: var(--button-color-6-rgba-10);
+}
+
+.neutral:hover {
+  background-color: var(--button-color-6-rgba-10);
+}
+
+.premium {
+  background-color: var(--button-color-7);
+}
+
+.premium:focus {
+  outline: none;
+  background-color: var(--button-color-7-rgba-10);
+}
+
+.premium:hover {
+  background-color: var(--button-color-7-rgba-10);
+}

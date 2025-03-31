@@ -11,8 +11,10 @@ export const MainWrapper = ({ children }: Props) => {
   return (
     <div className={`${styles.mainWrapper}`}>
       <Menu />
-      <div className={`${styles.leftContent}`}>
+      <div className={`${styles.rightContent}`}>
         <Header />
+
+        {/* Contenido de la página */}
         <PageContainer>{children}</PageContainer>
       </div>
     </div>
