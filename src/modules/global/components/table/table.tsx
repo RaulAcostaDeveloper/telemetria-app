@@ -1,6 +1,7 @@
 import { TableAddNewButton } from "../tableAddNewButton/tableAddNewButton";
 import { TableColumns } from "../tableColumns/tableColumns";
 import { TableDataContent } from "../tableDataContent/tableDataContent";
+import { TableDataSummatory } from "../tableDataSummatory/tableDataSummatory";
 import { TableDownloadCSV } from "../tableDownloadCSV/tableDownloadCSV";
 import { TableFilters } from "../tableFilters/tableFilters";
 import { TableSearch } from "../tableSearch/tableSearch";
@@ -8,7 +9,7 @@ import { columnsTable } from "./table.model";
 import styles from "./table.module.css";
 
 interface Props {
-  title: string;
+  title?: string;
   showCreateButton?: boolean;
   showEdit?: boolean;
   showDelete?: boolean;
@@ -17,6 +18,7 @@ interface Props {
   columns: string[];
 }
 
+// Estas columnas y los datos de la tabla no son copys, son un ejemplo
 const columns: columnsTable = [
   {
     columnName: "Zona",
@@ -29,6 +31,7 @@ const columns: columnsTable = [
     defaultSpace: 2,
     orderColumn: true,
     filterOptions: true,
+    showTotal: true,
   },
   { columnName: "País", defaultSpace: 2 },
   {
@@ -36,6 +39,7 @@ const columns: columnsTable = [
     defaultSpace: 2,
     filterOptions: true,
     orderColumn: true,
+    showTotal: true,
   },
 ];
 
@@ -76,7 +80,7 @@ export const Table = ({
   return (
     <div className={`${styles.defaultTable}`}>
       <div className={`${styles.inside}`}>
-        <h2 className={`${styles.title}`}>{title}</h2>
+        {title && <h4 className={`${styles.title}`}>{title}</h4>}
         <div className={`${styles.topActions}`}>
           {showCreateButton && <TableAddNewButton />}
           <TableDownloadCSV />
@@ -105,6 +109,7 @@ export const Table = ({
             />
           </div>
         </div>
+        <TableDataSummatory columns={columns} data={data} />
       </div>
     </div>
   );

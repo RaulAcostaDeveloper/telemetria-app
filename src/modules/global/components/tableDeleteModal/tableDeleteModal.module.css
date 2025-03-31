@@ -1,0 +1,35 @@
+.warningIconSection {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.warningIconContainer {
+  background-color: rgba(255, 0, 0, 0.2);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.warningIcon {
+  position: relative;
+  bottom: 2px;
+}
+
+.adviceSection {
+  margin: 20px 0;
+  font-size: 3rem;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 20px;
+}
+
+.button {
+  padding: 20px;
+}

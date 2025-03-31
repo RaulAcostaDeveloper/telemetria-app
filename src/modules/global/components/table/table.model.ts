@@ -3,6 +3,7 @@ interface column {
   defaultSpace: number;
   orderColumn?: boolean;
   filterOptions?: boolean;
+  showTotal?: boolean;
 }
 export type columnsTable = column[];
 
