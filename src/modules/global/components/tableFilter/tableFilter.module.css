@@ -1,0 +1,42 @@
+.selector {
+  display: flex;
+  justify-content: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+/* Estilos especiales para el selector */
+.selectInput {
+  appearance: none;
+  background-color: white;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px;
+  width: 100%;
+
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.selectInput:focus {
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-5);
+  -moz-box-shadow: 2px 2px 5px 0px var(--company-color-5);
+  box-shadow: 2px 2px 5px 0px var(--company-color-5);
+}
+
+.selectInput:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-4);
+  -moz-box-shadow: 2px 2px 5px 0px var(--company-color-4);
+  box-shadow: 2px 2px 5px 0px var(--company-color-4);
+}

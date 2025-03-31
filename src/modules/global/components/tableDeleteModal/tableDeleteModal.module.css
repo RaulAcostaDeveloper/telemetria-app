@@ -1,0 +1,40 @@
+.inside {
+  padding: 5px;
+  margin: 10px;
+}
+
+.warningIconContainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.warningIcon {
+  background-color: rgba(255, 0, 0, 0.2);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.icon {
+  position: relative;
+  bottom: 2px;
+}
+
+.formTitle {
+  margin: 20px 0;
+  font-size: 3rem;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.button {
+  padding: 15px;
+}

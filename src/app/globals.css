@@ -1,12 +1,23 @@
+/* Estilos globales para la aplicación */
+
+/* Ajustes generales para todos los elementos */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box; /*asegura que el ancho y alto incluyan padding y borde sin alterar el tamaño del contendor*/
   font-size: 62.5%; /*Define 1rem como 10px, facilitando el cálculo y conversión de tamaños en CSS.*/
 }
-/* Variables para fuentes están declaradas en src\globalConfig\fonts\fonts.ts */
 
-/* Variables de CSS del proyecto */
+body {
+  font-family: var(--font-nunito);
+  font-weight: 400;
+}
+
+/* VARIABLES CSS */
+
+/* Nota: Las variables para fuentes de letra están declaradas en src\globalConfig\fonts\fonts.ts /
+
+/* Variables de colores de la empresa (theme) */
 :root {
   --company-color-1: #e8f7ff;
   --company-color-2: #bdd5e1;
@@ -16,7 +27,99 @@
   --company-color-6: #113154;
 }
 
-body {
-  font-family: var(--font-nunito);
-  font-weight: 400;
+/*  Variables de colores de la empresa (theme) obscurecidas 10% (hovers) */
+:root {
+  --company-color-1-rgba-10: color-mix(
+    in srgb,
+    var(--company-color-1),
+    black 10%
+  );
+  --company-color-2-rgba-10: color-mix(
+    in srgb,
+    var(--company-color-2),
+    black 10%
+  );
+  --company-color-3-rgba-10: color-mix(
+    in srgb,
+    var(--company-color-3),
+    black 10%
+  );
+  --company-color-4-rgba-10: color-mix(
+    in srgb,
+    var(--company-color-4),
+    black 10%
+  );
+  --company-color-5-rgba-10: color-mix(
+    in srgb,
+    var(--company-color-5),
+    black 10%
+  );
+  --company-color-6-rgba-10: color-mix(
+    in srgb,
+    var(--company-color-6),
+    black 10%
+  );
+}
+
+/* Variables de colores de botones */
+:root {
+  /* Boton 1: Acción principal, Envío, Confirmación, Inicio de sesión */
+  --button-color-1: #007bff;
+
+  /* Boton 2: Éxito, confirmación, Aceptar, Guardar, Continuar  */
+  --button-color-2: #198754;
+
+  /* Boton 3: Advertencia, Eliminación, Cancelar, Salir */
+  --button-color-3: #b91c1c;
+
+  /* Boton 4: Precaución, Advertencia, Atención, Reintentar, Acción riesgosa */
+  --button-color-4: #0000;
+
+  /* Boton 5: Llamado a la acción, Comprar ahora, Subscribirse, Empezar */
+  --button-color-5: #0000;
+
+  /* Boton 6: Neutralidad, deshabilitado, cancelado, omitir, poca relevancia */
+  --button-color-6: #e5e7eb;
+
+  /* Boton 7: Alternativo, elegante, acción premium */
+  --button-color-7: #f3f4f6;
+}
+
+/* Variables de colores de botones obscurecidOs 10% (hovers) */
+:root {
+  --button-color-1-rgba-10: color-mix(
+    in srgb,
+    var(--button-color-1),
+    black 10%
+  );
+  --button-color-2-rgba-10: color-mix(
+    in srgb,
+    var(--button-color-2),
+    black 10%
+  );
+  --button-color-3-rgba-10: color-mix(
+    in srgb,
+    var(--button-color-3),
+    black 10%
+  );
+  --button-color-4-rgba-10: color-mix(
+    in srgb,
+    var(--button-color-4),
+    black 10%
+  );
+  --button-color-5-rgba-10: color-mix(
+    in srgb,
+    var(--button-color-5),
+    black 10%
+  );
+  --button-color-6-rgba-10: color-mix(
+    in srgb,
+    var(--button-color-6),
+    black 10%
+  );
+  --button-color-7-rgba-10: color-mix(
+    in srgb,
+    var(--button-color-7),
+    black 10%
+  );
 }

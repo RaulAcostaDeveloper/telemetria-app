@@ -1,6 +1,50 @@
 import { LanguageInterface } from "./language.model";
 
 export const ENGLISH: LanguageInterface = {
+  menu: {
+    titles: {
+      close: "Close menu",
+      fuel: "Fuel",
+      logo: "Logo company",
+      management: "Management",
+      open: "Open menu",
+    },
+    buttons: {
+      logOut: "Log out",
+    },
+  },
+  table: {
+    buttons: {
+      cancel: "Cancel",
+      create: "Create",
+      delete: "Delete item",
+      downloadCSV: "Download CSV",
+      saveEdit: "Save changes",
+      saveNew: "Save item",
+    },
+    actions: {
+      close: "Close",
+      copy: "Copy text",
+      copyError: "Error on copyng text",
+      deleteElement: "Delete item",
+      editElement: "Edit item",
+      filterBy: "Filter by column",
+      search: "Search",
+      searchTitle: "Search by the first column of the table",
+      sortItems: "Sort items by",
+      viewDetail: "Ver detalles",
+    },
+    elements: {
+      actions: "Actions",
+      columns: "Columns",
+      total: "Total",
+    },
+    formTitles: {
+      createElement: "Create item",
+      deleteElement: "Are you sure you want to delete this item?",
+      deleteSubString: "This action is permanent and cannot be undone.",
+    },
+  },
   auth: {
     principalTitle: "Authentication page",
     authForm: {
@@ -11,15 +55,11 @@ export const ENGLISH: LanguageInterface = {
     linkToHome: "Go to home",
     linkToRegister: "Go to Register",
   },
-  menu: {
-    titles: {
-      fuel: "Fuel",
-      management: "Management",
-      open: "Open menu",
-      close: "Close menu",
-    },
-    buttons: {
-      logOut: "Log out",
+  fuel: {
+    tabs: {
+      groups: "Groups",
+      unitys: "Unitys",
+      zones: "Zones",
     },
   },
 };

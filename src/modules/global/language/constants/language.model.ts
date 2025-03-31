@@ -1,6 +1,50 @@
 // Asegura que haya concordancia entre idiomas
 
 export interface LanguageInterface {
+  menu: {
+    titles: {
+      close: string;
+      fuel: string;
+      logo: string;
+      management: string;
+      open: string;
+    };
+    buttons: {
+      logOut: string;
+    };
+  };
+  table: {
+    buttons: {
+      cancel: string;
+      create: string;
+      delete: string;
+      downloadCSV: string;
+      saveEdit: string;
+      saveNew: string;
+    };
+    actions: {
+      close: string;
+      copy: string;
+      copyError: string;
+      deleteElement: string;
+      editElement: string;
+      filterBy: string;
+      search: string;
+      searchTitle: string;
+      sortItems: string;
+      viewDetail: string;
+    };
+    elements: {
+      actions: string;
+      columns: string;
+      total: string;
+    };
+    formTitles: {
+      createElement: string;
+      deleteElement: string;
+      deleteSubString: string;
+    };
+  };
   auth: {
     principalTitle: string;
     authForm: {
@@ -11,15 +55,11 @@ export interface LanguageInterface {
     linkToHome: string;
     linkToRegister: string;
   };
-  menu: {
-    titles: {
-      fuel: string;
-      management: string;
-      open: string;
-      close: string;
-    };
-    buttons: {
-      logOut: string;
+  fuel: {
+    tabs: {
+      groups: string;
+      unitys: string;
+      zones: string;
     };
   };
 }

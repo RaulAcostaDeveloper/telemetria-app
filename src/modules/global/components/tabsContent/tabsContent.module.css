@@ -1,11 +1,6 @@
 .tabsContent {
   width: 100%;
   height: 100%;
-  /* 
-    Este position absolute es necesario para que el componente no desborde la página.
-    Es importante verificar que el componente padre sea el PageContainer o su posición sea relative 
-  */
-  position: absolute;
   padding-right: 2px;
 }
 
