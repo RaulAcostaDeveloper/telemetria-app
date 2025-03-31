@@ -85,6 +85,7 @@
 
 .neutral {
   background-color: var(--button-color-6);
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .neutral:focus {

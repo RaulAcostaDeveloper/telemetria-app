@@ -2,8 +2,10 @@
 .mainWrapper {
   display: flex;
   align-items: flex-start; /*Alinea los elementos al principio (arriba) en lugar de estirarlos verticalmente.*/
+  width: 100%;
 }
 
-.leftContent {
+.rightContent {
   width: 100%;
+  overflow-x: auto;
 }
