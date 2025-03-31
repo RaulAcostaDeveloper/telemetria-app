@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { MainWrapper } from "@/modules/global/components";
+import { MainWrapper, ReduxProvider } from "@/modules/global/components";
 import {
   neuropolFont,
   nunitoFont,
@@ -22,7 +22,9 @@ export default function RootLayout({
       <body
         className={`${nunitoItalicFont.variable} ${nunitoFont.variable} ${neuropolFont.variable}`}
       >
-        <MainWrapper>{children}</MainWrapper>
+        <ReduxProvider>
+          <MainWrapper>{children}</MainWrapper>
+        </ReduxProvider>
       </body>
     </html>
   );
