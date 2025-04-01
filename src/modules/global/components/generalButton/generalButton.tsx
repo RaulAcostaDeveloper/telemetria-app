@@ -9,6 +9,7 @@ interface Props {
   title: string;
   titleStyle?: string;
   type: ButtonTypes;
+  disabled?: boolean;
 }
 
 export const GeneralButton = ({
@@ -18,7 +19,15 @@ export const GeneralButton = ({
   title,
   titleStyle,
   type,
+  disabled,
 }: Props) => {
+  const handleCallback = () => {
+    if (disabled) {
+      return null;
+    } else {
+      callback();
+    }
+  };
   return (
     <button
       className={`
@@ -31,8 +40,9 @@ export const GeneralButton = ({
         ${type === ButtonTypes.USER_ACTION && styles.userAction} 
         ${type === ButtonTypes.NEUTRAL && styles.neutral} 
         ${type === ButtonTypes.PREMIUM && styles.premium} 
+        ${disabled ? styles.disabled : ""} 
       `}
-      onClick={callback}
+      onClick={handleCallback}
       title={title}
     >
       <span className={` ${titleStyle ? titleStyle : ""} ${styles.title}`}>
