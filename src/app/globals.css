@@ -63,26 +63,29 @@ body {
 
 /* Variables de colores de botones */
 :root {
-  /* Boton 1: Acción principal, Envío, Confirmación, Inicio de sesión */
+  /* Botón 1: Acción principal, Envío, Confirmación, Inicio de sesión */
   --button-color-1: #007bff;
 
-  /* Boton 2: Éxito, confirmación, Aceptar, Guardar, Continuar  */
+  /* Botón 2: Éxito, confirmación, Aceptar, Guardar, Continuar  */
   --button-color-2: #198754;
 
-  /* Boton 3: Advertencia, Eliminación, Cancelar, Salir */
+  /* Botón 3: Advertencia, Eliminación, Cancelar, Salir */
   --button-color-3: #b91c1c;
 
-  /* Boton 4: Precaución, Advertencia, Atención, Reintentar, Acción riesgosa */
-  --button-color-4: #0000;
+  /* Botón 4: Precaución, Advertencia, Atención, Reintentar, Acción riesgosa */
+  --button-color-4: #ffb300;
 
-  /* Boton 5: Llamado a la acción, Comprar ahora, Subscribirse, Empezar */
-  --button-color-5: #0000;
+  /* Botón 5: Llamado a la acción, Comprar ahora, Subscribirse, Empezar */
+  --button-color-5: #ff6f00;
 
-  /* Boton 6: Neutralidad, deshabilitado, cancelado, omitir, poca relevancia */
+  /* Botón 6: Neutralidad, deshabilitado, cancelado, omitir, poca relevancia */
   --button-color-6: #e5e7eb;
 
-  /* Boton 7: Alternativo, elegante, acción premium */
-  --button-color-7: #f3f4f6;
+  /* Botón 7: Alternativo, elegante, acción premium */
+  --button-color-7: #111111;
+
+  /* Botón deshabilitado */
+  --button-color-8: #b0c4de;
 }
 
 /* Variables de colores de botones obscurecidOs 10% (hovers) */

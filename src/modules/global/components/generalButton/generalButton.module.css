@@ -12,10 +12,22 @@
   -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  transition: 0.5s;
+}
+
+.generalButton:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transform: translateY(-1px);
 }
 
 .title {
   padding-right: 5px;
+}
+
+.disabled {
+  background-color: var(--button-color-8);
+  color: #b0c4de;
+  cursor: no-drop;
 }
 
 .confirm {
@@ -59,6 +71,7 @@
 
 .warning {
   background-color: var(--button-color-4);
+  color: #111827;
 }
 
 .warning:focus {
