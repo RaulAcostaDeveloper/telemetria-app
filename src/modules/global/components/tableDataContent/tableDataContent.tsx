@@ -33,6 +33,7 @@ export const TableDataContent = ({
             };
             return (
               <TableDataProp
+                key={key}
                 value={String(value)}
                 defaultSpace={defaultSpace}
               />
