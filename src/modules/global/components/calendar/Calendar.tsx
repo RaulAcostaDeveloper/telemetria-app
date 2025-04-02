@@ -84,13 +84,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   const formatDate = (date: Date) =>
     `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 
-  const [isCustomPeriod, setIsCustomPeriod] = useState(true);
-
-  const handleToggle = () => {
-    setIsCustomPeriod(!isCustomPeriod);
-    console.log(`custom period set to: ${isCustomPeriod}`);
-  };
-
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
   };
@@ -129,288 +122,275 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       </div>
       <div className={styles.personalizedDate}>
         <p className={styles.reportPeriod}>Periodo de reportes</p>
-        {isCustomPeriod ? (
-          <>
-            <div className={styles.isCustomCalendarContainer}>
-              <label className={styles.containerLabel}>Desde:</label>
+        <>
+          <div className={styles.isCustomCalendarContainer}>
+            <label className={styles.containerLabel}>Desde:</label>
+            <input
+              type="text"
+              value={startDate ? startDate.toLocaleDateString() : ""}
+              onClick={toggleStartDateCalendar}
+              readOnly
+              className={styles.containerInput}
+              placeholder="dd/mm/aaaa"
+            />
+            <div className={styles.timeInputGroup}>
               <input
-                type="text"
-                value={startDate ? startDate.toLocaleDateString() : ""}
-                onClick={toggleStartDateCalendar}
-                readOnly
-                className={styles.containerInput}
-                placeholder="dd/mm/aaaa"
+                className={styles.timeInputField}
+                id="12hours"
+                inputMode="decimal"
+                aria-label="Hours"
+                type="tel"
+                value="12"
+                name="12hours"
               />
-              <div className={styles.timeInputGroup}>
-                <input
-                  className={styles.timeInputField}
-                  id="12hours"
-                  inputMode="decimal"
-                  aria-label="Hours"
-                  type="tel"
-                  value="12"
-                  name="12hours"
-                />
-                <input
-                  className={styles.timeInputField}
-                  id="minutes12"
-                  inputMode="decimal"
-                  aria-label="Minutes"
-                  type="tel"
-                  value="00"
-                  name="minutes"
-                />
-                <input
-                  className={styles.timeInputField}
-                  id="seconds12"
-                  inputMode="decimal"
-                  aria-label="Seconds"
-                  type="tel"
-                  value="00"
-                  name="seconds"
-                />
-                <div className={styles.amPmWrapper}>
-                  <button
-                    type="button"
-                    role="combobox"
-                    aria-controls="radix-:r18:"
-                    aria-expanded="false"
-                    aria-autocomplete="none"
-                    dir="ltr"
-                    data-state="closed"
-                    data-slot="select-trigger"
-                    className={styles.amPmButton}
+              <input
+                className={styles.timeInputField}
+                id="minutes12"
+                inputMode="decimal"
+                aria-label="Minutes"
+                type="tel"
+                value="00"
+                name="minutes"
+              />
+              <input
+                className={styles.timeInputField}
+                id="seconds12"
+                inputMode="decimal"
+                aria-label="Seconds"
+                type="tel"
+                value="00"
+                name="seconds"
+              />
+              <div className={styles.amPmWrapper}>
+                <button
+                  type="button"
+                  role="combobox"
+                  aria-controls="radix-:r18:"
+                  aria-expanded="false"
+                  aria-autocomplete="none"
+                  dir="ltr"
+                  data-state="closed"
+                  data-slot="select-trigger"
+                  className={styles.amPmButton}
+                >
+                  <span className={styles.amPmText}>AM</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1.28rem"
+                    height="1.28rem"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={styles.amPmIcon}
+                    aria-hidden="true"
                   >
-                    <span className={styles.amPmText}>AM</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="1.28rem"
-                      height="1.28rem"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className={styles.amPmIcon}
-                      aria-hidden="true"
-                    >
-                      <path d="m6 9 6 6 6-6"></path>
-                    </svg>
-                  </button>
-                </div>
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
               </div>
-
-              {showStartDateCalendar && (
-                <div className={styles.dateContainer}>
-                  <div className={styles.dateSubContainer}>
-                    <div className={styles.dateDayMonthYear}>
-                      <button
-                        onClick={() => changeMonth(-1)}
-                        className={styles.previousMonth}
-                      >
-                        ‹
-                      </button>
-                      <span className={styles.dateSpan}>
-                        {highlightDate
-                          ? formatDate(highlightDate)
-                          : formatDate(currentDate)}
-                      </span>
-                      <button
-                        onClick={() => changeMonth(1)}
-                        className={styles.nextMonth}
-                      >
-                        ›
-                      </button>
-                    </div>
-                    <div className={styles.daysOfTheWeekContainer}>
-                      {daysOfWeek.map((day, index) => (
-                        <div
-                          key={index}
-                          className={styles.daysOfTheWeekSubContainer}
-                        >
-                          {day}
-                        </div>
-                      ))}
-                    </div>
-                    <div className={styles.calendarDayButtonContainer}>
-                      {Array.from({ length: 42 }, (_, i) => {
-                        const date = new Date(
-                          currentDate.getFullYear(),
-                          currentDate.getMonth(),
-                          i - currentDate.getDay() + 1
-                        );
-                        return (
-                          <button
-                            key={i}
-                            onClick={() => handleDateChange(date, setStartDate)}
-                            disabled={isPast90Days(date)}
-                            className={styles.calendarDayButtonFrom}
-                          >
-                            {date.getDate()}
-                          </button>
-                        );
-                      })}
-                    </div>
-                    <div className={styles.todayButtonContainer}>
-                      <button
-                        onClick={handleGoToToday}
-                        className={styles.todayButton}
-                      >
-                        Today
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
 
-            <div className={styles.isCustomCalendarContainer}>
-              <label className={styles.containerLabel}>Hasta:</label>
-              <input
-                type="text"
-                value={endDate ? endDate.toLocaleDateString() : ""}
-                onClick={toggleEndDateCalendar}
-                readOnly
-                className={styles.containerInput}
-                placeholder="dd/mm/aaaa"
-              />
-              <div className={styles.timeInputGroup}>
-                <input
-                  className={styles.timeInputField}
-                  id="12hours"
-                  inputMode="decimal"
-                  aria-label="Hours"
-                  type="tel"
-                  value="12"
-                  name="12hours"
-                />
-                <input
-                  className={styles.timeInputField}
-                  id="minutes12"
-                  inputMode="decimal"
-                  aria-label="Minutes"
-                  type="tel"
-                  value="00"
-                  name="minutes"
-                />
-                <input
-                  className={styles.timeInputField}
-                  id="seconds12"
-                  inputMode="decimal"
-                  aria-label="Seconds"
-                  type="tel"
-                  value="00"
-                  name="seconds"
-                />
-                <div className={styles.amPmWrapper}>
-                  <button
-                    type="button"
-                    role="combobox"
-                    aria-controls="radix-:r18:"
-                    aria-expanded="false"
-                    aria-autocomplete="none"
-                    dir="ltr"
-                    data-state="closed"
-                    data-slot="select-trigger"
-                    className={styles.amPmButton}
-                  >
-                    <span className={styles.amPmText}>PM</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="1.28rem"
-                      height="1.28rem"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className={styles.amPmIcon}
-                      aria-hidden="true"
+            {showStartDateCalendar && (
+              <div className={styles.dateContainer}>
+                <div className={styles.dateSubContainer}>
+                  <div className={styles.dateDayMonthYear}>
+                    <button
+                      onClick={() => changeMonth(-1)}
+                      className={styles.previousMonth}
                     >
-                      <path d="m6 9 6 6 6-6"></path>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-
-              {showEndDateCalendar && (
-                <div className={styles.dateContainer}>
-                  <div className={styles.dateSubContainer}>
-                    <div className={styles.dateDayMonthYear}>
-                      <button
-                        onClick={() => changeMonth(-1)}
-                        className={styles.previousMonth}
+                      ‹
+                    </button>
+                    <span className={styles.dateSpan}>
+                      {highlightDate
+                        ? formatDate(highlightDate)
+                        : formatDate(currentDate)}
+                    </span>
+                    <button
+                      onClick={() => changeMonth(1)}
+                      className={styles.nextMonth}
+                    >
+                      ›
+                    </button>
+                  </div>
+                  <div className={styles.daysOfTheWeekContainer}>
+                    {daysOfWeek.map((day, index) => (
+                      <div
+                        key={index}
+                        className={styles.daysOfTheWeekSubContainer}
                       >
-                        ‹
-                      </button>
-                      <span className={styles.dateSpan}>
-                        {highlightDate
-                          ? formatDate(highlightDate)
-                          : formatDate(currentDate)}
-                      </span>
-                      <button
-                        onClick={() => changeMonth(1)}
-                        className={styles.nextMonth}
-                      >
-                        ›
-                      </button>
-                    </div>
-                    <div className={styles.daysOfTheWeekContainer}>
-                      {daysOfWeek.map((day, index) => (
-                        <div
-                          key={index}
-                          className={styles.daysOfTheWeekSubContainer}
+                        {day}
+                      </div>
+                    ))}
+                  </div>
+                  <div className={styles.calendarDayButtonContainer}>
+                    {Array.from({ length: 42 }, (_, i) => {
+                      const date = new Date(
+                        currentDate.getFullYear(),
+                        currentDate.getMonth(),
+                        i - currentDate.getDay() + 1
+                      );
+                      return (
+                        <button
+                          key={i}
+                          onClick={() => handleDateChange(date, setStartDate)}
+                          disabled={isPast90Days(date)}
+                          className={styles.calendarDayButtonFrom}
                         >
-                          {day}
-                        </div>
-                      ))}
-                    </div>
-                    <div className={styles.calendarDayButtonContainer}>
-                      {Array.from({ length: 42 }, (_, i) => {
-                        const date = new Date(
-                          currentDate.getFullYear(),
-                          currentDate.getMonth(),
-                          i - currentDate.getDay() + 1
-                        );
-                        return (
-                          <button
-                            key={i}
-                            onClick={() => handleDateChange(date, setEndDate)}
-                            disabled={isPast90Days(date)}
-                            className={styles.calendarDayButtonTill}
-                          >
-                            {date.getDate()}
-                          </button>
-                        );
-                      })}
-                    </div>
-                    <div className={styles.todayButtonContainer}>
-                      <button
-                        onClick={handleGoToToday}
-                        className={styles.todayButton}
-                      >
-                        Today
-                      </button>
-                    </div>
+                          {date.getDate()}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <div className={styles.todayButtonContainer}>
+                    <button
+                      onClick={handleGoToToday}
+                      className={styles.todayButton}
+                    >
+                      Today
+                    </button>
                   </div>
                 </div>
-              )}
-            </div>
-          </>
-        ) : (
-          <div className={styles.selectPeriodContainer}>
-            <label>Periodo:</label>
-            <select value={selectedOption} onChange={handleOptionChange}>
-              <option value="">Seleccionar un periodo</option>
-              <option value="last7Days">Últimos 7 días</option>
-              <option value="last14Days">Últimos 14 días</option>
-              <option value="last30Days">Últimos 30 días</option>
-              <option value="last90Days">Últimos 90 días</option>
-            </select>
+              </div>
+            )}
           </div>
-        )}
+
+          <div className={styles.isCustomCalendarContainer}>
+            <label className={styles.containerLabel}>Hasta:</label>
+            <input
+              type="text"
+              value={endDate ? endDate.toLocaleDateString() : ""}
+              onClick={toggleEndDateCalendar}
+              readOnly
+              className={styles.containerInput}
+              placeholder="dd/mm/aaaa"
+            />
+            <div className={styles.timeInputGroup}>
+              <input
+                className={styles.timeInputField}
+                id="12hours"
+                inputMode="decimal"
+                aria-label="Hours"
+                type="tel"
+                value="12"
+                name="12hours"
+              />
+              <input
+                className={styles.timeInputField}
+                id="minutes12"
+                inputMode="decimal"
+                aria-label="Minutes"
+                type="tel"
+                value="00"
+                name="minutes"
+              />
+              <input
+                className={styles.timeInputField}
+                id="seconds12"
+                inputMode="decimal"
+                aria-label="Seconds"
+                type="tel"
+                value="00"
+                name="seconds"
+              />
+              <div className={styles.amPmWrapper}>
+                <button
+                  type="button"
+                  role="combobox"
+                  aria-controls="radix-:r18:"
+                  aria-expanded="false"
+                  aria-autocomplete="none"
+                  dir="ltr"
+                  data-state="closed"
+                  data-slot="select-trigger"
+                  className={styles.amPmButton}
+                >
+                  <span className={styles.amPmText}>PM</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1.28rem"
+                    height="1.28rem"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={styles.amPmIcon}
+                    aria-hidden="true"
+                  >
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {showEndDateCalendar && (
+              <div className={styles.dateContainer}>
+                <div className={styles.dateSubContainer}>
+                  <div className={styles.dateDayMonthYear}>
+                    <button
+                      onClick={() => changeMonth(-1)}
+                      className={styles.previousMonth}
+                    >
+                      ‹
+                    </button>
+                    <span className={styles.dateSpan}>
+                      {highlightDate
+                        ? formatDate(highlightDate)
+                        : formatDate(currentDate)}
+                    </span>
+                    <button
+                      onClick={() => changeMonth(1)}
+                      className={styles.nextMonth}
+                    >
+                      ›
+                    </button>
+                  </div>
+                  <div className={styles.daysOfTheWeekContainer}>
+                    {daysOfWeek.map((day, index) => (
+                      <div
+                        key={index}
+                        className={styles.daysOfTheWeekSubContainer}
+                      >
+                        {day}
+                      </div>
+                    ))}
+                  </div>
+                  <div className={styles.calendarDayButtonContainer}>
+                    {Array.from({ length: 42 }, (_, i) => {
+                      const date = new Date(
+                        currentDate.getFullYear(),
+                        currentDate.getMonth(),
+                        i - currentDate.getDay() + 1
+                      );
+                      return (
+                        <button
+                          key={i}
+                          onClick={() => handleDateChange(date, setEndDate)}
+                          disabled={isPast90Days(date)}
+                          className={styles.calendarDayButtonTill}
+                        >
+                          {date.getDate()}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <div className={styles.todayButtonContainer}>
+                    <button
+                      onClick={handleGoToToday}
+                      className={styles.todayButton}
+                    >
+                      Today
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </>
         <div className={styles.selectPeriodButtonsContainer}>
           <button
             onClick={() => {
