@@ -1,14 +1,40 @@
 .calendarContainer {
+  display: flex;
+  justify-content: space-between;
   z-index: 10;
   position: absolute;
   top: 5rem;
   right: 1rem;
-  background-color: #e5e7eb;
+  background-color: white;
   color: black;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  width: 24rem;
+  width: 40rem;
+  height: 27rem;
+  gap: 1rem;
+}
+.fixedDatesContainer {
+  width: 18rem;
+  height: 25rem;
+}
+.fixedDatesContainer ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 25rem;
+}
+.fixedDatesContainer li {
+  border: 0.1rem solid rgb(224, 221, 221);
+  border-radius: 0.9rem;
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+.fixedDatesContainer li:hover {
+  background-color: rgb(231, 226, 226);
 }
 .subContainer {
   display: flex;
@@ -55,6 +81,10 @@
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
+}
+.fixedDateOptions {
+  list-style-type: none;
+  font-size: 3rem;
 }
 
 /*PERIODO PERSONALIZADO*/
@@ -187,22 +217,70 @@
   gap: 1rem;
 }
 .selectPeriodSaveButton {
-  background-color: "#00416A";
+  background-color: rgb(18, 18, 34);
   color: white;
   padding: 0.5rem;
   border-radius: 0.5rem;
   font-size: 1.125rem;
   cursor: pointer;
-  background-color: rgb(18, 18, 34);
   border: none;
 }
 .selectPeriodCancelButton {
-  background-color: #9ca3af;
+  background-color: grey;
   color: white;
   padding: 0.5rem;
   border-radius: 0.5rem;
   font-size: 1.125rem;
   cursor: pointer;
-  background-color: grey;
   border: none;
+}
+
+.timeInputGroup {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.64rem;
+  margin: 0.5rem 0 0 0;
+}
+
+.timeInputField {
+  display: flex;
+  height: 3.2rem;
+  border-radius: 0.48rem;
+  border: 0.08rem solid #d1d5db;
+  background-color: white;
+  width: 3.2rem;
+  text-align: center;
+  padding: 0.32rem;
+  font-family: monospace;
+  font-size: 1.28rem;
+  caret-color: transparent;
+}
+
+.amPmWrapper {
+  display: flex;
+  height: 3.2rem;
+  align-items: center;
+}
+
+.amPmButton {
+  display: flex;
+  height: 3.2rem;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.48rem;
+  border: 0.08rem solid #d1d5db;
+  background-color: transparent;
+  padding: 0.64rem 0.96rem;
+  font-size: 1.12rem;
+  white-space: nowrap;
+  cursor: pointer;
+  width: 5.2rem;
+}
+
+.amPmText {
+  pointer-events: none;
+}
+
+.amPmIcon {
+  opacity: 0.5;
 }
