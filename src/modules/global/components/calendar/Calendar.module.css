@@ -10,14 +10,13 @@
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  width: 45rem;
+  width: 42rem;
   height: 27rem;
   gap: 1rem;
 }
 .fixedDatesContainer {
   width: 18rem;
   height: 25rem;
-  background-color: red;
 }
 .fixedDatesContainer ul {
   display: flex;
@@ -36,6 +35,9 @@
 }
 .fixedDatesContainer li:hover {
   background-color: rgb(231, 226, 226);
+}
+.personalizedDate {
+  width: 50%;
 }
 .subContainer {
   display: flex;
@@ -238,6 +240,7 @@
 
 .timeInputGroup {
   display: flex;
+  justify-content: space-between;
   align-items: flex-end;
   gap: 0.64rem;
   margin: 0.5rem 0 0 0;
