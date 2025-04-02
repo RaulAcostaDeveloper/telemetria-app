@@ -10,13 +10,14 @@
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  width: 40rem;
+  width: 45rem;
   height: 27rem;
   gap: 1rem;
 }
 .fixedDatesContainer {
   width: 18rem;
   height: 25rem;
+  background-color: red;
 }
 .fixedDatesContainer ul {
   display: flex;
