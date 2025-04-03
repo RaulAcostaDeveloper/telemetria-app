@@ -260,6 +260,18 @@
   caret-color: transparent;
 }
 
+/* Ocultar los controles (flechas) de los inputs tipo number en WebKit */
+.timeInputField::-webkit-inner-spin-button,
+.timeInputField::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Ocultar los controles en Firefox */
+.timeInputField {
+  -moz-appearance: textfield;
+}
+
 .amPmWrapper {
   display: flex;
   height: 3.2rem;
