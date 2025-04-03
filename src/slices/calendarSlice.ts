@@ -1,23 +1,29 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface CalendarState {
-  dateRangeSelected: string | null;
+  startDate: string | null;
+  endDate: string | null;
 }
 
 const initialState: CalendarState = {
-  dateRangeSelected: null,
+  startDate: null,
+  endDate: null,
 };
 
 const calendarSlice = createSlice({
   name: "calendar",
   initialState,
   reducers: {
-    setDateRangeSelected(state, action: PayloadAction<string>) {
-      state.dateRangeSelected = action.payload;
+    // Guarda el rango de fechas como dos valores ISO 8601
+    setDateRange(
+      state,
+      action: PayloadAction<{ startDate: string; endDate: string }>
+    ) {
+      state.startDate = action.payload.startDate;
+      state.endDate = action.payload.endDate;
     },
   },
 });
 
-export const { setDateRangeSelected } = calendarSlice.actions;
-
+export const { setDateRange } = calendarSlice.actions;
 export default calendarSlice.reducer;

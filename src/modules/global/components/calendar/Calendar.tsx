@@ -2,22 +2,64 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
-import { setDateRangeSelected } from "@/slices/calendarSlice";
+import { setDateRange } from "@/slices/calendarSlice";
 import styles from "./Calendar.module.css";
+
+// Helper: formatea un objeto Date a una cadena ISO 8601 usando la hora local y el desplazamiento
+const toLocalISOString = (date: Date): string => {
+  const tzOffset = -date.getTimezoneOffset();
+  const diffSign = tzOffset >= 0 ? "+" : "-";
+  const pad = (n: number) => n.toString().padStart(2, "0");
+  return (
+    date.getFullYear() +
+    "-" +
+    pad(date.getMonth() + 1) +
+    "-" +
+    pad(date.getDate()) +
+    "T" +
+    pad(date.getHours()) +
+    ":" +
+    pad(date.getMinutes()) +
+    ":" +
+    pad(date.getSeconds()) +
+    diffSign +
+    pad(Math.floor(Math.abs(tzOffset) / 60)) +
+    ":" +
+    pad(Math.abs(tzOffset) % 60)
+  );
+};
 
 interface CalendarProps {
   toggleContainer: () => void;
 }
 
 const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
-  /*** DECLARACIÓN DE ESTADOS ***/
+  /*** ESTADOS DEL COMPONENTE ***/
+  // Estado para la fecha actual mostrada en el calendario
   const [currentDate, setCurrentDate] = useState(new Date());
+  // Estados para mostrar u ocultar el calendario de fecha de inicio y fin
   const [showStartDateCalendar, setShowStartDateCalendar] = useState(false);
   const [showEndDateCalendar, setShowEndDateCalendar] = useState(false);
+  // Estado para la fecha resaltada (seleccionada)
   const [highlightDate, setHighlightDate] = useState<Date | null>(null);
+  // Estado para una opción seleccionada (si se utiliza un dropdown adicional)
   const [selectedOption, setSelectedOption] = useState("");
+  // Estados para la fecha de inicio y fin seleccionadas
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
+
+  // Estados para el tiempo de la fecha de inicio
+  const [startHour, setStartHour] = useState("12");
+  const [startMinute, setStartMinute] = useState("00");
+  const [startSecond, setStartSecond] = useState("00");
+  const [startMeridiem, setStartMeridiem] = useState("AM");
+
+  // Estados para el tiempo de la fecha de fin
+  const [endHour, setEndHour] = useState("12");
+  const [endMinute, setEndMinute] = useState("00");
+  const [endSecond, setEndSecond] = useState("00");
+  const [endMeridiem, setEndMeridiem] = useState("PM");
+
   const dispatch = useDispatch();
 
   // Fecha de hoy y cálculo de la fecha límite de hace 90 días
@@ -25,8 +67,46 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   const past90Days = new Date(today);
   past90Days.setDate(today.getDate() - 90);
 
-  /*** MANEJADORES DE EVENTOS ***/
+  /*** MANEJADORES DE TECLADO PARA INPUTS DE TIEMPO ***/
+  // Permite incrementar o decrementar la hora de forma cíclica (1-12), mostrando siempre dos dígitos.
+  const handleHourKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    currentValue: string,
+    setter: (value: string) => void
+  ) => {
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      let value = parseInt(currentValue, 10);
+      value = value === 12 ? 1 : value + 1;
+      setter(value.toString().padStart(2, "0"));
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      let value = parseInt(currentValue, 10);
+      value = value === 1 ? 12 : value - 1;
+      setter(value.toString().padStart(2, "0"));
+    }
+  };
 
+  // Permite incrementar o decrementar los minutos o segundos de forma cíclica (0-59) y los muestra con dos dígitos.
+  const handleMinuteSecondKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    currentValue: string,
+    setter: (value: string) => void
+  ) => {
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      let value = parseInt(currentValue, 10);
+      value = value === 59 ? 0 : value + 1;
+      setter(value.toString().padStart(2, "0"));
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      let value = parseInt(currentValue, 10);
+      value = value === 0 ? 59 : value - 1;
+      setter(value.toString().padStart(2, "0"));
+    }
+  };
+
+  /*** MANEJADORES DE EVENTOS ***/
   // Alterna la visibilidad del calendario para la fecha de inicio
   const toggleStartDateCalendar = () => {
     setShowStartDateCalendar(!showStartDateCalendar);
@@ -57,66 +137,112 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     setCurrentDate(newDate);
   };
 
-  // Establece la fecha actual a hoy y actualiza el calendario activo
+  // Al hacer clic en "Today", se reinician la fecha y los inputs de tiempo.
   const handleGoToToday = () => {
     setCurrentDate(today);
     setHighlightDate(today);
-
     if (showStartDateCalendar) {
       setStartDate(today);
+      // Reinicia el tiempo de inicio a "12:00:00 AM"
+      setStartHour("12");
+      setStartMinute("00");
+      setStartSecond("00");
+      setStartMeridiem("AM");
       setTimeout(() => setShowStartDateCalendar(false), 250);
     } else if (showEndDateCalendar) {
       setEndDate(today);
+      // Reinicia el tiempo de fin a "12:00:00 PM"
+      setEndHour("12");
+      setEndMinute("00");
+      setEndSecond("00");
+      setEndMeridiem("PM");
       setTimeout(() => setShowEndDateCalendar(false), 250);
     }
   };
 
-  // Actualiza la opción seleccionada en el dropdown (si se usa)
+  // Actualiza la opción seleccionada en un dropdown adicional (si se utiliza)
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
   };
 
-  // Guarda el rango de fechas seleccionado en el store de Redux
+  // Guarda el rango de fechas en formato ISO 8601 usando la hora local.
+  // Convierte la hora ingresada (en formato 12h) a 24h según el valor del dropdown.
   const saveDate = () => {
     if (startDate && endDate) {
-      const start = startDate <= endDate ? startDate : endDate;
-      const end = startDate > endDate ? startDate : endDate;
-      const formattedRange = `From ${start.toLocaleDateString()} to ${end.toLocaleDateString()}`;
-      console.log("Rango seleccionado:", formattedRange);
-      dispatch(setDateRangeSelected(formattedRange));
+      // Ajuste de la fecha de inicio
+      const adjustedStart = new Date(startDate);
+      let hourStart = parseInt(startHour, 10);
+      if (startMeridiem === "PM" && hourStart < 12) {
+        hourStart += 12;
+      } else if (startMeridiem === "AM" && hourStart === 12) {
+        hourStart = 0;
+      }
+      adjustedStart.setHours(
+        hourStart,
+        parseInt(startMinute, 10),
+        parseInt(startSecond, 10)
+      );
+
+      // Ajuste de la fecha de fin
+      const adjustedEnd = new Date(endDate);
+      let hourEnd = parseInt(endHour, 10);
+      if (endMeridiem === "PM" && hourEnd < 12) {
+        hourEnd += 12;
+      } else if (endMeridiem === "AM" && hourEnd === 12) {
+        hourEnd = 0;
+      }
+      adjustedEnd.setHours(
+        hourEnd,
+        parseInt(endMinute, 10),
+        parseInt(endSecond, 10)
+      );
+
+      // Se asegura de que finalStart es la fecha anterior
+      const finalStart =
+        adjustedStart <= adjustedEnd ? adjustedStart : adjustedEnd;
+      const finalEnd =
+        adjustedStart > adjustedEnd ? adjustedStart : adjustedEnd;
+
+      console.log("startMinute:", startMinute, "startSecond:", startSecond);
+      console.log("endMinute:", endMinute, "endSecond:", endSecond);
+
+      // Convertir a cadena ISO local usando la función helper
+      const isoStart = toLocalISOString(finalStart);
+      const isoEnd = toLocalISOString(finalEnd);
+
+      console.log("Fecha de inicio (local ISO):", isoStart);
+      console.log("Fecha de fin (local ISO):", isoEnd);
+      dispatch(setDateRange({ startDate: isoStart, endDate: isoEnd }));
     } else {
       console.log("Por favor, selecciona ambas fechas: inicio y fin.");
     }
   };
 
   /*** FUNCIONES UTILITARIAS ***/
-
-  // Retorna verdadero si la fecha es anterior a la fecha límite de hace 90 días
+  // Comprueba si una fecha es anterior a la fecha límite de hace 90 días
   const isPast90Days = (date: Date) => date < past90Days;
 
-  // Verifica si la fecha es la seleccionada para aplicar estilos
+  // Comprueba si una fecha es la misma que la fecha resaltada
   const isSelectedDate = (date: Date) =>
     highlightDate && date.toDateString() === highlightDate.toDateString();
 
-  // Verifica si la fecha es hoy
+  // Comprueba si la fecha es hoy
   const isToday = (date: Date) => date.toDateString() === today.toDateString();
 
   // Formatea una fecha en el formato "dd/mm/yyyy"
   const formatDate = (date: Date) =>
     `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 
-  // Días de la semana para el encabezado del calendario
+  // Arreglo con los días de la semana para el encabezado del calendario
   const daysOfWeek = ["Do", "Lu", "Ma", "Mi", "Jue", "Vie", "Sa"];
 
-  // Obtiene el rango de fecha actual del store (si es necesario)
-  const date = useSelector(
-    (state: RootState) => state.calendar.dateRangeSelected
-  );
+  // Obtiene el estado del calendario del store (si es necesario)
+  const date = useSelector((state: RootState) => state.calendar);
 
   /*** RENDERIZADO ***/
   return (
     <div className={styles.calendarContainer}>
-      {/* Opciones de fechas fijas */}
+      {/* Sección de fechas fijas */}
       <div className={styles.fixedDatesContainer}>
         <div className={styles.selectPeriodContainer}>
           <ul className={styles.fixedDateOptions}>
@@ -130,7 +256,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
         </div>
       </div>
 
-      {/* Rango de fechas personalizado */}
+      {/* Sección para el rango de fechas personalizado */}
       <div className={styles.personalizedDate}>
         <p className={styles.reportPeriod}>Periodo de reportes</p>
 
@@ -145,67 +271,60 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
             className={styles.containerInput}
             placeholder="dd/mm/aaaa"
           />
+          {/* Sección para ingresar el tiempo (horas, minutos, segundos, AM/PM) */}
           <div className={styles.timeInputGroup}>
             <input
               className={styles.timeInputField}
-              id="12hours"
-              inputMode="decimal"
-              aria-label="Hours"
-              type="tel"
-              value="12"
-              name="12hours"
+              id="start-hours"
+              type="number"
+              min="1"
+              max="12"
+              step="1"
+              value={startHour}
+              name="start-hours"
+              onChange={(e) => setStartHour(e.target.value.padStart(2, "0"))}
+              onKeyDown={(e) => handleHourKeyDown(e, startHour, setStartHour)}
             />
             <input
               className={styles.timeInputField}
-              id="minutes12"
-              inputMode="decimal"
-              aria-label="Minutes"
-              type="tel"
-              value="00"
-              name="minutes"
+              id="start-minutes"
+              type="number"
+              min="0"
+              max="59"
+              step="1"
+              value={startMinute}
+              name="start-minutes"
+              onChange={(e) => setStartMinute(e.target.value.padStart(2, "0"))}
+              onKeyDown={(e) =>
+                handleMinuteSecondKeyDown(e, startMinute, setStartMinute)
+              }
             />
             <input
               className={styles.timeInputField}
-              id="seconds12"
-              inputMode="decimal"
-              aria-label="Seconds"
-              type="tel"
-              value="00"
-              name="seconds"
+              id="start-seconds"
+              type="number"
+              min="0"
+              max="59"
+              step="1"
+              value={startSecond}
+              name="start-seconds"
+              onChange={(e) => setStartSecond(e.target.value.padStart(2, "0"))}
+              onKeyDown={(e) =>
+                handleMinuteSecondKeyDown(e, startSecond, setStartSecond)
+              }
             />
             <div className={styles.amPmWrapper}>
-              <button
-                type="button"
-                role="combobox"
-                aria-controls="radix-:r18:"
-                aria-expanded="false"
-                aria-autocomplete="none"
-                dir="ltr"
-                data-state="closed"
-                data-slot="select-trigger"
-                className={styles.amPmButton}
+              <select
+                className={styles.amPmSelect}
+                value={startMeridiem}
+                onChange={(e) => setStartMeridiem(e.target.value)}
               >
-                <span className={styles.amPmText}>AM</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1.28rem"
-                  height="1.28rem"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className={styles.amPmIcon}
-                  aria-hidden="true"
-                >
-                  <path d="m6 9 6 6 6-6"></path>
-                </svg>
-              </button>
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
             </div>
           </div>
 
-          {/* Calendario para la fecha de inicio */}
           {showStartDateCalendar && (
             <div className={styles.dateContainer}>
               <div className={styles.dateSubContainer}>
@@ -284,64 +403,56 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
           <div className={styles.timeInputGroup}>
             <input
               className={styles.timeInputField}
-              id="12hours"
-              inputMode="decimal"
-              aria-label="Hours"
-              type="tel"
-              value="12"
-              name="12hours"
+              id="end-hours"
+              type="number"
+              min="1"
+              max="12"
+              step="1"
+              value={endHour}
+              name="end-hours"
+              onChange={(e) => setEndHour(e.target.value.padStart(2, "0"))}
+              onKeyDown={(e) => handleHourKeyDown(e, endHour, setEndHour)}
             />
             <input
               className={styles.timeInputField}
-              id="minutes12"
-              inputMode="decimal"
-              aria-label="Minutes"
-              type="tel"
-              value="00"
-              name="minutes"
+              id="end-minutes"
+              type="number"
+              min="0"
+              max="59"
+              step="1"
+              value={endMinute}
+              name="end-minutes"
+              onChange={(e) => setEndMinute(e.target.value.padStart(2, "0"))}
+              onKeyDown={(e) =>
+                handleMinuteSecondKeyDown(e, endMinute, setEndMinute)
+              }
             />
             <input
               className={styles.timeInputField}
-              id="seconds12"
-              inputMode="decimal"
-              aria-label="Seconds"
-              type="tel"
-              value="00"
-              name="seconds"
+              id="end-seconds"
+              type="number"
+              min="0"
+              max="59"
+              step="1"
+              value={endSecond}
+              name="end-seconds"
+              onChange={(e) => setEndSecond(e.target.value.padStart(2, "0"))}
+              onKeyDown={(e) =>
+                handleMinuteSecondKeyDown(e, endSecond, setEndSecond)
+              }
             />
             <div className={styles.amPmWrapper}>
-              <button
-                type="button"
-                role="combobox"
-                aria-controls="radix-:r18:"
-                aria-expanded="false"
-                aria-autocomplete="none"
-                dir="ltr"
-                data-state="closed"
-                data-slot="select-trigger"
-                className={styles.amPmButton}
+              <select
+                className={styles.amPmSelect}
+                value={endMeridiem}
+                onChange={(e) => setEndMeridiem(e.target.value)}
               >
-                <span className={styles.amPmText}>PM</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1.28rem"
-                  height="1.28rem"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className={styles.amPmIcon}
-                  aria-hidden="true"
-                >
-                  <path d="m6 9 6 6 6-6"></path>
-                </svg>
-              </button>
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
             </div>
           </div>
 
-          {/* Calendario para la fecha de fin */}
           {showEndDateCalendar && (
             <div className={styles.dateContainer}>
               <div className={styles.dateSubContainer}>
@@ -406,7 +517,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
           )}
         </div>
 
-        {/* Botones para aceptar o cancelar */}
         <div className={styles.selectPeriodButtonsContainer}>
           <button
             onClick={() => {
