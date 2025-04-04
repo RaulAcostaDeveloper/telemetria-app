@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { setDateRange } from "@/slices/calendarSlice";
 import FixedDateSection from "./FixedDateSection";
+import DatePicker from "./DatePicker";
 import styles from "./Calendar.module.css";
 
-// Helper: formatea un objeto Date a una cadena ISO 8601 usando la hora local y el desplazamiento
+// Helper: formatea un objeto Date a una cadena ISO 8601 usando la hora local
 const toLocalISOString = (date: Date): string => {
   const tzOffset = -date.getTimezoneOffset();
   const diffSign = tzOffset >= 0 ? "+" : "-";
@@ -36,16 +37,11 @@ interface CalendarProps {
 
 const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   /*** ESTADOS DEL COMPONENTE ***/
-  // Estado para la fecha actual mostrada en el calendario
   const [currentDate, setCurrentDate] = useState(new Date());
-  // Estados para mostrar u ocultar el calendario de fecha de inicio y fin
   const [showStartDateCalendar, setShowStartDateCalendar] = useState(false);
   const [showEndDateCalendar, setShowEndDateCalendar] = useState(false);
-  // Estado para la fecha resaltada (seleccionada)
   const [highlightDate, setHighlightDate] = useState<Date | null>(null);
-  // Estado para una opción seleccionada (si se utiliza un dropdown adicional)
   const [selectedOption, setSelectedOption] = useState("");
-  // Estados para la fecha de inicio y fin seleccionadas
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
@@ -63,13 +59,11 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
   const dispatch = useDispatch();
 
-  // Fecha de hoy y cálculo de la fecha límite de hace 90 días
   const today = new Date();
   const past90Days = new Date(today);
   past90Days.setDate(today.getDate() - 90);
 
   /*** MANEJADORES DE TECLADO PARA INPUTS DE TIEMPO ***/
-  // Permite incrementar o decrementar la hora de forma cíclica (1-12), mostrando siempre dos dígitos.
   const handleHourKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
     currentValue: string,
@@ -88,7 +82,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     }
   };
 
-  // Permite incrementar o decrementar los minutos o segundos de forma cíclica (0-59) y los muestra con dos dígitos.
   const handleMinuteSecondKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
     currentValue: string,
@@ -108,19 +101,16 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   };
 
   /*** MANEJADORES DE EVENTOS ***/
-  // Alterna la visibilidad del calendario para la fecha de inicio
   const toggleStartDateCalendar = () => {
     setShowStartDateCalendar(!showStartDateCalendar);
     setShowEndDateCalendar(false);
   };
 
-  // Alterna la visibilidad del calendario para la fecha de fin
   const toggleEndDateCalendar = () => {
     setShowEndDateCalendar(!showEndDateCalendar);
     setShowStartDateCalendar(false);
   };
 
-  // Actualiza la fecha seleccionada y oculta ambos calendarios
   const handleDateChange = (
     date: Date | null,
     setter: React.Dispatch<React.SetStateAction<Date | null>>
@@ -131,20 +121,17 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     setShowEndDateCalendar(false);
   };
 
-  // Cambia el mes mostrado en el calendario
   const changeMonth = (amount: number) => {
     const newDate = new Date(currentDate);
     newDate.setMonth(currentDate.getMonth() + amount);
     setCurrentDate(newDate);
   };
 
-  // Al hacer clic en "Today", se reinician la fecha y los inputs de tiempo.
   const handleGoToToday = () => {
     setCurrentDate(today);
     setHighlightDate(today);
     if (showStartDateCalendar) {
       setStartDate(today);
-      // Reinicia el tiempo de inicio a "12:00:00 AM"
       setStartHour("12");
       setStartMinute("00");
       setStartSecond("00");
@@ -152,7 +139,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       setTimeout(() => setShowStartDateCalendar(false), 250);
     } else if (showEndDateCalendar) {
       setEndDate(today);
-      // Reinicia el tiempo de fin a "12:00:00 PM"
       setEndHour("12");
       setEndMinute("00");
       setEndSecond("00");
@@ -161,13 +147,10 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     }
   };
 
-  // Actualiza la opción seleccionada en un dropdown adicional (si se utiliza)
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
   };
 
-  // Guarda el rango de fechas en formato ISO 8601 usando la hora local.
-  // Convierte la hora ingresada (en formato 12h) a 24h según el valor del dropdown.
   const saveDate = () => {
     if (startDate && endDate) {
       // Ajuste de la fecha de inicio
@@ -198,7 +181,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
         parseInt(endSecond, 10)
       );
 
-      // Se asegura de que finalStart es la fecha anterior
       const finalStart =
         adjustedStart <= adjustedEnd ? adjustedStart : adjustedEnd;
       const finalEnd =
@@ -207,7 +189,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       console.log("startMinute:", startMinute, "startSecond:", startSecond);
       console.log("endMinute:", endMinute, "endSecond:", endSecond);
 
-      // Convertir a cadena ISO local usando la función helper
       const isoStart = toLocalISOString(finalStart);
       const isoEnd = toLocalISOString(finalEnd);
 
@@ -220,24 +201,15 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   };
 
   /*** FUNCIONES UTILITARIAS ***/
-  // Comprueba si una fecha es anterior a la fecha límite de hace 90 días
   const isPast90Days = (date: Date) => date < past90Days;
-
-  // Comprueba si una fecha es la misma que la fecha resaltada
   const isSelectedDate = (date: Date) =>
     highlightDate && date.toDateString() === highlightDate.toDateString();
-
-  // Comprueba si la fecha es hoy
   const isToday = (date: Date) => date.toDateString() === today.toDateString();
-
-  // Formatea una fecha en el formato "dd/mm/yyyy"
   const formatDate = (date: Date) =>
     `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-
-  // Arreglo con los días de la semana para el encabezado del calendario
   const daysOfWeek = ["Do", "Lu", "Ma", "Mi", "Jue", "Vie", "Sa"];
 
-  // Obtiene el estado del calendario del store (si es necesario)
+  // Lee el estado del calendario
   const date = useSelector((state: RootState) => state.calendar);
 
   /*** RENDERIZADO ***/
@@ -316,66 +288,18 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
           </div>
 
           {showStartDateCalendar && (
-            <div className={styles.dateContainer}>
-              <div className={styles.dateSubContainer}>
-                <div className={styles.dateDayMonthYear}>
-                  <button
-                    onClick={() => changeMonth(-1)}
-                    className={styles.previousMonth}
-                  >
-                    ‹
-                  </button>
-                  <span className={styles.dateSpan}>
-                    {highlightDate
-                      ? formatDate(highlightDate)
-                      : formatDate(currentDate)}
-                  </span>
-                  <button
-                    onClick={() => changeMonth(1)}
-                    className={styles.nextMonth}
-                  >
-                    ›
-                  </button>
-                </div>
-                <div className={styles.daysOfTheWeekContainer}>
-                  {daysOfWeek.map((day, index) => (
-                    <div
-                      key={index}
-                      className={styles.daysOfTheWeekSubContainer}
-                    >
-                      {day}
-                    </div>
-                  ))}
-                </div>
-                <div className={styles.calendarDayButtonContainer}>
-                  {Array.from({ length: 42 }, (_, i) => {
-                    const date = new Date(
-                      currentDate.getFullYear(),
-                      currentDate.getMonth(),
-                      i - currentDate.getDay() + 1
-                    );
-                    return (
-                      <button
-                        key={i}
-                        onClick={() => handleDateChange(date, setStartDate)}
-                        disabled={isPast90Days(date)}
-                        className={styles.calendarDayButtonFrom}
-                      >
-                        {date.getDate()}
-                      </button>
-                    );
-                  })}
-                </div>
-                <div className={styles.todayButtonContainer}>
-                  <button
-                    onClick={handleGoToToday}
-                    className={styles.todayButton}
-                  >
-                    Today
-                  </button>
-                </div>
-              </div>
-            </div>
+            <DatePicker
+              currentDate={currentDate}
+              highlightDate={highlightDate}
+              changeMonth={changeMonth}
+              daysOfWeek={daysOfWeek}
+              handleDateChange={(date) => handleDateChange(date, setStartDate)}
+              isPast90Days={isPast90Days}
+              today={today}
+              handleGoToToday={handleGoToToday}
+              buttonClassName={styles.calendarDayButtonFrom}
+              formatDate={formatDate}
+            />
           )}
         </div>
 
@@ -444,66 +368,18 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
           </div>
 
           {showEndDateCalendar && (
-            <div className={styles.dateContainer}>
-              <div className={styles.dateSubContainer}>
-                <div className={styles.dateDayMonthYear}>
-                  <button
-                    onClick={() => changeMonth(-1)}
-                    className={styles.previousMonth}
-                  >
-                    ‹
-                  </button>
-                  <span className={styles.dateSpan}>
-                    {highlightDate
-                      ? formatDate(highlightDate)
-                      : formatDate(currentDate)}
-                  </span>
-                  <button
-                    onClick={() => changeMonth(1)}
-                    className={styles.nextMonth}
-                  >
-                    ›
-                  </button>
-                </div>
-                <div className={styles.daysOfTheWeekContainer}>
-                  {daysOfWeek.map((day, index) => (
-                    <div
-                      key={index}
-                      className={styles.daysOfTheWeekSubContainer}
-                    >
-                      {day}
-                    </div>
-                  ))}
-                </div>
-                <div className={styles.calendarDayButtonContainer}>
-                  {Array.from({ length: 42 }, (_, i) => {
-                    const date = new Date(
-                      currentDate.getFullYear(),
-                      currentDate.getMonth(),
-                      i - currentDate.getDay() + 1
-                    );
-                    return (
-                      <button
-                        key={i}
-                        onClick={() => handleDateChange(date, setEndDate)}
-                        disabled={isPast90Days(date)}
-                        className={styles.calendarDayButtonTill}
-                      >
-                        {date.getDate()}
-                      </button>
-                    );
-                  })}
-                </div>
-                <div className={styles.todayButtonContainer}>
-                  <button
-                    onClick={handleGoToToday}
-                    className={styles.todayButton}
-                  >
-                    Today
-                  </button>
-                </div>
-              </div>
-            </div>
+            <DatePicker
+              currentDate={currentDate}
+              highlightDate={highlightDate}
+              changeMonth={changeMonth}
+              daysOfWeek={daysOfWeek}
+              handleDateChange={(date) => handleDateChange(date, setEndDate)}
+              isPast90Days={isPast90Days}
+              today={today}
+              handleGoToToday={handleGoToToday}
+              buttonClassName={styles.calendarDayButtonTill}
+              formatDate={formatDate}
+            />
           )}
         </div>
 
