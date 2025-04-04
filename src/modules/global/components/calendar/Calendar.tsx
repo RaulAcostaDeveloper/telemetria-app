@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { setDateRange } from "@/slices/calendarSlice";
+import FixedDateSection from "./FixedDateSection";
 import styles from "./Calendar.module.css";
 
 // Helper: formatea un objeto Date a una cadena ISO 8601 usando la hora local y el desplazamiento
@@ -243,18 +244,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   return (
     <div className={styles.calendarContainer}>
       {/* Sección de fechas fijas */}
-      <div className={styles.fixedDatesContainer}>
-        <div className={styles.selectPeriodContainer}>
-          <ul className={styles.fixedDateOptions}>
-            <li>Últimos 7 días</li>
-            <li>Últimos 15 días</li>
-            <li>Últimos 30 días</li>
-            <li>Últimos 90 días</li>
-            <li>Este mes</li>
-            <li>El mes pasado</li>
-          </ul>
-        </div>
-      </div>
+      <FixedDateSection />
 
       {/* Sección para el rango de fechas personalizado */}
       <div className={styles.personalizedDate}>
