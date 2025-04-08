@@ -189,7 +189,10 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
       const isoStart = toLocalISOString(finalStart);
       const isoEnd = toLocalISOString(finalEnd);
+      // Save the new date range...
       dispatch(setDateRange({ startDate: isoStart, endDate: isoEnd }));
+      // Clear any fixed date filter when saving custom dates
+      dispatch(setFixedFilter(""));
     } else {
       console.log("Por favor, selecciona ambas fechas: inicio y fin.");
     }

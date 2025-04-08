@@ -1,4 +1,3 @@
-// utils.ts
 import React from "react";
 
 export const toLocalISOString = (date: Date): string => {
@@ -22,6 +21,53 @@ export const toLocalISOString = (date: Date): string => {
     ":" +
     pad(Math.abs(tzOffset) % 60)
   );
+};
+
+export const calculatePredefinedDateRange = (
+  option: string,
+  today: Date
+): { startDate: Date; endDate: Date } => {
+  let startDate: Date, endDate: Date;
+  switch (option) {
+    case "Últimos 7 días":
+      startDate = new Date(today);
+      startDate.setDate(today.getDate() - 7);
+      endDate = today;
+      break;
+    case "Últimos 15 días":
+      startDate = new Date(today);
+      startDate.setDate(today.getDate() - 15);
+      endDate = today;
+      break;
+    case "Últimos 30 días":
+      startDate = new Date(today);
+      startDate.setDate(today.getDate() - 30);
+      endDate = today;
+      break;
+    case "Últimos 90 días":
+      startDate = new Date(today);
+      startDate.setDate(today.getDate() - 90);
+      endDate = today;
+      break;
+    case "Este mes":
+      startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+      endDate = today;
+      break;
+    case "El mes pasado":
+      const firstDayCurrentMonth = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        1
+      );
+      endDate = new Date(firstDayCurrentMonth);
+      endDate.setDate(0);
+      startDate = new Date(endDate.getFullYear(), endDate.getMonth(), 1);
+      break;
+    default:
+      startDate = today;
+      endDate = today;
+  }
+  return { startDate, endDate };
 };
 
 export const handleHourKeyDown = (
