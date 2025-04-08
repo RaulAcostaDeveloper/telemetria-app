@@ -9,18 +9,17 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import styles from "./header.module.css";
 
-// Define the shape of your calendar state slice
 interface CalendarState {
   startDate: string | null;
   endDate: string | null;
 }
 
-// Define the overall state shape, assuming 'calendar' is part of your global state
 interface RootState {
   calendar: CalendarState;
 }
 
-// Helper function to format an ISO date string to "MM/DD/YYYY, hh:mm:ss a. m."
+// Función auxiliar para formatear una cadena de fecha ISO a "MM/DD/YYYY, hh:mm:ss a. m."
+
 const formatDate = (dateStr: string): string => {
   const date = new Date(dateStr);
   const month = String(date.getMonth() + 1).padStart(2, "0");
