@@ -1,13 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
-import { setDateRange } from "@/slices/calendarSlice";
+import { setDateRange, setFixedFilter } from "@/slices/calendarSlice";
 import FixedDateSection from "./FixedDateSection";
 import DatePicker from "./DatePicker";
 import styles from "./Calendar.module.css";
 
-// Helper: formatea un objeto Date a una cadena ISO 8601 usando la hora local
 const toLocalISOString = (date: Date): string => {
   const tzOffset = -date.getTimezoneOffset();
   const diffSign = tzOffset >= 0 ? "+" : "-";
@@ -36,34 +35,91 @@ interface CalendarProps {
 }
 
 const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
-  /*** ESTADOS DEL COMPONENTE ***/
+  const dispatch = useDispatch();
+  const today = new Date();
+  const past90Days = new Date(today);
+  past90Days.setDate(today.getDate() - 90);
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const [currentDate, setCurrentDate] = useState(new Date());
   const [showStartDateCalendar, setShowStartDateCalendar] = useState(false);
   const [showEndDateCalendar, setShowEndDateCalendar] = useState(false);
   const [highlightDate, setHighlightDate] = useState<Date | null>(null);
-  const [selectedOption, setSelectedOption] = useState("");
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
-  // Estados para el tiempo de la fecha de inicio
   const [startHour, setStartHour] = useState("12");
   const [startMinute, setStartMinute] = useState("00");
   const [startSecond, setStartSecond] = useState("00");
   const [startMeridiem, setStartMeridiem] = useState("AM");
 
-  // Estados para el tiempo de la fecha de fin
   const [endHour, setEndHour] = useState("12");
   const [endMinute, setEndMinute] = useState("00");
   const [endSecond, setEndSecond] = useState("00");
   const [endMeridiem, setEndMeridiem] = useState("PM");
 
-  const dispatch = useDispatch();
+  const calendarState = useSelector((state: RootState) => state.calendar);
+  // Get the fixed filter from Redux
+  const fixedFilter = calendarState.fixedFilter;
 
-  const today = new Date();
-  const past90Days = new Date(today);
-  past90Days.setDate(today.getDate() - 90);
+  useEffect(() => {
+    if (calendarState.startDate) {
+      const globalStart = new Date(calendarState.startDate);
+      const hour = (globalStart.getHours() % 12 || 12)
+        .toString()
+        .padStart(2, "0");
+      const minute = globalStart.getMinutes().toString().padStart(2, "0");
+      const second = globalStart.getSeconds().toString().padStart(2, "0");
+      setStartHour(hour);
+      setStartMinute(minute);
+      setStartSecond(second);
+      setStartMeridiem(globalStart.getHours() >= 12 ? "PM" : "AM");
+    }
+  }, [calendarState.startDate]);
 
-  /*** MANEJADORES DE TECLADO PARA INPUTS DE TIEMPO ***/
+  useEffect(() => {
+    if (calendarState.endDate) {
+      const globalEnd = new Date(calendarState.endDate);
+      const hour = (globalEnd.getHours() % 12 || 12)
+        .toString()
+        .padStart(2, "0");
+      const minute = globalEnd.getMinutes().toString().padStart(2, "0");
+      const second = globalEnd.getSeconds().toString().padStart(2, "0");
+      setEndHour(hour);
+      setEndMinute(minute);
+      setEndSecond(second);
+      setEndMeridiem(globalEnd.getHours() >= 12 ? "PM" : "AM");
+    }
+  }, [calendarState.endDate]);
+
+  useEffect(() => {
+    if (showStartDateCalendar && !calendarState.startDate) {
+      const hour = (today.getHours() % 12 || 12).toString().padStart(2, "0");
+      const minute = today.getMinutes().toString().padStart(2, "0");
+      const second = today.getSeconds().toString().padStart(2, "0");
+      setStartHour(hour);
+      setStartMinute(minute);
+      setStartSecond(second);
+      setStartMeridiem(today.getHours() >= 12 ? "PM" : "AM");
+    }
+  }, [showStartDateCalendar, calendarState.startDate, today]);
+
+  useEffect(() => {
+    if (showEndDateCalendar && !calendarState.endDate) {
+      const hour = (today.getHours() % 12 || 12).toString().padStart(2, "0");
+      const minute = today.getMinutes().toString().padStart(2, "0");
+      const second = today.getSeconds().toString().padStart(2, "0");
+      setEndHour(hour);
+      setEndMinute(minute);
+      setEndSecond(second);
+      setEndMeridiem(today.getHours() >= 12 ? "PM" : "AM");
+    }
+  }, [showEndDateCalendar, calendarState.endDate, today]);
+
   const handleHourKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
     currentValue: string,
@@ -100,7 +156,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     }
   };
 
-  /*** MANEJADORES DE EVENTOS ***/
   const toggleStartDateCalendar = () => {
     setShowStartDateCalendar(!showStartDateCalendar);
     setShowEndDateCalendar(false);
@@ -147,13 +202,8 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     }
   };
 
-  const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(event.target.value);
-  };
-
   const saveDate = () => {
     if (startDate && endDate) {
-      // Ajuste de la fecha de inicio
       const adjustedStart = new Date(startDate);
       let hourStart = parseInt(startHour, 10);
       if (startMeridiem === "PM" && hourStart < 12) {
@@ -167,7 +217,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
         parseInt(startSecond, 10)
       );
 
-      // Ajuste de la fecha de fin
       const adjustedEnd = new Date(endDate);
       let hourEnd = parseInt(endHour, 10);
       if (endMeridiem === "PM" && hourEnd < 12) {
@@ -186,21 +235,14 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       const finalEnd =
         adjustedStart > adjustedEnd ? adjustedStart : adjustedEnd;
 
-      console.log("startMinute:", startMinute, "startSecond:", startSecond);
-      console.log("endMinute:", endMinute, "endSecond:", endSecond);
-
       const isoStart = toLocalISOString(finalStart);
       const isoEnd = toLocalISOString(finalEnd);
-
-      console.log("Fecha de inicio (local ISO):", isoStart);
-      console.log("Fecha de fin (local ISO):", isoEnd);
       dispatch(setDateRange({ startDate: isoStart, endDate: isoEnd }));
     } else {
       console.log("Por favor, selecciona ambas fechas: inicio y fin.");
     }
   };
 
-  /*** FUNCIONES UTILITARIAS ***/
   const isPast90Days = (date: Date) => date < past90Days;
   const isSelectedDate = (date: Date) =>
     highlightDate && date.toDateString() === highlightDate.toDateString();
@@ -209,20 +251,65 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   const daysOfWeek = ["Do", "Lu", "Ma", "Mi", "Jue", "Vie", "Sa"];
 
-  // Lee el estado del calendario
-  const date = useSelector((state: RootState) => state.calendar);
+  const calendarRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        calendarRef.current &&
+        !calendarRef.current.contains(event.target as Node)
+      ) {
+        toggleContainer();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [toggleContainer]);
 
-  /*** RENDERIZADO ***/
+  if (!mounted) {
+    return null;
+  }
+
+  const globalStartDate = calendarState.startDate
+    ? new Date(calendarState.startDate)
+    : today;
+  const globalEndDate = calendarState.endDate
+    ? new Date(calendarState.endDate)
+    : today;
+  const startDatePlaceholder = globalStartDate.toLocaleDateString();
+  const endDatePlaceholder = globalEndDate.toLocaleDateString();
+  const startHourPlaceholder = (globalStartDate.getHours() % 12 || 12)
+    .toString()
+    .padStart(2, "0");
+  const startMinutePlaceholder = globalStartDate
+    .getMinutes()
+    .toString()
+    .padStart(2, "0");
+  const startSecondPlaceholder = globalStartDate
+    .getSeconds()
+    .toString()
+    .padStart(2, "0");
+  const endHourPlaceholder = (globalEndDate.getHours() % 12 || 12)
+    .toString()
+    .padStart(2, "0");
+  const endMinutePlaceholder = globalEndDate
+    .getMinutes()
+    .toString()
+    .padStart(2, "0");
+  const endSecondPlaceholder = globalEndDate
+    .getSeconds()
+    .toString()
+    .padStart(2, "0");
+
   return (
-    <div className={styles.calendarContainer}>
-      {/* Sección de fechas fijas */}
-      <FixedDateSection />
-
-      {/* Sección para el rango de fechas personalizado */}
+    <div className={styles.calendarContainer} ref={calendarRef}>
+      <FixedDateSection
+        selectedOption={calendarState.fixedFilter}
+        setSelectedOption={(option: string) => dispatch(setFixedFilter(option))}
+      />
       <div className={styles.personalizedDate}>
         <p className={styles.reportPeriod}>Periodo de reportes</p>
-
-        {/* Sección para la fecha de inicio */}
         <div className={styles.isCustomCalendarContainer}>
           <label className={styles.containerLabel}>Desde:</label>
           <input
@@ -231,9 +318,8 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
             onClick={toggleStartDateCalendar}
             readOnly
             className={styles.containerInput}
-            placeholder="dd/mm/aaaa"
+            placeholder={startDatePlaceholder || "dd/mm/aaaa"}
           />
-          {/* Sección para ingresar el tiempo (horas, minutos, segundos, AM/PM) */}
           <div className={styles.timeInputGroup}>
             <input
               className={styles.timeInputField}
@@ -246,6 +332,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               name="start-hours"
               onChange={(e) => setStartHour(e.target.value.padStart(2, "0"))}
               onKeyDown={(e) => handleHourKeyDown(e, startHour, setStartHour)}
+              placeholder={startHourPlaceholder}
             />
             <input
               className={styles.timeInputField}
@@ -260,6 +347,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               onKeyDown={(e) =>
                 handleMinuteSecondKeyDown(e, startMinute, setStartMinute)
               }
+              placeholder={startMinutePlaceholder}
             />
             <input
               className={styles.timeInputField}
@@ -274,6 +362,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               onKeyDown={(e) =>
                 handleMinuteSecondKeyDown(e, startSecond, setStartSecond)
               }
+              placeholder={startSecondPlaceholder}
             />
             <div className={styles.amPmWrapper}>
               <select
@@ -286,7 +375,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               </select>
             </div>
           </div>
-
           {showStartDateCalendar && (
             <DatePicker
               currentDate={currentDate}
@@ -302,8 +390,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
             />
           )}
         </div>
-
-        {/* Sección para la fecha de fin */}
         <div className={styles.isCustomCalendarContainer}>
           <label className={styles.containerLabel}>Hasta:</label>
           <input
@@ -312,7 +398,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
             onClick={toggleEndDateCalendar}
             readOnly
             className={styles.containerInput}
-            placeholder="dd/mm/aaaa"
+            placeholder={endDatePlaceholder || "dd/mm/aaaa"}
           />
           <div className={styles.timeInputGroup}>
             <input
@@ -326,6 +412,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               name="end-hours"
               onChange={(e) => setEndHour(e.target.value.padStart(2, "0"))}
               onKeyDown={(e) => handleHourKeyDown(e, endHour, setEndHour)}
+              placeholder={endHourPlaceholder}
             />
             <input
               className={styles.timeInputField}
@@ -340,6 +427,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               onKeyDown={(e) =>
                 handleMinuteSecondKeyDown(e, endMinute, setEndMinute)
               }
+              placeholder={endMinutePlaceholder}
             />
             <input
               className={styles.timeInputField}
@@ -354,6 +442,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               onKeyDown={(e) =>
                 handleMinuteSecondKeyDown(e, endSecond, setEndSecond)
               }
+              placeholder={endSecondPlaceholder}
             />
             <div className={styles.amPmWrapper}>
               <select
@@ -366,7 +455,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               </select>
             </div>
           </div>
-
           {showEndDateCalendar && (
             <DatePicker
               currentDate={currentDate}
@@ -382,7 +470,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
             />
           )}
         </div>
-
         <div className={styles.selectPeriodButtonsContainer}>
           <button
             onClick={() => {

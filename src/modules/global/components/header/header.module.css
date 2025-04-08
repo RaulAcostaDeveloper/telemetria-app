@@ -35,18 +35,36 @@
   font-size: 18px;
 }
 
-.btn {
-  margin-left: 1rem;
-  background-color: #00416a;
-  color: white;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  font-size: 1.25rem;
-  font-family: Arial, sans-serif;
-  transition: background-color 0.2s ease;
+.dateButton {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  border-radius: 0.26rem;
+  font-size: 0.7rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  padding: 0.85rem 1.5rem;
+  justify-content: flex-start;
+  text-align: left;
+  font-weight: 400;
   cursor: pointer;
 }
 
-.btn:hover {
-  background-color: #87ceeb;
+.calendarIcon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.dateContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.startDate {
+  font-size: 1.1rem;
+}
+
+.endDate {
+  font-size: 1.25rem;
 }
