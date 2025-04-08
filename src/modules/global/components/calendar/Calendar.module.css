@@ -309,6 +309,10 @@
   display: flex;
   align-items: stretch;
   height: 3.2rem;
+  width: 5rem;
+  font-size: 1rem;
+  border: 0.08rem solid var(--button-color-6);
+  border-radius: 0.48rem;
 }
 
 .amPmSelect {
