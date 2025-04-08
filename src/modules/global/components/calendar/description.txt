@@ -1,0 +1,23 @@
+Descripción del Componente Calendar
+
+El componente Calendar es un componente de interfaz de usuario  que permite a los usuarios seleccionar un rango de fechas para el filtrado de reportes. Este componente ofrece dos métodos principales para la selección de fechas:
+
+1. Selección personalizada: 
+   - Utiliza inputs y un subcomponente DatePicker  para permitir al usuario elegir fechas de inicio y fin.
+   - Permite ajustar la hora, minutos y segundos en formato de 12 horas (AM/PM).
+   - Incluye lógica para convertir las fechas a un formato ISO local, facilitando su almacenamiento y procesamiento.
+
+2. Filtros predefinidos:
+   - A través del subcomponente FixedDateSection, se muestran opciones como "Últimos 7 días", "Últimos 15 días", "Este mes", etc.
+   - Cuando se selecciona una opción, se calcula automáticamente el rango de fechas correspondiente y se actualiza el estado global mediante Redux.
+   - Si la opción seleccionada ya estaba activa, se deselecciona, permitiendo que el usuario quite el filtro aplicado.
+   - Al guardar un rango de fechas personalizado (utilizando el DatePicker), cualquier filtro predefinido se limpia, asegurando que el rango personalizado sea el activo.
+
+Integración con Redux:
+- El componente utiliza Redux para almacenar y gestionar el estado global del calendario (fechas de inicio, fin y el filtro predefinido).
+- Al guardar un nuevo rango de fechas o al seleccionar un filtro predefinido, se actualiza el almacenamiento local (localStorage) para mantener la persistencia del estado.
+
+Características adicionales:
+- Se emplean hooks de React como useState, useEffect y useRef para gestionar el estado interno y la interactividad del componente.
+- Incluye funciones utilitarias importadas desde un archivo utils.ts, que encapsulan la lógica para el formateo de fechas, manejo de eventos de teclado y cálculos de rangos predefinidos.
+

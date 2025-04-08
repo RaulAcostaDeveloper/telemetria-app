@@ -7,7 +7,7 @@ import FixedDateSection from "./FixedDateSection";
 import DatePicker from "./DatePicker";
 import styles from "./Calendar.module.css";
 
-// Import the utility functions
+// Importa las funciones utilitarias previamente definidas.
 import {
   toLocalISOString,
   handleHourKeyDown,
@@ -17,18 +17,21 @@ import {
 } from "./utils";
 
 interface CalendarProps {
+  // Función que permite ocultar o mostrar el componente calendario.
   toggleContainer: () => void;
 }
 
 const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   const dispatch = useDispatch();
   const today = new Date();
+
+  // Estado local para determinar si el componente ya se montó.
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Local state declarations
+  // Estados locales para controlar la fecha actual, fechas seleccionadas y visibilidad de los calendarios.
   const [currentDate, setCurrentDate] = useState(new Date());
   const [showStartDateCalendar, setShowStartDateCalendar] = useState(false);
   const [showEndDateCalendar, setShowEndDateCalendar] = useState(false);
@@ -36,6 +39,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
+  // Estados para el control de la hora, minutos y segundos en formato de 12 horas (AM/PM)
   const [startHour, setStartHour] = useState("12");
   const [startMinute, setStartMinute] = useState("00");
   const [startSecond, setStartSecond] = useState("00");
@@ -46,10 +50,13 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   const [endSecond, setEndSecond] = useState("00");
   const [endMeridiem, setEndMeridiem] = useState("PM");
 
+  // Obtiene el estado del calendario desde Redux.
   const calendarState = useSelector((state: RootState) => state.calendar);
-  const fixedFilter = calendarState.fixedFilter;
 
-  // Setup state for start and end times from calendar state
+  /**
+   * Cuando se actualiza el estado global (Redux) con startDate, se extrae la hora y se actualizan
+   * los estados locales correspondientes.
+   */
   useEffect(() => {
     if (calendarState.startDate) {
       const globalStart = new Date(calendarState.startDate);
@@ -65,6 +72,10 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     }
   }, [calendarState.startDate]);
 
+  /**
+   * Cuando se actualiza el estado global (Redux) con endDate, se extrae la hora y se actualizan
+   * los estados locales correspondientes.
+   */
   useEffect(() => {
     if (calendarState.endDate) {
       const globalEnd = new Date(calendarState.endDate);
@@ -80,6 +91,10 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     }
   }, [calendarState.endDate]);
 
+  /**
+   * Inicializa los estados de la hora de inicio con la hora actual si no se ha definido en el estado global
+   * y si el calendario de inicio está abierto.
+   */
   useEffect(() => {
     if (showStartDateCalendar && !calendarState.startDate) {
       const hour = (today.getHours() % 12 || 12).toString().padStart(2, "0");
@@ -92,6 +107,10 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     }
   }, [showStartDateCalendar, calendarState.startDate, today]);
 
+  /**
+   * Inicializa los estados de la hora de fin con la hora actual si no se ha definido en el estado global
+   * y si el calendario de fin está abierto.
+   */
   useEffect(() => {
     if (showEndDateCalendar && !calendarState.endDate) {
       const hour = (today.getHours() % 12 || 12).toString().padStart(2, "0");
@@ -104,20 +123,45 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     }
   }, [showEndDateCalendar, calendarState.endDate, today]);
 
-  // Create a local wrapper for isPast90Days using today's value.
+  /**
+   * Envoltura local para la función isPast90Days, utilizando la fecha actual (today).
+   * Se utiliza para verificar si una fecha está fuera del rango de los últimos 90 días.
+   *
+   * Ejemplo de uso: checkPast90Days(date)
+   */
   const checkPast90Days = (date: Date) => isPast90Days(date, today);
 
-  // UI-specific functions remain in the component
+  /**
+   * Alterna la visibilidad del calendario de la fecha de inicio.
+   * Asegura que el calendario de fecha de fin quede oculto si está abierto.
+   *
+   * Ejemplo de uso: onClick={toggleStartDateCalendar}
+   */
   const toggleStartDateCalendar = () => {
     setShowStartDateCalendar(!showStartDateCalendar);
     setShowEndDateCalendar(false);
   };
 
+  /**
+   * Alterna la visibilidad del calendario de la fecha de fin.
+   * Asegura que el calendario de fecha de inicio quede oculto si está abierto.
+   *
+   * Ejemplo de uso: onClick={toggleEndDateCalendar}
+   */
   const toggleEndDateCalendar = () => {
     setShowEndDateCalendar(!showEndDateCalendar);
     setShowStartDateCalendar(false);
   };
 
+  /**
+   * Maneja el cambio de fecha cuando el usuario selecciona una fecha desde el DatePicker.
+   * Actualiza la fecha resaltada y oculta ambos calendarios.
+   *
+   * @param date - Fecha seleccionada o null.
+   * @param setter - Función para actualizar el estado de la fecha (startDate o endDate).
+   *
+   * Ejemplo de uso: handleDateChange(date, setStartDate)
+   */
   const handleDateChange = (
     date: Date | null,
     setter: React.Dispatch<React.SetStateAction<Date | null>>
@@ -128,12 +172,26 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     setShowEndDateCalendar(false);
   };
 
+  /**
+   * Cambia el mes actual mostrado en el DatePicker.
+   *
+   * @param amount - Número de meses a desplazar (positivo para avanzar, negativo para retroceder).
+   *
+   * Ejemplo de uso: changeMonth(1) para avanzar un mes.
+   */
   const changeMonth = (amount: number) => {
     const newDate = new Date(currentDate);
     newDate.setMonth(currentDate.getMonth() + amount);
     setCurrentDate(newDate);
   };
 
+  /**
+   * Establece el día de hoy como fecha actual y resalta el día actual.
+   * También actualiza la fecha de inicio o fin (dependiendo de cuál calendario esté abierto)
+   * y luego oculta el calendario correspondiente después de 250 ms.
+   *
+   * Ejemplo de uso: onClick={handleGoToToday}
+   */
   const handleGoToToday = () => {
     setCurrentDate(today);
     setHighlightDate(today);
@@ -154,6 +212,14 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     }
   };
 
+  /**
+   * Guarda el rango de fechas seleccionado ajustando las horas según el formato AM/PM.
+   * Se asegura que la fecha de inicio sea la menor o igual a la fecha de fin.
+   * Luego, convierte las fechas a formato ISO local y las guarda en el estado global (Redux).
+   * También limpia cualquier filtro predefinido seleccionado.
+   *
+   * Ejemplo de uso: onClick={saveDate}
+   */
   const saveDate = () => {
     if (startDate && endDate) {
       const adjustedStart = new Date(startDate);
@@ -182,6 +248,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
         parseInt(endSecond, 10)
       );
 
+      // Define cuál es la fecha de inicio y cuál la de fin basado en el ajuste.
       const finalStart =
         adjustedStart <= adjustedEnd ? adjustedStart : adjustedEnd;
       const finalEnd =
@@ -189,15 +256,19 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
       const isoStart = toLocalISOString(finalStart);
       const isoEnd = toLocalISOString(finalEnd);
-      // Save the new date range...
+      // Guarda el rango de fechas en el estado global mediante Redux.
       dispatch(setDateRange({ startDate: isoStart, endDate: isoEnd }));
-      // Clear any fixed date filter when saving custom dates
+      // Limpia cualquier filtro predefinido al guardar fechas personalizadas.
       dispatch(setFixedFilter(""));
     } else {
       console.log("Por favor, selecciona ambas fechas: inicio y fin.");
     }
   };
 
+  /**
+   * Referencia al contenedor del calendario.
+   * Se utiliza para detectar clics fuera del componente y, de esa forma, ocultarlo.
+   */
   const calendarRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -214,10 +285,12 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     };
   }, [toggleContainer]);
 
+  // Si el componente aún no se ha montado, no se renderiza nada.
   if (!mounted) {
     return null;
   }
 
+  // Se obtienen las fechas globales del estado para usarlas como placeholder en los inputs de fecha.
   const globalStartDate = calendarState.startDate
     ? new Date(calendarState.startDate)
     : today;
@@ -251,6 +324,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
   return (
     <div className={styles.calendarContainer} ref={calendarRef}>
+      {/* Componente para seleccionar filtros de fechas predefinidos */}
       <FixedDateSection
         selectedOption={calendarState.fixedFilter}
         setSelectedOption={(option: string) => dispatch(setFixedFilter(option))}
