@@ -7,28 +7,14 @@ import FixedDateSection from "./FixedDateSection";
 import DatePicker from "./DatePicker";
 import styles from "./Calendar.module.css";
 
-const toLocalISOString = (date: Date): string => {
-  const tzOffset = -date.getTimezoneOffset();
-  const diffSign = tzOffset >= 0 ? "+" : "-";
-  const pad = (n: number) => n.toString().padStart(2, "0");
-  return (
-    date.getFullYear() +
-    "-" +
-    pad(date.getMonth() + 1) +
-    "-" +
-    pad(date.getDate()) +
-    "T" +
-    pad(date.getHours()) +
-    ":" +
-    pad(date.getMinutes()) +
-    ":" +
-    pad(date.getSeconds()) +
-    diffSign +
-    pad(Math.floor(Math.abs(tzOffset) / 60)) +
-    ":" +
-    pad(Math.abs(tzOffset) % 60)
-  );
-};
+// Import the utility functions
+import {
+  toLocalISOString,
+  handleHourKeyDown,
+  handleMinuteSecondKeyDown,
+  formatDate,
+  isPast90Days,
+} from "./utils";
 
 interface CalendarProps {
   toggleContainer: () => void;
@@ -37,14 +23,12 @@ interface CalendarProps {
 const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   const dispatch = useDispatch();
   const today = new Date();
-  const past90Days = new Date(today);
-  past90Days.setDate(today.getDate() - 90);
-
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Local state declarations
   const [currentDate, setCurrentDate] = useState(new Date());
   const [showStartDateCalendar, setShowStartDateCalendar] = useState(false);
   const [showEndDateCalendar, setShowEndDateCalendar] = useState(false);
@@ -63,9 +47,9 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   const [endMeridiem, setEndMeridiem] = useState("PM");
 
   const calendarState = useSelector((state: RootState) => state.calendar);
-  // Get the fixed filter from Redux
   const fixedFilter = calendarState.fixedFilter;
 
+  // Setup state for start and end times from calendar state
   useEffect(() => {
     if (calendarState.startDate) {
       const globalStart = new Date(calendarState.startDate);
@@ -120,42 +104,10 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     }
   }, [showEndDateCalendar, calendarState.endDate, today]);
 
-  const handleHourKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-    currentValue: string,
-    setter: (value: string) => void
-  ) => {
-    if (e.key === "ArrowUp") {
-      e.preventDefault();
-      let value = parseInt(currentValue, 10);
-      value = value === 12 ? 1 : value + 1;
-      setter(value.toString().padStart(2, "0"));
-    } else if (e.key === "ArrowDown") {
-      e.preventDefault();
-      let value = parseInt(currentValue, 10);
-      value = value === 1 ? 12 : value - 1;
-      setter(value.toString().padStart(2, "0"));
-    }
-  };
+  // Create a local wrapper for isPast90Days using today's value.
+  const checkPast90Days = (date: Date) => isPast90Days(date, today);
 
-  const handleMinuteSecondKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-    currentValue: string,
-    setter: (value: string) => void
-  ) => {
-    if (e.key === "ArrowUp") {
-      e.preventDefault();
-      let value = parseInt(currentValue, 10);
-      value = value === 59 ? 0 : value + 1;
-      setter(value.toString().padStart(2, "0"));
-    } else if (e.key === "ArrowDown") {
-      e.preventDefault();
-      let value = parseInt(currentValue, 10);
-      value = value === 0 ? 59 : value - 1;
-      setter(value.toString().padStart(2, "0"));
-    }
-  };
-
+  // UI-specific functions remain in the component
   const toggleStartDateCalendar = () => {
     setShowStartDateCalendar(!showStartDateCalendar);
     setShowEndDateCalendar(false);
@@ -242,14 +194,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       console.log("Por favor, selecciona ambas fechas: inicio y fin.");
     }
   };
-
-  const isPast90Days = (date: Date) => date < past90Days;
-  const isSelectedDate = (date: Date) =>
-    highlightDate && date.toDateString() === highlightDate.toDateString();
-  const isToday = (date: Date) => date.toDateString() === today.toDateString();
-  const formatDate = (date: Date) =>
-    `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-  const daysOfWeek = ["Do", "Lu", "Ma", "Mi", "Jue", "Vie", "Sa"];
 
   const calendarRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -380,9 +324,9 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               currentDate={currentDate}
               highlightDate={highlightDate}
               changeMonth={changeMonth}
-              daysOfWeek={daysOfWeek}
+              daysOfWeek={["Do", "Lu", "Ma", "Mi", "Jue", "Vie", "Sa"]}
               handleDateChange={(date) => handleDateChange(date, setStartDate)}
-              isPast90Days={isPast90Days}
+              isPast90Days={checkPast90Days}
               today={today}
               handleGoToToday={handleGoToToday}
               buttonClassName={styles.calendarDayButtonFrom}
@@ -460,9 +404,9 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               currentDate={currentDate}
               highlightDate={highlightDate}
               changeMonth={changeMonth}
-              daysOfWeek={daysOfWeek}
+              daysOfWeek={["Do", "Lu", "Ma", "Mi", "Jue", "Vie", "Sa"]}
               handleDateChange={(date) => handleDateChange(date, setEndDate)}
-              isPast90Days={isPast90Days}
+              isPast90Days={checkPast90Days}
               today={today}
               handleGoToToday={handleGoToToday}
               buttonClassName={styles.calendarDayButtonTill}
