@@ -365,3 +365,9 @@
   background-color: var(--company-color-6);
   color: white;
 }
+.errorMessage {
+  color: red;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}

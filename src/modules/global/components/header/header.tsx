@@ -16,8 +16,7 @@ interface RootState {
   calendar: CalendarState;
 }
 
-// Función auxiliar para formatear una cadena de fecha ISO a "MM/DD/YYYY, hh:mm:ss a. m."
-
+// Función para formatear una cadena ISO a "día/mes/año, hh:mm:ss a. m."
 const formatDate = (dateStr: string): string => {
   const date = new Date(dateStr);
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -30,24 +29,26 @@ const formatDate = (dateStr: string): string => {
   hours = hours % 12;
   if (hours === 0) hours = 12;
   const hourStr = String(hours).padStart(2, "0");
-  return `${month}/${day}/${year}, ${hourStr}:${minutes}:${seconds} ${ampm}`;
+
+  return `${day}/${month}/${year}, ${hourStr}:${minutes}:${seconds} ${ampm}`;
 };
 
 export const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  // FLAG DE MONTAJE: Siempre se llaman los hooks, pero se usará mounted para condicionar el renderizado dinámico.
+  // Para saber si el componente ya se cargó
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Leer fechas del estado global
+  // Leemos las fechas desde el estado global
   const { startDate: reduxStartDate, endDate: reduxEndDate } = useSelector(
     (state: RootState) => state.calendar
   );
 
+  // Estado para mostrar/ocultar el calendario
   const [showCalendar, setShowCalendar] = useState(false);
   const toggleContainer = (): void => {
     setShowCalendar((prev) => !prev);
@@ -59,7 +60,7 @@ export const Header = () => {
     }
   };
 
-  // Usar la fecha actual por defecto si los valores del estado son null
+  // Si no hay fechas en Redux, se usa la fecha actual por defecto
   const defaultISO: string = new Date().toISOString();
   const start: string = reduxStartDate
     ? formatDate(reduxStartDate)
@@ -70,7 +71,6 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
-      {/* Aquí se renderiza el contenido dinámico solo si está montado */}
       {mounted && (
         <>
           <nav className={styles.navBar}>
@@ -82,7 +82,8 @@ export const Header = () => {
               onClick={toggleContainer}
               id="date"
               type="button"
-              data-state="closed"
+              // Actualiza data-state según si showCalendar es true u false
+              data-state={showCalendar ? "open" : "closed"}
               className={styles.dateButton}
             >
               <CalendarTodayIcon className={styles.calendarIcon} />
