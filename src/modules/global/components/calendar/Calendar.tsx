@@ -1,37 +1,172 @@
 "use client";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setDateRangeSelected } from "@/slices/calendarSlice";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store";
+import { setDateRange, setFixedFilter } from "@/slices/calendarSlice";
+import FixedDateSection from "./FixedDateSection";
+import DatePicker from "./DatePicker";
 import styles from "./Calendar.module.css";
+import {
+  toLocalISOString,
+  handleHourKeyDown,
+  handleMinuteSecondKeyDown,
+  formatDate,
+  isPast90Days,
+} from "@/modules/global/utils/utils";
 
 interface CalendarProps {
+  // Función para mostrar u ocultar el calendario
   toggleContainer: () => void;
 }
 
 const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
+  const dispatch = useDispatch();
+  const today = new Date();
+
+  // Para saber si ya está montado el componente
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Estados para manejar fechas y para mostrar/ocultar los calendarios
   const [currentDate, setCurrentDate] = useState(new Date());
   const [showStartDateCalendar, setShowStartDateCalendar] = useState(false);
   const [showEndDateCalendar, setShowEndDateCalendar] = useState(false);
   const [highlightDate, setHighlightDate] = useState<Date | null>(null);
-  const [selectedOption, setSelectedOption] = useState("");
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-  const dispatch = useDispatch();
 
-  const today = new Date();
-  const past90Days = new Date(today);
-  past90Days.setDate(today.getDate() - 90);
+  // Estados para manejar hora, minutos y segundos (formato 12 horas)
+  const [startHour, setStartHour] = useState("12");
+  const [startMinute, setStartMinute] = useState("00");
+  const [startSecond, setStartSecond] = useState("00");
+  const [startMeridiem, setStartMeridiem] = useState("AM");
 
+  const [endHour, setEndHour] = useState("12");
+  const [endMinute, setEndMinute] = useState("00");
+  const [endSecond, setEndSecond] = useState("00");
+  const [endMeridiem, setEndMeridiem] = useState("PM");
+
+  // Para mostrar mensajes de error en el DatePicker
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  // Obtenemos el estado global del calendario desde Redux
+  const calendarState = useSelector((state: RootState) => state.calendar);
+
+  // **************** VALIDAR INPUTS DE TIEMPO ****************
+  /**
+   * Función para validar y ajustar lo que el usuario escribe en los inputs de tiempo.
+   * Se queda solo con dígitos, limita a 2 caracteres, se asegura que esté en el rango y si el usuario
+   * escribe "00", lo deja así.
+   *
+   * @param e - Evento del input.
+   * @param setter - Función para actualizar el estado.
+   * @param min - Valor mínimo permitido (1 para horas o 0 para minutos/segundos).
+   * @param max - Valor máximo permitido (12 para horas o 59 para minutos/segundos).
+   */
+  const handleTimeInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setter: (value: string) => void,
+    min: number,
+    max: number
+  ) => {
+    let rawValue = e.target.value.replace(/\D/g, ""); // Quita lo que no sean números
+    if (rawValue.length > 2) {
+      rawValue = rawValue.slice(0, 2); // Se queda solo con 2 dígitos
+    }
+    // Si el usuario escribió "00", se queda con ese valor
+    if (rawValue === "00") {
+      setter("00");
+      return;
+    }
+    let num = parseInt(rawValue, 10);
+    if (isNaN(num)) {
+      setter("00");
+    } else {
+      if (num < min) num = min;
+      if (num > max) num = max;
+      setter(num.toString().padStart(2, "0"));
+    }
+  };
+  // **********************************************************
+
+  // Actualiza la hora de inicio en base a la fecha global
+  useEffect(() => {
+    if (calendarState.startDate) {
+      const globalStart = new Date(calendarState.startDate);
+      const hour = (globalStart.getHours() % 12 || 12)
+        .toString()
+        .padStart(2, "0");
+      const minute = globalStart.getMinutes().toString().padStart(2, "0");
+      const second = globalStart.getSeconds().toString().padStart(2, "0");
+      setStartHour(hour);
+      setStartMinute(minute);
+      setStartSecond(second);
+      setStartMeridiem(globalStart.getHours() >= 12 ? "PM" : "AM");
+    }
+  }, [calendarState.startDate]);
+
+  // Actualiza la hora de fin en base a la fecha global
+  useEffect(() => {
+    if (calendarState.endDate) {
+      const globalEnd = new Date(calendarState.endDate);
+      const hour = (globalEnd.getHours() % 12 || 12)
+        .toString()
+        .padStart(2, "0");
+      const minute = globalEnd.getMinutes().toString().padStart(2, "0");
+      const second = globalEnd.getSeconds().toString().padStart(2, "0");
+      setEndHour(hour);
+      setEndMinute(minute);
+      setEndSecond(second);
+      setEndMeridiem(globalEnd.getHours() >= 12 ? "PM" : "AM");
+    }
+  }, [calendarState.endDate]);
+
+  // Si se abre el calendario de inicio y no hay fecha global, usamos la hora de hoy
+  useEffect(() => {
+    if (showStartDateCalendar && !calendarState.startDate) {
+      const hour = (today.getHours() % 12 || 12).toString().padStart(2, "0");
+      const minute = today.getMinutes().toString().padStart(2, "0");
+      const second = today.getSeconds().toString().padStart(2, "0");
+      setStartHour(hour);
+      setStartMinute(minute);
+      setStartSecond(second);
+      setStartMeridiem(today.getHours() >= 12 ? "PM" : "AM");
+    }
+  }, [showStartDateCalendar, calendarState.startDate, today]);
+
+  // Si se abre el calendario de fin y no hay fecha global, usamos la hora de hoy
+  useEffect(() => {
+    if (showEndDateCalendar && !calendarState.endDate) {
+      const hour = (today.getHours() % 12 || 12).toString().padStart(2, "0");
+      const minute = today.getMinutes().toString().padStart(2, "0");
+      const second = today.getSeconds().toString().padStart(2, "0");
+      setEndHour(hour);
+      setEndMinute(minute);
+      setEndSecond(second);
+      setEndMeridiem(today.getHours() >= 12 ? "PM" : "AM");
+    }
+  }, [showEndDateCalendar, calendarState.endDate, today]);
+
+  // Utilizamos isPast90Days con la fecha de hoy
+  const checkPast90Days = (date: Date) => isPast90Days(date, today);
+
+  // Alterna el calendario de inicio y limpia cualquier mensaje de error
   const toggleStartDateCalendar = () => {
     setShowStartDateCalendar(!showStartDateCalendar);
     setShowEndDateCalendar(false);
+    setErrorMessage("");
   };
 
+  // Alterna el calendario de fin y limpia el error
   const toggleEndDateCalendar = () => {
     setShowEndDateCalendar(!showEndDateCalendar);
     setShowStartDateCalendar(false);
+    setErrorMessage("");
   };
 
+  // Cuando el usuario selecciona una fecha, se actualiza y se borra el error
   const handleDateChange = (
     date: Date | null,
     setter: React.Dispatch<React.SetStateAction<Date | null>>
@@ -40,272 +175,338 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     setter(date);
     setShowStartDateCalendar(false);
     setShowEndDateCalendar(false);
+    setErrorMessage("");
   };
 
+  // Cambia el mes que se muestra en el calendario
   const changeMonth = (amount: number) => {
     const newDate = new Date(currentDate);
     newDate.setMonth(currentDate.getMonth() + amount);
     setCurrentDate(newDate);
   };
 
+  // Coloca la fecha de hoy en el calendario, resalta hoy y limpia el error
   const handleGoToToday = () => {
     setCurrentDate(today);
     setHighlightDate(today);
-
     if (showStartDateCalendar) {
       setStartDate(today);
-      setTimeout(() => {
-        setShowStartDateCalendar(false);
-      }, 250);
+      setStartHour("12");
+      setStartMinute("00");
+      setStartSecond("00");
+      setStartMeridiem("AM");
+      setTimeout(() => setShowStartDateCalendar(false), 250);
     } else if (showEndDateCalendar) {
       setEndDate(today);
-      setTimeout(() => {
-        setShowEndDateCalendar(false);
-      }, 250);
+      setEndHour("12");
+      setEndMinute("00");
+      setEndSecond("00");
+      setEndMeridiem("PM");
+      setTimeout(() => setShowEndDateCalendar(false), 250);
     }
+    setErrorMessage("");
   };
 
-  const isPast90Days = (date: Date) => date < past90Days;
-
-  const isSelectedDate = (date: Date) => {
-    return (
-      highlightDate && date.toDateString() === highlightDate.toDateString()
-    );
-  };
-
-  const isToday = (date: Date) => {
-    return date.toDateString() === today.toDateString();
-  };
-
-  const daysOfWeek = ["Do", "Lu", "Ma", "Mi", "Jue", "Vie", "Sa"];
-
-  const formatDate = (date: Date) =>
-    `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-
-  const [isCustomPeriod, setIsCustomPeriod] = useState(true);
-
-  const handleToggle = () => {
-    setIsCustomPeriod(!isCustomPeriod);
-    console.log(`custom period set to: ${isCustomPeriod}`);
-  };
-
-  const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(event.target.value);
-  };
-
+  /**
+   * Guarda el rango de fechas.
+   * Si no hay fechas locales, se usan las del estado global.
+   * Si faltan fechas, muestra un error en el DatePicker.
+   * Luego, guarda el rango en Redux en formato ISO y limpia el filtro.
+   */
   const saveDate = () => {
-    if (startDate && endDate) {
-      const start = startDate <= endDate ? startDate : endDate;
-      const end = startDate > endDate ? startDate : endDate;
-      const formattedRange = `From ${start.toLocaleDateString()} to ${end.toLocaleDateString()}`;
-      console.log("Selected range:", formattedRange);
-      //here it is where the date is store
-      dispatch(setDateRangeSelected(formattedRange));
-    } else {
-      console.log("Please select both start and end dates.");
+    let start = startDate;
+    let end = endDate;
+
+    if (!start || !end) {
+      if (calendarState.startDate && calendarState.endDate) {
+        start = new Date(calendarState.startDate);
+        end = new Date(calendarState.endDate);
+      } else {
+        setErrorMessage("Por favor, selecciona ambas fechas: inicio y fin.");
+        return;
+      }
     }
+
+    const adjustedStart = new Date(start);
+    let hourStart = parseInt(startHour, 10);
+    if (startMeridiem === "PM" && hourStart < 12) {
+      hourStart += 12;
+    } else if (startMeridiem === "AM" && hourStart === 12) {
+      hourStart = 0;
+    }
+    adjustedStart.setHours(
+      hourStart,
+      parseInt(startMinute, 10),
+      parseInt(startSecond, 10)
+    );
+
+    const adjustedEnd = new Date(end);
+    let hourEnd = parseInt(endHour, 10);
+    if (endMeridiem === "PM" && hourEnd < 12) {
+      hourEnd += 12;
+    } else if (endMeridiem === "AM" && hourEnd === 12) {
+      hourEnd = 0;
+    }
+    adjustedEnd.setHours(
+      hourEnd,
+      parseInt(endMinute, 10),
+      parseInt(endSecond, 10)
+    );
+
+    const finalStart =
+      adjustedStart <= adjustedEnd ? adjustedStart : adjustedEnd;
+    const finalEnd = adjustedStart > adjustedEnd ? adjustedStart : adjustedEnd;
+
+    const isoStart = toLocalISOString(finalStart);
+    const isoEnd = toLocalISOString(finalEnd);
+    dispatch(setDateRange({ startDate: isoStart, endDate: isoEnd }));
+    dispatch(setFixedFilter(""));
+    setErrorMessage("");
   };
+
+  // Cierra el calendario si se hace clic fuera de él, a menos que el clic sea en el botón (con id "date")
+  const calendarRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        calendarRef.current &&
+        !calendarRef.current.contains(event.target as Node) &&
+        // Si el clic es sobre el botón con id "date", no cerramos
+        !(event.target as HTMLElement).closest("#date")
+      ) {
+        toggleContainer();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [toggleContainer]);
+
+  if (!mounted) {
+    return null;
+  }
+
+  // Se usan las fechas globales para definir los placeholders
+  const globalStartDate = calendarState.startDate
+    ? new Date(calendarState.startDate)
+    : today;
+  const globalEndDate = calendarState.endDate
+    ? new Date(calendarState.endDate)
+    : today;
+  const startDatePlaceholder = globalStartDate.toLocaleDateString();
+  const endDatePlaceholder = globalEndDate.toLocaleDateString();
+  const startHourPlaceholder = (globalStartDate.getHours() % 12 || 12)
+    .toString()
+    .padStart(2, "0");
+  const startMinutePlaceholder = globalStartDate
+    .getMinutes()
+    .toString()
+    .padStart(2, "0");
+  const startSecondPlaceholder = globalStartDate
+    .getSeconds()
+    .toString()
+    .padStart(2, "0");
+  const endHourPlaceholder = (globalEndDate.getHours() % 12 || 12)
+    .toString()
+    .padStart(2, "0");
+  const endMinutePlaceholder = globalEndDate
+    .getMinutes()
+    .toString()
+    .padStart(2, "0");
+  const endSecondPlaceholder = globalEndDate
+    .getSeconds()
+    .toString()
+    .padStart(2, "0");
 
   return (
-    <div className={styles.calendarContainer}>
-      <div className={styles.subContainer}>
-        <button
-          onClick={handleToggle}
-          className={`${styles.toggleButton} ${
-            isCustomPeriod ? styles.active : ""
-          }`}
-        >
-          <div
-            className={`${styles.toggleCircle} ${
-              isCustomPeriod ? styles.shifted : ""
-            }`}
+    <div className={styles.calendarContainer} ref={calendarRef}>
+      <FixedDateSection
+        selectedOption={calendarState.fixedFilter}
+        setSelectedOption={(option: string) => dispatch(setFixedFilter(option))}
+      />
+      <div className={styles.personalizedDate}>
+        <p className={styles.reportPeriod}>Periodo de reportes</p>
+        <div className={styles.isCustomCalendarContainer}>
+          <label className={styles.containerLabel}>Desde:</label>
+          <input
+            type="text"
+            value={startDate ? startDate.toLocaleDateString() : ""}
+            onClick={toggleStartDateCalendar}
+            readOnly
+            className={styles.containerInput}
+            placeholder={startDatePlaceholder || "dd/mm/aaaa"}
           />
-        </button>
-
-        <label className={styles.label}>Periodo personalizado</label>
-      </div>
-
-      <p className={styles.reportPeriod}>Periodo de reportes</p>
-
-      {isCustomPeriod ? (
-        <>
-          <div className={styles.isCustomCalendarContainer}>
-            <label className={styles.containerLabel}>Desde:</label>
+          <div className={styles.timeInputGroup}>
             <input
-              type="text"
-              value={startDate ? startDate.toLocaleDateString() : ""} //check why value isnt changing
-              onClick={toggleStartDateCalendar}
-              readOnly
-              className={styles.containerInput}
-              placeholder="dd/mm/aaaa"
+              className={styles.timeInputField}
+              id="start-hours"
+              type="number"
+              min="1"
+              max="12"
+              step="1"
+              value={startHour}
+              name="start-hours"
+              onChange={(e) => handleTimeInputChange(e, setStartHour, 1, 12)}
+              onKeyDown={(e) => handleHourKeyDown(e, startHour, setStartHour)}
+              placeholder={startHourPlaceholder}
             />
-            {showStartDateCalendar && (
-              <div className={styles.dateContainer}>
-                <div className={styles.dateSubContainer}>
-                  <div className={styles.dateDayMonthYear}>
-                    <button
-                      onClick={() => changeMonth(-1)}
-                      className={styles.previousMonth}
-                    >
-                      ‹
-                    </button>
-                    <span className={styles.dateSpan}>
-                      {highlightDate
-                        ? formatDate(highlightDate)
-                        : formatDate(currentDate)}
-                    </span>
-                    <button
-                      onClick={() => changeMonth(1)}
-                      className={styles.nextMonth}
-                    >
-                      ›
-                    </button>
-                  </div>
-                  <div className={styles.daysOfTheWeekContainer}>
-                    {daysOfWeek.map((day, index) => (
-                      <div
-                        key={index}
-                        className={styles.daysOfTheWeekSubContainer}
-                      >
-                        {day}
-                      </div>
-                    ))}
-                  </div>
-                  <div className={styles.calendarDayButtonContainer}>
-                    {Array.from({ length: 42 }, (_, i) => {
-                      const date = new Date(
-                        currentDate.getFullYear(),
-                        currentDate.getMonth(),
-                        i - currentDate.getDay() + 1
-                      );
-                      return (
-                        <button
-                          key={i}
-                          onClick={() => handleDateChange(date, setEndDate)}
-                          disabled={isPast90Days(date)}
-                          className={styles.calendarDayButtonFrom}
-                        >
-                          {date.getDate()}
-                        </button>
-                      );
-                    })}
-                  </div>
-                  <div className={styles.todayButtonContainer}>
-                    <button
-                      onClick={handleGoToToday}
-                      className={styles.todayButton}
-                    >
-                      Today
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-          <div className={styles.isCustomCalendarContainer}>
-            <label className={styles.containerLabel}>Hasta:</label>
             <input
-              type="text"
-              value={endDate ? endDate.toLocaleDateString() : ""}
-              onClick={toggleEndDateCalendar}
-              readOnly
-              className={styles.containerInput}
-              placeholder="dd/mm/aaaa"
+              className={styles.timeInputField}
+              id="start-minutes"
+              type="number"
+              min="0"
+              max="59"
+              step="1"
+              value={startMinute}
+              name="start-minutes"
+              onChange={(e) => handleTimeInputChange(e, setStartMinute, 0, 59)}
+              onKeyDown={(e) =>
+                handleMinuteSecondKeyDown(e, startMinute, setStartMinute)
+              }
+              placeholder={startMinutePlaceholder}
             />
-            {showEndDateCalendar && (
-              <div className={styles.dateContainer}>
-                <div className={styles.dateSubContainer}>
-                  <div className={styles.dateDayMonthYear}>
-                    <button
-                      onClick={() => changeMonth(-1)}
-                      className={styles.previousMonth}
-                    >
-                      ‹
-                    </button>
-                    <span className={styles.dateSpan}>
-                      {highlightDate
-                        ? formatDate(highlightDate)
-                        : formatDate(currentDate)}
-                    </span>
-                    <button
-                      onClick={() => changeMonth(1)}
-                      className={styles.nextMonth}
-                    >
-                      ›
-                    </button>
-                  </div>
-                  <div className={styles.daysOfTheWeekContainer}>
-                    {daysOfWeek.map((day, index) => (
-                      <div
-                        key={index}
-                        className={styles.daysOfTheWeekSubContainer}
-                      >
-                        {day}
-                      </div>
-                    ))}
-                  </div>
-                  <div className={styles.calendarDayButtonContainer}>
-                    {Array.from({ length: 42 }, (_, i) => {
-                      const date = new Date(
-                        currentDate.getFullYear(),
-                        currentDate.getMonth(),
-                        i - currentDate.getDay() + 1
-                      );
-                      return (
-                        <button
-                          key={i}
-                          onClick={() => handleDateChange(date, setEndDate)}
-                          disabled={isPast90Days(date)}
-                          className={styles.calendarDayButtonTill}
-                        >
-                          {date.getDate()}
-                        </button>
-                      );
-                    })}
-                  </div>
-                  <div className={styles.todayButtonContainer}>
-                    <button
-                      onClick={handleGoToToday}
-                      className={styles.todayButton}
-                    >
-                      Today
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
+            <input
+              className={styles.timeInputField}
+              id="start-seconds"
+              type="number"
+              min="0"
+              max="59"
+              step="1"
+              value={startSecond}
+              name="start-seconds"
+              onChange={(e) => handleTimeInputChange(e, setStartSecond, 0, 59)}
+              onKeyDown={(e) =>
+                handleMinuteSecondKeyDown(e, startSecond, setStartSecond)
+              }
+              placeholder={startSecondPlaceholder}
+            />
+            <div className={styles.amPmWrapper}>
+              <select
+                className={styles.amPmSelect}
+                value={startMeridiem}
+                onChange={(e) => setStartMeridiem(e.target.value)}
+              >
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
+            </div>
           </div>
-        </>
-      ) : (
-        <div className={styles.selectPeriodContainer}>
-          <label>Periodo:</label>
-          <select value={selectedOption} onChange={handleOptionChange}>
-            <option value="">Seleccionar un periodo</option>
-            <option value="last7Days">Últimos 7 días</option>
-            <option value="last14Days">Últimos 14 días</option>
-            <option value="last30Days">Últimos 30 días</option>
-            <option value="last90Days">Últimos 90 días</option>
-          </select>
+          {showStartDateCalendar && (
+            <DatePicker
+              currentDate={currentDate}
+              highlightDate={highlightDate}
+              changeMonth={changeMonth}
+              daysOfWeek={["Do", "Lu", "Ma", "Mi", "Jue", "Vie", "Sa"]}
+              handleDateChange={(date) => handleDateChange(date, setStartDate)}
+              isPast90Days={checkPast90Days}
+              today={today}
+              handleGoToToday={handleGoToToday}
+              buttonClassName={styles.calendarDayButtonFrom}
+              formatDate={formatDate}
+              errorMessage={errorMessage}
+            />
+          )}
         </div>
-      )}
-
-      <div className={styles.selectPeriodButtonsContainer}>
-        <button
-          onClick={() => {
-            saveDate();
-            toggleContainer();
-          }}
-          data-testid="save-button"
-          className={styles.selectPeriodSaveButton}
-        >
-          Guardar
-        </button>
-        <button
-          onClick={toggleContainer}
-          className={styles.selectPeriodCancelButton}
-        >
-          Cancelar
-        </button>
+        <div className={styles.isCustomCalendarContainer}>
+          <label className={styles.containerLabel}>Hasta:</label>
+          <input
+            type="text"
+            value={endDate ? endDate.toLocaleDateString() : ""}
+            onClick={toggleEndDateCalendar}
+            readOnly
+            className={styles.containerInput}
+            placeholder={endDatePlaceholder || "dd/mm/aaaa"}
+          />
+          <div className={styles.timeInputGroup}>
+            <input
+              className={styles.timeInputField}
+              id="end-hours"
+              type="number"
+              min="1"
+              max="12"
+              step="1"
+              value={endHour}
+              name="end-hours"
+              onChange={(e) => handleTimeInputChange(e, setEndHour, 1, 12)}
+              onKeyDown={(e) => handleHourKeyDown(e, endHour, setEndHour)}
+              placeholder={endHourPlaceholder}
+            />
+            <input
+              className={styles.timeInputField}
+              id="end-minutes"
+              type="number"
+              min="0"
+              max="59"
+              step="1"
+              value={endMinute}
+              name="end-minutes"
+              onChange={(e) => handleTimeInputChange(e, setEndMinute, 0, 59)}
+              onKeyDown={(e) =>
+                handleMinuteSecondKeyDown(e, endMinute, setEndMinute)
+              }
+              placeholder={endMinutePlaceholder}
+            />
+            <input
+              className={styles.timeInputField}
+              id="end-seconds"
+              type="number"
+              min="0"
+              max="59"
+              step="1"
+              value={endSecond}
+              name="end-seconds"
+              onChange={(e) => handleTimeInputChange(e, setEndSecond, 0, 59)}
+              onKeyDown={(e) =>
+                handleMinuteSecondKeyDown(e, endSecond, setEndSecond)
+              }
+              placeholder={endSecondPlaceholder}
+            />
+            <div className={styles.amPmWrapper}>
+              <select
+                className={styles.amPmSelect}
+                value={endMeridiem}
+                onChange={(e) => setEndMeridiem(e.target.value)}
+              >
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
+            </div>
+          </div>
+          {showEndDateCalendar && (
+            <DatePicker
+              currentDate={currentDate}
+              highlightDate={highlightDate}
+              changeMonth={changeMonth}
+              daysOfWeek={["Do", "Lu", "Ma", "Mi", "Jue", "Vie", "Sa"]}
+              handleDateChange={(date) => handleDateChange(date, setEndDate)}
+              isPast90Days={checkPast90Days}
+              today={today}
+              handleGoToToday={handleGoToToday}
+              buttonClassName={styles.calendarDayButtonTill}
+              formatDate={formatDate}
+              errorMessage={errorMessage}
+            />
+          )}
+        </div>
+        <div className={styles.selectPeriodButtonsContainer}>
+          <button
+            onClick={() => {
+              saveDate();
+              toggleContainer();
+            }}
+            data-testid="save-button"
+            className={styles.selectPeriodSaveButton}
+          >
+            Aceptar
+          </button>
+          <button
+            onClick={toggleContainer}
+            className={styles.selectPeriodCancelButton}
+          >
+            Cancelar
+          </button>
+        </div>
       </div>
     </div>
   );
