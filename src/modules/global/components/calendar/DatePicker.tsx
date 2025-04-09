@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import styles from "./Calendar.module.css";
+import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
 
 interface DatePickerProps {
   currentDate: Date;
@@ -27,6 +28,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   buttonClassName,
   formatDate,
 }) => {
+  const LANGUAGE = LanguageSelector();
   return (
     <div className={styles.dateContainer}>
       <div className={styles.dateSubContainer}>
@@ -74,7 +76,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
         </div>
         <div className={styles.todayButtonContainer}>
           <button onClick={handleGoToToday} className={styles.todayButton}>
-            Today
+            {LANGUAGE.DatePicker.buttons.today}
           </button>
         </div>
       </div>

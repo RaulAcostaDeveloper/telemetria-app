@@ -62,4 +62,9 @@ export const ENGLISH: LanguageInterface = {
       zones: "Zones",
     },
   },
+  DatePicker: {
+    buttons: {
+      today: "Today",
+    },
+  },
 };
