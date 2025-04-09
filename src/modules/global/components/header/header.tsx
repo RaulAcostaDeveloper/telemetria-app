@@ -1,12 +1,10 @@
 "use client";
-
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
-import Calendar from "@/modules/global/components/calendar/Calendar";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import Calendar from "@/modules/global/components/calendar/Calendar";
 import styles from "./header.module.css";
 
 interface CalendarState {
