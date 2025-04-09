@@ -2,7 +2,10 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { setDateRange } from "@/slices/calendarSlice";
 import styles from "./Calendar.module.css";
-import { toLocalISOString, calculatePredefinedDateRange } from "./utils";
+import {
+  toLocalISOString,
+  calculatePredefinedDateRange,
+} from "@/modules/global/utils/utils";
 
 interface FixedDateSectionProps {
   selectedOption: string;
