@@ -62,4 +62,17 @@ export const SPANISH: LanguageInterface = {
       zones: "Zonas",
     },
   },
+  DatePicker: {
+    buttons: {
+      today: "Hoy",
+    },
+  },
+  fixedDateFilterOptions: [
+    "Últimos 7 días",
+    "Últimos 15 días",
+    "Últimos 30 días",
+    "Últimos 90 días",
+    "Este mes",
+    "El mes pasado",
+  ],
 };
