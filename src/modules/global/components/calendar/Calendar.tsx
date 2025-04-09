@@ -14,7 +14,7 @@ import {
   handleMinuteSecondKeyDown,
   formatDate,
   isPast90Days,
-} from "./utils";
+} from "@/modules/global/utils/utils";
 
 interface CalendarProps {
   // Función que permite ocultar o mostrar el componente calendario.
