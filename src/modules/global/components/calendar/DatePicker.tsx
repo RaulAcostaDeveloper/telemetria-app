@@ -14,6 +14,7 @@ interface DatePickerProps {
   handleGoToToday: () => void;
   buttonClassName: string;
   formatDate: (date: Date) => string;
+  errorMessage?: string;
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({
@@ -27,8 +28,14 @@ const DatePicker: React.FC<DatePickerProps> = ({
   handleGoToToday,
   buttonClassName,
   formatDate,
+  errorMessage,
 }) => {
   const LANGUAGE = LanguageSelector();
+
+  const isCurrentMonth =
+    currentDate.getFullYear() === today.getFullYear() &&
+    currentDate.getMonth() === today.getMonth();
+
   return (
     <div className={styles.dateContainer}>
       <div className={styles.dateSubContainer}>
@@ -44,7 +51,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
               ? formatDate(highlightDate)
               : formatDate(currentDate)}
           </span>
-          <button onClick={() => changeMonth(1)} className={styles.nextMonth}>
+          <button
+            onClick={() => changeMonth(1)}
+            className={styles.nextMonth}
+            disabled={isCurrentMonth}
+          >
             ›
           </button>
         </div>
@@ -62,6 +73,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
               currentDate.getMonth(),
               i - currentDate.getDay() + 1
             );
+            // If the date is after today, do not render it.
+            if (date > today) return null;
             return (
               <button
                 key={i}
@@ -74,6 +87,9 @@ const DatePicker: React.FC<DatePickerProps> = ({
             );
           })}
         </div>
+        {errorMessage && (
+          <div className={styles.errorMessage}>{errorMessage}</div>
+        )}
         <div className={styles.todayButtonContainer}>
           <button onClick={handleGoToToday} className={styles.todayButton}>
             {LANGUAGE.DatePicker.buttons.today}
