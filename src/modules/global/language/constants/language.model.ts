@@ -67,4 +67,5 @@ export interface LanguageInterface {
       today: string;
     };
   };
+  fixedDateFilterOptions: string[];
 }

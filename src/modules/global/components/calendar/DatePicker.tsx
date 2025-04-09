@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import styles from "./Calendar.module.css";
 import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
+import styles from "./Calendar.module.css";
 
 interface DatePickerProps {
   currentDate: Date;

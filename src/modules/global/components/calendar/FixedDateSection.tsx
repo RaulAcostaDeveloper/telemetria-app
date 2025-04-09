@@ -1,11 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
+import {
+  calculatePredefinedDateRange,
+  toLocalISOString,
+} from "@/modules/global/utils/utils";
 import { setDateRange } from "@/slices/calendarSlice";
 import styles from "./Calendar.module.css";
-import {
-  toLocalISOString,
-  calculatePredefinedDateRange,
-} from "@/modules/global/utils/utils";
 
 interface FixedDateSectionProps {
   selectedOption: string;
@@ -19,9 +20,23 @@ const FixedDateSection: React.FC<FixedDateSectionProps> = ({
   const dispatch = useDispatch();
   const today = new Date();
 
+  const LANGUAGE = LanguageSelector();
+
+  const options = LANGUAGE.fixedDateFilterOptions;
+
+  /**
+   * Función para manejar la selección de una opción de rango predefinido.
+   *
+   * - Si la opción ya está activa, se limpia (des-selecciona).
+   * - En caso contrario, se calcula el rango de fechas correspondiente con
+   *   calculatePredefinedDateRange y se guarda el rango en el estado global (Redux)
+   *   utilizando toLocalISOString para formatear las fechas.
+   *
+   * @param option - Opción predefinida seleccionada.
+   */
   const handlePredefinedDate = (option: string) => {
-    // If the filter is already active, clear it.
     if (selectedOption === option) {
+      // Si el filtro ya está activo, límpialo.
       setSelectedOption("");
       return;
     }
@@ -36,15 +51,6 @@ const FixedDateSection: React.FC<FixedDateSectionProps> = ({
       })
     );
   };
-
-  const options = [
-    "Últimos 7 días",
-    "Últimos 15 días",
-    "Últimos 30 días",
-    "Últimos 90 días",
-    "Este mes",
-    "El mes pasado",
-  ];
 
   return (
     <div className={styles.fixedDatesContainer}>
