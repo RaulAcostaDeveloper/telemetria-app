@@ -62,4 +62,9 @@ export const SPANISH: LanguageInterface = {
       zones: "Zonas",
     },
   },
+  DatePicker: {
+    buttons: {
+      today: "Hoy",
+    },
+  },
 };

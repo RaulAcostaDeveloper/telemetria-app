@@ -62,4 +62,9 @@ export interface LanguageInterface {
       zones: string;
     };
   };
+  DatePicker: {
+    buttons: {
+      today: string;
+    };
+  };
 }
