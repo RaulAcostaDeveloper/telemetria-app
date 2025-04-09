@@ -67,4 +67,12 @@ export const ENGLISH: LanguageInterface = {
       today: "Today",
     },
   },
+  fixedDateFilterOptions: [
+    "Last 7 days",
+    "Last 15 days",
+    "Last 30 days",
+    "Last 90 days",
+    "This month",
+    "Last month",
+  ],
 };
