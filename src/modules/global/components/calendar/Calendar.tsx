@@ -15,7 +15,7 @@ import {
 } from "@/modules/global/utils/utils";
 
 interface CalendarProps {
-  // Función para mostrar u ocultar el calendario
+  // Función para mostrar u ocultar el calendario.
   toggleContainer: () => void;
 }
 
@@ -23,13 +23,13 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   const dispatch = useDispatch();
   const today = new Date();
 
-  // Para saber si ya está montado el componente
+  // Para saber si el componente ya está cargado
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Estados para manejar fechas y para mostrar/ocultar los calendarios
+  // Estados para manejar fechas y la visibilidad de los calendarios
   const [currentDate, setCurrentDate] = useState(new Date());
   const [showStartDateCalendar, setShowStartDateCalendar] = useState(false);
   const [showEndDateCalendar, setShowEndDateCalendar] = useState(false);
@@ -37,7 +37,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
-  // Estados para manejar hora, minutos y segundos (formato 12 horas)
+  // Estados para la hora, minutos y segundos (formato 12 horas)
   const [startHour, setStartHour] = useState("12");
   const [startMinute, setStartMinute] = useState("00");
   const [startSecond, setStartSecond] = useState("00");
@@ -48,7 +48,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   const [endSecond, setEndSecond] = useState("00");
   const [endMeridiem, setEndMeridiem] = useState("PM");
 
-  // Para mostrar mensajes de error en el DatePicker
+  // Estado para mensajes de error del DatePicker
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   // Obtenemos el estado global del calendario desde Redux
@@ -56,14 +56,14 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
   // **************** VALIDAR INPUTS DE TIEMPO ****************
   /**
-   * Función para validar y ajustar lo que el usuario escribe en los inputs de tiempo.
-   * Se queda solo con dígitos, limita a 2 caracteres, se asegura que esté en el rango y si el usuario
-   * escribe "00", lo deja así.
+   * Valida y ajusta lo que el usuario ingresa en los inputs de tiempo.
+   * Se queda solo con números, limita a 2 dígitos y fuerza que el valor esté en el rango.
+   * Si el usuario escribe "00", se deja ese valor.
    *
-   * @param e - Evento del input.
-   * @param setter - Función para actualizar el estado.
-   * @param min - Valor mínimo permitido (1 para horas o 0 para minutos/segundos).
-   * @param max - Valor máximo permitido (12 para horas o 59 para minutos/segundos).
+   * @param e Evento del input.
+   * @param setter Función para actualizar el estado.
+   * @param min Valor mínimo (ej., 1 para horas o 0 para minutos/segundos).
+   * @param max Valor máximo (ej., 12 para horas o 59 para minutos/segundos).
    */
   const handleTimeInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -71,11 +71,11 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     min: number,
     max: number
   ) => {
-    let rawValue = e.target.value.replace(/\D/g, ""); // Quita lo que no sean números
+    let rawValue = e.target.value.replace(/\D/g, ""); // Quita cualquier carácter no numérico
     if (rawValue.length > 2) {
-      rawValue = rawValue.slice(0, 2); // Se queda solo con 2 dígitos
+      rawValue = rawValue.slice(0, 2); // Limita a 2 dígitos
     }
-    // Si el usuario escribió "00", se queda con ese valor
+    // Si se escribió exactamente "00", lo deja así.
     if (rawValue === "00") {
       setter("00");
       return;
@@ -91,7 +91,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   };
   // **********************************************************
 
-  // Actualiza la hora de inicio en base a la fecha global
+  // Sincroniza la hora de inicio con la fecha global de Redux
   useEffect(() => {
     if (calendarState.startDate) {
       const globalStart = new Date(calendarState.startDate);
@@ -107,7 +107,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     }
   }, [calendarState.startDate]);
 
-  // Actualiza la hora de fin en base a la fecha global
+  // Sincroniza la hora de fin con la fecha global de Redux
   useEffect(() => {
     if (calendarState.endDate) {
       const globalEnd = new Date(calendarState.endDate);
@@ -123,7 +123,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     }
   }, [calendarState.endDate]);
 
-  // Si se abre el calendario de inicio y no hay fecha global, usamos la hora de hoy
+  // Si se abre el calendario de inicio y no hay fecha global, se usa la hora de hoy
   useEffect(() => {
     if (showStartDateCalendar && !calendarState.startDate) {
       const hour = (today.getHours() % 12 || 12).toString().padStart(2, "0");
@@ -136,7 +136,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     }
   }, [showStartDateCalendar, calendarState.startDate, today]);
 
-  // Si se abre el calendario de fin y no hay fecha global, usamos la hora de hoy
+  // Si se abre el calendario de fin y no hay fecha global, se usa la hora de hoy
   useEffect(() => {
     if (showEndDateCalendar && !calendarState.endDate) {
       const hour = (today.getHours() % 12 || 12).toString().padStart(2, "0");
@@ -149,10 +149,10 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     }
   }, [showEndDateCalendar, calendarState.endDate, today]);
 
-  // Utilizamos isPast90Days con la fecha de hoy
+  // Función para usar isPast90Days con la fecha de hoy
   const checkPast90Days = (date: Date) => isPast90Days(date, today);
 
-  // Alterna el calendario de inicio y limpia cualquier mensaje de error
+  // Alterna el calendario de inicio y limpia el error
   const toggleStartDateCalendar = () => {
     setShowStartDateCalendar(!showStartDateCalendar);
     setShowEndDateCalendar(false);
@@ -166,7 +166,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     setErrorMessage("");
   };
 
-  // Cuando el usuario selecciona una fecha, se actualiza y se borra el error
+  // Al seleccionar una fecha, la actualiza y borra errores
   const handleDateChange = (
     date: Date | null,
     setter: React.Dispatch<React.SetStateAction<Date | null>>
@@ -178,14 +178,14 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     setErrorMessage("");
   };
 
-  // Cambia el mes que se muestra en el calendario
+  // Cambia el mes que se muestra en el DatePicker
   const changeMonth = (amount: number) => {
     const newDate = new Date(currentDate);
     newDate.setMonth(currentDate.getMonth() + amount);
     setCurrentDate(newDate);
   };
 
-  // Coloca la fecha de hoy en el calendario, resalta hoy y limpia el error
+  // Pone la fecha de hoy en el DatePicker, resalta hoy y limpia el error
   const handleGoToToday = () => {
     setCurrentDate(today);
     setHighlightDate(today);
@@ -209,9 +209,9 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
   /**
    * Guarda el rango de fechas.
-   * Si no hay fechas locales, se usan las del estado global.
+   * Si no hay fechas locales, usa las del estado global.
    * Si faltan fechas, muestra un error en el DatePicker.
-   * Luego, guarda el rango en Redux en formato ISO y limpia el filtro.
+   * Después, guarda el rango en Redux en formato ISO y limpia el filtro.
    */
   const saveDate = () => {
     let start = startDate;
@@ -264,14 +264,13 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     setErrorMessage("");
   };
 
-  // Cierra el calendario si se hace clic fuera de él, a menos que el clic sea en el botón (con id "date")
+  // Detecta clics fuera del calendario (excepto en el botón con id "date") para cerrarlo.
   const calendarRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         calendarRef.current &&
         !calendarRef.current.contains(event.target as Node) &&
-        // Si el clic es sobre el botón con id "date", no cerramos
         !(event.target as HTMLElement).closest("#date")
       ) {
         toggleContainer();
@@ -287,34 +286,45 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     return null;
   }
 
-  // Se usan las fechas globales para definir los placeholders
-  const globalStartDate = calendarState.startDate
-    ? new Date(calendarState.startDate)
-    : today;
-  const globalEndDate = calendarState.endDate
-    ? new Date(calendarState.endDate)
-    : today;
-  const startDatePlaceholder = globalStartDate.toLocaleDateString();
-  const endDatePlaceholder = globalEndDate.toLocaleDateString();
-  const startHourPlaceholder = (globalStartDate.getHours() % 12 || 12)
+  // Placeholder: si el calendario está abierto, se usa currentDate, sino se usa la fecha global guardada (si existe) o currentDate.
+  const startDatePlaceholder = showStartDateCalendar
+    ? currentDate.toLocaleDateString()
+    : calendarState.startDate
+    ? new Date(calendarState.startDate).toLocaleDateString()
+    : currentDate.toLocaleDateString();
+  const endDatePlaceholder = showEndDateCalendar
+    ? currentDate.toLocaleDateString()
+    : calendarState.endDate
+    ? new Date(calendarState.endDate).toLocaleDateString()
+    : currentDate.toLocaleDateString();
+
+  const startHourPlaceholder = (
+    new Date(calendarState.startDate || currentDate).getHours() % 12 || 12
+  )
     .toString()
     .padStart(2, "0");
-  const startMinutePlaceholder = globalStartDate
+  const startMinutePlaceholder = new Date(
+    calendarState.startDate || currentDate
+  )
     .getMinutes()
     .toString()
     .padStart(2, "0");
-  const startSecondPlaceholder = globalStartDate
+  const startSecondPlaceholder = new Date(
+    calendarState.startDate || currentDate
+  )
     .getSeconds()
     .toString()
     .padStart(2, "0");
-  const endHourPlaceholder = (globalEndDate.getHours() % 12 || 12)
+  const endHourPlaceholder = (
+    new Date(calendarState.endDate || currentDate).getHours() % 12 || 12
+  )
     .toString()
     .padStart(2, "0");
-  const endMinutePlaceholder = globalEndDate
+  const endMinutePlaceholder = new Date(calendarState.endDate || currentDate)
     .getMinutes()
     .toString()
     .padStart(2, "0");
-  const endSecondPlaceholder = globalEndDate
+  const endSecondPlaceholder = new Date(calendarState.endDate || currentDate)
     .getSeconds()
     .toString()
     .padStart(2, "0");
