@@ -188,3 +188,28 @@ export const isPast90Days = (date: Date, today: Date): boolean => {
   past90Days.setDate(today.getDate() - 90);
   return date < past90Days;
 };
+
+/**
+ * Convierte una cadena ISO a "día/mes/año, hh:mm:ss a. m."
+ *
+ * Esta función toma una cadena en formato ISO y la formatea en una cadena
+ * que muestra la fecha y hora en formato local, usando el reloj de 12 horas.
+ *
+ * @param dateStr - Fecha en formato ISO.
+ * @returns Fecha formateada como "día/mes/año, hh:mm:ss a. m."
+ */
+export const formatDateTime = (dateStr: string): string => {
+  const date = new Date(dateStr);
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const year = date.getFullYear();
+  let hours = date.getHours();
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+  const ampm = hours >= 12 ? "p.\u00a0m." : "a.\u00a0m.";
+  hours = hours % 12;
+  if (hours === 0) hours = 12;
+  const hourStr = String(hours).padStart(2, "0");
+
+  return `${day}/${month}/${year}, ${hourStr}:${minutes}:${seconds} ${ampm}`;
+};
