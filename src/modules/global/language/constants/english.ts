@@ -75,4 +75,7 @@ export const ENGLISH: LanguageInterface = {
     "This month",
     "Last month",
   ],
+  VehicleFilter: {
+    inputPlaceholder: "Search Vehicle",
+  },
 };
