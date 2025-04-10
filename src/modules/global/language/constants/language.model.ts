@@ -68,4 +68,7 @@ export interface LanguageInterface {
     };
   };
   fixedDateFilterOptions: string[];
+  VehicleFilter: {
+    inputPlaceholder: string;
+  };
 }

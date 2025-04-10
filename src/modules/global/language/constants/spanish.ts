@@ -75,4 +75,7 @@ export const SPANISH: LanguageInterface = {
     "Este mes",
     "El mes pasado",
   ],
+  VehicleFilter: {
+    inputPlaceholder: "Buscar vehiculo...",
+  },
 };
