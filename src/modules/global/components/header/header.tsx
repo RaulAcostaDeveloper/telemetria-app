@@ -22,30 +22,31 @@ export const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  // Determine if the component is mounted.
+  // Determinar si el componente está montado.
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Retrieve dates from Redux.
+  // Obtener las fechas desde Redux.
   const { startDate: reduxStartDate, endDate: reduxEndDate } = useSelector(
     (state: RootState) => state.calendar
   );
 
-  // Toggle calendar display.
+  // Alternar la visualización del calendario.
   const [showCalendar, setShowCalendar] = useState(false);
   const toggleContainer = (): void => {
     setShowCalendar((prev) => !prev);
   };
 
+  // Retroceder a la página anterior.
   const goBack = (): void => {
     if (pathname !== "/") {
       router.back();
     }
   };
 
-  // Use default current date if no Redux dates provided.
+  // Usar la fecha actual por defecto si no hay fechas en Redux.
   const defaultISO: string = new Date().toISOString();
   const start: string = reduxStartDate
     ? formatDateTime(reduxStartDate)
@@ -62,10 +63,8 @@ export const Header = () => {
             <button onClick={goBack} className={styles.returnButton}>
               <ArrowBackIcon />
             </button>
-            {/* Render the VehicleFilter (search input with dropdown) */}
-
+            {/* Renderizar el VehicleFilter (input de búsqueda con dropdown) */}
             <div className={styles.inputAndDatesContainer}>
-              {" "}
               <VehicleFilter />
               <button
                 onClick={toggleContainer}
