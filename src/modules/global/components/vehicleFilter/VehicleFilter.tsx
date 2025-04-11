@@ -97,10 +97,7 @@ const VehicleFilter = () => {
                     onClick={() => setShowDropdown(false)}
                     className={styles.linkIcon}
                   >
-                    <button
-                      className={styles.iconButton}
-                      data-title={action.title}
-                    >
+                    <button className={styles.iconButton} title={action.title}>
                       {iconMapping[action.label]}
                     </button>
                   </Link>

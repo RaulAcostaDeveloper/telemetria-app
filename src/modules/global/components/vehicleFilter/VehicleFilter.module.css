@@ -59,20 +59,7 @@
 .buttonsContainer a {
   position: relative;
 }
-.iconButton[data-title]:hover:after {
-  content: attr(data-title);
-  width: 15rem;
-  background: #fff;
-  padding: 5px 12px;
-  border: solid 1px #ddd;
-  position: absolute;
-  font-size: 1rem;
-  color: black;
-  z-index: 3;
-  top: 80%;
-  left: 10%;
-  transform: translateX(-40%);
-}
+
 .iconButton:hover {
   background-color: var(--button-color-1-rgba-10);
 }
