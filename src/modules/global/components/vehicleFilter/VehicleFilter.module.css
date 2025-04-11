@@ -54,3 +54,19 @@
   font-size: 2.2rem;
   cursor: pointer;
 }
+.buttonsContainer a {
+  position: relative;
+}
+.iconButton:hover:after {
+  content: attr(title);
+  background: #fff;
+  padding: 5px 12px;
+  border: solid 1px #ddd;
+  position: absolute;
+  font-size: 1rem;
+  color: black;
+  z-index: 3;
+  top: 80%;
+  left: 10%;
+  transform: translateX(-40%);
+}

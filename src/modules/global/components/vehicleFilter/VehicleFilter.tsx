@@ -16,6 +16,14 @@ type Vehicle = {
 
 const vehicles: Vehicle[] = [
   { name: "Apollo", plates: "JK-958473" },
+  { name: "Apollo", plates: "JK-958473" },
+  { name: "Apollo", plates: "JK-958473" },
+  { name: "Apollo", plates: "JK-958473" },
+  { name: "Apollo", plates: "JK-958473" },
+  { name: "Apollo", plates: "JK-958473" },
+  { name: "Apollo", plates: "JK-958473" },
+  { name: "Apollo", plates: "JK-958473" },
+  { name: "Apollo", plates: "JK-958473" },
   { name: "Zeus", plates: "FR-434349" },
   { name: "Zeus", plates: "FR-434349" },
   { name: "Titan", plates: "GD-082721" },
@@ -24,12 +32,13 @@ const vehicles: Vehicle[] = [
 type Action = {
   label: string;
   routePrefix: string;
+  title: string;
 };
 
 const actions: Action[] = [
-  { label: "management", routePrefix: "management" },
-  { label: "telemetry", routePrefix: "telemetry" },
-  { label: "fuel", routePrefix: "fuel" },
+  { label: "management", routePrefix: "management", title: "ir a gestions" },
+  { label: "telemetry", routePrefix: "telemetry", title: "ir a telemetria" },
+  { label: "fuel", routePrefix: "fuel", title: "ir a reportes de combustible" },
 ];
 
 const iconMapping: { [key: string]: JSX.Element } = {
@@ -76,7 +85,7 @@ const VehicleFilter = () => {
                     href={`/${action.routePrefix}/vehicle/${vehicle.name}`}
                     onClick={() => setShowDropdown(false)}
                   >
-                    <button className={styles.iconButton}>
+                    <button className={styles.iconButton} title={action.title}>
                       {iconMapping[action.label]}
                     </button>
                   </Link>
