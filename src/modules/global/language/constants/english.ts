@@ -77,5 +77,8 @@ export const ENGLISH: LanguageInterface = {
   ],
   VehicleFilter: {
     inputPlaceholder: "Search Vehicle",
+    actionManagementTitle: "Go to management page",
+    actionFuelTitle: "Go to fuel report page",
+    actionTelemetryTitle: "Go to telemetry page",
   },
 };
