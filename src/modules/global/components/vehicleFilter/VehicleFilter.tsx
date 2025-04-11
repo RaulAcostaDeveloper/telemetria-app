@@ -73,7 +73,7 @@ const VehicleFilter = () => {
                 {actions.map((action, idx) => (
                   <Link
                     key={idx}
-                    href={`/${action.routePrefix}/${vehicle.name}`}
+                    href={`/${action.routePrefix}/vehicle/${vehicle.name}`}
                     onClick={() => setShowDropdown(false)}
                   >
                     <button className={styles.iconButton}>
