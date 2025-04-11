@@ -34,11 +34,23 @@ type Action = {
   routePrefix: string;
   title: string;
 };
-
+const LANGUAGE = LanguageSelector();
 const actions: Action[] = [
-  { label: "management", routePrefix: "management", title: "ir a gestions" },
-  { label: "telemetry", routePrefix: "telemetry", title: "ir a telemetria" },
-  { label: "fuel", routePrefix: "fuel", title: "ir a reportes de combustible" },
+  {
+    label: "management",
+    routePrefix: "management",
+    title: `${LANGUAGE.VehicleFilter.actionManagementTitle}`,
+  },
+  {
+    label: "telemetry",
+    routePrefix: "telemetry",
+    title: `${LANGUAGE.VehicleFilter.actionTelemetryTitle}`,
+  },
+  {
+    label: "fuel",
+    routePrefix: "fuel",
+    title: `${LANGUAGE.VehicleFilter.actionFuelTitle}`,
+  },
 ];
 
 const iconMapping: { [key: string]: JSX.Element } = {
@@ -60,7 +72,6 @@ const VehicleFilter = () => {
   const filteredVehicles = vehicles.filter((vehicle) =>
     vehicle.name.toLowerCase().includes(query.toLowerCase())
   );
-  const LANGUAGE = LanguageSelector();
 
   return (
     <div className={styles.container}>
@@ -84,8 +95,12 @@ const VehicleFilter = () => {
                     key={idx}
                     href={`/${action.routePrefix}/vehicle/${vehicle.name}`}
                     onClick={() => setShowDropdown(false)}
+                    className={styles.linkIcon}
                   >
-                    <button className={styles.iconButton} title={action.title}>
+                    <button
+                      className={styles.iconButton}
+                      data-title={action.title}
+                    >
                       {iconMapping[action.label]}
                     </button>
                   </Link>

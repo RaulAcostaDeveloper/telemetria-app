@@ -70,5 +70,8 @@ export interface LanguageInterface {
   fixedDateFilterOptions: string[];
   VehicleFilter: {
     inputPlaceholder: string;
+    actionManagementTitle: string;
+    actionFuelTitle: string;
+    actionTelemetryTitle: string;
   };
 }

@@ -77,5 +77,8 @@ export const SPANISH: LanguageInterface = {
   ],
   VehicleFilter: {
     inputPlaceholder: "Buscar vehiculo...",
+    actionManagementTitle: "Ir a la gestión del vehículo",
+    actionFuelTitle: "Ir al reporte de combustible ",
+    actionTelemetryTitle: "Ir a  pagina telemetría del vehículo",
   },
 };
