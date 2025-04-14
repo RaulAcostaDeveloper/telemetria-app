@@ -11,6 +11,22 @@ export const ENGLISH: LanguageInterface = {
       actionTelemetryTitle: "Go to telemetry report page",
       inputPlaceholder: "Search Vehicle",
     },
+    calendar: {
+      buttonHover: "Open calendar options",
+      datePicker: {
+        buttons: {
+          today: "Today",
+        },
+      },
+      fixedDateFilterOptions: [
+        "Last 7 days",
+        "Last 15 days",
+        "Last 30 days",
+        "Last 90 days",
+        "This month",
+        "Last month",
+      ],
+    },
   },
   menu: {
     titles: {
@@ -73,17 +89,4 @@ export const ENGLISH: LanguageInterface = {
       zones: "Zones",
     },
   },
-  DatePicker: {
-    buttons: {
-      today: "Today",
-    },
-  },
-  fixedDateFilterOptions: [
-    "Last 7 days",
-    "Last 15 days",
-    "Last 30 days",
-    "Last 90 days",
-    "This month",
-    "Last month",
-  ],
 };

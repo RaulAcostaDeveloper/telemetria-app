@@ -2,13 +2,14 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import Calendar from "@/modules/global/components/calendar/Calendar";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
+import Calendar from "@/modules/global/components/calendar/Calendar";
 import HeaderVehicleFilter from "../headerVehicleFilter/headerVehicleFilter";
 import styles from "./header.module.css";
 import { HeaderBackButton } from "../headerBackButton/headerBackButton";
 import { formatDateTime } from "@/modules/global/utils/utils";
+import { LanguageSelector } from "../../language/utils/languageSelector";
 
 interface CalendarState {
   endDate: string | null;
@@ -18,6 +19,8 @@ interface CalendarState {
 interface RootState {
   calendar: CalendarState;
 }
+
+const LANGUAGE = LanguageSelector();
 
 export const Header = () => {
   // Determinar si el componente está montado.
@@ -62,6 +65,7 @@ export const Header = () => {
                 type="button"
                 data-state={showCalendar ? "open" : "closed"}
                 className={styles.dateButton}
+                title={LANGUAGE.header.calendar.buttonHover}
               >
                 <CalendarTodayIcon className={styles.calendarIcon} />
                 <div className={styles.dateContainer}>

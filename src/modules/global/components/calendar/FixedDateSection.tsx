@@ -13,16 +13,16 @@ interface FixedDateSectionProps {
   setSelectedOption: (option: string) => void;
 }
 
+const LANGUAGE = LanguageSelector();
+
+const options = LANGUAGE.header.calendar.fixedDateFilterOptions;
+
 const FixedDateSection: React.FC<FixedDateSectionProps> = ({
   selectedOption,
   setSelectedOption,
 }) => {
   const dispatch = useDispatch();
   const today = new Date();
-
-  const LANGUAGE = LanguageSelector();
-
-  const options = LANGUAGE.fixedDateFilterOptions;
 
   /**
    * Función para manejar la selección de una opción de rango predefinido.
@@ -64,6 +64,7 @@ const FixedDateSection: React.FC<FixedDateSectionProps> = ({
               <button
                 className={styles.invisibleButton}
                 onClick={() => handlePredefinedDate(option)}
+                title={option}
               >
                 {option}
               </button>
