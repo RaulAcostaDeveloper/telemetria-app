@@ -59,7 +59,7 @@ export const SPANISH: LanguageInterface = {
       search: "Buscar",
       searchTitle: "Buscar por la primer columna de la tabla",
       sortItems: "Ordenar elementos por",
-      viewDetail: "View details",
+      viewDetail: "Ver detalles",
     },
     elements: {
       actions: "Acciones",
@@ -72,7 +72,6 @@ export const SPANISH: LanguageInterface = {
       deleteSubString: "Esta acción es permanente y no se puede deshacer.",
     },
   },
-
   auth: {
     principalTitle: "Página de autenticación",
     authForm: {

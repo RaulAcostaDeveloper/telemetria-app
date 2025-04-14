@@ -45,28 +45,28 @@ const columns: columnsTable = [
 
 const data = [
   {
-    zone: "alalalala",
-    profile: "asdmoad",
-    country: "asdasd",
-    state: "asdas",
+    zone: "Principal name",
+    profile: "Perfil name",
+    country: "Country name",
+    state: "Estado ",
   },
   {
-    zone: "alalalala2",
-    profile: "asdmoad",
-    country: "asdasd",
-    state: "asdas",
+    zone: "Principal name 2",
+    profile: "Perfil name 2",
+    country: "Country name 2",
+    state: "Estado 2",
   },
   {
-    zone: "alalalala3",
-    profile: "asdmoad",
-    country: "asdasd",
-    state: "asdas",
+    zone: "Principal name 3",
+    profile: "Perfil name 3",
+    country: "Country name 3",
+    state: "Estado 3",
   },
   {
-    zone: "alalalala4",
-    profile: "asdmoad",
-    country: "asdasd",
-    state: "asdas",
+    zone: "Principal name 4",
+    profile: "Perfil name 4",
+    country: "Country name 4",
+    state: "Estado 4",
   },
 ];
 
