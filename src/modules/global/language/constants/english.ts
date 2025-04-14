@@ -59,7 +59,7 @@ export const ENGLISH: LanguageInterface = {
       search: "Search",
       searchTitle: "Search by the first column of the table",
       sortItems: "Sort items by",
-      viewDetail: "Ver detalles",
+      viewDetail: "View details",
     },
     elements: {
       actions: "Actions",
