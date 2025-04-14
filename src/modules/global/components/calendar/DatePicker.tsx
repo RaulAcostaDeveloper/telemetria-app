@@ -92,7 +92,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
         )}
         <div className={styles.todayButtonContainer}>
           <button onClick={handleGoToToday} className={styles.todayButton}>
-            {LANGUAGE.DatePicker.buttons.today}
+            {LANGUAGE.header.calendar.datePicker.buttons.today}
           </button>
         </div>
       </div>

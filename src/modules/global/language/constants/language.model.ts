@@ -11,6 +11,15 @@ export interface LanguageInterface {
       actionTelemetryTitle: string;
       inputPlaceholder: string;
     };
+    calendar: {
+      buttonHover: string;
+      datePicker: {
+        buttons: {
+          today: string;
+        };
+      };
+      fixedDateFilterOptions: string[];
+    };
   };
   menu: {
     titles: {
@@ -56,6 +65,7 @@ export interface LanguageInterface {
       deleteSubString: string;
     };
   };
+
   auth: {
     principalTitle: string;
     authForm: {
@@ -73,10 +83,4 @@ export interface LanguageInterface {
       zones: string;
     };
   };
-  DatePicker: {
-    buttons: {
-      today: string;
-    };
-  };
-  fixedDateFilterOptions: string[];
 }

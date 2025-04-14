@@ -11,6 +11,22 @@ export const SPANISH: LanguageInterface = {
       actionTelemetryTitle: "Ir al reporte de telemetría",
       inputPlaceholder: "Buscar vehiculo...",
     },
+    calendar: {
+      buttonHover: "Abrir opciones de calendario",
+      datePicker: {
+        buttons: {
+          today: "Hoy",
+        },
+      },
+      fixedDateFilterOptions: [
+        "Últimos 7 días",
+        "Últimos 15 días",
+        "Últimos 30 días",
+        "Últimos 90 días",
+        "Este mes",
+        "El mes pasado",
+      ],
+    },
   },
   menu: {
     titles: {
@@ -56,6 +72,7 @@ export const SPANISH: LanguageInterface = {
       deleteSubString: "Esta acción es permanente y no se puede deshacer.",
     },
   },
+
   auth: {
     principalTitle: "Página de autenticación",
     authForm: {
@@ -73,17 +90,4 @@ export const SPANISH: LanguageInterface = {
       zones: "Zonas",
     },
   },
-  DatePicker: {
-    buttons: {
-      today: "Hoy",
-    },
-  },
-  fixedDateFilterOptions: [
-    "Últimos 7 días",
-    "Últimos 15 días",
-    "Últimos 30 días",
-    "Últimos 90 días",
-    "Este mes",
-    "El mes pasado",
-  ],
 };
