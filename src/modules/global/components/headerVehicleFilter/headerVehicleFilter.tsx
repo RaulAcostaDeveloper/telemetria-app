@@ -1,13 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+
 import {
   LocalGasStation as LocalGasStationIcon,
   ManageAccounts as ManageAccountsIcon,
   Speed as SpeedIcon,
 } from "@mui/icons-material";
+
+import styles from "./headerVehicleFilter.module.css";
 import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
-import styles from "./VehicleFilter.module.css";
 
 type Vehicle = {
   name: string;
@@ -34,22 +36,23 @@ type Action = {
   routePrefix: string;
   title: string;
 };
+
 const LANGUAGE = LanguageSelector();
 const actions: Action[] = [
   {
     label: "management",
     routePrefix: "management",
-    title: `${LANGUAGE.VehicleFilter.actionManagementTitle}`,
+    title: `${LANGUAGE.header.vehicleFilter.actionManagementTitle}`,
   },
   {
     label: "telemetry",
     routePrefix: "telemetry",
-    title: `${LANGUAGE.VehicleFilter.actionTelemetryTitle}`,
+    title: `${LANGUAGE.header.vehicleFilter.actionTelemetryTitle}`,
   },
   {
     label: "fuel",
     routePrefix: "fuel",
-    title: `${LANGUAGE.VehicleFilter.actionFuelTitle}`,
+    title: `${LANGUAGE.header.vehicleFilter.actionFuelTitle}`,
   },
 ];
 
@@ -59,7 +62,7 @@ const iconMapping: { [key: string]: JSX.Element } = {
   fuel: <LocalGasStationIcon />,
 };
 
-const VehicleFilter = () => {
+const HeaderVehicleFilter = () => {
   const [query, setQuery] = useState<string>("");
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
@@ -79,8 +82,9 @@ const VehicleFilter = () => {
         type="text"
         value={query}
         onChange={handleInputChange}
-        placeholder={LANGUAGE.VehicleFilter.inputPlaceholder}
+        placeholder={LANGUAGE.header.vehicleFilter.inputPlaceholder}
         className={styles.input}
+        title={LANGUAGE.header.vehicleFilter.inputPlaceholder}
       />
       {showDropdown && query && filteredVehicles.length > 0 && (
         <ul className={styles.dropdown}>
@@ -111,4 +115,4 @@ const VehicleFilter = () => {
   );
 };
 
-export default VehicleFilter;
+export default HeaderVehicleFilter;

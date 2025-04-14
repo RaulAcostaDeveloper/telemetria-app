@@ -5,6 +5,12 @@ export interface LanguageInterface {
     backButton: {
       hover: string;
     };
+    vehicleFilter: {
+      actionFuelTitle: string;
+      actionManagementTitle: string;
+      actionTelemetryTitle: string;
+      inputPlaceholder: string;
+    };
   };
   menu: {
     titles: {
@@ -73,10 +79,4 @@ export interface LanguageInterface {
     };
   };
   fixedDateFilterOptions: string[];
-  VehicleFilter: {
-    inputPlaceholder: string;
-    actionManagementTitle: string;
-    actionFuelTitle: string;
-    actionTelemetryTitle: string;
-  };
 }

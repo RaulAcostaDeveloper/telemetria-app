@@ -5,6 +5,12 @@ export const ENGLISH: LanguageInterface = {
     backButton: {
       hover: "Go back",
     },
+    vehicleFilter: {
+      actionFuelTitle: "Go to fuel report page",
+      actionManagementTitle: "Go to management page",
+      actionTelemetryTitle: "Go to telemetry report page",
+      inputPlaceholder: "Search Vehicle",
+    },
   },
   menu: {
     titles: {
@@ -80,10 +86,4 @@ export const ENGLISH: LanguageInterface = {
     "This month",
     "Last month",
   ],
-  VehicleFilter: {
-    inputPlaceholder: "Search Vehicle",
-    actionManagementTitle: "Go to management page",
-    actionFuelTitle: "Go to fuel report page",
-    actionTelemetryTitle: "Go to telemetry page",
-  },
 };
