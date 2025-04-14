@@ -1,6 +1,11 @@
 import { LanguageInterface } from "./language.model";
 
 export const SPANISH: LanguageInterface = {
+  header: {
+    backButton: {
+      hover: "Regresar",
+    },
+  },
   menu: {
     titles: {
       close: "Cerrar menú",

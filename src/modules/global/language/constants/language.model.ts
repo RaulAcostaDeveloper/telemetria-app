@@ -1,6 +1,11 @@
 // Asegura que haya concordancia entre idiomas
 
 export interface LanguageInterface {
+  header: {
+    backButton: {
+      hover: string;
+    };
+  };
   menu: {
     titles: {
       close: string;

@@ -1,17 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+
 import Calendar from "@/modules/global/components/calendar/Calendar";
-import styles from "./header.module.css";
-import { formatDateTime } from "@/modules/global/utils/utils";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+
 import VehicleFilter from "@/modules/global/components/vehicleFilter/VehicleFilter";
+import styles from "./header.module.css";
+import { HeaderBackButton } from "../headerBackButton/headerBackButton";
+import { formatDateTime } from "@/modules/global/utils/utils";
 
 interface CalendarState {
-  startDate: string | null;
   endDate: string | null;
+  startDate: string | null;
 }
 
 interface RootState {
@@ -19,11 +20,11 @@ interface RootState {
 }
 
 export const Header = () => {
-  const router = useRouter();
-  const pathname = usePathname();
-
   // Determinar si el componente está montado.
   const [mounted, setMounted] = useState(false);
+  // Alternar la visualización del calendario.
+  const [showCalendar, setShowCalendar] = useState(false);
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -33,17 +34,8 @@ export const Header = () => {
     (state: RootState) => state.calendar
   );
 
-  // Alternar la visualización del calendario.
-  const [showCalendar, setShowCalendar] = useState(false);
   const toggleContainer = (): void => {
     setShowCalendar((prev) => !prev);
-  };
-
-  // Retroceder a la página anterior.
-  const goBack = (): void => {
-    if (pathname !== "/") {
-      router.back();
-    }
   };
 
   // Usar la fecha actual por defecto si no hay fechas en Redux.
@@ -60,9 +52,7 @@ export const Header = () => {
       {mounted && (
         <>
           <nav className={styles.navBar}>
-            <button onClick={goBack} className={styles.returnButton}>
-              <ArrowBackIcon />
-            </button>
+            <HeaderBackButton />
             {/* Renderizar el VehicleFilter (input de búsqueda con dropdown) */}
             <div className={styles.inputAndDatesContainer}>
               <VehicleFilter />
