@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Calendar from "@/modules/global/components/calendar/Calendar";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
-import VehicleFilter from "@/modules/global/components/vehicleFilter/VehicleFilter";
+import HeaderVehicleFilter from "../headerVehicleFilter/headerVehicleFilter";
 import styles from "./header.module.css";
 import { HeaderBackButton } from "../headerBackButton/headerBackButton";
 import { formatDateTime } from "@/modules/global/utils/utils";
@@ -55,7 +55,7 @@ export const Header = () => {
             <HeaderBackButton />
             {/* Renderizar el VehicleFilter (input de búsqueda con dropdown) */}
             <div className={styles.inputAndDatesContainer}>
-              <VehicleFilter />
+              <HeaderVehicleFilter />
               <button
                 onClick={toggleContainer}
                 id="date"

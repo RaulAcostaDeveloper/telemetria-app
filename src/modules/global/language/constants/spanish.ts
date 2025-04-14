@@ -5,6 +5,12 @@ export const SPANISH: LanguageInterface = {
     backButton: {
       hover: "Regresar",
     },
+    vehicleFilter: {
+      actionFuelTitle: "Ir al reporte de combustible",
+      actionManagementTitle: "Ir a la gestión del vehículo",
+      actionTelemetryTitle: "Ir al reporte de telemetría",
+      inputPlaceholder: "Buscar vehiculo...",
+    },
   },
   menu: {
     titles: {
@@ -80,10 +86,4 @@ export const SPANISH: LanguageInterface = {
     "Este mes",
     "El mes pasado",
   ],
-  VehicleFilter: {
-    inputPlaceholder: "Buscar vehiculo...",
-    actionManagementTitle: "Ir a la gestión del vehículo",
-    actionFuelTitle: "Ir al reporte de combustible ",
-    actionTelemetryTitle: "Ir a  pagina telemetría del vehículo",
-  },
 };
