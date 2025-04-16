@@ -1,6 +1,26 @@
 // Asegura que haya concordancia entre idiomas
 
 export interface LanguageInterface {
+  header: {
+    backButton: {
+      hover: string;
+    };
+    vehicleFilter: {
+      actionFuelTitle: string;
+      actionManagementTitle: string;
+      actionTelemetryTitle: string;
+      inputPlaceholder: string;
+    };
+    calendar: {
+      buttonHover: string;
+      datePicker: {
+        buttons: {
+          today: string;
+        };
+      };
+      fixedDateFilterOptions: string[];
+    };
+  };
   menu: {
     titles: {
       close: string;
@@ -45,6 +65,7 @@ export interface LanguageInterface {
       deleteSubString: string;
     };
   };
+
   auth: {
     principalTitle: string;
     authForm: {
@@ -61,17 +82,5 @@ export interface LanguageInterface {
       unitys: string;
       zones: string;
     };
-  };
-  DatePicker: {
-    buttons: {
-      today: string;
-    };
-  };
-  fixedDateFilterOptions: string[];
-  VehicleFilter: {
-    inputPlaceholder: string;
-    actionManagementTitle: string;
-    actionFuelTitle: string;
-    actionTelemetryTitle: string;
   };
 }

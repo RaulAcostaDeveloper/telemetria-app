@@ -1,6 +1,33 @@
 import { LanguageInterface } from "./language.model";
 
 export const SPANISH: LanguageInterface = {
+  header: {
+    backButton: {
+      hover: "Regresar",
+    },
+    vehicleFilter: {
+      actionFuelTitle: "Ir al reporte de combustible",
+      actionManagementTitle: "Ir a la gestión del vehículo",
+      actionTelemetryTitle: "Ir al reporte de telemetría",
+      inputPlaceholder: "Buscar vehiculo...",
+    },
+    calendar: {
+      buttonHover: "Abrir opciones de calendario",
+      datePicker: {
+        buttons: {
+          today: "Hoy",
+        },
+      },
+      fixedDateFilterOptions: [
+        "Últimos 7 días",
+        "Últimos 15 días",
+        "Últimos 30 días",
+        "Últimos 90 días",
+        "Este mes",
+        "El mes pasado",
+      ],
+    },
+  },
   menu: {
     titles: {
       close: "Cerrar menú",
@@ -32,7 +59,7 @@ export const SPANISH: LanguageInterface = {
       search: "Buscar",
       searchTitle: "Buscar por la primer columna de la tabla",
       sortItems: "Ordenar elementos por",
-      viewDetail: "View details",
+      viewDetail: "Ver detalles",
     },
     elements: {
       actions: "Acciones",
@@ -61,24 +88,5 @@ export const SPANISH: LanguageInterface = {
       unitys: "Unidades",
       zones: "Zonas",
     },
-  },
-  DatePicker: {
-    buttons: {
-      today: "Hoy",
-    },
-  },
-  fixedDateFilterOptions: [
-    "Últimos 7 días",
-    "Últimos 15 días",
-    "Últimos 30 días",
-    "Últimos 90 días",
-    "Este mes",
-    "El mes pasado",
-  ],
-  VehicleFilter: {
-    inputPlaceholder: "Buscar vehiculo...",
-    actionManagementTitle: "Ir a la gestión del vehículo",
-    actionFuelTitle: "Ir al reporte de combustible ",
-    actionTelemetryTitle: "Ir a  pagina telemetría del vehículo",
   },
 };
