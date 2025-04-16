@@ -1,6 +1,33 @@
 import { LanguageInterface } from "./language.model";
 
 export const ENGLISH: LanguageInterface = {
+  header: {
+    backButton: {
+      hover: "Go back",
+    },
+    vehicleFilter: {
+      actionFuelTitle: "Go to fuel report page",
+      actionManagementTitle: "Go to management page",
+      actionTelemetryTitle: "Go to telemetry report page",
+      inputPlaceholder: "Search Vehicle",
+    },
+    calendar: {
+      buttonHover: "Open calendar options",
+      datePicker: {
+        buttons: {
+          today: "Today",
+        },
+      },
+      fixedDateFilterOptions: [
+        "Last 7 days",
+        "Last 15 days",
+        "Last 30 days",
+        "Last 90 days",
+        "This month",
+        "Last month",
+      ],
+    },
+  },
   menu: {
     titles: {
       close: "Close menu",
@@ -32,7 +59,7 @@ export const ENGLISH: LanguageInterface = {
       search: "Search",
       searchTitle: "Search by the first column of the table",
       sortItems: "Sort items by",
-      viewDetail: "Ver detalles",
+      viewDetail: "View details",
     },
     elements: {
       actions: "Actions",
@@ -61,24 +88,5 @@ export const ENGLISH: LanguageInterface = {
       unitys: "Unitys",
       zones: "Zones",
     },
-  },
-  DatePicker: {
-    buttons: {
-      today: "Today",
-    },
-  },
-  fixedDateFilterOptions: [
-    "Last 7 days",
-    "Last 15 days",
-    "Last 30 days",
-    "Last 90 days",
-    "This month",
-    "Last month",
-  ],
-  VehicleFilter: {
-    inputPlaceholder: "Search Vehicle",
-    actionManagementTitle: "Go to management page",
-    actionFuelTitle: "Go to fuel report page",
-    actionTelemetryTitle: "Go to telemetry page",
   },
 };

@@ -1,0 +1,21 @@
+.returnButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.returnButton:hover {
+  background-color: var(--company-color-4);
+}
+
+.returnButton svg {
+  font-size: 18px;
+}

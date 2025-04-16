@@ -1,18 +1,19 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store";
-import { setDateRange, setFixedFilter } from "@/slices/calendarSlice";
-import FixedDateSection from "./FixedDateSection";
+
 import DatePicker from "./DatePicker";
+import FixedDateSection from "./FixedDateSection";
 import styles from "./Calendar.module.css";
 import {
-  toLocalISOString,
+  formatDate,
   handleHourKeyDown,
   handleMinuteSecondKeyDown,
-  formatDate,
   isPast90Days,
+  toLocalISOString,
 } from "@/modules/global/utils/utils";
+import { RootState } from "@/store";
+import { setDateRange, setFixedFilter } from "@/slices/calendarSlice";
 
 interface CalendarProps {
   // Función para mostrar u ocultar el calendario.
@@ -22,12 +23,10 @@ interface CalendarProps {
 const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   const dispatch = useDispatch();
   const today = new Date();
+  const calendarRef = useRef<HTMLDivElement>(null);
 
   // Para saber si el componente ya está cargado
   const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Estados para manejar fechas y la visibilidad de los calendarios
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -54,42 +53,9 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   // Obtenemos el estado global del calendario desde Redux
   const calendarState = useSelector((state: RootState) => state.calendar);
 
-  // **************** VALIDAR INPUTS DE TIEMPO ****************
-  /**
-   * Valida y ajusta lo que el usuario ingresa en los inputs de tiempo.
-   * Se queda solo con números, limita a 2 dígitos y fuerza que el valor esté en el rango.
-   * Si el usuario escribe "00", se deja ese valor.
-   *
-   * @param e Evento del input.
-   * @param setter Función para actualizar el estado.
-   * @param min Valor mínimo (ej., 1 para horas o 0 para minutos/segundos).
-   * @param max Valor máximo (ej., 12 para horas o 59 para minutos/segundos).
-   */
-  const handleTimeInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    setter: (value: string) => void,
-    min: number,
-    max: number
-  ) => {
-    let rawValue = e.target.value.replace(/\D/g, ""); // Quita cualquier carácter no numérico
-    if (rawValue.length > 2) {
-      rawValue = rawValue.slice(0, 2); // Limita a 2 dígitos
-    }
-    // Si se escribió exactamente "00", lo deja así.
-    if (rawValue === "00") {
-      setter("00");
-      return;
-    }
-    let num = parseInt(rawValue, 10);
-    if (isNaN(num)) {
-      setter("00");
-    } else {
-      if (num < min) num = min;
-      if (num > max) num = max;
-      setter(num.toString().padStart(2, "0"));
-    }
-  };
-  // **********************************************************
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Sincroniza la hora de inicio con la fecha global de Redux
   useEffect(() => {
@@ -148,6 +114,60 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       setEndMeridiem(today.getHours() >= 12 ? "PM" : "AM");
     }
   }, [showEndDateCalendar, calendarState.endDate, today]);
+
+  // Detecta clics fuera del calendario (excepto en el botón con id "date") para cerrarlo.
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        calendarRef.current &&
+        !calendarRef.current.contains(event.target as Node) &&
+        !(event.target as HTMLElement).closest("#date")
+      ) {
+        toggleContainer();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [toggleContainer]);
+
+  // **************** VALIDAR INPUTS DE TIEMPO ****************
+  /**
+   * Valida y ajusta lo que el usuario ingresa en los inputs de tiempo.
+   * Se queda solo con números, limita a 2 dígitos y fuerza que el valor esté en el rango.
+   * Si el usuario escribe "00", se deja ese valor.
+   *
+   * @param e Evento del input.
+   * @param setter Función para actualizar el estado.
+   * @param min Valor mínimo (ej., 1 para horas o 0 para minutos/segundos).
+   * @param max Valor máximo (ej., 12 para horas o 59 para minutos/segundos).
+   */
+  const handleTimeInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setter: (value: string) => void,
+    min: number,
+    max: number
+  ) => {
+    let rawValue = e.target.value.replace(/\D/g, ""); // Quita cualquier carácter no numérico
+    if (rawValue.length > 2) {
+      rawValue = rawValue.slice(0, 2); // Limita a 2 dígitos
+    }
+    // Si se escribió exactamente "00", lo deja así.
+    if (rawValue === "00") {
+      setter("00");
+      return;
+    }
+    let num = parseInt(rawValue, 10);
+    if (isNaN(num)) {
+      setter("00");
+    } else {
+      if (num < min) num = min;
+      if (num > max) num = max;
+      setter(num.toString().padStart(2, "0"));
+    }
+  };
+  // **********************************************************
 
   // Función para usar isPast90Days con la fecha de hoy
   const checkPast90Days = (date: Date) => isPast90Days(date, today);
@@ -259,28 +279,11 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
     const isoStart = toLocalISOString(finalStart);
     const isoEnd = toLocalISOString(finalEnd);
+
     dispatch(setDateRange({ startDate: isoStart, endDate: isoEnd }));
     dispatch(setFixedFilter(""));
     setErrorMessage("");
   };
-
-  // Detecta clics fuera del calendario (excepto en el botón con id "date") para cerrarlo.
-  const calendarRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        calendarRef.current &&
-        !calendarRef.current.contains(event.target as Node) &&
-        !(event.target as HTMLElement).closest("#date")
-      ) {
-        toggleContainer();
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [toggleContainer]);
 
   if (!mounted) {
     return null;
