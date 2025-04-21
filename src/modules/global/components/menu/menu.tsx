@@ -1,62 +1,29 @@
-"use client";
-import { useEffect, useState } from "react";
-
 import styles from "./menu.module.css";
-import {
-  localStorageGetItem,
-  localStorageSetItem,
-} from "../../localStorage/utils/storageService";
-import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
-import { MenuHeader } from "../menuHeader/menuHeader";
 import { MenuContent } from "../menuContent/menuContent";
+import { MenuHeader } from "../menuHeader/menuHeader";
 
-export const Menu = () => {
-  const [isOpen, setIsOpen] = useState<boolean | null>(null);
+interface Props {
+  isMenuOpen: boolean | null;
+  setIsMenuOpen: (isOpen: boolean | null) => void;
+}
 
-  useEffect(() => {
-    const defaultValue: boolean = true;
-    const storedValue: boolean | null = localStorageGetItem(
-      STORAGE_KEYS.MENU_OPEN
-    );
-    setIsOpen(storedValue !== null ? storedValue : defaultValue);
-  }, []);
-
-  useEffect(() => {
-    if (isOpen !== null) {
-      localStorageSetItem(STORAGE_KEYS.MENU_OPEN, isOpen);
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
-    // Menu closed en resolución movile
-    const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setTimeout(() => {
-          setIsOpen(false);
-        }, 10);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+export const Menu = ({ isMenuOpen, setIsMenuOpen }: Props) => {
   return (
     <>
       <div
         className={`${styles.menu} ${
-          isOpen === null || isOpen === true
+          isMenuOpen === null || isMenuOpen === true
             ? `${styles.open}`
             : `${styles.close}`
         }`}
       >
-        <MenuHeader isOpen={isOpen} setIsOpen={setIsOpen} />
-        <MenuContent isOpen={isOpen} />
+        <MenuHeader isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
+        <MenuContent isOpen={isMenuOpen} />
       </div>
 
       <div
         className={`${
-          isOpen === null || isOpen === true
+          isMenuOpen === null || isMenuOpen === true
             ? `${styles.ghostMenuOpen}`
             : `${styles.ghostMenuClosed}`
         }`}

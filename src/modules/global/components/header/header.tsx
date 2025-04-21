@@ -18,9 +18,13 @@ interface RootState {
   calendar: CalendarState;
 }
 
+interface Props {
+  isMenuOpen: boolean | null;
+}
+
 const LANGUAGE = LanguageSelector();
 
-export const Header = () => {
+export const Header = ({ isMenuOpen }: Props) => {
   // Determinar si el componente está montado.
   const [mounted, setMounted] = useState(false);
   // Alternar la visualización del calendario.
@@ -49,7 +53,13 @@ export const Header = () => {
     : formatDateTime(defaultISO);
 
   return (
-    <header className={styles.header}>
+    <header
+      className={styles.header}
+      style={{
+        width: isMenuOpen !== true ? "calc(100% - 80px)" : "calc(100% - 250px)",
+        transition: isMenuOpen !== true ? "0.9s" : "1.1s",
+      }}
+    >
       {mounted && (
         <>
           <nav className={styles.navBar}>
