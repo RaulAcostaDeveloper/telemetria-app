@@ -7,18 +7,22 @@
 }
 
 .ghostMenuOpen {
+  height: 100vh;
   transition: 1.1s;
-  width: 258px;
+  width: 250px;
+  flex-shrink: 0;
 }
 
 .ghostMenuClosed {
+  height: 100vh;
   transition: 0.9s;
   width: 80px;
+  flex-shrink: 0;
 }
 
 .open {
   transition: 1s;
-  width: 228px;
+  width: 250px;
 }
 
 .close {
