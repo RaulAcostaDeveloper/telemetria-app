@@ -7,7 +7,6 @@
 /* Renderizado del header y del contenido de la página */
 .rightContent {
   width: 100%;
-  z-index: 99999999999999;
 
   /* Evita que se desborde el contenido en la página */
   overflow-x: auto;
