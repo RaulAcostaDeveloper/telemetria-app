@@ -1,9 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
 import { ArrowBack, ArrowForward, CalendarToday } from "@mui/icons-material";
-
 import Calendar from "@/modules/global/components/calendar/Calendar";
 import HeaderVehicleFilter from "../headerVehicleFilter/headerVehicleFilter";
 import styles from "./header.module.css";
