@@ -28,13 +28,15 @@
 .dateButton {
   display: inline-flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
   white-space: nowrap;
   border-radius: 0.26rem;
   font-size: 0.7rem;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   border: 1px solid #d1d5db;
   background-color: #ffffff;
-  padding: 0.85rem 1.5rem;
+  padding: 0 1.5rem;
   justify-content: flex-start;
   text-align: left;
   font-weight: 400;
@@ -52,9 +54,15 @@
 }
 
 .startDate {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
 }
 
 .endDate {
   font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
 }
