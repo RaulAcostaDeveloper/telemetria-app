@@ -1,14 +1,18 @@
 .header {
-  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  /* Pendiente, que el width responda a el menú open y closed */
   width: 100%;
-  min-height: 10vh;
+
+  display: block;
   background-color: var(--company-color-6);
   color: white;
 }
 
 .navBar {
   display: flex;
-  min-height: 10vh;
+  height: 70px;
   justify-content: space-between;
   align-items: center;
   width: 90%;

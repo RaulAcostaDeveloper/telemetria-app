@@ -1,8 +1,19 @@
 .menu {
+  position: fixed;
   background-color: var(--company-color-6);
   display: flex;
   flex-direction: column;
   height: 100vh;
+}
+
+.ghostMenuOpen {
+  transition: 1.1s;
+  width: 258px;
+}
+
+.ghostMenuClosed {
+  transition: 0.9s;
+  width: 80px;
 }
 
 .open {

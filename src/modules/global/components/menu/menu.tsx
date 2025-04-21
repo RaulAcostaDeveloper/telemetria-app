@@ -42,15 +42,27 @@ export const Menu = () => {
   }, []);
 
   return (
-    <div
-      className={`${styles.menu} ${
-        isOpen === null || isOpen === true
-          ? `${styles.open}`
-          : `${styles.close}`
-      }`}
-    >
-      <MenuHeader isOpen={isOpen} setIsOpen={setIsOpen} />
-      <MenuContent isOpen={isOpen} />
-    </div>
+    <>
+      <div
+        className={`${styles.menu} ${
+          isOpen === null || isOpen === true
+            ? `${styles.open}`
+            : `${styles.close}`
+        }`}
+      >
+        <MenuHeader isOpen={isOpen} setIsOpen={setIsOpen} />
+        <MenuContent isOpen={isOpen} />
+      </div>
+
+      <div
+        className={`${
+          isOpen === null || isOpen === true
+            ? `${styles.ghostMenuOpen}`
+            : `${styles.ghostMenuClosed}`
+        }`}
+      >
+        {/* Ghost menu to fix the space */}
+      </div>
+    </>
   );
 };
