@@ -2,7 +2,6 @@
 .mainWrapper {
   display: flex;
   align-items: flex-start;
-  width: 100%;
 }
 
 /* Renderizado del header y del contenido de la página */
