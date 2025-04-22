@@ -320,10 +320,12 @@
   width: 100%;
   border: none;
   background: transparent;
-  font: inherit;
+  font-size: 1.1rem;
   text-align: center;
 }
-
+.amPmSelect option {
+  font-size: 1rem;
+}
 .amPmButton {
   display: flex;
   height: 3.2rem;
