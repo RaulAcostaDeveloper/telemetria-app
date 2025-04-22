@@ -21,7 +21,7 @@ export const TableDataContent = ({
   showView,
 }: Props) => {
   return (
-    <>
+    <div className={styles.dataContent}>
       {data.map((dataObject, index) => (
         <div key={index} className={styles.dataObject}>
           {/* Datos de la tabla por columna */}
@@ -50,6 +50,6 @@ export const TableDataContent = ({
           )}
         </div>
       ))}
-    </>
+    </div>
   );
 };

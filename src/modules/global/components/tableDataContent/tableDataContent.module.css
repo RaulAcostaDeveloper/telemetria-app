@@ -1,3 +1,8 @@
+.dataContent {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
 .dataObject {
   display: flex;
   font-size: 2rem;
