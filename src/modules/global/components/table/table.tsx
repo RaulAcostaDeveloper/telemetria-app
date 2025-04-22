@@ -41,6 +41,20 @@ const columns: columnsTable = [
     orderColumn: true,
     showTotal: true,
   },
+  {
+    columnName: "Estado",
+    defaultSpace: 2,
+    filterOptions: true,
+    orderColumn: true,
+    showTotal: true,
+  },
+  {
+    columnName: "Estado",
+    defaultSpace: 2,
+    filterOptions: true,
+    orderColumn: true,
+    showTotal: true,
+  },
 ];
 
 const data = [
@@ -55,6 +69,7 @@ const data = [
     profile: "Perfil name 2",
     country: "Country name 2",
     state: "Estado 2",
+    statee: "Estado 2",
   },
   {
     zone: "Principal name 3",
@@ -129,7 +144,7 @@ const data = [
     state: "Estado 4",
   },
   {
-    zone: "Principal name 4",
+    zone: "Principal name 2",
     profile: "Perfil name 4",
     country: "Country name 4",
     state: "Estado 4",
