@@ -233,7 +233,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
    * Si faltan fechas, muestra un error en el DatePicker.
    * Después, guarda el rango en Redux en formato ISO y limpia el filtro.
    */
-  const saveDate = () => {
+  const saveDate = (): boolean => {
     let start = startDate;
     let end = endDate;
 
@@ -243,7 +243,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
         end = new Date(calendarState.endDate);
       } else {
         setErrorMessage("Por favor, selecciona ambas fechas: inicio y fin.");
-        return;
+        return false;
       }
     }
 
@@ -273,16 +273,26 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       parseInt(endSecond, 10)
     );
 
-    const finalStart =
-      adjustedStart <= adjustedEnd ? adjustedStart : adjustedEnd;
-    const finalEnd = adjustedStart > adjustedEnd ? adjustedStart : adjustedEnd;
+    // Valida que la fecha de inicio no sea posterior a la de fin
+    if (adjustedStart > adjustedEnd) {
+      setErrorMessage(
+        "La fecha de inicio debe ser anterior o igual a la fecha de fin."
+      );
+      console.log("rango de fechas invalida");
+      return false; // ← Se retorna false al fallar la validación
+    }
+
+    const finalStart = adjustedStart;
+    const finalEnd = adjustedEnd;
 
     const isoStart = toLocalISOString(finalStart);
     const isoEnd = toLocalISOString(finalEnd);
 
     dispatch(setDateRange({ startDate: isoStart, endDate: isoEnd }));
     dispatch(setFixedFilter(""));
+
     setErrorMessage("");
+    return true;
   };
 
   if (!mounted) {
@@ -339,6 +349,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
         setSelectedOption={(option: string) => dispatch(setFixedFilter(option))}
       />
       <div className={styles.personalizedDate}>
+        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
         <p className={styles.reportPeriod}>Periodo de reportes</p>
         <div className={styles.isCustomCalendarContainer}>
           <label className={styles.containerLabel}>Desde:</label>
@@ -504,12 +515,13 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
         </div>
         <div className={styles.selectPeriodButtonsContainer}>
           <button
-            onClick={() => {
-              saveDate();
-              toggleContainer();
-            }}
             data-testid="save-button"
             className={styles.selectPeriodSaveButton}
+            onClick={() => {
+              if (saveDate()) {
+                toggleContainer(); // sólo cierra cuando saveDate() devuelve true, haciendo que se muestre el mensaje de error.
+              }
+            }}
           >
             Aceptar
           </button>
