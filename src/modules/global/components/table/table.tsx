@@ -16,6 +16,8 @@ interface Props {
   showEdit?: boolean;
   showView?: boolean;
   title?: string;
+  viewIdKey?: string;
+  viewPath?: string;
 }
 
 // Columnas y su configuración
@@ -24,34 +26,22 @@ const columns: columnsTable = [
     columnName: "Zona",
     defaultSpace: 3,
     orderColumn: true,
-    filterOptions: true,
   },
   {
     columnName: "Perfil",
     defaultSpace: 2,
     orderColumn: true,
     filterOptions: true,
-    showTotal: true,
   },
-  { columnName: "País", defaultSpace: 2 },
   {
-    columnName: "Estado",
+    columnName: "País",
     defaultSpace: 2,
-    filterOptions: true,
     orderColumn: true,
-    showTotal: true,
+    filterOptions: true,
   },
   {
-    columnName: "Estado",
+    columnName: "Id",
     defaultSpace: 2,
-    filterOptions: true,
-    orderColumn: true,
-    showTotal: true,
-  },
-  {
-    columnName: "Estado",
-    defaultSpace: 2,
-    filterOptions: true,
     orderColumn: true,
     showTotal: true,
   },
@@ -62,92 +52,14 @@ const data = [
     zone: "Principal name",
     profile: "Perfil name",
     country: "Country name",
-    state: "Estado ",
+    idVehicle: "412",
   },
   {
     zone: "Principal name 2",
     profile: "Perfil name 2",
     country: "Country name 2",
-    state: "Estado 2",
+    idVehicle: "521",
     statee: "Estado 2",
-  },
-  {
-    zone: "Principal name 3",
-    profile: "Perfil name 3",
-    country: "Country name 3",
-    state: "Estado 3",
-  },
-  {
-    zone: "Principal name 4",
-    profile: "Perfil name 4",
-    country: "Country name 4",
-    state: "Estado 4",
-  },
-  {
-    zone: "Principal name 4",
-    profile: "Perfil name 4",
-    country: "Country name 4",
-    state: "Estado 4",
-  },
-  {
-    zone: "Principal name 4",
-    profile: "Perfil name 4",
-    country: "Country name 4",
-    state: "Estado 4",
-  },
-  {
-    zone: "Principal name 4",
-    profile: "Perfil name 4",
-    country: "Country name 4",
-    state: "Estado 4",
-  },
-  {
-    zone: "Principal name 4",
-    profile: "Perfil name 4",
-    country: "Country name 4",
-    state: "Estado 4",
-  },
-  {
-    zone: "Principal name 4",
-    profile: "Perfil name 4",
-    country: "Country name 4",
-    state: "Estado 4",
-  },
-  {
-    zone: "Principal name 4",
-    profile: "Perfil name 4",
-    country: "Country name 4",
-    state: "Estado 4",
-  },
-  {
-    zone: "Principal name 4",
-    profile: "Perfil name 4",
-    country: "Country name 4",
-    state: "Estado 4",
-  },
-  {
-    zone: "Principal name 4",
-    profile: "Perfil name 4",
-    country: "Country name 4",
-    state: "Estado 4",
-  },
-  {
-    zone: "Principal name 4",
-    profile: "Perfil name 4",
-    country: "Country name 4",
-    state: "Estado 4",
-  },
-  {
-    zone: "Principal name 4",
-    profile: "Perfil name 4",
-    country: "Country name 4",
-    state: "Estado 4",
-  },
-  {
-    zone: "Principal name 2",
-    profile: "Perfil name 4",
-    country: "Country name 4",
-    state: "Estado 4",
   },
 ];
 
@@ -157,6 +69,8 @@ export const Table = ({
   showEdit,
   showView,
   title,
+  viewPath,
+  viewIdKey,
 }: Props) => {
   return (
     <div className={`${styles.container}`}>
@@ -187,6 +101,8 @@ export const Table = ({
               showDelete={showDelete}
               showEdit={showEdit}
               showView={showView}
+              viewPath={viewPath}
+              viewIdKey={viewIdKey}
             />
           </div>
         </div>

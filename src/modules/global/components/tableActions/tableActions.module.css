@@ -7,6 +7,8 @@
 }
 
 .button {
+  text-decoration: none;
+  color: black;
   margin: 0 4px;
   cursor: pointer;
   background-color: transparent;

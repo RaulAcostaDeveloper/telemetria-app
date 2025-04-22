@@ -10,6 +10,8 @@ interface Props {
   showDelete?: boolean;
   showEdit?: boolean;
   showView?: boolean;
+  viewIdKey?: string;
+  viewPath?: string;
 }
 
 export const TableDataContent = ({
@@ -19,6 +21,8 @@ export const TableDataContent = ({
   showDelete,
   showEdit,
   showView,
+  viewIdKey,
+  viewPath,
 }: Props) => {
   return (
     <div className={styles.dataContent}>
@@ -45,6 +49,7 @@ export const TableDataContent = ({
               showDelete={showDelete}
               showEdit={showEdit}
               showView={showView}
+              viewPath={`${viewPath}${dataObject[viewIdKey ?? ""]}`}
             />
           )}
         </div>
