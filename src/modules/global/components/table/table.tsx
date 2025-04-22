@@ -68,6 +68,72 @@ const data = [
     country: "Country name 4",
     state: "Estado 4",
   },
+  {
+    zone: "Principal name 4",
+    profile: "Perfil name 4",
+    country: "Country name 4",
+    state: "Estado 4",
+  },
+  {
+    zone: "Principal name 4",
+    profile: "Perfil name 4",
+    country: "Country name 4",
+    state: "Estado 4",
+  },
+  {
+    zone: "Principal name 4",
+    profile: "Perfil name 4",
+    country: "Country name 4",
+    state: "Estado 4",
+  },
+  {
+    zone: "Principal name 4",
+    profile: "Perfil name 4",
+    country: "Country name 4",
+    state: "Estado 4",
+  },
+  {
+    zone: "Principal name 4",
+    profile: "Perfil name 4",
+    country: "Country name 4",
+    state: "Estado 4",
+  },
+  {
+    zone: "Principal name 4",
+    profile: "Perfil name 4",
+    country: "Country name 4",
+    state: "Estado 4",
+  },
+  {
+    zone: "Principal name 4",
+    profile: "Perfil name 4",
+    country: "Country name 4",
+    state: "Estado 4",
+  },
+  {
+    zone: "Principal name 4",
+    profile: "Perfil name 4",
+    country: "Country name 4",
+    state: "Estado 4",
+  },
+  {
+    zone: "Principal name 4",
+    profile: "Perfil name 4",
+    country: "Country name 4",
+    state: "Estado 4",
+  },
+  {
+    zone: "Principal name 4",
+    profile: "Perfil name 4",
+    country: "Country name 4",
+    state: "Estado 4",
+  },
+  {
+    zone: "Principal name 4",
+    profile: "Perfil name 4",
+    country: "Country name 4",
+    state: "Estado 4",
+  },
 ];
 
 export const Table = ({
