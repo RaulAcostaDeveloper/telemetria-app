@@ -40,12 +40,12 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   const [startHour, setStartHour] = useState("12");
   const [startMinute, setStartMinute] = useState("00");
   const [startSecond, setStartSecond] = useState("00");
-  const [startMeridiem, setStartMeridiem] = useState("AM");
+  const [startMeridiem, setStartMeridiem] = useState("am");
 
   const [endHour, setEndHour] = useState("12");
   const [endMinute, setEndMinute] = useState("00");
   const [endSecond, setEndSecond] = useState("00");
-  const [endMeridiem, setEndMeridiem] = useState("PM");
+  const [endMeridiem, setEndMeridiem] = useState("pm");
 
   // Estado para mensajes de error del DatePicker
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -69,7 +69,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       setStartHour(hour);
       setStartMinute(minute);
       setStartSecond(second);
-      setStartMeridiem(globalStart.getHours() >= 12 ? "PM" : "AM");
+      setStartMeridiem(globalStart.getHours() >= 12 ? "am" : "pm");
     }
   }, [calendarState.startDate]);
 
@@ -85,7 +85,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       setEndHour(hour);
       setEndMinute(minute);
       setEndSecond(second);
-      setEndMeridiem(globalEnd.getHours() >= 12 ? "PM" : "AM");
+      setEndMeridiem(globalEnd.getHours() >= 12 ? "pm" : "am");
     }
   }, [calendarState.endDate]);
 
@@ -98,7 +98,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       setStartHour(hour);
       setStartMinute(minute);
       setStartSecond(second);
-      setStartMeridiem(today.getHours() >= 12 ? "PM" : "AM");
+      setStartMeridiem(today.getHours() >= 12 ? "pm" : "am");
     }
   }, [showStartDateCalendar, calendarState.startDate, today]);
 
@@ -111,7 +111,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       setEndHour(hour);
       setEndMinute(minute);
       setEndSecond(second);
-      setEndMeridiem(today.getHours() >= 12 ? "PM" : "AM");
+      setEndMeridiem(today.getHours() >= 12 ? "pm" : "am");
     }
   }, [showEndDateCalendar, calendarState.endDate, today]);
 
@@ -214,14 +214,14 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       setStartHour("12");
       setStartMinute("00");
       setStartSecond("00");
-      setStartMeridiem("AM");
+      setStartMeridiem("am");
       setTimeout(() => setShowStartDateCalendar(false), 250);
     } else if (showEndDateCalendar) {
       setEndDate(today);
       setEndHour("12");
       setEndMinute("00");
       setEndSecond("00");
-      setEndMeridiem("PM");
+      setEndMeridiem("pm");
       setTimeout(() => setShowEndDateCalendar(false), 250);
     }
     setErrorMessage("");
@@ -249,9 +249,9 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
     const adjustedStart = new Date(start);
     let hourStart = parseInt(startHour, 10);
-    if (startMeridiem === "PM" && hourStart < 12) {
+    if (startMeridiem === "pm" && hourStart < 12) {
       hourStart += 12;
-    } else if (startMeridiem === "AM" && hourStart === 12) {
+    } else if (startMeridiem === "am" && hourStart === 12) {
       hourStart = 0;
     }
     adjustedStart.setHours(
@@ -262,9 +262,9 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
     const adjustedEnd = new Date(end);
     let hourEnd = parseInt(endHour, 10);
-    if (endMeridiem === "PM" && hourEnd < 12) {
+    if (endMeridiem === "pm" && hourEnd < 12) {
       hourEnd += 12;
-    } else if (endMeridiem === "AM" && hourEnd === 12) {
+    } else if (endMeridiem === "am" && hourEnd === 12) {
       hourEnd = 0;
     }
     adjustedEnd.setHours(
@@ -400,8 +400,8 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
                 value={startMeridiem}
                 onChange={(e) => setStartMeridiem(e.target.value)}
               >
-                <option value="AM">AM</option>
-                <option value="PM">PM</option>
+                <option value="am">am</option>
+                <option value="pm">pm</option>
               </select>
             </div>
           </div>
@@ -481,8 +481,8 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
                 value={endMeridiem}
                 onChange={(e) => setEndMeridiem(e.target.value)}
               >
-                <option value="AM">AM</option>
-                <option value="PM">PM</option>
+                <option value="am">am</option>
+                <option value="pm">pm</option>
               </select>
             </div>
           </div>
