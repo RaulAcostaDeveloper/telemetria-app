@@ -5,31 +5,33 @@ export default function Fuel() {
   return (
     <div>
       <Table
-        title="Mi tabla"
+        columns={[]}
+        data={[]}
         showCreateButton
         showDelete
         showEdit
         showView
-        data={[]}
-        columns={[]}
+        title="Mi tabla"
+        viewIdKey="idVehicle"
+        viewPath="/management/vehicle/"
       />
       <Table
-        title="Mi tabla"
+        columns={[]}
+        data={[]}
         showCreateButton
         showDelete
         showEdit
         showView
-        data={[]}
-        columns={[]}
+        title="Mi tabla"
       />
       <Table
-        title="Mi tabla"
+        columns={[]}
+        data={[]}
         showCreateButton
         showDelete
         showEdit
         showView
-        data={[]}
-        columns={[]}
+        title="Mi tabla"
       />
       <FuelTabs />
     </div>

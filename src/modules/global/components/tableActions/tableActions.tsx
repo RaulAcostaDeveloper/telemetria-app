@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
+
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -14,23 +16,30 @@ interface Props {
   showDelete?: boolean;
   showEdit?: boolean;
   showView?: boolean;
+  viewPath?: string;
 }
 
-export const TableActions = ({ showDelete, showEdit, showView }: Props) => {
+export const TableActions = ({
+  showDelete,
+  showEdit,
+  showView,
+  viewPath,
+}: Props) => {
   const LANGUAGE = LanguageSelector();
-  const [showDeleteModal, setShowDeleteModal] = useState<Boolean>(false);
-  const [showEditModal, setShowEditModal] = useState<Boolean>(false);
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+  const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
   return (
     <div className={`${styles.tableActions}`}>
       {/* Acciones de la tabla (Botones) */}
-      {showView && (
-        <button
+      {showView && viewPath && (
+        <Link
           className={`${styles.button}`}
           title={LANGUAGE.table.actions.viewDetail}
+          href={viewPath}
         >
           <VisibilityIcon />
-        </button>
+        </Link>
       )}
 
       {showEdit && (
