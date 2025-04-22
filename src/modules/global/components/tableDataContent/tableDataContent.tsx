@@ -22,25 +22,24 @@ export const TableDataContent = ({
 }: Props) => {
   return (
     <div className={styles.dataContent}>
-      {data.map((dataObject, index) => (
-        <div key={index} className={styles.dataObject}>
-          {/* Datos de la tabla por columna */}
-          {Object.entries(dataObject).map(([key, value], propIndex) => {
+      {data.map((dataObject, dataIndex) => (
+        <div key={dataIndex} className={styles.dataObject}>
+          {columns.map((col, colIndex) => {
             const defaultSpace = {
-              width: columns[propIndex].defaultSpace
-                ? `${columns[propIndex].defaultSpace * 50}px`
+              width: columns[colIndex].defaultSpace
+                ? `${columns[colIndex].defaultSpace * 50}px`
                 : "fit-content",
             };
+            const dataValues = Object.values(dataObject);
             return (
-              <TableDataProp
-                key={key}
-                value={String(value)}
-                defaultSpace={defaultSpace}
-              />
+              <div key={colIndex} style={defaultSpace}>
+                <TableDataProp
+                  value={String(dataValues[colIndex] ?? "-")}
+                  defaultSpace={defaultSpace}
+                />
+              </div>
             );
           })}
-
-          {/* Acciones de la tabla */}
           {showActions && (
             <TableActions
               showDelete={showDelete}
