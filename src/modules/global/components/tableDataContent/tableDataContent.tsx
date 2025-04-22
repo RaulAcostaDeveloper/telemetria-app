@@ -6,22 +6,28 @@ import { columnsTable, dataTable } from "../table/table.model";
 interface Props {
   columns: columnsTable;
   data: dataTable;
+  editFormContent?: React.FC<{
+    dataObject: { [key: string]: string | number };
+    setIsDisabled: (val: boolean) => void;
+    setSaveFunction: (cb: () => void) => void;
+  }>;
+  idKey?: string;
   showActions?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
   showView?: boolean;
-  viewIdKey?: string;
   viewPath?: string;
 }
 
 export const TableDataContent = ({
   columns,
   data,
+  editFormContent,
+  idKey,
   showActions,
   showDelete,
   showEdit,
   showView,
-  viewIdKey,
   viewPath,
 }: Props) => {
   return (
@@ -46,10 +52,13 @@ export const TableDataContent = ({
           })}
           {showActions && (
             <TableActions
+              dataObject={dataObject}
+              editFormContent={editFormContent}
+              idKey={idKey}
               showDelete={showDelete}
               showEdit={showEdit}
               showView={showView}
-              viewPath={`${viewPath}${dataObject[viewIdKey ?? ""]}`}
+              viewPath={`${viewPath}${dataObject[idKey ?? ""]}`}
             />
           )}
         </div>

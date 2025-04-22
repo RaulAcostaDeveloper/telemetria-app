@@ -12,6 +12,13 @@ import { TableDeleteModal } from "../tableDeleteModal/tableDeleteModa";
 import { TableEditFormModal } from "../tableEditFormModal/tableEditFormModa";
 
 interface Props {
+  dataObject: { [key: string]: string | number };
+  editFormContent?: React.FC<{
+    dataObject: { [key: string]: string | number };
+    setIsDisabled: (val: boolean) => void;
+    setSaveFunction: (cb: () => void) => void;
+  }>;
+  idKey?: string;
   showActions?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
@@ -20,6 +27,8 @@ interface Props {
 }
 
 export const TableActions = ({
+  dataObject,
+  editFormContent,
   showDelete,
   showEdit,
   showView,
@@ -68,7 +77,11 @@ export const TableActions = ({
       )}
 
       {showEditModal && (
-        <TableEditFormModal closeModal={() => setShowEditModal(false)} />
+        <TableEditFormModal
+          closeModal={() => setShowEditModal(false)}
+          dataObject={dataObject}
+          editFormContent={editFormContent}
+        />
       )}
     </div>
   );

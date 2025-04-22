@@ -9,14 +9,24 @@ import { TableSearch } from "../tableSearch/tableSearch";
 import { columnsTable } from "./table.model";
 
 interface Props {
+  addFormContent?: React.FC<{
+    dataObject?: { [key: string]: string | number };
+    setIsDisabled: (val: boolean) => void;
+    setSaveFunction: (cb: () => void) => void;
+  }>;
   columns: string[];
   data: any[];
+  editFormContent?: React.FC<{
+    dataObject: { [key: string]: string | number };
+    setIsDisabled: (val: boolean) => void;
+    setSaveFunction: (cb: () => void) => void;
+  }>;
   showCreateButton?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
   showView?: boolean;
   title?: string;
-  viewIdKey?: string;
+  idKey?: string;
   viewPath?: string;
 }
 
@@ -64,20 +74,24 @@ const data = [
 ];
 
 export const Table = ({
+  addFormContent,
+  editFormContent,
   showCreateButton,
   showDelete,
   showEdit,
   showView,
   title,
+  idKey,
   viewPath,
-  viewIdKey,
 }: Props) => {
   return (
     <div className={`${styles.container}`}>
       <div className={`${styles.inside}`}>
         {title && <h4 className={`${styles.title}`}>{title}</h4>}
         <div className={`${styles.topActions}`}>
-          {showCreateButton && <TableAddNewButton />}
+          {showCreateButton && (
+            <TableAddNewButton addFormContent={addFormContent} />
+          )}
           <TableDownloadCSV />
         </div>
         <div className={`${styles.topActions}`}>
@@ -102,7 +116,8 @@ export const Table = ({
               showEdit={showEdit}
               showView={showView}
               viewPath={viewPath}
-              viewIdKey={viewIdKey}
+              idKey={idKey}
+              editFormContent={editFormContent}
             />
           </div>
         </div>
