@@ -14,6 +14,9 @@ import {
 } from "@/modules/global/utils/utils";
 import { RootState } from "@/store";
 import { setDateRange, setFixedFilter } from "@/slices/calendarSlice";
+import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
+
+const LANGUAGE = LanguageSelector();
 
 interface CalendarProps {
   // Función para mostrar u ocultar el calendario.
@@ -242,7 +245,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
         start = new Date(calendarState.startDate);
         end = new Date(calendarState.endDate);
       } else {
-        setErrorMessage("Por favor, selecciona ambas fechas: inicio y fin.");
+        setErrorMessage(LANGUAGE.header.calendar.errorMessage);
         return false;
       }
     }

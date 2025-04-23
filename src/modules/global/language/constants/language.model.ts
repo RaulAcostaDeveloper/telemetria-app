@@ -19,6 +19,7 @@ export interface LanguageInterface {
         };
       };
       fixedDateFilterOptions: string[];
+      errorMessage: string;
     };
   };
   menu: {
