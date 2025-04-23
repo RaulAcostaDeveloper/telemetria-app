@@ -26,6 +26,7 @@ export const ENGLISH: LanguageInterface = {
         "This month",
         "Last month",
       ],
+      errorMessage: "Please select a valid date range.",
     },
   },
   menu: {
