@@ -6,7 +6,7 @@ import { TableDataSummatory } from "../tableDataSummatory/tableDataSummatory";
 import { TableDownloadCSV } from "../tableDownloadCSV/tableDownloadCSV";
 import { TableFilters } from "../tableFilters/tableFilters";
 import { TableSearch } from "../tableSearch/tableSearch";
-import { columnsTable } from "./table.model";
+import { columnsTable, dataTable } from "./table.model";
 
 interface Props {
   addFormContent?: React.FC<{
@@ -15,7 +15,7 @@ interface Props {
     setSaveFunction: (cb: () => void) => void;
   }>;
   columns: columnsTable;
-  data: any[];
+  data: dataTable;
   editFormContent?: React.FC<{
     dataObject: { [key: string]: string | number };
     setIsDisabled: (val: boolean) => void;
@@ -30,25 +30,10 @@ interface Props {
   viewPath?: string;
 }
 
-const data = [
-  {
-    zone: "Principal name",
-    profile: "Perfil name",
-    country: "Country name",
-    idVehicle: "412",
-  },
-  {
-    zone: "Principal name 2",
-    profile: "Perfil name 2",
-    country: "Country name 2",
-    idVehicle: "521",
-    statee: "Estado 2",
-  },
-];
-
 export const Table = ({
   addFormContent,
   columns,
+  data,
   editFormContent,
   idKey,
   showCreateButton,
