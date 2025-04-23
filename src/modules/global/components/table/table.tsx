@@ -14,7 +14,7 @@ interface Props {
     setIsDisabled: (val: boolean) => void;
     setSaveFunction: (cb: () => void) => void;
   }>;
-  columns: string[];
+  columns: columnsTable;
   data: any[];
   editFormContent?: React.FC<{
     dataObject: { [key: string]: string | number };
@@ -29,33 +29,6 @@ interface Props {
   idKey?: string;
   viewPath?: string;
 }
-
-// Columnas y su configuración
-const columns: columnsTable = [
-  {
-    columnName: "Zona",
-    defaultSpace: 3,
-    orderColumn: true,
-  },
-  {
-    columnName: "Perfil",
-    defaultSpace: 2,
-    orderColumn: true,
-    filterOptions: true,
-  },
-  {
-    columnName: "País",
-    defaultSpace: 2,
-    orderColumn: true,
-    filterOptions: true,
-  },
-  {
-    columnName: "Id",
-    defaultSpace: 2,
-    orderColumn: true,
-    showTotal: true,
-  },
-];
 
 const data = [
   {
@@ -75,13 +48,14 @@ const data = [
 
 export const Table = ({
   addFormContent,
+  columns,
   editFormContent,
+  idKey,
   showCreateButton,
   showDelete,
   showEdit,
   showView,
   title,
-  idKey,
   viewPath,
 }: Props) => {
   return (
