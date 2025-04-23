@@ -1,7 +1,10 @@
 import { FuelTabs } from "@/modules/fuel/components";
 import { Table } from "@/modules/global/components";
 import { ExampleTableForm } from "@/modules/global/components/exampleTableForm/exampleTableForm";
-import { columnsTable } from "@/modules/global/components/table/table.model";
+import {
+  columnsTable,
+  dataTable,
+} from "@/modules/global/components/table/table.model";
 
 const tableColumns: columnsTable = [
   {
@@ -29,13 +32,34 @@ const tableColumns: columnsTable = [
   },
 ];
 
+const tableData: dataTable = [
+  {
+    zone: "Principal name",
+    profile: "Perfil name",
+    country: "Country name",
+    idVehicle: "412",
+  },
+  {
+    zone: "Principal name 2",
+    profile: "Perfil name 2",
+    country: "Country name 2",
+    idVehicle: "521",
+  },
+  {
+    zone: "Principal name 2",
+    profile: "Perfil name 2",
+    country: "Country name 2",
+    idVehicle: "522",
+  },
+];
+
 export default function Fuel() {
   return (
     <div>
       <Table
         addFormContent={ExampleTableForm}
         columns={tableColumns}
-        data={[]}
+        data={tableData}
         editFormContent={ExampleTableForm}
         idKey="idVehicle"
         showCreateButton
@@ -47,7 +71,7 @@ export default function Fuel() {
       />
       <Table
         columns={tableColumns}
-        data={[]}
+        data={tableData}
         showCreateButton
         showDelete
         showEdit
@@ -56,7 +80,7 @@ export default function Fuel() {
       />
       <Table
         columns={tableColumns}
-        data={[]}
+        data={tableData}
         showCreateButton
         showDelete
         showEdit
