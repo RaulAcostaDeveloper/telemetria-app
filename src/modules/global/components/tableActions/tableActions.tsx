@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
+
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -10,29 +12,47 @@ import { TableDeleteModal } from "../tableDeleteModal/tableDeleteModa";
 import { TableEditFormModal } from "../tableEditFormModal/tableEditFormModa";
 
 interface Props {
+  dataObject: { [key: string]: string | number };
+  idKey?: string;
   showActions?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
   showView?: boolean;
+  viewPath?: string;
+  editFormContent?: React.FC<{
+    dataObject: { [key: string]: string | number };
+    setIsDisabled: (val: boolean) => void;
+    setSaveFunction: (cb: () => void) => void;
+  }>;
 }
 
-export const TableActions = ({ showDelete, showEdit, showView }: Props) => {
+// Acciones de la tabla para los registros
+export const TableActions = ({
+  dataObject,
+  editFormContent,
+  showDelete,
+  showEdit,
+  showView,
+  viewPath,
+}: Props) => {
   const LANGUAGE = LanguageSelector();
-  const [showDeleteModal, setShowDeleteModal] = useState<Boolean>(false);
-  const [showEditModal, setShowEditModal] = useState<Boolean>(false);
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+  const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
   return (
     <div className={`${styles.tableActions}`}>
-      {/* Acciones de la tabla (Botones) */}
-      {showView && (
-        <button
+      {/* Botón "Ver" */}
+      {showView && viewPath && (
+        <Link
           className={`${styles.button}`}
           title={LANGUAGE.table.actions.viewDetail}
+          href={viewPath}
         >
           <VisibilityIcon />
-        </button>
+        </Link>
       )}
 
+      {/* Botón "Editar" */}
       {showEdit && (
         <button
           className={`${styles.button}`}
@@ -43,6 +63,7 @@ export const TableActions = ({ showDelete, showEdit, showView }: Props) => {
         </button>
       )}
 
+      {/* Botón "Eliminar" */}
       {showDelete && (
         <button
           className={`${styles.button}`}
@@ -53,13 +74,18 @@ export const TableActions = ({ showDelete, showEdit, showView }: Props) => {
         </button>
       )}
 
-      {/* Modales de Editar y Borrar */}
-      {showDeleteModal && (
-        <TableDeleteModal closeModal={() => setShowDeleteModal(false)} />
+      {/* Modal que contiene el formulario de Editar*/}
+      {showEditModal && (
+        <TableEditFormModal
+          closeModal={() => setShowEditModal(false)}
+          dataObject={dataObject}
+          editFormContent={editFormContent}
+        />
       )}
 
-      {showEditModal && (
-        <TableEditFormModal closeModal={() => setShowEditModal(false)} />
+      {/* Modal que contiene el formulario de Eliminar*/}
+      {showDeleteModal && (
+        <TableDeleteModal closeModal={() => setShowDeleteModal(false)} />
       )}
     </div>
   );
