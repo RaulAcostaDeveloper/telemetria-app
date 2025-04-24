@@ -25,6 +25,7 @@ export const TableAddFormModal = ({ closeModal, addFormContent }: Props) => {
   const [saveFunction, setSaveFunction] = useState<() => void>(() => {});
 
   // Asignación a una variable con mayúscula
+  // Para poder usarlo como componente
   const AddFormContent = addFormContent;
 
   return (
@@ -33,8 +34,12 @@ export const TableAddFormModal = ({ closeModal, addFormContent }: Props) => {
         <div className={`${styles.formTitle}`}>
           <h3>{LANGUAGE.table.formTitles.createElement}</h3>
         </div>
+
+        {/* Renderizado de addFormContent */}
+        {/* Recibe como parámetro setIsDisabled para controlar el activar el botón */}
+        {/* Y recibe como parámetro setSaveFunction para definir la función de CREAR */}
+        {/* Es importante usar como ejemplo el componente ExampleTableForm */}
         <div className={`${styles.content}`}>
-          {/* Renderizado de addFormContent */}
           {AddFormContent && (
             <AddFormContent
               setIsDisabled={setIsDisabled}
@@ -42,6 +47,8 @@ export const TableAddFormModal = ({ closeModal, addFormContent }: Props) => {
             />
           )}
         </div>
+
+        {/* Contenido genérico de los modales de CREAR */}
         <div className={`${styles.buttons}`}>
           <GeneralButton
             title={LANGUAGE.table.buttons.cancel}

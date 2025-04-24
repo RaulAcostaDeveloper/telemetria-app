@@ -29,6 +29,9 @@ export const TableAddNewButton = ({ addFormContent }: Props) => {
         title={LANGUAGE.table.buttons.create}
         type={ButtonTypes.CONFIRM}
       />
+
+      {/* Modal de CREAR registro */}
+      {/* Recibe el componente de formulario de CREAR */}
       {showEditModal && addFormContent && (
         <TableAddFormModal
           addFormContent={addFormContent}

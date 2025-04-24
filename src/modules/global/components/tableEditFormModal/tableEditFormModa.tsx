@@ -29,6 +29,8 @@ export const TableEditFormModal = ({
   const [isSaveDisabled, setIsDisabled] = useState(true);
   const [saveFunction, setSaveFunction] = useState<() => void>(() => {});
 
+  // Asignación a una variable con mayúscula
+  // Para poder usarlo como componente
   const EditFormContent = editFormContent;
 
   return (
@@ -37,8 +39,12 @@ export const TableEditFormModal = ({
         <div className={`${styles.formTitle}`}>
           <h3>{LANGUAGE.table.actions.editElement}</h3>
         </div>
+
+        {/* Renderizado de editFormContent */}
+        {/* Recibe como parámetro setIsDisabled para controlar el activar el botón */}
+        {/* Y recibe como parámetro setSaveFunction para definir la función de EDITAR */}
+        {/* Es importante usar como ejemplo el componente ExampleTableForm */}
         <div className={`${styles.content}`}>
-          {/* Renderizado de editFormContent */}
           {EditFormContent && (
             <EditFormContent
               dataObject={dataObject}
@@ -47,6 +53,8 @@ export const TableEditFormModal = ({
             />
           )}
         </div>
+
+        {/* Contenido genérico de los modales de EDITAR */}
         <div className={`${styles.buttons}`}>
           <GeneralButton
             Icon={<CloseIcon />}

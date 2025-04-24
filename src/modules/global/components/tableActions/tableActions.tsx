@@ -13,19 +13,20 @@ import { TableEditFormModal } from "../tableEditFormModal/tableEditFormModa";
 
 interface Props {
   dataObject: { [key: string]: string | number };
-  editFormContent?: React.FC<{
-    dataObject: { [key: string]: string | number };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
   idKey?: string;
   showActions?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
   showView?: boolean;
   viewPath?: string;
+  editFormContent?: React.FC<{
+    dataObject: { [key: string]: string | number };
+    setIsDisabled: (val: boolean) => void;
+    setSaveFunction: (cb: () => void) => void;
+  }>;
 }
 
+// Acciones de la tabla para los registros
 export const TableActions = ({
   dataObject,
   editFormContent,
@@ -40,7 +41,7 @@ export const TableActions = ({
 
   return (
     <div className={`${styles.tableActions}`}>
-      {/* Acciones de la tabla (Botones) */}
+      {/* Botón "Ver" */}
       {showView && viewPath && (
         <Link
           className={`${styles.button}`}
@@ -51,6 +52,7 @@ export const TableActions = ({
         </Link>
       )}
 
+      {/* Botón "Editar" */}
       {showEdit && (
         <button
           className={`${styles.button}`}
@@ -61,6 +63,7 @@ export const TableActions = ({
         </button>
       )}
 
+      {/* Botón "Eliminar" */}
       {showDelete && (
         <button
           className={`${styles.button}`}
@@ -71,17 +74,18 @@ export const TableActions = ({
         </button>
       )}
 
-      {/* Modales de Editar y Borrar */}
-      {showDeleteModal && (
-        <TableDeleteModal closeModal={() => setShowDeleteModal(false)} />
-      )}
-
+      {/* Modal que contiene el formulario de Editar*/}
       {showEditModal && (
         <TableEditFormModal
           closeModal={() => setShowEditModal(false)}
           dataObject={dataObject}
           editFormContent={editFormContent}
         />
+      )}
+
+      {/* Modal que contiene el formulario de Eliminar*/}
+      {showDeleteModal && (
+        <TableDeleteModal closeModal={() => setShowDeleteModal(false)} />
       )}
     </div>
   );
