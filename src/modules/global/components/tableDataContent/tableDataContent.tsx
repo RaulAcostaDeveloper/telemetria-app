@@ -6,17 +6,17 @@ import { columnsTable, dataTable } from "../table/table.model";
 interface Props {
   columns: columnsTable;
   data: dataTable;
-  editFormContent?: React.FC<{
-    dataObject: { [key: string]: string | number };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
   idKey?: string;
   showActions?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
   showView?: boolean;
   viewPath?: string;
+  editFormContent?: React.FC<{
+    dataObject: { [key: string]: string | number };
+    setIsDisabled: (val: boolean) => void;
+    setSaveFunction: (cb: () => void) => void;
+  }>;
 }
 
 export const TableDataContent = ({
@@ -33,8 +33,10 @@ export const TableDataContent = ({
   return (
     <div className={styles.dataContent}>
       {data.map((dataObject, dataIndex) => (
+        // Registros de la tabla
         <div key={dataIndex} className={styles.dataObject}>
           {columns.map((col, colIndex) => {
+            // Espacio que se le indicó en la columna
             const defaultSpace = {
               width: columns[colIndex].defaultSpace
                 ? `${columns[colIndex].defaultSpace * 50}px`
@@ -50,6 +52,8 @@ export const TableDataContent = ({
               </div>
             );
           })}
+
+          {/* Acciones de los registros */}
           {showActions && (
             <TableActions
               dataObject={dataObject}

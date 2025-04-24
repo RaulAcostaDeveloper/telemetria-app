@@ -9,25 +9,25 @@ import { TableSearch } from "../tableSearch/tableSearch";
 import { columnsTable, dataTable } from "./table.model";
 
 interface Props {
-  addFormContent?: React.FC<{
-    dataObject?: { [key: string]: string | number };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
   columns: columnsTable;
   data: dataTable;
-  editFormContent?: React.FC<{
-    dataObject: { [key: string]: string | number };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
+  idKey?: string;
   showCreateButton?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
   showView?: boolean;
   title?: string;
-  idKey?: string;
   viewPath?: string;
+  addFormContent?: React.FC<{
+    dataObject?: { [key: string]: string | number };
+    setIsDisabled: (val: boolean) => void;
+    setSaveFunction: (cb: () => void) => void;
+  }>;
+  editFormContent?: React.FC<{
+    dataObject: { [key: string]: string | number };
+    setIsDisabled: (val: boolean) => void;
+    setSaveFunction: (cb: () => void) => void;
+  }>;
 }
 
 export const Table = ({
@@ -46,19 +46,28 @@ export const Table = ({
   return (
     <div className={`${styles.container}`}>
       <div className={`${styles.inside}`}>
+        {/* Título */}
         {title && <h4 className={`${styles.title}`}>{title}</h4>}
+
+        {/* Botones externos */}
         <div className={`${styles.topActions}`}>
           {showCreateButton && (
             <TableAddNewButton addFormContent={addFormContent} />
           )}
           <TableDownloadCSV />
         </div>
+
+        {/* Búsqueda en la primer columna*/}
         <div className={`${styles.topActions}`}>
           <TableSearch />
         </div>
+
+        {/* Filtros por columna */}
         <div className={`${styles.topActions}`}>
           <TableFilters columns={columns} />
         </div>
+
+        {/* Tabla */}
         <div className={`${styles.tableContent}`}>
           <div>
             {/* Columnas */}
@@ -66,7 +75,8 @@ export const Table = ({
               columns={columns}
               showActions={showDelete || showEdit || showView}
             />
-            {/* Datos de la tabla */}
+
+            {/* Registros de la tabla */}
             <TableDataContent
               columns={columns}
               data={data}
@@ -80,6 +90,8 @@ export const Table = ({
             />
           </div>
         </div>
+
+        {/* Suma de valores */}
         <TableDataSummatory columns={columns} data={data} />
       </div>
     </div>

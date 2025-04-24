@@ -7,6 +7,8 @@ interface Props {
   value: string;
 }
 
+// Dato en el registro, copiar el dato en clipboard
+// Tiene el mismo espacio que se le asignó a la columna
 export const TableDataProp = ({ defaultSpace, value }: Props) => {
   const LANGUAGE = LanguageSelector();
 

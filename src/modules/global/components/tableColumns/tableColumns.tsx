@@ -15,12 +15,15 @@ export const TableColumns = ({ columns, showActions }: Props) => {
   return (
     <div className={`${styles.columns}`}>
       {columns.map((el, index) => {
+        {
+          /* Espacio que se le indicó en la columna */
+        }
         const defaultSpace = {
           width: el.defaultSpace ? `${el.defaultSpace * 50}px` : "fit-content",
         };
 
-        // Columnas ordenables
         return el.orderColumn ? (
+          // Columnas que son ordenables
           <button
             key={el.columnName}
             className={`${styles.column} ${styles.columnButton} ${
@@ -41,7 +44,7 @@ export const TableColumns = ({ columns, showActions }: Props) => {
             </div>
           </button>
         ) : (
-          // Columnas no ordenables
+          // Columnas que no son ordenables
           <div
             key={el.columnName}
             className={styles.column}
@@ -51,7 +54,8 @@ export const TableColumns = ({ columns, showActions }: Props) => {
           </div>
         );
       })}
-      {/* Acciones de la tabla */}
+
+      {/* Columna para acciones de la tabla */}
       {showActions && (
         <div
           className={`${styles.column} ${styles.actions} ${styles.lastButton}`}
@@ -64,5 +68,3 @@ export const TableColumns = ({ columns, showActions }: Props) => {
     </div>
   );
 };
-
-//

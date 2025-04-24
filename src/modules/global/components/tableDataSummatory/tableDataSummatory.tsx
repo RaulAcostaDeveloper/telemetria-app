@@ -17,9 +17,11 @@ export const TableDataSummatory = ({ columns, data }: Props) => {
   return (
     <div className={`${styles.tableDataSummatory}`}>
       {columns.map((el) => {
+        // Espacio que se le indicó en la columna
         const defaultSpace = {
           width: el.defaultSpace ? `${el.defaultSpace * 50}px` : "fit-content",
         };
+
         // Muestra el total de la suma de los datos de la columna correspondiente
         return (
           <>
