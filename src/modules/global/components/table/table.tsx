@@ -6,91 +6,68 @@ import { TableDataSummatory } from "../tableDataSummatory/tableDataSummatory";
 import { TableDownloadCSV } from "../tableDownloadCSV/tableDownloadCSV";
 import { TableFilters } from "../tableFilters/tableFilters";
 import { TableSearch } from "../tableSearch/tableSearch";
-import { columnsTable } from "./table.model";
+import { columnsTable, dataTable } from "./table.model";
 
 interface Props {
-  columns: string[];
-  data: any[];
+  columns: columnsTable;
+  data: dataTable;
+  idKey?: string;
   showCreateButton?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
   showView?: boolean;
   title?: string;
+  viewPath?: string;
+  addFormContent?: React.FC<{
+    dataObject?: { [key: string]: string | number };
+    setIsDisabled: (val: boolean) => void;
+    setSaveFunction: (cb: () => void) => void;
+  }>;
+  editFormContent?: React.FC<{
+    dataObject: { [key: string]: string | number };
+    setIsDisabled: (val: boolean) => void;
+    setSaveFunction: (cb: () => void) => void;
+  }>;
 }
 
-// Columnas y su configuración
-const columns: columnsTable = [
-  {
-    columnName: "Zona",
-    defaultSpace: 3,
-    orderColumn: true,
-    filterOptions: true,
-  },
-  {
-    columnName: "Perfil",
-    defaultSpace: 2,
-    orderColumn: true,
-    filterOptions: true,
-    showTotal: true,
-  },
-  { columnName: "País", defaultSpace: 2 },
-  {
-    columnName: "Estado",
-    defaultSpace: 2,
-    filterOptions: true,
-    orderColumn: true,
-    showTotal: true,
-  },
-];
-
-const data = [
-  {
-    zone: "Principal name",
-    profile: "Perfil name",
-    country: "Country name",
-    state: "Estado ",
-  },
-  {
-    zone: "Principal name 2",
-    profile: "Perfil name 2",
-    country: "Country name 2",
-    state: "Estado 2",
-  },
-  {
-    zone: "Principal name 3",
-    profile: "Perfil name 3",
-    country: "Country name 3",
-    state: "Estado 3",
-  },
-  {
-    zone: "Principal name 4",
-    profile: "Perfil name 4",
-    country: "Country name 4",
-    state: "Estado 4",
-  },
-];
-
 export const Table = ({
+  addFormContent,
+  columns,
+  data,
+  editFormContent,
+  idKey,
   showCreateButton,
   showDelete,
   showEdit,
   showView,
   title,
+  viewPath,
 }: Props) => {
   return (
     <div className={`${styles.container}`}>
       <div className={`${styles.inside}`}>
+        {/* Título */}
         {title && <h4 className={`${styles.title}`}>{title}</h4>}
+
+        {/* Botones externos */}
         <div className={`${styles.topActions}`}>
-          {showCreateButton && <TableAddNewButton />}
+          {showCreateButton && (
+            <TableAddNewButton addFormContent={addFormContent} />
+          )}
           <TableDownloadCSV />
         </div>
+
+        {/* Búsqueda en la primer columna*/}
         <div className={`${styles.topActions}`}>
           <TableSearch />
         </div>
+
+        {/* Filtros por columna */}
         <div className={`${styles.topActions}`}>
           <TableFilters columns={columns} />
         </div>
+
+        {/* Tabla */}
         <div className={`${styles.tableContent}`}>
           <div>
             {/* Columnas */}
@@ -98,7 +75,8 @@ export const Table = ({
               columns={columns}
               showActions={showDelete || showEdit || showView}
             />
-            {/* Datos de la tabla */}
+
+            {/* Registros de la tabla */}
             <TableDataContent
               columns={columns}
               data={data}
@@ -106,9 +84,14 @@ export const Table = ({
               showDelete={showDelete}
               showEdit={showEdit}
               showView={showView}
+              viewPath={viewPath}
+              idKey={idKey}
+              editFormContent={editFormContent}
             />
           </div>
         </div>
+
+        {/* Suma de valores */}
         <TableDataSummatory columns={columns} data={data} />
       </div>
     </div>
