@@ -73,7 +73,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
               currentDate.getMonth(),
               i - currentDate.getDay() + 1
             );
-            // If the date is after today, do not render it.
+            // Si la fecha es depues de hoy no renderizar
             if (date > today) return null;
             return (
               <button
