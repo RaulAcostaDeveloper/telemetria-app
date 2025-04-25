@@ -20,6 +20,8 @@ export interface LanguageInterface {
       };
       fixedDateFilterOptions: string[];
       reportingPeriod: string;
+      fromLabel: string;
+      toLabel: string;
       errorMessage: string;
     };
   };

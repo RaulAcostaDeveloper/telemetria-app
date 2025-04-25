@@ -27,6 +27,8 @@ export const ENGLISH: LanguageInterface = {
         "Last month",
       ],
       reportingPeriod: "Reporting period",
+      fromLabel: "From:",
+      toLabel: "To:",
       errorMessage: "Please select a valid date range.",
     },
   },
