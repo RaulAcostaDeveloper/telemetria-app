@@ -27,6 +27,8 @@ export const SPANISH: LanguageInterface = {
         "El mes pasado",
       ],
       reportingPeriod: "Período de reportes",
+      fromLabel: "Desde:",
+      toLabel: "Hasta:",
       errorMessage: "Por favor, selecciona un rango de fechas valido.",
     },
   },

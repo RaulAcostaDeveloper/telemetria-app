@@ -360,7 +360,9 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
           {LANGUAGE.header.calendar.reportingPeriod}
         </p>
         <div className={styles.isCustomCalendarContainer}>
-          <label className={styles.containerLabel}>Desde:</label>
+          <label className={styles.containerLabel}>
+            {LANGUAGE.header.calendar.fromLabel}
+          </label>
           <input
             type="text"
             value={startDate ? startDate.toLocaleDateString() : ""}
@@ -441,7 +443,9 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
           )}
         </div>
         <div className={styles.isCustomCalendarContainer}>
-          <label className={styles.containerLabel}>Hasta:</label>
+          <label className={styles.containerLabel}>
+            {LANGUAGE.header.calendar.toLabel}
+          </label>
           <input
             type="text"
             value={endDate ? endDate.toLocaleDateString() : ""}
