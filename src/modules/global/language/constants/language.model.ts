@@ -24,7 +24,8 @@ export interface LanguageInterface {
       toLabel: string;
       acceptButtonLabel: string;
       cancelButtonLabel: string;
-      errorMessage: string;
+      errorMessage1: string;
+      errorMessage2: string;
     };
   };
   menu: {
