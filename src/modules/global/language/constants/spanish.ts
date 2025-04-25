@@ -26,6 +26,7 @@ export const SPANISH: LanguageInterface = {
         "Este mes",
         "El mes pasado",
       ],
+      reportingPeriod: "Período de reportes",
       errorMessage: "Por favor, selecciona un rango de fechas valido.",
     },
   },
