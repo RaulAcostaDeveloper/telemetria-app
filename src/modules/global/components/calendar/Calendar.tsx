@@ -535,13 +535,13 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               }
             }}
           >
-            Aceptar
+            {LANGUAGE.header.calendar.acceptButtonLabel}
           </button>
           <button
             onClick={toggleContainer}
             className={styles.selectPeriodCancelButton}
           >
-            Cancelar
+            {LANGUAGE.header.calendar.cancelButtonLabel}
           </button>
         </div>
       </div>

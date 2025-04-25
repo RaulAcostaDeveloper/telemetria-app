@@ -22,6 +22,8 @@ export interface LanguageInterface {
       reportingPeriod: string;
       fromLabel: string;
       toLabel: string;
+      acceptButtonLabel: string;
+      cancelButtonLabel: string;
       errorMessage: string;
     };
   };

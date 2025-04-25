@@ -29,6 +29,8 @@ export const SPANISH: LanguageInterface = {
       reportingPeriod: "Período de reportes",
       fromLabel: "Desde:",
       toLabel: "Hasta:",
+      acceptButtonLabel: "Aceptar",
+      cancelButtonLabel: "Cancelar",
       errorMessage: "Por favor, selecciona un rango de fechas valido.",
     },
   },
