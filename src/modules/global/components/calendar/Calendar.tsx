@@ -62,6 +62,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
   // Sincroniza la hora de inicio con la fecha global de Redux
   useEffect(() => {
+    //Checar si se puede convertir en una función y mover a utils
     if (calendarState.startDate) {
       const globalStart = new Date(calendarState.startDate);
       const hour = (globalStart.getHours() % 12 || 12)
@@ -78,6 +79,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
   // Sincroniza la hora de fin con la fecha global de Redux
   useEffect(() => {
+    //Checar si se puede convertir en una función y mover a utils
     if (calendarState.endDate) {
       const globalEnd = new Date(calendarState.endDate);
       const hour = (globalEnd.getHours() % 12 || 12)
@@ -120,6 +122,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
   // Detecta clics fuera del calendario (excepto en el botón con id "date") para cerrarlo.
   useEffect(() => {
+    //Checar si se puede convertir en una función y mover a utils
     const handleClickOutside = (event: MouseEvent) => {
       if (
         calendarRef.current &&
@@ -353,7 +356,9 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       />
       <div className={styles.personalizedDate}>
         {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
-        <p className={styles.reportPeriod}>Periodo de reportes</p>
+        <p className={styles.reportPeriod}>
+          {LANGUAGE.header.calendar.reportingPeriod}
+        </p>
         <div className={styles.isCustomCalendarContainer}>
           <label className={styles.containerLabel}>Desde:</label>
           <input
