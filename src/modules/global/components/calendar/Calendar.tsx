@@ -248,7 +248,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
         start = new Date(calendarState.startDate);
         end = new Date(calendarState.endDate);
       } else {
-        setErrorMessage(LANGUAGE.header.calendar.errorMessage);
+        setErrorMessage(LANGUAGE.header.calendar.errorMessage2);
         return false;
       }
     }
@@ -281,9 +281,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
     // Valida que la fecha de inicio no sea posterior a la de fin
     if (adjustedStart > adjustedEnd) {
-      setErrorMessage(
-        "La fecha de inicio debe ser anterior o igual a la fecha de fin."
-      );
+      setErrorMessage(LANGUAGE.header.calendar.errorMessage1);
       console.log("rango de fechas invalida");
       return false; // ← Se retorna false al fallar la validación
     }
