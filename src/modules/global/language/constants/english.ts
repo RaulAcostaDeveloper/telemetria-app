@@ -29,6 +29,8 @@ export const ENGLISH: LanguageInterface = {
       reportingPeriod: "Reporting period",
       fromLabel: "From:",
       toLabel: "To:",
+      acceptButtonLabel: "Accept",
+      cancelButtonLabel: "Cancel",
       errorMessage: "Please select a valid date range.",
     },
   },
