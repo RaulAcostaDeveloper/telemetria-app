@@ -31,10 +31,10 @@ export const SPANISH: LanguageInterface = {
       toLabel: "Hasta:",
       acceptButtonLabel: "Aceptar",
       cancelButtonLabel: "Cancelar",
-      errorMessage1: `La fecha "Hasta" no puede ser anterior a la fecha "Desde"
-Por favor selecciona una hora válida.`,
-      errorMessage2: `La hora seleccionada en la fecha "Hasta" no puede ser mayor que la hora actual.
-Por favor selecciona una hora válida.`,
+      errorMessage3: `No se encontró una fecha "Desde" o "Hasta".`,
+      errorMessage1: `La fecha "Hasta" no puede ser anterior a la fecha "Desde" `,
+      errorMessage2: `La hora seleccionada en la fecha "Hasta" no puede ser mayor que la hora actual.`,
+      errorMessage: " Por favor selecciona una hora válida.",
     },
   },
   menu: {
