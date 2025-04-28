@@ -19,6 +19,13 @@ export interface LanguageInterface {
         };
       };
       fixedDateFilterOptions: string[];
+      reportingPeriod: string;
+      fromLabel: string;
+      toLabel: string;
+      acceptButtonLabel: string;
+      cancelButtonLabel: string;
+      errorMessage1: string;
+      errorMessage2: string;
     };
   };
   menu: {

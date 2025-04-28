@@ -11,7 +11,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   width: 42rem;
-  height: 27rem;
+  min-height: 27rem;
   gap: 1rem;
 }
 
@@ -52,6 +52,7 @@
 
 .personalizedDate {
   width: 50%;
+  position: relative;
 }
 
 .subContainer {
@@ -183,12 +184,20 @@
   cursor: pointer;
 }
 
+.calendarDayButtonFrom:hover {
+  background-color: var(--button-color-1);
+  color: white;
+}
 .calendarDayButtonTill {
   padding: 0.5rem;
   border: none;
   font-size: 1.25rem;
   background-color: white;
   cursor: pointer;
+}
+.calendarDayButtonTill:hover {
+  background-color: var(--button-color-1);
+  color: white;
 }
 
 .isCustomCalendarContainer {
@@ -320,10 +329,12 @@
   width: 100%;
   border: none;
   background: transparent;
-  font: inherit;
+  font-size: 1.1rem;
   text-align: center;
 }
-
+.amPmSelect option {
+  font-size: 1rem;
+}
 .amPmButton {
   display: flex;
   height: 3.2rem;
@@ -366,8 +377,16 @@
   color: white;
 }
 .errorMessage {
-  color: red;
+  position: relative;
+  top: 0;
   font-size: 1.2rem;
-  margin-top: 0.5rem;
   text-align: center;
+  background-color: red;
+  color: white;
+  z-index: 999999999;
+  margin: 0.5rem 0;
+}
+.calendarDayButtonSelected {
+  background-color: var(--button-color-1);
+  color: white;
 }

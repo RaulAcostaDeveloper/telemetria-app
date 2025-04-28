@@ -26,6 +26,15 @@ export const SPANISH: LanguageInterface = {
         "Este mes",
         "El mes pasado",
       ],
+      reportingPeriod: "Período de reportes",
+      fromLabel: "Desde:",
+      toLabel: "Hasta:",
+      acceptButtonLabel: "Aceptar",
+      cancelButtonLabel: "Cancelar",
+      errorMessage1: `La fecha "Hasta" no puede ser anterior a la fecha "Desde"
+Por favor selecciona una hora válida.`,
+      errorMessage2: `La hora seleccionada en la fecha "Hasta" no puede ser mayor que la hora actual.
+Por favor selecciona una hora válida.`,
     },
   },
   menu: {

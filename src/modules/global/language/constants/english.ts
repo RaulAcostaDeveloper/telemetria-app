@@ -26,6 +26,15 @@ export const ENGLISH: LanguageInterface = {
         "This month",
         "Last month",
       ],
+      reportingPeriod: "Reporting period",
+      fromLabel: "From:",
+      toLabel: "To:",
+      acceptButtonLabel: "Accept",
+      cancelButtonLabel: "Cancel",
+      errorMessage1: `The "End" date must not be earlier than the "Start" date.
+Please choose a valid time.`,
+      errorMessage2: `The time selected for the "To" date cannot be later than the current time. 
+Please choose a valid time.`,
     },
   },
   menu: {

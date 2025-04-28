@@ -12,8 +12,13 @@ import {
   isPast90Days,
   toLocalISOString,
 } from "@/modules/global/utils/utils";
+import { ButtonTypes } from "../generalButton/generalButton.model";
+import { GeneralButton } from "../generalButton/generalButton";
 import { RootState } from "@/store";
 import { setDateRange, setFixedFilter } from "@/slices/calendarSlice";
+import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
+
+const LANGUAGE = LanguageSelector();
 
 interface CalendarProps {
   // Función para mostrar u ocultar el calendario.
@@ -40,12 +45,12 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   const [startHour, setStartHour] = useState("12");
   const [startMinute, setStartMinute] = useState("00");
   const [startSecond, setStartSecond] = useState("00");
-  const [startMeridiem, setStartMeridiem] = useState("AM");
+  const [startMeridiem, setStartMeridiem] = useState("am");
 
   const [endHour, setEndHour] = useState("12");
   const [endMinute, setEndMinute] = useState("00");
   const [endSecond, setEndSecond] = useState("00");
-  const [endMeridiem, setEndMeridiem] = useState("PM");
+  const [endMeridiem, setEndMeridiem] = useState("pm");
 
   // Estado para mensajes de error del DatePicker
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -59,6 +64,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
   // Sincroniza la hora de inicio con la fecha global de Redux
   useEffect(() => {
+    //Checar si se puede convertir en una función y mover a utils
     if (calendarState.startDate) {
       const globalStart = new Date(calendarState.startDate);
       const hour = (globalStart.getHours() % 12 || 12)
@@ -69,12 +75,13 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       setStartHour(hour);
       setStartMinute(minute);
       setStartSecond(second);
-      setStartMeridiem(globalStart.getHours() >= 12 ? "PM" : "AM");
+      setStartMeridiem(globalStart.getHours() >= 12 ? "am" : "pm");
     }
   }, [calendarState.startDate]);
 
   // Sincroniza la hora de fin con la fecha global de Redux
   useEffect(() => {
+    //Checar si se puede convertir en una función y mover a utils
     if (calendarState.endDate) {
       const globalEnd = new Date(calendarState.endDate);
       const hour = (globalEnd.getHours() % 12 || 12)
@@ -85,7 +92,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       setEndHour(hour);
       setEndMinute(minute);
       setEndSecond(second);
-      setEndMeridiem(globalEnd.getHours() >= 12 ? "PM" : "AM");
+      setEndMeridiem(globalEnd.getHours() >= 12 ? "pm" : "am");
     }
   }, [calendarState.endDate]);
 
@@ -98,7 +105,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       setStartHour(hour);
       setStartMinute(minute);
       setStartSecond(second);
-      setStartMeridiem(today.getHours() >= 12 ? "PM" : "AM");
+      setStartMeridiem(today.getHours() >= 12 ? "pm" : "am");
     }
   }, [showStartDateCalendar, calendarState.startDate, today]);
 
@@ -111,12 +118,13 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       setEndHour(hour);
       setEndMinute(minute);
       setEndSecond(second);
-      setEndMeridiem(today.getHours() >= 12 ? "PM" : "AM");
+      setEndMeridiem(today.getHours() >= 12 ? "pm" : "am");
     }
   }, [showEndDateCalendar, calendarState.endDate, today]);
 
   // Detecta clics fuera del calendario (excepto en el botón con id "date") para cerrarlo.
   useEffect(() => {
+    //Checar si se puede convertir en una función y mover a utils
     const handleClickOutside = (event: MouseEvent) => {
       if (
         calendarRef.current &&
@@ -174,18 +182,40 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
   // Alterna el calendario de inicio y limpia el error
   const toggleStartDateCalendar = () => {
-    setShowStartDateCalendar(!showStartDateCalendar);
+    const willOpen = !showStartDateCalendar;
+    setShowStartDateCalendar(willOpen);
     setShowEndDateCalendar(false);
     setErrorMessage("");
-  };
 
+    if (willOpen) {
+      const initialDate: Date = startDate
+        ? startDate
+        : calendarState.startDate
+        ? new Date(calendarState.startDate)
+        : today;
+
+      setHighlightDate(initialDate);
+      setCurrentDate(initialDate);
+    }
+  };
   // Alterna el calendario de fin y limpia el error
   const toggleEndDateCalendar = () => {
-    setShowEndDateCalendar(!showEndDateCalendar);
+    const willOpen = !showEndDateCalendar;
+    setShowEndDateCalendar(willOpen);
     setShowStartDateCalendar(false);
     setErrorMessage("");
-  };
 
+    if (willOpen) {
+      const initialDate: Date = endDate
+        ? endDate
+        : calendarState.endDate
+        ? new Date(calendarState.endDate)
+        : today;
+
+      setHighlightDate(initialDate);
+      setCurrentDate(initialDate);
+    }
+  };
   // Al seleccionar una fecha, la actualiza y borra errores
   const handleDateChange = (
     date: Date | null,
@@ -214,14 +244,14 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       setStartHour("12");
       setStartMinute("00");
       setStartSecond("00");
-      setStartMeridiem("AM");
+      setStartMeridiem("am");
       setTimeout(() => setShowStartDateCalendar(false), 250);
     } else if (showEndDateCalendar) {
       setEndDate(today);
       setEndHour("12");
       setEndMinute("00");
       setEndSecond("00");
-      setEndMeridiem("PM");
+      setEndMeridiem("pm");
       setTimeout(() => setShowEndDateCalendar(false), 250);
     }
     setErrorMessage("");
@@ -233,7 +263,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
    * Si faltan fechas, muestra un error en el DatePicker.
    * Después, guarda el rango en Redux en formato ISO y limpia el filtro.
    */
-  const saveDate = () => {
+  const saveDate = (): boolean => {
     let start = startDate;
     let end = endDate;
 
@@ -242,16 +272,16 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
         start = new Date(calendarState.startDate);
         end = new Date(calendarState.endDate);
       } else {
-        setErrorMessage("Por favor, selecciona ambas fechas: inicio y fin.");
-        return;
+        setErrorMessage(LANGUAGE.header.calendar.errorMessage2);
+        return false;
       }
     }
 
     const adjustedStart = new Date(start);
     let hourStart = parseInt(startHour, 10);
-    if (startMeridiem === "PM" && hourStart < 12) {
+    if (startMeridiem === "pm" && hourStart < 12) {
       hourStart += 12;
-    } else if (startMeridiem === "AM" && hourStart === 12) {
+    } else if (startMeridiem === "am" && hourStart === 12) {
       hourStart = 0;
     }
     adjustedStart.setHours(
@@ -262,9 +292,9 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
     const adjustedEnd = new Date(end);
     let hourEnd = parseInt(endHour, 10);
-    if (endMeridiem === "PM" && hourEnd < 12) {
+    if (endMeridiem === "pm" && hourEnd < 12) {
       hourEnd += 12;
-    } else if (endMeridiem === "AM" && hourEnd === 12) {
+    } else if (endMeridiem === "am" && hourEnd === 12) {
       hourEnd = 0;
     }
     adjustedEnd.setHours(
@@ -273,16 +303,24 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       parseInt(endSecond, 10)
     );
 
-    const finalStart =
-      adjustedStart <= adjustedEnd ? adjustedStart : adjustedEnd;
-    const finalEnd = adjustedStart > adjustedEnd ? adjustedStart : adjustedEnd;
+    // Valida que la fecha de inicio no sea posterior a la de fin
+    if (adjustedStart > adjustedEnd) {
+      setErrorMessage(LANGUAGE.header.calendar.errorMessage1);
+      console.log("rango de fechas invalida");
+      return false; // ← Se retorna false al fallar la validación
+    }
+
+    const finalStart = adjustedStart;
+    const finalEnd = adjustedEnd;
 
     const isoStart = toLocalISOString(finalStart);
     const isoEnd = toLocalISOString(finalEnd);
 
     dispatch(setDateRange({ startDate: isoStart, endDate: isoEnd }));
     dispatch(setFixedFilter(""));
+
     setErrorMessage("");
+    return true;
   };
 
   if (!mounted) {
@@ -339,9 +377,14 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
         setSelectedOption={(option: string) => dispatch(setFixedFilter(option))}
       />
       <div className={styles.personalizedDate}>
-        <p className={styles.reportPeriod}>Periodo de reportes</p>
+        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
+        <p className={styles.reportPeriod}>
+          {LANGUAGE.header.calendar.reportingPeriod}
+        </p>
         <div className={styles.isCustomCalendarContainer}>
-          <label className={styles.containerLabel}>Desde:</label>
+          <label className={styles.containerLabel}>
+            {LANGUAGE.header.calendar.fromLabel}
+          </label>
           <input
             type="text"
             value={startDate ? startDate.toLocaleDateString() : ""}
@@ -400,8 +443,8 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
                 value={startMeridiem}
                 onChange={(e) => setStartMeridiem(e.target.value)}
               >
-                <option value="AM">AM</option>
-                <option value="PM">PM</option>
+                <option value="am">am</option>
+                <option value="pm">pm</option>
               </select>
             </div>
           </div>
@@ -422,7 +465,9 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
           )}
         </div>
         <div className={styles.isCustomCalendarContainer}>
-          <label className={styles.containerLabel}>Hasta:</label>
+          <label className={styles.containerLabel}>
+            {LANGUAGE.header.calendar.toLabel}
+          </label>
           <input
             type="text"
             value={endDate ? endDate.toLocaleDateString() : ""}
@@ -481,8 +526,8 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
                 value={endMeridiem}
                 onChange={(e) => setEndMeridiem(e.target.value)}
               >
-                <option value="AM">AM</option>
-                <option value="PM">PM</option>
+                <option value="am">am</option>
+                <option value="pm">pm</option>
               </select>
             </div>
           </div>
@@ -503,22 +548,20 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
           )}
         </div>
         <div className={styles.selectPeriodButtonsContainer}>
-          <button
-            onClick={() => {
-              saveDate();
-              toggleContainer();
+          <GeneralButton
+            callback={() => {
+              if (saveDate()) {
+                toggleContainer(); // sólo cierra cuando saveDate() devuelve true, haciendo que se muestre el mensaje de error.
+              }
             }}
-            data-testid="save-button"
-            className={styles.selectPeriodSaveButton}
-          >
-            Aceptar
-          </button>
-          <button
-            onClick={toggleContainer}
-            className={styles.selectPeriodCancelButton}
-          >
-            Cancelar
-          </button>
+            title={LANGUAGE.header.calendar.acceptButtonLabel}
+            type={ButtonTypes.CONFIRM}
+          />
+          <GeneralButton
+            callback={toggleContainer}
+            title={LANGUAGE.header.calendar.cancelButtonLabel}
+            type={ButtonTypes.DANGER}
+          />
         </div>
       </div>
     </div>
