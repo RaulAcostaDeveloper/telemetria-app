@@ -45,11 +45,9 @@ export const GeneralButton = ({
       onClick={handleCallback}
       title={title}
     >
-      <span className={` ${titleStyle ? titleStyle : ""} ${styles.title}`}>
-        {title}
-      </span>
+      <span className={` ${titleStyle ? titleStyle : ""}`}>{title}</span>
 
-      <>{Icon && Icon}</>
+      {Icon && <div className={styles.icon}>{Icon} </div>}
     </button>
   );
 };
