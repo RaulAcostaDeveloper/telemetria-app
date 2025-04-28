@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
+import { ButtonTypes } from "../generalButton/generalButton.model";
+import { GeneralButton } from "../generalButton/generalButton";
 import styles from "./Calendar.module.css";
 
 interface DatePickerProps {
@@ -91,9 +93,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
           <div className={styles.errorMessage}>{errorMessage}</div>
         )}
         <div className={styles.todayButtonContainer}>
-          <button onClick={handleGoToToday} className={styles.todayButton}>
-            {LANGUAGE.header.calendar.datePicker.buttons.today}
-          </button>
+          <GeneralButton
+            callback={handleGoToToday}
+            title={LANGUAGE.header.calendar.datePicker.buttons.today}
+            type={ButtonTypes.CONFIRM}
+          />
         </div>
       </div>
     </div>
