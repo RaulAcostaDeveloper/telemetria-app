@@ -323,6 +323,11 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     const isoStart = toLocalISOString(finalStart);
     const isoEnd = toLocalISOString(finalEnd);
 
+    if (adjustedEnd.getTime() > today.getTime()) {
+      setErrorMessage(LANGUAGE.header.calendar.errorMessage2);
+      return false;
+    }
+
     dispatch(setDateRange({ startDate: isoStart, endDate: isoEnd }));
     dispatch(setFixedFilter(""));
 
