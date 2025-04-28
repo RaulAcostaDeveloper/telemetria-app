@@ -75,7 +75,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
       setStartHour(hour);
       setStartMinute(minute);
       setStartSecond(second);
-      setStartMeridiem(globalStart.getHours() >= 12 ? "AM" : "PM");
+      setStartMeridiem(globalStart.getHours() >= 12 ? "PM" : "AM");
     }
   }, [calendarState.startDate]);
 
