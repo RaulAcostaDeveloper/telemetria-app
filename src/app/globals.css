@@ -13,6 +13,10 @@ body {
   font-weight: 400;
 }
 
+button {
+  font-family: var(--font-nunito);
+}
+
 /* VARIABLES CSS */
 
 /* Nota: Las variables para fuentes de letra están declaradas en src\globalConfig\fonts\fonts.ts /
