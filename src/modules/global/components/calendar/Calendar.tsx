@@ -267,14 +267,21 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
     let start = startDate;
     let end = endDate;
 
-    if (!start || !end) {
-      if (calendarState.startDate && calendarState.endDate) {
+    if (!start) {
+      if (calendarState.startDate) {
         start = new Date(calendarState.startDate);
-        end = new Date(calendarState.endDate);
-      } else {
-        setErrorMessage(LANGUAGE.header.calendar.errorMessage2);
-        return false;
       }
+    }
+
+    if (!end) {
+      if (calendarState.endDate) {
+        end = new Date(calendarState.endDate);
+      }
+    }
+
+    if (!start || !end) {
+      setErrorMessage(LANGUAGE.header.calendar.errorMessage3);
+      return false;
     }
 
     const adjustedStart = new Date(start);
@@ -377,7 +384,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
         setSelectedOption={(option: string) => dispatch(setFixedFilter(option))}
       />
       <div className={styles.personalizedDate}>
-        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
         <p className={styles.reportPeriod}>
           {LANGUAGE.header.calendar.reportingPeriod}
         </p>
@@ -547,6 +553,14 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
             />
           )}
         </div>
+        {errorMessage && (
+          <div className={styles.errorMessage}>
+            <p>
+              {errorMessage}
+              {LANGUAGE.header.calendar.errorMessage}
+            </p>
+          </div>
+        )}
         <div className={styles.selectPeriodButtonsContainer}>
           <GeneralButton
             callback={() => {
