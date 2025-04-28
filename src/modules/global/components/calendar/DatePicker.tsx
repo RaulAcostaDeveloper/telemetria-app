@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
+import { ButtonTypes } from "../generalButton/generalButton.model";
+import { GeneralButton } from "../generalButton/generalButton";
 import styles from "./Calendar.module.css";
 
 interface DatePickerProps {
@@ -73,14 +75,24 @@ const DatePicker: React.FC<DatePickerProps> = ({
               currentDate.getMonth(),
               i - currentDate.getDay() + 1
             );
-            // If the date is after today, do not render it.
             if (date > today) return null;
+
+            // Checa si hay una fecha resaltada y, al convertir date y highlightDate a texto (día/mes/año), ve si coinciden para marcar ese día, y regresa un booleano
+            const isSelected =
+              highlightDate &&
+              date.toDateString() === highlightDate.toDateString();
+            console.log(isSelected);
             return (
               <button
                 key={i}
                 onClick={() => handleDateChange(date)}
                 disabled={isPast90Days(date)}
-                className={buttonClassName}
+                //si isSelected true aplica un estilo que resalta el día selecionado
+                className={
+                  isSelected
+                    ? `${buttonClassName} ${styles.calendarDayButtonSelected}`
+                    : buttonClassName
+                }
               >
                 {date.getDate()}
               </button>
@@ -91,9 +103,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
           <div className={styles.errorMessage}>{errorMessage}</div>
         )}
         <div className={styles.todayButtonContainer}>
-          <button onClick={handleGoToToday} className={styles.todayButton}>
-            {LANGUAGE.header.calendar.datePicker.buttons.today}
-          </button>
+          <GeneralButton
+            callback={handleGoToToday}
+            title={LANGUAGE.header.calendar.datePicker.buttons.today}
+            type={ButtonTypes.CONFIRM}
+          />
         </div>
       </div>
     </div>
