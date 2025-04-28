@@ -12,6 +12,8 @@ import {
   isPast90Days,
   toLocalISOString,
 } from "@/modules/global/utils/utils";
+import { ButtonTypes } from "../generalButton/generalButton.model";
+import { GeneralButton } from "../generalButton/generalButton";
 import { RootState } from "@/store";
 import { setDateRange, setFixedFilter } from "@/slices/calendarSlice";
 import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
@@ -180,18 +182,40 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
 
   // Alterna el calendario de inicio y limpia el error
   const toggleStartDateCalendar = () => {
-    setShowStartDateCalendar(!showStartDateCalendar);
+    const willOpen = !showStartDateCalendar;
+    setShowStartDateCalendar(willOpen);
     setShowEndDateCalendar(false);
     setErrorMessage("");
-  };
 
+    if (willOpen) {
+      const initialDate: Date = startDate
+        ? startDate
+        : calendarState.startDate
+        ? new Date(calendarState.startDate)
+        : today;
+
+      setHighlightDate(initialDate);
+      setCurrentDate(initialDate);
+    }
+  };
   // Alterna el calendario de fin y limpia el error
   const toggleEndDateCalendar = () => {
-    setShowEndDateCalendar(!showEndDateCalendar);
+    const willOpen = !showEndDateCalendar;
+    setShowEndDateCalendar(willOpen);
     setShowStartDateCalendar(false);
     setErrorMessage("");
-  };
 
+    if (willOpen) {
+      const initialDate: Date = endDate
+        ? endDate
+        : calendarState.endDate
+        ? new Date(calendarState.endDate)
+        : today;
+
+      setHighlightDate(initialDate);
+      setCurrentDate(initialDate);
+    }
+  };
   // Al seleccionar una fecha, la actualiza y borra errores
   const handleDateChange = (
     date: Date | null,
@@ -524,23 +548,20 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
           )}
         </div>
         <div className={styles.selectPeriodButtonsContainer}>
-          <button
-            data-testid="save-button"
-            className={styles.selectPeriodSaveButton}
-            onClick={() => {
+          <GeneralButton
+            callback={() => {
               if (saveDate()) {
                 toggleContainer(); // sólo cierra cuando saveDate() devuelve true, haciendo que se muestre el mensaje de error.
               }
             }}
-          >
-            {LANGUAGE.header.calendar.acceptButtonLabel}
-          </button>
-          <button
-            onClick={toggleContainer}
-            className={styles.selectPeriodCancelButton}
-          >
-            {LANGUAGE.header.calendar.cancelButtonLabel}
-          </button>
+            title={LANGUAGE.header.calendar.acceptButtonLabel}
+            type={ButtonTypes.CONFIRM}
+          />
+          <GeneralButton
+            callback={toggleContainer}
+            title={LANGUAGE.header.calendar.cancelButtonLabel}
+            type={ButtonTypes.DANGER}
+          />
         </div>
       </div>
     </div>

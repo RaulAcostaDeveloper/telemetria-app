@@ -185,7 +185,8 @@
 }
 
 .calendarDayButtonFrom:hover {
-  background-color: var(--button-color-6);
+  background-color: var(--button-color-1);
+  color: white;
 }
 .calendarDayButtonTill {
   padding: 0.5rem;
@@ -195,7 +196,8 @@
   cursor: pointer;
 }
 .calendarDayButtonTill:hover {
-  background-color: var(--button-color-6);
+  background-color: var(--button-color-1);
+  color: white;
 }
 
 .isCustomCalendarContainer {
@@ -383,4 +385,8 @@
   color: white;
   z-index: 999999999;
   margin: 0.5rem 0;
+}
+.calendarDayButtonSelected {
+  background-color: var(--button-color-1);
+  color: white;
 }

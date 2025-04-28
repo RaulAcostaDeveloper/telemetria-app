@@ -75,14 +75,24 @@ const DatePicker: React.FC<DatePickerProps> = ({
               currentDate.getMonth(),
               i - currentDate.getDay() + 1
             );
-            // Si la fecha es depues de hoy no renderizar
             if (date > today) return null;
+
+            // Checa si hay una fecha resaltada y, al convertir date y highlightDate a texto (día/mes/año), ve si coinciden para marcar ese día, y regresa un booleano
+            const isSelected =
+              highlightDate &&
+              date.toDateString() === highlightDate.toDateString();
+            console.log(isSelected);
             return (
               <button
                 key={i}
                 onClick={() => handleDateChange(date)}
                 disabled={isPast90Days(date)}
-                className={buttonClassName}
+                //si isSelected true aplica un estilo que resalta el día selecionado
+                className={
+                  isSelected
+                    ? `${buttonClassName} ${styles.calendarDayButtonSelected}`
+                    : buttonClassName
+                }
               >
                 {date.getDate()}
               </button>
