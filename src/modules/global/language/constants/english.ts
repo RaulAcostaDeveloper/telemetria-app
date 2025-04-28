@@ -31,10 +31,10 @@ export const ENGLISH: LanguageInterface = {
       toLabel: "To:",
       acceptButtonLabel: "Accept",
       cancelButtonLabel: "Cancel",
-      errorMessage1: `The "End" date must not be earlier than the "Start" date.
-Please choose a valid time.`,
-      errorMessage2: `The time selected for the "To" date cannot be later than the current time. 
-Please choose a valid time.`,
+      errorMessage3: `Can not find "End" or "Start" date`,
+      errorMessage1: `The "End" date must not be earlier than the "Start" date.`,
+      errorMessage2: `The time selected for the "To" date cannot be later than the current time.`,
+      errorMessage: " Please choose a valid time.",
     },
   },
   menu: {

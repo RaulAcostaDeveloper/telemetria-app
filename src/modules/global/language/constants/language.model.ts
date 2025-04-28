@@ -18,14 +18,16 @@ export interface LanguageInterface {
           today: string;
         };
       };
-      fixedDateFilterOptions: string[];
-      reportingPeriod: string;
-      fromLabel: string;
-      toLabel: string;
       acceptButtonLabel: string;
       cancelButtonLabel: string;
+      errorMessage3: string;
       errorMessage1: string;
       errorMessage2: string;
+      errorMessage: string;
+      fixedDateFilterOptions: string[];
+      fromLabel: string;
+      reportingPeriod: string;
+      toLabel: string;
     };
   };
   menu: {
