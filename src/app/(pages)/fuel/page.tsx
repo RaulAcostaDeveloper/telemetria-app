@@ -57,7 +57,7 @@ export default function Fuel() {
   return (
     <div>
       <Table
-        addFormContent={ExampleTableForm}
+        createFormContent={ExampleTableForm}
         columns={tableColumns}
         data={tableData}
         editFormContent={ExampleTableForm}

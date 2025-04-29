@@ -9,14 +9,14 @@ import { LanguageSelector } from "../../language/utils/languageSelector";
 import { TableAddFormModal } from "../tableAddFormModal/tableAddFormModal";
 
 interface Props {
-  addFormContent?: React.FC<{
+  createFormContent?: React.FC<{
     dataObject?: { [key: string]: string | number };
     setIsDisabled: (val: boolean) => void;
     setSaveFunction: (cb: () => void) => void;
   }>;
 }
 
-export const TableAddNewButton = ({ addFormContent }: Props) => {
+export const TableAddNewButton = ({ createFormContent }: Props) => {
   const LANGUAGE = LanguageSelector();
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
@@ -32,9 +32,9 @@ export const TableAddNewButton = ({ addFormContent }: Props) => {
 
       {/* Modal de CREAR registro */}
       {/* Recibe el componente de formulario de CREAR */}
-      {showEditModal && addFormContent && (
+      {showEditModal && createFormContent && (
         <TableAddFormModal
-          addFormContent={addFormContent}
+          createFormContent={createFormContent}
           closeModal={() => setShowEditModal(false)}
         />
       )}

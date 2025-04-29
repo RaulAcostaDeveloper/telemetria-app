@@ -18,7 +18,7 @@ interface Props {
   showView?: boolean;
   title?: string;
   viewPath?: string;
-  addFormContent?: React.FC<{
+  createFormContent?: React.FC<{
     dataObject?: { [key: string]: string | number };
     setIsDisabled: (val: boolean) => void;
     setSaveFunction: (cb: () => void) => void;
@@ -31,7 +31,7 @@ interface Props {
 }
 
 export const Table = ({
-  addFormContent,
+  createFormContent,
   columns,
   data,
   editFormContent,
@@ -52,7 +52,7 @@ export const Table = ({
         {/* Botones externos */}
         <div className={`${styles.topActions}`}>
           {showCreateButton && (
-            <TableAddNewButton addFormContent={addFormContent} />
+            <TableAddNewButton createFormContent={createFormContent} />
           )}
           <TableDownloadCSV />
         </div>
