@@ -1,7 +1,8 @@
 .returnButton {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
+  width: 80px;
   padding: 20px 0;
   background-color: transparent;
   border: none;
@@ -13,7 +14,7 @@
 }
 
 .returnButton:hover {
-  background-color: var(--company-color-4);
+  /* background-color: var(--company-color-4); */
 }
 
 .returnButton svg {
