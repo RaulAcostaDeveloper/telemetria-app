@@ -5,7 +5,7 @@ import {
   calculatePredefinedDateRange,
   toLocalISOString,
 } from "@/modules/global/utils/utils";
-import { setDateRange } from "@/slices/calendarSlice";
+import { setDateRange } from "@/globalConfig/redux/slices/calendarSlice";
 import styles from "./Calendar.module.css";
 
 interface FixedDateSectionProps {

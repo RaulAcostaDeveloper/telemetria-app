@@ -14,8 +14,11 @@ import {
 } from "@/modules/global/utils/utils";
 import { ButtonTypes } from "../generalButton/generalButton.model";
 import { GeneralButton } from "../generalButton/generalButton";
-import { RootState } from "@/store";
-import { setDateRange, setFixedFilter } from "@/slices/calendarSlice";
+import { RootState } from "@/globalConfig/redux/store";
+import {
+  setDateRange,
+  setFixedFilter,
+} from "@/globalConfig/redux/slices/calendarSlice";
 import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
 
 const LANGUAGE = LanguageSelector();
