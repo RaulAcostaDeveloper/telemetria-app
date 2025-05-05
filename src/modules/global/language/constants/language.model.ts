@@ -29,6 +29,7 @@ export interface LanguageInterface {
       reportingPeriod: string;
       toLabel: string;
       daysOfWeek: string[];
+      daysOfWeekTitle: string;
     };
   };
   menu: {
