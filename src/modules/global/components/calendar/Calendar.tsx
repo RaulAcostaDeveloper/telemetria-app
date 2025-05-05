@@ -467,7 +467,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               currentDate={currentDate}
               highlightDate={highlightDate}
               changeMonth={changeMonth}
-              daysOfWeek={["Do", "Lu", "Ma", "Mi", "Jue", "Vie", "Sa"]}
+              daysOfWeek={LANGUAGE.header.calendar.daysOfWeek}
               handleDateChange={(date) => handleDateChange(date, setStartDate)}
               isPast90Days={checkPast90Days}
               today={today}
@@ -550,7 +550,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               currentDate={currentDate}
               highlightDate={highlightDate}
               changeMonth={changeMonth}
-              daysOfWeek={["Do", "Lu", "Ma", "Mi", "Jue", "Vie", "Sa"]}
+              daysOfWeek={LANGUAGE.header.calendar.daysOfWeek}
               handleDateChange={(date) => handleDateChange(date, setEndDate)}
               isPast90Days={checkPast90Days}
               today={today}

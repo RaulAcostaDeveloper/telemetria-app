@@ -35,6 +35,7 @@ export const SPANISH: LanguageInterface = {
       errorMessage1: `La fecha "Hasta" no puede ser anterior a la fecha "Desde" `,
       errorMessage2: `La hora seleccionada en la fecha "Hasta" no puede ser mayor que la hora actual.`,
       errorMessage: " Por favor selecciona una hora válida.",
+      daysOfWeek: ["Do", "Lu", "Ma", "Mi", "Jue", "Vie", "Sa"],
     },
   },
   menu: {
