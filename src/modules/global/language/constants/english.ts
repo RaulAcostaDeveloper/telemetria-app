@@ -36,6 +36,7 @@ export const ENGLISH: LanguageInterface = {
       errorMessage2: `The time selected for the "To" date cannot be later than the current time.`,
       errorMessage: " Please choose a valid time.",
       daysOfWeek: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+      daysOfWeekTitle: "Select",
     },
   },
   menu: {

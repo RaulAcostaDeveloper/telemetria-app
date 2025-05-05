@@ -87,6 +87,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                 key={i}
                 onClick={() => handleDateChange(date)}
                 disabled={isPast90Days(date)}
+                title={LANGUAGE.header.calendar.daysOfWeekTitle}
                 //si isSelected true aplica un estilo que resalta el día selecionado
                 className={
                   isSelected
