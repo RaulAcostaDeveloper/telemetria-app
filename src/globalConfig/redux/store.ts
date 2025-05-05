@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import calendarReducer from "@/slices/calendarSlice";
+import calendarReducer from "@/globalConfig/redux/slices/calendarSlice";
 
 export const store = configureStore({
   reducer: {
