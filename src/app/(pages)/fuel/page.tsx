@@ -1,4 +1,4 @@
-import { FuelTabs } from "@/modules/fuel/components";
+import { FuelDataProvider, FuelTabs } from "@/modules/fuel/components";
 import { Table } from "@/modules/global/components";
 import { ExampleTableForm } from "@/modules/global/components/exampleTableForm/exampleTableForm";
 import {
@@ -56,6 +56,7 @@ const tableData: dataTable = [
 export default function Fuel() {
   return (
     <div>
+      <FuelDataProvider />
       <Table
         createFormContent={ExampleTableForm}
         columns={tableColumns}

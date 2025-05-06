@@ -1,3 +1,4 @@
+export * from "./cacheCleaner/cacheCleaner";
 export * from "./calendar/Calendar";
 export * from "./footer/footer";
 export * from "./generalButton/generalButton";
