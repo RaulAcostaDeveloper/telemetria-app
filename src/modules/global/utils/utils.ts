@@ -1,5 +1,7 @@
 import React from "react";
 
+import { getCacheTable } from "@/globalConfig/cache/dexie";
+
 /**
  * Convierte una fecha a una cadena en formato ISO local.
  *
@@ -213,3 +215,22 @@ export const formatDateTime = (dateStr: string): string => {
 
   return `${day}/${month}/${year}, ${hourStr}:${minutes}:${seconds} ${ampm}`;
 };
+
+// Limpiar elementos en caché que tengan más de una semana de vida
+export async function cleanExpiredCache(): Promise<void> {
+  const now = Date.now();
+  const ttl = 7 * 24 * 60 * 60 * 1000; // 7 días
+  const table = getCacheTable();
+
+  try {
+    const deletedCount = await table
+      .where("timestamp")
+      .below(now - ttl)
+      .delete();
+    console.log(
+      `[CACHE CLEANUP] Eliminadas ${deletedCount} entradas expiradas.`
+    );
+  } catch (error) {
+    console.error("[CACHE CLEANUP ERROR]", error);
+  }
+}
