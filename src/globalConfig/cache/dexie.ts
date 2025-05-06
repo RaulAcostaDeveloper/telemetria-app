@@ -1,10 +1,14 @@
-import Dexie from "dexie";
+import Dexie, { Table } from "dexie";
 
 // Librería para manejar grandes volúmenes de datos
-export interface CacheEntry<T = any> {
+export interface CacheEntry<T> {
   key: string;
   timestamp: number;
   data: T;
+}
+
+export interface CacheDBSchema {
+  cache: CacheEntry<unknown>;
 }
 
 const db = new Dexie("ClientCacheDB");
@@ -14,9 +18,7 @@ db.version(1).stores({
   cache: "key, timestamp",
 });
 
-type CacheTable = Dexie.Table<CacheEntry, string>;
-
 // Exportar acceso a la tabla
-export const getCacheTable = (): CacheTable => {
-  return db.table("cache") as CacheTable;
-};
+export function getCacheTable<T>(): Table<CacheEntry<T>, string> {
+  return db.table("cache") as Table<CacheEntry<T>, string>;
+}
