@@ -51,7 +51,6 @@ export const fetchFuelSummary = createAsyncThunk(
     startDate: string;
     endDate: string;
     performanceType: string;
-    forceRefresh?: boolean;
   }) => {
     return getFuelSummary(accountId, startDate, endDate, performanceType);
   }
