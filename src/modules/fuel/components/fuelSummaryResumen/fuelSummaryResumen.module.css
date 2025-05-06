@@ -1,0 +1,9 @@
+.fuelSummaryResumen {
+  font-size: 2rem;
+}
+
+.fuelSummaryResumen p {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
