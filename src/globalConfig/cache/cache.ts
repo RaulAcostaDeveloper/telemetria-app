@@ -1,4 +1,4 @@
-import { CacheEntry, getCacheTable } from "./dexie";
+import { getCacheTable } from "./dexie";
 
 // Función genérica de manejo de caché con dexie.js
 export async function getCached<T>(
@@ -8,7 +8,7 @@ export async function getCached<T>(
 ): Promise<T> {
   const now = Date.now();
 
-  const table = getCacheTable();
+  const table = getCacheTable<T>();
   const cached = await table.get(key);
 
   if (!forceRefresh && cached && now - cached.timestamp) {
@@ -19,7 +19,7 @@ export async function getCached<T>(
   // Ejecuta la función fetch proporcionada
   const data = await fetcher();
   // Reemplaza los datos en caché
-  await table.put({ key, timestamp: now, data } as CacheEntry);
+  await table.put({ key, timestamp: now, data });
   return data;
 }
 
