@@ -15,7 +15,7 @@ interface DatePickerProps {
   today: Date;
   handleGoToToday: () => void;
   buttonClassName: string;
-  formatDate: (date: Date) => string;
+  formatDate: (date: Date) => string; // Ya no se usa para el título principal
   errorMessage?: string;
 }
 
@@ -29,10 +29,21 @@ const DatePicker: React.FC<DatePickerProps> = ({
   today,
   handleGoToToday,
   buttonClassName,
-  formatDate,
+  // formatDate ya no se utiliza para el span de mes/año
   errorMessage,
 }) => {
   const LANGUAGE = LanguageSelector();
+
+  // Función para formatear la fecha como "Mes | Año" y capitalizar la primera letra
+  const formatMonthYear = (date: Date): string => {
+    // Obtenemos el nombre largo del mes en el locale del usuario
+    const monthName = date.toLocaleString(undefined, { month: "long" });
+    // Capitalizamos la primera letra y mantenemos el resto igual
+    const monthCapitalized =
+      monthName.charAt(0).toUpperCase() + monthName.slice(1);
+    const year = date.getFullYear();
+    return `${monthCapitalized} | ${year}`;
+  };
 
   const isCurrentMonth =
     currentDate.getFullYear() === today.getFullYear() &&
@@ -49,9 +60,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
             ‹
           </button>
           <span className={styles.dateSpan}>
-            {highlightDate
-              ? formatDate(highlightDate)
-              : formatDate(currentDate)}
+            {/* Mostrar siempre el mes/año de la vista actual (currentDate) */}
+            {formatMonthYear(currentDate)}
           </span>
           <button
             onClick={() => changeMonth(1)}
@@ -61,6 +71,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             ›
           </button>
         </div>
+
         <div className={styles.daysOfTheWeekContainer}>
           {daysOfWeek.map((day, index) => (
             <div key={index} className={styles.daysOfTheWeekSubContainer}>
@@ -68,6 +79,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             </div>
           ))}
         </div>
+
         <div className={styles.calendarDayButtonContainer}>
           {Array.from({ length: 42 }, (_, i) => {
             const date = new Date(
@@ -77,18 +89,17 @@ const DatePicker: React.FC<DatePickerProps> = ({
             );
             if (date > today) return null;
 
-            // Checa si hay una fecha resaltada y, al convertir date y highlightDate a texto (día/mes/año), ve si coinciden para marcar ese día, y regresa un booleano
+            // Comprobamos que highlightDate no sea null antes de usarlo
             const isSelected =
-              highlightDate &&
+              highlightDate != null &&
               date.toDateString() === highlightDate.toDateString();
-            console.log(isSelected);
+
             return (
               <button
                 key={i}
                 onClick={() => handleDateChange(date)}
                 disabled={isPast90Days(date)}
                 title={LANGUAGE.header.calendar.daysOfWeekTitle}
-                //si isSelected true aplica un estilo que resalta el día selecionado
                 className={
                   isSelected
                     ? `${buttonClassName} ${styles.calendarDayButtonSelected}`
@@ -100,9 +111,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
             );
           })}
         </div>
+
         {errorMessage && (
           <div className={styles.errorMessage}>{errorMessage}</div>
         )}
+
         <div className={styles.todayButtonContainer}>
           <GeneralButton
             callback={handleGoToToday}
