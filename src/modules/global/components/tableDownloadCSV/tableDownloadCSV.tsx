@@ -4,10 +4,13 @@ import DownloadIcon from "@mui/icons-material/Download";
 import styles from "./tableDownloadCSV.module.css";
 import { ButtonTypes } from "../generalButton/generalButton.model";
 import { GeneralButton } from "../generalButton/generalButton";
-import { LanguageSelector } from "../../language/utils/languageSelector";
+import { LanguageInterface } from "../../language/constants/language.model";
 
-export const TableDownloadCSV = () => {
-  const LANGUAGE = LanguageSelector();
+interface Props {
+  LANGUAGE: LanguageInterface;
+}
+
+export const TableDownloadCSV = ({ LANGUAGE }: Props) => {
   return (
     <GeneralButton
       Icon={<DownloadIcon />}

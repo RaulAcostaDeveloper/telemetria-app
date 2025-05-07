@@ -10,6 +10,10 @@ import { Header } from "../header/header";
 import { Menu } from "../menu/menu";
 import { PageContainer } from "../pageContainer/pageContainer";
 import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
+import { LanguageContext } from "../../language/components/languageProvider/languageProvider";
+import { LanguageInterface } from "../../language/constants/language.model";
+import { ENGLISH } from "../../language/constants/english";
+import { SPANISH } from "../../language/constants/spanish";
 
 interface Props {
   children: React.ReactNode;
@@ -17,6 +21,14 @@ interface Props {
 
 export const MainWrapper = ({ children }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | null>(null);
+  const [LANGUAGE, setLanguage] = useState<LanguageInterface>(ENGLISH);
+
+  // Aquí trae de redux y modifica el lenguaje
+  useEffect(() => {
+    setTimeout(() => {
+      setLanguage(SPANISH);
+    }, 2000);
+  }, []);
 
   useEffect(() => {
     const defaultValue: boolean = true;
@@ -48,12 +60,18 @@ export const MainWrapper = ({ children }: Props) => {
 
   return (
     <div className={`${styles.mainWrapper}`}>
-      <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      <Menu
+        LANGUAGE={LANGUAGE}
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+      />
       <div className={`${styles.rightContent}`}>
-        <Header isMenuOpen={isMenuOpen} />
+        <Header LANGUAGE={LANGUAGE} isMenuOpen={isMenuOpen} />
 
         {/* Contenido de la página */}
-        <PageContainer>{children}</PageContainer>
+        <LanguageContext.Provider value={LANGUAGE}>
+          <PageContainer>{children}</PageContainer>
+        </LanguageContext.Provider>
       </div>
     </div>
   );

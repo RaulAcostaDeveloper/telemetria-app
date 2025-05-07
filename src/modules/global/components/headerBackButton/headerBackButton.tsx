@@ -3,12 +3,15 @@ import { usePathname, useRouter } from "next/navigation";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import styles from "./headerBackButton.module.css";
-import { LanguageSelector } from "../../language/utils/languageSelector";
+import { LanguageInterface } from "../../language/constants/language.model";
 
-export const HeaderBackButton = () => {
+interface Props {
+  LANGUAGE: LanguageInterface;
+}
+
+export const HeaderBackButton = ({ LANGUAGE }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
-  const LANGUAGE = LanguageSelector();
 
   // Retroceder a la página anterior.
   const goBack = (): void => {

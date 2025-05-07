@@ -1,8 +1,11 @@
-import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
+import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { TabsContent } from "@/modules/global/components";
 
-export const FuelTabs: React.FC = () => {
-  const LANGUAGE = LanguageSelector();
+interface Props {
+  LANGUAGE: LanguageInterface;
+}
+
+export const FuelTabs = ({ LANGUAGE }: Props) => {
   const tabOptions = [
     LANGUAGE.fuel.tabs.groups,
     LANGUAGE.fuel.tabs.unitys,

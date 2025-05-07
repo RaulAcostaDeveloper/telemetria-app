@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
 import { ButtonTypes } from "../generalButton/generalButton.model";
 import { GeneralButton } from "../generalButton/generalButton";
 import styles from "./Calendar.module.css";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 interface DatePickerProps {
   currentDate: Date;
@@ -17,6 +17,7 @@ interface DatePickerProps {
   buttonClassName: string;
   formatDate: (date: Date) => string;
   errorMessage?: string;
+  LANGUAGE: LanguageInterface;
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({
@@ -31,9 +32,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
   buttonClassName,
   formatDate,
   errorMessage,
+  LANGUAGE,
 }) => {
-  const LANGUAGE = LanguageSelector();
-
   const isCurrentMonth =
     currentDate.getFullYear() === today.getFullYear() &&
     currentDate.getMonth() === today.getMonth();
