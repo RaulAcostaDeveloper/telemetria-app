@@ -2,8 +2,10 @@ import styles from "./tableDataContent.module.css";
 import { TableActions } from "../tableActions/tableActions";
 import { TableDataProp } from "../tableDataProp/tableDataProp";
 import { columnsTable, dataTable } from "../table/table.model";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
+  LANGUAGE: LanguageInterface;
   columns: columnsTable;
   data: dataTable;
   idKey?: string;
@@ -29,6 +31,7 @@ export const TableDataContent = ({
   showEdit,
   showView,
   viewPath,
+  LANGUAGE,
 }: Props) => {
   return (
     <div className={styles.dataContent}>
@@ -46,6 +49,7 @@ export const TableDataContent = ({
             return (
               <div key={colIndex} style={defaultSpace}>
                 <TableDataProp
+                  LANGUAGE={LANGUAGE}
                   value={String(dataValues[colIndex] ?? "-")}
                   defaultSpace={defaultSpace}
                 />
@@ -56,6 +60,7 @@ export const TableDataContent = ({
           {/* Acciones de los registros */}
           {showActions && (
             <TableActions
+              LANGUAGE={LANGUAGE}
               dataObject={dataObject}
               editFormContent={editFormContent}
               idKey={idKey}

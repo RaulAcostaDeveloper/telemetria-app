@@ -1,4 +1,5 @@
 import styles from "./table.module.css";
+import { LanguageInterface } from "../../language/constants/language.model";
 import { TableAddNewButton } from "../tableAddNewButton/tableAddNewButton";
 import { TableColumns } from "../tableColumns/tableColumns";
 import { TableDataContent } from "../tableDataContent/tableDataContent";
@@ -9,6 +10,7 @@ import { TableSearch } from "../tableSearch/tableSearch";
 import { columnsTable, dataTable } from "./table.model";
 
 interface Props {
+  LANGUAGE: LanguageInterface;
   columns: columnsTable;
   data: dataTable;
   idKey?: string;
@@ -42,6 +44,7 @@ export const Table = ({
   showView,
   title,
   viewPath,
+  LANGUAGE,
 }: Props) => {
   return (
     <div className={`${styles.container}`}>
@@ -52,19 +55,22 @@ export const Table = ({
         {/* Botones externos */}
         <div className={`${styles.topActions}`}>
           {showCreateButton && (
-            <TableAddNewButton createFormContent={createFormContent} />
+            <TableAddNewButton
+              LANGUAGE={LANGUAGE}
+              createFormContent={createFormContent}
+            />
           )}
-          <TableDownloadCSV />
+          <TableDownloadCSV LANGUAGE={LANGUAGE} />
         </div>
 
         {/* Búsqueda en la primer columna*/}
         <div className={`${styles.topActions}`}>
-          <TableSearch />
+          <TableSearch LANGUAGE={LANGUAGE} />
         </div>
 
         {/* Filtros por columna */}
         <div className={`${styles.topActions}`}>
-          <TableFilters columns={columns} />
+          <TableFilters LANGUAGE={LANGUAGE} columns={columns} />
         </div>
 
         {/* Tabla */}
@@ -72,12 +78,14 @@ export const Table = ({
           <div>
             {/* Columnas */}
             <TableColumns
+              LANGUAGE={LANGUAGE}
               columns={columns}
               showActions={showDelete || showEdit || showView}
             />
 
             {/* Registros de la tabla */}
             <TableDataContent
+              LANGUAGE={LANGUAGE}
               columns={columns}
               data={data}
               showActions={showDelete || showEdit || showView}
@@ -92,7 +100,7 @@ export const Table = ({
         </div>
 
         {/* Suma de valores */}
-        <TableDataSummatory columns={columns} data={data} />
+        <TableDataSummatory LANGUAGE={LANGUAGE} columns={columns} data={data} />
       </div>
     </div>
   );

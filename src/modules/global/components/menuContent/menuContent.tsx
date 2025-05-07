@@ -4,17 +4,17 @@ import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 
 import LogoutIcon from "@mui/icons-material/Logout";
 import styles from "./menuContent.module.css";
-import { LanguageSelector } from "../../language/utils/languageSelector";
 import { MenuButton } from "../menuButton/menuButton";
 import { MenuRoute } from "../menuRoute/menuRoute";
 import { usePathname } from "next/navigation";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
   isOpen: boolean | null;
+  LANGUAGE: LanguageInterface;
 }
 
-export const MenuContent = ({ isOpen }: Props) => {
-  const LANGUAGE = LanguageSelector();
+export const MenuContent = ({ isOpen, LANGUAGE }: Props) => {
   const pathname = usePathname();
 
   const menuList = [

@@ -7,11 +7,12 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import styles from "./tableActions.module.css";
-import { LanguageSelector } from "../../language/utils/languageSelector";
 import { TableDeleteModal } from "../tableDeleteModal/tableDeleteModa";
 import { TableEditFormModal } from "../tableEditFormModal/tableEditFormModa";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
+  LANGUAGE: LanguageInterface;
   dataObject: { [key: string]: string | number };
   idKey?: string;
   showActions?: boolean;
@@ -28,6 +29,7 @@ interface Props {
 
 // Acciones de la tabla para los registros
 export const TableActions = ({
+  LANGUAGE,
   dataObject,
   editFormContent,
   showDelete,
@@ -35,7 +37,6 @@ export const TableActions = ({
   showView,
   viewPath,
 }: Props) => {
-  const LANGUAGE = LanguageSelector();
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
@@ -77,6 +78,7 @@ export const TableActions = ({
       {/* Modal que contiene el formulario de Editar*/}
       {showEditModal && (
         <TableEditFormModal
+          LANGUAGE={LANGUAGE}
           closeModal={() => setShowEditModal(false)}
           dataObject={dataObject}
           editFormContent={editFormContent}

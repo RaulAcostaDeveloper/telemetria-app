@@ -1,8 +1,11 @@
 import styles from "./authForm.module.css";
-import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
+import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 
-export const AuthForm = () => {
-  const LANGUAGE = LanguageSelector();
+interface Props {
+  LANGUAGE: LanguageInterface;
+}
+
+export const AuthForm = ({ LANGUAGE }: Props) => {
   return (
     <div className={`${styles.authForm}`}>
       <p>{LANGUAGE.auth.authForm.title}</p>

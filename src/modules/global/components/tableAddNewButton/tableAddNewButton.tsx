@@ -5,10 +5,11 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import styles from "./tableAddNewButton.module.css";
 import { ButtonTypes } from "../generalButton/generalButton.model";
 import { GeneralButton } from "../generalButton/generalButton";
-import { LanguageSelector } from "../../language/utils/languageSelector";
 import { TableAddFormModal } from "../tableAddFormModal/tableAddFormModal";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
+  LANGUAGE: LanguageInterface;
   createFormContent?: React.FC<{
     dataObject?: { [key: string]: string | number };
     setIsDisabled: (val: boolean) => void;
@@ -16,8 +17,7 @@ interface Props {
   }>;
 }
 
-export const TableAddNewButton = ({ createFormContent }: Props) => {
-  const LANGUAGE = LanguageSelector();
+export const TableAddNewButton = ({ createFormContent, LANGUAGE }: Props) => {
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
   return (
@@ -34,6 +34,7 @@ export const TableAddNewButton = ({ createFormContent }: Props) => {
       {/* Recibe el componente de formulario de CREAR */}
       {showEditModal && createFormContent && (
         <TableAddFormModal
+          LANGUAGE={LANGUAGE}
           createFormContent={createFormContent}
           closeModal={() => setShowEditModal(false)}
         />

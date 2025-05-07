@@ -1,17 +1,16 @@
 "use client";
 import styles from "./tableDataProp.module.css";
-import { LanguageSelector } from "../../language/utils/languageSelector";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
   defaultSpace: { width: string };
   value: string;
+  LANGUAGE: LanguageInterface;
 }
 
 // Dato en el registro, copiar el dato en clipboard
 // Tiene el mismo espacio que se le asignó a la columna
-export const TableDataProp = ({ defaultSpace, value }: Props) => {
-  const LANGUAGE = LanguageSelector();
-
+export const TableDataProp = ({ defaultSpace, value, LANGUAGE }: Props) => {
   const copyToClipboard = async (text: string): Promise<void> => {
     try {
       await navigator.clipboard.writeText(text);
