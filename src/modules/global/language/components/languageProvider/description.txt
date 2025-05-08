@@ -1,0 +1,4 @@
+Contexto del lenguaje para poder obtenerlo en page.tsx
+Se usa en el componente src\modules\global\components\mainWrapper\mainWrapper.tsx
+En el componente MainWrapper se selecciona el idioma LANGUAGE a través de lo que está almacenado en redux
+Y en redux se obtiene el lenguaje de la seleccion del usuario o de localStorage (primer render)
