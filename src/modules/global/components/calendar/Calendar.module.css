@@ -392,3 +392,8 @@
   background-color: var(--button-color-1);
   color: white;
 }
+
+.dayOutsideMonthRange {
+  color: #ccc;
+  cursor: default;
+}

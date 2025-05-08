@@ -467,13 +467,12 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
               currentDate={currentDate}
               highlightDate={highlightDate}
               changeMonth={changeMonth}
-              daysOfWeek={["Do", "Lu", "Ma", "Mi", "Jue", "Vie", "Sa"]}
+              daysOfWeek={LANGUAGE.header.calendar.daysOfWeek}
               handleDateChange={(date) => handleDateChange(date, setStartDate)}
               isPast90Days={checkPast90Days}
               today={today}
               handleGoToToday={handleGoToToday}
               buttonClassName={styles.calendarDayButtonFrom}
-              formatDate={formatDate}
               errorMessage={errorMessage}
               LANGUAGE={LANGUAGE}
             />
@@ -551,13 +550,12 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
               currentDate={currentDate}
               highlightDate={highlightDate}
               changeMonth={changeMonth}
-              daysOfWeek={["Do", "Lu", "Ma", "Mi", "Jue", "Vie", "Sa"]}
+              daysOfWeek={LANGUAGE.header.calendar.daysOfWeek}
               handleDateChange={(date) => handleDateChange(date, setEndDate)}
               isPast90Days={checkPast90Days}
               today={today}
               handleGoToToday={handleGoToToday}
               buttonClassName={styles.calendarDayButtonTill}
-              formatDate={formatDate}
               errorMessage={errorMessage}
               LANGUAGE={LANGUAGE}
             />
