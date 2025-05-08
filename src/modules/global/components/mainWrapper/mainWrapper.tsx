@@ -6,29 +6,49 @@ import {
   localStorageGetItem,
   localStorageSetItem,
 } from "../../localStorage/utils/storageService";
+import { ENGLISH } from "../../language/constants/english";
 import { Header } from "../header/header";
-import { Menu } from "../menu/menu";
-import { PageContainer } from "../pageContainer/pageContainer";
-import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
+import { LANGUAGE_OPTIONS } from "../../language/utils/languageSelector.model";
 import { LanguageContext } from "../../language/components/languageProvider/languageProvider";
 import { LanguageInterface } from "../../language/constants/language.model";
-import { ENGLISH } from "../../language/constants/english";
+import { Menu } from "../menu/menu";
+import { PageContainer } from "../pageContainer/pageContainer";
+import { RootState } from "@/globalConfig/redux/store";
 import { SPANISH } from "../../language/constants/spanish";
-// aqui
+import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
+import { useSelector } from "react-redux";
+
 interface Props {
   children: React.ReactNode;
 }
 
 export const MainWrapper = ({ children }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | null>(null);
-  const [LANGUAGE, setLanguage] = useState<LanguageInterface>(ENGLISH);
+  const [LANGUAGE, setLanguageObject] = useState<LanguageInterface>(SPANISH);
 
-  // Aquí trae de redux y modifica el lenguaje
+  const languageSelected = useSelector(
+    (state: RootState) => state.languageOption.languageSelected
+  );
+
+  // Aquí trae de redux y modifica el LANGUAGE
   useEffect(() => {
-    setTimeout(() => {
-      setLanguage(SPANISH);
-    }, 2000);
-  }, []);
+    switch (languageSelected) {
+      case LANGUAGE_OPTIONS.SPANISH:
+        setLanguageObject(SPANISH);
+        break;
+      case LANGUAGE_OPTIONS.ENGLISH:
+        setLanguageObject(ENGLISH);
+        break;
+      default:
+        setLanguageObject(SPANISH);
+        break;
+    }
+  }, [languageSelected]);
+
+  // Ejemplo de como cambiar el idioma
+  // setTimeout(() => {
+  //   dispatch(setLanguageReducer(LANGUAGE_OPTIONS.ENGLISH));
+  // }, 5000);
 
   useEffect(() => {
     const defaultValue: boolean = true;
