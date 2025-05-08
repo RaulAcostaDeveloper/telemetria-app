@@ -11,7 +11,7 @@ interface Props {
 export const MenuHeader = ({ isOpen, setIsOpen, LANGUAGE }: Props) => {
   return (
     <div
-      className={`${styles.header}`}
+      className={`${styles.header} ${isOpen ? styles.isOpen : ""}`}
       onClick={() => setIsOpen(!isOpen)}
       title={isOpen ? LANGUAGE.menu.titles.close : LANGUAGE.menu.titles.open}
     >
