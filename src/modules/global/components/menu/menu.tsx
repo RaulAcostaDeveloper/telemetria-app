@@ -1,13 +1,15 @@
 import styles from "./menu.module.css";
 import { MenuContent } from "../menuContent/menuContent";
 import { MenuHeader } from "../menuHeader/menuHeader";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
   isMenuOpen: boolean | null;
   setIsMenuOpen: (isOpen: boolean | null) => void;
+  LANGUAGE: LanguageInterface;
 }
 
-export const Menu = ({ isMenuOpen, setIsMenuOpen }: Props) => {
+export const Menu = ({ isMenuOpen, setIsMenuOpen, LANGUAGE }: Props) => {
   return (
     <>
       <div
@@ -17,8 +19,12 @@ export const Menu = ({ isMenuOpen, setIsMenuOpen }: Props) => {
             : `${styles.close}`
         }`}
       >
-        <MenuHeader isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
-        <MenuContent isOpen={isMenuOpen} />
+        <MenuHeader
+          LANGUAGE={LANGUAGE}
+          isOpen={isMenuOpen}
+          setIsOpen={setIsMenuOpen}
+        />
+        <MenuContent LANGUAGE={LANGUAGE} isOpen={isMenuOpen} />
       </div>
 
       <div

@@ -1,17 +1,16 @@
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 import styles from "./tableColumns.module.css";
-import { LanguageSelector } from "../../language/utils/languageSelector";
 import { columnsTable } from "../table/table.model";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
   columns: columnsTable;
   showActions?: boolean;
+  LANGUAGE: LanguageInterface;
 }
 
-export const TableColumns = ({ columns, showActions }: Props) => {
-  const LANGUAGE = LanguageSelector();
-
+export const TableColumns = ({ columns, showActions, LANGUAGE }: Props) => {
   return (
     <div className={`${styles.columns}`}>
       {columns.map((el, index) => {

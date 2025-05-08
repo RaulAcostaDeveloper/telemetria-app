@@ -9,7 +9,7 @@ import {
 } from "@mui/icons-material";
 
 import styles from "./headerVehicleFilter.module.css";
-import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 type Vehicle = {
   name: string;
@@ -37,34 +37,37 @@ type Action = {
   title: string;
 };
 
-const LANGUAGE = LanguageSelector();
-const actions: Action[] = [
-  {
-    label: "management",
-    routePrefix: "management",
-    title: `${LANGUAGE.header.vehicleFilter.actionManagementTitle}`,
-  },
-  {
-    label: "telemetry",
-    routePrefix: "telemetry",
-    title: `${LANGUAGE.header.vehicleFilter.actionTelemetryTitle}`,
-  },
-  {
-    label: "fuel",
-    routePrefix: "fuel",
-    title: `${LANGUAGE.header.vehicleFilter.actionFuelTitle}`,
-  },
-];
-
 const iconMapping: { [key: string]: JSX.Element } = {
   management: <ManageAccountsIcon />,
   telemetry: <SpeedIcon />,
   fuel: <LocalGasStationIcon />,
 };
 
-const HeaderVehicleFilter = () => {
+interface Props {
+  LANGUAGE: LanguageInterface;
+}
+
+const HeaderVehicleFilter = ({ LANGUAGE }: Props) => {
   const [query, setQuery] = useState<string>("");
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
+
+  const actions: Action[] = [
+    {
+      label: "management",
+      routePrefix: "management",
+      title: `${LANGUAGE.header.vehicleFilter.actionManagementTitle}`,
+    },
+    {
+      label: "telemetry",
+      routePrefix: "telemetry",
+      title: `${LANGUAGE.header.vehicleFilter.actionTelemetryTitle}`,
+    },
+    {
+      label: "fuel",
+      routePrefix: "fuel",
+      title: `${LANGUAGE.header.vehicleFilter.actionFuelTitle}`,
+    },
+  ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const value = e.target.value;

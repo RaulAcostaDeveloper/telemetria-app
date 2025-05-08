@@ -1,10 +1,12 @@
-import { FuelDataProvider, FuelTabs } from "@/modules/fuel/components";
-import { Table } from "@/modules/global/components";
-import { ExampleTableForm } from "@/modules/global/components/exampleTableForm/exampleTableForm";
+"use client";
 import {
   columnsTable,
   dataTable,
 } from "@/modules/global/components/table/table.model";
+import { ExampleTableForm } from "@/modules/global/components/exampleTableForm/exampleTableForm";
+import { FuelDataProvider, FuelTabs } from "@/modules/fuel/components";
+import { Table } from "@/modules/global/components";
+import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
 const tableColumns: columnsTable = [
   {
@@ -54,10 +56,13 @@ const tableData: dataTable = [
 ];
 
 export default function Fuel() {
+  const LANGUAGE = useLanguage();
+
   return (
     <div>
       <FuelDataProvider />
       <Table
+        LANGUAGE={LANGUAGE}
         createFormContent={ExampleTableForm}
         columns={tableColumns}
         data={tableData}
@@ -71,6 +76,7 @@ export default function Fuel() {
         viewPath="/management/vehicle/"
       />
       <Table
+        LANGUAGE={LANGUAGE}
         columns={tableColumns}
         data={tableData}
         showCreateButton
@@ -80,6 +86,7 @@ export default function Fuel() {
         title="Mi tabla"
       />
       <Table
+        LANGUAGE={LANGUAGE}
         columns={tableColumns}
         data={tableData}
         showCreateButton
@@ -88,7 +95,7 @@ export default function Fuel() {
         showView
         title="Mi tabla"
       />
-      <FuelTabs />
+      <FuelTabs LANGUAGE={LANGUAGE} />
     </div>
   );
 }
