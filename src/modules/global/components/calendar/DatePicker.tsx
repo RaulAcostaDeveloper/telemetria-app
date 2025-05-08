@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
-import { formatMonthYear } from "@/modules/global/utils/utils";
+
 import { ButtonTypes } from "../generalButton/generalButton.model";
 import { GeneralButton } from "../generalButton/generalButton";
 import styles from "./Calendar.module.css";
@@ -43,6 +43,21 @@ const DatePicker: React.FC<DatePickerProps> = ({
   // ¿Estamos en el mes de "hoy"?
   const isCurrentMonth =
     year === today.getFullYear() && month === today.getMonth();
+
+  /**
+   * Formatea una fecha en "Mes | Año" usando un array de nombres de meses
+   *
+   * @param date - La fecha que se quiere formatear
+   * @param monthNames - Array de 12 strings con los nombres de mes localizados
+   * @returns Cadena con formato "Mes | Año", p.ej. "Mayo | 2025"
+   *
+   */
+  const formatMonthYear = (date: Date, monthNames: string[]): string => {
+    const monthIndex = date.getMonth();
+    const month = monthNames[monthIndex];
+    const year = date.getFullYear();
+    return `${month} | ${year}`;
+  };
 
   return (
     <div className={styles.dateContainer}>
