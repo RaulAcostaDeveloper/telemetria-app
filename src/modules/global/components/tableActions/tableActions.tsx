@@ -87,7 +87,10 @@ export const TableActions = ({
 
       {/* Modal que contiene el formulario de Eliminar*/}
       {showDeleteModal && (
-        <TableDeleteModal closeModal={() => setShowDeleteModal(false)} />
+        <TableDeleteModal
+          LANGUAGE={LANGUAGE}
+          closeModal={() => setShowDeleteModal(false)}
+        />
       )}
     </div>
   );

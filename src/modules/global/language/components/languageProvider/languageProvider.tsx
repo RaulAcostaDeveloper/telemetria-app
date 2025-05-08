@@ -1,12 +1,12 @@
-// context/LanguageContext.tsx
 "use client";
 
 import { createContext, useContext } from "react";
 import { LanguageInterface } from "../../constants/language.model";
-import { ENGLISH } from "../../constants/english";
+import { SPANISH } from "../../constants/spanish";
 
-export const LanguageContext = createContext<LanguageInterface>(ENGLISH);
+// Español por defecto
+// Provider
+export const LanguageContext = createContext<LanguageInterface>(SPANISH);
 
+// Obtener el valor del provider en page.tsx
 export const useLanguage = () => useContext(LanguageContext);
-
-// aqui

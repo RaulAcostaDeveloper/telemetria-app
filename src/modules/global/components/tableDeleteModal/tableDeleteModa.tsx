@@ -5,18 +5,17 @@ import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import styles from "./tableDeleteModal.module.css";
 import { ButtonTypes } from "../generalButton/generalButton.model";
 import { GeneralButton } from "../generalButton/generalButton";
-import { LanguageSelector } from "../../language/utils/languageSelector";
 import { Modal } from "../modal/modal";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
   closeModal: () => void;
+  LANGUAGE: LanguageInterface;
 }
 
-export const TableDeleteModal = ({ closeModal }: Props) => {
-  const LANGUAGE = LanguageSelector();
-
+export const TableDeleteModal = ({ closeModal, LANGUAGE }: Props) => {
   return (
-    <Modal closeModal={closeModal}>
+    <Modal LANGUAGE={LANGUAGE} closeModal={closeModal}>
       <div className={`${styles.inside}`}>
         <div className={`${styles.warningIconContainer}`}>
           <div className={`${styles.warningIcon}`}>
