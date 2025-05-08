@@ -16,7 +16,6 @@ interface DatePickerProps {
   today: Date;
   handleGoToToday: () => void;
   buttonClassName: string;
-  formatDate: (date: Date) => string; // Ya no se usa para el título principal
   errorMessage?: string;
 }
 
@@ -30,18 +29,25 @@ const DatePicker: React.FC<DatePickerProps> = ({
   today,
   handleGoToToday,
   buttonClassName,
-  // formatDate ya no se utiliza para el span de mes/año
   errorMessage,
 }) => {
   const LANGUAGE = LanguageSelector();
 
+  // Año y mes de la vista actual
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+
+  // Día de la semana del primer día del mes (0=domingo…6=sábado)
+  const firstDayOfMonth = new Date(year, month, 1).getDay();
+
+  // ¿Estamos en el mes de "hoy"?
   const isCurrentMonth =
-    currentDate.getFullYear() === today.getFullYear() &&
-    currentDate.getMonth() === today.getMonth();
+    year === today.getFullYear() && month === today.getMonth();
 
   return (
     <div className={styles.dateContainer}>
       <div className={styles.dateSubContainer}>
+        {/* Cabecera: flechas y mes/año */}
         <div className={styles.dateDayMonthYear}>
           <button
             onClick={() => changeMonth(-1)}
@@ -61,39 +67,49 @@ const DatePicker: React.FC<DatePickerProps> = ({
           </button>
         </div>
 
+        {/* Días de la semana */}
         <div className={styles.daysOfTheWeekContainer}>
-          {daysOfWeek.map((day, index) => (
-            <div key={index} className={styles.daysOfTheWeekSubContainer}>
+          {daysOfWeek.map((day, idx) => (
+            <div key={idx} className={styles.daysOfTheWeekSubContainer}>
               {day}
             </div>
           ))}
         </div>
 
+        {/* Botones de días */}
         <div className={styles.calendarDayButtonContainer}>
           {Array.from({ length: 42 }, (_, i) => {
-            const date = new Date(
-              currentDate.getFullYear(),
-              currentDate.getMonth(),
-              i - currentDate.getDay() + 1
-            );
+            // 1) Construye fecha usando el offset del primer día
+            const date = new Date(year, month, i - firstDayOfMonth + 1);
+
+            // 2) Oculta días futuros
             if (date > today) return null;
 
-            // Comprobamos que highlightDate no sea null antes de usarlo
+            // 3) Detecta fuera de mes
+            const isOutsideMonth = date.getMonth() !== month;
+
+            // 4) Deshabilita o grishea
+            const isDisabled = isPast90Days(date) || isOutsideMonth;
+
+            // 5) Seleccionado solo dentro de mes actual
             const isSelected =
+              !isOutsideMonth &&
               highlightDate != null &&
               date.toDateString() === highlightDate.toDateString();
 
             return (
               <button
                 key={i}
-                onClick={() => handleDateChange(date)}
-                disabled={isPast90Days(date)}
+                onClick={() => !isOutsideMonth && handleDateChange(date)}
+                disabled={isDisabled}
                 title={LANGUAGE.header.calendar.daysOfWeekTitle}
-                className={
-                  isSelected
-                    ? `${buttonClassName} ${styles.calendarDayButtonSelected}`
-                    : buttonClassName
-                }
+                className={[
+                  buttonClassName,
+                  isSelected && styles.calendarDayButtonSelected,
+                  isOutsideMonth && styles.calendarDayButtonOutside,
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
               >
                 {date.getDate()}
               </button>
@@ -101,10 +117,12 @@ const DatePicker: React.FC<DatePickerProps> = ({
           })}
         </div>
 
+        {/* Error */}
         {errorMessage && (
           <div className={styles.errorMessage}>{errorMessage}</div>
         )}
 
+        {/* Botón Hoy */}
         <div className={styles.todayButtonContainer}>
           <GeneralButton
             callback={handleGoToToday}

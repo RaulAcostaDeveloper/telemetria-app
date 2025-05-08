@@ -473,7 +473,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               today={today}
               handleGoToToday={handleGoToToday}
               buttonClassName={styles.calendarDayButtonFrom}
-              formatDate={formatDate}
               errorMessage={errorMessage}
             />
           )}
@@ -556,7 +555,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               today={today}
               handleGoToToday={handleGoToToday}
               buttonClassName={styles.calendarDayButtonTill}
-              formatDate={formatDate}
               errorMessage={errorMessage}
             />
           )}
