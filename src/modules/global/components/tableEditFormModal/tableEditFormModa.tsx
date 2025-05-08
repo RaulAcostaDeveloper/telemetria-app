@@ -7,10 +7,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import styles from "./tableEditFormModal.module.css";
 import { ButtonTypes } from "../generalButton/generalButton.model";
 import { GeneralButton } from "../generalButton/generalButton";
-import { LanguageSelector } from "../../language/utils/languageSelector";
 import { Modal } from "../modal/modal";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
+  LANGUAGE: LanguageInterface;
   closeModal: () => void;
   dataObject: { [key: string]: string | number };
   editFormContent?: React.FC<{
@@ -21,11 +22,11 @@ interface Props {
 }
 
 export const TableEditFormModal = ({
+  LANGUAGE,
   closeModal,
   dataObject,
   editFormContent,
 }: Props) => {
-  const LANGUAGE = LanguageSelector();
   const [isSaveDisabled, setIsDisabled] = useState(true);
   const [saveFunction, setSaveFunction] = useState<() => void>(() => {});
 
@@ -34,7 +35,7 @@ export const TableEditFormModal = ({
   const EditFormContent = editFormContent;
 
   return (
-    <Modal closeModal={closeModal}>
+    <Modal LANGUAGE={LANGUAGE} closeModal={closeModal}>
       <div className={`${styles.inside}`}>
         <div className={`${styles.formTitle}`}>
           <h3>{LANGUAGE.table.actions.editElement}</h3>

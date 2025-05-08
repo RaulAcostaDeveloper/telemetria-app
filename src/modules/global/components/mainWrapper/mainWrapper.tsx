@@ -6,10 +6,17 @@ import {
   localStorageGetItem,
   localStorageSetItem,
 } from "../../localStorage/utils/storageService";
+import { ENGLISH } from "../../language/constants/english";
 import { Header } from "../header/header";
+import { LANGUAGE_OPTIONS } from "../../language/utils/languageSelector.model";
+import { LanguageContext } from "../../language/components/languageProvider/languageProvider";
+import { LanguageInterface } from "../../language/constants/language.model";
 import { Menu } from "../menu/menu";
 import { PageContainer } from "../pageContainer/pageContainer";
+import { RootState } from "@/globalConfig/redux/store";
+import { SPANISH } from "../../language/constants/spanish";
 import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
+import { useSelector } from "react-redux";
 
 interface Props {
   children: React.ReactNode;
@@ -17,6 +24,32 @@ interface Props {
 
 export const MainWrapper = ({ children }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | null>(null);
+  const [LANGUAGE, setLanguageObject] = useState<LanguageInterface>(SPANISH);
+
+  const languageSelected = useSelector(
+    (state: RootState) => state.languageOption.languageSelected
+  );
+
+  // Aquí trae de redux y modifica el LANGUAGE
+  // Actualizar en caso de agregar un nuevo idioma
+  useEffect(() => {
+    switch (languageSelected) {
+      case LANGUAGE_OPTIONS.SPANISH:
+        setLanguageObject(SPANISH);
+        break;
+      case LANGUAGE_OPTIONS.ENGLISH:
+        setLanguageObject(ENGLISH);
+        break;
+      default:
+        setLanguageObject(SPANISH);
+        break;
+    }
+  }, [languageSelected]);
+
+  // Ejemplo de como cambiar el idioma
+  // setTimeout(() => {
+  //   dispatch(setLanguageReducer(LANGUAGE_OPTIONS.ENGLISH));
+  // }, 5000);
 
   useEffect(() => {
     const defaultValue: boolean = true;
@@ -48,12 +81,18 @@ export const MainWrapper = ({ children }: Props) => {
 
   return (
     <div className={`${styles.mainWrapper}`}>
-      <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      <Menu
+        LANGUAGE={LANGUAGE}
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+      />
       <div className={`${styles.rightContent}`}>
-        <Header isMenuOpen={isMenuOpen} />
+        <Header LANGUAGE={LANGUAGE} isMenuOpen={isMenuOpen} />
 
         {/* Contenido de la página */}
-        <PageContainer>{children}</PageContainer>
+        <LanguageContext.Provider value={LANGUAGE}>
+          <PageContainer>{children}</PageContainer>
+        </LanguageContext.Provider>
       </div>
     </div>
   );

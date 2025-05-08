@@ -1,14 +1,14 @@
 import Image from "next/image";
-import { LanguageSelector } from "../../language/utils/languageSelector";
 import styles from "./menuHeader.module.css";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
   isOpen: boolean | null;
   setIsOpen: (isOpen: boolean) => void;
+  LANGUAGE: LanguageInterface;
 }
 
-export const MenuHeader = ({ isOpen, setIsOpen }: Props) => {
-  const LANGUAGE = LanguageSelector();
+export const MenuHeader = ({ isOpen, setIsOpen, LANGUAGE }: Props) => {
   return (
     <div
       className={`${styles.header}`}

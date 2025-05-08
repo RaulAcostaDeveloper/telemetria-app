@@ -1,14 +1,16 @@
+"use client";
+
 import { AuthForm } from "@/modules/auth/components";
-import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
+import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
 export default function Login() {
-  const LANGUAGE = LanguageSelector();
+  const LANGUAGE = useLanguage();
 
   return (
     <div>
       Login page
       <p>{LANGUAGE?.auth.principalTitle}</p>
-      <AuthForm />
+      <AuthForm LANGUAGE={LANGUAGE} />
     </div>
   );
 }

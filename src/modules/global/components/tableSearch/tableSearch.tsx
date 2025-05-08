@@ -1,11 +1,13 @@
 import SearchIcon from "@mui/icons-material/Search";
 
 import styles from "./tableSearch.module.css";
-import { LanguageSelector } from "../../language/utils/languageSelector";
+import { LanguageInterface } from "../../language/constants/language.model";
 
-export const TableSearch = () => {
-  const LANGUAGE = LanguageSelector();
+interface Props {
+  LANGUAGE: LanguageInterface;
+}
 
+export const TableSearch = ({ LANGUAGE }: Props) => {
   return (
     <div
       className={`${styles.tableSearch}`}

@@ -1,28 +1,27 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
 import {
   calculatePredefinedDateRange,
   toLocalISOString,
 } from "@/modules/global/utils/utils";
 import { setDateRange } from "@/globalConfig/redux/slices/calendarSlice";
 import styles from "./Calendar.module.css";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 interface FixedDateSectionProps {
   selectedOption: string;
   setSelectedOption: (option: string) => void;
+  LANGUAGE: LanguageInterface;
 }
-
-const LANGUAGE = LanguageSelector();
-
-const options = LANGUAGE.header.calendar.fixedDateFilterOptions;
 
 const FixedDateSection: React.FC<FixedDateSectionProps> = ({
   selectedOption,
   setSelectedOption,
+  LANGUAGE,
 }) => {
   const dispatch = useDispatch();
   const today = new Date();
+  const options = LANGUAGE.header.calendar.fixedDateFilterOptions;
 
   /**
    * Función para manejar la selección de una opción de rango predefinido.

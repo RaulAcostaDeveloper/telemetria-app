@@ -7,10 +7,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import styles from "./tableAddFormModal.module.css";
 import { ButtonTypes } from "../generalButton/generalButton.model";
 import { GeneralButton } from "../generalButton/generalButton";
-import { LanguageSelector } from "../../language/utils/languageSelector";
 import { Modal } from "../modal/modal";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
+  LANGUAGE: LanguageInterface;
   createFormContent?: React.FC<{
     dataObject?: { [key: string]: string | number };
     setIsDisabled: (val: boolean) => void;
@@ -19,8 +20,11 @@ interface Props {
   closeModal: () => void;
 }
 
-export const TableAddFormModal = ({ closeModal, createFormContent }: Props) => {
-  const LANGUAGE = LanguageSelector();
+export const TableAddFormModal = ({
+  closeModal,
+  createFormContent,
+  LANGUAGE,
+}: Props) => {
   const [isSaveDisabled, setIsDisabled] = useState(true);
   const [saveFunction, setSaveFunction] = useState<() => void>(() => {});
 
@@ -29,7 +33,7 @@ export const TableAddFormModal = ({ closeModal, createFormContent }: Props) => {
   const CreateFormContent = createFormContent;
 
   return (
-    <Modal closeModal={closeModal}>
+    <Modal LANGUAGE={LANGUAGE} closeModal={closeModal}>
       <div className={`${styles.inside}`}>
         <div className={`${styles.formTitle}`}>
           <h3>{LANGUAGE.table.formTitles.createElement}</h3>

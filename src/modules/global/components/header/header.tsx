@@ -7,7 +7,7 @@ import HeaderVehicleFilter from "../headerVehicleFilter/headerVehicleFilter";
 import styles from "./header.module.css";
 import { HeaderBackButton } from "../headerBackButton/headerBackButton";
 import { formatDateTime } from "@/modules/global/utils/utils";
-import { LanguageSelector } from "../../language/utils/languageSelector";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 interface CalendarState {
   endDate: string | null;
@@ -20,11 +20,10 @@ interface RootState {
 
 interface Props {
   isMenuOpen: boolean | null;
+  LANGUAGE: LanguageInterface;
 }
 
-const LANGUAGE = LanguageSelector();
-
-export const Header = ({ isMenuOpen }: Props) => {
+export const Header = ({ isMenuOpen, LANGUAGE }: Props) => {
   // Determinar si el componente está montado.
   const [mounted, setMounted] = useState(false);
   // Alternar la visualización del calendario.
@@ -63,10 +62,10 @@ export const Header = ({ isMenuOpen }: Props) => {
       {mounted && (
         <>
           <nav className={styles.navBar}>
-            <HeaderBackButton />
+            <HeaderBackButton LANGUAGE={LANGUAGE} />
             {/* Renderizar el VehicleFilter (input de búsqueda con dropdown) */}
             <div className={styles.inputAndDatesContainer}>
-              <HeaderVehicleFilter />
+              <HeaderVehicleFilter LANGUAGE={LANGUAGE} />
               <button
                 onClick={toggleContainer}
                 id="date"
@@ -90,7 +89,9 @@ export const Header = ({ isMenuOpen }: Props) => {
               </button>
             </div>
           </nav>
-          {showCalendar && <Calendar toggleContainer={toggleContainer} />}
+          {showCalendar && (
+            <Calendar LANGUAGE={LANGUAGE} toggleContainer={toggleContainer} />
+          )}
         </>
       )}
     </header>

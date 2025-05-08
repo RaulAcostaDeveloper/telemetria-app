@@ -19,16 +19,15 @@ import {
   setDateRange,
   setFixedFilter,
 } from "@/globalConfig/redux/slices/calendarSlice";
-import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
-
-const LANGUAGE = LanguageSelector();
+import { LanguageInterface } from "../../language/constants/language.model";
 
 interface CalendarProps {
   // Función para mostrar u ocultar el calendario.
   toggleContainer: () => void;
+  LANGUAGE: LanguageInterface;
 }
 
-const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
+const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
   const dispatch = useDispatch();
   const today = new Date();
   const calendarRef = useRef<HTMLDivElement>(null);
@@ -388,6 +387,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
   return (
     <div className={styles.calendarContainer} ref={calendarRef}>
       <FixedDateSection
+        LANGUAGE={LANGUAGE}
         selectedOption={calendarState.fixedFilter}
         setSelectedOption={(option: string) => dispatch(setFixedFilter(option))}
       />
@@ -474,6 +474,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               handleGoToToday={handleGoToToday}
               buttonClassName={styles.calendarDayButtonFrom}
               errorMessage={errorMessage}
+              LANGUAGE={LANGUAGE}
             />
           )}
         </div>
@@ -556,6 +557,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer }) => {
               handleGoToToday={handleGoToToday}
               buttonClassName={styles.calendarDayButtonTill}
               errorMessage={errorMessage}
+              LANGUAGE={LANGUAGE}
             />
           )}
         </div>
