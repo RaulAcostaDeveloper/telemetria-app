@@ -213,3 +213,18 @@ export const formatDateTime = (dateStr: string): string => {
 
   return `${day}/${month}/${year}, ${hourStr}:${minutes}:${seconds} ${ampm}`;
 };
+
+/**
+ * Formatea una fecha en "Mes | Año" usando un array de nombres de meses
+ *
+ * @param date - La fecha que se quiere formatear
+ * @param monthNames - Array de 12 strings con los nombres de mes localizados
+ * @returns Cadena con formato "Mes | Año", p.ej. "Mayo | 2025"
+ *
+ */
+export const formatMonthYear = (date: Date, monthNames: string[]): string => {
+  const monthIndex = date.getMonth();
+  const month = monthNames[monthIndex];
+  const year = date.getFullYear();
+  return `${month} | ${year}`;
+};

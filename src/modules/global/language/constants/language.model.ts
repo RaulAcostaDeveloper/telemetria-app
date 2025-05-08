@@ -30,6 +30,7 @@ export interface LanguageInterface {
       toLabel: string;
       daysOfWeek: string[];
       daysOfWeekTitle: string;
+      monthNames: string[];
     };
   };
   menu: {

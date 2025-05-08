@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { LanguageSelector } from "@/modules/global/language/utils/languageSelector";
+import { formatMonthYear } from "@/modules/global/utils/utils";
 import { ButtonTypes } from "../generalButton/generalButton.model";
 import { GeneralButton } from "../generalButton/generalButton";
 import styles from "./Calendar.module.css";
@@ -34,17 +35,6 @@ const DatePicker: React.FC<DatePickerProps> = ({
 }) => {
   const LANGUAGE = LanguageSelector();
 
-  // Función para formatear la fecha como "Mes | Año" y capitalizar la primera letra
-  const formatMonthYear = (date: Date): string => {
-    // Obtenemos el nombre largo del mes en el locale del usuario
-    const monthName = date.toLocaleString(undefined, { month: "long" });
-    // Capitalizamos la primera letra y mantenemos el resto igual
-    const monthCapitalized =
-      monthName.charAt(0).toUpperCase() + monthName.slice(1);
-    const year = date.getFullYear();
-    return `${monthCapitalized} | ${year}`;
-  };
-
   const isCurrentMonth =
     currentDate.getFullYear() === today.getFullYear() &&
     currentDate.getMonth() === today.getMonth();
@@ -60,8 +50,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             ‹
           </button>
           <span className={styles.dateSpan}>
-            {/* Mostrar siempre el mes/año de la vista actual (currentDate) */}
-            {formatMonthYear(currentDate)}
+            {formatMonthYear(currentDate, LANGUAGE.header.calendar.monthNames)}
           </span>
           <button
             onClick={() => changeMonth(1)}
