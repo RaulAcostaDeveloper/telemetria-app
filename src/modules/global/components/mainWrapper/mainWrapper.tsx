@@ -31,6 +31,7 @@ export const MainWrapper = ({ children }: Props) => {
   );
 
   // Aquí trae de redux y modifica el LANGUAGE
+  // Actualizar en caso de agregar un nuevo idioma
   useEffect(() => {
     switch (languageSelected) {
       case LANGUAGE_OPTIONS.SPANISH:
