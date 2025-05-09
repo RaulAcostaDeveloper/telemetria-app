@@ -15,7 +15,7 @@ export const MenuHeader = ({ isOpen, setIsOpen, LANGUAGE }: Props) => {
       onClick={() => setIsOpen(!isOpen)}
       title={isOpen ? LANGUAGE.menu.titles.close : LANGUAGE.menu.titles.open}
     >
-      {isOpen === null || isOpen === true ? (
+      {isOpen ? (
         // IMAGEN PROPORCIÓN LOGO 6:1
         <Image
           alt={LANGUAGE.menu.titles.logo}

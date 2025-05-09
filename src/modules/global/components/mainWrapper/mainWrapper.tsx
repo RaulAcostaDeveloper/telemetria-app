@@ -52,7 +52,7 @@ export const MainWrapper = ({ children }: Props) => {
   // }, 5000);
 
   useEffect(() => {
-    const defaultValue: boolean = true;
+    const defaultValue: boolean = false;
     const storedValue: boolean | null = localStorageGetItem(
       STORAGE_KEYS.MENU_OPEN
     );
@@ -67,16 +67,18 @@ export const MainWrapper = ({ children }: Props) => {
 
   // Cerrar el menú en resolución movile
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setTimeout(() => {
-          setIsMenuOpen(false);
-        }, 10);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
+    if (typeof window !== "undefined") {
+      const handleResize = () => {
+        if (window.innerWidth <= 768) {
+          setTimeout(() => {
+            setIsMenuOpen(false);
+          }, 10);
+        }
+      };
+      window.addEventListener("resize", handleResize);
+      handleResize();
+      return () => window.removeEventListener("resize", handleResize);
+    }
   }, []);
 
   return (

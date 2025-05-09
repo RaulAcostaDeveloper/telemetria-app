@@ -127,19 +127,21 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
   // Detecta clics fuera del calendario (excepto en el botón con id "date") para cerrarlo.
   useEffect(() => {
     //Checar si se puede convertir en una función y mover a utils
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        calendarRef.current &&
-        !calendarRef.current.contains(event.target as Node) &&
-        !(event.target as HTMLElement).closest("#date")
-      ) {
-        toggleContainer();
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    if (typeof window !== "undefined") {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (
+          calendarRef.current &&
+          !calendarRef.current.contains(event.target as Node) &&
+          !(event.target as HTMLElement).closest("#date")
+        ) {
+          toggleContainer();
+        }
+      };
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
   }, [toggleContainer]);
 
   // **************** VALIDAR INPUTS DE TIEMPO ****************

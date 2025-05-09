@@ -17,9 +17,7 @@ export const MenuRoute = ({ route, title, isOpen, Icon, active }: Props) => {
       title={title}
     >
       <Icon sx={{ fontSize: "3rem" }} />
-      {(isOpen === null || isOpen === true) && (
-        <span className={`${styles.title}`}>{title}</span>
-      )}
+      {isOpen && <span className={`${styles.title}`}>{title}</span>}
     </Link>
   );
 };
