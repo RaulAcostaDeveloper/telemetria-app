@@ -1,13 +1,14 @@
 "use client";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
-
 import LogoutIcon from "@mui/icons-material/Logout";
+
 import styles from "./menuContent.module.css";
-import { MenuButton } from "../menuButton/menuButton";
+import { ButtonTypes } from "../generalButton/generalButton.model";
+import { GeneralButton } from "../generalButton/generalButton";
+import { LanguageInterface } from "../../language/constants/language.model";
 import { MenuRoute } from "../menuRoute/menuRoute";
 import { usePathname } from "next/navigation";
-import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
   isOpen: boolean | null;
@@ -46,11 +47,14 @@ export const MenuContent = ({ isOpen, LANGUAGE }: Props) => {
           ))}
         </nav>
         <div className={`${styles.bottom}`}>
-          <MenuButton
-            title={LANGUAGE.menu.buttons.logOut}
-            Icon={LogoutIcon}
-            isOpen={isOpen}
+          <GeneralButton
+            Icon={<LogoutIcon />}
+            buttonStyle={styles.buttonStyle}
             callback={() => {}}
+            placeholder={LANGUAGE.menu.buttons.logOut}
+            title={isOpen ? LANGUAGE.menu.buttons.logOut : ""}
+            titleStyle={styles.buttonTitle}
+            type={ButtonTypes.NEUTRAL}
           />
         </div>
       </div>
