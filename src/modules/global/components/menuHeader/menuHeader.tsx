@@ -11,11 +11,11 @@ interface Props {
 export const MenuHeader = ({ isOpen, setIsOpen, LANGUAGE }: Props) => {
   return (
     <div
-      className={`${styles.header}`}
+      className={`${styles.header} ${isOpen ? styles.isOpen : ""}`}
       onClick={() => setIsOpen(!isOpen)}
       title={isOpen ? LANGUAGE.menu.titles.close : LANGUAGE.menu.titles.open}
     >
-      {isOpen === null || isOpen === true ? (
+      {isOpen ? (
         // IMAGEN PROPORCIÓN LOGO 6:1
         <Image
           alt={LANGUAGE.menu.titles.logo}

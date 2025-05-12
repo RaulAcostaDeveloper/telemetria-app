@@ -5,7 +5,7 @@ import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
   isMenuOpen: boolean | null;
-  setIsMenuOpen: (isOpen: boolean | null) => void;
+  setIsMenuOpen: (isOpen: boolean) => void;
   LANGUAGE: LanguageInterface;
 }
 
@@ -14,9 +14,7 @@ export const Menu = ({ isMenuOpen, setIsMenuOpen, LANGUAGE }: Props) => {
     <>
       <div
         className={`${styles.menu} ${
-          isMenuOpen === null || isMenuOpen === true
-            ? `${styles.open}`
-            : `${styles.close}`
+          isMenuOpen ? `${styles.open}` : `${styles.close}`
         }`}
       >
         <MenuHeader
@@ -29,9 +27,7 @@ export const Menu = ({ isMenuOpen, setIsMenuOpen, LANGUAGE }: Props) => {
 
       <div
         className={`${
-          isMenuOpen === null || isMenuOpen === true
-            ? `${styles.ghostMenuOpen}`
-            : `${styles.ghostMenuClosed}`
+          isMenuOpen ? `${styles.ghostMenuOpen}` : `${styles.ghostMenuClosed}`
         }`}
       >
         {/* Ghost menu to fix the space */}

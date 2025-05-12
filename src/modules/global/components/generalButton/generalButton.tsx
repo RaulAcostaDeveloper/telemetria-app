@@ -10,6 +10,7 @@ interface Props {
   titleStyle?: string;
   type: ButtonTypes;
   disabled?: boolean;
+  placeholder?: string;
 }
 
 export const GeneralButton = ({
@@ -20,6 +21,7 @@ export const GeneralButton = ({
   titleStyle,
   type,
   disabled,
+  placeholder,
 }: Props) => {
   const handleCallback = () => {
     if (disabled) {
@@ -43,7 +45,7 @@ export const GeneralButton = ({
         ${disabled ? styles.disabled : ""} 
       `}
       onClick={handleCallback}
-      title={title}
+      title={title ? title : placeholder}
     >
       <span className={` ${titleStyle ? titleStyle : ""}`}>{title}</span>
 
