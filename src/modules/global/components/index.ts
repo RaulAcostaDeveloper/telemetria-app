@@ -7,7 +7,6 @@ export * from "./header/header";
 export * from "./headerBackButton/headerBackButton";
 export * from "./mainWrapper/mainWrapper";
 export * from "./menu/menu";
-export * from "./menuButton/menuButton";
 export * from "./menuContent/menuContent";
 export * from "./menuHeader/menuHeader";
 export * from "./menuRoute/menuRoute";

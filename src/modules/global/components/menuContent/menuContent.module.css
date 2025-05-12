@@ -11,3 +11,12 @@
   justify-content: center;
   width: 100%;
 }
+
+.buttonStyle {
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.buttonTitle {
+  font-size: 1.5rem;
+}
