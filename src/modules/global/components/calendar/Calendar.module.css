@@ -151,6 +151,22 @@
   border: none;
 }
 
+.monthArrowButton {
+  width: 2rem;
+  font-size: 4rem;
+  font-size: 1.875rem;
+  background-color: white;
+  cursor: pointer;
+  border: none;
+}
+.monthArrowButton:hover {
+  background-color: var(--button-color-6);
+}
+
+.currentMonth {
+  cursor: no-drop;
+}
+
 .daysOfTheWeekContainer {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
