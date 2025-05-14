@@ -65,7 +65,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
         <div className={styles.dateDayMonthYear}>
           <button
             onClick={() => changeMonth(-1)}
-            className={styles.previousMonth}
+            className={styles.monthArrowButton}
           >
             ‹
           </button>
@@ -74,7 +74,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
           </span>
           <button
             onClick={() => changeMonth(1)}
-            className={styles.nextMonth}
+            className={
+              isCurrentMonth
+                ? `${styles.monthArrowButton}  ${styles.currentMonth}`
+                : styles.monthArrowButton
+            }
             disabled={isCurrentMonth}
           >
             ›
