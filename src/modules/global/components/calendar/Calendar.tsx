@@ -6,7 +6,7 @@ import DatePicker from "./DatePicker";
 import FixedDateSection from "./FixedDateSection";
 import styles from "./Calendar.module.css";
 import {
-  formatDate,
+  formatDateTime,
   handleHourKeyDown,
   handleMinuteSecondKeyDown,
   isPast90Days,
@@ -341,17 +341,28 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
     return null;
   }
 
+  const fmt = new Intl.DateTimeFormat("es-ES", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+
+  function formatEither(d: Date | string | null) {
+    if (!d) return "";
+    return fmt.format(d instanceof Date ? d : new Date(d));
+  }
   // Placeholder: si el calendario está abierto, se usa currentDate, sino se usa la fecha global guardada (si existe) o currentDate.
   const startDatePlaceholder = showStartDateCalendar
-    ? currentDate.toLocaleDateString()
+    ? formatEither(currentDate)
     : calendarState.startDate
-    ? new Date(calendarState.startDate).toLocaleDateString()
-    : currentDate.toLocaleDateString();
+    ? formatEither(calendarState.startDate)
+    : formatEither(currentDate);
+
   const endDatePlaceholder = showEndDateCalendar
-    ? currentDate.toLocaleDateString()
+    ? formatEither(currentDate)
     : calendarState.endDate
-    ? new Date(calendarState.endDate).toLocaleDateString()
-    : currentDate.toLocaleDateString();
+    ? formatEither(calendarState.endDate)
+    : formatEither(currentDate);
 
   const startHourPlaceholder = (
     new Date(calendarState.startDate || currentDate).getHours() % 12 || 12
@@ -401,7 +412,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
           </label>
           <input
             type="text"
-            value={startDate ? startDate.toLocaleDateString() : ""}
+            value={startDate ? fmt.format(startDate) : ""}
             onClick={toggleStartDateCalendar}
             readOnly
             className={styles.containerInput}
@@ -484,7 +495,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
           </label>
           <input
             type="text"
-            value={endDate ? endDate.toLocaleDateString() : ""}
+            value={endDate ? fmt.format(endDate) : ""}
             onClick={toggleEndDateCalendar}
             readOnly
             className={styles.containerInput}
