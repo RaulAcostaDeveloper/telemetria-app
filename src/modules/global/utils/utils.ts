@@ -3,7 +3,7 @@ import React from "react";
 import { getCacheTable } from "@/globalConfig/cache/dexie";
 
 // Usar esta función para formatear startDate y endDate del slice y usarla en el llamado de la API
-export const formatIsoDate = (date: string): string => {
+export const formatToLocalIso8601 = (date: string): string => {
   const isoDate = new Date(date);
 
   // Obtiene componentes individuales en hora local
