@@ -15,6 +15,7 @@ interface Props {
   data: dataTable;
   filteredData: dataTable;
   idKey?: string;
+  newSelectorFilter: (propIndex: number, value: string) => void;
   showCreateButton?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
@@ -41,6 +42,7 @@ export const TableServerContent = ({
   editFormContent,
   filteredData,
   idKey,
+  newSelectorFilter,
   showCreateButton,
   showDelete,
   showEdit,
@@ -77,7 +79,12 @@ export const TableServerContent = ({
 
       {/* Filtros por columna */}
       <div className={`${styles.topActions}`}>
-        <TableFilters LANGUAGE={LANGUAGE} columns={columns} />
+        <TableFilters
+          LANGUAGE={LANGUAGE}
+          columns={columns}
+          filteredData={filteredData}
+          newSelectorFilter={newSelectorFilter}
+        />
       </div>
 
       {/* Tabla */}

@@ -14,10 +14,12 @@ const tableColumns: columnsTable = [
   {
     columnName: "Perfil",
     defaultSpace: 2,
+    filterOptions: true,
   },
   {
     columnName: "País",
-    defaultSpace: 2,
+    defaultSpace: 3,
+    filterOptions: true,
   },
   {
     columnName: "Id",
@@ -45,6 +47,7 @@ const tableData: dataTable = [
     idVehicle: "522",
   },
 ];
+
 export default function Fuel() {
   const LANGUAGE = useLanguage();
   return (

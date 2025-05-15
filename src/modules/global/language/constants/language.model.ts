@@ -62,6 +62,7 @@ export interface LanguageInterface {
       deleteElement: string;
       editElement: string;
       filterBy: string;
+      any: string;
       search: string;
       searchTitle: string;
       sortItems: string;
