@@ -1,3 +1,7 @@
 export default function Fuel() {
-  return <div>Fuel page</div>;
+  return (
+    <div>
+      <h1>Fuel page</h1>
+    </div>
+  );
 }
