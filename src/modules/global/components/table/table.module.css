@@ -19,25 +19,3 @@
 .inside {
   width: fit-content;
 }
-
-.title {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.topActions {
-  align-items: center;
-  display: flex;
-  justify-content: left;
-}
-
-.tableContent {
-  border-left: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  display: flex;
-  margin-bottom: 10px;
-  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
-}

@@ -51,6 +51,7 @@ export interface LanguageInterface {
       create: string;
       delete: string;
       downloadCSV: string;
+      downloadFiltredCSV: string;
       saveEdit: string;
       saveNew: string;
     };
