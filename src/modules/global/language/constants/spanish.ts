@@ -71,6 +71,7 @@ export const SPANISH: LanguageInterface = {
       create: "Crear",
       delete: "Eliminar elemento",
       downloadCSV: "Descargar CSV",
+      downloadFiltredCSV: "Descargar CSV (filtrado)",
       saveEdit: "Guardar edición",
       saveNew: "Guardar elemento",
     },

@@ -2,6 +2,14 @@ import React from "react";
 
 import { getCacheTable } from "@/globalConfig/cache/dexie";
 
+export const toKebabCase = (str: string) => {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9\-]/g, "");
+};
+
 // Usar esta función para formatear startDate y endDate del slice y usarla en el llamado de la API
 export const formatToLocalIso8601 = (date: string): string => {
   const isoDate = new Date(date);

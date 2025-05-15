@@ -1,12 +1,9 @@
+"use client";
+import { useState } from "react";
+
 import styles from "./table.module.css";
 import { LanguageInterface } from "../../language/constants/language.model";
-import { TableAddNewButton } from "../tableAddNewButton/tableAddNewButton";
-import { TableColumns } from "../tableColumns/tableColumns";
-import { TableDataContent } from "../tableDataContent/tableDataContent";
-import { TableDataSummatory } from "../tableDataSummatory/tableDataSummatory";
-import { TableDownloadCSV } from "../tableDownloadCSV/tableDownloadCSV";
-import { TableFilters } from "../tableFilters/tableFilters";
-import { TableSearch } from "../tableSearch/tableSearch";
+import { TableServerContent } from "../tableServerContent/tableServerContent";
 import { columnsTable, dataTable } from "./table.model";
 
 interface Props {
@@ -33,8 +30,9 @@ interface Props {
 }
 
 export const Table = ({
-  createFormContent,
+  LANGUAGE,
   columns,
+  createFormContent,
   data,
   editFormContent,
   idKey,
@@ -44,63 +42,27 @@ export const Table = ({
   showView,
   title,
   viewPath,
-  LANGUAGE,
 }: Props) => {
+  const [filteredData, setFilteredData] = useState<dataTable>(data);
+
   return (
     <div className={`${styles.container}`}>
       <div className={`${styles.inside}`}>
-        {/* Título */}
-        {title && <h4 className={`${styles.title}`}>{title}</h4>}
-
-        {/* Botones externos */}
-        <div className={`${styles.topActions}`}>
-          {showCreateButton && (
-            <TableAddNewButton
-              LANGUAGE={LANGUAGE}
-              createFormContent={createFormContent}
-            />
-          )}
-          <TableDownloadCSV LANGUAGE={LANGUAGE} />
-        </div>
-
-        {/* Búsqueda en la primer columna*/}
-        <div className={`${styles.topActions}`}>
-          <TableSearch LANGUAGE={LANGUAGE} />
-        </div>
-
-        {/* Filtros por columna */}
-        <div className={`${styles.topActions}`}>
-          <TableFilters LANGUAGE={LANGUAGE} columns={columns} />
-        </div>
-
-        {/* Tabla */}
-        <div className={`${styles.tableContent}`}>
-          <div>
-            {/* Columnas */}
-            <TableColumns
-              LANGUAGE={LANGUAGE}
-              columns={columns}
-              showActions={showDelete || showEdit || showView}
-            />
-
-            {/* Registros de la tabla */}
-            <TableDataContent
-              LANGUAGE={LANGUAGE}
-              columns={columns}
-              data={data}
-              showActions={showDelete || showEdit || showView}
-              showDelete={showDelete}
-              showEdit={showEdit}
-              showView={showView}
-              viewPath={viewPath}
-              idKey={idKey}
-              editFormContent={editFormContent}
-            />
-          </div>
-        </div>
-
-        {/* Suma de valores */}
-        <TableDataSummatory LANGUAGE={LANGUAGE} columns={columns} data={data} />
+        <TableServerContent
+          LANGUAGE={LANGUAGE}
+          columns={columns}
+          createFormContent={createFormContent}
+          data={data}
+          editFormContent={editFormContent}
+          filteredData={filteredData}
+          idKey={idKey}
+          showCreateButton={showCreateButton}
+          showDelete={showDelete}
+          showEdit={showEdit}
+          showView={showView}
+          title={title}
+          viewPath={viewPath}
+        />
       </div>
     </div>
   );
