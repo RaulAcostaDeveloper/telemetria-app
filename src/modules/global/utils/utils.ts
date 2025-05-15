@@ -2,6 +2,22 @@ import React from "react";
 
 import { getCacheTable } from "@/globalConfig/cache/dexie";
 
+// Usar esta función para formatear startDate y endDate del slice y usarla en el llamado de la API
+export const formatIsoDate = (date: string): string => {
+  const isoDate = new Date(date);
+
+  // Obtiene componentes individuales en hora local
+  const year = isoDate.getFullYear();
+  const month = String(isoDate.getMonth() + 1).padStart(2, "0");
+  const day = String(isoDate.getDate()).padStart(2, "0");
+  const hours = String(isoDate.getHours()).padStart(2, "0");
+  const minutes = String(isoDate.getMinutes()).padStart(2, "0");
+  const seconds = String(isoDate.getSeconds()).padStart(2, "0");
+
+  // Construye la cadena ISO 8601 para usarla en las APIS
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+};
+
 /**
  * Convierte una fecha a una cadena en formato ISO local.
  *
