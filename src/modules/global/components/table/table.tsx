@@ -45,6 +45,10 @@ export const Table = ({
 }: Props) => {
   const [filteredData, setFilteredData] = useState<dataTable>(data);
 
+  const newSelectorFilter = (propIndex: number, value: string) => {
+    console.log("newSelectorFilter: ", propIndex, " ", value);
+  };
+
   return (
     <div className={`${styles.container}`}>
       <div className={`${styles.inside}`}>
@@ -56,6 +60,7 @@ export const Table = ({
           editFormContent={editFormContent}
           filteredData={filteredData}
           idKey={idKey}
+          newSelectorFilter={newSelectorFilter}
           showCreateButton={showCreateButton}
           showDelete={showDelete}
           showEdit={showEdit}

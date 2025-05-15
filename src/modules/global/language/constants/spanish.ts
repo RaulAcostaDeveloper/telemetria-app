@@ -82,6 +82,7 @@ export const SPANISH: LanguageInterface = {
       deleteElement: "Eliminar elemento",
       editElement: "Editar elemento",
       filterBy: "Filtrar por la columna",
+      any: "Sin filtro",
       search: "Buscar",
       searchTitle: "Buscar por la primer columna de la tabla",
       sortItems: "Ordenar elementos por",

@@ -82,6 +82,7 @@ export const ENGLISH: LanguageInterface = {
       deleteElement: "Delete item",
       editElement: "Edit item",
       filterBy: "Filter by column",
+      any: "Any",
       search: "Search",
       searchTitle: "Search by the first column of the table",
       sortItems: "Sort items by",
