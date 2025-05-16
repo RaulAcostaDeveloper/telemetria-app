@@ -80,7 +80,6 @@
 }
 
 .toggleCircle {
-  /* Leaving white here for contrast */
   background-color: white;
   width: 1rem;
   height: 1rem;
@@ -153,7 +152,6 @@
 
 .monthArrowButton {
   width: 2rem;
-  font-size: 4rem;
   font-size: 1.875rem;
   background-color: white;
   cursor: pointer;
@@ -192,18 +190,7 @@
   gap: 0.25rem;
 }
 
-.calendarDayButtonFrom {
-  padding: 0.5rem;
-  border: none;
-  font-size: 1.25rem;
-  background-color: white;
-  cursor: pointer;
-}
-
-.calendarDayButtonFrom:hover {
-  background-color: var(--button-color-1);
-  color: white;
-}
+.calendarDayButtonFrom,
 .calendarDayButtonTill {
   padding: 0.5rem;
   border: none;
@@ -211,6 +198,8 @@
   background-color: white;
   cursor: pointer;
 }
+
+.calendarDayButtonFrom:hover,
 .calendarDayButtonTill:hover {
   background-color: var(--button-color-1);
   color: white;
@@ -317,7 +306,10 @@
   padding: 0.32rem;
   font-family: monospace;
   font-size: 1.28rem;
-  caret-color: transparent;
+  caret-color: var(--button-color-7); /* visible caret */
+  position: relative; /* above overlays */
+  z-index: 2; /* above overlays */
+  pointer-events: auto !important; /* ensure clicks register */
 }
 
 .timeInputField::-webkit-inner-spin-button,
@@ -338,6 +330,8 @@
   font-size: 1rem;
   border: 0.08rem solid var(--button-color-6);
   border-radius: 0.48rem;
+  position: relative;
+  z-index: 1; /* behind inputs */
 }
 
 .amPmSelect {
@@ -351,6 +345,7 @@
 .amPmSelect option {
   font-size: 1rem;
 }
+
 .amPmButton {
   display: flex;
   height: 3.2rem;
@@ -364,6 +359,7 @@
   white-space: nowrap;
   cursor: pointer;
   width: 5.2rem;
+  z-index: 1;
 }
 
 .amPmText {
@@ -386,6 +382,7 @@
   color: inherit;
   text-align: center;
   display: block;
+  z-index: 1; /* behind inputs */
 }
 
 .selectedFilter {
@@ -412,4 +409,8 @@
 .dayOutsideMonthRange {
   color: #ccc;
   cursor: default;
+}
+
+.timeInputField:focus {
+  outline: none;
 }
