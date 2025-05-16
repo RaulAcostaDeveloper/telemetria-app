@@ -31,6 +31,9 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
   const startHourRef = useRef<HTMLInputElement>(null);
   const startMinuteRef = useRef<HTMLInputElement>(null);
   const startSecondRef = useRef<HTMLInputElement>(null);
+  const endHourRef = useRef<HTMLInputElement>(null);
+  const endMinuteRef = useRef<HTMLInputElement>(null);
+  const endSecondRef = useRef<HTMLInputElement>(null);
 
   const dispatch = useDispatch();
   const today = new Date();
@@ -397,15 +400,14 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
               className={styles.timeInputField}
               value={startHour}
               placeholder={startHourPlaceholder}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
+              onChange={(e) => {
                 const v = e.target.value.replace(/\D/g, "").slice(0, 2);
                 setStartHour(v);
-                if (v.length === 2) {
-                  // once two digits are entered, move focus to minutes
-                  startMinuteRef.current?.focus();
-                }
+                if (v.length === 2) startMinuteRef.current?.focus();
               }}
             />
+
             <input
               id="start-minutes"
               ref={startMinuteRef}
@@ -422,6 +424,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
                   startSecondRef.current?.focus();
                 }
               }}
+              onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
             />
             <input
               id="start-seconds"
@@ -436,6 +439,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
                 const v = e.target.value.replace(/\D/g, "").slice(0, 2);
                 setStartSecond(v);
               }}
+              onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
             />
 
             <div className={styles.amPmWrapper}>
@@ -480,39 +484,54 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
           <div className={styles.timeInputGroup}>
             <input
               id="end-hours"
+              ref={endHourRef}
               type="text"
               inputMode="numeric"
               maxLength={2}
               className={styles.timeInputField}
               value={endHour}
               placeholder={endHourPlaceholder}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setEndHour(e.target.value.slice(0, 2));
+              onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
+              onChange={(e) => {
+                const v = e.target.value.replace(/\D/g, "").slice(0, 2);
+                setEndHour(v);
+                if (v.length === 2) endMinuteRef.current?.focus();
               }}
             />
 
             <input
-              className={styles.timeInputField}
               id="end-minutes"
+              ref={endMinuteRef}
               type="text"
               inputMode="numeric"
               maxLength={2}
-              value={endMinute}
-              name="end-minutes"
-              onChange={(e) => setEndMinute(e.target.value.slice(0, 2))}
-              placeholder={endMinutePlaceholder}
-            />
-            <input
               className={styles.timeInputField}
+              value={endMinute}
+              placeholder={endMinutePlaceholder}
+              onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
+              onChange={(e) => {
+                const v = e.target.value.replace(/\D/g, "").slice(0, 2);
+                setEndMinute(v);
+                if (v.length === 2) endSecondRef.current?.focus();
+              }}
+            />
+
+            <input
               id="end-seconds"
+              ref={endSecondRef}
               type="text"
               inputMode="numeric"
               maxLength={2}
+              className={styles.timeInputField}
               value={endSecond}
-              name="end-seconds"
-              onChange={(e) => setEndSecond(e.target.value.slice(0, 2))}
               placeholder={endSecondPlaceholder}
+              onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
+              onChange={(e) => {
+                const v = e.target.value.replace(/\D/g, "").slice(0, 2);
+                setEndSecond(v);
+              }}
             />
+
             <div className={styles.amPmWrapper}>
               <select
                 className={styles.amPmSelect}
