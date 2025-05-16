@@ -413,6 +413,11 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
                 setStartHour(next);
               }}
               onKeyDown={(e) => {
+                if (e.key === "Backspace" || e.key === "Delete") {
+                  e.preventDefault();
+                  return;
+                }
+
                 if (e.key === "ArrowUp" || e.key === "ArrowDown") {
                   e.preventDefault();
                   let n = parseInt(startHour, 10) || 1;
@@ -445,6 +450,10 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
                 setStartMinute(next);
               }}
               onKeyDown={(e) => {
+                if (e.key === "Backspace" || e.key === "Delete") {
+                  e.preventDefault();
+                  return;
+                }
                 if (e.key === "ArrowUp" || e.key === "ArrowDown") {
                   e.preventDefault();
                   let n = parseInt(startMinute, 10) || 0;
@@ -454,7 +463,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
                 }
               }}
             />
-
             <input
               id="start-seconds"
               ref={startSecondRef}
@@ -476,6 +484,10 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
                 setStartSecond(next);
               }}
               onKeyDown={(e) => {
+                if (e.key === "Backspace" || e.key === "Delete") {
+                  e.preventDefault();
+                  return;
+                }
                 if (e.key === "ArrowUp" || e.key === "ArrowDown") {
                   e.preventDefault();
                   let n = parseInt(startSecond, 10) || 0;
@@ -548,6 +560,10 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
                 setEndHour(next);
               }}
               onKeyDown={(e) => {
+                if (e.key === "Backspace" || e.key === "Delete") {
+                  e.preventDefault();
+                  return;
+                }
                 if (e.key === "ArrowUp" || e.key === "ArrowDown") {
                   e.preventDefault();
                   let n = parseInt(endHour, 10) || 1;
@@ -580,6 +596,10 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
                 setEndMinute(next);
               }}
               onKeyDown={(e) => {
+                if (e.key === "Backspace" || e.key === "Delete") {
+                  e.preventDefault();
+                  return;
+                }
                 if (e.key === "ArrowUp" || e.key === "ArrowDown") {
                   e.preventDefault();
                   let n = parseInt(endMinute, 10) || 0;
@@ -589,6 +609,7 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
                 }
               }}
             />
+
             <input
               id="end-seconds"
               ref={endSecondRef}
@@ -610,6 +631,10 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
                 setEndSecond(next);
               }}
               onKeyDown={(e) => {
+                if (e.key === "Backspace" || e.key === "Delete") {
+                  e.preventDefault();
+                  return;
+                }
                 if (e.key === "ArrowUp" || e.key === "ArrowDown") {
                   e.preventDefault();
                   let n = parseInt(endSecond, 10) || 0;
