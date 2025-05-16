@@ -402,19 +402,23 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
               placeholder={startHourPlaceholder}
               onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
               onChange={(e) => {
-                const rawInput = e.target.value.replace(/\D/g, "").slice(0, 2);
-                let next = rawInput;
-
-                if (rawInput.length === 2) {
-                  let n = parseInt(rawInput, 10);
+                const raw = e.target.value.replace(/\D/g, "").slice(0, 2);
+                let next = raw;
+                if (raw.length === 2) {
+                  let n = parseInt(raw, 10);
                   n = Math.max(1, Math.min(n, 12));
                   next = String(n).padStart(2, "0");
-                }
-
-                setStartHour(next);
-
-                if (rawInput.length === 2) {
                   startMinuteRef.current?.focus();
+                }
+                setStartHour(next);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+                  e.preventDefault();
+                  let n = parseInt(startHour, 10) || 1;
+                  if (e.key === "ArrowUp") n = n === 12 ? 1 : n + 1;
+                  else n = n === 1 ? 12 : n - 1;
+                  setStartHour(String(n).padStart(2, "0"));
                 }
               }}
             />
@@ -428,24 +432,29 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
               className={styles.timeInputField}
               value={startMinute}
               placeholder={startMinutePlaceholder}
+              onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
               onChange={(e) => {
-                const rawInput = e.target.value.replace(/\D/g, "").slice(0, 2);
-                let next = rawInput;
-
-                if (rawInput.length === 2) {
-                  let n = parseInt(rawInput, 10);
+                const raw = e.target.value.replace(/\D/g, "").slice(0, 2);
+                let next = raw;
+                if (raw.length === 2) {
+                  let n = parseInt(raw, 10);
                   n = Math.max(0, Math.min(n, 59));
                   next = String(n).padStart(2, "0");
-                }
-
-                setStartMinute(next);
-
-                if (rawInput.length === 2) {
                   startSecondRef.current?.focus();
                 }
+                setStartMinute(next);
               }}
-              onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+                  e.preventDefault();
+                  let n = parseInt(startMinute, 10) || 0;
+                  if (e.key === "ArrowUp") n = n === 59 ? 0 : n + 1;
+                  else n = n === 0 ? 59 : n - 1;
+                  setStartMinute(String(n).padStart(2, "0"));
+                }
+              }}
             />
+
             <input
               id="start-seconds"
               ref={startSecondRef}
@@ -455,19 +464,26 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
               className={styles.timeInputField}
               value={startSecond}
               placeholder={startSecondPlaceholder}
+              onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
               onChange={(e) => {
-                const rawInput = e.target.value.replace(/\D/g, "").slice(0, 2);
-                let next = rawInput;
-
-                if (rawInput.length === 2) {
-                  let n = parseInt(rawInput, 10);
+                const raw = e.target.value.replace(/\D/g, "").slice(0, 2);
+                let next = raw;
+                if (raw.length === 2) {
+                  let n = parseInt(raw, 10);
                   n = Math.max(0, Math.min(n, 59));
                   next = String(n).padStart(2, "0");
                 }
-
                 setStartSecond(next);
               }}
-              onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+                  e.preventDefault();
+                  let n = parseInt(startSecond, 10) || 0;
+                  if (e.key === "ArrowUp") n = n === 59 ? 0 : n + 1;
+                  else n = n === 0 ? 59 : n - 1;
+                  setStartSecond(String(n).padStart(2, "0"));
+                }
+              }}
             />
 
             <div className={styles.amPmWrapper}>
@@ -521,19 +537,23 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
               placeholder={endHourPlaceholder}
               onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
               onChange={(e) => {
-                const rawInput = e.target.value.replace(/\D/g, "").slice(0, 2);
-                let next = rawInput;
-
-                if (rawInput.length === 2) {
-                  let n = parseInt(rawInput, 10);
+                const raw = e.target.value.replace(/\D/g, "").slice(0, 2);
+                let next = raw;
+                if (raw.length === 2) {
+                  let n = parseInt(raw, 10);
                   n = Math.max(1, Math.min(n, 12));
                   next = String(n).padStart(2, "0");
-                }
-
-                setEndHour(next);
-
-                if (rawInput.length === 2) {
                   endMinuteRef.current?.focus();
+                }
+                setEndHour(next);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+                  e.preventDefault();
+                  let n = parseInt(endHour, 10) || 1;
+                  if (e.key === "ArrowUp") n = n === 12 ? 1 : n + 1;
+                  else n = n === 1 ? 12 : n - 1;
+                  setEndHour(String(n).padStart(2, "0"));
                 }
               }}
             />
@@ -549,24 +569,26 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
               placeholder={endMinutePlaceholder}
               onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
               onChange={(e) => {
-                const rawInput = e.target.value.replace(/\D/g, "").slice(0, 2);
-                let next = rawInput;
-
-                if (rawInput.length === 2) {
-                  let n = parseInt(rawInput, 10);
+                const raw = e.target.value.replace(/\D/g, "").slice(0, 2);
+                let next = raw;
+                if (raw.length === 2) {
+                  let n = parseInt(raw, 10);
                   n = Math.max(0, Math.min(n, 59));
                   next = String(n).padStart(2, "0");
-                }
-
-                setEndMinute(next);
-
-                // 3) advance focus to seconds only after 2 raw keystrokes
-                if (rawInput.length === 2) {
                   endSecondRef.current?.focus();
+                }
+                setEndMinute(next);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+                  e.preventDefault();
+                  let n = parseInt(endMinute, 10) || 0;
+                  if (e.key === "ArrowUp") n = n === 59 ? 0 : n + 1;
+                  else n = n === 0 ? 59 : n - 1;
+                  setEndMinute(String(n).padStart(2, "0"));
                 }
               }}
             />
-
             <input
               id="end-seconds"
               ref={endSecondRef}
@@ -578,16 +600,23 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
               placeholder={endSecondPlaceholder}
               onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
               onChange={(e) => {
-                const rawInput = e.target.value.replace(/\D/g, "").slice(0, 2);
-                let next = rawInput;
-
-                if (rawInput.length === 2) {
-                  let n = parseInt(rawInput, 10);
+                const raw = e.target.value.replace(/\D/g, "").slice(0, 2);
+                let next = raw;
+                if (raw.length === 2) {
+                  let n = parseInt(raw, 10);
                   n = Math.max(0, Math.min(n, 59));
                   next = String(n).padStart(2, "0");
                 }
-
                 setEndSecond(next);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+                  e.preventDefault();
+                  let n = parseInt(endSecond, 10) || 0;
+                  if (e.key === "ArrowUp") n = n === 59 ? 0 : n + 1;
+                  else n = n === 0 ? 59 : n - 1;
+                  setEndSecond(String(n).padStart(2, "0"));
+                }
               }}
             />
 
