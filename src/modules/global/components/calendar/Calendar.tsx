@@ -428,10 +428,19 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
               className={styles.timeInputField}
               value={startMinute}
               placeholder={startMinutePlaceholder}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                const v = e.target.value.replace(/\D/g, "").slice(0, 2);
-                setStartMinute(v);
-                if (v.length === 2) {
+              onChange={(e) => {
+                const rawInput = e.target.value.replace(/\D/g, "").slice(0, 2);
+                let next = rawInput;
+
+                if (rawInput.length === 2) {
+                  let n = parseInt(rawInput, 10);
+                  n = Math.max(0, Math.min(n, 59));
+                  next = String(n).padStart(2, "0");
+                }
+
+                setStartMinute(next);
+
+                if (rawInput.length === 2) {
                   startSecondRef.current?.focus();
                 }
               }}
@@ -446,9 +455,17 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
               className={styles.timeInputField}
               value={startSecond}
               placeholder={startSecondPlaceholder}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                const v = e.target.value.replace(/\D/g, "").slice(0, 2);
-                setStartSecond(v);
+              onChange={(e) => {
+                const rawInput = e.target.value.replace(/\D/g, "").slice(0, 2);
+                let next = rawInput;
+
+                if (rawInput.length === 2) {
+                  let n = parseInt(rawInput, 10);
+                  n = Math.max(0, Math.min(n, 59));
+                  next = String(n).padStart(2, "0");
+                }
+
+                setStartSecond(next);
               }}
               onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
             />
@@ -532,9 +549,21 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
               placeholder={endMinutePlaceholder}
               onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
               onChange={(e) => {
-                const v = e.target.value.replace(/\D/g, "").slice(0, 2);
-                setEndMinute(v);
-                if (v.length === 2) endSecondRef.current?.focus();
+                const rawInput = e.target.value.replace(/\D/g, "").slice(0, 2);
+                let next = rawInput;
+
+                if (rawInput.length === 2) {
+                  let n = parseInt(rawInput, 10);
+                  n = Math.max(0, Math.min(n, 59));
+                  next = String(n).padStart(2, "0");
+                }
+
+                setEndMinute(next);
+
+                // 3) advance focus to seconds only after 2 raw keystrokes
+                if (rawInput.length === 2) {
+                  endSecondRef.current?.focus();
+                }
               }}
             />
 
@@ -549,8 +578,16 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
               placeholder={endSecondPlaceholder}
               onFocus={(e) => (e.currentTarget as HTMLInputElement).select()}
               onChange={(e) => {
-                const v = e.target.value.replace(/\D/g, "").slice(0, 2);
-                setEndSecond(v);
+                const rawInput = e.target.value.replace(/\D/g, "").slice(0, 2);
+                let next = rawInput;
+
+                if (rawInput.length === 2) {
+                  let n = parseInt(rawInput, 10);
+                  n = Math.max(0, Math.min(n, 59));
+                  next = String(n).padStart(2, "0");
+                }
+
+                setEndSecond(next);
               }}
             />
 
