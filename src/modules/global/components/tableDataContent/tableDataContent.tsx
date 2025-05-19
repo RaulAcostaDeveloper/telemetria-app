@@ -8,6 +8,7 @@ interface Props {
   LANGUAGE: LanguageInterface;
   columns: columnsTable;
   data: dataTable;
+  deleteFunction?: (idElement: string | number) => void;
   idKey?: string;
   showActions?: boolean;
   showDelete?: boolean;
@@ -22,8 +23,10 @@ interface Props {
 }
 
 export const TableDataContent = ({
+  LANGUAGE,
   columns,
   data,
+  deleteFunction,
   editFormContent,
   idKey,
   showActions,
@@ -31,7 +34,6 @@ export const TableDataContent = ({
   showEdit,
   showView,
   viewPath,
-  LANGUAGE,
 }: Props) => {
   return (
     <div className={styles.dataContent}>
@@ -62,6 +64,7 @@ export const TableDataContent = ({
             <TableActions
               LANGUAGE={LANGUAGE}
               dataObject={dataObject}
+              deleteFunction={deleteFunction}
               editFormContent={editFormContent}
               idKey={idKey}
               showDelete={showDelete}

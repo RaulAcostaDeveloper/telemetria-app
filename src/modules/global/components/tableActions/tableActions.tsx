@@ -14,6 +14,7 @@ import { LanguageInterface } from "../../language/constants/language.model";
 interface Props {
   LANGUAGE: LanguageInterface;
   dataObject: { [key: string]: string | number };
+  deleteFunction?: (idElement: string | number) => void;
   idKey?: string;
   showActions?: boolean;
   showDelete?: boolean;
@@ -31,7 +32,9 @@ interface Props {
 export const TableActions = ({
   LANGUAGE,
   dataObject,
+  deleteFunction,
   editFormContent,
+  idKey,
   showDelete,
   showEdit,
   showView,
@@ -90,6 +93,8 @@ export const TableActions = ({
         <TableDeleteModal
           LANGUAGE={LANGUAGE}
           closeModal={() => setShowDeleteModal(false)}
+          deleteFunction={deleteFunction}
+          idObject={idKey ? dataObject[idKey] : undefined}
         />
       )}
     </div>
