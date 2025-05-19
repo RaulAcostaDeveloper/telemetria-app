@@ -2,7 +2,8 @@ Componente reutilizable para tablas.
 
 Cualquier duda de uso consultarla con el equipo de desarrollo.
 
-Completamente re utilizable y configurable a través de los parámetros del componente:
+Recomendable guiarse por las interfaces de TypeScript
+De todos modos comparto las instrucciones de uso del componente:
 •	title: Opcional: Se va a mostrar arriba del elemento como título
 •	columns: Requerido: Arreglo de objetos de tipo columna:
     o	Usar el modelo "columnsTable" exportado en "@/modules/global/components/table/table.model"
