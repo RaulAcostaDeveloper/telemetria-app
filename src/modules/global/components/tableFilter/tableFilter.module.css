@@ -28,14 +28,16 @@
 
 .selectInput:focus {
   outline: none;
-  background-color: rgba(0, 0, 0, 0.05);
-  -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-5);
-  -moz-box-shadow: 2px 2px 5px 0px var(--company-color-5);
-  box-shadow: 2px 2px 5px 0px var(--company-color-5);
 }
 
 .selectInput:hover {
   background-color: rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-4);
+  -moz-box-shadow: 2px 2px 5px 0px var(--company-color-4);
+  box-shadow: 2px 2px 5px 0px var(--company-color-4);
+}
+
+.selectedOption {
   -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-4);
   -moz-box-shadow: 2px 2px 5px 0px var(--company-color-4);
   box-shadow: 2px 2px 5px 0px var(--company-color-4);

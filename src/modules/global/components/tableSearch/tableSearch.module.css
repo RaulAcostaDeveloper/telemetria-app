@@ -25,11 +25,14 @@
   box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
+.input:not(:placeholder-shown) {
+  -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-4);
+  -moz-box-shadow: 2px 2px 5px 0px var(--company-color-4);
+  box-shadow: 2px 2px 5px 0px var(--company-color-4);
+}
+
 .input:focus {
   outline: none;
-  -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-5);
-  -moz-box-shadow: 2px 2px 5px 0px var(--company-color-5);
-  box-shadow: 2px 2px 5px 0px var(--company-color-5);
 }
 
 .input:hover {
