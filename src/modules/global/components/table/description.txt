@@ -1,4 +1,6 @@
-Componente reutilizable para tablas
+Componente reutilizable para tablas.
+
+Cualquier duda de uso consultarla con el equipo de desarrollo.
 
 Completamente re utilizable y configurable a través de los parámetros del componente:
 •	title: Opcional: Se va a mostrar arriba del elemento como título
@@ -24,7 +26,7 @@ Completamente re utilizable y configurable a través de los parámetros del comp
 •	viewPath: Opcional: Ruta de la pantalla para "showView". Ejemplo: "/management/vehicle/"
     o	 Requerido si se usó showView
 •	idKey: Opcional: Nombre del parámetro en data que corresponde al id del elemento
-    o	 Requerido si se usó showView
+    o	 Requerido si se usó showView, showDelete o showEdit
 •	showDelete: Opcional: Mostrar la acción "Eliminar" para eliminar el registro
     o	Queda pendiente cómo definir la función de eliminar el registro
 •	showEdit: Opcional: Mostrar la acción "Editar" para editar el registro
