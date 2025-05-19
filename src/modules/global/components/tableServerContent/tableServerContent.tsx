@@ -13,6 +13,7 @@ interface Props {
   LANGUAGE: LanguageInterface;
   columns: columnsTable;
   data: dataTable;
+  deleteFunction?: (idElement: string | number) => void;
   filteredData: dataTable;
   idKey?: string;
   newSelectorFilter: (propIndex: number, value: string) => void;
@@ -39,6 +40,7 @@ export const TableServerContent = ({
   columns,
   createFormContent,
   data,
+  deleteFunction,
   editFormContent,
   filteredData,
   idKey,
@@ -102,6 +104,7 @@ export const TableServerContent = ({
             LANGUAGE={LANGUAGE}
             columns={columns}
             data={data}
+            deleteFunction={deleteFunction}
             editFormContent={editFormContent}
             idKey={idKey}
             showActions={showDelete || showEdit || showView}

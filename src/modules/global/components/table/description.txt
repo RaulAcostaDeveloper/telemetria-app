@@ -1,1 +1,53 @@
 Componente reutilizable para tablas
+
+Completamente re utilizable y configurable a través de los parámetros del componente:
+•	title: Opcional: Se va a mostrar arriba del elemento como título
+•	columns: Requerido: Arreglo de objetos de tipo columna:
+    o	Usar el modelo "columnsTable" exportado en "@/modules/global/components/table/table.model"
+    o	columnName: Requerido: Nombre a mostrar de la columna
+    o	defaultSpace: Requerido: Tamaño de la columna
+    o	filterSelector: Opcional: Si la columna se puede usar con un filtro de registros (selector y opciones únicas)
+    o	orderColumn: Opcional: Si la columna se puede usar para ordenar los registros
+    o	showTotal: Opcional: Si los valores de los registros se pueden sumar y mostrar la suma al final
+•	data:  Requerido: Arreglo de objetos con los registros de la tabla
+    o	Usar el modelo "dataTable" exportado en "@/modules/global/components/table/table.model"
+    o	Procurar que en los objetos haya una propiedad relacionada al ID del elemento
+    o	Ordenar las propiedades según se van a mostrar en la tabla
+    o	Procurar que el número de propiedades corresponda a la cantidad de columnas
+•	showCreateButton: Opcional: Mostrar el botón "Crear" para crear el registro
+•	createFormContent: Opcional: Componente que contiene el formulario de "Crear"
+    o	Requerido si se usó showCreateButton
+    o	Usar como base el componente de ejemplo ExampleTableForm en "@/modules/global/components/exampleTableForm/"
+    o   createFormContent={CreateFormVehicles} // Pasarlo así
+    o	Leer las instrucciones centro de ExampleTableForm para poder activar/desactivar el botón y definir una función de crear
+•	showView: Opcional: Mostrar la acción "Ver" para ir a su pantalla individual
+•	viewPath: Opcional: Ruta de la pantalla para "showView". Ejemplo: "/management/vehicle/"
+    o	 Requerido si se usó showView
+•	idKey: Opcional: Nombre del parámetro en data que corresponde al id del elemento
+    o	 Requerido si se usó showView
+•	showDelete: Opcional: Mostrar la acción "Eliminar" para eliminar el registro
+    o	Queda pendiente cómo definir la función de eliminar el registro
+•	showEdit: Opcional: Mostrar la acción "Editar" para editar el registro
+•	editFormContent: Opcional: Componente que contiene el formulario de "Editar"
+    o	Requerido si se usó showEdit
+    o	Usar como base el componente de ejemplo ExampleTableForm que está en "@/modules/global/components/exampleTableForm/"
+    o	Leer las instrucciones del componente para poder activar/desactivar el botón y definir la función de editar
+•	deleteFunction: Opcional: Función para eliminar un elemento de la tabla
+    o	Obligatorio si se pasó la prop showDelete
+    o	Debe ser una función que reciba una prop llamada idElement: string|number
+    o	Por ejemplo:
+
+    const deleteElementExample = (idElement: string | number) => {
+        console.log("Eliminar elemento con el id ", idElement);
+    };
+
+
+      <Table
+        LANGUAGE={LANGUAGE}
+        title="Table example"
+        columns={tableColumns}
+        data={tableData}
+        showDelete
+        idKey="idVehicle"
+        deleteFunction={deleteElementExample}
+      />
