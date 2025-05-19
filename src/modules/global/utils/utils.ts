@@ -258,3 +258,23 @@ export async function cleanExpiredCache(): Promise<void> {
     console.error("[CACHE CLEANUP ERROR]", error);
   }
 }
+
+export interface TimeParts {
+  hour: string;
+  minute: string;
+  second: string;
+  meridiem: "AM" | "PM";
+}
+
+/**
+ * Dado un Date, devuelve sus piezas de hora en formato 12h, con cero-padding.
+ */
+export function parseTime(date: Date): TimeParts {
+  const h24 = date.getHours();
+  const hour12 = h24 % 12 || 12;
+  const hour = String(hour12).padStart(2, "0");
+  const minute = String(date.getMinutes()).padStart(2, "0");
+  const second = String(date.getSeconds()).padStart(2, "0");
+  const meridiem = h24 >= 12 ? "PM" : "AM";
+  return { hour, minute, second, meridiem };
+}
