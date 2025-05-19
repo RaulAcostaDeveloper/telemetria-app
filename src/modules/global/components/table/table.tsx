@@ -10,6 +10,7 @@ interface Props {
   LANGUAGE: LanguageInterface;
   columns: columnsTable;
   data: dataTable;
+  deleteFunction?: (idElement: string | number) => void;
   idKey?: string;
   showCreateButton?: boolean;
   showDelete?: boolean;
@@ -34,6 +35,7 @@ export const Table = ({
   columns,
   createFormContent,
   data,
+  deleteFunction,
   editFormContent,
   idKey,
   showCreateButton,
@@ -57,6 +59,7 @@ export const Table = ({
           columns={columns}
           createFormContent={createFormContent}
           data={data}
+          deleteFunction={deleteFunction}
           editFormContent={editFormContent}
           filteredData={filteredData}
           idKey={idKey}

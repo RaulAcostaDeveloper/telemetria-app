@@ -1,7 +1,7 @@
 interface column {
   columnName: string;
   defaultSpace: number;
-  filterOptions?: boolean;
+  filterSelector?: boolean;
   orderColumn?: boolean;
   showTotal?: boolean;
 }
