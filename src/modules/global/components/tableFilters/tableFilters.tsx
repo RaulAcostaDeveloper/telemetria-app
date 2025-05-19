@@ -9,19 +9,19 @@ import { columnsTable, dataTable } from "../table/table.model";
 interface Props {
   LANGUAGE: LanguageInterface;
   columns: columnsTable;
-  filteredData: dataTable;
-  newSelectorFilter: (propIndex: number, value: string) => void;
+  data: dataTable;
+  handleSelectorFilter: (propIndex: number, value: string) => void;
 }
 
 const getAllUniqueFilterValues = (
   columns: columnsTable,
-  filteredData: dataTable
+  data: dataTable
 ): string[][] => {
-  if (!filteredData.length) {
+  if (!data.length) {
     return columns.map(() => []);
   }
 
-  const dataKeys = Object.keys(filteredData[0]);
+  const dataKeys = Object.keys(data[0]);
 
   return columns.map((col, index) => {
     if (!col.filterSelector) return [];
@@ -29,23 +29,21 @@ const getAllUniqueFilterValues = (
     const key = dataKeys[index];
     if (!key) return [];
 
-    const uniqueValues = Array.from(
-      new Set(filteredData.map((row) => row[key]))
-    );
+    const uniqueValues = Array.from(new Set(data.map((row) => row[key])));
 
     return uniqueValues;
   });
 };
 
 export const TableFilters = ({
-  columns,
   LANGUAGE,
-  filteredData,
-  newSelectorFilter,
+  columns,
+  data,
+  handleSelectorFilter,
 }: Props) => {
   const uniqueFilterValues = useMemo(
-    () => getAllUniqueFilterValues(columns, filteredData),
-    [columns, filteredData]
+    () => getAllUniqueFilterValues(columns, data),
+    [columns, data]
   );
 
   return (
@@ -59,7 +57,7 @@ export const TableFilters = ({
             <TableFilter
               LANGUAGE={LANGUAGE}
               columnName={col.columnName}
-              newSelectorFilter={newSelectorFilter}
+              handleSelectorFilter={handleSelectorFilter}
               options={uniqueFilterValues[index]}
               propIndex={index}
             />

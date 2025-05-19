@@ -15,8 +15,9 @@ interface Props {
   data: dataTable;
   deleteFunction?: (idElement: string | number) => void;
   filteredData: dataTable;
+  handleSelectorFilter: (propIndex: number, value: string) => void;
   idKey?: string;
-  newSelectorFilter: (propIndex: number, value: string) => void;
+  setInputFilterValue: (value: string) => void;
   showCreateButton?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
@@ -43,8 +44,9 @@ export const TableServerContent = ({
   deleteFunction,
   editFormContent,
   filteredData,
+  handleSelectorFilter,
   idKey,
-  newSelectorFilter,
+  setInputFilterValue,
   showCreateButton,
   showDelete,
   showEdit,
@@ -76,7 +78,10 @@ export const TableServerContent = ({
 
       {/* Búsqueda en la primer columna*/}
       <div className={`${styles.topActions}`}>
-        <TableSearch LANGUAGE={LANGUAGE} />
+        <TableSearch
+          LANGUAGE={LANGUAGE}
+          setInputFilterValue={setInputFilterValue}
+        />
       </div>
 
       {/* Filtros por columna */}
@@ -84,8 +89,8 @@ export const TableServerContent = ({
         <TableFilters
           LANGUAGE={LANGUAGE}
           columns={columns}
-          filteredData={filteredData}
-          newSelectorFilter={newSelectorFilter}
+          data={data}
+          handleSelectorFilter={handleSelectorFilter}
         />
       </div>
 
@@ -103,7 +108,7 @@ export const TableServerContent = ({
           <TableDataContent
             LANGUAGE={LANGUAGE}
             columns={columns}
-            data={data}
+            data={filteredData}
             deleteFunction={deleteFunction}
             editFormContent={editFormContent}
             idKey={idKey}
@@ -117,7 +122,11 @@ export const TableServerContent = ({
       </div>
 
       {/* Suma de valores */}
-      <TableDataSummatory LANGUAGE={LANGUAGE} columns={columns} data={data} />
+      <TableDataSummatory
+        LANGUAGE={LANGUAGE}
+        columns={columns}
+        data={filteredData}
+      />
     </>
   );
 };
