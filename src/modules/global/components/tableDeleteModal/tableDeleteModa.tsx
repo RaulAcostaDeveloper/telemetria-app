@@ -9,11 +9,30 @@ import { Modal } from "../modal/modal";
 import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
-  closeModal: () => void;
   LANGUAGE: LanguageInterface;
+  closeModal: () => void;
+  deleteFunction?: (idElement: string | number) => void;
+  idObject?: number | string;
 }
 
-export const TableDeleteModal = ({ closeModal, LANGUAGE }: Props) => {
+export const TableDeleteModal = ({
+  LANGUAGE,
+  closeModal,
+  deleteFunction,
+  idObject,
+}: Props) => {
+  const deleteFeedback = () => {
+    if (deleteFunction) {
+      if (idObject) {
+        deleteFunction(idObject);
+      } else {
+        console.error("No se ha pasado un idKey a la tabla");
+      }
+    } else {
+      console.error("No se le ha pasado una función deleteFunction a la tabla");
+    }
+  };
+
   return (
     <Modal LANGUAGE={LANGUAGE} closeModal={closeModal}>
       <div className={`${styles.inside}`}>
@@ -32,18 +51,18 @@ export const TableDeleteModal = ({ closeModal, LANGUAGE }: Props) => {
         <div className={`${styles.content}`}></div>
         <div className={`${styles.buttons}`}>
           <GeneralButton
+            Icon={<CloseIcon />}
+            buttonStyle={`${styles.button}`}
+            callback={closeModal}
             title={LANGUAGE.table.buttons.cancel}
             type={ButtonTypes.NEUTRAL}
-            Icon={<CloseIcon />}
-            callback={closeModal}
-            buttonStyle={`${styles.button}`}
           />
           <GeneralButton
+            Icon={<DeleteForeverIcon />}
+            buttonStyle={`${styles.button}`}
+            callback={deleteFeedback}
             title={LANGUAGE.table.buttons.delete}
             type={ButtonTypes.DANGER}
-            Icon={<DeleteForeverIcon />}
-            callback={() => {}}
-            buttonStyle={`${styles.button}`}
           />
         </div>
       </div>

@@ -24,7 +24,7 @@ const getAllUniqueFilterValues = (
   const dataKeys = Object.keys(filteredData[0]);
 
   return columns.map((col, index) => {
-    if (!col.filterOptions) return [];
+    if (!col.filterSelector) return [];
 
     const key = dataKeys[index];
     if (!key) return [];
@@ -55,7 +55,7 @@ export const TableFilters = ({
           key={col.columnName + index}
           style={{ width: `${(col.defaultSpace || 1) * 50}px` }}
         >
-          {col.filterOptions && (
+          {col.filterSelector && (
             <TableFilter
               LANGUAGE={LANGUAGE}
               columnName={col.columnName}
