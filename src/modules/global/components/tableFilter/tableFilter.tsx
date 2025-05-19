@@ -7,7 +7,7 @@ import { LanguageInterface } from "../../language/constants/language.model";
 interface Props {
   LANGUAGE: LanguageInterface;
   columnName: string;
-  newSelectorFilter: (propIndex: number, value: string) => void;
+  handleSelectorFilter: (propIndex: number, value: string) => void;
   options: string[];
   propIndex: number;
 }
@@ -15,15 +15,15 @@ interface Props {
 export const TableFilter = ({
   LANGUAGE,
   columnName,
-  newSelectorFilter,
+  handleSelectorFilter,
   options,
   propIndex,
 }: Props) => {
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    handleSelectorFilter(propIndex, e.target.value);
     setSelectedOption(e.target.value);
-    newSelectorFilter(propIndex, e.target.value);
   };
 
   return (
@@ -33,11 +33,13 @@ export const TableFilter = ({
     >
       <select
         id={`filter-${columnName}`}
-        className={styles.selectInput}
+        className={`${styles.selectInput} ${
+          selectedOption ? styles.selectedOption : ""
+        }`}
         value={selectedOption}
         onChange={handleChange}
       >
-        <option value="no-filter">{LANGUAGE.table.actions.any}</option>
+        <option value="">{LANGUAGE.table.actions.any}</option>
         {options.map((opt) => (
           <option key={opt} value={opt}>
             {opt}

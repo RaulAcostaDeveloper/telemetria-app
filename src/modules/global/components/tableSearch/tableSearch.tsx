@@ -4,10 +4,11 @@ import styles from "./tableSearch.module.css";
 import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
+  setInputFilterValue: (value: string) => void;
   LANGUAGE: LanguageInterface;
 }
 
-export const TableSearch = ({ LANGUAGE }: Props) => {
+export const TableSearch = ({ LANGUAGE, setInputFilterValue }: Props) => {
   return (
     <div
       className={`${styles.tableSearch}`}
@@ -18,6 +19,7 @@ export const TableSearch = ({ LANGUAGE }: Props) => {
       </div>
       <input
         className={`${styles.input}`}
+        onChange={(e) => setInputFilterValue(e.target.value)}
         placeholder={LANGUAGE.table.actions.search}
         type="text"
       />
