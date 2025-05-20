@@ -1,6 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import {
   LocalGasStation as LocalGasStationIcon,
@@ -11,32 +12,14 @@ import {
 import styles from "./headerVehicleFilter.module.css";
 import { LanguageInterface } from "../../language/constants/language.model";
 
-type Vehicle = {
-  name: string;
-  plates: string;
-};
-
+type Vehicle = { name: string; plates: string };
 const vehicles: Vehicle[] = [
-  { name: "Apollo", plates: "JK-958473" },
-  { name: "Apollo", plates: "JK-958473" },
-  { name: "Apollo", plates: "JK-958473" },
-  { name: "Apollo", plates: "JK-958473" },
-  { name: "Apollo", plates: "JK-958473" },
-  { name: "Apollo", plates: "JK-958473" },
-  { name: "Apollo", plates: "JK-958473" },
-  { name: "Apollo", plates: "JK-958473" },
-  { name: "Apollo", plates: "JK-958473" },
-  { name: "Zeus", plates: "FR-434349" },
+  ...Array(20).fill({ name: "Apollo", plates: "JK-958473" }),
   { name: "Zeus", plates: "FR-434349" },
   { name: "Titan", plates: "GD-082721" },
 ];
 
-type Action = {
-  label: string;
-  routePrefix: string;
-  title: string;
-};
-
+type Action = { label: string; routePrefix: string; title: string };
 const iconMapping: { [key: string]: JSX.Element } = {
   management: <ManageAccountsIcon />,
   telemetry: <SpeedIcon />,
@@ -47,60 +30,86 @@ interface Props {
   LANGUAGE: LanguageInterface;
 }
 
-const HeaderVehicleFilter = ({ LANGUAGE }: Props) => {
-  const [query, setQuery] = useState<string>("");
-  const [showDropdown, setShowDropdown] = useState<boolean>(false);
+const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
+  const [query, setQuery] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
-  const actions: Action[] = [
-    {
-      label: "management",
-      routePrefix: "management",
-      title: `${LANGUAGE.header.vehicleFilter.actionManagementTitle}`,
-    },
-    {
-      label: "telemetry",
-      routePrefix: "telemetry",
-      title: `${LANGUAGE.header.vehicleFilter.actionTelemetryTitle}`,
-    },
-    {
-      label: "fuel",
-      routePrefix: "fuel",
-      title: `${LANGUAGE.header.vehicleFilter.actionFuelTitle}`,
-    },
-  ];
+  // click fuera → cerrar dropdown + limpiar input
+  useEffect(() => {
+    const onClickOutside = (e: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
+        setShowDropdown(false);
+        setQuery("");
+      }
+    };
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const value = e.target.value;
-    setQuery(value);
-    setShowDropdown(value.trim() !== "");
-  };
+  // al cambiar ruta → limpiar input + cerrar dropdown
+  useEffect(() => {
+    setQuery("");
+    setShowDropdown(false);
+  }, [pathname]);
 
-  const filteredVehicles = vehicles.filter((vehicle) =>
-    vehicle.name.toLowerCase().includes(query.toLowerCase())
+  // filtrar todos los resultados que coincidan
+  const filtered = vehicles.filter((v) =>
+    v.name.toLowerCase().includes(query.toLowerCase())
   );
 
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setQuery(val);
+    setShowDropdown(val.trim() !== "");
+  };
+
   return (
-    <div className={styles.container}>
+    <div ref={containerRef} className={styles.container}>
       <input
-        type="text"
-        value={query}
-        onChange={handleInputChange}
-        placeholder={LANGUAGE.header.vehicleFilter.inputPlaceholder}
         className={styles.input}
+        type="text"
+        placeholder={LANGUAGE.header.vehicleFilter.inputPlaceholder}
+        value={query}
+        onChange={handleInput}
         title={LANGUAGE.header.vehicleFilter.inputPlaceholder}
       />
-      {showDropdown && query && filteredVehicles.length > 0 && (
+
+      {showDropdown && query && filtered.length > 0 && (
         <ul className={styles.dropdown}>
-          {filteredVehicles.map((vehicle, index) => (
-            <li key={index} className={styles.dropdownItem}>
+          {filtered.map((v, i) => (
+            <li key={i} className={styles.dropdownItem}>
               <div className={styles.vehicleDetails}>
-                <strong>{vehicle.name}</strong> - <span>{vehicle.plates}</span>
+                <strong>{v.name}</strong> - <span>{v.plates}</span>
               </div>
               <div className={styles.buttonsContainer}>
-                {actions.map((action, idx) => (
+                {(
+                  [
+                    {
+                      label: "management",
+                      routePrefix: "management",
+                      title:
+                        LANGUAGE.header.vehicleFilter.actionManagementTitle,
+                    },
+                    {
+                      label: "telemetry",
+                      routePrefix: "telemetry",
+                      title: LANGUAGE.header.vehicleFilter.actionTelemetryTitle,
+                    },
+                    {
+                      label: "fuel",
+                      routePrefix: "fuel",
+                      title: LANGUAGE.header.vehicleFilter.actionFuelTitle,
+                    },
+                  ] as Action[]
+                ).map((action, idx) => (
                   <Link
                     key={idx}
-                    href={`/${action.routePrefix}/vehicle/${vehicle.name}`}
+                    href={`/${action.routePrefix}/vehicle/${v.name}`}
                     onClick={() => setShowDropdown(false)}
                     className={styles.linkIcon}
                   >
