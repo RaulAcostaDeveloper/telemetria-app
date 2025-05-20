@@ -47,8 +47,11 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
         setQuery("");
       }
     };
-    document.addEventListener("mousedown", onClickOutside);
-    return () => document.removeEventListener("mousedown", onClickOutside);
+
+    if (typeof window !== "undefined") {
+      document.addEventListener("mousedown", onClickOutside);
+      return () => document.removeEventListener("mousedown", onClickOutside);
+    }
   }, []);
 
   // al cambiar ruta → limpiar input + cerrar dropdown
