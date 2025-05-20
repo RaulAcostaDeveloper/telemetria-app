@@ -1,65 +1,106 @@
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 import styles from "./tableColumns.module.css";
-import { columnsTable } from "../table/table.model";
 import { LanguageInterface } from "../../language/constants/language.model";
+import { columnsTable, SelectorOrdered } from "../table/table.model";
 
 interface Props {
-  columns: columnsTable;
-  showActions?: boolean;
   LANGUAGE: LanguageInterface;
+  columnOrdered: SelectorOrdered;
+  columns: columnsTable;
+  setColumnOrdered: React.Dispatch<React.SetStateAction<SelectorOrdered>>;
+  showActions?: boolean;
 }
 
-export const TableColumns = ({ columns, showActions, LANGUAGE }: Props) => {
+export const TableColumns = ({
+  LANGUAGE,
+  columnOrdered,
+  columns,
+  setColumnOrdered,
+  showActions,
+}: Props) => {
+  const handleSelectorFilter = (propIndex: number) => {
+    setColumnOrdered((prev) => {
+      if (prev.propIndex !== propIndex) {
+        // Nuevo ordenamiento ascendente
+        return { propIndex, value: true };
+      }
+      // Invertir ascendente | descendente
+      return { propIndex, value: !prev.value };
+    });
+  };
+
   return (
-    <div className={`${styles.columns}`}>
-      {columns.map((el, index) => {
-        {
-          /* Espacio que se le indicó en la columna */
-        }
-        const defaultSpace = {
-          width: el.defaultSpace ? `${el.defaultSpace * 50}px` : "fit-content",
+    <div className={styles.columns}>
+      {columns.map((column, index) => {
+        const widthStyle = {
+          width: column.defaultSpace
+            ? `${column.defaultSpace * 50}px`
+            : "fit-content",
         };
 
-        return el.orderColumn ? (
-          // Columnas que son ordenables
+        // Decisiones de renderizado
+        const isFirstColumn = index === 0;
+        const isLastColumn = index === columns.length - 1 && !showActions;
+        const isOrderedSelected = columnOrdered.propIndex === index;
+        const isAscendant = columnOrdered.value;
+
+        const constructedClass = `
+        ${styles.column} 
+        ${column.orderColumn ? styles.columnButton : ""} 
+        ${isFirstColumn ? styles.firstButton : ""} 
+        ${isLastColumn ? styles.lastButton : ""}`;
+
+        const renderSortIcon = () => {
+          if (!column.orderColumn) return null;
+          if (!isOrderedSelected)
+            return <ArrowRightIcon sx={{ fontSize: "2rem", color: "white" }} />;
+          return isAscendant ? (
+            <ArrowDropUpIcon sx={{ fontSize: "2rem", color: "white" }} />
+          ) : (
+            <ArrowDropDownIcon sx={{ fontSize: "2rem", color: "white" }} />
+          );
+        };
+
+        const content = (
+          <>
+            <span className={styles.columnTitle}>{column.columnName}</span>
+            {column.orderColumn && (
+              <div className={styles.columnSortIcon}>{renderSortIcon()}</div>
+            )}
+          </>
+        );
+
+        // Es columna de ordenamiento?
+        return column.orderColumn ? (
           <button
-            key={el.columnName}
-            className={`${styles.column} ${styles.columnButton} ${
-              index === 0 ? styles.firstButton : ""
-            }
-            ${
-              index === columns.length - 1 && showActions !== true
-                ? styles.lastButton
-                : ""
-            }
-            `}
-            style={defaultSpace}
-            title={`${LANGUAGE.table.actions.sortItems} \"${el.columnName}\"`}
+            key={column.columnName}
+            className={constructedClass}
+            style={widthStyle}
+            title={`${LANGUAGE.table.actions.sortItems} "${column.columnName}"`}
+            onClick={() => handleSelectorFilter(index)}
           >
-            <span className={styles.columnTitle}>{el.columnName}</span>
-            <div className={styles.columnSortIcon}>
-              <ArrowRightIcon sx={{ fontSize: "2rem", color: "white" }} />
-            </div>
+            {content}
           </button>
         ) : (
-          // Columnas que no son ordenables
           <div
-            key={el.columnName}
-            className={styles.column}
-            style={defaultSpace}
+            key={column.columnName}
+            className={constructedClass}
+            style={widthStyle}
           >
-            <span className={styles.columnTitle}>{el.columnName}</span>
+            {content}
           </div>
         );
       })}
 
-      {/* Columna para acciones de la tabla */}
+      {/* Mostrar acciones? */}
       {showActions && (
         <div
           className={`${styles.column} ${styles.actions} ${styles.lastButton}`}
         >
-          <span className={`${styles.columnTitle} `}>
+          <span className={styles.columnTitle}>
             {LANGUAGE.table.elements.actions}
           </span>
         </div>

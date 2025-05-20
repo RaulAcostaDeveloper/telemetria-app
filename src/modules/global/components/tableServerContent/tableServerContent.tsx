@@ -1,22 +1,24 @@
 import styles from "./tableServerContent.module.css";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { TableAddNewButton } from "../tableAddNewButton/tableAddNewButton";
+import { TableCSVButtonsContainer } from "../tableCSVButtonsContainer/tableCSVButtonsContainer";
 import { TableColumns } from "../tableColumns/tableColumns";
 import { TableDataContent } from "../tableDataContent/tableDataContent";
 import { TableDataSummatory } from "../tableDataSummatory/tableDataSummatory";
 import { TableFilters } from "../tableFilters/tableFilters";
 import { TableSearch } from "../tableSearch/tableSearch";
-import { columnsTable, dataTable } from "../table/table.model";
-import { TableCSVButtonsContainer } from "../tableCSVButtonsContainer/tableCSVButtonsContainer";
+import { columnsTable, dataTable, SelectorOrdered } from "../table/table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
+  columnOrdered: SelectorOrdered;
   columns: columnsTable;
   data: dataTable;
   deleteFunction?: (idElement: string | number) => void;
   filteredData: dataTable;
   handleSelectorFilter: (propIndex: number, value: string) => void;
   idKey?: string;
+  setColumnOrdered: React.Dispatch<React.SetStateAction<SelectorOrdered>>;
   setInputFilterValue: (value: string) => void;
   showCreateButton?: boolean;
   showDelete?: boolean;
@@ -38,6 +40,7 @@ interface Props {
 
 export const TableServerContent = ({
   LANGUAGE,
+  columnOrdered,
   columns,
   createFormContent,
   data,
@@ -46,6 +49,7 @@ export const TableServerContent = ({
   filteredData,
   handleSelectorFilter,
   idKey,
+  setColumnOrdered,
   setInputFilterValue,
   showCreateButton,
   showDelete,
@@ -100,7 +104,9 @@ export const TableServerContent = ({
           {/* Columnas */}
           <TableColumns
             LANGUAGE={LANGUAGE}
+            columnOrdered={columnOrdered}
             columns={columns}
+            setColumnOrdered={setColumnOrdered}
             showActions={showDelete || showEdit || showView}
           />
 
