@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import styles from "./table.module.css";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { TableServerContent } from "../tableServerContent/tableServerContent";
-import { columnsTable, dataTable } from "./table.model";
-
-type SelectorFilter = {
-  propIndex: number;
-  value: string;
-};
+import {
+  SelectorFilter,
+  SelectorOrdered,
+  columnsTable,
+  dataTable,
+} from "./table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -53,7 +53,42 @@ export const Table = ({
   const [filteredData, setFilteredData] = useState<dataTable>(data);
   const [inputFilterValue, setInputFilterValue] = useState<string>("");
   const [filterSelectors, setFilterSelectors] = useState<SelectorFilter[]>([]);
+  const [columnOrdered, setColumnOrdered] = useState<SelectorOrdered>({
+    propIndex: 0,
+    value: true,
+  });
 
+  // Ordenamiento ascendente y descendente
+  useEffect(() => {
+    if (filteredData.length === 0) return;
+
+    const columnKey = Object.keys(filteredData[0])[columnOrdered.propIndex];
+    if (!columnKey) return;
+
+    const sorted = [...filteredData].sort((a, b) => {
+      const valA = a[columnKey];
+      const valB = b[columnKey];
+
+      const numA = Number(valA);
+      const numB = Number(valB);
+
+      const bothAreNumbers = !isNaN(numA) && !isNaN(numB);
+
+      let result: number;
+
+      if (bothAreNumbers) {
+        result = numA - numB;
+      } else {
+        result = valA.localeCompare(valB, undefined, { sensitivity: "base" });
+      }
+
+      return columnOrdered.value ? result : -result;
+    });
+
+    setFilteredData(sorted);
+  }, [columnOrdered]);
+
+  // Filtros
   useEffect(() => {
     const applyFilters = () => {
       let result = data;
@@ -107,16 +142,18 @@ export const Table = ({
     <div className={`${styles.container}`}>
       <div className={`${styles.inside}`}>
         <TableServerContent
-          setInputFilterValue={setInputFilterValue}
           LANGUAGE={LANGUAGE}
+          columnOrdered={columnOrdered}
           columns={columns}
           createFormContent={createFormContent}
           data={data}
           deleteFunction={deleteFunction}
           editFormContent={editFormContent}
           filteredData={filteredData}
-          idKey={idKey}
           handleSelectorFilter={handleSelectorFilter}
+          idKey={idKey}
+          setColumnOrdered={setColumnOrdered}
+          setInputFilterValue={setInputFilterValue}
           showCreateButton={showCreateButton}
           showDelete={showDelete}
           showEdit={showEdit}
