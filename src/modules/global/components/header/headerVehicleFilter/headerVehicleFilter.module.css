@@ -31,6 +31,8 @@
   padding: 8px;
   list-style: none;
   z-index: 2;
+  max-height: 215px;
+  overflow-y: auto;
 }
 
 .dropdownItem {
