@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 import styles from "./tabsContent.module.css";
-import { TabSelector } from "../tabSelector/tabSelector";
+import { TabSelector } from "./tabSelector/tabSelector";
 
 interface Props {
   tabContents: React.ReactNode[];
