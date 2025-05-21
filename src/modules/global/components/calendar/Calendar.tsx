@@ -5,7 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "./DatePicker";
 import FixedDateSection from "./FixedDateSection";
 import styles from "./Calendar.module.css";
-import { isPast90Days, toLocalISOString } from "@/modules/global/utils/utils";
+
+import {
+  isPast90Days,
+  parseTime,
+  toLocalISOString,
+} from "@/modules/global/utils/utils";
+
 import { ButtonTypes } from "../generalButton/generalButton.model";
 import { GeneralButton } from "../generalButton/generalButton";
 import { RootState } from "@/globalConfig/redux/store";
@@ -65,65 +71,59 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
     setMounted(true);
   }, []);
 
-  // Sincroniza la hora de inicio con la fecha global de Redux
+  //  Cuando cambian las fechas en Redux, sincroniza horas/minutos/segundos
   useEffect(() => {
-    //Checar si se puede convertir en una función y mover a utils
+    // Si hay fecha de inicio guardada en Redux…
     if (calendarState.startDate) {
-      const globalStart = new Date(calendarState.startDate);
-      const hour = (globalStart.getHours() % 12 || 12)
-        .toString()
-        .padStart(2, "0");
-      const minute = globalStart.getMinutes().toString().padStart(2, "0");
-      const second = globalStart.getSeconds().toString().padStart(2, "0");
-      setStartHour(hour);
-      setStartMinute(minute);
-      setStartSecond(second);
-      setStartMeridiem(globalStart.getHours() >= 12 ? "PM" : "AM");
+      const { hour, minute, second, meridiem } = parseTime(
+        new Date(calendarState.startDate)
+      );
+      setStartHour(hour); // actualiza la hora
+      setStartMinute(minute); // actualiza los minutos
+      setStartSecond(second); // actualiza los segundos
+      setStartMeridiem(meridiem); // actualiza AM/PM
     }
-  }, [calendarState.startDate]);
-
-  // Sincroniza la hora de fin con la fecha global de Redux
-  useEffect(() => {
-    //Checar si se puede convertir en una función y mover a utils
+    // Si hay fecha de fin guardada en Redux…
     if (calendarState.endDate) {
-      const globalEnd = new Date(calendarState.endDate);
-      const hour = (globalEnd.getHours() % 12 || 12)
-        .toString()
-        .padStart(2, "0");
-      const minute = globalEnd.getMinutes().toString().padStart(2, "0");
-      const second = globalEnd.getSeconds().toString().padStart(2, "0");
-      setEndHour(hour);
-      setEndMinute(minute);
-      setEndSecond(second);
-      setEndMeridiem(globalEnd.getHours() >= 12 ? "PM" : "AM");
+      const { hour, minute, second, meridiem } = parseTime(
+        new Date(calendarState.endDate)
+      );
+      setEndHour(hour); // actualiza la hora
+      setEndMinute(minute); // actualiza los minutos
+      setEndSecond(second); // actualiza los segundos
+      setEndMeridiem(meridiem); // actualiza AM/PM
     }
-  }, [calendarState.endDate]);
+  }, [calendarState.startDate, calendarState.endDate]);
 
-  // Si se abre el calendario de inicio y no hay fecha global, se usa la hora de hoy
+  //  Si abres cualquiera de los pickers sin fecha en Redux, reinicia al “ahora”
   useEffect(() => {
-    if (showStartDateCalendar && !calendarState.startDate) {
-      const hour = (today.getHours() % 12 || 12).toString().padStart(2, "0");
-      const minute = today.getMinutes().toString().padStart(2, "0");
-      const second = today.getSeconds().toString().padStart(2, "0");
-      setStartHour(hour);
-      setStartMinute(minute);
-      setStartSecond(second);
-      setStartMeridiem(today.getHours() >= 12 ? "PM" : "AM");
-    }
-  }, [showStartDateCalendar, calendarState.startDate, today]);
+    const resetStart = showStartDateCalendar && !calendarState.startDate; // abrí start sin fecha global
+    const resetEnd = showEndDateCalendar && !calendarState.endDate; // abrí end sin fecha global
 
-  // Si se abre el calendario de fin y no hay fecha global, se usa la hora de hoy
-  useEffect(() => {
-    if (showEndDateCalendar && !calendarState.endDate) {
-      const hour = (today.getHours() % 12 || 12).toString().padStart(2, "0");
-      const minute = today.getMinutes().toString().padStart(2, "0");
-      const second = today.getSeconds().toString().padStart(2, "0");
-      setEndHour(hour);
-      setEndMinute(minute);
-      setEndSecond(second);
-      setEndMeridiem(today.getHours() >= 12 ? "PM" : "AM");
+    // Si toca reiniciar alguno…
+    if (resetStart || resetEnd) {
+      const now = new Date();
+      const { hour, minute, second, meridiem } = parseTime(now);
+
+      if (resetStart) {
+        setStartHour(hour);
+        setStartMinute(minute);
+        setStartSecond(second);
+        setStartMeridiem(meridiem);
+      }
+      if (resetEnd) {
+        setEndHour(hour);
+        setEndMinute(minute);
+        setEndSecond(second);
+        setEndMeridiem(meridiem);
+      }
     }
-  }, [showEndDateCalendar, calendarState.endDate, today]);
+  }, [
+    showStartDateCalendar,
+    showEndDateCalendar,
+    calendarState.startDate,
+    calendarState.endDate,
+  ]);
 
   // Detecta clics fuera del calendario (excepto en el botón con id "date") para cerrarlo.
   useEffect(() => {

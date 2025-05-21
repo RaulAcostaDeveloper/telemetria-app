@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { ArrowBack, ArrowForward, CalendarToday } from "@mui/icons-material";
+import { ArrowDownward, CalendarToday } from "@mui/icons-material";
 import Calendar from "@/modules/global/components/calendar/Calendar";
 import HeaderVehicleFilter from "./headerVehicleFilter/headerVehicleFilter";
 import styles from "./header.module.css";
@@ -75,16 +75,10 @@ export const Header = ({ isMenuOpen, LANGUAGE }: Props) => {
                 title={LANGUAGE.header.calendar.buttonHover}
               >
                 <CalendarToday className={styles.calendarIcon} />
+                <ArrowDownward className={styles.arrowIcon} />
                 <div className={styles.dateContainer}>
-                  <span className={styles.startDate}>
-                    <ArrowForward />
-                    {start}
-                  </span>
-                  <span className={styles.endDate}>
-                    <ArrowBack />
-
-                    {end}
-                  </span>
+                  <span className={styles.startDate}>{start}</span>
+                  <span className={styles.endDate}>{end}</span>
                 </div>
               </button>
             </div>
