@@ -9,25 +9,36 @@ interface Props {
 }
 
 export const TableDataSummatory = ({ columns, data, LANGUAGE }: Props) => {
-  const calcSumm = () => {
-    return 4231;
+  // Calcula la suma de todos los valores de ese parámetro
+  const calcSumm = (index: number): number => {
+    let total = 0;
+
+    for (const item of data) {
+      const key = Object.keys(item)[index];
+
+      if (key) {
+        const value = parseFloat(item[key]);
+        if (!isNaN(value)) {
+          total += value;
+        }
+      }
+    }
+
+    return total;
   };
 
   return (
     <div className={`${styles.tableDataSummatory}`}>
       {columns.map((el, index) => {
-        // Espacio que se le indicó en la columna
         const defaultSpace = {
           width: el.defaultSpace ? `${el.defaultSpace * 50}px` : "fit-content",
         };
-
-        // Muestra el total de la suma de los datos de la columna correspondiente
         return (
           <div key={el.columnName + index} style={defaultSpace}>
             {el.showTotal && (
               <div className={`${styles.summatory}`}>
                 <p>{LANGUAGE.table.elements.total}</p>
-                <span>{calcSumm()}</span>
+                <span>{calcSumm(index)}</span>
               </div>
             )}
           </div>
