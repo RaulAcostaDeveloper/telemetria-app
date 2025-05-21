@@ -27,6 +27,7 @@ const tableColumns: columnsTable = [
   {
     columnName: "Id",
     defaultSpace: 1,
+    showTotal: true,
   },
 ];
 

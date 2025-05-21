@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import styles from "./table.module.css";
 import { LanguageInterface } from "../../language/constants/language.model";
-import { TableServerContent } from "../tableServerContent/tableServerContent";
+import { TableServerContent } from "./tableServerContent/tableServerContent";
 import {
   SelectorFilter,
   SelectorOrdered,
