@@ -5,13 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "./DatePicker";
 import FixedDateSection from "./FixedDateSection";
 import styles from "./Calendar.module.css";
-import {
-  formatDateTime,
-  handleHourKeyDown,
-  handleMinuteSecondKeyDown,
-  isPast90Days,
-  toLocalISOString,
-} from "@/modules/global/utils/utils";
+import { isPast90Days, toLocalISOString } from "@/modules/global/utils/utils";
 import { ButtonTypes } from "../generalButton/generalButton.model";
 import { GeneralButton } from "../generalButton/generalButton";
 import { RootState } from "@/globalConfig/redux/store";

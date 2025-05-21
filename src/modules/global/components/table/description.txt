@@ -54,3 +54,7 @@ De todos modos comparto las instrucciones de uso del componente:
         idKey="idVehicle"
         deleteFunction={deleteElementExample}
       />
+
+Muy importante
+Usar como ejemplo: src\modules\global\components\table\exampleTableForm
+Para crear un componente de formulario para editar o crear
