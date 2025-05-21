@@ -1,7 +1,7 @@
 import styles from "./menu.module.css";
-import { MenuContent } from "../menuContent/menuContent";
-import { MenuHeader } from "../menuHeader/menuHeader";
+import { MenuContent } from "./menuContent/menuContent";
 import { LanguageInterface } from "../../language/constants/language.model";
+import { MenuHeader } from "./menuHeader/menuHeader";
 
 interface Props {
   isMenuOpen: boolean | null;
