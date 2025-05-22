@@ -1,0 +1,20 @@
+Usar este hook para logear, deslogear y obtener si el usuario está autenticado
+
+IMPORTANTE, debe obtener validación de back end
+
+Traer la interface de: import { UserData } from "@/globalConfig/redux/slices/authSlice";
+
+Ejemplo de uso:
+
+const { isAuthenticated, loginHook, logoutHook } = useAuth();
+
+const user: UserData = {
+    email: "user@test.com",
+    name: "usernameTest",
+    id: "12412",
+};
+
+const token = "r21r2143-token";
+loginHook(token, user);
+
+logoutHook();
