@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import styles from "./mainWrapper.module.css";
 import {
@@ -16,7 +17,7 @@ import { PageContainer } from "../pageContainer/pageContainer";
 import { RootState } from "@/globalConfig/redux/store";
 import { SPANISH } from "../../language/constants/spanish";
 import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
-import { useSelector } from "react-redux";
+import { useAuth } from "../../hooks";
 
 interface Props {
   children: React.ReactNode;
@@ -29,6 +30,8 @@ export const MainWrapper = ({ children }: Props) => {
   const languageSelected = useSelector(
     (state: RootState) => state.languageOption.languageSelected
   );
+
+  const { isAuthenticated } = useAuth();
 
   // Aquí trae de redux y modifica el LANGUAGE
   // Actualizar en caso de agregar un nuevo idioma
@@ -83,13 +86,18 @@ export const MainWrapper = ({ children }: Props) => {
 
   return (
     <div className={`${styles.mainWrapper}`}>
-      <Menu
-        LANGUAGE={LANGUAGE}
-        isMenuOpen={isMenuOpen}
-        setIsMenuOpen={setIsMenuOpen}
-      />
+      {isAuthenticated && (
+        <Menu
+          LANGUAGE={LANGUAGE}
+          isMenuOpen={isMenuOpen}
+          setIsMenuOpen={setIsMenuOpen}
+        />
+      )}
+
       <div className={`${styles.rightContent}`}>
-        <Header LANGUAGE={LANGUAGE} isMenuOpen={isMenuOpen} />
+        {isAuthenticated && (
+          <Header LANGUAGE={LANGUAGE} isMenuOpen={isMenuOpen} />
+        )}
 
         {/* Contenido de la página */}
         <LanguageContext.Provider value={LANGUAGE}>

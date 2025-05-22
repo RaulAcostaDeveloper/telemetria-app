@@ -52,43 +52,47 @@ export const Header = ({ isMenuOpen, LANGUAGE }: Props) => {
     : formatDateTime(defaultISO);
 
   return (
-    <header
-      className={styles.header}
-      style={{
-        width: isMenuOpen !== true ? "calc(100% - 80px)" : "calc(100% - 250px)",
-        transition: isMenuOpen !== true ? "0.9s" : "1.1s",
-      }}
-    >
-      {mounted && (
-        <>
-          <nav className={styles.navBar}>
-            <HeaderBackButton LANGUAGE={LANGUAGE} />
-            {/* Renderizar el VehicleFilter (input de búsqueda con dropdown) */}
-            <div className={styles.inputAndDatesContainer}>
-              <HeaderVehicleFilter LANGUAGE={LANGUAGE} />
-              <button
-                onClick={toggleContainer}
-                id="date"
-                type="button"
-                data-state={showCalendar ? "open" : "closed"}
-                className={styles.dateButton}
-                title={LANGUAGE.header.calendar.buttonHover}
-              >
-                <CalendarToday className={styles.calendarIcon} />
-                <ArrowDownward className={styles.arrowIcon} />
-                <div className={styles.dateContainer}>
-                  <span className={styles.startDate}>{start}</span>
-                  <span className={styles.endDate}>{end}</span>
-                </div>
-              </button>
-            </div>
-          </nav>
-          {showCalendar && (
-            <Calendar LANGUAGE={LANGUAGE} toggleContainer={toggleContainer} />
-          )}
-        </>
-      )}
-    </header>
+    <>
+      <header
+        className={styles.header}
+        style={{
+          width:
+            isMenuOpen !== true ? "calc(100% - 80px)" : "calc(100% - 250px)",
+          transition: isMenuOpen !== true ? "0.9s" : "1.1s",
+        }}
+      >
+        {mounted && (
+          <>
+            <nav className={styles.navBar}>
+              <HeaderBackButton LANGUAGE={LANGUAGE} />
+              {/* Renderizar el VehicleFilter (input de búsqueda con dropdown) */}
+              <div className={styles.inputAndDatesContainer}>
+                <HeaderVehicleFilter LANGUAGE={LANGUAGE} />
+                <button
+                  onClick={toggleContainer}
+                  id="date"
+                  type="button"
+                  data-state={showCalendar ? "open" : "closed"}
+                  className={styles.dateButton}
+                  title={LANGUAGE.header.calendar.buttonHover}
+                >
+                  <CalendarToday className={styles.calendarIcon} />
+                  <ArrowDownward className={styles.arrowIcon} />
+                  <div className={styles.dateContainer}>
+                    <span className={styles.startDate}>{start}</span>
+                    <span className={styles.endDate}>{end}</span>
+                  </div>
+                </button>
+              </div>
+            </nav>
+            {showCalendar && (
+              <Calendar LANGUAGE={LANGUAGE} toggleContainer={toggleContainer} />
+            )}
+          </>
+        )}
+      </header>
+      <div className={styles.shadowHeader}>{/* Shadow Header */}.</div>
+    </>
   );
 };
 
