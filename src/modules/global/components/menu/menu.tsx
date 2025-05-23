@@ -4,12 +4,18 @@ import { LanguageInterface } from "../../language/constants/language.model";
 import { MenuHeader } from "./menuHeader/menuHeader";
 
 interface Props {
-  isMenuOpen: boolean | null;
-  setIsMenuOpen: (isOpen: boolean) => void;
   LANGUAGE: LanguageInterface;
+  isMenuOpen: boolean | null;
+  logoutHook: () => Promise<void>;
+  setIsMenuOpen: (isOpen: boolean) => void;
 }
 
-export const Menu = ({ isMenuOpen, setIsMenuOpen, LANGUAGE }: Props) => {
+export const Menu = ({
+  LANGUAGE,
+  logoutHook,
+  isMenuOpen,
+  setIsMenuOpen,
+}: Props) => {
   return (
     <>
       <div
@@ -22,7 +28,11 @@ export const Menu = ({ isMenuOpen, setIsMenuOpen, LANGUAGE }: Props) => {
           isOpen={isMenuOpen}
           setIsOpen={setIsMenuOpen}
         />
-        <MenuContent LANGUAGE={LANGUAGE} isOpen={isMenuOpen} />
+        <MenuContent
+          LANGUAGE={LANGUAGE}
+          isOpen={isMenuOpen}
+          logoutHook={logoutHook}
+        />
       </div>
 
       <div
