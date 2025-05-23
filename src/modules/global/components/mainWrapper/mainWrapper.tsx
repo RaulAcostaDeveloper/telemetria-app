@@ -17,6 +17,7 @@ import { PageContainer } from "../pageContainer/pageContainer";
 import { RootState } from "@/globalConfig/redux/store";
 import { SPANISH } from "../../language/constants/spanish";
 import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
+import { UserData } from "@/globalConfig/redux/slices/authSlice";
 import { useAuth } from "../../hooks";
 
 interface Props {
@@ -31,7 +32,23 @@ export const MainWrapper = ({ children }: Props) => {
     (state: RootState) => state.languageOption.languageSelected
   );
 
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, tryLoginHook, logoutHook } = useAuth();
+
+  useEffect(() => {
+    // Simular datos de usuario
+    const user: UserData = {
+      email: "user@test.com",
+      name: "usernameTest",
+      id: "12412",
+    };
+
+    // Traer token del localStorage o definir uno de prueba
+    // Cambiar a "" o null si se quiere forzar logout temporalmente
+    const token = "token_4123";
+
+    // Intentar iniciar sesión si hay token
+    tryLoginHook(token, user);
+  }, []);
 
   // Aquí trae de redux y modifica el LANGUAGE
   // Actualizar en caso de agregar un nuevo idioma
@@ -90,6 +107,7 @@ export const MainWrapper = ({ children }: Props) => {
         <Menu
           LANGUAGE={LANGUAGE}
           isMenuOpen={isMenuOpen}
+          logoutHook={logoutHook}
           setIsMenuOpen={setIsMenuOpen}
         />
       )}
