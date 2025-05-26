@@ -1,3 +1,37 @@
 .authForm {
-  background-color: antiquewhite;
+  height: 320px;
+  width: 100%;
+  font-size: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1rem;
+}
+.logoContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.inputsContainers {
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  font-weight: bold;
+  padding: 0 2rem;
+}
+
+.inputsContainers input {
+  font-size: 2rem;
+  border-radius: 0.35rem;
+  padding: 0.3rem;
+}
+.authForm button {
+  padding: 1rem;
+  margin: 0 2rem;
+  width: calc(100% - 4rem);
+  border-radius: 0.5rem;
+  font-size: 2rem;
+  border: none;
+  font-weight: bold;
 }
