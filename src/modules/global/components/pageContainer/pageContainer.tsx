@@ -1,9 +1,24 @@
+"use client";
+import { useSelector } from "react-redux";
+import { RootState } from "@/globalConfig/redux/store";
 import styles from "./pageContainer.module.css";
 
 interface Props {
   children: React.ReactNode;
 }
 
-export const PageContainer = ({ children }: Props) => (
-  <div className={`${styles.pageContainer}`}>{children}</div>
-);
+export const PageContainer = ({ children }: Props) => {
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+  console.log(isAuthenticated);
+  return (
+    <div
+      className={
+        isAuthenticated ? `${styles.pageContainer}` : `${styles.loginContainer}`
+      }
+    >
+      {children}
+    </div>
+  );
+};

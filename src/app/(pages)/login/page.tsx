@@ -2,15 +2,16 @@
 
 import { AuthForm } from "@/modules/auth/components";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
+import styles from "./Loginpage.module.css";
 
-export default function Login() {
+export default function LoginPage() {
   const LANGUAGE = useLanguage();
 
   return (
-    <div>
-      Login page
-      <p>{LANGUAGE?.auth.principalTitle}</p>
-      <AuthForm LANGUAGE={LANGUAGE} />
+    <div className={styles.loginPage}>
+      <div className={styles.formContainer}>
+        <AuthForm LANGUAGE={LANGUAGE} />
+      </div>
     </div>
   );
 }
