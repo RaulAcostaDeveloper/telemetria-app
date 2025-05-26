@@ -1,4 +1,4 @@
-export const usersOutDto = {
+export const usersOutDtoDataMock = {
   statusCode: 0,
   message: "string",
   value: [

@@ -1,4 +1,4 @@
-export const fuelSummaryMock = {
+export const fuelSummaryDataMock = {
   statusCode: 200,
   message: "Ok",
   value: {
