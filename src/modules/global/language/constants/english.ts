@@ -116,4 +116,15 @@ export const ENGLISH: LanguageInterface = {
       zones: "Zones",
     },
   },
+  management: {
+    tabs: {
+      vehicles: "Vehicles",
+      devices: "Devices",
+      clients: "Clients",
+      users: "Users",
+      groups: "Groups",
+      accounts: "Accounts",
+      drivers: "Drivers",
+    },
+  },
 };
