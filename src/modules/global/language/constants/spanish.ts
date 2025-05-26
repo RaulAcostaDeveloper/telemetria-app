@@ -116,4 +116,15 @@ export const SPANISH: LanguageInterface = {
       zones: "Zonas",
     },
   },
+  management: {
+    tabs: {
+      vehicles: "Vehículos",
+      devices: "Dispositivos",
+      clients: "Clientes",
+      users: "Usuarios",
+      groups: "Grupos",
+      accounts: "Cuentas",
+      drivers: "Conductores",
+    },
+  },
 };
