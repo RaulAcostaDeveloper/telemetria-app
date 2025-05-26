@@ -97,4 +97,15 @@ export interface LanguageInterface {
       zones: string;
     };
   };
+  management: {
+    tabs: {
+      vehicles: string;
+      devices: string;
+      clients: string;
+      users: string;
+      groups: string;
+      accounts: string;
+      drivers: string;
+    };
+  };
 }
