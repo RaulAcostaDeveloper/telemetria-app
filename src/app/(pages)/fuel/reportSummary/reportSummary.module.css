@@ -52,3 +52,8 @@
 .summaryContainer span {
   font-weight: bold;
 }
+@media (max-width: 1540px) {
+  .reportSummaryContainer {
+    width: 70%;
+  }
+}
