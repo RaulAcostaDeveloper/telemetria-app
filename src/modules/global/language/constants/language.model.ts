@@ -52,6 +52,7 @@ export interface LanguageInterface {
       delete: string;
       downloadCSV: string;
       downloadFiltredCSV: string;
+      filtered: string;
       saveEdit: string;
       saveNew: string;
     };
@@ -97,6 +98,19 @@ export interface LanguageInterface {
       groups: string;
       unitys: string;
       zones: string;
+    };
+    vehiclesTableColumns: {
+      imei: string;
+      lastFuelLevel: string;
+      lastReportDate: string;
+      name: string;
+      plate: string;
+      fuelLoadCount: string;
+      fuelUnloadCount: string;
+      performanceOdometer: string;
+      performanceHorometer: string;
+      fuelLoaded: string;
+      fuelUnloaded: string;
     };
   };
   management: {

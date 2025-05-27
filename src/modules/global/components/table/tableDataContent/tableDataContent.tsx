@@ -2,7 +2,7 @@ import styles from "./tableDataContent.module.css";
 import { LanguageInterface } from "../../../language/constants/language.model";
 import { TableActions } from "../tableActions/tableActions";
 import { TableDataProp } from "../tableDataProp/tableDataProp";
-import { columnsTable, dataTable } from "../table.model";
+import { columnsTable, dataTable, PrimitiveValue } from "../table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -16,7 +16,7 @@ interface Props {
   showView?: boolean;
   viewPath?: string;
   editFormContent?: React.FC<{
-    dataObject: { [key: string]: string | number };
+    dataObject: { [key: string]: PrimitiveValue };
     setIsDisabled: (val: boolean) => void;
     setSaveFunction: (cb: () => void) => void;
   }>;
@@ -52,7 +52,7 @@ export const TableDataContent = ({
               <div key={colIndex} style={defaultSpace}>
                 <TableDataProp
                   LANGUAGE={LANGUAGE}
-                  value={String(dataValues[colIndex] ?? "-")}
+                  value={dataValues[colIndex] ?? "-"}
                   defaultSpace={defaultSpace}
                 />
               </div>

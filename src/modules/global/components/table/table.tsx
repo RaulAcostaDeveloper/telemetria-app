@@ -5,6 +5,7 @@ import styles from "./table.module.css";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { TableServerContent } from "./tableServerContent/tableServerContent";
 import {
+  PrimitiveValue,
   SelectorFilter,
   SelectorOrdered,
   columnsTable,
@@ -24,12 +25,12 @@ interface Props {
   title?: string;
   viewPath?: string;
   createFormContent?: React.FC<{
-    dataObject?: { [key: string]: string | number };
+    dataObject?: { [key: string]: PrimitiveValue };
     setIsDisabled: (val: boolean) => void;
     setSaveFunction: (cb: () => void) => void;
   }>;
   editFormContent?: React.FC<{
-    dataObject: { [key: string]: string | number };
+    dataObject: { [key: string]: PrimitiveValue };
     setIsDisabled: (val: boolean) => void;
     setSaveFunction: (cb: () => void) => void;
   }>;
@@ -77,9 +78,11 @@ export const Table = ({
       let result: number;
 
       if (bothAreNumbers) {
-        result = numA - numB;
+        result = numB - numA;
       } else {
-        result = valA.localeCompare(valB, undefined, { sensitivity: "base" });
+        const strA = (valA ?? "").toString();
+        const strB = (valB ?? "").toString();
+        result = strA.localeCompare(strB, undefined, { sensitivity: "base" });
       }
 
       return columnOrdered.value ? result : -result;
@@ -93,24 +96,28 @@ export const Table = ({
     const applyFilters = () => {
       let result = data;
 
-      // Filtro de texto
+      // Filtro de texto (por la primera columna)
       if (inputFilterValue.trim() !== "") {
         result = result.filter((item) => {
           const firstKey = Object.keys(item)[0];
-          return item[firstKey]
-            .toLowerCase()
-            .includes(inputFilterValue.toLowerCase());
+          const raw = item[firstKey];
+
+          const strValue = raw?.toString().toLowerCase() ?? "";
+          return strValue.includes(inputFilterValue.toLowerCase());
         });
       }
 
-      // Filtros por columna (selector)
+      // Filtros por columna (selectors)
       filterSelectors.forEach(({ propIndex, value }) => {
         result = result.filter((item) => {
           const keys = Object.keys(item);
           const key = keys[propIndex];
-          return (
-            key && item[key].toLowerCase().trim() === value.toLowerCase().trim()
-          );
+          const raw = item[key];
+
+          const strValue = raw?.toString().toLowerCase().trim() ?? "";
+          const target = value.toLowerCase().trim();
+
+          return strValue === target;
         });
       });
 
