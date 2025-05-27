@@ -112,6 +112,14 @@ export interface LanguageInterface {
       fuelLoaded: string;
       fuelUnloaded: string;
     };
+    summaryReports: {
+      labels: {
+        inventory: string;
+        performance: string;
+        fuelCharged: string;
+        fuelDischarged: string;
+      };
+    };
   };
   management: {
     tabs: {

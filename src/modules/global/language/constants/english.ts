@@ -131,6 +131,14 @@ export const ENGLISH: LanguageInterface = {
       fuelLoaded: "Fuel loaded",
       fuelUnloaded: "Fuel unloaded",
     },
+    summaryReports: {
+      labels: {
+        inventory: "Inventory",
+        performance: "Performance",
+        fuelCharged: "Charged",
+        fuelDischarged: "Discharged",
+      },
+    },
   },
   management: {
     tabs: {

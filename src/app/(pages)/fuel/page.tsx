@@ -1,5 +1,6 @@
 "use client";
 import { Table, TabsContent } from "@/modules/global/components";
+import ReportSummary from "./reportSummary/ReportSummary";
 import {
   columnsTable,
   dataTable,
@@ -81,6 +82,7 @@ export default function Fuel() {
 
   return (
     <div>
+      <ReportSummary />
       <TabsContent
         tabOptions={tabOptions}
         tabContents={[
