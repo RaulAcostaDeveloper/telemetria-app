@@ -6,7 +6,7 @@ interface Props {
   Icon?: React.ReactElement;
   buttonStyle?: string;
   callback: () => void;
-  title: string;
+  title?: string;
   titleStyle?: string;
   type: ButtonTypes;
   disabled?: boolean;
@@ -45,11 +45,15 @@ export const GeneralButton = ({
         ${disabled ? styles.disabled : ""} 
       `}
       onClick={handleCallback}
-      title={title ? title : placeholder}
+      title={placeholder ? placeholder : title}
     >
       <span className={` ${titleStyle ? titleStyle : ""}`}>{title}</span>
 
-      {Icon && <div className={styles.icon}>{Icon} </div>}
+      {Icon && (
+        <div className={`${styles.icon} ${title ? styles.iconWithTitle : ""}`}>
+          {Icon}
+        </div>
+      )}
     </button>
   );
 };

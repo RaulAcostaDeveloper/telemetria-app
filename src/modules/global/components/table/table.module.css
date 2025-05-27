@@ -2,7 +2,10 @@
   -webkit-overflow-scrolling: touch;
   margin: 10px 0;
   overflow-x: auto;
-  padding: 0 5px;
+  border: 1px solid rgba(0, 0, 0, 0.471);
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.019);
+  border-radius: 4px;
 }
 
 /* Estilos del scrollbar */

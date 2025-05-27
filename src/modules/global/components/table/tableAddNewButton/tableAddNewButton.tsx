@@ -7,11 +7,12 @@ import { ButtonTypes } from "../../generalButton/generalButton.model";
 import { GeneralButton } from "../../generalButton/generalButton";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { TableAddFormModal } from "../tableAddFormModal/tableAddFormModal";
+import { PrimitiveValue } from "../table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   createFormContent?: React.FC<{
-    dataObject?: { [key: string]: string | number };
+    dataObject?: { [key: string]: PrimitiveValue };
     setIsDisabled: (val: boolean) => void;
     setSaveFunction: (cb: () => void) => void;
   }>;

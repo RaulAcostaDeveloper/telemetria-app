@@ -7,12 +7,13 @@ import { ButtonTypes } from "../../generalButton/generalButton.model";
 import { GeneralButton } from "../../generalButton/generalButton";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Modal } from "../../modal/modal";
+import { PrimitiveValue } from "../table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   closeModal: () => void;
   deleteFunction?: (idElement: string | number) => void;
-  idObject?: number | string;
+  idObject?: PrimitiveValue;
 }
 
 export const TableDeleteModal = ({

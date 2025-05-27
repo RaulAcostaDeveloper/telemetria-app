@@ -7,7 +7,12 @@ import { TableDataContent } from "../tableDataContent/tableDataContent";
 import { TableDataSummatory } from "../tableDataSummatory/tableDataSummatory";
 import { TableFilters } from "../tableFilters/tableFilters";
 import { TableSearch } from "../tableSearch/tableSearch";
-import { columnsTable, dataTable, SelectorOrdered } from "../table.model";
+import {
+  PrimitiveValue,
+  SelectorOrdered,
+  columnsTable,
+  dataTable,
+} from "../table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -27,12 +32,12 @@ interface Props {
   title?: string;
   viewPath?: string;
   createFormContent?: React.FC<{
-    dataObject?: { [key: string]: string | number };
+    dataObject?: { [key: string]: PrimitiveValue };
     setIsDisabled: (val: boolean) => void;
     setSaveFunction: (cb: () => void) => void;
   }>;
   editFormContent?: React.FC<{
-    dataObject: { [key: string]: string | number };
+    dataObject: { [key: string]: PrimitiveValue };
     setIsDisabled: (val: boolean) => void;
     setSaveFunction: (cb: () => void) => void;
   }>;
