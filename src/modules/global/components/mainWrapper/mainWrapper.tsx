@@ -18,7 +18,7 @@ import { RootState } from "@/globalConfig/redux/store";
 import { SPANISH } from "../../language/constants/spanish";
 import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
 import { UserData } from "@/globalConfig/redux/slices/authSlice";
-import { useAuth } from "../../hooks";
+import { useAuth } from "../../../auth/utils";
 
 interface Props {
   children: React.ReactNode;
@@ -44,7 +44,7 @@ export const MainWrapper = ({ children }: Props) => {
 
     // Traer token del localStorage o definir uno de prueba
     // Cambiar a "" o null si se quiere forzar logout temporalmente
-    const token = "token_4123";
+    const token = "112e21e";
 
     // Intentar iniciar sesión si hay token
     tryLoginHook(token, user);

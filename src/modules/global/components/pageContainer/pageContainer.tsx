@@ -11,7 +11,6 @@ export const PageContainer = ({ children }: Props) => {
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
-  console.log(isAuthenticated);
   return (
     <div
       className={
