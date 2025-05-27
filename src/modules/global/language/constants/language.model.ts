@@ -86,8 +86,7 @@ export interface LanguageInterface {
       name: string;
       password: string;
       title: string;
-      nameError: string;
-      passwordError: string;
+      nameOrPasswordError: string;
       loginButton: string;
     };
     linkToHome: string;

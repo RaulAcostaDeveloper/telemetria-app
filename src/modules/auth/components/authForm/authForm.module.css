@@ -1,5 +1,5 @@
 .authForm {
-  height: 320px;
+  min-height: 320px;
   width: 100%;
   font-size: 3rem;
   display: flex;
@@ -26,8 +26,19 @@
   border-radius: 0.35rem;
   padding: 0.3rem;
 }
-.inputsContainers span {
+.errorMessageContainer {
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--warning-color-transparent-1);
+  margin: 0 2rem;
+  width: calc(100% - 4rem);
+}
+.errorMessageContainer span {
   color: var(--button-color-3);
+  font-weight: bold;
+  font-size: 1.3rem;
 }
 .authForm button {
   padding: 1rem;
