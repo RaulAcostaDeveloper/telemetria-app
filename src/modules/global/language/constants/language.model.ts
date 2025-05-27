@@ -100,6 +100,19 @@ export interface LanguageInterface {
       unitys: string;
       zones: string;
     };
+    vehiclesTableColumns: {
+      imei: string;
+      lastFuelLevel: string;
+      lastReportDate: string;
+      name: string;
+      plate: string;
+      fuelLoadCount: string;
+      fuelUnloadCount: string;
+      performanceOdometer: string;
+      performanceHorometer: string;
+      fuelLoaded: string;
+      fuelUnloaded: string;
+    };
   };
   management: {
     tabs: {

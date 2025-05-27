@@ -119,6 +119,19 @@ export const ENGLISH: LanguageInterface = {
       unitys: "Unitys",
       zones: "Zones",
     },
+    vehiclesTableColumns: {
+      imei: "Imei",
+      lastFuelLevel: "Last fuel level",
+      lastReportDate: "Last report date",
+      name: "Name",
+      plate: "Plate",
+      fuelLoadCount: "Loads",
+      fuelUnloadCount: "Unloads",
+      performanceOdometer: "Performance (Odo)",
+      performanceHorometer: "Performance (Horo)",
+      fuelLoaded: "Fuel loaded",
+      fuelUnloaded: "Fuel unloaded",
+    },
   },
   management: {
     tabs: {
