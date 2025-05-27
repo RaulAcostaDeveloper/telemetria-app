@@ -119,6 +119,19 @@ export const SPANISH: LanguageInterface = {
       unitys: "Unidades",
       zones: "Zonas",
     },
+    vehiclesTableColumns: {
+      imei: "Imei",
+      lastFuelLevel: "Último nivel de combustible",
+      lastReportDate: "Fecha de último reporte",
+      name: "Nombre",
+      plate: "Placa",
+      fuelLoadCount: "Cargas",
+      fuelUnloadCount: "Descargas",
+      performanceOdometer: "Rendimiento (Odo)",
+      performanceHorometer: "Rendimiento (Horo)",
+      fuelLoaded: "Combustible cargado",
+      fuelUnloaded: "Combustible descargado",
+    },
   },
   management: {
     tabs: {

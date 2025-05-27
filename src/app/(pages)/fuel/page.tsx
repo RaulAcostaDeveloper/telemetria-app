@@ -7,75 +7,78 @@ import {
 import { fuelSummaryDataMock } from "@/modules/global/dataMock/fuelSummary/fuelSummary";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
-const tableColumns: columnsTable = [
-  {
-    columnName: "Imei",
-    defaultSpace: 3,
-  },
-  {
-    columnName: "Último nivel de combustible",
-    defaultSpace: 3,
-    showTotal: true,
-  },
-  {
-    columnName: "Fecha de último reporte",
-    defaultSpace: 3,
-  },
-  {
-    columnName: "Nombre",
-    defaultSpace: 2,
-    orderColumn: true,
-  },
-  {
-    columnName: "Placa",
-    defaultSpace: 6,
-  },
-  {
-    columnName: "Cargas",
-    defaultSpace: 2,
-    showTotal: true,
-    orderColumn: true,
-  },
-  {
-    columnName: "Descargas",
-    defaultSpace: 3,
-    showTotal: true,
-    orderColumn: true,
-  },
-  {
-    columnName: "Rendimiento (Odo)",
-    defaultSpace: 3,
-    showTotal: true,
-    orderColumn: true,
-  },
-  {
-    columnName: "Rendimiento (Horo)",
-    defaultSpace: 3,
-    showTotal: true,
-    orderColumn: true,
-  },
-  {
-    columnName: "Combustible cargado",
-    defaultSpace: 3,
-    showTotal: true,
-    orderColumn: true,
-  },
-  {
-    columnName: "Combustible descargado",
-    defaultSpace: 3,
-    showTotal: true,
-    orderColumn: true,
-  },
-];
-
 export default function Fuel() {
   const LANGUAGE = useLanguage();
+
   const tabOptions = [
     LANGUAGE.fuel.tabs.unitys,
     LANGUAGE.fuel.tabs.groups,
     LANGUAGE.fuel.tabs.zones,
   ];
-  const unitys: dataTable = fuelSummaryDataMock.value.devices;
+
+  const vehiclesColumns: columnsTable = [
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.imei,
+      defaultSpace: 3,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.lastFuelLevel,
+      defaultSpace: 3,
+      showTotal: true,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.lastReportDate,
+      defaultSpace: 3,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.name,
+      defaultSpace: 2,
+      orderColumn: true,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.plate,
+      defaultSpace: 6,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelLoadCount,
+      defaultSpace: 2,
+      showTotal: true,
+      orderColumn: true,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelUnloadCount,
+      defaultSpace: 3,
+      showTotal: true,
+      orderColumn: true,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.performanceOdometer,
+      defaultSpace: 3,
+      showTotal: true,
+      orderColumn: true,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.performanceHorometer,
+      defaultSpace: 3,
+      showTotal: true,
+      orderColumn: true,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelLoaded,
+      defaultSpace: 3,
+      showTotal: true,
+      orderColumn: true,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelUnloaded,
+      defaultSpace: 3,
+      showTotal: true,
+      orderColumn: true,
+    },
+  ];
+
+  const vehiclesReport: dataTable = fuelSummaryDataMock.value.devices;
+
   return (
     <div>
       <TabsContent
@@ -84,8 +87,8 @@ export default function Fuel() {
           <div key={1}>
             <Table
               LANGUAGE={LANGUAGE}
-              columns={tableColumns}
-              data={unitys}
+              columns={vehiclesColumns}
+              data={vehiclesReport}
               idKey="imei"
               showView
               viewPath="/fuel/vehicle/"
