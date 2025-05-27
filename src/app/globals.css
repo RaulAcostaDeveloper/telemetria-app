@@ -130,8 +130,14 @@ button {
     black 10%
   );
 }
-/*Variables para colores transparentes y contenedores*/
+/*Variables para colores transparentes */
 :root {
   /*Contenedor para advertencia*/
   --warning-color-transparent-1: #fef2f2;
+}
+/*Variables para colores de contenedores */
+:root {
+  --container-performance-1: #ff9100;
+  --container-performance-2: rgb(4, 187, 4);
+  --container-performance-3: rgb(223, 44, 59);
 }
