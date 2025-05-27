@@ -1,5 +1,6 @@
 "use client";
 import { Table } from "@/modules/global/components";
+import ReportSummary from "./reportSummary/ReportSummary";
 import {
   columnsTable,
   dataTable,
@@ -98,7 +99,7 @@ export default function Fuel() {
   const LANGUAGE = useLanguage();
   return (
     <div>
-      <h1>Fuel page</h1>{" "}
+      <h1>Fuel page</h1> <ReportSummary />
       <Table
         LANGUAGE={LANGUAGE}
         title="Table example"
