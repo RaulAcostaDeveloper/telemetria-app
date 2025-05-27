@@ -1,13 +1,15 @@
 import React from "react";
+
 import {
   LocalGasStationRounded,
   SpeedRounded,
   TrendingDown,
   TrendingUp,
 } from "@mui/icons-material";
-import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
-import { fuelSummaryDataMock } from "@/modules/global/dataMock/fuelSummary/fuelSummary";
+
 import styles from "./reportSummary.module.css";
+import { fuelSummaryDataMock } from "@/modules/global/dataMock/fuelSummary/fuelSummary";
+import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
 const ReportSummary = () => {
   const LANGUAGE = useLanguage();

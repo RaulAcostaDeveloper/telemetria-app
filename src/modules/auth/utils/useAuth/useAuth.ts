@@ -7,8 +7,6 @@ import {
   logoutAction,
 } from "@/globalConfig/redux/slices/authSlice";
 import { RootState } from "@/globalConfig/redux/store";
-import { deleteAuthCookie } from "@/modules/auth/utils/deleteAuthCookie/deleteAuthCookie";
-import { setAuthCookie } from "@/modules/auth/utils/setAuthCookie/setAuthCookie";
 
 export const useAuth = () => {
   const dispatch = useDispatch();
@@ -44,9 +42,6 @@ export const useAuth = () => {
   };
 
   const logoutHook = async () => {
-    // Limpiar la cookie (server side)
-    await deleteAuthCookie();
-
     // Actualizar el estado de redux
     dispatch(logoutAction());
 
@@ -57,9 +52,6 @@ export const useAuth = () => {
   };
 
   const login = async (sessionToken: string, userData: UserData) => {
-    // Actualizar la cookie (server side)
-    await setAuthCookie(sessionToken);
-
     // Actualizar el estado de redux
     dispatch(loginAction({ sessionToken, userData }));
 
