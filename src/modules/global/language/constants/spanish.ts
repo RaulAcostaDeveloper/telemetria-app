@@ -117,6 +117,14 @@ export const SPANISH: LanguageInterface = {
       unitys: "Unidades",
       zones: "Zonas",
     },
+    summaryReports: {
+      labels: {
+        inventory: "Inventario total",
+        performance: "Rendimiento de la flota",
+        fuelCharged: "Combustible cargado",
+        fuelDischarged: "Combustible descargado",
+      },
+    },
   },
   management: {
     tabs: {

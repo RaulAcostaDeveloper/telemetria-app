@@ -98,6 +98,14 @@ export interface LanguageInterface {
       unitys: string;
       zones: string;
     };
+    summaryReports: {
+      labels: {
+        inventory: string;
+        performance: string;
+        fuelCharged: string;
+        fuelDischarged: string;
+      };
+    };
   };
   management: {
     tabs: {
