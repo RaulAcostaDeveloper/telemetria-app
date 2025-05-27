@@ -72,6 +72,7 @@ export const ENGLISH: LanguageInterface = {
       delete: "Delete item",
       downloadCSV: "Download CSV",
       downloadFiltredCSV: "Download CSV (filtered)",
+      filtered: "Filtered",
       saveEdit: "Save changes",
       saveNew: "Save item",
     },
