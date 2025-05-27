@@ -1,109 +1,97 @@
 "use client";
-import { Table } from "@/modules/global/components";
+import { Table, TabsContent } from "@/modules/global/components";
 import {
   columnsTable,
   dataTable,
 } from "@/modules/global/components/table/table.model";
+import { fuelSummaryDataMock } from "@/modules/global/dataMock/fuelSummary/fuelSummary";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
 const tableColumns: columnsTable = [
   {
-    columnName: "Zona",
+    columnName: "Imei",
     defaultSpace: 3,
-    orderColumn: true,
   },
   {
-    columnName: "Perfil",
+    columnName: "Último nivel de combustible",
     defaultSpace: 3,
-    filterSelector: true,
-    orderColumn: true,
-  },
-  {
-    columnName: "País",
-    defaultSpace: 3,
-    filterSelector: true,
-    orderColumn: true,
-  },
-  {
-    columnName: "Id",
-    defaultSpace: 1,
     showTotal: true,
   },
-];
-
-const tableData: dataTable = [
   {
-    zone: "Zone A12",
-    profile: "Geo standard",
-    country: "México",
-    idVehicle: "101",
+    columnName: "Fecha de último reporte",
+    defaultSpace: 3,
   },
   {
-    zone: "Zone B07",
-    profile: "Eco drive",
-    country: "Colombia",
-    idVehicle: "102",
+    columnName: "Nombre",
+    defaultSpace: 2,
+    orderColumn: true,
   },
   {
-    zone: "Zone C19",
-    profile: "Geo gravity",
-    country: "Chile",
-    idVehicle: "103",
+    columnName: "Placa",
+    defaultSpace: 6,
   },
   {
-    zone: "Zone D03",
-    profile: "Urban ride",
-    country: "Argentina",
-    idVehicle: "104",
+    columnName: "Cargas",
+    defaultSpace: 2,
+    showTotal: true,
+    orderColumn: true,
   },
   {
-    zone: "Zone E22",
-    profile: "Highway master",
-    country: "Perú",
-    idVehicle: "105",
+    columnName: "Descargas",
+    defaultSpace: 3,
+    showTotal: true,
+    orderColumn: true,
   },
   {
-    zone: "Zone F11",
-    profile: "Eco drive",
-    country: "Brasil",
-    idVehicle: "106",
+    columnName: "Rendimiento (Odo)",
+    defaultSpace: 3,
+    showTotal: true,
+    orderColumn: true,
   },
   {
-    zone: "Zone G05",
-    profile: "Geo standard",
-    country: "México",
-    idVehicle: "107",
+    columnName: "Rendimiento (Horo)",
+    defaultSpace: 3,
+    showTotal: true,
+    orderColumn: true,
   },
   {
-    zone: "Zone H14",
-    profile: "Urban ride",
-    country: "Ecuador",
-    idVehicle: "108",
+    columnName: "Combustible cargado",
+    defaultSpace: 3,
+    showTotal: true,
+    orderColumn: true,
   },
   {
-    zone: "Zone I09",
-    profile: "Highway master",
-    country: "Uruguay",
-    idVehicle: "109",
-  },
-  {
-    zone: "Zone J01",
-    profile: "Geo gravity",
-    country: "Paraguay",
-    idVehicle: "110",
+    columnName: "Combustible descargado",
+    defaultSpace: 3,
+    showTotal: true,
+    orderColumn: true,
   },
 ];
 
 export default function Fuel() {
   const LANGUAGE = useLanguage();
+  const tabOptions = [
+    LANGUAGE.fuel.tabs.unitys,
+    LANGUAGE.fuel.tabs.groups,
+    LANGUAGE.fuel.tabs.zones,
+  ];
+  const unitys: dataTable = fuelSummaryDataMock.value.devices;
   return (
     <div>
-      <h1>Fuel page</h1>{" "}
-      <Table
-        LANGUAGE={LANGUAGE}
-        title="Table example"
-        columns={tableColumns}
-        data={tableData}
+      <TabsContent
+        tabOptions={tabOptions}
+        tabContents={[
+          <div key={1}>
+            <Table
+              LANGUAGE={LANGUAGE}
+              title="Tabla de unidades"
+              columns={tableColumns}
+              data={unitys}
+              showCreateButton
+              showView
+            />
+          </div>,
+        ]}
       />
     </div>
   );

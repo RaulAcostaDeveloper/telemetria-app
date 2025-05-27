@@ -8,7 +8,9 @@ interface column {
 
 export type columnsTable = column[];
 
-export type dataTable = Record<string, string>[];
+export type PrimitiveValue = string | number | null;
+
+export type dataTable = Record<string, PrimitiveValue>[];
 
 export type SelectorOrdered = {
   propIndex: number;

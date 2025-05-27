@@ -9,13 +9,14 @@ import { ButtonTypes } from "../../generalButton/generalButton.model";
 import { GeneralButton } from "../../generalButton/generalButton";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Modal } from "../../modal/modal";
+import { PrimitiveValue } from "../table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   closeModal: () => void;
-  dataObject: { [key: string]: string | number };
+  dataObject: { [key: string]: PrimitiveValue };
   editFormContent?: React.FC<{
-    dataObject: { [key: string]: string | number };
+    dataObject: { [key: string]: PrimitiveValue };
     setIsDisabled: (val: boolean) => void;
     setSaveFunction: (cb: () => void) => void;
   }>;
