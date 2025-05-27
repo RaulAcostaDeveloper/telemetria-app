@@ -59,6 +59,11 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
         type={ButtonTypes.CONFIRM}
         disabled={isFormValid ? false : true}
       />
+      {true && (
+        <div className={styles.errorMessageContainer}>
+          <span>{LANGUAGE.auth.authForm.nameOrPasswordError}</span>
+        </div>
+      )}
     </div>
   );
 };
