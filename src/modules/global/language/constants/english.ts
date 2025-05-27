@@ -72,6 +72,7 @@ export const ENGLISH: LanguageInterface = {
       delete: "Delete item",
       downloadCSV: "Download CSV",
       downloadFiltredCSV: "Download CSV (filtered)",
+      filtered: "Filtered",
       saveEdit: "Save changes",
       saveNew: "Save item",
     },
@@ -116,6 +117,19 @@ export const ENGLISH: LanguageInterface = {
       groups: "Groups",
       unitys: "Unitys",
       zones: "Zones",
+    },
+    vehiclesTableColumns: {
+      imei: "Imei",
+      lastFuelLevel: "Last fuel level",
+      lastReportDate: "Last report date",
+      name: "Name",
+      plate: "Plate",
+      fuelLoadCount: "Loads",
+      fuelUnloadCount: "Unloads",
+      performanceOdometer: "Performance (Odo)",
+      performanceHorometer: "Performance (Horo)",
+      fuelLoaded: "Fuel loaded",
+      fuelUnloaded: "Fuel unloaded",
     },
     summaryReports: {
       labels: {

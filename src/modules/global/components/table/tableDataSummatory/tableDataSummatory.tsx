@@ -17,14 +17,17 @@ export const TableDataSummatory = ({ columns, data, LANGUAGE }: Props) => {
       const key = Object.keys(item)[index];
 
       if (key) {
-        const value = parseFloat(item[key]);
+        const rawValue = item[key];
+        const value = Number(rawValue);
+
         if (!isNaN(value)) {
           total += value;
         }
       }
     }
 
-    return total;
+    // Máximo 3 decimales
+    return Math.round(total * 1000) / 1000;
   };
 
   return (
