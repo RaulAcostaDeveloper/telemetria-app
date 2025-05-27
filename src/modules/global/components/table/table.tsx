@@ -78,9 +78,11 @@ export const Table = ({
       let result: number;
 
       if (bothAreNumbers) {
-        result = numA - numB;
+        result = numB - numA;
       } else {
-        result = valA.localeCompare(valB, undefined, { sensitivity: "base" });
+        const strA = (valA ?? "").toString();
+        const strB = (valB ?? "").toString();
+        result = strA.localeCompare(strB, undefined, { sensitivity: "base" });
       }
 
       return columnOrdered.value ? result : -result;
