@@ -130,3 +130,8 @@ button {
     black 10%
   );
 }
+/*Variables para colores transparentes y contenedores*/
+:root {
+  /*Contenedor para advertencia*/
+  --warning-color-transparent-1: #fef2f2;
+}
