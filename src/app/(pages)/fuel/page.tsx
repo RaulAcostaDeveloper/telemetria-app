@@ -84,11 +84,11 @@ export default function Fuel() {
           <div key={1}>
             <Table
               LANGUAGE={LANGUAGE}
-              title="Tabla de unidades"
               columns={tableColumns}
               data={unitys}
-              showCreateButton
+              idKey="imei"
               showView
+              viewPath="/fuel/vehicle/"
             />
           </div>,
         ]}

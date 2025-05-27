@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
+import BrowserUpdatedIcon from "@mui/icons-material/BrowserUpdated";
 import DownloadIcon from "@mui/icons-material/Download";
 
 import styles from "./tableCSVButtonsContainer.module.css";
@@ -57,7 +58,8 @@ export const TableCSVButtonsContainer = ({
           Icon={<DownloadIcon />}
           buttonStyle={styles.tableDownloadCSV}
           callback={() => {}}
-          title={LANGUAGE.table.buttons.downloadCSV}
+          title={""}
+          placeholder={LANGUAGE.table.buttons.downloadCSV}
           type={ButtonTypes.SUCCESS}
         />
       </CSVLink>
@@ -70,10 +72,11 @@ export const TableCSVButtonsContainer = ({
         headers={headersCSV}
       >
         <GeneralButton
-          Icon={<DownloadIcon />}
+          Icon={<BrowserUpdatedIcon />}
           buttonStyle={styles.tableDownloadCSV}
           callback={() => {}}
-          title={LANGUAGE.table.buttons.downloadFiltredCSV}
+          title={LANGUAGE.table.buttons.filtered}
+          placeholder={LANGUAGE.table.buttons.downloadFiltredCSV}
           type={ButtonTypes.SUCCESS}
         />
       </CSVLink>
