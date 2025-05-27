@@ -7,13 +7,14 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import styles from "./tableActions.module.css";
+import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { PrimitiveValue } from "../table.model";
 import { TableDeleteModal } from "../tableDeleteModal/tableDeleteModa";
 import { TableEditFormModal } from "../tableEditFormModal/tableEditFormModa";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  dataObject: { [key: string]: string | number };
+  dataObject: { [key: string]: PrimitiveValue };
   deleteFunction?: (idElement: string | number) => void;
   idKey?: string;
   showActions?: boolean;
@@ -22,7 +23,7 @@ interface Props {
   showView?: boolean;
   viewPath?: string;
   editFormContent?: React.FC<{
-    dataObject: { [key: string]: string | number };
+    dataObject: { [key: string]: PrimitiveValue };
     setIsDisabled: (val: boolean) => void;
     setSaveFunction: (cb: () => void) => void;
   }>;
