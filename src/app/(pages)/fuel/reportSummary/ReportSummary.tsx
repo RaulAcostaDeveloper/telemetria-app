@@ -5,9 +5,12 @@ import {
   TrendingDown,
   TrendingUp,
 } from "@mui/icons-material";
+import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
+import { fuelSummaryDataMock } from "@/modules/global/dataMock/fuelSummary/fuelSummary";
 import styles from "./reportSummary.module.css";
 
 const ReportSummary = () => {
+  const LANGUAGE = useLanguage();
   return (
     <div className={styles.reportSummaryContainer}>
       <div className={styles.singleReportContainer}>
@@ -15,8 +18,12 @@ const ReportSummary = () => {
           <LocalGasStationRounded className={styles.inventory} />
         </div>
         <div className={styles.summaryContainer}>
-          <h1>Inventario</h1>
-          <span>48,037.00L</span>
+          <h1>{LANGUAGE.fuel.summaryReports.labels.inventory}</h1>
+          <span>
+            {fuelSummaryDataMock.value.inventory
+              ? `${fuelSummaryDataMock.value.inventory}L`
+              : "0,00L"}
+          </span>
         </div>
       </div>
       <div className={styles.singleReportContainer}>
@@ -24,8 +31,12 @@ const ReportSummary = () => {
           <SpeedRounded className={styles.performance} />
         </div>
         <div className={styles.summaryContainer}>
-          <h1>Rendimiento</h1>
-          <span>158.39999</span>
+          <h1>{LANGUAGE.fuel.summaryReports.labels.performance}</h1>
+          <span>
+            {fuelSummaryDataMock.value.performanceOdometer
+              ? `${fuelSummaryDataMock.value.performanceOdometer}L`
+              : "0,00L"}
+          </span>
         </div>
       </div>
       <div className={styles.singleReportContainer}>
@@ -33,8 +44,12 @@ const ReportSummary = () => {
           <TrendingUp className={styles.fuelCharged} />
         </div>
         <div className={styles.summaryContainer}>
-          <h1>Cargado</h1>
-          <span>153977L</span>
+          <h1>{LANGUAGE.fuel.summaryReports.labels.fuelCharged}</h1>
+          <span>
+            {fuelSummaryDataMock.value.fuelCharged
+              ? `${fuelSummaryDataMock.value.fuelCharged}L`
+              : "0,00L"}
+          </span>
         </div>
       </div>
       <div className={styles.singleReportContainer}>
@@ -42,8 +57,12 @@ const ReportSummary = () => {
           <TrendingDown className={styles.fuelDischarged} />
         </div>
         <div className={styles.summaryContainer}>
-          <h1>Descargado</h1>
-          <span>153977L</span>
+          <h1>{LANGUAGE.fuel.summaryReports.labels.fuelDischarged}</h1>
+          <span>
+            {fuelSummaryDataMock.value.fuelDischarged
+              ? `${fuelSummaryDataMock.value.fuelDischarged}L`
+              : "0,00L"}
+          </span>
         </div>
       </div>
     </div>

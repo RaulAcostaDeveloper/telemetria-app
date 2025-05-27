@@ -6,7 +6,7 @@
   justify-content: space-between;
 }
 .singleReportContainer {
-  width: 20rem;
+  width: 22rem;
   height: 6rem;
   display: flex;
 }
@@ -47,5 +47,8 @@
   font-size: 2rem;
 }
 .summaryContainer h1 {
+  color: gray;
+}
+.summaryContainer span {
   font-weight: bold;
 }

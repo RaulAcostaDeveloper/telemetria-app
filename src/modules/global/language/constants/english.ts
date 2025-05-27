@@ -117,6 +117,14 @@ export const ENGLISH: LanguageInterface = {
       unitys: "Unitys",
       zones: "Zones",
     },
+    summaryReports: {
+      labels: {
+        inventory: "Inventory",
+        performance: "Performance",
+        fuelCharged: "Charged",
+        fuelDischarged: "Discharged",
+      },
+    },
   },
   management: {
     tabs: {
