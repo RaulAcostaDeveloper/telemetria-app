@@ -131,6 +131,14 @@ export const SPANISH: LanguageInterface = {
       fuelLoaded: "Combustible cargado",
       fuelUnloaded: "Combustible descargado",
     },
+    summaryReports: {
+      labels: {
+        inventory: "Inventario total",
+        performance: "Rendimiento de la flota",
+        fuelCharged: "Combustible cargado",
+        fuelDischarged: "Combustible descargado",
+      },
+    },
   },
   management: {
     tabs: {
