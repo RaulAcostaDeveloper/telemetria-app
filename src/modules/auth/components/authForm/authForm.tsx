@@ -40,6 +40,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+        {true && <span>{LANGUAGE.auth.authForm.nameError}</span>}
       </div>
 
       <div className={styles.inputsContainers}>
@@ -51,6 +52,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {true && <span>{LANGUAGE.auth.authForm.passwordError}</span>}
       </div>
 
       <GeneralButton
