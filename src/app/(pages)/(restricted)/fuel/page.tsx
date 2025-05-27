@@ -1,6 +1,6 @@
 "use client";
+import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
 import { Table, TabsContent } from "@/modules/global/components";
-import ReportSummary from "./reportSummary/ReportSummary";
 import {
   columnsTable,
   dataTable,
@@ -82,6 +82,7 @@ export default function Fuel() {
 
   return (
     <div>
+      <h1>Fuel page</h1>
       <ReportSummary />
       <TabsContent
         tabOptions={tabOptions}

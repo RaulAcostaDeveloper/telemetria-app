@@ -14,7 +14,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  isAuthenticated: true, // cambiar esto a false cuando se tenga un sistema de autenticación más robusto
+  isAuthenticated: false,
   sessionToken: null,
   userData: null,
 };
