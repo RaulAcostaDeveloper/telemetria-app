@@ -1,36 +1,36 @@
-import { Table, TabsContent } from "@/modules/global/components";
 import {
   columnsTable,
   dataTable,
 } from "@/modules/global/components/table/table.model";
-import { devicesDataMock } from "@/modules/global/dataMock/devices/devices";
-import { vehidlesDataMock } from "@/modules/global/dataMock/vehicles/vehicles";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { Table, TabsContent } from "@/modules/global/components";
+import { accountsDataMock } from "@/modules/global/dataMock/accounts/accounts";
+import { devicesDataMock } from "@/modules/global/dataMock/devices/devices";
+import { usersDataMock } from "@/modules/global/dataMock/users/users";
+import { vehidlesDataMock } from "@/modules/global/dataMock/vehicles/vehicles";
 
 interface Props {
   LANGUAGE: LanguageInterface;
 }
-
 export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   const fuelTabs = [
     LANGUAGE.management.tabs.vehicles,
     LANGUAGE.management.tabs.devices,
+    LANGUAGE.management.tabs.users,
     LANGUAGE.management.tabs.accounts,
     LANGUAGE.management.tabs.clients,
     LANGUAGE.management.tabs.drivers,
     LANGUAGE.management.tabs.groups,
-    LANGUAGE.management.tabs.users,
   ];
 
-  const vehiclesTableData: dataTable = vehidlesDataMock.value.vehicles;
   const vehicleColumns: columnsTable = [
     {
       columnName: "ID",
-      defaultSpace: 3,
+      defaultSpace: 1,
     },
     {
       columnName: "Placas",
-      defaultSpace: 3,
+      defaultSpace: 2,
     },
     {
       columnName: "Marca",
@@ -42,8 +42,8 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       defaultSpace: 3,
     },
   ];
+  const vehiclesTableData: dataTable = vehidlesDataMock.value.vehicles;
 
-  const devicesTableData: dataTable = devicesDataMock.value.devices;
   const devicesColumns: columnsTable = [
     {
       columnName: "ID",
@@ -60,6 +60,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     {
       columnName: "Estatus",
       defaultSpace: 2,
+      filterSelector: true,
     },
     {
       columnName: "Fecha",
@@ -90,8 +91,45 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       defaultSpace: 4,
     },
   ];
+  const devicesTableData: dataTable = devicesDataMock.value.devices;
+
+  const usersColumns: columnsTable = [
+    {
+      columnName: "ID",
+      defaultSpace: 1,
+    },
+    {
+      columnName: "Username",
+      defaultSpace: 3,
+    },
+    {
+      columnName: "Nombre(s)",
+      defaultSpace: 3,
+    },
+    {
+      columnName: "Apellido(s)",
+      defaultSpace: 3,
+    },
+    {
+      columnName: "Correo electrónico",
+      defaultSpace: 5,
+    },
+  ];
+  const usersTableData: dataTable = usersDataMock.value.users;
+
+  const accountsColumns: columnsTable = [
+    {
+      columnName: "ID",
+      defaultSpace: 1,
+    },
+    {
+      columnName: "Name",
+      defaultSpace: 4,
+    },
+  ];
+  const accountsTableData: dataTable = accountsDataMock.value.accounts;
   return (
-    <div>
+    <div className="margintop">
       <TabsContent
         tabOptions={fuelTabs}
         tabContents={[
@@ -107,6 +145,20 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
               LANGUAGE={LANGUAGE}
               columns={devicesColumns}
               data={devicesTableData}
+            />
+          </div>,
+          <div key={3}>
+            <Table
+              LANGUAGE={LANGUAGE}
+              columns={usersColumns}
+              data={usersTableData}
+            />
+          </div>,
+          <div key={4}>
+            <Table
+              LANGUAGE={LANGUAGE}
+              columns={accountsColumns}
+              data={accountsTableData}
             />
           </div>,
         ]}
