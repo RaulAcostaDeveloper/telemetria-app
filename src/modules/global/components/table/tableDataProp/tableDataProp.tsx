@@ -28,7 +28,7 @@ export const TableDataProp = ({ defaultSpace, value, LANGUAGE }: Props) => {
       style={defaultSpace}
       title={`${LANGUAGE.table.actions.copy} \"${value}\"`}
     >
-      {value}
+      {value === "" ? <span>&nbsp;</span> : value}
     </button>
   );
 };

@@ -11,13 +11,9 @@ import {
 
 import styles from "./headerVehicleFilter.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { vehidlesDataMock } from "@/modules/global/dataMock/vehicles/vehicles";
 
-type Vehicle = { name: string; plates: string };
-const vehicles: Vehicle[] = [
-  ...Array(20).fill({ name: "Apollo", plates: "JK-958473" }),
-  { name: "Zeus", plates: "FR-434349" },
-  { name: "Titan", plates: "GD-082721" },
-];
+const vehicles = vehidlesDataMock.value.vehicles;
 
 type Action = { label: string; routePrefix: string; title: string };
 const iconMapping: { [key: string]: JSX.Element } = {
@@ -62,7 +58,7 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
 
   // filtrar todos los resultados que coincidan
   const filtered = vehicles.filter((v) =>
-    v.name.toLowerCase().includes(query.toLowerCase())
+    v.carNumber.toLowerCase().includes(query.toLowerCase())
   );
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,7 +83,7 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
           {filtered.map((v, i) => (
             <li key={i} className={styles.dropdownItem}>
               <div className={styles.vehicleDetails}>
-                <strong>{v.name}</strong> - <span>{v.plates}</span>
+                <strong>{v.carNumber}</strong> - <span>{v.carShortcut}</span>
               </div>
               <div className={styles.buttonsContainer}>
                 {(
@@ -112,7 +108,7 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
                 ).map((action, idx) => (
                   <Link
                     key={idx}
-                    href={`/${action.routePrefix}/vehicle/${v.name}`}
+                    href={`/${action.routePrefix}/vehicle/${v.id}`}
                     onClick={() => setShowDropdown(false)}
                     className={styles.linkIcon}
                   >
