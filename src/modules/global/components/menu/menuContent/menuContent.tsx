@@ -21,14 +21,14 @@ export const MenuContent = ({ isOpen, LANGUAGE, logoutHook }: Props) => {
 
   const menuList = [
     {
-      icon: LocalGasStationIcon,
-      route: "/fuel",
-      title: LANGUAGE.menu.titles.fuel,
-    },
-    {
       icon: AddCardIcon,
       route: "/management",
       title: LANGUAGE.menu.titles.management,
+    },
+    {
+      icon: LocalGasStationIcon,
+      route: "/fuel",
+      title: LANGUAGE.menu.titles.fuel,
     },
   ];
 
