@@ -140,6 +140,15 @@ export const ENGLISH: LanguageInterface = {
       },
     },
   },
+  fuelVehicle: {
+    tabs: {
+      behavior: "Behavior",
+      reports: "Reports",
+      fuelNow: "Fuel now",
+      charges: "Charges",
+      discharges: "Discharges",
+    },
+  },
   management: {
     tabs: {
       vehicles: "Vehicles",
