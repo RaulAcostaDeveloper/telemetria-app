@@ -8,6 +8,8 @@ import { accountsDataMock } from "@/modules/global/dataMock/accounts/accounts";
 import { devicesDataMock } from "@/modules/global/dataMock/devices/devices";
 import { usersDataMock } from "@/modules/global/dataMock/users/users";
 import { vehidlesDataMock } from "@/modules/global/dataMock/vehicles/vehicles";
+import { groupsDataMock } from "@/modules/global/dataMock/groups/groups";
+import { driversDataMock } from "@/modules/global/dataMock/drivers/drivers";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -18,7 +20,6 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     LANGUAGE.management.tabs.devices,
     LANGUAGE.management.tabs.users,
     LANGUAGE.management.tabs.accounts,
-    LANGUAGE.management.tabs.clients,
     LANGUAGE.management.tabs.drivers,
     LANGUAGE.management.tabs.groups,
   ];
@@ -128,6 +129,30 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     },
   ];
   const accountsTableData: dataTable = accountsDataMock.value.accounts;
+
+  const groupsColumns: columnsTable = [
+    {
+      columnName: "ID",
+      defaultSpace: 1,
+    },
+    {
+      columnName: "Name",
+      defaultSpace: 4,
+    },
+  ];
+  const groupsTableData: dataTable = groupsDataMock.value.groups;
+
+  const driversColumns: columnsTable = [
+    {
+      columnName: "ID",
+      defaultSpace: 1,
+    },
+    {
+      columnName: "Name",
+      defaultSpace: 4,
+    },
+  ];
+  const driversTableData: dataTable = driversDataMock.value.groups;
   return (
     <div className="margintop">
       <TabsContent
@@ -159,6 +184,20 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
               LANGUAGE={LANGUAGE}
               columns={accountsColumns}
               data={accountsTableData}
+            />
+          </div>,
+          <div key={5}>
+            <Table
+              LANGUAGE={LANGUAGE}
+              columns={driversColumns}
+              data={driversTableData}
+            />
+          </div>,
+          <div key={6}>
+            <Table
+              LANGUAGE={LANGUAGE}
+              columns={groupsColumns}
+              data={groupsTableData}
             />
           </div>,
         ]}
