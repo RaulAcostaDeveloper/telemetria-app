@@ -140,6 +140,15 @@ export const SPANISH: LanguageInterface = {
       },
     },
   },
+  fuelVehicle: {
+    tabs: {
+      behavior: "Comportamiento",
+      reports: "Reportes",
+      fuelNow: "Combustible actual",
+      charges: "Cargas",
+      discharges: "Descargas",
+    },
+  },
   management: {
     tabs: {
       vehicles: "Vehículos",

@@ -121,6 +121,15 @@ export interface LanguageInterface {
       };
     };
   };
+  fuelVehicle: {
+    tabs: {
+      behavior: string;
+      reports: string;
+      fuelNow: string;
+      charges: string;
+      discharges: string;
+    };
+  };
   management: {
     tabs: {
       vehicles: string;
