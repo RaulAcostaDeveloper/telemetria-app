@@ -6,7 +6,7 @@ import {
   TrendingDown,
   TrendingUp,
 } from "@mui/icons-material";
-
+import { formatNumberWithCommas } from "@/modules/global/utils/utils";
 import styles from "./reportSummary.module.css";
 import { fuelSummaryDataMock } from "@/modules/global/dataMock/fuelSummary/fuelSummary";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
@@ -23,7 +23,9 @@ const ReportSummary = () => {
           <h1>{LANGUAGE.fuel.summaryReports.labels.inventory}</h1>
           <span>
             {fuelSummaryDataMock.value.inventory
-              ? `${fuelSummaryDataMock.value.inventory}L`
+              ? `${formatNumberWithCommas(
+                  fuelSummaryDataMock.value.inventory
+                )}L`
               : "0,00L"}
           </span>
         </div>
@@ -36,7 +38,9 @@ const ReportSummary = () => {
           <h1>{LANGUAGE.fuel.summaryReports.labels.performance}</h1>
           <span>
             {fuelSummaryDataMock.value.performanceOdometer
-              ? `${fuelSummaryDataMock.value.performanceOdometer}L`
+              ? `${formatNumberWithCommas(
+                  fuelSummaryDataMock.value.performanceOdometer
+                )}L`
               : "0,00L"}
           </span>
         </div>
@@ -49,7 +53,9 @@ const ReportSummary = () => {
           <h1>{LANGUAGE.fuel.summaryReports.labels.fuelCharged}</h1>
           <span>
             {fuelSummaryDataMock.value.fuelCharged
-              ? `${fuelSummaryDataMock.value.fuelCharged}L`
+              ? `${formatNumberWithCommas(
+                  fuelSummaryDataMock.value.fuelCharged
+                )}L`
               : "0,00L"}
           </span>
         </div>
@@ -62,7 +68,9 @@ const ReportSummary = () => {
           <h1>{LANGUAGE.fuel.summaryReports.labels.fuelDischarged}</h1>
           <span>
             {fuelSummaryDataMock.value.fuelDischarged
-              ? `${fuelSummaryDataMock.value.fuelDischarged}L`
+              ? `${formatNumberWithCommas(
+                  fuelSummaryDataMock.value.fuelDischarged
+                )}L`
               : "0,00L"}
           </span>
         </div>
