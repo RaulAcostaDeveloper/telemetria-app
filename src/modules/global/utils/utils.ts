@@ -278,3 +278,16 @@ export function parseTime(date: Date): TimeParts {
   const meridiem = h24 >= 12 ? "PM" : "AM";
   return { hour, minute, second, meridiem };
 }
+
+/**
+ * Convierte un número (puede tener decimales) a entero
+ * y lo formatea con separadores de miles (comas).
+ *
+ * @param value - Número a formatear.
+ * @returns Cadena con el número entero formateado, por ejemplo "41,231,212".
+ */
+export function formatNumberWithCommas(value: number): string {
+  const intValue = Math.trunc(value);
+
+  return intValue.toLocaleString("en-US");
+}
