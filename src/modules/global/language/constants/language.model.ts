@@ -131,5 +131,25 @@ export interface LanguageInterface {
       accounts: string;
       drivers: string;
     };
+    tableColumns: {
+      id: string;
+      plates: string;
+      brand: string;
+      alias: string;
+      model: string;
+      version: string;
+      status: string;
+      date: string;
+      serialNumber: string;
+      sim: string;
+      firmware: string;
+      hardware: string;
+      imei: string;
+      lastDataDate: string;
+      username: string;
+      names: string;
+      lastnames: string;
+      email: string;
+    };
   };
 }

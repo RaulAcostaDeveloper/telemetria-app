@@ -26,20 +26,20 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
 
   const vehicleColumns: columnsTable = [
     {
-      columnName: "ID",
+      columnName: LANGUAGE.management.tableColumns.id,
       defaultSpace: 1,
     },
     {
-      columnName: "Placas",
+      columnName: LANGUAGE.management.tableColumns.plates,
       defaultSpace: 2,
     },
     {
-      columnName: "Marca",
+      columnName: LANGUAGE.management.tableColumns.brand,
       defaultSpace: 3,
       filterSelector: true,
     },
     {
-      columnName: "Alias",
+      columnName: LANGUAGE.management.tableColumns.alias,
       defaultSpace: 3,
     },
   ];
@@ -47,48 +47,48 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
 
   const devicesColumns: columnsTable = [
     {
-      columnName: "ID",
+      columnName: LANGUAGE.management.tableColumns.id,
       defaultSpace: 1,
     },
     {
-      columnName: "Modelo",
+      columnName: LANGUAGE.management.tableColumns.model,
       defaultSpace: 2,
     },
     {
-      columnName: "Versión",
+      columnName: LANGUAGE.management.tableColumns.version,
       defaultSpace: 2,
     },
     {
-      columnName: "Estatus",
+      columnName: LANGUAGE.management.tableColumns.status,
       defaultSpace: 2,
       filterSelector: true,
     },
     {
-      columnName: "Fecha",
+      columnName: LANGUAGE.management.tableColumns.date,
       defaultSpace: 4,
     },
     {
-      columnName: "Serial Numer",
+      columnName: LANGUAGE.management.tableColumns.serialNumber,
       defaultSpace: 3,
     },
     {
-      columnName: "SIM",
+      columnName: LANGUAGE.management.tableColumns.sim,
       defaultSpace: 3,
     },
     {
-      columnName: "firmware",
+      columnName: LANGUAGE.management.tableColumns.firmware,
       defaultSpace: 2,
     },
     {
-      columnName: "hardware",
+      columnName: LANGUAGE.management.tableColumns.hardware,
       defaultSpace: 2,
     },
     {
-      columnName: "imei",
+      columnName: LANGUAGE.management.tableColumns.imei,
       defaultSpace: 3,
     },
     {
-      columnName: "lastDataAt",
+      columnName: LANGUAGE.management.tableColumns.lastDataDate,
       defaultSpace: 4,
     },
   ];
@@ -96,23 +96,23 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
 
   const usersColumns: columnsTable = [
     {
-      columnName: "ID",
+      columnName: LANGUAGE.management.tableColumns.id,
       defaultSpace: 1,
     },
     {
-      columnName: "Username",
+      columnName: LANGUAGE.management.tableColumns.username,
       defaultSpace: 3,
     },
     {
-      columnName: "Nombre(s)",
+      columnName: LANGUAGE.management.tableColumns.names,
       defaultSpace: 3,
     },
     {
-      columnName: "Apellido(s)",
+      columnName: LANGUAGE.management.tableColumns.lastnames,
       defaultSpace: 3,
     },
     {
-      columnName: "Correo electrónico",
+      columnName: LANGUAGE.management.tableColumns.email,
       defaultSpace: 5,
     },
   ];
@@ -120,11 +120,11 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
 
   const accountsColumns: columnsTable = [
     {
-      columnName: "ID",
+      columnName: LANGUAGE.management.tableColumns.id,
       defaultSpace: 1,
     },
     {
-      columnName: "Name",
+      columnName: LANGUAGE.management.tableColumns.names,
       defaultSpace: 4,
     },
   ];
@@ -132,11 +132,11 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
 
   const groupsColumns: columnsTable = [
     {
-      columnName: "ID",
+      columnName: LANGUAGE.management.tableColumns.id,
       defaultSpace: 1,
     },
     {
-      columnName: "Name",
+      columnName: LANGUAGE.management.tableColumns.names,
       defaultSpace: 4,
     },
   ];
@@ -144,11 +144,11 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
 
   const driversColumns: columnsTable = [
     {
-      columnName: "ID",
+      columnName: LANGUAGE.management.tableColumns.id,
       defaultSpace: 1,
     },
     {
-      columnName: "Name",
+      columnName: LANGUAGE.management.tableColumns.names,
       defaultSpace: 4,
     },
   ];
