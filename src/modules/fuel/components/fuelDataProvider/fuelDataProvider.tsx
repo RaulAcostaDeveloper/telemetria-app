@@ -1,4 +1,5 @@
 import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
+import DonutGraphic from "@/modules/global/components/donutGraphic/DonutGraphic";
 import {
   columnsTable,
   dataTable,
@@ -84,6 +85,8 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
   return (
     <div>
       <ReportSummary />
+
+      <DonutGraphic devices={fuelSummaryDataMock.value.devices} />
       <TabsContent
         tabOptions={tabOptions}
         tabContents={[

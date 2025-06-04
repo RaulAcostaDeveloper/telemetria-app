@@ -1,0 +1,96 @@
+/* DonutGraphic.module.css */
+
+.container {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 16px 8px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.controlGroup {
+  display: flex;
+  align-items: center;
+}
+
+.controlGroup label {
+  font-weight: 600;
+  margin-right: 8px;
+  font-size: 1rem;
+  white-space: nowrap;
+  color: #333;
+}
+
+.controlGroup select {
+  font-size: 1rem;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.controlGroup select:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.3);
+}
+
+.chartWrapper {
+  position: relative;
+  min-height: 420px; /* deja espacio para el gráfico 3D */
+}
+
+.loadingText {
+  text-align: center;
+  font-style: italic;
+  color: #666;
+  padding: 80px 0;
+}
+
+.highchartsContainer {
+  padding: 12px;
+}
+
+/* Aumentar texto dentro del tooltip (Highcharts ya renderiza un <svg> con <text>) */
+.highcharts-tooltip text {
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+}
+
+/* Opcional: estilizar el fondo y borde del tooltip */
+.highcharts-tooltip-box {
+  fill: rgba(255, 255, 255, 0.95) !important;
+  stroke: #bbb !important;
+  stroke-width: 1 !important;
+}
+
+/* Aumentar fuente de dataLabels */
+.highcharts-data-label text {
+  font-size: 0.9rem !important;
+  text-outline: none !important;
+}
+
+/* Aumentar fuente de leyenda */
+.highcharts-legend-item text {
+  font-size: 0.9rem !important;
+}
+
+/* Aumentar tamaño de título/subtítulo (por si Highcharts no lo está tomando de chartOptions) */
+.highcharts-title {
+  font-size: 1.2rem !important;
+  fill: #222;
+}
+
+.highcharts-subtitle {
+  font-size: 1rem !important;
+  fill: #555;
+}
