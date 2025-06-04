@@ -94,6 +94,17 @@ export interface LanguageInterface {
     linkToRegister: string;
   };
   fuel: {
+    filter: {
+      header: string;
+      showFilters: string;
+      hideFilters: string;
+      account: string;
+      group: string;
+      brand: string;
+      model: string;
+      selectAnOption: string;
+      search: string;
+    };
     tabs: {
       groups: string;
       unitys: string;
