@@ -1,0 +1,12 @@
+.fuelFilterContent {
+  width: 100%;
+  border-radius: 4px;
+  background-color: rgb(250, 250, 250);
+  padding: 10px;
+}
+
+.selectors {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

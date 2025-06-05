@@ -113,6 +113,17 @@ export const SPANISH: LanguageInterface = {
     linkToRegister: "Ir a registro",
   },
   fuel: {
+    filter: {
+      header: "Filtros",
+      showFilters: "Mostrar filtros",
+      hideFilters: "Ocultar filtros",
+      account: "Cuenta",
+      group: "Grupo",
+      brand: "Marca",
+      model: "Modelo",
+      selectAnOption: "Selecciona una opción",
+      search: "Buscar",
+    },
     tabs: {
       groups: "Grupos",
       unitys: "Unidades",
