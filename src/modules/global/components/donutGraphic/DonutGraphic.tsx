@@ -118,7 +118,7 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
       },
       title: { text: "" },
       subtitle: {
-        text: `${LANGUAGE.fuel.donutGrpahic.metric}: ${selectedMetric} ·${LANGUAGE.fuel.donutGrpahic.segments}: ${segmentsCount}`,
+        text: `${LANGUAGE.fuel.donutGrpahic.title}`,
         style: { fontSize: "1.3rem", color: "#333", fontWeight: "bold" },
       },
 
