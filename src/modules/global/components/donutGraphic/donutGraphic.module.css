@@ -1,0 +1,93 @@
+.container {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 16px 8px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.controlGroup {
+  display: flex;
+  align-items: center;
+}
+
+.controlGroup label {
+  font-weight: 600;
+  margin-right: 8px;
+  font-size: 1.3rem;
+  white-space: nowrap;
+  color: #333;
+}
+
+.controlGroup select {
+  font-size: 1.4rem;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.controlGroup select:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.3);
+}
+
+.chartWrapper {
+  position: relative;
+  min-height: 420px;
+  overflow: visible;
+}
+
+.loadingText {
+  text-align: center;
+  font-style: italic;
+  color: #666;
+  padding: 80px 0;
+}
+
+.highchartsContainer {
+  padding: 12px;
+  overflow: visible;
+}
+
+.highcharts-tooltip text {
+  font-size: 2rem !important;
+  font-weight: 500 !important;
+}
+
+.highcharts-tooltip-box {
+  fill: rgba(255, 255, 255, 0.95) !important;
+  stroke: #bbb !important;
+  stroke-width: 1 !important;
+}
+
+.highcharts-data-label text {
+  font-size: 5.2rem !important;
+}
+
+.highcharts-legend-item text {
+  font-size: 0.9rem !important;
+}
+
+.highcharts-title {
+  font-size: 1.2rem !important;
+  fill: #222;
+}
+
+.highcharts-subtitle {
+  font-size: 1rem !important;
+  fill: #555;
+}
+.controlGroup select option {
+  font-size: 1.3rem;
+}
