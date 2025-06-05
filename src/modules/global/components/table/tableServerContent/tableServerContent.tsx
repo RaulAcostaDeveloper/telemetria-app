@@ -68,8 +68,12 @@ export const TableServerContent = ({
       {/* Título */}
       {title && <h4 className={`${styles.title}`}>{title}</h4>}
 
-      {/* Botones externos */}
+      {/* Búsqueda en la primer columna*/}
       <div className={`${styles.topActions}`}>
+        <TableSearch
+          LANGUAGE={LANGUAGE}
+          setInputFilterValue={setInputFilterValue}
+        />
         {showCreateButton && (
           <TableAddNewButton
             LANGUAGE={LANGUAGE}
@@ -84,60 +88,53 @@ export const TableServerContent = ({
           title={title}
         />
       </div>
-
-      {/* Búsqueda en la primer columna*/}
-      <div className={`${styles.topActions}`}>
-        <TableSearch
-          LANGUAGE={LANGUAGE}
-          setInputFilterValue={setInputFilterValue}
-        />
-      </div>
-
-      {/* Filtros por columna */}
-      <div className={`${styles.topActions}`}>
-        <TableFilters
-          LANGUAGE={LANGUAGE}
-          columns={columns}
-          data={data}
-          handleSelectorFilter={handleSelectorFilter}
-        />
-      </div>
-
-      {/* Tabla */}
-      <div className={`${styles.tableContent}`}>
-        <div>
-          {/* Columnas */}
-          <TableColumns
-            LANGUAGE={LANGUAGE}
-            columnOrdered={columnOrdered}
-            columns={columns}
-            setColumnOrdered={setColumnOrdered}
-            showActions={showDelete || showEdit || showView}
-          />
-
-          {/* Registros de la tabla */}
-          <TableDataContent
+      <div className={styles.inside}>
+        {/* Filtros por columna */}
+        <div className={`${styles.topActions}`}>
+          <TableFilters
             LANGUAGE={LANGUAGE}
             columns={columns}
-            data={filteredData}
-            deleteFunction={deleteFunction}
-            editFormContent={editFormContent}
-            idKey={idKey}
-            showActions={showDelete || showEdit || showView}
-            showDelete={showDelete}
-            showEdit={showEdit}
-            showView={showView}
-            viewPath={viewPath}
+            data={data}
+            handleSelectorFilter={handleSelectorFilter}
           />
         </div>
-      </div>
 
-      {/* Suma de valores */}
-      <TableDataSummatory
-        LANGUAGE={LANGUAGE}
-        columns={columns}
-        data={filteredData}
-      />
+        {/* Tabla */}
+        <div className={`${styles.tableContent}`}>
+          <div>
+            {/* Columnas */}
+            <TableColumns
+              LANGUAGE={LANGUAGE}
+              columnOrdered={columnOrdered}
+              columns={columns}
+              setColumnOrdered={setColumnOrdered}
+              showActions={showDelete || showEdit || showView}
+            />
+
+            {/* Registros de la tabla */}
+            <TableDataContent
+              LANGUAGE={LANGUAGE}
+              columns={columns}
+              data={filteredData}
+              deleteFunction={deleteFunction}
+              editFormContent={editFormContent}
+              idKey={idKey}
+              showActions={showDelete || showEdit || showView}
+              showDelete={showDelete}
+              showEdit={showEdit}
+              showView={showView}
+              viewPath={viewPath}
+            />
+          </div>
+        </div>
+
+        {/* Suma de valores */}
+        <TableDataSummatory
+          LANGUAGE={LANGUAGE}
+          columns={columns}
+          data={filteredData}
+        />
+      </div>
     </>
   );
 };

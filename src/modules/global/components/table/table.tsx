@@ -147,28 +147,26 @@ export const Table = ({
 
   return (
     <div className={`${styles.container}`}>
-      <div className={`${styles.inside}`}>
-        <TableServerContent
-          LANGUAGE={LANGUAGE}
-          columnOrdered={columnOrdered}
-          columns={columns}
-          createFormContent={createFormContent}
-          data={data}
-          deleteFunction={deleteFunction}
-          editFormContent={editFormContent}
-          filteredData={filteredData}
-          handleSelectorFilter={handleSelectorFilter}
-          idKey={idKey}
-          setColumnOrdered={setColumnOrdered}
-          setInputFilterValue={setInputFilterValue}
-          showCreateButton={showCreateButton}
-          showDelete={showDelete}
-          showEdit={showEdit}
-          showView={showView}
-          title={title}
-          viewPath={viewPath}
-        />
-      </div>
+      <TableServerContent
+        LANGUAGE={LANGUAGE}
+        columnOrdered={columnOrdered}
+        columns={columns}
+        createFormContent={createFormContent}
+        data={data}
+        deleteFunction={deleteFunction}
+        editFormContent={editFormContent}
+        filteredData={filteredData}
+        handleSelectorFilter={handleSelectorFilter}
+        idKey={idKey}
+        setColumnOrdered={setColumnOrdered}
+        setInputFilterValue={setInputFilterValue}
+        showCreateButton={showCreateButton}
+        showDelete={showDelete}
+        showEdit={showEdit}
+        showView={showView}
+        title={title}
+        viewPath={viewPath}
+      />
     </div>
   );
 };

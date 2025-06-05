@@ -2,7 +2,6 @@
   -webkit-overflow-scrolling: touch;
   margin: 10px 0;
   overflow-x: auto;
-  border: 1px solid rgba(0, 0, 0, 0.471);
   padding: 10px;
   border-radius: 4px;
 }
@@ -16,8 +15,4 @@
 .container::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.2);
   cursor: e-resize;
-}
-
-.inside {
-  width: fit-content;
 }

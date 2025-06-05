@@ -2,14 +2,13 @@ import {
   columnsTable,
   dataTable,
 } from "@/modules/global/components/table/table.model";
+
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Table, TabsContent } from "@/modules/global/components";
-import { accountsDataMock } from "@/modules/global/dataMock/accounts/accounts";
 import { devicesDataMock } from "@/modules/global/dataMock/devices/devices";
-import { usersDataMock } from "@/modules/global/dataMock/users/users";
-import { vehidlesDataMock } from "@/modules/global/dataMock/vehicles/vehicles";
-import { groupsDataMock } from "@/modules/global/dataMock/groups/groups";
 import { driversDataMock } from "@/modules/global/dataMock/drivers/drivers";
+import { groupsDataMock } from "@/modules/global/dataMock/groups/groups";
+import { vehidlesDataMock } from "@/modules/global/dataMock/vehicles/vehicles";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -18,8 +17,6 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   const fuelTabs = [
     LANGUAGE.management.tabs.vehicles,
     LANGUAGE.management.tabs.devices,
-    LANGUAGE.management.tabs.users,
-    LANGUAGE.management.tabs.accounts,
     LANGUAGE.management.tabs.drivers,
     LANGUAGE.management.tabs.groups,
   ];
@@ -94,42 +91,6 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   ];
   const devicesTableData: dataTable = devicesDataMock.value.devices;
 
-  const usersColumns: columnsTable = [
-    {
-      columnName: LANGUAGE.management.tableColumns.id,
-      defaultSpace: 1,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.username,
-      defaultSpace: 3,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.names,
-      defaultSpace: 3,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.lastnames,
-      defaultSpace: 3,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.email,
-      defaultSpace: 5,
-    },
-  ];
-  const usersTableData: dataTable = usersDataMock.value.users;
-
-  const accountsColumns: columnsTable = [
-    {
-      columnName: LANGUAGE.management.tableColumns.id,
-      defaultSpace: 1,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.names,
-      defaultSpace: 4,
-    },
-  ];
-  const accountsTableData: dataTable = accountsDataMock.value.accounts;
-
   const groupsColumns: columnsTable = [
     {
       columnName: LANGUAGE.management.tableColumns.id,
@@ -154,7 +115,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   ];
   const driversTableData: dataTable = driversDataMock.value.groups;
   return (
-    <div className="margintop">
+    <div>
       <TabsContent
         tabOptions={fuelTabs}
         tabContents={[
@@ -175,25 +136,11 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
           <div key={3}>
             <Table
               LANGUAGE={LANGUAGE}
-              columns={usersColumns}
-              data={usersTableData}
-            />
-          </div>,
-          <div key={4}>
-            <Table
-              LANGUAGE={LANGUAGE}
-              columns={accountsColumns}
-              data={accountsTableData}
-            />
-          </div>,
-          <div key={5}>
-            <Table
-              LANGUAGE={LANGUAGE}
               columns={driversColumns}
               data={driversTableData}
             />
           </div>,
-          <div key={6}>
+          <div key={4}>
             <Table
               LANGUAGE={LANGUAGE}
               columns={groupsColumns}
