@@ -2,7 +2,8 @@
   position: relative;
   display: inline-block;
   margin-bottom: 20px;
-  width: 100%;
+  width: 200px;
+  margin-right: 10px;
 }
 
 .icon {
