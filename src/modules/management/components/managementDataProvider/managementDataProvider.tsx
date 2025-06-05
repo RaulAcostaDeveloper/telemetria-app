@@ -131,7 +131,6 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
               LANGUAGE={LANGUAGE}
               columns={devicesColumns}
               data={devicesTableData}
-              showCreateButton
             />
           </div>,
           <div key={3}>
