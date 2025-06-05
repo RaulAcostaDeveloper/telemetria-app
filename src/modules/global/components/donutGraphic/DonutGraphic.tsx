@@ -3,18 +3,19 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Highcharts from "highcharts";
 import dynamic from "next/dynamic";
+import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 import styles from "./DonutGraphic.module.css";
 
-// Cargamos HighchartsReact dinámicamente para evitar SSR
+// Cargamos HighchartsReact dinámicamente para evitar que se cargue del lado del servidor
 const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
   ssr: false,
 });
 
 export interface Device {
   imei: string;
-  lastFuelLevel: number; // “Inventario”
-  fuelLoadCount: number; // futuro “Cargado”
-  fuelUnloadCount: number; // futuro “Descargado”
+  lastFuelLevel: number;
+  fuelLoadCount: number;
+  fuelUnloadCount: number;
 }
 
 type MetricOption = "Inventario" | "Cargado" | "Descargado";
@@ -25,13 +26,13 @@ interface DonutGraphicProps {
 }
 
 const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
+  const LANGUAGE = useLanguage();
   const [selectedMetric, setSelectedMetric] =
     useState<MetricOption>("Inventario");
   const [segmentsCount, setSegmentsCount] = useState<SegmentOption>(10);
   const [is3DReady, setIs3DReady] = useState(false);
 
-  // Cargamos highcharts 3D SOLO en el cliente; el simple `import()` parchea a Highcharts.
-
+  // Nos aseguramos que highcharts 3d solo se cargue del lado del cliente
   useEffect(() => {
     (async () => {
       try {
@@ -51,7 +52,7 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
   const chartOptions: Highcharts.Options = useMemo(() => {
     if (!is3DReady) {
       return {
-        title: { text: "Cargando gráfico 3D..." },
+        title: { text: `${LANGUAGE.fuel.donutGrpahic.waitingMessage}` },
         series: [],
       };
     }
@@ -63,14 +64,13 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
 
     if (allValues.length === 0) {
       return {
-        title: { text: "No hay datos disponibles" },
+        title: { text: `${LANGUAGE.fuel.donutGrpahic.noDataMessage}` },
         series: [],
       };
     }
 
     const minVal = Math.min(...allValues);
     const maxVal = Math.max(...allValues);
-
     const step = (maxVal - minVal) / segmentsCount;
 
     const thresholds: number[] = [];
@@ -88,13 +88,13 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
       let count = 0;
 
       if (i === 0) {
-        label = `< ${upper.toFixed(2)}`;
+        label = `< ${upper.toFixed(2)}L`;
         count = allValues.filter((v) => v < upper).length;
       } else if (i === segmentsCount - 1) {
-        label = `> ${lower.toFixed(2)}`;
+        label = `> ${lower.toFixed(2)}L`;
         count = allValues.filter((v) => v >= lower).length;
       } else {
-        label = `${lower.toFixed(2)} - ${upper.toFixed(2)}`;
+        label = `${lower.toFixed(2)}L – ${upper.toFixed(2)}L`;
         count = allValues.filter((v) => v >= lower && v < upper).length;
       }
 
@@ -102,7 +102,6 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
     }
 
     const binsDesc = binsAsc.slice().reverse();
-
     const seriesData: Array<[string, number]> = binsDesc.map((b) => [
       b.label,
       b.count,
@@ -111,50 +110,27 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
     return {
       chart: {
         type: "pie",
-        options3d: {
-          enabled: true,
-          alpha: 45,
-          beta: 0,
-        },
+        options3d: { enabled: true, alpha: 45, beta: 0 },
         backgroundColor: "transparent",
+        spacing: [20, 20, 20, 20],
       },
-      title: {
-        text: "",
-      },
+      title: { text: "" },
       subtitle: {
-        text: `Métrica: ${selectedMetric} · Segmentos: ${segmentsCount}`,
-        style: {
-          fontSize: "1rem",
-          color: "#333",
-        },
+        text: `${LANGUAGE.fuel.donutGrpahic.metric}: ${selectedMetric} ·${LANGUAGE.fuel.donutGrpahic.segments}: ${segmentsCount}`,
+        style: { fontSize: "1.3rem", color: "#333", fontWeight: "bold" },
       },
+
       plotOptions: {
         pie: {
           innerSize: 100,
           depth: 45,
-          dataLabels: {
-            enabled: true,
-            style: {
-              fontSize: "0.9rem",
-              textOutline: "none",
-            },
-            formatter: function (this: any): string | null {
-              if ((this.y as number) > 0) {
-                return `${this.point.name}: ${this.y}`;
-              }
-              return null;
-            },
-          },
         },
       },
       legend: {
         align: "right",
         verticalAlign: "middle",
         layout: "vertical",
-        itemStyle: {
-          fontSize: "0.9rem",
-          fontWeight: "400",
-        },
+        itemStyle: { fontSize: "0.9rem", fontWeight: "400" },
         itemMarginTop: 4,
         itemMarginBottom: 4,
       },
@@ -162,18 +138,45 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
         {
           name: "Cantidad",
           type: "pie",
+          innerSize: 100,
+          depth: 45,
           data: seriesData,
+
+          dataLabels: {
+            enabled: true,
+            useHTML: true,
+            inside: false,
+            distance: 60,
+            connectorWidth: 1,
+            connectorColor: "#ccc",
+            crop: false,
+            allowOverlap: true,
+            style: {
+              fontSize: "2rem",
+              color: "#000",
+              textOutline: "none",
+            },
+            formatter: function (this: any): string | null {
+              if ((this.y as number) > 0) {
+                return `<span>${this.point.name}</span>`;
+              }
+              return null;
+            },
+          } as Highcharts.SeriesPieDataLabelsOptionsObject,
         },
       ],
-      credits: {
-        enabled: false,
-      },
+      credits: { enabled: false },
       tooltip: {
-        style: {
-          fontSize: "1rem",
-          fontWeight: "500",
+        useHTML: true, // ← Permite <br/> en el tooltip
+        style: { fontSize: "2.6rem", fontWeight: "bold" },
+        formatter: function (this: any) {
+          return (
+            `<div style="text-align: center;">` +
+            `<span>${this.point.name}</span><br/>` +
+            `<span>Vehículos: ${this.y}</span>` +
+            `</div>`
+          );
         },
-        pointFormat: "{point.name}: <b>{point.y} dispositivos</b>",
         backgroundColor: "rgba(255,255,255,0.95)",
         borderColor: "#ccc",
         borderRadius: 4,
@@ -186,24 +189,27 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
     <div className={styles.container}>
       <div className={styles.controls}>
         <div className={styles.controlGroup}>
-          <label htmlFor="metric-select">Ordenar por:</label>
+          <label htmlFor="metric-select">
+            {`${LANGUAGE.fuel.donutGrpahic.metric}`}
+          </label>
           <select
             id="metric-select"
             value={selectedMetric}
             onChange={(e) => setSelectedMetric(e.target.value as MetricOption)}
           >
-            <option value="Inventario">Inventario</option>
-            <option value="Cargado" disabled>
-              Cargado (próximamente)
-            </option>
-            <option value="Descargado" disabled>
-              Descargado (próximamente)
+            <option value="Inventario">
+              {`
+             ${LANGUAGE.fuel.donutGrpahic.inventory}`
+                ? `${LANGUAGE.fuel.donutGrpahic.inventory}`
+                : "Inventario"}
             </option>
           </select>
         </div>
 
         <div className={styles.controlGroup}>
-          <label htmlFor="segments-select">Segmentos:</label>
+          <label htmlFor="segments-select">
+            {LANGUAGE.fuel.donutGrpahic.segments}:
+          </label>
           <select
             id="segments-select"
             value={segmentsCount}

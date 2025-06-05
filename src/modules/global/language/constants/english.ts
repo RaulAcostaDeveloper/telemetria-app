@@ -139,6 +139,13 @@ export const ENGLISH: LanguageInterface = {
         fuelDischarged: "Discharged",
       },
     },
+    donutGrpahic: {
+      waitingMessage: "Loading 3d donut graphic...",
+      noDataMessage: "There is no available data",
+      metric: "Metrica",
+      segments: "Segmentos",
+      inventory: "Inventario",
+    },
   },
   fuelVehicle: {
     tabs: {

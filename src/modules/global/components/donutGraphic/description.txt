@@ -1,0 +1,39 @@
+Descripción del componente DonutGraphic
+
+DonutGraphic es un componente de React que utiliza Highcharts para mostrar un gráfico tipo “donut” en 3D. Funciona así:
+
+Primero, colocamos "use client" arriba para asegurarnos de que todo el código de Highcharts se ejecute en el navegador, no en el servidor.
+ Luego usamos dynamic de Next.js para cargar el wrapper de Highcharts (highcharts-react-official) solo en el cliente, evitando errores de que Highcharts no existe en el servidor.
+
+En el CSS (DonutGraphic.module.css) definimos estilos para el contenedor principal con overflow: visible, de modo que las etiquetas que van afuera del donut no queden recortadas. 
+También agregamos un min-height para dejar espacio a la gráfica y un poco de padding.
+
+Dentro del componente, usamos tres estados:
+1. selectedMetric: guarda la métrica que queremos graficar (en este caso “Inventario”). Más adelante podría usarse para “Cargado” o “Descargado”,
+pero ahora solo usamos Inventario.
+2. segmentsCount: indica en cuántos segmentos (5, 10 o 15) dividimos los valores. Esto controla cuántos “bins” tendrá el donut.
+3. is3DReady: arranca en false y se pone true cuando en el useEffect importamos highcharts/highcharts-3d.js.
+ Ese import “parchea” a Highcharts para que pueda dibujar en 3D. Si falla, se queda en false y no mostramos la gráfica.
+
+En ese mismo useEffect hacemos un await import("highcharts/highcharts-3d.js"). Si se importa bien, setIs3DReady(true); 
+si no, setIs3DReady(false) y no rompemos nada.
+
+Después, en un useMemo, construimos chartOptions cada vez que cambian devices, selectedMetric, segmentsCount o is3DReady.
+ Ahí hacemos esto:
+- Creamos un array allValues con los valores de la métrica (por ejemplo lastFuelLevel de cada dispositivo).
+- Calculamos minVal y maxVal, y definimos un step = (maxVal - minVal) / segmentsCount.
+- Armamos un array thresholds con segmentsCount + 1 números equidistantes entre minVal y maxVal.
+- Recorremos esos thresholds para armar “bins” (cada bin contiene un label y un conteo):
+ 
+
+Luego devolvemos el objeto chartOptions, donde:
+- Definimos un chart de tipo pie con options3d: { enabled: true, alpha: 45, beta: 0 } y un spacing: [20,20,20,20] para que haya margen alrededor.
+- Ponemos title vacío y un subtitle con el texto “Métrica: Inventario · Segmentos: 10” (o el que toque según estados).
+- Quitamos cualquier dataLabels de plotOptions, para no duplicar la configuración.
+- En series[0] metemos la configuración del donut 3D:
+  - innerSize: 100 para que sea un donut en lugar de un pie completo.
+  - depth: 45 le da la apariencia 3D.
+  - data: seriesData con los labels y conteos.
+  - dataLabels:
+- El tooltip usa useHTML: true y un formatter que muestra dos líneas: primero el rango (this.point.name) y en la segunda “Vehículos: X” con fontSize: "2rem".
+
