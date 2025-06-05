@@ -6,23 +6,23 @@ import styles from "./fuelFilterCustomSearch.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 
 interface Props {
-  options: string[];
-  title: string;
-  setValue: (value: string) => void;
-  valueSelected: string;
   LANGUAGE: LanguageInterface;
+  options: string[];
+  setValue: (value: string) => void;
+  title: string;
+  valueSelected: string;
 }
 
 export const FuelFilterCustomSearch = ({
+  LANGUAGE,
   options,
+  setValue,
   title,
   valueSelected,
-  setValue,
-  LANGUAGE,
 }: Props) => {
+  const [activeIndex, setActiveIndex] = useState(-1);
   const [filtered, setFiltered] = useState(options);
   const [showList, setShowList] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(-1);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,8 +34,10 @@ export const FuelFilterCustomSearch = ({
         setShowList(false);
       }
     };
-    document.addEventListener("click", handler);
-    return () => document.removeEventListener("click", handler);
+    if (typeof window !== "undefined") {
+      document.addEventListener("click", handler);
+      return () => document.removeEventListener("click", handler);
+    }
   }, []);
 
   const handleInput = (value: string) => {
@@ -63,10 +65,13 @@ export const FuelFilterCustomSearch = ({
 
   return (
     <div className={styles.wrapper} ref={wrapperRef}>
-      <h4 className={styles.title}>{title}</h4>
+      <label htmlFor={"fuelFilterSelector" + title} className={styles.title}>
+        {title}
+      </label>
       <div className={styles.container}>
         <input
           type="text"
+          id={"fuelFilterSelector" + title}
           placeholder={LANGUAGE.fuel.filter.selectAnOption}
           value={valueSelected}
           onChange={(e) => handleInput(e.target.value)}
