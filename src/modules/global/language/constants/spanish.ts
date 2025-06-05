@@ -139,6 +139,13 @@ export const SPANISH: LanguageInterface = {
         fuelDischarged: "Combustible descargado",
       },
     },
+    donutGrpahic: {
+      waitingMessage: "Cargando gráfica 3D...",
+      noDataMessage: "No hay información disponible",
+      metric: "Metrica",
+      segments: "Segmentos",
+      inventory: "Inventario",
+    },
   },
   fuelVehicle: {
     tabs: {
