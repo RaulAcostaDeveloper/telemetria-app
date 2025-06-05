@@ -226,7 +226,9 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
 
       <div className={styles.chartWrapper}>
         {!is3DReady || !HighchartsReact ? (
-          <div className={styles.loadingText}>Cargando gráfica 3D...</div>
+          <div className={styles.loadingText}>
+            {LANGUAGE.fuel.donutGrpahic.waitingMessage}
+          </div>
         ) : (
           <div className={styles.highchartsContainer}>
             <HighchartsReact highcharts={Highcharts} options={chartOptions} />
