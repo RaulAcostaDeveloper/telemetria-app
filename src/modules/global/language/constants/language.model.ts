@@ -120,6 +120,13 @@ export interface LanguageInterface {
         fuelDischarged: string;
       };
     };
+    donutGrpahic: {
+      waitingMessage: string;
+      noDataMessage: string;
+      metric: string;
+      segments: string;
+      inventory: string;
+    };
   };
   fuelVehicle: {
     tabs: {
