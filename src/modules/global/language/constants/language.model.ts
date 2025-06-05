@@ -132,6 +132,7 @@ export interface LanguageInterface {
       };
     };
     donutGrpahic: {
+      title: string;
       waitingMessage: string;
       noDataMessage: string;
       metric: string;
