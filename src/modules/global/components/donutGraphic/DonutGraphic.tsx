@@ -3,8 +3,9 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Highcharts from "highcharts";
 import dynamic from "next/dynamic";
+
+import styles from "./donutGraphic.module.css";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
-import styles from "./DonutGraphic.module.css";
 
 // Cargamos HighchartsReact dinámicamente para evitar que se cargue del lado del servidor
 const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
@@ -113,10 +114,11 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
         options3d: { enabled: true, alpha: 45, beta: 0 },
         backgroundColor: "transparent",
         spacing: [20, 20, 20, 20],
+        height: 300,
       },
       title: { text: "" },
       subtitle: {
-        text: `${LANGUAGE.fuel.donutGrpahic.metric}: ${selectedMetric} ·${LANGUAGE.fuel.donutGrpahic.segments}: ${segmentsCount}`,
+        text: `${LANGUAGE.fuel.donutGrpahic.title}`,
         style: { fontSize: "1.3rem", color: "#333", fontWeight: "bold" },
       },
 
@@ -141,12 +143,13 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
           innerSize: 100,
           depth: 45,
           data: seriesData,
+          size: 220,
 
           dataLabels: {
             enabled: true,
             useHTML: true,
             inside: false,
-            distance: 60,
+            distance: 30,
             connectorWidth: 1,
             connectorColor: "#ccc",
             crop: false,

@@ -151,6 +151,7 @@ export const SPANISH: LanguageInterface = {
       },
     },
     donutGrpahic: {
+      title: "Distribución de Vehículos",
       waitingMessage: "Cargando gráfica 3D...",
       noDataMessage: "No hay información disponible",
       metric: "Metrica",

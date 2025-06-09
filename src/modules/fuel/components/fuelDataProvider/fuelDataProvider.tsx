@@ -1,9 +1,11 @@
-import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
 import DonutGraphic from "@/modules/global/components/donutGraphic/DonutGraphic";
+import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
+import styles from "./fuelDataProvider.module.css";
 import {
   columnsTable,
   dataTable,
 } from "@/modules/global/components/table/table.model";
+import { FuelFilter } from "../fuelFilter/fuelFilter";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Table, TabsContent } from "@/modules/global/components";
 import { fuelSummaryDataMock } from "@/modules/global/dataMock/fuelSummary/fuelSummary";
@@ -84,9 +86,11 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
 
   return (
     <div>
-      <ReportSummary />
-
-      <DonutGraphic devices={fuelSummaryDataMock.value.devices} />
+      <FuelFilter LANGUAGE={LANGUAGE} />
+      <div className={styles.topResumeData}>
+        <ReportSummary />
+        <DonutGraphic devices={fuelSummaryDataMock.value.devices} />
+      </div>
       <TabsContent
         tabOptions={tabOptions}
         tabContents={[
