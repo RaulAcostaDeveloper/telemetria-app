@@ -10,7 +10,7 @@ interface Props {
   options: string[];
   setValue: (value: string) => void;
   title: string;
-  valueSelected: string;
+  valueSelected: string | null;
 }
 
 export const FuelFilterCustomSearch = ({
@@ -73,7 +73,7 @@ export const FuelFilterCustomSearch = ({
           type="text"
           id={"fuelFilterSelector" + title}
           placeholder={LANGUAGE.fuel.filter.selectAnOption}
-          value={valueSelected}
+          value={valueSelected ?? ""}
           onChange={(e) => handleInput(e.target.value)}
           onKeyDown={handleKeyDown}
           onFocus={() => setShowList(true)}
