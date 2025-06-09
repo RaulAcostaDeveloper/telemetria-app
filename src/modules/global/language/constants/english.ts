@@ -151,11 +151,12 @@ export const ENGLISH: LanguageInterface = {
       },
     },
     donutGrpahic: {
+      title: "Vehicle Distribution",
       waitingMessage: "Loading 3d donut graphic...",
       noDataMessage: "There is no available data",
-      metric: "Metrica",
-      segments: "Segmentos",
-      inventory: "Inventario",
+      metric: "Metric",
+      segments: "Segments",
+      inventory: "Inventory",
     },
   },
   fuelVehicle: {

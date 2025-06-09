@@ -1,13 +1,13 @@
 .container {
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
+  width: 50%;
+  min-width: 530px;
   padding: 16px 8px;
+  margin: 0;
 }
 
 .controls {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 16px;
   gap: 16px;
@@ -44,7 +44,6 @@
 
 .chartWrapper {
   position: relative;
-  min-height: 420px;
   overflow: visible;
 }
 
