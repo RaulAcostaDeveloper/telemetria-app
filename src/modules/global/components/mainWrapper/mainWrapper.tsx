@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 
 import styles from "./mainWrapper.module.css";
 import {
@@ -14,11 +15,11 @@ import { LanguageContext } from "../../language/components/languageProvider/lang
 import { LanguageInterface } from "../../language/constants/language.model";
 import { Menu } from "../menu/menu";
 import { PageContainer } from "../pageContainer/pageContainer";
-import { RootState } from "@/globalConfig/redux/store";
 import { SPANISH } from "../../language/constants/spanish";
 import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
 import { UserData } from "@/globalConfig/redux/slices/authSlice";
 import { useAuth } from "../../../auth/utils";
+import { fetchVehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
 
 interface Props {
   children: React.ReactNode;
@@ -27,6 +28,8 @@ interface Props {
 export const MainWrapper = ({ children }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | null>(null);
   const [LANGUAGE, setLanguageObject] = useState<LanguageInterface>(SPANISH);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const languageSelected = useSelector(
     (state: RootState) => state.languageOption.languageSelected
@@ -100,6 +103,18 @@ export const MainWrapper = ({ children }: Props) => {
       return () => window.removeEventListener("resize", handleResize);
     }
   }, []);
+
+  // Servicios al inicio de la sesión del usuario
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(
+        fetchVehicles({
+          accountId: "62856",
+        })
+      );
+    }
+  }, [dispatch, isAuthenticated]);
 
   return (
     <div className={`${styles.mainWrapper}`}>

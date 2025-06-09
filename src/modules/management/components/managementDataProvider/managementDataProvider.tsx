@@ -1,19 +1,26 @@
+"use client";
+import { useSelector } from "react-redux";
+import { RootState } from "@/globalConfig/redux/store";
+
 import {
   columnsTable,
   dataTable,
 } from "@/modules/global/components/table/table.model";
-
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Table, TabsContent } from "@/modules/global/components";
 import { devicesDataMock } from "@/modules/global/dataMock/devices/devices";
 import { driversDataMock } from "@/modules/global/dataMock/drivers/drivers";
 import { groupsDataMock } from "@/modules/global/dataMock/groups/groups";
-import { vehidlesDataMock } from "@/modules/global/dataMock/vehicles/vehicles";
 
 interface Props {
   LANGUAGE: LanguageInterface;
 }
+
 export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
+  const { vehiclesData, vehiclesStatus } = useSelector(
+    (state: RootState) => state.vehicles
+  );
+
   const fuelTabs = [
     LANGUAGE.management.tabs.vehicles,
     LANGUAGE.management.tabs.devices,
@@ -24,7 +31,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   const vehicleColumns: columnsTable = [
     {
       columnName: LANGUAGE.management.tableColumns.id,
-      defaultSpace: 1,
+      defaultSpace: 2,
     },
     {
       columnName: LANGUAGE.management.tableColumns.plates,
@@ -40,7 +47,15 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       defaultSpace: 3,
     },
   ];
-  const vehiclesTableData: dataTable = vehidlesDataMock.value.vehicles;
+
+  // Ejemplo de como añadir o quitar elementos en la tabla
+  const vehiclesTableData: dataTable | undefined =
+    vehiclesData?.value.vehicles.map((value) => ({
+      id: value.id,
+      carNumber: value.carNumber,
+      carLabel: value.carLabel,
+      carShortcut: value.carShortcut,
+    }));
 
   const devicesColumns: columnsTable = [
     {
@@ -120,11 +135,16 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
         tabOptions={fuelTabs}
         tabContents={[
           <div key={1}>
-            <Table
-              LANGUAGE={LANGUAGE}
-              columns={vehicleColumns}
-              data={vehiclesTableData}
-            />
+            {vehiclesStatus === "succeeded" && vehiclesTableData ? (
+              <Table
+                LANGUAGE={LANGUAGE}
+                columns={vehicleColumns}
+                data={vehiclesTableData}
+              />
+            ) : (
+              // Añadir un loading
+              <div>...</div>
+            )}
           </div>,
           <div key={2}>
             <Table
