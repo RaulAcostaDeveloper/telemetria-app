@@ -6,7 +6,7 @@ import { LanguageInterface } from "@/modules/global/language/constants/language.
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  account: string;
+  account: string | null;
 }
 
 export const FuelFilterSearchButton = ({ LANGUAGE, account }: Props) => {
@@ -17,7 +17,7 @@ export const FuelFilterSearchButton = ({ LANGUAGE, account }: Props) => {
         callback={() => {}}
         title={LANGUAGE.fuel.filter.search}
         type={ButtonTypes.CONFIRM}
-        disabled={account.length < 1}
+        disabled={account ? account.length < 1 : true}
       />
     </div>
   );
