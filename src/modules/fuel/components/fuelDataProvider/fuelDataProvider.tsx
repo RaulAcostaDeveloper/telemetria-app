@@ -23,66 +23,57 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
 
   const vehiclesColumns: columnsTable = [
     {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.imei,
-      defaultSpace: 3,
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.name,
+      defaultSpace: 2,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.lastFuelLevel,
-      defaultSpace: 3,
-      showTotal: true,
-    },
-    {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.lastReportDate,
-      defaultSpace: 3,
-    },
-    {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.name,
       defaultSpace: 2,
-      orderColumn: true,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.performanceOdometer,
+      defaultSpace: 3,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelLoadCount,
+      defaultSpace: 2,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelUnloadCount,
+      defaultSpace: 2,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelLoaded,
+      defaultSpace: 2,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelUnloaded,
+      defaultSpace: 2,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.plate,
       defaultSpace: 6,
     },
     {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelLoadCount,
-      defaultSpace: 2,
-      showTotal: true,
-      orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelUnloadCount,
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.lastReportDate,
       defaultSpace: 3,
-      showTotal: true,
-      orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.performanceOdometer,
-      defaultSpace: 3,
-      showTotal: true,
-      orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.performanceHorometer,
-      defaultSpace: 3,
-      showTotal: true,
-      orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelLoaded,
-      defaultSpace: 3,
-      showTotal: true,
-      orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelUnloaded,
-      defaultSpace: 3,
-      showTotal: true,
-      orderColumn: true,
     },
   ];
 
-  const vehiclesReport: dataTable = fuelSummaryDataMock.value.devices;
+  const vehiclesReport: dataTable = fuelSummaryDataMock.value.devices.map(
+    (value) => ({
+      name: value.name,
+      lastFuelLevel: value.lastFuelLevel,
+      performanceOdometer: value.performanceOdometer,
+      fuelLoadCount: value.fuelLoadCount,
+      fuelUnloadCount: value.fuelUnloadCount,
+      fuelLoaded: value.fuelLoaded,
+      fuelUnloaded: value.fuelUnloaded,
+      plate: value.plate,
+      lastReportDate: value.lastReportDate,
+      imei: value.imei,
+    })
+  );
 
   return (
     <div>

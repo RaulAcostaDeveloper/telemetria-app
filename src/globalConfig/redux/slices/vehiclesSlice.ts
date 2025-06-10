@@ -3,9 +3,9 @@ import { getVehicles } from "@/modules/management/services/vehicles/vehicles";
 
 interface Vehicles {
   id: number;
-  carNumber: number;
-  carLabel: number;
-  carShortcut: number;
+  carNumber: string;
+  carLabel: string;
+  carShortcut: string;
 }
 
 interface Values {
