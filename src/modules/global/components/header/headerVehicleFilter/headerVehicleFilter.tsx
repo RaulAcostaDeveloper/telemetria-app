@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
 
 import {
   LocalGasStation as LocalGasStationIcon,
@@ -11,9 +12,7 @@ import {
 
 import styles from "./headerVehicleFilter.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { vehidlesDataMock } from "@/modules/global/dataMock/vehicles/vehicles";
-
-const vehicles = vehidlesDataMock.value.vehicles;
+import { RootState } from "@/globalConfig/redux/store";
 
 type Action = { label: string; routePrefix: string; title: string };
 const iconMapping: { [key: string]: JSX.Element } = {
@@ -29,6 +28,8 @@ interface Props {
 const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
+  const { vehiclesData } = useSelector((state: RootState) => state.vehicles);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
@@ -57,7 +58,7 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
   }, [pathname]);
 
   // filtrar todos los resultados que coincidan
-  const filtered = vehicles.filter((v) =>
+  const filtered = vehiclesData?.value.vehicles.filter((v) =>
     v.carNumber.toLowerCase().includes(query.toLowerCase())
   );
 
@@ -78,22 +79,16 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
         title={LANGUAGE.header.vehicleFilter.inputPlaceholder}
       />
 
-      {showDropdown && query && filtered.length > 0 && (
+      {showDropdown && query && filtered && filtered.length > 0 && (
         <ul className={styles.dropdown}>
           {filtered.map((v, i) => (
             <li key={i} className={styles.dropdownItem}>
               <div className={styles.vehicleDetails}>
-                <strong>{v.carNumber}</strong> - <span>{v.carShortcut}</span>
+                <strong>{v.carNumber}</strong> - <span>{v.carLabel}</span>
               </div>
               <div className={styles.buttonsContainer}>
                 {(
                   [
-                    {
-                      label: "management",
-                      routePrefix: "management",
-                      title:
-                        LANGUAGE.header.vehicleFilter.actionManagementTitle,
-                    },
                     {
                       label: "telemetry",
                       routePrefix: "telemetry",
