@@ -1,20 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "next/navigation";
+import { useSelector } from "react-redux";
+import { usePathname } from "next/navigation";
 import { ArrowDownward, CalendarToday } from "@mui/icons-material";
 import Calendar from "@/modules/global/components/calendar/Calendar";
 import HeaderVehicleFilter from "./headerVehicleFilter/headerVehicleFilter";
 import styles from "./header.module.css";
 import { formatDateTime } from "@/modules/global/utils/utils";
+import { isSingleFuelPage } from "./utils";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { HeaderBackButton } from "./headerBackButton/headerBackButton";
-
-import { fetchVehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
-import type {
-  AppDispatch,
-  RootState as StoreState,
-} from "@/globalConfig/redux/store";
 
 interface CalendarState {
   endDate: string | null;
@@ -31,41 +26,18 @@ interface Props {
 }
 
 export const Header = ({ isMenuOpen, LANGUAGE }: Props) => {
-  const dispatch = useDispatch<AppDispatch>();
-  const params = useParams();
-
-  // Normaliza el id para que sea siempre un string
-  const rawId = params.id;
-  const accountId: string = Array.isArray(rawId) ? rawId[0] : rawId ?? "";
-
   const [mounted, setMounted] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
+  const pathname = usePathname();
+  const areWeinSingleFuelPage = isSingleFuelPage(pathname);
 
   const { startDate: reduxStartDate, endDate: reduxEndDate } = useSelector(
     (state: RootState) => state.calendar
-  );
-  const vehiclesData = useSelector(
-    (state: StoreState) => state.vehicles.vehiclesData
-  );
-  const vehiclesStatus = useSelector(
-    (state: StoreState) => state.vehicles.vehiclesStatus
   );
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  // Lanza el thunk solo si tenemos un accountId válido
-  useEffect(() => {
-    if (!accountId) return;
-    dispatch(fetchVehicles({ accountId }));
-  }, [dispatch, accountId]);
-
-  useEffect(() => {
-    if (vehiclesStatus === "succeeded" && vehiclesData) {
-      console.log("🚗 vehiclesData:", vehiclesData);
-    }
-  }, [vehiclesStatus, vehiclesData]);
 
   const toggleContainer = (): void => {
     setShowCalendar((prev) => !prev);
@@ -88,12 +60,17 @@ export const Header = ({ isMenuOpen, LANGUAGE }: Props) => {
         {mounted && (
           <>
             <nav className={styles.navBar}>
-              <div className={styles.platesAndName}>
+              <div className={styles.subContainer}>
+                {" "}
                 <HeaderBackButton LANGUAGE={LANGUAGE} />
-                <span>{vehiclesData?.value.vehicles[0].carNumber} </span>
+                {areWeinSingleFuelPage && (
+                  <div className={styles.platesAndName}>
+                    <span>VA4784A</span>
+                    <span>HILUX</span>
+                  </div>
+                )}
+              </div>
 
-                <span>HILUX</span>
-              </div>{" "}
               <div className={styles.inputAndDatesContainer}>
                 <HeaderVehicleFilter LANGUAGE={LANGUAGE} />
                 <button
