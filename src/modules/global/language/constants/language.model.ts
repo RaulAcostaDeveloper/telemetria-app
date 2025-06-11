@@ -131,6 +131,16 @@ export interface LanguageInterface {
         fuelDischarged: string;
       };
     };
+    vehicleReports: {
+      distanceEfficiency: string;
+      distanceTravelled: string;
+      fuelConsumed: string;
+      fuelEnd: string;
+      fuelLoaded: string;
+      fuelStart: string;
+      operatingHours: string;
+      timeEfficiency: string;
+    };
     donutGrpahic: {
       title: string;
       waitingMessage: string;
