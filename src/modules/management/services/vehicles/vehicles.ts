@@ -7,7 +7,7 @@ export async function getVehicles(
   forceRefresh = true // Se le puede indicar que no busque en caché
 ) {
   // Construcción de la url con parámetros
-  const fullUrl = `${url}${accountId}/vehicles`;
+  const fullUrl = `${url}${70675}/vehicles`;
 
   // Construcción del key único para caché
   const key = `managementVehicles-${accountId}`;
