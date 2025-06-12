@@ -150,6 +150,16 @@ export const SPANISH: LanguageInterface = {
         fuelDischarged: "Combustible descargado",
       },
     },
+    vehicleReports: {
+      distanceEfficiency: "Rendimiento por distancia",
+      distanceTravelled: "Distancia recorrida",
+      fuelConsumed: "Combustible consumido",
+      fuelEnd: "Combustible final",
+      fuelLoaded: "Combustible cargado",
+      fuelStart: "Combustible inicial",
+      operatingHours: "Horas operando",
+      timeEfficiency: "Eficiencia de tiempo",
+    },
     donutGrpahic: {
       title: "Distribución de Vehículos",
       waitingMessage: "Cargando gráfica 3D...",
