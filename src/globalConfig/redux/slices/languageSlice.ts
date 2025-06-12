@@ -6,7 +6,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  languageSelected: LANGUAGE_OPTIONS.ENGLISH,
+  languageSelected: LANGUAGE_OPTIONS.SPANISH,
 };
 
 // Obtener la opción del lenguaje

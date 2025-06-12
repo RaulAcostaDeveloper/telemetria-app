@@ -169,6 +169,7 @@ export interface LanguageInterface {
       ignition: string;
       on: string;
       off: string;
+      tank: string;
     };
   };
   management: {

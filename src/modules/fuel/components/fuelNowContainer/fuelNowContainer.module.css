@@ -6,15 +6,26 @@
 }
 
 .fuelDataReportContainer {
-  width: 50%;
+  width: 40%;
   min-width: 320px;
+  margin-top: 10px;
   display: flex;
+  align-content: center;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
 .tanksContainer {
-  width: 50%;
+  width: 60%;
   min-width: 320px;
-  background-color: red;
+}
+
+@media (max-width: 768px) {
+  .fuelDataReportContainer {
+    width: 100%;
+  }
+
+  .tanksContainer {
+    width: 100%;
+  }
 }

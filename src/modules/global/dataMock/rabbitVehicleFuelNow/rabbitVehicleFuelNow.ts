@@ -17,7 +17,7 @@ export const rabbitVehicleFuelNow = {
   BckBatPercentaje: 89.5,
   Ignition: 1,
   CurrentLevel: 75,
-  TanksLevels: "75,50,30",
+  TanksLevels: "65,50,30",
   AdcVoltages: "3.3,5.0",
   Origin: 2,
   DigitalInputs: 3,
