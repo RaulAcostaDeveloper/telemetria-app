@@ -189,6 +189,7 @@ export const ENGLISH: LanguageInterface = {
       ignition: "Ignition",
       on: "On",
       off: "Off",
+      tank: "Tank",
     },
   },
   management: {

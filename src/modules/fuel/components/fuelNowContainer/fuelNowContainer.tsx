@@ -86,7 +86,10 @@ export const FuelNowContainer = ({ LANGUAGE }: Props) => {
         />
       </div>
       <div className={styles.tanksContainer}>
-        <FuelNowVehicleTank numberOfTanks={numberOfTanks} />
+        <FuelNowVehicleTank
+          tankValues={tankValues}
+          title={LANGUAGE.fuelVehicle.fuelNow.tank}
+        />
       </div>
     </div>
   );
