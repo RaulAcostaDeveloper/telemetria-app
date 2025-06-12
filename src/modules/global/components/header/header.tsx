@@ -1,11 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { usePathname } from "next/navigation";
 import { ArrowDownward, CalendarToday } from "@mui/icons-material";
 import Calendar from "@/modules/global/components/calendar/Calendar";
 import HeaderVehicleFilter from "./headerVehicleFilter/headerVehicleFilter";
 import styles from "./header.module.css";
 import { formatDateTime } from "@/modules/global/utils/utils";
+import { isSingleFuelPage } from "./utils";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { HeaderBackButton } from "./headerBackButton/headerBackButton";
 
@@ -24,32 +26,26 @@ interface Props {
 }
 
 export const Header = ({ isMenuOpen, LANGUAGE }: Props) => {
-  // Determinar si el componente está montado.
   const [mounted, setMounted] = useState(false);
-  // Alternar la visualización del calendario.
   const [showCalendar, setShowCalendar] = useState(false);
+  const pathname = usePathname();
+  const areWeinSingleFuelPage = isSingleFuelPage(pathname);
+
+  const { startDate: reduxStartDate, endDate: reduxEndDate } = useSelector(
+    (state: RootState) => state.calendar
+  );
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Obtener las fechas desde Redux.
-  const { startDate: reduxStartDate, endDate: reduxEndDate } = useSelector(
-    (state: RootState) => state.calendar
-  );
-
   const toggleContainer = (): void => {
     setShowCalendar((prev) => !prev);
   };
 
-  // Usar la fecha actual por defecto si no hay fechas en Redux.
-  const defaultISO: string = new Date().toISOString();
-  const start: string = reduxStartDate
-    ? formatDateTime(reduxStartDate)
-    : formatDateTime(defaultISO);
-  const end: string = reduxEndDate
-    ? formatDateTime(reduxEndDate)
-    : formatDateTime(defaultISO);
+  const defaultISO = new Date().toISOString();
+  const start = formatDateTime(reduxStartDate ?? defaultISO);
+  const end = formatDateTime(reduxEndDate ?? defaultISO);
 
   return (
     <>
@@ -64,8 +60,17 @@ export const Header = ({ isMenuOpen, LANGUAGE }: Props) => {
         {mounted && (
           <>
             <nav className={styles.navBar}>
-              <HeaderBackButton LANGUAGE={LANGUAGE} />
-              {/* Renderizar el VehicleFilter (input de búsqueda con dropdown) */}
+              <div className={styles.subContainer}>
+                {" "}
+                <HeaderBackButton LANGUAGE={LANGUAGE} />
+                {areWeinSingleFuelPage && (
+                  <div className={styles.platesAndName}>
+                    <span>VA4784A</span>
+                    <span>HILUX</span>
+                  </div>
+                )}
+              </div>
+
               <div className={styles.inputAndDatesContainer}>
                 <HeaderVehicleFilter LANGUAGE={LANGUAGE} />
                 <button

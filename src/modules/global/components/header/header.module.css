@@ -75,3 +75,12 @@
 .shadowHeader {
   height: 70px;
 }
+.subContainer {
+  display: flex;
+  align-items: center;
+}
+.platesAndName {
+  display: flex;
+  gap: 0.8rem;
+  font-size: 3rem;
+}
