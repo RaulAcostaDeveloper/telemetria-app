@@ -138,6 +138,8 @@ export interface LanguageInterface {
       metric: string;
       segments: string;
       inventory: string;
+      charged: string;
+      discharged: string;
     };
   };
   fuelVehicle: {

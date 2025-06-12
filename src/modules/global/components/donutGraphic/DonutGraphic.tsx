@@ -17,6 +17,8 @@ export interface Device {
   lastFuelLevel: number;
   fuelLoadCount: number;
   fuelUnloadCount: number;
+  fuelLoaded: number;
+  fuelUnloaded: number;
 }
 
 type MetricOption = "Inventario" | "Cargado" | "Descargado";
@@ -58,10 +60,16 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
       };
     }
 
-    const allValues: number[] =
-      selectedMetric === "Inventario"
-        ? devices.map((d) => d.lastFuelLevel)
-        : [];
+    let allValues: number[];
+    if (selectedMetric === "Inventario") {
+      allValues = devices.map((d) => d.lastFuelLevel);
+    } else if (selectedMetric === "Cargado") {
+      allValues = devices.map((d) => d.fuelLoaded);
+    } else if (selectedMetric === "Descargado") {
+      allValues = devices.map((d) => d.fuelUnloaded);
+    } else {
+      allValues = [];
+    }
 
     if (allValues.length === 0) {
       return {
@@ -201,10 +209,13 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
             onChange={(e) => setSelectedMetric(e.target.value as MetricOption)}
           >
             <option value="Inventario">
-              {`
-             ${LANGUAGE.fuel.donutGrpahic.inventory}`
-                ? `${LANGUAGE.fuel.donutGrpahic.inventory}`
-                : "Inventario"}
+              {LANGUAGE.fuel.donutGrpahic.inventory}
+            </option>
+            <option value="Cargado">
+              {LANGUAGE.fuel.donutGrpahic.charged}
+            </option>
+            <option value="Descargado">
+              {LANGUAGE.fuel.donutGrpahic.discharged}
             </option>
           </select>
         </div>

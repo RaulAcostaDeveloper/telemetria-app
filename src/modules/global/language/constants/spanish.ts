@@ -158,6 +158,8 @@ export const SPANISH: LanguageInterface = {
       metric: "Metrica",
       segments: "Segmentos",
       inventory: "Inventario",
+      charged: "Cargado",
+      discharged: "Descargado",
     },
   },
   fuelVehicle: {

@@ -158,6 +158,8 @@ export const ENGLISH: LanguageInterface = {
       metric: "Metric",
       segments: "Segments",
       inventory: "Inventory",
+      charged: "Charged",
+      discharged: "Discharged",
     },
   },
   fuelVehicle: {
