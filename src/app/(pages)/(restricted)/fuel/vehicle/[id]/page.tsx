@@ -1,5 +1,8 @@
 "use client";
-import { FuelPerformanceMetrics } from "@/modules/fuel/components";
+import {
+  FuelNowContainer,
+  FuelPerformanceMetrics,
+} from "@/modules/fuel/components";
 import { TabsContent } from "@/modules/global/components";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
@@ -10,7 +13,9 @@ interface Page {
 }
 
 export default function FuelVehicle({ params }: Page) {
-  const { id } = params;
+  const { id } = params; // id es el imei del dispositivo
+  console.log("Imei: ", id);
+
   const LANGUAGE = useLanguage();
   const vehicleTabs = [
     LANGUAGE.fuelVehicle.tabs.behavior,
@@ -21,13 +26,15 @@ export default function FuelVehicle({ params }: Page) {
   ];
   return (
     <div>
-      <b>{id}</b>
       <TabsContent
         tabOptions={vehicleTabs}
         tabContents={[
           <div key={0}></div>,
           <div key={1}>
             <FuelPerformanceMetrics LANGUAGE={LANGUAGE} />
+          </div>,
+          <div key={2}>
+            <FuelNowContainer LANGUAGE={LANGUAGE} />
           </div>,
         ]}
       />
