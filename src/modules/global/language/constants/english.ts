@@ -150,6 +150,16 @@ export const ENGLISH: LanguageInterface = {
         fuelDischarged: "Discharged",
       },
     },
+    vehicleReports: {
+      distanceEfficiency: "Distance efficiency",
+      distanceTravelled: "Distance traveled",
+      fuelConsumed: "Fuel consumed",
+      fuelEnd: "Fuel end",
+      fuelLoaded: "Fuel loaded",
+      fuelStart: "Fuel start",
+      operatingHours: "Operating hours",
+      timeEfficiency: "Time efficiency",
+    },
     donutGrpahic: {
       title: "Vehicle Distribution",
       waitingMessage: "Loading 3d donut graphic...",
