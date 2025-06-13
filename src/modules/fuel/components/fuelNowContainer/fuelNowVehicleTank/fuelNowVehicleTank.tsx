@@ -8,7 +8,7 @@ interface Props {
 
 export const FuelNowVehicleTank = ({ tankValues, title }: Props) => {
   return (
-    <div className={styles.container}>
+    <>
       {tankValues.map((value, index) => (
         <div key={index} className={styles.graphic}>
           <GaugeGraphic
@@ -19,6 +19,6 @@ export const FuelNowVehicleTank = ({ tankValues, title }: Props) => {
           />
         </div>
       ))}
-    </div>
+    </>
   );
 };
