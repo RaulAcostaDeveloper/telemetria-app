@@ -1,6 +1,6 @@
 .fuelNowContainer {
   display: flex;
-  justify-content: left;
+  justify-content: space-around;
   flex-wrap: wrap;
   padding: 10px;
 }
@@ -13,19 +13,4 @@
   align-content: center;
   flex-wrap: wrap;
   justify-content: space-between;
-}
-
-.tanksContainer {
-  width: 60%;
-  min-width: 320px;
-}
-
-@media (max-width: 768px) {
-  .fuelDataReportContainer {
-    width: 100%;
-  }
-
-  .tanksContainer {
-    width: 100%;
-  }
 }
