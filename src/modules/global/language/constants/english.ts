@@ -1,6 +1,7 @@
 import { LanguageInterface } from "./language.model";
 
 export const ENGLISH: LanguageInterface = {
+  localeLanguage: "en-US",
   header: {
     backButton: {
       hover: "Go back",
@@ -150,16 +151,6 @@ export const ENGLISH: LanguageInterface = {
         fuelDischarged: "Discharged",
       },
     },
-    vehicleReports: {
-      distanceEfficiency: "Distance efficiency",
-      distanceTravelled: "Distance traveled",
-      fuelConsumed: "Fuel consumed",
-      fuelEnd: "Fuel end",
-      fuelLoaded: "Fuel loaded",
-      fuelStart: "Fuel start",
-      operatingHours: "Operating hours",
-      timeEfficiency: "Time efficiency",
-    },
     donutGrpahic: {
       title: "Vehicle Distribution",
       waitingMessage: "Loading 3d donut graphic...",
@@ -178,6 +169,27 @@ export const ENGLISH: LanguageInterface = {
       fuelNow: "Fuel now",
       charges: "Charges",
       discharges: "Discharges",
+    },
+    vehicleReports: {
+      distanceEfficiency: "Distance efficiency",
+      distanceTravelled: "Distance traveled",
+      fuelConsumed: "Fuel consumed",
+      fuelEnd: "Fuel end",
+      fuelLoaded: "Fuel loaded",
+      fuelStart: "Fuel start",
+      operatingHours: "Operating hours",
+      timeEfficiency: "Time efficiency",
+    },
+    fuelNow: {
+      lastDateReport: "Last date report",
+      fuelNow: "Fuel now",
+      capacity: "Capacity",
+      velocity: "Velocity",
+      performance: "Performance",
+      ignition: "Ignition",
+      on: "On",
+      off: "Off",
+      tank: "Tank",
     },
   },
   management: {

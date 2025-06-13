@@ -1,6 +1,7 @@
 // Asegura que haya concordancia entre idiomas
 
 export interface LanguageInterface {
+  localeLanguage: string;
   header: {
     backButton: {
       hover: string;
@@ -80,7 +81,6 @@ export interface LanguageInterface {
       deleteSubString: string;
     };
   };
-
   auth: {
     principalTitle: string;
     authForm: {
@@ -131,16 +131,6 @@ export interface LanguageInterface {
         fuelDischarged: string;
       };
     };
-    vehicleReports: {
-      distanceEfficiency: string;
-      distanceTravelled: string;
-      fuelConsumed: string;
-      fuelEnd: string;
-      fuelLoaded: string;
-      fuelStart: string;
-      operatingHours: string;
-      timeEfficiency: string;
-    };
     donutGrpahic: {
       title: string;
       waitingMessage: string;
@@ -159,6 +149,27 @@ export interface LanguageInterface {
       fuelNow: string;
       charges: string;
       discharges: string;
+    };
+    vehicleReports: {
+      distanceEfficiency: string;
+      distanceTravelled: string;
+      fuelConsumed: string;
+      fuelEnd: string;
+      fuelLoaded: string;
+      fuelStart: string;
+      operatingHours: string;
+      timeEfficiency: string;
+    };
+    fuelNow: {
+      lastDateReport: string;
+      fuelNow: string;
+      capacity: string;
+      velocity: string;
+      performance: string;
+      ignition: string;
+      on: string;
+      off: string;
+      tank: string;
     };
   };
   management: {

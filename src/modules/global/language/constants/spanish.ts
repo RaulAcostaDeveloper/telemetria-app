@@ -1,6 +1,7 @@
 import { LanguageInterface } from "./language.model";
 
 export const SPANISH: LanguageInterface = {
+  localeLanguage: "ex-MX",
   header: {
     backButton: {
       hover: "Regresar",
@@ -150,16 +151,6 @@ export const SPANISH: LanguageInterface = {
         fuelDischarged: "Combustible descargado",
       },
     },
-    vehicleReports: {
-      distanceEfficiency: "Rendimiento por distancia",
-      distanceTravelled: "Distancia recorrida",
-      fuelConsumed: "Combustible consumido",
-      fuelEnd: "Combustible final",
-      fuelLoaded: "Combustible cargado",
-      fuelStart: "Combustible inicial",
-      operatingHours: "Horas operando",
-      timeEfficiency: "Eficiencia de tiempo",
-    },
     donutGrpahic: {
       title: "Distribución de Vehículos",
       waitingMessage: "Cargando gráfica 3D...",
@@ -178,6 +169,27 @@ export const SPANISH: LanguageInterface = {
       fuelNow: "Combustible actual",
       charges: "Cargas",
       discharges: "Descargas",
+    },
+    vehicleReports: {
+      distanceEfficiency: "Rendimiento por distancia",
+      distanceTravelled: "Distancia recorrida",
+      fuelConsumed: "Combustible consumido",
+      fuelEnd: "Combustible final",
+      fuelLoaded: "Combustible cargado",
+      fuelStart: "Combustible inicial",
+      operatingHours: "Horas operando",
+      timeEfficiency: "Eficiencia de tiempo",
+    },
+    fuelNow: {
+      lastDateReport: "Fecha del último reporte",
+      fuelNow: "Combustible actual",
+      capacity: "Capacidad",
+      velocity: "Velocidad",
+      performance: "Rendimiento",
+      ignition: "Ignición",
+      on: "Encendido",
+      off: "Apagado",
+      tank: "Tanque",
     },
   },
   management: {

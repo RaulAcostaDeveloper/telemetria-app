@@ -3,6 +3,7 @@ export * from "./calendar/Calendar";
 export * from "./footer/footer";
 export * from "./generalButton/generalButton";
 export * from "./generalButton/generalButton.model";
+export * from "./graphics/index";
 export * from "./header/header";
 export * from "./mainWrapper/mainWrapper";
 export * from "./menu/menu";

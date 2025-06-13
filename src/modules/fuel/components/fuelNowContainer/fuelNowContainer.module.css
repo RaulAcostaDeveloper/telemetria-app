@@ -1,0 +1,16 @@
+.fuelNowContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.fuelDataReportContainer {
+  width: 40%;
+  min-width: 320px;
+  margin-top: 10px;
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

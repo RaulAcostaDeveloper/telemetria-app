@@ -1,0 +1,48 @@
+.singleReportContainer {
+  min-width: 40%;
+  height: 6rem;
+  display: flex;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  border: none;
+  text-align: left;
+  background-color: transparent;
+  cursor: pointer;
+  padding-right: 10px;
+  border-radius: 4px;
+}
+
+.singleReportContainer:hover {
+  background-color: #cccccc2a;
+}
+
+.singleReportContainer:active {
+  background-color: #cccccc45;
+}
+
+.iconContainer {
+  height: 6rem;
+  margin: 0 0.7rem 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconContainer svg {
+  color: white;
+  font-size: 5rem;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.color {
+  background-color: var(--company-color-6);
+}
+
+.summaryContainer {
+  height: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 2.2rem;
+}
