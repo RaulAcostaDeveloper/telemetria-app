@@ -13,7 +13,6 @@ import { FuelFilter } from "../fuelFilter/fuelFilter";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Table, TabsContent } from "@/modules/global/components";
 import { fetchFuelSummary } from "@/globalConfig/redux/slices/fuelSummarySlice";
-import { fuelSummaryDataMock } from "@/modules/global/dataMock/fuelSummary/fuelSummary";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -122,7 +121,12 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
       />
       <div className={styles.topResumeData}>
         <ReportSummary />
-        <DonutGraphic devices={fuelSummaryDataMock.value.devices} />
+        {fuelSummaryStatus === "succeeded" && fuelSummaryData ? (
+          <DonutGraphic devices={fuelSummaryData.value.devices} />
+        ) : (
+          // Añadir un loading
+          <div>...</div>
+        )}
       </div>
       <TabsContent
         tabOptions={tabOptions}
