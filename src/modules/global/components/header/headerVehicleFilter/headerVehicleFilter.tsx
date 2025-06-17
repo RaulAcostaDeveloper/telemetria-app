@@ -58,7 +58,7 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
   }, [pathname]);
 
   // filtrar todos los resultados que coincidan
-  const filtered = vehiclesData?.value.vehicles.filter((v) =>
+  const filtered = vehiclesData?.value.vehicles?.filter((v) =>
     v.carNumber.toLowerCase().includes(query.toLowerCase())
   );
 

@@ -24,7 +24,7 @@ interface InitialState {
 }
 
 export const fetchVehicles = createAsyncThunk(
-  "fuelSummary/fetch",
+  "vehicles/fetch",
   async ({ accountId }: { accountId: string }) => {
     return getVehicles(accountId);
   }
@@ -37,7 +37,7 @@ const initialState: InitialState = {
 
 // Slice del servicio
 const vehiclesSlice = createSlice({
-  name: "fuelSummary",
+  name: "vehicles",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
