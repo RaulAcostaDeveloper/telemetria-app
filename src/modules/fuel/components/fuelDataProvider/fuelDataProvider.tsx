@@ -29,26 +29,32 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.lastFuelLevel,
       defaultSpace: 3,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.performanceOdometer,
       defaultSpace: 3,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelLoadCount,
       defaultSpace: 2,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelUnloadCount,
       defaultSpace: 2,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelLoaded,
       defaultSpace: 3,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelUnloaded,
       defaultSpace: 3,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.plate,
