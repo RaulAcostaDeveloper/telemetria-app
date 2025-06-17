@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import DonutGraphic from "@/modules/global/components/donutGraphic/DonutGraphic";
 import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
 import styles from "./fuelDataProvider.module.css";
@@ -5,9 +8,11 @@ import {
   columnsTable,
   dataTable,
 } from "@/modules/global/components/table/table.model";
+import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 import { FuelFilter } from "../fuelFilter/fuelFilter";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Table, TabsContent } from "@/modules/global/components";
+import { fetchFuelSummary } from "@/globalConfig/redux/slices/fuelSummarySlice";
 import { fuelSummaryDataMock } from "@/modules/global/dataMock/fuelSummary/fuelSummary";
 
 interface Props {
@@ -15,6 +20,29 @@ interface Props {
 }
 
 export const FuelDataProvider = ({ LANGUAGE }: Props) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { startDate, endDate } = useSelector(
+    (state: RootState) => state.calendar
+  );
+
+  const { fuelSummaryData, fuelSummaryStatus } = useSelector(
+    (state: RootState) => state.fuelSummary
+  );
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      dispatch(
+        fetchFuelSummary({
+          accountId: "4992",
+          startDate: "2024-08-05T00:00:00", // formatToLocalIso8601(startDate),
+          endDate: "2024-09-07T00:00:00",
+          performanceType: "1",
+        })
+      );
+    }
+  }, [dispatch, startDate, endDate]);
+
   const tabOptions = [
     LANGUAGE.fuel.tabs.unitys,
     LANGUAGE.fuel.tabs.groups,
