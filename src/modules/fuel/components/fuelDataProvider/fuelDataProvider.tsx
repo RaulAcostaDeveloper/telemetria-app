@@ -30,6 +30,8 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.lastFuelLevel,
       defaultSpace: 3,
       orderColumn: true,
+      showTotal: true,
+      filterSelector: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.performanceOdometer,
