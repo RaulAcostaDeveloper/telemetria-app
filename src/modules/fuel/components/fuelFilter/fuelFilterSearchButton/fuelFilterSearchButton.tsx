@@ -7,17 +7,22 @@ import { LanguageInterface } from "@/modules/global/language/constants/language.
 interface Props {
   LANGUAGE: LanguageInterface;
   account: string | null;
+  callFetchFuelSummary: () => void;
 }
 
-export const FuelFilterSearchButton = ({ LANGUAGE, account }: Props) => {
+export const FuelFilterSearchButton = ({
+  LANGUAGE,
+  account,
+  callFetchFuelSummary,
+}: Props) => {
   return (
     <div className={styles.container}>
       <GeneralButton
         Icon={<SearchIcon />}
-        callback={() => {}}
+        callback={() => callFetchFuelSummary()}
+        disabled={account ? account.length < 1 : true}
         title={LANGUAGE.fuel.filter.search}
         type={ButtonTypes.CONFIRM}
-        disabled={account ? account.length < 1 : true}
       />
     </div>
   );
