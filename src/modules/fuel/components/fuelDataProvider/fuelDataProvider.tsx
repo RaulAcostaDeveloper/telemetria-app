@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import DonutGraphic from "@/modules/global/components/donutGraphic/DonutGraphic";
@@ -30,7 +30,7 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
     (state: RootState) => state.fuelSummary
   );
 
-  useEffect(() => {
+  const callFetchFuelSummary = useCallback(() => {
     dispatch(
       fetchFuelSummary({
         accountId: "4992",
@@ -39,7 +39,11 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
         performanceType: "1",
       })
     );
-  }, [dispatch, startDate, endDate]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    callFetchFuelSummary();
+  }, [callFetchFuelSummary, startDate, endDate]);
 
   const tabOptions = [
     LANGUAGE.fuel.tabs.unitys,
@@ -56,8 +60,6 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.lastFuelLevel,
       defaultSpace: 3,
       orderColumn: true,
-      showTotal: true,
-      filterSelector: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.performanceOdometer,
@@ -68,21 +70,25 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelLoadCount,
       defaultSpace: 2,
       orderColumn: true,
+      showTotal: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelUnloadCount,
       defaultSpace: 2,
       orderColumn: true,
+      showTotal: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelLoaded,
       defaultSpace: 3,
       orderColumn: true,
+      showTotal: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelUnloaded,
       defaultSpace: 3,
       orderColumn: true,
+      showTotal: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.plate,
@@ -110,7 +116,10 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
 
   return (
     <div>
-      <FuelFilter LANGUAGE={LANGUAGE} />
+      <FuelFilter
+        LANGUAGE={LANGUAGE}
+        callFetchFuelSummary={callFetchFuelSummary}
+      />
       <div className={styles.topResumeData}>
         <ReportSummary />
         <DonutGraphic devices={fuelSummaryDataMock.value.devices} />
