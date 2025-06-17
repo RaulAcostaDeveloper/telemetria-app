@@ -31,16 +31,14 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
   );
 
   useEffect(() => {
-    if (startDate && endDate) {
-      dispatch(
-        fetchFuelSummary({
-          accountId: "4992",
-          startDate: "2024-08-05T00:00:00", // formatToLocalIso8601(startDate),
-          endDate: "2024-09-07T00:00:00",
-          performanceType: "1",
-        })
-      );
-    }
+    dispatch(
+      fetchFuelSummary({
+        accountId: "4992",
+        startDate: "2024-08-05T00:00:00", // formatToLocalIso8601(startDate),
+        endDate: "2024-09-07T00:00:00",
+        performanceType: "1",
+      })
+    );
   }, [dispatch, startDate, endDate]);
 
   const tabOptions = [
@@ -88,8 +86,8 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
     },
   ];
 
-  const vehiclesReport: dataTable = fuelSummaryDataMock.value.devices.map(
-    (value) => ({
+  const vehiclesReport: dataTable | undefined =
+    fuelSummaryData?.value.devices.map((value) => ({
       name: value.name,
       lastFuelLevel: value.lastFuelLevel,
       performanceOdometer: value.performanceOdometer,
@@ -100,8 +98,7 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
       plate: value.plate,
       lastReportDate: value.lastReportDate,
       imei: value.imei,
-    })
-  );
+    }));
 
   return (
     <div>
@@ -114,14 +111,19 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
         tabOptions={tabOptions}
         tabContents={[
           <div key={1}>
-            <Table
-              LANGUAGE={LANGUAGE}
-              columns={vehiclesColumns}
-              data={vehiclesReport}
-              idKey="imei"
-              showView
-              viewPath="/fuel/vehicle/"
-            />
+            {fuelSummaryStatus === "succeeded" && vehiclesReport ? (
+              <Table
+                LANGUAGE={LANGUAGE}
+                columns={vehiclesColumns}
+                data={vehiclesReport}
+                idKey="imei"
+                showView
+                viewPath="/fuel/vehicle/"
+              />
+            ) : (
+              // Añadir un loading
+              <div>...</div>
+            )}
           </div>,
         ]}
       />
