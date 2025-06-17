@@ -6,26 +6,18 @@ import dynamic from "next/dynamic";
 
 import styles from "./donutGraphic.module.css";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
+import { Devices } from "@/globalConfig/redux/slices/fuelSummarySlice";
 
 // Cargamos HighchartsReact dinámicamente para evitar que se cargue del lado del servidor
 const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
   ssr: false,
 });
 
-export interface Device {
-  imei: string;
-  lastFuelLevel: number;
-  fuelLoadCount: number;
-  fuelUnloadCount: number;
-  fuelLoaded: number;
-  fuelUnloaded: number;
-}
-
 type MetricOption = "Inventario" | "Cargado" | "Descargado";
 type SegmentOption = 5 | 10 | 15;
 
 interface DonutGraphicProps {
-  devices: Device[];
+  devices: Devices[];
 }
 
 const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {

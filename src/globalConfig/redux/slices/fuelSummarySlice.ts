@@ -2,17 +2,17 @@ import { getFuelSummary } from "@/modules/fuel/services/fuelSummary/fuelSummary"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 // Tipado de los datos
-interface Devices {
+export interface Devices {
   imei: string;
   lastFuelLevel: number;
   lastReportDate: string;
   name: string;
   plate: string;
-  fuelLoadCount: string;
+  fuelLoadCount: number;
   fuelUnloadCount: number;
   performanceOdometer: number;
-  performanceHorometer: boolean;
-  fuelLoaded: string;
+  performanceHorometer: number;
+  fuelLoaded: number;
   fuelUnloaded: number;
 }
 
