@@ -8,9 +8,10 @@ import { LanguageInterface } from "@/modules/global/language/constants/language.
 
 interface Props {
   LANGUAGE: LanguageInterface;
+  callFetchFuelSummary: () => void;
 }
 
-export const FuelFilter = ({ LANGUAGE }: Props) => {
+export const FuelFilter = ({ LANGUAGE, callFetchFuelSummary }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div className={styles.fuelFilter}>
@@ -19,7 +20,12 @@ export const FuelFilter = ({ LANGUAGE }: Props) => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
-      {isOpen && <FuelFilterContent LANGUAGE={LANGUAGE} />}
+      {isOpen && (
+        <FuelFilterContent
+          LANGUAGE={LANGUAGE}
+          callFetchFuelSummary={callFetchFuelSummary}
+        />
+      )}
     </div>
   );
 };
