@@ -21,6 +21,23 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     (state: RootState) => state.vehicles
   );
 
+  const { driversData, driversStatus } = useSelector(
+    (state: RootState) => state.drivers
+  );
+  
+  const { devicesData, devicesStatus } = useSelector(
+    (state: RootState) => state.devices
+  );
+  
+  const { groupsData, groupsStatus } = useSelector(
+    (state: RootState) => state.groups
+  );
+
+  console.log('driversData ', driversData);
+  console.log('devicesData ', devicesData);
+  console.log('groupsData ', groupsData);
+
+
   const fuelTabs = [
     LANGUAGE.management.tabs.vehicles,
     LANGUAGE.management.tabs.devices,
