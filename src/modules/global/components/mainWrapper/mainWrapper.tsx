@@ -116,17 +116,17 @@ export const MainWrapper = ({ children }: Props) => {
           accountId: "62856",
         })
       );
-            dispatch(
+      dispatch(
         fetchDevices({
           accountId: "62856",
         })
       );
-            dispatch(
+      dispatch(
         fetchDrivers({
           accountId: "62856",
         })
       );
-            dispatch(
+      dispatch(
         fetchGroups({
           accountId: "62856",
         })
