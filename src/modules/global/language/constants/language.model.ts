@@ -201,6 +201,8 @@ export interface LanguageInterface {
       names: string;
       lastnames: string;
       email: string;
+      celphone: string;
+      createdAt: string;
     };
   };
 }

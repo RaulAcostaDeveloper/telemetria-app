@@ -221,6 +221,8 @@ export const ENGLISH: LanguageInterface = {
       names: "Name(s)",
       lastnames: "Last name(s)",
       email: "Email",
+      celphone: "Cell phone",
+      createdAt: "Created at",
     },
   },
 };

@@ -221,6 +221,8 @@ export const SPANISH: LanguageInterface = {
       names: "Nombre(s)",
       lastnames: "Apellido(s)",
       email: "Correo electrónico",
+      celphone: "Teléfono",
+      createdAt: "Fecha de creación",
     },
   },
 };
