@@ -140,7 +140,6 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
                 idKey="imei"
                 showGoFuel
                 showGoOBT
-                viewPath="/fuel/vehicle/"
               />
             ) : (
               // Añadir un loading
