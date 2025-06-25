@@ -28,6 +28,8 @@ interface Props {
   showCreateButton?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
+  showGoFuel?: boolean;
+  showGoOBT?: boolean;
   showView?: boolean;
   title?: string;
   viewPath?: string;
@@ -59,6 +61,8 @@ export const TableServerContent = ({
   showCreateButton,
   showDelete,
   showEdit,
+  showGoFuel,
+  showGoOBT,
   showView,
   title,
   viewPath,
@@ -108,7 +112,9 @@ export const TableServerContent = ({
               columnOrdered={columnOrdered}
               columns={columns}
               setColumnOrdered={setColumnOrdered}
-              showActions={showDelete || showEdit || showView}
+              showActions={
+                showDelete || showEdit || showView || showGoFuel || showGoOBT
+              }
             />
 
             {/* Registros de la tabla */}
@@ -119,9 +125,13 @@ export const TableServerContent = ({
               deleteFunction={deleteFunction}
               editFormContent={editFormContent}
               idKey={idKey}
-              showActions={showDelete || showEdit || showView}
+              showActions={
+                showDelete || showEdit || showView || showGoFuel || showGoOBT
+              }
               showDelete={showDelete}
               showEdit={showEdit}
+              showGoFuel={showGoFuel}
+              showGoOBT={showGoOBT}
               showView={showView}
               viewPath={viewPath}
             />

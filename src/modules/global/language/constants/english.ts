@@ -89,6 +89,8 @@ export const ENGLISH: LanguageInterface = {
       searchTitle: "Search by the first column of the table",
       sortItems: "Sort items by",
       viewDetail: "View details",
+      goFuelReport: "Go to fuel report",
+      goObtReport: "Go to OBT report",
     },
     elements: {
       actions: "Actions",
