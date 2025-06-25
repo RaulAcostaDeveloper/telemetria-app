@@ -89,6 +89,8 @@ export const SPANISH: LanguageInterface = {
       searchTitle: "Buscar por la primer columna de la tabla",
       sortItems: "Ordenar elementos por",
       viewDetail: "Ver detalles",
+      goFuelReport: "Ir a reporte de combustible",
+      goObtReport: "Ir a reporte de OBT",
     },
     elements: {
       actions: "Acciones",

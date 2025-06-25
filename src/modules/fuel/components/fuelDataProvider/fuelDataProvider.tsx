@@ -138,8 +138,8 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
                 columns={vehiclesColumns}
                 data={vehiclesReport}
                 idKey="imei"
-                showView
-                viewPath="/fuel/vehicle/"
+                showGoFuel
+                showGoOBT
               />
             ) : (
               // Añadir un loading

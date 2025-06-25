@@ -6,6 +6,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
+import LeakAddIcon from "@mui/icons-material/LeakAdd";
+import ShowChartIcon from "@mui/icons-material/ShowChart";
 import styles from "./tableActions.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { PrimitiveValue } from "../table.model";
@@ -17,9 +19,10 @@ interface Props {
   dataObject: { [key: string]: PrimitiveValue };
   deleteFunction?: (idElement: string | number) => void;
   idKey?: string;
-  showActions?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
+  showGoFuel?: boolean;
+  showGoOBT?: boolean;
   showView?: boolean;
   viewPath?: string;
   editFormContent?: React.FC<{
@@ -38,6 +41,8 @@ export const TableActions = ({
   idKey,
   showDelete,
   showEdit,
+  showGoFuel,
+  showGoOBT,
   showView,
   viewPath,
 }: Props) => {
@@ -54,6 +59,28 @@ export const TableActions = ({
           href={viewPath}
         >
           <VisibilityIcon />
+        </Link>
+      )}
+
+      {/* Botón "Ir a reporte individual de combustible" */}
+      {showGoFuel && (
+        <Link
+          className={`${styles.button}`}
+          title={LANGUAGE.table.actions.goFuelReport}
+          href={`/fuel/vehicle/${idKey ? dataObject[idKey] : undefined}`}
+        >
+          <ShowChartIcon />
+        </Link>
+      )}
+
+      {/* Botón "Ir a reporte individual de OBT" */}
+      {showGoOBT && (
+        <Link
+          className={`${styles.button}`}
+          title={LANGUAGE.table.actions.goObtReport}
+          href={`/telemetry/vehicle/${idKey ? dataObject[idKey] : undefined}`}
+        >
+          <LeakAddIcon />
         </Link>
       )}
 
