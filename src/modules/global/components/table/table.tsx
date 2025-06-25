@@ -21,6 +21,8 @@ interface Props {
   showCreateButton?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
+  showGoFuel?: boolean;
+  showGoOBT?: boolean;
   showView?: boolean;
   title?: string;
   viewPath?: string;
@@ -47,6 +49,8 @@ export const Table = ({
   showCreateButton,
   showDelete,
   showEdit,
+  showGoFuel,
+  showGoOBT,
   showView,
   title,
   viewPath,
@@ -163,6 +167,8 @@ export const Table = ({
         showCreateButton={showCreateButton}
         showDelete={showDelete}
         showEdit={showEdit}
+        showGoFuel={showGoFuel}
+        showGoOBT={showGoOBT}
         showView={showView}
         title={title}
         viewPath={viewPath}

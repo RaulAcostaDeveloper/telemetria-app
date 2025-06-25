@@ -13,6 +13,8 @@ interface Props {
   showActions?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
+  showGoFuel?: boolean;
+  showGoOBT?: boolean;
   showView?: boolean;
   viewPath?: string;
   editFormContent?: React.FC<{
@@ -32,6 +34,8 @@ export const TableDataContent = ({
   showActions,
   showDelete,
   showEdit,
+  showGoFuel,
+  showGoOBT,
   showView,
   viewPath,
 }: Props) => {
@@ -69,6 +73,8 @@ export const TableDataContent = ({
               idKey={idKey}
               showDelete={showDelete}
               showEdit={showEdit}
+              showGoFuel={showGoFuel}
+              showGoOBT={showGoOBT}
               showView={showView}
               viewPath={`${viewPath}${dataObject[idKey ?? ""]}`}
             />

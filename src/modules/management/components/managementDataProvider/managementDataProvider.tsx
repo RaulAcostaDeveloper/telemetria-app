@@ -171,6 +171,9 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
                 LANGUAGE={LANGUAGE}
                 columns={vehicleColumns}
                 data={vehiclesTableData}
+                showGoFuel
+                showGoOBT
+                idKey="id"
               />
             ) : (
               // Añadir un loading

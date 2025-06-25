@@ -97,9 +97,7 @@ export const TableColumns = ({
 
       {/* Mostrar acciones? */}
       {showActions && (
-        <div
-          className={`${styles.column} ${styles.actions} ${styles.lastButton}`}
-        >
+        <div className={`${styles.actions} ${styles.lastButton}`}>
           <span className={styles.columnTitle}>
             {LANGUAGE.table.elements.actions}
           </span>

@@ -69,6 +69,8 @@ export interface LanguageInterface {
       searchTitle: string;
       sortItems: string;
       viewDetail: string;
+      goFuelReport: string;
+      goObtReport: string;
     };
     elements: {
       actions: string;

@@ -138,7 +138,8 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
                 columns={vehiclesColumns}
                 data={vehiclesReport}
                 idKey="imei"
-                showView
+                showGoFuel
+                showGoOBT
                 viewPath="/fuel/vehicle/"
               />
             ) : (
