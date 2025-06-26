@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
 import styles from "./tableFiltersButton.module.css";
@@ -14,6 +14,7 @@ interface Props {
   columns: columnsTable;
   data: dataTable;
   handleSelectorFilter: (propIndex: number, value: string) => void;
+  setMinHeight: (height: number) => void;
 }
 
 export const TableFiltersButton = ({
@@ -21,8 +22,17 @@ export const TableFiltersButton = ({
   columns,
   data,
   handleSelectorFilter,
+  setMinHeight,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const filtersRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (filtersRef.current) {
+      const height = filtersRef.current.offsetHeight;
+      setMinHeight(height + 100);
+    }
+  }, []);
   return (
     <div className={styles.container}>
       <GeneralButton
@@ -34,26 +44,27 @@ export const TableFiltersButton = ({
         placeholder={LANGUAGE.table.buttons.filtersButton}
         Icon={<FilterAltIcon />}
       />
-      {isOpen && (
-        <div className={styles.filtersContent}>
-          <TableFilters
-            LANGUAGE={LANGUAGE}
-            columns={columns}
-            data={data}
-            handleSelectorFilter={handleSelectorFilter}
+      <div
+        ref={filtersRef}
+        className={`${styles.filtersContent} ${isOpen ? styles.show : ""}`}
+      >
+        <TableFilters
+          LANGUAGE={LANGUAGE}
+          columns={columns}
+          data={data}
+          handleSelectorFilter={handleSelectorFilter}
+        />
+        <div className={styles.buttonCloseContainer}>
+          <GeneralButton
+            type={ButtonTypes.NEUTRAL}
+            callback={() => {
+              setIsOpen(!isOpen);
+            }}
+            title={LANGUAGE.table.actions.close}
+            placeholder={LANGUAGE.table.actions.close}
           />
-          <div className={styles.buttonCloseContainer}>
-            <GeneralButton
-              type={ButtonTypes.NEUTRAL}
-              callback={() => {
-                setIsOpen(!isOpen);
-              }}
-              title={LANGUAGE.table.actions.close}
-              placeholder={LANGUAGE.table.actions.close}
-            />
-          </div>
         </div>
-      )}
+      </div>
       {/* Agregar "no hay filtros disponibles para esta tabla" */}
     </div>
   );

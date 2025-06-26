@@ -25,6 +25,7 @@ interface Props {
   idKey?: string;
   setColumnOrdered: React.Dispatch<React.SetStateAction<SelectorOrdered>>;
   setInputFilterValue: (value: string) => void;
+  setMinHeight: (height: number) => void;
   showCreateButton?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
@@ -58,6 +59,7 @@ export const TableServerContent = ({
   idKey,
   setColumnOrdered,
   setInputFilterValue,
+  setMinHeight,
   showCreateButton,
   showDelete,
   showEdit,
@@ -97,6 +99,7 @@ export const TableServerContent = ({
             columns={columns}
             data={data}
             handleSelectorFilter={handleSelectorFilter}
+            setMinHeight={setMinHeight}
           />
         </div>
 
