@@ -43,7 +43,7 @@ export const TableFilter = ({
       >
         <option value="">{LANGUAGE.table.actions.any}</option>
         {options.map((opt) => (
-          <option key={opt} value={opt ? opt : ""}>
+          <option key={opt} value={opt ?? ""}>
             {opt}
           </option>
         ))}

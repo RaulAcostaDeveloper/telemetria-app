@@ -40,6 +40,7 @@ export const TableFiltersButton = ({
         callback={() => {
           setIsOpen(!isOpen);
         }}
+        title={LANGUAGE.table.buttons.filtersButton}
         buttonStyle={styles.button}
         placeholder={LANGUAGE.table.buttons.filtersButton}
         Icon={<FilterAltIcon />}
