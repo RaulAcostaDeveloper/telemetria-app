@@ -56,6 +56,7 @@ export interface LanguageInterface {
       filtered: string;
       saveEdit: string;
       saveNew: string;
+      filtersButton: string;
     };
     actions: {
       close: string;

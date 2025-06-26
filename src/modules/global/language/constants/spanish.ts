@@ -76,6 +76,7 @@ export const SPANISH: LanguageInterface = {
       filtered: "Filtrado",
       saveEdit: "Guardar edición",
       saveNew: "Guardar elemento",
+      filtersButton: "Abrir filtros",
     },
     actions: {
       close: "Cerrar",
