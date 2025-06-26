@@ -55,13 +55,14 @@ export const Table = ({
   title,
   viewPath,
 }: Props) => {
-  const [filteredData, setFilteredData] = useState<dataTable>(data);
-  const [inputFilterValue, setInputFilterValue] = useState<string>("");
-  const [filterSelectors, setFilterSelectors] = useState<SelectorFilter[]>([]);
   const [columnOrdered, setColumnOrdered] = useState<SelectorOrdered>({
     propIndex: 0,
     value: true,
   });
+  const [filterSelectors, setFilterSelectors] = useState<SelectorFilter[]>([]);
+  const [filteredData, setFilteredData] = useState<dataTable>(data);
+  const [inputFilterValue, setInputFilterValue] = useState<string>("");
+  const [minHeight, setMinHeight] = useState(0);
 
   // Ordenamiento ascendente y descendente
   useEffect(() => {
@@ -150,7 +151,10 @@ export const Table = ({
   };
 
   return (
-    <div className={`${styles.container}`}>
+    <div
+      className={`${styles.container}`}
+      style={{ minHeight: `${minHeight}px` }}
+    >
       <TableServerContent
         LANGUAGE={LANGUAGE}
         columnOrdered={columnOrdered}
@@ -164,6 +168,7 @@ export const Table = ({
         idKey={idKey}
         setColumnOrdered={setColumnOrdered}
         setInputFilterValue={setInputFilterValue}
+        setMinHeight={setMinHeight}
         showCreateButton={showCreateButton}
         showDelete={showDelete}
         showEdit={showEdit}
