@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import styles from "./tableFilters.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { TableFilter } from "../tableFilter/tableFilter";
-import { columnsTable, dataTable } from "../table.model";
+import { columnsTable, dataTable, PrimitiveValue } from "../table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -16,7 +16,7 @@ interface Props {
 const getAllUniqueFilterValues = (
   columns: columnsTable,
   data: dataTable
-): string[][] => {
+): PrimitiveValue[][] => {
   if (!data.length) {
     return columns.map(() => []);
   }
@@ -49,10 +49,7 @@ export const TableFilters = ({
   return (
     <div className={styles.tableFilters}>
       {columns.map((col, index) => (
-        <div
-          key={col.columnName + index}
-          style={{ width: `${(col.defaultSpace || 1) * 50}px` }}
-        >
+        <div key={index}>
           {col.filterSelector && (
             <TableFilter
               LANGUAGE={LANGUAGE}
