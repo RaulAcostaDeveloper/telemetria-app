@@ -76,6 +76,7 @@ export const ENGLISH: LanguageInterface = {
       filtered: "Filtered",
       saveEdit: "Save changes",
       saveNew: "Save item",
+      filtersButton: "Open filters",
     },
     actions: {
       close: "Close",
