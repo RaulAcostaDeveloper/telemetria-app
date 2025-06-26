@@ -1,8 +1,14 @@
 .selector {
   display: flex;
   justify-content: left;
-  margin-right: 10px;
+  flex-wrap: wrap;
   margin-bottom: 10px;
+  width: 200px;
+}
+
+.title {
+  color: rgba(0, 0, 0, 0.753);
+  font-size: 1.5rem;
 }
 
 /* Estilos especiales para el selector */

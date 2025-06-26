@@ -11,7 +11,6 @@ import { TableCSVButtonsContainer } from "../tableCSVButtonsContainer/tableCSVBu
 import { TableColumns } from "../tableColumns/tableColumns";
 import { TableDataContent } from "../tableDataContent/tableDataContent";
 import { TableDataSummatory } from "../tableDataSummatory/tableDataSummatory";
-import { TableFilters } from "../tableFilters/tableFilters";
 import { TableFiltersButton } from "../tableFiltersButton/tableFiltersButton";
 import { TableSearch } from "../tableSearch/tableSearch";
 
@@ -93,11 +92,7 @@ export const TableServerContent = ({
             tableData={data}
             title={title}
           />
-          <TableFiltersButton LANGUAGE={LANGUAGE} />
-        </div>
-        {/* Filtros por columna */}
-        <div className={`${styles.topActions}`}>
-          <TableFilters
+          <TableFiltersButton
             LANGUAGE={LANGUAGE}
             columns={columns}
             data={data}
