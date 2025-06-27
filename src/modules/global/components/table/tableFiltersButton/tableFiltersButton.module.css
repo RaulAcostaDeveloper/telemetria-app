@@ -27,8 +27,8 @@
   pointer-events: all;
 }
 
-.buttonCloseContainer {
+.buttonsContainer {
   width: 100%;
   display: flex;
-  justify-content: right;
+  justify-content: space-between;
 }
