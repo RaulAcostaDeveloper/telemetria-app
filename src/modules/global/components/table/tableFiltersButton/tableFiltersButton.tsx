@@ -25,6 +25,8 @@ export const TableFiltersButton = ({
   setMinHeight,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+
   const filtersRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,7 +34,14 @@ export const TableFiltersButton = ({
       const height = filtersRef.current.offsetHeight;
       setMinHeight(height + 100);
     }
+    resetSelectedOptions();
   }, []);
+
+  const resetSelectedOptions = () => {
+    const filterableColumns = columns.filter((col) => col.filterSelector);
+    setSelectedOptions(filterableColumns.map(() => ""));
+  };
+
   return (
     <div className={styles.container}>
       <GeneralButton
@@ -54,6 +63,8 @@ export const TableFiltersButton = ({
           columns={columns}
           data={data}
           handleSelectorFilter={handleSelectorFilter}
+          selectedOptions={selectedOptions}
+          setSelectedOptions={setSelectedOptions}
         />
         <div className={styles.buttonCloseContainer}>
           <GeneralButton

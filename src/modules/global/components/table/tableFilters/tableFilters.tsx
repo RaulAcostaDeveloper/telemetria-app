@@ -11,6 +11,8 @@ interface Props {
   columns: columnsTable;
   data: dataTable;
   handleSelectorFilter: (propIndex: number, value: string) => void;
+  selectedOptions: string[];
+  setSelectedOptions: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const getAllUniqueFilterValues = (
@@ -40,25 +42,37 @@ export const TableFilters = ({
   columns,
   data,
   handleSelectorFilter,
+  selectedOptions,
+  setSelectedOptions,
 }: Props) => {
   const uniqueFilterValues = useMemo(
     () => getAllUniqueFilterValues(columns, data),
     [columns, data]
   );
 
+  // Índices de columnas que tienen filtro
+  const filteredColumnIndexes = useMemo(
+    () =>
+      columns
+        .map((col, i) => (col.filterSelector ? i : null))
+        .filter((i): i is number => i !== null),
+    [columns]
+  );
+
   return (
     <div className={styles.tableFilters}>
-      {columns.map((col, index) => (
-        <div key={index}>
-          {col.filterSelector && (
-            <TableFilter
-              LANGUAGE={LANGUAGE}
-              columnName={col.columnName}
-              handleSelectorFilter={handleSelectorFilter}
-              options={uniqueFilterValues[index]}
-              propIndex={index}
-            />
-          )}
+      {filteredColumnIndexes.map((colIndex, renderIndex) => (
+        <div key={colIndex}>
+          <TableFilter
+            LANGUAGE={LANGUAGE}
+            columnName={columns[colIndex].columnName}
+            filterRenderIndex={renderIndex}
+            handleSelectorFilter={handleSelectorFilter}
+            options={uniqueFilterValues[colIndex]}
+            propIndex={colIndex}
+            selectedOptions={selectedOptions}
+            setSelectedOptions={setSelectedOptions}
+          />
         </div>
       ))}
     </div>
