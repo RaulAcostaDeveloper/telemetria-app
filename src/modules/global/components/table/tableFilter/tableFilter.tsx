@@ -1,6 +1,3 @@
-"use client";
-import { useState } from "react";
-
 import styles from "./tableFilter.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { PrimitiveValue } from "../table.model";
@@ -23,15 +20,12 @@ export const TableFilter = ({
   handleSelectorFilter,
   options,
   propIndex,
+  selectedOptions,
   setSelectedOptions,
 }: Props) => {
-  const [selectedOption, setSelectedOption] = useState("");
-
+  // Actualiza los filtros desde el componente TableFiltersButton
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     handleSelectorFilter(propIndex, e.target.value);
-
-    setSelectedOption(e.target.value);
-
     setSelectedOptions((prevOptions) => {
       const updated = [...prevOptions];
       updated[filterRenderIndex] = e.target.value;
@@ -39,6 +33,7 @@ export const TableFilter = ({
     });
   };
 
+  // Va a usar el arreglo de selectedOptions
   return (
     <div
       className={styles.selector}
@@ -48,9 +43,9 @@ export const TableFilter = ({
       <select
         id={`filter-${columnName}`}
         className={`${styles.selectInput} ${
-          selectedOption ? styles.selectedOption : ""
+          selectedOptions[filterRenderIndex] ? styles.selectedOption : ""
         }`}
-        value={selectedOption}
+        value={selectedOptions[filterRenderIndex]}
         onChange={handleChange}
       >
         <option value="">{LANGUAGE.table.actions.any}</option>

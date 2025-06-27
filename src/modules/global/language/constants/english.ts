@@ -92,6 +92,7 @@ export const ENGLISH: LanguageInterface = {
       viewDetail: "View details",
       goFuelReport: "Go to fuel report",
       goObtReport: "Go to OBT report",
+      cleanFilters: "Clean",
     },
     elements: {
       actions: "Actions",

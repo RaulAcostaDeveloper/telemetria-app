@@ -38,8 +38,18 @@ export const TableFiltersButton = ({
   }, []);
 
   const resetSelectedOptions = () => {
-    const filterableColumns = columns.filter((col) => col.filterSelector);
+    // Obtener las columnas con filterSelector y también conocer su indice (para reiniciar los filtros)
+    const filterableColumns = columns
+      .map((col, indexCol) => ({ col, indexCol }))
+      .filter(({ col }) => col.filterSelector);
+
+    // Reiniciar los selectores
     setSelectedOptions(filterableColumns.map(() => ""));
+
+    // Reiniciar los filtros
+    filterableColumns.forEach(({ indexCol }) => {
+      handleSelectorFilter(indexCol, "");
+    });
   };
 
   return (
@@ -66,12 +76,16 @@ export const TableFiltersButton = ({
           selectedOptions={selectedOptions}
           setSelectedOptions={setSelectedOptions}
         />
-        <div className={styles.buttonCloseContainer}>
+        <div className={styles.buttonsContainer}>
+          <GeneralButton
+            type={ButtonTypes.WARNING}
+            callback={() => resetSelectedOptions()}
+            title={LANGUAGE.table.actions.cleanFilters}
+            placeholder={LANGUAGE.table.actions.cleanFilters}
+          />
           <GeneralButton
             type={ButtonTypes.NEUTRAL}
-            callback={() => {
-              setIsOpen(!isOpen);
-            }}
+            callback={() => setIsOpen(!isOpen)}
             title={LANGUAGE.table.actions.close}
             placeholder={LANGUAGE.table.actions.close}
           />
