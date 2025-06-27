@@ -1,18 +1,18 @@
 import styles from "./tableServerContent.module.css";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { TableAddNewButton } from "../tableAddNewButton/tableAddNewButton";
-import { TableCSVButtonsContainer } from "../tableCSVButtonsContainer/tableCSVButtonsContainer";
-import { TableColumns } from "../tableColumns/tableColumns";
-import { TableDataContent } from "../tableDataContent/tableDataContent";
-import { TableDataSummatory } from "../tableDataSummatory/tableDataSummatory";
-import { TableFilters } from "../tableFilters/tableFilters";
-import { TableSearch } from "../tableSearch/tableSearch";
 import {
   PrimitiveValue,
   SelectorOrdered,
   columnsTable,
   dataTable,
 } from "../table.model";
+import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { TableAddNewButton } from "../tableAddNewButton/tableAddNewButton";
+import { TableCSVButtonsContainer } from "../tableCSVButtonsContainer/tableCSVButtonsContainer";
+import { TableColumns } from "../tableColumns/tableColumns";
+import { TableDataContent } from "../tableDataContent/tableDataContent";
+import { TableDataSummatory } from "../tableDataSummatory/tableDataSummatory";
+import { TableFiltersButton } from "../tableFiltersButton/tableFiltersButton";
+import { TableSearch } from "../tableSearch/tableSearch";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -25,6 +25,7 @@ interface Props {
   idKey?: string;
   setColumnOrdered: React.Dispatch<React.SetStateAction<SelectorOrdered>>;
   setInputFilterValue: (value: string) => void;
+  setMinHeight: (height: number) => void;
   showCreateButton?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
@@ -58,6 +59,7 @@ export const TableServerContent = ({
   idKey,
   setColumnOrdered,
   setInputFilterValue,
+  setMinHeight,
   showCreateButton,
   showDelete,
   showEdit,
@@ -69,37 +71,35 @@ export const TableServerContent = ({
 }: Props) => {
   return (
     <>
-      {/* Título */}
-      {title && <h4 className={`${styles.title}`}>{title}</h4>}
-
-      {/* Búsqueda en la primer columna*/}
-      <div className={`${styles.topActions}`}>
-        <TableSearch
-          LANGUAGE={LANGUAGE}
-          setInputFilterValue={setInputFilterValue}
-        />
-        {showCreateButton && (
-          <TableAddNewButton
-            LANGUAGE={LANGUAGE}
-            createFormContent={createFormContent}
-          />
-        )}
-        <TableCSVButtonsContainer
-          LANGUAGE={LANGUAGE}
-          columns={columns}
-          filteredData={filteredData}
-          tableData={data}
-          title={title}
-        />
-      </div>
       <div className={styles.inside}>
-        {/* Filtros por columna */}
+        {/* Título */}
+        {title && <h4 className={`${styles.title}`}>{title}</h4>}
+
+        {/* Búsqueda en la primer columna*/}
         <div className={`${styles.topActions}`}>
-          <TableFilters
+          <TableSearch
+            LANGUAGE={LANGUAGE}
+            setInputFilterValue={setInputFilterValue}
+          />
+          {showCreateButton && (
+            <TableAddNewButton
+              LANGUAGE={LANGUAGE}
+              createFormContent={createFormContent}
+            />
+          )}
+          <TableCSVButtonsContainer
+            LANGUAGE={LANGUAGE}
+            columns={columns}
+            filteredData={filteredData}
+            tableData={data}
+            title={title}
+          />
+          <TableFiltersButton
             LANGUAGE={LANGUAGE}
             columns={columns}
             data={data}
             handleSelectorFilter={handleSelectorFilter}
+            setMinHeight={setMinHeight}
           />
         </div>
 

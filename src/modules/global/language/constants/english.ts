@@ -71,11 +71,12 @@ export const ENGLISH: LanguageInterface = {
       cancel: "Cancel",
       create: "Create",
       delete: "Delete item",
-      downloadCSV: "Download CSV",
+      downloadCSV: "Export",
       downloadFiltredCSV: "Download CSV (filtered)",
       filtered: "Filtered",
       saveEdit: "Save changes",
       saveNew: "Save item",
+      filtersButton: "Filters",
     },
     actions: {
       close: "Close",
@@ -91,6 +92,8 @@ export const ENGLISH: LanguageInterface = {
       viewDetail: "View details",
       goFuelReport: "Go to fuel report",
       goObtReport: "Go to OBT report",
+      cleanFilters: "Clean",
+      noFilters: "There are not filters for this table",
     },
     elements: {
       actions: "Actions",
