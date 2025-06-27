@@ -7,7 +7,7 @@ import localFont from "next/font/local";
 export const nunitoItalicFont = localFont({
   src: [
     {
-      path: "/fonts/Nunito/Nunito-italic-VariableFont_wght.ttf",
+      path: "./fonts/Nunito/Nunito-italic-VariableFont_wght.ttf",
       weight: "100..900",
       style: "italic",
     },
@@ -18,7 +18,7 @@ export const nunitoItalicFont = localFont({
 export const nunitoFont = localFont({
   src: [
     {
-      path: "/fonts/Nunito/Nunito-VariableFont_wght.ttf",
+      path: "./fonts/Nunito/Nunito-VariableFont_wght.ttf",
       weight: "100..900",
     },
   ],
