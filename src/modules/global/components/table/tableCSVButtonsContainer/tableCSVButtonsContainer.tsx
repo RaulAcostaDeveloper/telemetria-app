@@ -58,7 +58,7 @@ export const TableCSVButtonsContainer = ({
           Icon={<DownloadIcon />}
           buttonStyle={styles.tableDownloadCSV}
           callback={() => {}}
-          title={""}
+          title={LANGUAGE.table.buttons.downloadCSV}
           placeholder={LANGUAGE.table.buttons.downloadCSV}
           type={ButtonTypes.SUCCESS}
         />

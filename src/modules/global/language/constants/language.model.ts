@@ -56,6 +56,7 @@ export interface LanguageInterface {
       filtered: string;
       saveEdit: string;
       saveNew: string;
+      filtersButton: string;
     };
     actions: {
       close: string;
@@ -71,6 +72,8 @@ export interface LanguageInterface {
       viewDetail: string;
       goFuelReport: string;
       goObtReport: string;
+      cleanFilters: string;
+      noFilters: string;
     };
     elements: {
       actions: string;

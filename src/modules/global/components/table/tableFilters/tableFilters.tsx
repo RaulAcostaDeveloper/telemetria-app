@@ -4,19 +4,21 @@ import { useMemo } from "react";
 import styles from "./tableFilters.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { TableFilter } from "../tableFilter/tableFilter";
-import { columnsTable, dataTable } from "../table.model";
+import { columnsTable, dataTable, PrimitiveValue } from "../table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   columns: columnsTable;
   data: dataTable;
   handleSelectorFilter: (propIndex: number, value: string) => void;
+  selectedOptions: string[];
+  setSelectedOptions: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const getAllUniqueFilterValues = (
   columns: columnsTable,
   data: dataTable
-): string[][] => {
+): PrimitiveValue[][] => {
   if (!data.length) {
     return columns.map(() => []);
   }
@@ -40,28 +42,37 @@ export const TableFilters = ({
   columns,
   data,
   handleSelectorFilter,
+  selectedOptions,
+  setSelectedOptions,
 }: Props) => {
   const uniqueFilterValues = useMemo(
     () => getAllUniqueFilterValues(columns, data),
     [columns, data]
   );
 
+  // Índices de columnas que tienen filtro
+  const filteredColumnIndexes = useMemo(
+    () =>
+      columns
+        .map((col, i) => (col.filterSelector ? i : null))
+        .filter((i): i is number => i !== null),
+    [columns]
+  );
+
   return (
     <div className={styles.tableFilters}>
-      {columns.map((col, index) => (
-        <div
-          key={col.columnName + index}
-          style={{ width: `${(col.defaultSpace || 1) * 50}px` }}
-        >
-          {col.filterSelector && (
-            <TableFilter
-              LANGUAGE={LANGUAGE}
-              columnName={col.columnName}
-              handleSelectorFilter={handleSelectorFilter}
-              options={uniqueFilterValues[index]}
-              propIndex={index}
-            />
-          )}
+      {filteredColumnIndexes.map((colIndex, renderIndex) => (
+        <div key={colIndex}>
+          <TableFilter
+            LANGUAGE={LANGUAGE}
+            columnName={columns[colIndex].columnName}
+            filterRenderIndex={renderIndex}
+            handleSelectorFilter={handleSelectorFilter}
+            options={uniqueFilterValues[colIndex]}
+            propIndex={colIndex}
+            selectedOptions={selectedOptions}
+            setSelectedOptions={setSelectedOptions}
+          />
         </div>
       ))}
     </div>
