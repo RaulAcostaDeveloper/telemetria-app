@@ -73,6 +73,7 @@ export interface LanguageInterface {
       goFuelReport: string;
       goObtReport: string;
       cleanFilters: string;
+      noFilters: string;
     };
     elements: {
       actions: string;

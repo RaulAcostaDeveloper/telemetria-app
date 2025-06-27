@@ -20,6 +20,7 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.473);
   opacity: 0;
   pointer-events: none;
+  min-width: 240px;
 }
 
 .show {
@@ -31,4 +32,9 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.noFilters {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
 }

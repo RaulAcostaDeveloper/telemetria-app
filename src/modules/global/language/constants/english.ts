@@ -93,6 +93,7 @@ export const ENGLISH: LanguageInterface = {
       goFuelReport: "Go to fuel report",
       goObtReport: "Go to OBT report",
       cleanFilters: "Clean",
+      noFilters: "There are not filters for this table",
     },
     elements: {
       actions: "Actions",
