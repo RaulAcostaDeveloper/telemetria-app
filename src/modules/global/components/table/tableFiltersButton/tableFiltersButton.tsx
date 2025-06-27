@@ -68,28 +68,44 @@ export const TableFiltersButton = ({
         ref={filtersRef}
         className={`${styles.filtersContent} ${isOpen ? styles.show : ""}`}
       >
-        <TableFilters
-          LANGUAGE={LANGUAGE}
-          columns={columns}
-          data={data}
-          handleSelectorFilter={handleSelectorFilter}
-          selectedOptions={selectedOptions}
-          setSelectedOptions={setSelectedOptions}
-        />
-        <div className={styles.buttonsContainer}>
-          <GeneralButton
-            type={ButtonTypes.WARNING}
-            callback={() => resetSelectedOptions()}
-            title={LANGUAGE.table.actions.cleanFilters}
-            placeholder={LANGUAGE.table.actions.cleanFilters}
-          />
-          <GeneralButton
-            type={ButtonTypes.NEUTRAL}
-            callback={() => setIsOpen(!isOpen)}
-            title={LANGUAGE.table.actions.close}
-            placeholder={LANGUAGE.table.actions.close}
-          />
-        </div>
+        {selectedOptions.length > 0 ? (
+          <>
+            <TableFilters
+              LANGUAGE={LANGUAGE}
+              columns={columns}
+              data={data}
+              handleSelectorFilter={handleSelectorFilter}
+              selectedOptions={selectedOptions}
+              setSelectedOptions={setSelectedOptions}
+            />
+            <div className={styles.buttonsContainer}>
+              <GeneralButton
+                type={ButtonTypes.WARNING}
+                callback={() => resetSelectedOptions()}
+                title={LANGUAGE.table.actions.cleanFilters}
+                placeholder={LANGUAGE.table.actions.cleanFilters}
+              />
+              <GeneralButton
+                type={ButtonTypes.NEUTRAL}
+                callback={() => setIsOpen(!isOpen)}
+                title={LANGUAGE.table.actions.close}
+                placeholder={LANGUAGE.table.actions.close}
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <p className={styles.noFilters}>
+              {LANGUAGE.table.actions.noFilters}
+            </p>
+            <GeneralButton
+              type={ButtonTypes.NEUTRAL}
+              callback={() => setIsOpen(!isOpen)}
+              title={LANGUAGE.table.actions.close}
+              placeholder={LANGUAGE.table.actions.close}
+            />
+          </>
+        )}
       </div>
       {/* Agregar "no hay filtros disponibles para esta tabla" */}
     </div>
