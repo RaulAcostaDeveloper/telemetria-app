@@ -8,23 +8,35 @@ import { PrimitiveValue } from "../table.model";
 interface Props {
   LANGUAGE: LanguageInterface;
   columnName: string;
+  filterRenderIndex: number;
   handleSelectorFilter: (propIndex: number, value: string) => void;
   options: PrimitiveValue[];
   propIndex: number;
+  selectedOptions: string[];
+  setSelectedOptions: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export const TableFilter = ({
   LANGUAGE,
   columnName,
+  filterRenderIndex,
   handleSelectorFilter,
   options,
   propIndex,
+  setSelectedOptions,
 }: Props) => {
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     handleSelectorFilter(propIndex, e.target.value);
+
     setSelectedOption(e.target.value);
+
+    setSelectedOptions((prevOptions) => {
+      const updated = [...prevOptions];
+      updated[filterRenderIndex] = e.target.value;
+      return updated;
+    });
   };
 
   return (
