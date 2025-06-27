@@ -7,6 +7,7 @@
 .dataObject {
   display: flex;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: white;
 }
 
 .dataObject:hover {
