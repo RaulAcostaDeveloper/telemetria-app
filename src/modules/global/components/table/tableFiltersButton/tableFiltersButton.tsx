@@ -37,6 +37,22 @@ export const TableFiltersButton = ({
     resetSelectedOptions();
   }, []);
 
+  useEffect(() => {
+    const onClickOutside = (e: MouseEvent) => {
+      if (
+        filtersRef.current &&
+        !filtersRef.current.contains(e.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    if (typeof window !== "undefined") {
+      document.addEventListener("mousedown", onClickOutside);
+      return () => document.removeEventListener("mousedown", onClickOutside);
+    }
+  }, []);
+
   const resetSelectedOptions = () => {
     // Obtener las columnas con filterSelector y también conocer su indice (para reiniciar los filtros)
     const filterableColumns = columns
