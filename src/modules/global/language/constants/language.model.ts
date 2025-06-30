@@ -176,6 +176,43 @@ export interface LanguageInterface {
       off: string;
       tank: string;
     };
+    fuelChargesLabels: {
+      eventId: string;
+      address: string;
+      lat: string;
+      lon: string;
+      odometer: string;
+      speed: string;
+      ignition: string;
+      deviceBattery: string;
+      mainPower: string;
+      magnitude: string;
+      initialFuel: string;
+      finalFuel: string;
+      startDate: string;
+      endDate: string;
+      origin: string;
+    };
+    fuelNowLabels: {
+      AccountId: string;
+      DeviceId: string;
+      DeviceName: string;
+      EventId: string;
+      DateGps: string;
+      lat: string;
+      lon: string;
+      Address: string;
+      Speed: string;
+    };
+    geoModalTitles: {
+      fuelNowTitle: string;
+      fuelChargesTitle: string;
+    };
+    fuelLoadsChart: {
+      rangeSelectorShowAll: string;
+      fuelVariation: string;
+      time: string;
+    };
   };
   management: {
     tabs: {
