@@ -225,8 +225,9 @@ export const ENGLISH: LanguageInterface = {
       Speed: "Speed",
     },
     geoModalTitles: {
-      fuelNowTitle: "Fuel Now",
-      fuelChargesTitle: "Charges",
+      fuelChargeTitle: "Charge map",
+      roadmap: "Road map",
+      satellite: "Satellite",
     },
     fuelLoadsChart: {
       rangeSelectorShowAll: "Show all",
