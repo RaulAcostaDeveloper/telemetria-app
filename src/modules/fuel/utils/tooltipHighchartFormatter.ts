@@ -6,18 +6,21 @@ export interface TooltipField<T = any> {
 // Tooltips para diferentes series de datos
 export function getChargesTooltipFields(LANGUAGE: any): TooltipField[] {
   return [
-    { label: LANGUAGE.eventId, getValue: (c) => `${c.eventId} km` },
+    { label: LANGUAGE.initialFuel, getValue: (c) => `${c.initialFuel} L` },
+    { label: LANGUAGE.finalFuel, getValue: (c) => `${c.finalFuel} L` },
+    { label: LANGUAGE.magnitude, getValue: (c) => `${c.magnitude} (V)` },
     { label: LANGUAGE.address, getValue: (c) => c.address },
     { label: LANGUAGE.lat, getValue: (c) => c.lat },
-    { label: LANGUAGE.lon, getValue: (c) => `${c.lon} km/h` },
-    { label: LANGUAGE.odometer, getValue: (c) => c.odometer },
-    { label: LANGUAGE.speed, getValue: (c) => c.speed },
+    { label: LANGUAGE.lon, getValue: (c) => c.lon },
+    { label: LANGUAGE.odometer, getValue: (c) => `${c.odometer} L` },
+    { label: LANGUAGE.speed, getValue: (c) => `${c.speed}  km/h` },
     { label: LANGUAGE.ignition, getValue: (c) => c.ignition },
-    { label: LANGUAGE.deviceBattery, getValue: (c) => c.deviceBattery },
-    { label: LANGUAGE.mainPower, getValue: (c) => c.mainPower },
-    { label: LANGUAGE.magnitude, getValue: (c) => c.magnitude },
-    { label: LANGUAGE.initialFuel, getValue: (c) => c.initialFuel },
-    { label: LANGUAGE.finalFuel, getValue: (c) => c.finalFuel },
+    {
+      label: LANGUAGE.deviceBattery,
+      getValue: (c) => `${c.deviceBattery} (%)`,
+    },
+    { label: LANGUAGE.mainPower, getValue: (c) => `${c.mainPower} (V)` },
+    { label: LANGUAGE.eventId, getValue: (c) => c.eventId },
   ];
 }
 
