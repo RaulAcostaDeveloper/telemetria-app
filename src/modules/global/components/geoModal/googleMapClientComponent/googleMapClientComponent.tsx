@@ -3,15 +3,24 @@ import { useMemo } from "react";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 
 import { GeoModalData } from "../geoModal";
+import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 
 interface Props {
+  LANGUAGE: LanguageInterface;
   geoModalData: GeoModalData;
   mapType: "roadmap" | "satellite";
 }
 
-const GoogleMapClientComponent = ({ geoModalData, mapType }: Props) => {
+const GoogleMapClientComponent = ({
+  LANGUAGE,
+  geoModalData,
+  mapType,
+}: Props) => {
+  const [language, region] = LANGUAGE.localeLanguage.split("-");
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
+    language,
+    region,
   });
 
   const center = {
@@ -21,7 +30,7 @@ const GoogleMapClientComponent = ({ geoModalData, mapType }: Props) => {
 
   const memoizedCenter = useMemo(() => center, []);
 
-  if (!isLoaded) return <div>Cargando mapa...</div>;
+  if (!isLoaded) return <div>...</div>;
 
   return (
     <GoogleMap

@@ -62,6 +62,7 @@ const GeoModal = ({ LANGUAGE, closeModal, geoModalData }: Props) => {
           </div>
           <div className={styles.mapa}>
             <GoogleMapClientOnly
+              LANGUAGE={LANGUAGE}
               geoModalData={geoModalData}
               mapType={mapType}
             />
