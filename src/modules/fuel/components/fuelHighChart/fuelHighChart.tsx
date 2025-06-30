@@ -22,7 +22,7 @@ interface Props {
 }
 
 if (typeof HighstockInit === "function") {
-  HighstockInit(Highcharts);
+  (HighstockInit as (hc: typeof Highcharts) => void)(Highcharts);
 }
 
 export const FuelHighChart = ({ LANGUAGE }: Props) => {
