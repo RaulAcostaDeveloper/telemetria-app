@@ -9,7 +9,9 @@ import HighstockInit from "highcharts/modules/stock";
 import {
   createTooltipFormatter,
   getChargesTooltipFields,
+  getLabelsForChargeGeoMap,
 } from "../../utils/tooltipHighchartFormatter";
+import { GeoModalData } from "@/modules/global/components/geoModal/geoModal";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { fuelVehicleMetricsDataMock } from "@/modules/global/dataMock/fuelVehicleMetrics/fuelVehicleMetrics";
 
@@ -19,13 +21,14 @@ const {
 
 interface Props {
   LANGUAGE: LanguageInterface;
+  handleClicGeoData: (geoModalData: GeoModalData) => void;
 }
 
 if (typeof HighstockInit === "function") {
   (HighstockInit as (hc: typeof Highcharts) => void)(Highcharts);
 }
 
-export const FuelHighChart = ({ LANGUAGE }: Props) => {
+export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
   //   const dispatch = useDispatch();
 
   //   Debe definir lo que habrá en el tooltip de cada serie
@@ -106,8 +109,16 @@ export const FuelHighChart = ({ LANGUAGE }: Props) => {
           point: {
             events: {
               click: (e: any) => {
-                const fullCharge = (e.point.options as any).custom;
-                // dispatch(openGoogleMapsModal(fullCharge));
+                const charge = (e.point.options as any).custom;
+                handleClicGeoData({
+                  title: LANGUAGE.fuelVehicle.geoModalTitles.fuelChargeTitle,
+                  lat: charge.lat,
+                  lon: charge.lon,
+                  rows: getLabelsForChargeGeoMap(
+                    LANGUAGE.fuelVehicle.fuelChargesLabels,
+                    charge
+                  ),
+                });
               },
             },
           },

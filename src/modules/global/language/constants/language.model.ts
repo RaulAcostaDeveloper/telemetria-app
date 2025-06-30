@@ -205,8 +205,9 @@ export interface LanguageInterface {
       Speed: string;
     };
     geoModalTitles: {
-      fuelNowTitle: string;
-      fuelChargesTitle: string;
+      fuelChargeTitle: string;
+      roadmap: string;
+      satellite: string;
     };
     fuelLoadsChart: {
       rangeSelectorShowAll: string;
