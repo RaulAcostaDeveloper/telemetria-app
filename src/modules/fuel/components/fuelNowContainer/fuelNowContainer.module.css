@@ -1,3 +1,10 @@
+.openMapContainer {
+  display: flex;
+  justify-content: right;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
 .fuelNowContainer {
   display: flex;
   justify-content: space-around;

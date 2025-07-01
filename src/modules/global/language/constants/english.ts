@@ -195,6 +195,8 @@ export const ENGLISH: LanguageInterface = {
       on: "On",
       off: "Off",
       tank: "Tank",
+      showLocation: "Show location",
+      hideLocation: "Hide location",
     },
     fuelChargesLabels: {
       eventId: "Event ID",
@@ -226,6 +228,7 @@ export const ENGLISH: LanguageInterface = {
     },
     geoModalTitles: {
       fuelChargeTitle: "Charge map",
+      fuelNowTitle: "Fuel report location",
       roadmap: "Road map",
       satellite: "Satellite",
     },

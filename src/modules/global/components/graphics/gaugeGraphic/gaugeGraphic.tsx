@@ -25,6 +25,7 @@ export const GaugeGraphic = ({ title, max, metric, value }: Props) => {
         await import("highcharts/modules/solid-gauge");
         setIsReady(true);
       } catch (err) {
+        console.warn(err);
         setIsReady(false);
       }
     })();
@@ -125,5 +126,11 @@ export const GaugeGraphic = ({ title, max, metric, value }: Props) => {
     };
   }, []);
 
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
+  return (
+    <>
+      {isReady && (
+        <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+      )}
+    </>
+  );
 };
