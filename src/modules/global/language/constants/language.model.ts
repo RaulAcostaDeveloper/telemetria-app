@@ -175,6 +175,8 @@ export interface LanguageInterface {
       on: string;
       off: string;
       tank: string;
+      showLocation: string;
+      hideLocation: string;
     };
     fuelChargesLabels: {
       eventId: string;
@@ -206,6 +208,7 @@ export interface LanguageInterface {
     };
     geoModalTitles: {
       fuelChargeTitle: string;
+      fuelNowTitle: string;
       roadmap: string;
       satellite: string;
     };

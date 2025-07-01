@@ -195,6 +195,8 @@ export const SPANISH: LanguageInterface = {
       on: "Encendido",
       off: "Apagado",
       tank: "Tanque",
+      showLocation: "Mostrar ubicación",
+      hideLocation: "Ocultar ubicación",
     },
     fuelChargesLabels: {
       eventId: "Evento ID",
@@ -225,7 +227,8 @@ export const SPANISH: LanguageInterface = {
       Speed: "Velocidad",
     },
     geoModalTitles: {
-      fuelChargeTitle: "Mapa de la carga",
+      fuelChargeTitle: "Datos de la carga",
+      fuelNowTitle: "Ubicación del reporte de combustible",
       roadmap: "Mapa estándar",
       satellite: "Satélite",
     },
