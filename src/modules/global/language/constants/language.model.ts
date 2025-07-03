@@ -189,7 +189,8 @@ export interface LanguageInterface {
       ignition: string;
       deviceBattery: string;
       mainPower: string;
-      magnitude: string;
+      totalCharges: string;
+      totalDischarges: string;
       initialFuel: string;
       finalFuel: string;
       startDate: string;
@@ -209,6 +210,7 @@ export interface LanguageInterface {
     };
     geoModalTitles: {
       fuelChargeTitle: string;
+      fuelDischargeTitle: string;
       fuelNowTitle: string;
       roadmap: string;
       satellite: string;

@@ -196,8 +196,8 @@ export const ENGLISH: LanguageInterface = {
       on: "On",
       off: "Off",
       tank: "Tank",
-      showLocation: "Show location",
-      hideLocation: "Hide location",
+      showLocation: "Show map",
+      hideLocation: "Hide map",
     },
     fuelChargesLabels: {
       eventId: "Event ID",
@@ -209,7 +209,8 @@ export const ENGLISH: LanguageInterface = {
       ignition: "Ignition",
       deviceBattery: "Device battery",
       mainPower: "Main power",
-      magnitude: "Total fuel",
+      totalCharges: "Total charge",
+      totalDischarges: "Total discharge",
       initialFuel: "Initial fuel",
       finalFuel: "Final fuel",
       startDate: "Start",
@@ -229,6 +230,7 @@ export const ENGLISH: LanguageInterface = {
     },
     geoModalTitles: {
       fuelChargeTitle: "Charge map",
+      fuelDischargeTitle: "Discharge map",
       fuelNowTitle: "Fuel report location",
       roadmap: "Road map",
       satellite: "Satellite",
