@@ -38,6 +38,7 @@ export interface LanguageInterface {
     titles: {
       close: string;
       fuel: string;
+      home: string;
       logo: string;
       management: string;
       open: string;

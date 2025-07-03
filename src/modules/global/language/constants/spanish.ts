@@ -56,6 +56,7 @@ export const SPANISH: LanguageInterface = {
   },
   menu: {
     titles: {
+      home: "Inicio",
       close: "Cerrar menú",
       fuel: "Combustible",
       logo: "Logo de la compañía",
