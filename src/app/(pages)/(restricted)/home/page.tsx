@@ -1,9 +1,15 @@
-//import { useLanguage } from "@/modules/global/language/components/languageProvider"
+"use client"
+import { HomeBriefFuelDataProvider } from "@/modules/home/components";
+import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider"
 
 export default function Home() {
-  //const LANGUAGE = useLanguage();
+  const LANGUAGE = useLanguage();
 
   return(
-    <div>Home</div>
+    <div>
+      {/* <section> */}
+      <HomeBriefFuelDataProvider LANGUAGE={LANGUAGE} />
+      {/* </section> */}
+    </div>
   )
 }
