@@ -196,8 +196,8 @@ export const SPANISH: LanguageInterface = {
       on: "Encendido",
       off: "Apagado",
       tank: "Tanque",
-      showLocation: "Mostrar ubicación",
-      hideLocation: "Ocultar ubicación",
+      showLocation: "Mostrar mapa",
+      hideLocation: "Ocultar mapa",
     },
     fuelChargesLabels: {
       eventId: "Evento ID",

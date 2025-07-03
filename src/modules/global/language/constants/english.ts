@@ -196,8 +196,8 @@ export const ENGLISH: LanguageInterface = {
       on: "On",
       off: "Off",
       tank: "Tank",
-      showLocation: "Show location",
-      hideLocation: "Hide location",
+      showLocation: "Show map",
+      hideLocation: "Hide map",
     },
     fuelChargesLabels: {
       eventId: "Event ID",
