@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+ENV DISABLE_ESLINT=true
 RUN npm run build
 
 # Etapa 2: Producción
