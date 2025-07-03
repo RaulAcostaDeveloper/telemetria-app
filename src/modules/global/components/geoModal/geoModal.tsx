@@ -36,15 +36,17 @@ const GeoModal = ({ LANGUAGE, closeModal, geoModalData }: Props) => {
     <Modal LANGUAGE={LANGUAGE} closeModal={closeModal}>
       <h3 className={styles.title}>{geoModalData.title}</h3>
       <div className={styles.bottom}>
-        <div className={styles.rows}>
-          {geoModalData.rows.map((row, index) => (
-            <div className={styles.row} key={index}>
-              <span className={styles.label}>{row.label}:</span>
-              <span className={styles.value}>{String(row.value)}</span>
-            </div>
-          ))}
-        </div>
-        <div className={styles.mapContainer}>
+        {geoModalData.rows.length > 0 && (
+          <div className={styles.rows}>
+            {geoModalData.rows.map((row, index) => (
+              <div className={styles.row} key={index}>
+                <span className={styles.label}>{row.label}:</span>
+                <span className={styles.value}>{String(row.value)}</span>
+              </div>
+            ))}
+          </div>
+        )}
+        <div className={styles.mapSide}>
           <div className={styles.toggleWrapper}>
             <span className={styles.toggleLabel}>
               {mapType === "roadmap"

@@ -8,7 +8,27 @@ export function getChargesTooltipFields(LANGUAGE: any): TooltipField[] {
   return [
     { label: LANGUAGE.initialFuel, value: (c) => `${c.initialFuel} L` },
     { label: LANGUAGE.finalFuel, value: (c) => `${c.finalFuel} L` },
-    { label: LANGUAGE.magnitude, value: (c) => `${c.magnitude} (V)` },
+    { label: LANGUAGE.totalCharges, value: (c) => `${c.magnitude} L` },
+    { label: LANGUAGE.address, value: (c) => c.address },
+    { label: LANGUAGE.lat, value: (c) => c.lat },
+    { label: LANGUAGE.lon, value: (c) => c.lon },
+    { label: LANGUAGE.odometer, value: (c) => `${c.odometer} L` },
+    { label: LANGUAGE.speed, value: (c) => `${c.speed}  km/h` },
+    { label: LANGUAGE.ignition, value: (c) => c.ignition },
+    {
+      label: LANGUAGE.deviceBattery,
+      value: (c) => `${c.deviceBattery} (%)`,
+    },
+    { label: LANGUAGE.mainPower, value: (c) => `${c.mainPower} (V)` },
+    { label: LANGUAGE.eventId, value: (c) => c.eventId },
+  ];
+}
+
+export function getDisChargesTooltipFields(LANGUAGE: any): TooltipField[] {
+  return [
+    { label: LANGUAGE.initialFuel, value: (c) => `${c.initialFuel} L` },
+    { label: LANGUAGE.finalFuel, value: (c) => `${c.finalFuel} L` },
+    { label: LANGUAGE.totalDischarges, value: (c) => `${c.magnitude} L` },
     { label: LANGUAGE.address, value: (c) => c.address },
     { label: LANGUAGE.lat, value: (c) => c.lat },
     { label: LANGUAGE.lon, value: (c) => c.lon },
@@ -31,7 +51,30 @@ export function getLabelsForChargeGeoMap(
   return [
     { label: LANGUAGE.initialFuel, value: `${data.initialFuel} L` },
     { label: LANGUAGE.finalFuel, value: `${data.finalFuel} L` },
-    { label: LANGUAGE.magnitude, value: `${data.magnitude} (V)` },
+    { label: LANGUAGE.totalCharges, value: `${data.magnitude} L` },
+    { label: LANGUAGE.address, value: data.address },
+    { label: LANGUAGE.lat, value: data.lat },
+    { label: LANGUAGE.lon, value: data.lon },
+    { label: LANGUAGE.odometer, value: `${data.odometer} L` },
+    { label: LANGUAGE.speed, value: `${data.speed}  km/h` },
+    { label: LANGUAGE.ignition, value: data.ignition },
+    {
+      label: LANGUAGE.deviceBattery,
+      value: `${data.deviceBattery} (%)`,
+    },
+    { label: LANGUAGE.mainPower, value: `${data.mainPower} (V)` },
+    { label: LANGUAGE.eventId, value: data.eventId },
+  ];
+}
+
+export function getLabelsForDischargeGeoMap(
+  LANGUAGE: any,
+  data: any
+): TooltipField[] {
+  return [
+    { label: LANGUAGE.initialFuel, value: `${data.initialFuel} L` },
+    { label: LANGUAGE.finalFuel, value: `${data.finalFuel} L` },
+    { label: LANGUAGE.totalDischarges, value: `${data.magnitude} L` },
     { label: LANGUAGE.address, value: data.address },
     { label: LANGUAGE.lat, value: data.lat },
     { label: LANGUAGE.lon, value: data.lon },

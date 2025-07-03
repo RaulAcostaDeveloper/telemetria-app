@@ -56,7 +56,7 @@ export const useAuth = () => {
     dispatch(loginAction({ sessionToken, userData }));
 
     // Re dirigir
-    router.push("/fuel"); // temporalmente a /fuel
+    router.push("/home");
 
     // Y pendiente actualizar el token de localStorage
   };

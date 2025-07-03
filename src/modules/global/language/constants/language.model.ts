@@ -38,6 +38,7 @@ export interface LanguageInterface {
     titles: {
       close: string;
       fuel: string;
+      home: string;
       logo: string;
       management: string;
       open: string;
@@ -175,6 +176,8 @@ export interface LanguageInterface {
       on: string;
       off: string;
       tank: string;
+      showLocation: string;
+      hideLocation: string;
     };
     fuelChargesLabels: {
       eventId: string;
@@ -186,7 +189,8 @@ export interface LanguageInterface {
       ignition: string;
       deviceBattery: string;
       mainPower: string;
-      magnitude: string;
+      totalCharges: string;
+      totalDischarges: string;
       initialFuel: string;
       finalFuel: string;
       startDate: string;
@@ -206,6 +210,8 @@ export interface LanguageInterface {
     };
     geoModalTitles: {
       fuelChargeTitle: string;
+      fuelDischargeTitle: string;
+      fuelNowTitle: string;
       roadmap: string;
       satellite: string;
     };
