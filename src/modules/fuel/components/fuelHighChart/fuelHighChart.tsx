@@ -9,14 +9,16 @@ import HighstockInit from "highcharts/modules/stock";
 import {
   createTooltipFormatter,
   getChargesTooltipFields,
+  getDisChargesTooltipFields,
   getLabelsForChargeGeoMap,
+  getLabelsForDischargeGeoMap,
 } from "../../utils/tooltipHighchartFormatter";
 import { GeoModalData } from "@/modules/global/components/geoModal/geoModal";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { fuelVehicleMetricsDataMock } from "@/modules/global/dataMock/fuelVehicleMetrics/fuelVehicleMetrics";
 
 const {
-  value: [{ Charges }],
+  value: [{ Charges, Discharges }],
 } = fuelVehicleMetricsDataMock;
 
 interface Props {
@@ -33,6 +35,10 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
 
   //   Debe definir lo que habrá en el tooltip de cada serie
   const chargesTooltipFields = getChargesTooltipFields(
+    LANGUAGE.fuelVehicle.fuelChargesLabels
+  );
+
+  const dischargesTooltipFields = getDisChargesTooltipFields(
     LANGUAGE.fuelVehicle.fuelChargesLabels
   );
 
@@ -59,6 +65,30 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
       },
     })).sort((a, b) => a.x - b.x);
   }, [Charges]);
+
+  const disCharges = useMemo(() => {
+    return Discharges.map((c) => ({
+      x: new Date(c.endDate).getTime(),
+      y: c.magnitude,
+      custom: {
+        eventId: c.eventId,
+        address: c.address,
+        lat: c.lat,
+        lon: c.lon,
+        odometer: c.odometer,
+        speed: c.speed,
+        ignition: Boolean(c.ignition),
+        deviceBattery: c.deviceBattery,
+        mainPower: c.mainPower,
+        magnitude: c.magnitude,
+        initialFuel: c.initialFuel,
+        finalFuel: c.finalFuel,
+        startDate: c.startDate,
+        endDate: c.endDate,
+        origin: c.origin,
+      },
+    })).sort((a, b) => a.x - b.x);
+  }, [Discharges]);
 
   const chartOptions = useMemo(
     () => ({
@@ -105,6 +135,7 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
           type: "column",
           name: LANGUAGE.fuelVehicle.fuelLoadsChart.fuelVariation,
           data: charges,
+          color: "#4ec516",
           marker: { enabled: true, radius: 4, symbol: "circle" },
           point: {
             events: {
@@ -127,6 +158,33 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
             pointFormatter: createTooltipFormatter(chargesTooltipFields),
           },
         },
+        {
+          type: "column",
+          name: LANGUAGE.fuelVehicle.fuelLoadsChart.fuelVariation,
+          data: disCharges,
+          color: "#ca5252",
+          marker: { enabled: true, radius: 4, symbol: "circle" },
+          point: {
+            events: {
+              click: (e: any) => {
+                const disCharge = (e.point.options as any).custom;
+                handleClicGeoData({
+                  title: LANGUAGE.fuelVehicle.geoModalTitles.fuelDischargeTitle,
+                  lat: disCharge.lat,
+                  lon: disCharge.lon,
+                  rows: getLabelsForDischargeGeoMap(
+                    LANGUAGE.fuelVehicle.fuelChargesLabels,
+                    disCharge
+                  ),
+                });
+              },
+            },
+          },
+          dataLabels: { enabled: false },
+          tooltip: {
+            pointFormatter: createTooltipFormatter(dischargesTooltipFields),
+          },
+        },
       ],
       tooltip: {
         useHTML: true,
@@ -134,6 +192,9 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
         borderRadius: 6,
         padding: 10,
         shadow: true,
+        style: {
+          pointerEvents: "none",
+        },
       },
       chart: {
         height: 500,
