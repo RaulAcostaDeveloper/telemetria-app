@@ -1,6 +1,7 @@
 "use client";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
+import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 import styles from "./menuContent.module.css";
@@ -20,6 +21,11 @@ export const MenuContent = ({ isOpen, LANGUAGE, logoutHook }: Props) => {
   const pathname = usePathname();
 
   const menuList = [
+    {
+      icon: HomeIcon,
+      route: "/home",
+      title: LANGUAGE.menu.titles.home,
+    },
     {
       icon: AddCardIcon,
       route: "/management",

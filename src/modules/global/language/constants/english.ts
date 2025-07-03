@@ -56,6 +56,7 @@ export const ENGLISH: LanguageInterface = {
   },
   menu: {
     titles: {
+      home: "Home",
       close: "Close menu",
       fuel: "Fuel",
       logo: "Logo company",
