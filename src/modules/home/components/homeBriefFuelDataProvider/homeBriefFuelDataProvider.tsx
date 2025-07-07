@@ -53,7 +53,7 @@ export const HomeBriefFuelDataProvider = ({ LANGUAGE}: Props) => {
         {"succeeded" === fuelSummaryStatus && fuelSummaryData ?
           (
             <>
-              <ReportSummary />
+              <ReportSummary summaryValues={fuelSummaryData.value}/>
               <DonutGraphic devices={fuelSummaryData.value.devices} />
             </>  
           ) :

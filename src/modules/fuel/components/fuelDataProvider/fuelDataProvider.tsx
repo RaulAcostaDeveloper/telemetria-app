@@ -123,9 +123,11 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
         callFetchFuelSummary={callFetchFuelSummary}
       />
       <div className={styles.topResumeData}>
-        <ReportSummary />
         {fuelSummaryStatus === "succeeded" && fuelSummaryData ? (
-          <DonutGraphic devices={fuelSummaryData.value.devices} />
+          <>
+            <ReportSummary summaryValues={fuelSummaryData.value}/>
+            <DonutGraphic devices={fuelSummaryData.value.devices} />
+          </>
         ) : (
           // Añadir un loading
           <div>...</div>

@@ -16,7 +16,7 @@ export interface Devices {
   fuelUnloaded: number;
 }
 
-interface Values {
+export interface Values {
   clientId: number;
   unitsAnalyzed: number;
   inventory: number;
