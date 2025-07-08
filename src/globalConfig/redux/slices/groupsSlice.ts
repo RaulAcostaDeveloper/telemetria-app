@@ -6,14 +6,14 @@ interface Groups {
   name: string;
 }
 
-interface Values {
+interface ArrayGroups {
   groups: Groups[];
 }
 
 interface Data {
   statusCode: number;
   message: string;
-  value: Values;
+  value: ArrayGroups;
 }
 
 interface InitialState {

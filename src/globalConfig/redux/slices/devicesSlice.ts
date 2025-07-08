@@ -1,7 +1,7 @@
 import { getDevices } from "@/modules/management/services/devices/devices";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-interface Devices {
+interface Devices { 
   id: number,
   model: string,
   modelVersion: string,
@@ -15,14 +15,14 @@ interface Devices {
   lastDataAt: string,
 }
 
-interface Values {
+interface ArrayDevices {
   devices: Devices[];
 }
 
 interface Data {
   statusCode: number;
   message: string;
-  value: Values;
+  value: ArrayDevices;
 }
 
 interface InitialState {

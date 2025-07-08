@@ -135,6 +135,8 @@ export interface LanguageInterface {
         performance: string;
         fuelCharged: string;
         fuelDischarged: string;
+        unitsAnalyzed: string;
+        totalDistanceTraveled: string;
       };
     };
     donutGrpahic: {

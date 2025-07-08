@@ -11,14 +11,14 @@ interface Drivers {
   surname: string;
 }
 
-interface Values {
+interface ArrayDrivers {
   drivers: Drivers[];
 }
 
 interface Data {
   statusCode: number;
   message: string;
-  value: Values;
+  value: ArrayDrivers;
 }
 
 interface InitialState {
