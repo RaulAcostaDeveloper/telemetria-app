@@ -155,6 +155,8 @@ export const ENGLISH: LanguageInterface = {
         performance: "Performance",
         fuelCharged: "Charged",
         fuelDischarged: "Discharged",
+        unitsAnalyzed: "Analyzed units",
+        totalDistanceTraveled: "Total distance traveled",
       },
     },
     donutGrpahic: {

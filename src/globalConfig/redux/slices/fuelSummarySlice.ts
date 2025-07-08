@@ -25,6 +25,7 @@ export interface Values {
   fuelCharged: number;
   fuelDischarged: number;
   devices: Devices[];
+  totalDistanceTraveled: number;
 }
 
 interface Data {
