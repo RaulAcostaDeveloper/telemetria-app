@@ -201,6 +201,13 @@ export const SPANISH: LanguageInterface = {
       showLocation: "Mostrar mapa",
       hideLocation: "Ocultar mapa",
     },
+    fuelGraphicSeries: {
+      charges: "Cargas",
+      disCharges: "Descargas",
+      fuelVariaiton: "Variación de combustible",
+      performancesBetweenCharges: "Rendimiento entre cargas",
+      dailyPerformance: "Rendimiento diario",
+    },
     fuelChargesLabels: {
       eventId: "Evento ID",
       address: "Dirección",
@@ -250,6 +257,7 @@ export const SPANISH: LanguageInterface = {
       rangeSelectorShowAll: "Mostrar todo",
       fuelVariation: "Variación de combustible (L)",
       time: "Tiempo",
+      performance: "Rendimiento (L)",
     },
   },
   management: {

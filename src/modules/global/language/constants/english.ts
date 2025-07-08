@@ -201,6 +201,13 @@ export const ENGLISH: LanguageInterface = {
       showLocation: "Show map",
       hideLocation: "Hide map",
     },
+    fuelGraphicSeries: {
+      charges: "Charges",
+      disCharges: "Discharges",
+      fuelVariaiton: "Fuel variation",
+      performancesBetweenCharges: "Performance between charges",
+      dailyPerformance: "Daily performance",
+    },
     fuelChargesLabels: {
       eventId: "Event ID",
       address: "Address",
@@ -250,6 +257,7 @@ export const ENGLISH: LanguageInterface = {
       rangeSelectorShowAll: "Show all",
       fuelVariation: "Fuel Variation (L)",
       time: "Time",
+      performance: "Performance (L)",
     },
   },
   management: {

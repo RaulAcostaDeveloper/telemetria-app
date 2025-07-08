@@ -19,7 +19,15 @@ import { LanguageInterface } from "@/modules/global/language/constants/language.
 import { fuelVehicleMetricsDataMock } from "@/modules/global/dataMock/fuelVehicleMetrics/fuelVehicleMetrics";
 
 const {
-  value: [{ charges, discharges, levelMessages, performancesBetweenCharges }],
+  value: [
+    {
+      charges,
+      dailyPerformances,
+      discharges,
+      levelMessages,
+      performancesBetweenCharges,
+    },
+  ],
 } = fuelVehicleMetricsDataMock;
 
 interface Props {
@@ -32,9 +40,7 @@ if (typeof HighstockInit === "function") {
 }
 
 export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
-  //   const dispatch = useDispatch();
-
-  //   Debe definir lo que habrá en el tooltip de cada serie
+  // Tooltip de cada serie
   const chargesTooltipFields = getChargesTooltipFields(
     LANGUAGE.fuelVehicle.fuelChargesLabels
   );
@@ -141,15 +147,25 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
       .sort((a, b) => a.x - b.x);
   }, []);
 
+  const dailyPerformancesData = useMemo(() => {
+    return dailyPerformances
+      .map((c) => ({
+        x: new Date(c.endDate).getTime(),
+        y: c.averagePerformance,
+        custom: {
+          averagePerformance: c.averagePerformance,
+          fuelConsumed: c.fuelConsumed,
+          initialLevel: c.initialLevel,
+          finalLevel: c.finalLevel,
+          initialOdometer: c.initialOdometer,
+          finalOdometer: c.finalOdometer,
+        },
+      }))
+      .sort((a, b) => a.x - b.x);
+  }, []);
+
   const chartOptions = useMemo(
     () => ({
-      title: {
-        text: "",
-        style: {
-          fontSize: "12px",
-          fontWeight: "bold",
-        },
-      },
       xAxis: {
         type: "datetime",
         labels: {
@@ -165,29 +181,47 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
           },
         },
       },
-      yAxis: {
-        labels: {
-          style: {
-            fontSize: "14px",
-            fontWeight: "bold",
+      yAxis: [
+        {
+          labels: {
+            style: {
+              fontSize: "14px",
+              fontWeight: "bold",
+            },
           },
-        },
-        title: {
-          text: LANGUAGE.fuelVehicle.fuelLoadsChart.fuelVariation,
-          style: {
-            fontSize: "13px",
-            fontWeight: "bold",
+          title: {
+            text: LANGUAGE.fuelVehicle.fuelLoadsChart.fuelVariation,
+            style: {
+              fontSize: "13px",
+              fontWeight: "bold",
+            },
           },
+          opposite: false,
         },
-        opposite: false,
-      },
+        {
+          labels: {
+            style: {
+              fontSize: "14px",
+              fontWeight: "bold",
+            },
+          },
+          title: {
+            text: LANGUAGE.fuelVehicle.fuelLoadsChart.performance,
+            style: {
+              fontSize: "13px",
+              fontWeight: "bold",
+            },
+          },
+          opposite: true,
+        },
+      ],
       series: [
         {
+          yAxis: 0,
           type: "column",
-          name: LANGUAGE.fuelVehicle.fuelLoadsChart.fuelVariation,
+          name: LANGUAGE.fuelVehicle.fuelGraphicSeries.charges,
           data: chargesData,
           color: "#4ec516",
-          marker: { enabled: true, radius: 4, symbol: "circle" },
           point: {
             events: {
               click: (e: Highcharts.PointClickEventObject) => {
@@ -212,11 +246,11 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
           },
         },
         {
+          yAxis: 0,
           type: "column",
-          name: LANGUAGE.fuelVehicle.fuelLoadsChart.fuelVariation,
+          name: LANGUAGE.fuelVehicle.fuelGraphicSeries.disCharges,
           data: disChargesData,
           color: "#ca5252",
-          marker: { enabled: true, radius: 4, symbol: "circle" },
           point: {
             events: {
               click: (e: Highcharts.PointClickEventObject) => {
@@ -241,7 +275,8 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
           },
         },
         {
-          name: LANGUAGE.fuelVehicle.fuelLoadsChart.fuelVariation,
+          yAxis: 0,
+          name: LANGUAGE.fuelVehicle.fuelGraphicSeries.fuelVariaiton,
           data: levelMessagesData,
           color: "#006af5",
           tooltip: {
@@ -267,9 +302,24 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
           },
         },
         {
-          name: LANGUAGE.fuelVehicle.fuelLoadsChart.fuelVariation,
+          yAxis: 1,
+          name: LANGUAGE.fuelVehicle.fuelGraphicSeries
+            .performancesBetweenCharges,
           data: performancesBetweenChargesData,
+          marker: { enabled: true, radius: 4, symbol: "square" },
           color: "#f5c800",
+          tooltip: {
+            pointFormatter: createTooltipFormatter(
+              performancesBetweenChargesTooltipFields
+            ),
+          },
+        },
+        {
+          yAxis: 1,
+          name: LANGUAGE.fuelVehicle.fuelGraphicSeries.dailyPerformance,
+          data: dailyPerformancesData,
+          marker: { enabled: true, radius: 4, symbol: "circle" },
+          color: "#07b9ff",
           tooltip: {
             pointFormatter: createTooltipFormatter(
               performancesBetweenChargesTooltipFields
@@ -292,6 +342,7 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
         panning: true,
       },
       legend: {
+        enabled: true,
         itemStyle: {
           fontSize: "18px",
         },
