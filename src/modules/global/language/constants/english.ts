@@ -173,7 +173,7 @@ export const ENGLISH: LanguageInterface = {
   fuelVehicle: {
     tabs: {
       behavior: "Behavior",
-      reports: "Reports",
+      reports: "Performance",
       fuelNow: "Fuel now",
       charges: "Charges",
       discharges: "Discharges",
@@ -201,6 +201,13 @@ export const ENGLISH: LanguageInterface = {
       showLocation: "Show map",
       hideLocation: "Hide map",
     },
+    fuelGraphicSeries: {
+      charges: "Charges",
+      disCharges: "Discharges",
+      fuelVariaiton: "Fuel variation",
+      performancesBetweenCharges: "Performance between charges",
+      dailyPerformance: "Daily performance",
+    },
     fuelChargesLabels: {
       eventId: "Event ID",
       address: "Address",
@@ -218,6 +225,14 @@ export const ENGLISH: LanguageInterface = {
       startDate: "Start",
       endDate: "End",
       origin: "Origin",
+      averagePerformance: "Average performance",
+      tanks: "Tanks level",
+      fuelConsumed: "Fuel consumed",
+      initialLevel: "Initial fuel",
+      finalLevel: "Final fuel",
+      initialOdometer: "Initial odometer",
+      finalOdometer: "Final odometer",
+      distanceTravelled: "Distance traveled",
     },
     fuelNowLabels: {
       AccountId: "Account ID",
@@ -233,6 +248,7 @@ export const ENGLISH: LanguageInterface = {
     geoModalTitles: {
       fuelChargeTitle: "Charge map",
       fuelDischargeTitle: "Discharge map",
+      levelMessageTitle: "Level change map",
       fuelNowTitle: "Fuel report location",
       roadmap: "Road map",
       satellite: "Satellite",
@@ -241,6 +257,7 @@ export const ENGLISH: LanguageInterface = {
       rangeSelectorShowAll: "Show all",
       fuelVariation: "Fuel Variation (L)",
       time: "Time",
+      performance: "Performance (L)",
     },
   },
   management: {

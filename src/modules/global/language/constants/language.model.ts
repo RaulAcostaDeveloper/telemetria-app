@@ -181,6 +181,13 @@ export interface LanguageInterface {
       showLocation: string;
       hideLocation: string;
     };
+    fuelGraphicSeries: {
+      charges: string;
+      disCharges: string;
+      fuelVariaiton: string;
+      performancesBetweenCharges: string;
+      dailyPerformance: string;
+    };
     fuelChargesLabels: {
       eventId: string;
       address: string;
@@ -198,6 +205,14 @@ export interface LanguageInterface {
       startDate: string;
       endDate: string;
       origin: string;
+      averagePerformance: string;
+      tanks: string;
+      fuelConsumed: string;
+      initialLevel: string;
+      finalLevel: string;
+      initialOdometer: string;
+      finalOdometer: string;
+      distanceTravelled: string;
     };
     fuelNowLabels: {
       AccountId: string;
@@ -213,6 +228,7 @@ export interface LanguageInterface {
     geoModalTitles: {
       fuelChargeTitle: string;
       fuelDischargeTitle: string;
+      levelMessageTitle: string;
       fuelNowTitle: string;
       roadmap: string;
       satellite: string;
@@ -221,6 +237,7 @@ export interface LanguageInterface {
       rangeSelectorShowAll: string;
       fuelVariation: string;
       time: string;
+      performance: string;
     };
   };
   management: {

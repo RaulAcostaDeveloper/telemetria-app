@@ -12,7 +12,7 @@ export function getChargesTooltipFields(LANGUAGE: any): TooltipField[] {
     { label: LANGUAGE.address, value: (c) => c.address },
     { label: LANGUAGE.lat, value: (c) => c.lat },
     { label: LANGUAGE.lon, value: (c) => c.lon },
-    { label: LANGUAGE.odometer, value: (c) => `${c.odometer} L` },
+    { label: LANGUAGE.odometer, value: (c) => `${c.odometer} Km` },
     { label: LANGUAGE.speed, value: (c) => `${c.speed}  km/h` },
     { label: LANGUAGE.ignition, value: (c) => c.ignition },
     {
@@ -32,7 +32,7 @@ export function getDisChargesTooltipFields(LANGUAGE: any): TooltipField[] {
     { label: LANGUAGE.address, value: (c) => c.address },
     { label: LANGUAGE.lat, value: (c) => c.lat },
     { label: LANGUAGE.lon, value: (c) => c.lon },
-    { label: LANGUAGE.odometer, value: (c) => `${c.odometer} L` },
+    { label: LANGUAGE.odometer, value: (c) => `${c.odometer} Km` },
     { label: LANGUAGE.speed, value: (c) => `${c.speed}  km/h` },
     { label: LANGUAGE.ignition, value: (c) => c.ignition },
     {
@@ -41,6 +41,48 @@ export function getDisChargesTooltipFields(LANGUAGE: any): TooltipField[] {
     },
     { label: LANGUAGE.mainPower, value: (c) => `${c.mainPower} (V)` },
     { label: LANGUAGE.eventId, value: (c) => c.eventId },
+  ];
+}
+
+export function getLevelMessagesTooltipFields(LANGUAGE: any): TooltipField[] {
+  return [
+    { label: LANGUAGE.lat, value: (c) => c.lat },
+    { label: LANGUAGE.lon, value: (c) => c.lon },
+    { label: LANGUAGE.odometer, value: (c) => `${c.odometer} Km` },
+    { label: LANGUAGE.speed, value: (c) => `${c.speed}  km/h` },
+    { label: LANGUAGE.ignition, value: (c) => c.ignition },
+    {
+      label: LANGUAGE.deviceBattery,
+      value: (c) => `${c.deviceBattery} (%)`,
+    },
+    { label: LANGUAGE.mainPower, value: (c) => `${c.mainPower} (V)` },
+    { label: LANGUAGE.tanks, value: (c) => `${c.tanks} (L)` },
+  ];
+}
+
+export function getPerformancesBetweenChargesTooltipFields(
+  LANGUAGE: any
+): TooltipField[] {
+  return [
+    {
+      label: LANGUAGE.averagePerformance,
+      value: (c) => `${c.averagePerformance}  Km/h`,
+    },
+    { label: LANGUAGE.fuelConsumed, value: (c) => `${c.fuelConsumed} L` },
+    { label: LANGUAGE.initialLevel, value: (c) => `${c.initialLevel} L` },
+    { label: LANGUAGE.finalLevel, value: (c) => `${c.finalLevel}  L` },
+    {
+      label: LANGUAGE.initialOdometer,
+      value: (c) => `${c.initialOdometer}  Km`,
+    },
+    {
+      label: LANGUAGE.finalOdometer,
+      value: (c) => `${c.finalOdometer} Km`,
+    },
+    {
+      label: LANGUAGE.distanceTravelled,
+      value: (c) => `${c.finalOdometer - c.initialOdometer} Km`,
+    },
   ];
 }
 
@@ -55,7 +97,7 @@ export function getLabelsForChargeGeoMap(
     { label: LANGUAGE.address, value: data.address },
     { label: LANGUAGE.lat, value: data.lat },
     { label: LANGUAGE.lon, value: data.lon },
-    { label: LANGUAGE.odometer, value: `${data.odometer} L` },
+    { label: LANGUAGE.odometer, value: `${data.odometer} Km` },
     { label: LANGUAGE.speed, value: `${data.speed}  km/h` },
     { label: LANGUAGE.ignition, value: data.ignition },
     {
@@ -78,7 +120,7 @@ export function getLabelsForDischargeGeoMap(
     { label: LANGUAGE.address, value: data.address },
     { label: LANGUAGE.lat, value: data.lat },
     { label: LANGUAGE.lon, value: data.lon },
-    { label: LANGUAGE.odometer, value: `${data.odometer} L` },
+    { label: LANGUAGE.odometer, value: `${data.odometer} Km` },
     { label: LANGUAGE.speed, value: `${data.speed}  km/h` },
     { label: LANGUAGE.ignition, value: data.ignition },
     {
@@ -87,6 +129,25 @@ export function getLabelsForDischargeGeoMap(
     },
     { label: LANGUAGE.mainPower, value: `${data.mainPower} (V)` },
     { label: LANGUAGE.eventId, value: data.eventId },
+  ];
+}
+
+export function getLabelsForLevelMessagesGeoMap(
+  LANGUAGE: any,
+  data: any
+): TooltipField[] {
+  return [
+    {
+      label: LANGUAGE.lat,
+      value: `${data.lat}`,
+    },
+    { label: LANGUAGE.lon, value: `${data.lon}` },
+    { label: LANGUAGE.odometer, value: `${data.odometer} Km` },
+    { label: LANGUAGE.speed, value: `${data.speed}  km/h` },
+    { label: LANGUAGE.ignition, value: data.ignition },
+    { label: LANGUAGE.deviceBattery, value: `${data.deviceBattery} (%)` },
+    { label: LANGUAGE.mainPower, value: `${data.mainPower} (V)` },
+    { label: LANGUAGE.tanks, value: `${data.tanks} (L)` },
   ];
 }
 
@@ -115,7 +176,7 @@ export function createTooltipFormatter<T = any>(
       .join("");
 
     return `
-      <div style="width: 240px; padding: 7px; font-size: 14px; display: flex; flex-direction: column; gap: 5px;">
+      <div style="width: 340px; padding: 7px; font-size: 14px; display: flex; flex-direction: column; gap: 5px;">
         ${content}
       </div>
     `;

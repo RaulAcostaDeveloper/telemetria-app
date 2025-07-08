@@ -46,8 +46,8 @@ const GoogleMapClientComponent = ({
       mapRef.current.panTo(center);
       mapRef.current.setZoom(5);
 
-      let zoomLevel = 5;
-      const targetZoom = 12;
+      let zoomLevel = 10;
+      const targetZoom = 16;
       const interval = setInterval(() => {
         if (mapRef.current && zoomLevel < targetZoom) {
           zoomLevel += 1;

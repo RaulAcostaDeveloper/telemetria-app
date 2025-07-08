@@ -37,24 +37,26 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     LANGUAGE.management.tabs.groups,
   ];
 
+  // falta modelo, año, grupo, serial number (bin o mac address)
+  // En grupo, poder filtrar por nombre del grupo
   const vehicleColumns: columnsTable = [
     {
       columnName: LANGUAGE.management.tableColumns.id,
-      defaultSpace: 2,
+      defaultSpace: 3,
     },
     {
       columnName: LANGUAGE.management.tableColumns.plates,
-      defaultSpace: 2,
+      defaultSpace: 4,
       orderColumn: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.brand,
-      defaultSpace: 3,
+      defaultSpace: 5,
       filterSelector: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.alias,
-      defaultSpace: 3,
+      defaultSpace: 6,
       orderColumn: true,
     },
   ];
@@ -68,14 +70,11 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       carShortcut: value.carShortcut,
     }));
 
+  // falta numero de teléfono, fecha de registro, poner tarjeta SIM
   const devicesColumns: columnsTable = [
     {
       columnName: LANGUAGE.management.tableColumns.imei,
-      defaultSpace: 3,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.lastDataDate,
-      defaultSpace: 3,
+      defaultSpace: 4,
     },
     {
       columnName: LANGUAGE.management.tableColumns.model,
@@ -86,28 +85,18 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       defaultSpace: 2,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.serialNumber,
-      defaultSpace: 3,
-    },
-    {
       columnName: LANGUAGE.management.tableColumns.status,
       defaultSpace: 2,
       filterSelector: true,
     },
-    {
-      columnName: LANGUAGE.management.tableColumns.date,
-      defaultSpace: 3,
-    },
   ];
+
   const devicesTableData: dataTable | undefined =
     devicesData?.value.devices.map((value) => ({
       imei: value.imei,
-      lastDataAt: value.lastDataAt,
       model: value.model,
       modelVersion: value.modelVersion,
-      serial: value.serial,
       status: value.status,
-      statusAt: value.statusAt,
     }));
 
   const groupsColumns: columnsTable = [
@@ -127,6 +116,9 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     })
   );
 
+  // poner licencia (número), vehículo (quizá placa), ver vehículos del grupo
+  // mostrar el modal del vehículo
+  // mostrar el modal con vehículos del grupo
   const driversColumns: columnsTable = [
     {
       columnName: LANGUAGE.management.tableColumns.names,
@@ -146,18 +138,14 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       columnName: LANGUAGE.management.tableColumns.email,
       defaultSpace: 4,
     },
-    {
-      columnName: LANGUAGE.management.tableColumns.createdAt,
-      defaultSpace: 3,
-    },
   ];
+
   const driversTableData: dataTable | undefined =
     driversData?.value.drivers.map((value) => ({
       name: value.name,
       surname: value.surname,
       phone: value.phone,
       email: value.email,
-      created: value.created,
     }));
 
   return (

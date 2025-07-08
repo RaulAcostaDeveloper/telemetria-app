@@ -22,7 +22,6 @@
 }
 
 .inside {
-  background-color: var(--company-color-1);
   width: fit-content;
   padding: 10px;
   padding-left: 5px;
