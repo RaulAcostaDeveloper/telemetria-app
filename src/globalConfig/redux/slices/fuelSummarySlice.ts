@@ -16,7 +16,7 @@ export interface Devices {
   fuelUnloaded: number;
 }
 
-export interface Values {
+export interface SummaryFuelValues {
   clientId: number;
   unitsAnalyzed: number;
   inventory: number;
@@ -30,7 +30,7 @@ export interface Values {
 interface Data {
   statusCode: number;
   message: string;
-  value: Values;
+  value: SummaryFuelValues;
 }
 
 interface InitialState {

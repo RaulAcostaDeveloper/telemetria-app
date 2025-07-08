@@ -9,10 +9,10 @@ import {
 import { formatNumberWithCommas } from "@/modules/global/utils/utils";
 import styles from "./reportSummary.module.css";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
-import { Values } from "@/globalConfig/redux/slices/fuelSummarySlice";
+import { SummaryFuelValues } from "@/globalConfig/redux/slices/fuelSummarySlice";
 
 interface Props {
-  summaryValues: Values;
+  summaryValues: SummaryFuelValues;
 }
 
 const ReportSummary = ({ summaryValues }: Props) => {
