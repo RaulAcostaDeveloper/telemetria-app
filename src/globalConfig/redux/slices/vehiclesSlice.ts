@@ -8,14 +8,14 @@ interface Vehicles {
   carShortcut: string;
 }
 
-interface Values {
+interface ArrayVehicles {
   vehicles: Vehicles[];
 }
 
 interface Data {
   statusCode: number;
   message: string;
-  value: Values;
+  value: ArrayVehicles;
 }
 
 interface InitialState {
