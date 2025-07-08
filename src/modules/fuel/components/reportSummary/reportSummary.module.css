@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   align-content: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -45,6 +45,14 @@
 
 .iconContainer .fuelDischarged {
   background-color: var(--container-performance-3);
+}
+
+.iconContainer .unitsAnalyzed {
+  background-color: var(--company-color-5);
+}
+
+.iconContainer .totalDistanceTraveled {
+  background-color: var(--company-color-4);
 }
 
 .summaryContainer {

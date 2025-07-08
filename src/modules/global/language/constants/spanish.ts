@@ -155,6 +155,8 @@ export const SPANISH: LanguageInterface = {
         performance: "Rendimiento de la flota",
         fuelCharged: "Combustible cargado",
         fuelDischarged: "Combustible descargado",
+        unitsAnalyzed: "Unidades analizadas",
+        totalDistanceTraveled: "Distancia total recorrida",
       },
     },
     donutGrpahic: {
