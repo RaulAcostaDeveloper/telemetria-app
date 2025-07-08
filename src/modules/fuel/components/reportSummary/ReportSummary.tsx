@@ -27,10 +27,8 @@ const ReportSummary = ({ summaryValues }: Props) => {
           <h1>{LANGUAGE.fuel.summaryReports.labels.inventory}</h1>
           <span>
             {summaryValues.inventory
-              ? `${formatNumberWithCommas(
-                  summaryValues.inventory
-                )}L`
-              : "0,00L"}
+              ? `${formatNumberWithCommas(summaryValues.inventory)} L`
+              : "0,00 L"}
           </span>
         </div>
       </div>
@@ -44,8 +42,8 @@ const ReportSummary = ({ summaryValues }: Props) => {
             {summaryValues.performanceOdometer
               ? `${formatNumberWithCommas(
                   summaryValues.performanceOdometer
-                )}L`
-              : "0,00L"}
+                )} Km`
+              : "0,00 Km"}
           </span>
         </div>
       </div>
@@ -57,10 +55,8 @@ const ReportSummary = ({ summaryValues }: Props) => {
           <h1>{LANGUAGE.fuel.summaryReports.labels.fuelCharged}</h1>
           <span>
             {summaryValues.fuelCharged
-              ? `${formatNumberWithCommas(
-                  summaryValues.fuelCharged
-                )}L`
-              : "0,00L"}
+              ? `${formatNumberWithCommas(summaryValues.fuelCharged)} L`
+              : "0,00 L"}
           </span>
         </div>
       </div>
@@ -72,10 +68,8 @@ const ReportSummary = ({ summaryValues }: Props) => {
           <h1>{LANGUAGE.fuel.summaryReports.labels.fuelDischarged}</h1>
           <span>
             {summaryValues.fuelDischarged
-              ? `${formatNumberWithCommas(
-                  summaryValues.fuelDischarged
-                )}L`
-              : "0,00L"}
+              ? `${formatNumberWithCommas(summaryValues.fuelDischarged)} L`
+              : "0,00 L"}
           </span>
         </div>
       </div>

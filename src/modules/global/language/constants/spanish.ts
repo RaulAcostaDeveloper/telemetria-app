@@ -171,7 +171,7 @@ export const SPANISH: LanguageInterface = {
   fuelVehicle: {
     tabs: {
       behavior: "Comportamiento",
-      reports: "Reportes",
+      reports: "Rendimiento",
       fuelNow: "Combustible actual",
       charges: "Cargas",
       discharges: "Descargas",
@@ -216,6 +216,14 @@ export const SPANISH: LanguageInterface = {
       startDate: "Inicio",
       endDate: "Fin",
       origin: "Origen",
+      averagePerformance: "Rendimiento promedio",
+      tanks: "Nivel de los tanques",
+      fuelConsumed: "Combustible consumido",
+      initialLevel: "Combustible inicial",
+      finalLevel: "Combustible final",
+      initialOdometer: "Odómetro inicial",
+      finalOdometer: "Odómetro final",
+      distanceTravelled: "Distancia recorrida",
     },
     fuelNowLabels: {
       AccountId: "Id de cuenta",
@@ -231,6 +239,7 @@ export const SPANISH: LanguageInterface = {
     geoModalTitles: {
       fuelChargeTitle: "Datos de la carga",
       fuelDischargeTitle: "Datos de la descarga",
+      levelMessageTitle: "Datos del cambio de nivel",
       fuelNowTitle: "Ubicación del reporte de combustible",
       roadmap: "Mapa estándar",
       satellite: "Satélite",

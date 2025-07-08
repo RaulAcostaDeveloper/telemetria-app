@@ -1,24 +1,25 @@
 "use client";
 import { useMemo } from "react";
-// import { useDispatch } from "react-redux";
 import * as Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HighstockInit from "highcharts/modules/stock";
 
-// import { openGoogleMapsModal } from "@/globalConfig/redux/slices/googleMapsModalSlice";
 import {
   createTooltipFormatter,
   getChargesTooltipFields,
   getDisChargesTooltipFields,
   getLabelsForChargeGeoMap,
   getLabelsForDischargeGeoMap,
+  getLabelsForLevelMessagesGeoMap,
+  getLevelMessagesTooltipFields,
+  getPerformancesBetweenChargesTooltipFields,
 } from "../../utils/tooltipHighchartFormatter";
 import { GeoModalData } from "@/modules/global/components/geoModal/geoModal";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { fuelVehicleMetricsDataMock } from "@/modules/global/dataMock/fuelVehicleMetrics/fuelVehicleMetrics";
 
 const {
-  value: [{ Charges, Discharges }],
+  value: [{ charges, discharges, levelMessages, performancesBetweenCharges }],
 } = fuelVehicleMetricsDataMock;
 
 interface Props {
@@ -42,53 +43,103 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
     LANGUAGE.fuelVehicle.fuelChargesLabels
   );
 
-  const charges = useMemo(() => {
-    return Charges.map((c) => ({
-      x: new Date(c.endDate).getTime(),
-      y: c.magnitude,
-      custom: {
-        eventId: c.eventId,
-        address: c.address,
-        lat: c.lat,
-        lon: c.lon,
-        odometer: c.odometer,
-        speed: c.speed,
-        ignition: Boolean(c.ignition),
-        deviceBattery: c.deviceBattery,
-        mainPower: c.mainPower,
-        magnitude: c.magnitude,
-        initialFuel: c.initialFuel,
-        finalFuel: c.finalFuel,
-        startDate: c.startDate,
-        endDate: c.endDate,
-        origin: c.origin,
-      },
-    })).sort((a, b) => a.x - b.x);
-  }, [Charges]);
+  const levelMessagesTooltipFields = getLevelMessagesTooltipFields(
+    LANGUAGE.fuelVehicle.fuelChargesLabels
+  );
 
-  const disCharges = useMemo(() => {
-    return Discharges.map((c) => ({
-      x: new Date(c.endDate).getTime(),
-      y: c.magnitude,
-      custom: {
-        eventId: c.eventId,
-        address: c.address,
-        lat: c.lat,
-        lon: c.lon,
-        odometer: c.odometer,
-        speed: c.speed,
-        ignition: Boolean(c.ignition),
-        deviceBattery: c.deviceBattery,
-        mainPower: c.mainPower,
-        magnitude: c.magnitude,
-        initialFuel: c.initialFuel,
-        finalFuel: c.finalFuel,
-        startDate: c.startDate,
-        endDate: c.endDate,
-        origin: c.origin,
-      },
-    })).sort((a, b) => a.x - b.x);
-  }, [Discharges]);
+  const performancesBetweenChargesTooltipFields =
+    getPerformancesBetweenChargesTooltipFields(
+      LANGUAGE.fuelVehicle.fuelChargesLabels
+    );
+
+  const chargesData = useMemo(() => {
+    return charges
+      .map((c) => ({
+        x: new Date(c.endDate).getTime(),
+        y: c.magnitude,
+        custom: {
+          eventId: c.eventId,
+          address: c.address,
+          lat: c.lat,
+          lon: c.lon,
+          odometer: c.odometer,
+          speed: c.speed,
+          ignition: Boolean(c.ignition),
+          deviceBattery: c.deviceBattery,
+          mainPower: c.mainPower,
+          magnitude: c.magnitude,
+          initialFuel: c.initialFuel,
+          finalFuel: c.finalFuel,
+          startDate: c.startDate,
+          endDate: c.endDate,
+          origin: c.origin,
+        },
+      }))
+      .sort((a, b) => a.x - b.x);
+  }, []);
+
+  const disChargesData = useMemo(() => {
+    return discharges
+      .map((c) => ({
+        x: new Date(c.endDate).getTime(),
+        y: c.magnitude,
+        custom: {
+          eventId: c.eventId,
+          address: c.address,
+          lat: c.lat,
+          lon: c.lon,
+          odometer: c.odometer,
+          speed: c.speed,
+          ignition: Boolean(c.ignition),
+          deviceBattery: c.deviceBattery,
+          mainPower: c.mainPower,
+          magnitude: c.magnitude,
+          initialFuel: c.initialFuel,
+          finalFuel: c.finalFuel,
+          startDate: c.startDate,
+          endDate: c.endDate,
+          origin: c.origin,
+        },
+      }))
+      .sort((a, b) => a.x - b.x);
+  }, []);
+
+  const levelMessagesData = useMemo(() => {
+    return levelMessages
+      .map((c) => ({
+        x: new Date(c.dateGps).getTime(),
+        y: c.currentFuel,
+        custom: {
+          lat: c.lat,
+          lon: c.lon,
+          odometer: c.odometer,
+          speed: c.speed,
+          ignition: Boolean(c.ignition),
+          deviceBattery: c.deviceBattery,
+          mainPower: c.mainPower,
+          tanks: c.tanks,
+        },
+      }))
+      .sort((a, b) => a.x - b.x);
+  }, []);
+
+  // Performance es km/L
+  const performancesBetweenChargesData = useMemo(() => {
+    return performancesBetweenCharges
+      .map((c) => ({
+        x: new Date(c.endDatePerformance).getTime(),
+        y: c.averagePerformance,
+        custom: {
+          averagePerformance: c.averagePerformance,
+          fuelConsumed: c.fuelConsumed,
+          initialLevel: c.initialLevel,
+          finalLevel: c.finalLevel,
+          initialOdometer: c.initialOdometer,
+          finalOdometer: c.finalOdometer,
+        },
+      }))
+      .sort((a, b) => a.x - b.x);
+  }, []);
 
   const chartOptions = useMemo(
     () => ({
@@ -134,13 +185,15 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
         {
           type: "column",
           name: LANGUAGE.fuelVehicle.fuelLoadsChart.fuelVariation,
-          data: charges,
+          data: chargesData,
           color: "#4ec516",
           marker: { enabled: true, radius: 4, symbol: "circle" },
           point: {
             events: {
-              click: (e: any) => {
-                const charge = (e.point.options as any).custom;
+              click: (e: Highcharts.PointClickEventObject) => {
+                const charge = (
+                  e.point.options as { custom: { lat: number; lon: number } }
+                ).custom;
                 handleClicGeoData({
                   title: LANGUAGE.fuelVehicle.geoModalTitles.fuelChargeTitle,
                   lat: charge.lat,
@@ -161,13 +214,15 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
         {
           type: "column",
           name: LANGUAGE.fuelVehicle.fuelLoadsChart.fuelVariation,
-          data: disCharges,
+          data: disChargesData,
           color: "#ca5252",
           marker: { enabled: true, radius: 4, symbol: "circle" },
           point: {
             events: {
-              click: (e: any) => {
-                const disCharge = (e.point.options as any).custom;
+              click: (e: Highcharts.PointClickEventObject) => {
+                const disCharge = (
+                  e.point.options as { custom: { lat: number; lon: number } }
+                ).custom;
                 handleClicGeoData({
                   title: LANGUAGE.fuelVehicle.geoModalTitles.fuelDischargeTitle,
                   lat: disCharge.lat,
@@ -183,6 +238,42 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
           dataLabels: { enabled: false },
           tooltip: {
             pointFormatter: createTooltipFormatter(dischargesTooltipFields),
+          },
+        },
+        {
+          name: LANGUAGE.fuelVehicle.fuelLoadsChart.fuelVariation,
+          data: levelMessagesData,
+          color: "#006af5",
+          tooltip: {
+            pointFormatter: createTooltipFormatter(levelMessagesTooltipFields),
+          },
+          point: {
+            events: {
+              click: (e: Highcharts.PointClickEventObject) => {
+                const message = (
+                  e.point.options as { custom: { lat: number; lon: number } }
+                ).custom;
+                handleClicGeoData({
+                  title: LANGUAGE.fuelVehicle.geoModalTitles.levelMessageTitle,
+                  lat: message.lat,
+                  lon: message.lon,
+                  rows: getLabelsForLevelMessagesGeoMap(
+                    LANGUAGE.fuelVehicle.fuelChargesLabels,
+                    message
+                  ),
+                });
+              },
+            },
+          },
+        },
+        {
+          name: LANGUAGE.fuelVehicle.fuelLoadsChart.fuelVariation,
+          data: performancesBetweenChargesData,
+          color: "#f5c800",
+          tooltip: {
+            pointFormatter: createTooltipFormatter(
+              performancesBetweenChargesTooltipFields
+            ),
           },
         },
       ],
@@ -262,7 +353,7 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
         },
       },
     }),
-    [charges]
+    []
   );
 
   return (

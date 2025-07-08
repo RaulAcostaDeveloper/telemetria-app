@@ -196,6 +196,14 @@ export interface LanguageInterface {
       startDate: string;
       endDate: string;
       origin: string;
+      averagePerformance: string;
+      tanks: string;
+      fuelConsumed: string;
+      initialLevel: string;
+      finalLevel: string;
+      initialOdometer: string;
+      finalOdometer: string;
+      distanceTravelled: string;
     };
     fuelNowLabels: {
       AccountId: string;
@@ -211,6 +219,7 @@ export interface LanguageInterface {
     geoModalTitles: {
       fuelChargeTitle: string;
       fuelDischargeTitle: string;
+      levelMessageTitle: string;
       fuelNowTitle: string;
       roadmap: string;
       satellite: string;

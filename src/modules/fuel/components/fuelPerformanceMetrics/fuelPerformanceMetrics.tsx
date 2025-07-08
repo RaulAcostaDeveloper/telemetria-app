@@ -2,7 +2,7 @@ import { MetricItem } from "./metricItem/metricItem";
 import styles from "./fuelPerformanceMetrics.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 
-const temporalDataMock = {
+const fuelPerformanceMetrics = {
   distanceEfficiency: 1820.7, // km/L
   distanceTravelled: 1500, // km
   timeEfficiency: 3.2, // L/h
@@ -25,26 +25,30 @@ export const FuelPerformanceMetrics = ({ LANGUAGE }: Props) => {
           LANGUAGE={LANGUAGE}
           metric="Km/L"
           name={LANGUAGE.fuelVehicle.vehicleReports.distanceEfficiency}
-          value={temporalDataMock.distanceEfficiency.toLocaleString("en-US")}
+          value={fuelPerformanceMetrics.distanceEfficiency.toLocaleString(
+            "en-US"
+          )}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric="Km"
           name={LANGUAGE.fuelVehicle.vehicleReports.distanceTravelled}
-          value={temporalDataMock.distanceTravelled.toLocaleString("en-US")}
+          value={fuelPerformanceMetrics.distanceTravelled.toLocaleString(
+            "en-US"
+          )}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric="L/H"
           name={LANGUAGE.fuelVehicle.vehicleReports.timeEfficiency}
-          value={temporalDataMock.timeEfficiency.toLocaleString("en-US")}
+          value={fuelPerformanceMetrics.timeEfficiency.toLocaleString("en-US")}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           isLast
           metric="H"
           name={LANGUAGE.fuelVehicle.vehicleReports.operatingHours}
-          value={temporalDataMock.operatingHours.toLocaleString("en-US")}
+          value={fuelPerformanceMetrics.operatingHours.toLocaleString("en-US")}
         />
       </div>
       <div className={styles.cuadricula}>
@@ -52,26 +56,26 @@ export const FuelPerformanceMetrics = ({ LANGUAGE }: Props) => {
           LANGUAGE={LANGUAGE}
           metric="L"
           name={LANGUAGE.fuelVehicle.vehicleReports.fuelConsumed}
-          value={temporalDataMock.fuelConsumed.toLocaleString("en-US")}
+          value={fuelPerformanceMetrics.fuelConsumed.toLocaleString("en-US")}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric="L"
           name={LANGUAGE.fuelVehicle.vehicleReports.fuelStart}
-          value={temporalDataMock.fuelStart.toLocaleString("en-US")}
+          value={fuelPerformanceMetrics.fuelStart.toLocaleString("en-US")}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric="L"
           name={LANGUAGE.fuelVehicle.vehicleReports.fuelEnd}
-          value={temporalDataMock.fuelEnd.toLocaleString("en-US")}
+          value={fuelPerformanceMetrics.fuelEnd.toLocaleString("en-US")}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           isLast
           metric="L"
           name={LANGUAGE.fuelVehicle.vehicleReports.fuelLoaded}
-          value={temporalDataMock.fuelLoaded.toLocaleString("en-US")}
+          value={fuelPerformanceMetrics.fuelLoaded.toLocaleString("en-US")}
         />
       </div>
     </div>
