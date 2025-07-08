@@ -8,10 +8,14 @@ import {
 } from "@mui/icons-material";
 import { formatNumberWithCommas } from "@/modules/global/utils/utils";
 import styles from "./reportSummary.module.css";
-import { fuelSummaryDataMock } from "@/modules/global/dataMock/fuelSummary/fuelSummary";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
+import { SummaryFuelValues } from "@/globalConfig/redux/slices/fuelSummarySlice";
 
-const ReportSummary = () => {
+interface Props {
+  summaryValues: SummaryFuelValues;
+}
+
+const ReportSummary = ({ summaryValues }: Props) => {
   const LANGUAGE = useLanguage();
   return (
     <div className={styles.reportSummaryContainer}>
@@ -22,9 +26,9 @@ const ReportSummary = () => {
         <div className={styles.summaryContainer}>
           <h1>{LANGUAGE.fuel.summaryReports.labels.inventory}</h1>
           <span>
-            {fuelSummaryDataMock.value.inventory
+            {summaryValues.inventory
               ? `${formatNumberWithCommas(
-                  fuelSummaryDataMock.value.inventory
+                  summaryValues.inventory
                 )}L`
               : "0,00L"}
           </span>
@@ -37,9 +41,9 @@ const ReportSummary = () => {
         <div className={styles.summaryContainer}>
           <h1>{LANGUAGE.fuel.summaryReports.labels.performance}</h1>
           <span>
-            {fuelSummaryDataMock.value.performanceOdometer
+            {summaryValues.performanceOdometer
               ? `${formatNumberWithCommas(
-                  fuelSummaryDataMock.value.performanceOdometer
+                  summaryValues.performanceOdometer
                 )}L`
               : "0,00L"}
           </span>
@@ -52,9 +56,9 @@ const ReportSummary = () => {
         <div className={styles.summaryContainer}>
           <h1>{LANGUAGE.fuel.summaryReports.labels.fuelCharged}</h1>
           <span>
-            {fuelSummaryDataMock.value.fuelCharged
+            {summaryValues.fuelCharged
               ? `${formatNumberWithCommas(
-                  fuelSummaryDataMock.value.fuelCharged
+                  summaryValues.fuelCharged
                 )}L`
               : "0,00L"}
           </span>
@@ -67,9 +71,9 @@ const ReportSummary = () => {
         <div className={styles.summaryContainer}>
           <h1>{LANGUAGE.fuel.summaryReports.labels.fuelDischarged}</h1>
           <span>
-            {fuelSummaryDataMock.value.fuelDischarged
+            {summaryValues.fuelDischarged
               ? `${formatNumberWithCommas(
-                  fuelSummaryDataMock.value.fuelDischarged
+                  summaryValues.fuelDischarged
                 )}L`
               : "0,00L"}
           </span>
