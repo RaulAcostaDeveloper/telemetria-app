@@ -6,6 +6,7 @@ interface Vehicles {
   carNumber: string;
   carLabel: string;
   carShortcut: string;
+  imeIs: string[] | []; //Un vehículo puede no tener IMEIs asignadas
 }
 
 interface ArrayVehicles {

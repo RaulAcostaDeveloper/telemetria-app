@@ -57,10 +57,15 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
     setShowDropdown(false);
   }, [pathname]);
 
-  // filtrar todos los resultados que coincidan
+  // filtrar todos los resultados que coincidan por "carNumber"
   const filtered = vehiclesData?.value.vehicles?.filter((v) =>
     v.carNumber.toLowerCase().includes(query.toLowerCase())
   );
+  // filtrar todos los resultados que coincidan por el primer "imeIs" en el array.
+  // Ejemplo imei con proposito de saber que teclear en input: 868689060250000
+  const filteredByImei = vehiclesData?.value.vehicles?.filter((v) =>
+    v.imeIs[0].toLowerCase().includes(query.toLowerCase())
+  )
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
@@ -68,20 +73,12 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
     setShowDropdown(val.trim() !== "");
   };
 
-  return (
-    <div ref={containerRef} className={styles.container}>
-      <input
-        className={styles.input}
-        type="text"
-        placeholder={LANGUAGE.header.vehicleFilter.inputPlaceholder}
-        value={query}
-        onChange={handleInput}
-        title={LANGUAGE.header.vehicleFilter.inputPlaceholder}
-      />
-
-      {showDropdown && query && filtered && filtered.length > 0 && (
+  function answerScenarios(){
+    if(showDropdown && query && filteredByImei && filteredByImei.length > 0){
+      // Cuando la consulta a vehículo SÍ tiene IMEIs
+      return (
         <ul className={styles.dropdown}>
-          {filtered.map((v, i) => (
+          {filteredByImei.map((v, i) => (
             <li key={i} className={styles.dropdownItem}>
               <div className={styles.vehicleDetails}>
                 <strong>{v.carNumber}</strong> - <span>{v.carLabel}</span>
@@ -103,7 +100,7 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
                 ).map((action, idx) => (
                   <Link
                     key={idx}
-                    href={`/${action.routePrefix}/vehicle/${v.id}`}
+                    href={`/${action.routePrefix}/vehicle/${v.imeIs[0]}`}
                     onClick={() => setShowDropdown(false)}
                     className={styles.linkIcon}
                   >
@@ -116,7 +113,31 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
             </li>
           ))}
         </ul>
-      )}
+      )
+    }else if(showDropdown && query && filteredByImei && 0 === filteredByImei.length){
+      // Cuando la consulta a vehículo no coincide con la lista de IMEIs
+      return(
+        <ul className={styles.dropdown}>
+          <li key={0} className={styles.dropdownItem}>
+            <div className={styles.vehicleDetails}><strong>No hay coincidencias</strong></div>
+          </li>
+        </ul>
+      )
+    }
+  }
+
+  return (
+    <div ref={containerRef} className={styles.container}>
+      <input
+        className={styles.input}
+        type="text"
+        placeholder={LANGUAGE.header.vehicleFilter.inputPlaceholder}
+        value={query}
+        onChange={handleInput}
+        title={LANGUAGE.header.vehicleFilter.inputPlaceholder}
+      />
+
+      {answerScenarios()}
     </div>
   );
 };
