@@ -50,8 +50,8 @@ export default function FuelVehicle({ params }: Page) {
       dispatch(
         fetchFuelMetrics({
           imei: "863457051709333", // id.toString(),
-          startDate: "2024-09-01T06:00:01", // formatToLocalIso8601(startDate), "2024-08-05T00:00:00"
-          endDate: "2024-09-06T15:48:01", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
+          startDate: "2024-08-05T00:00:00", // formatToLocalIso8601(startDate), "2024-08-05T00:00:00"
+          endDate: "2024-09-07T00:00:00", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
         })
       );
     }

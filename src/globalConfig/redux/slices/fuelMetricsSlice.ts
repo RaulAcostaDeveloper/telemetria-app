@@ -18,39 +18,41 @@ interface LevelMessages {
 }
 
 interface Charges {
-  eventId: number;
   address: string;
+  dateGps: string;
+  deviceBattery: number;
+  endDate: string;
+  eventId: number;
+  finalFuel: number;
+  ignition: number;
+  initialFuel: number;
   lat: number;
   lon: number;
-  odometer: number;
-  speed: number;
-  ignition: number;
-  deviceBattery: number;
-  mainPower: number;
   magnitude: number;
-  initialFuel: number;
-  finalFuel: number;
-  startDate: string;
-  endDate: string;
+  mainPower: number;
+  odometer: number;
   origin: number;
+  speed: number;
+  startDate: string;
 }
 
 interface Discharges {
-  eventId: number;
   address: string;
+  dateGps: string;
+  deviceBattery: number;
+  endDate: string;
+  eventId: number;
+  finalFuel: number;
+  ignition: number;
+  initialFuel: number;
   lat: number;
   lon: number;
-  odometer: number;
-  speed: number;
-  ignition: number;
-  deviceBattery: number;
-  mainPower: number;
   magnitude: number;
-  initialFuel: number;
-  finalFuel: number;
-  startDate: string;
-  endDate: string;
+  mainPower: number;
+  odometer: number;
   origin: number;
+  speed: number;
+  startDate: string;
 }
 
 interface DailyPerformances {

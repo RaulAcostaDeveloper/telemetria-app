@@ -54,7 +54,7 @@ export const FuelHighChart = ({
   const chargesData = useMemo(() => {
     return fuelMetricsData.charges
       .map((c) => ({
-        x: new Date(c.endDate).getTime(),
+        x: new Date(c.dateGps).getTime(),
         y: c.magnitude,
         custom: {
           eventId: c.eventId,
@@ -70,7 +70,7 @@ export const FuelHighChart = ({
           initialFuel: c.initialFuel,
           finalFuel: c.finalFuel,
           startDate: c.startDate,
-          endDate: c.endDate,
+          endDate: c.dateGps,
           origin: c.origin,
         },
       }))
@@ -80,7 +80,7 @@ export const FuelHighChart = ({
   const disChargesData = useMemo(() => {
     return fuelMetricsData.discharges
       .map((c) => ({
-        x: new Date(c.endDate).getTime(),
+        x: new Date(c.dateGps).getTime(),
         y: c.magnitude,
         custom: {
           eventId: c.eventId,
@@ -96,7 +96,7 @@ export const FuelHighChart = ({
           initialFuel: c.initialFuel,
           finalFuel: c.finalFuel,
           startDate: c.startDate,
-          endDate: c.endDate,
+          endDate: c.dateGps,
           origin: c.origin,
         },
       }))
