@@ -11,8 +11,10 @@ import {
 } from "@mui/icons-material";
 
 import styles from "./headerVehicleFilter.module.css";
+// Tipado
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { RootState } from "@/globalConfig/redux/store";
+import { Vehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
 
 type Action = { label: string; routePrefix: string; title: string };
 const iconMapping: { [key: string]: JSX.Element } = {
@@ -29,7 +31,6 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const { vehiclesData } = useSelector((state: RootState) => state.vehicles);
-
   const containerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
@@ -57,12 +58,12 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
     setShowDropdown(false);
   }, [pathname]);
 
-  // filtrar todos los resultados que coincidan por "carNumber"
-  const filtered = vehiclesData?.value.vehicles?.filter((v) =>
+  /** Filtra todos los resultados que coincidan por "carNumber" */
+  const filteredByCarNumber = vehiclesData?.value.vehicles?.filter((v) =>
     v.carNumber.toLowerCase().includes(query.toLowerCase())
   );
-  // filtrar todos los resultados que coincidan por el primer "imeIs" en el array.
-  // Ejemplo imei con proposito de saber que teclear en input: 868689060250000
+  /** Filtra todos los resultados que coincidan por el primer "imeIs" en el array.
+  *   Ejemplo imei con proposito de saber que teclear en input: 868689060250000 */
   const filteredByImei = vehiclesData?.value.vehicles?.filter((v) =>
     v.imeIs[0].toLowerCase().includes(query.toLowerCase())
   )
@@ -74,11 +75,21 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
   };
 
   function answerScenarios(){
-    if(showDropdown && query && filteredByImei && filteredByImei.length > 0){
-      // Cuando la consulta a vehículo SÍ tiene IMEIs
+    let hasCarNumber, hasIMEI = false;
+    filteredByCarNumber && filteredByCarNumber.length > 0 ? hasCarNumber = true : hasCarNumber = false
+    filteredByImei && filteredByImei.length > 0 ? hasIMEI = true : hasIMEI = false
+
+    /** Se hace una busqueda, y existe informacion de IMEI o de placas */
+    if(showDropdown && query && (hasIMEI || hasCarNumber)){
+      let filteredByPivot: Vehicles[] =[];
+      hasIMEI ? 
+        filteredByPivot = filteredByImei as Vehicles[]
+        : 
+        hasCarNumber && (filteredByPivot = filteredByCarNumber as Vehicles[])
+
       return (
         <ul className={styles.dropdown}>
-          {filteredByImei.map((v, i) => (
+          {filteredByPivot.map((v, i) => (
             <li key={i} className={styles.dropdownItem}>
               <div className={styles.vehicleDetails}>
                 <strong>{v.carNumber}</strong> - <span>{v.carLabel}</span>
@@ -114,12 +125,12 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
           ))}
         </ul>
       )
-    }else if(showDropdown && query && filteredByImei && 0 === filteredByImei.length){
-      // Cuando la consulta a vehículo no coincide con la lista de IMEIs
+    }else if(showDropdown && query && !hasIMEI && !hasCarNumber){
+      /** Cuando la consulta a vehículo no coincide con la lista de IMEIs ni de placas. */
       return(
         <ul className={styles.dropdown}>
           <li key={0} className={styles.dropdownItem}>
-            <div className={styles.vehicleDetails}><strong>No hay coincidencias</strong></div>
+            <div className={styles.vehicleDetails}><strong>{LANGUAGE.header.vehicleFilter.inputNoMatch}</strong></div>
           </li>
         </ul>
       )

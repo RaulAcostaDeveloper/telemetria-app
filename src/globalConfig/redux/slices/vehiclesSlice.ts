@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getVehicles } from "@/modules/management/services/vehicles/vehicles";
 
-interface Vehicles {
+export interface Vehicles {
   id: number;
   carNumber: string;
   carLabel: string;

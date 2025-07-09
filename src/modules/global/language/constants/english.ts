@@ -11,6 +11,7 @@ export const ENGLISH: LanguageInterface = {
       actionManagementTitle: "Go to management page",
       actionTelemetryTitle: "Go to telemetry report page",
       inputPlaceholder: "Search Vehicle",
+      inputNoMatch: "No match found",
     },
     calendar: {
       buttonHover: "Open calendar options",
