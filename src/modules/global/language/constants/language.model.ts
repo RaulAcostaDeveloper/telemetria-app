@@ -11,6 +11,7 @@ export interface LanguageInterface {
       actionManagementTitle: string;
       actionTelemetryTitle: string;
       inputPlaceholder: string;
+      inputNoMatch: string;
     };
     calendar: {
       buttonHover: string;
