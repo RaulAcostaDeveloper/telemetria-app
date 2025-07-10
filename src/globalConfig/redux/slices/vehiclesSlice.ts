@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getVehicles } from "@/modules/management/services/vehicles/vehicles";
 
-interface Vehicles {
+export interface Vehicles {
   id: number;
   carNumber: string;
   carLabel: string;
   carShortcut: string;
+  imeIs: string[] | []; //Un vehículo puede no tener IMEIs asignadas
 }
 
 interface ArrayVehicles {

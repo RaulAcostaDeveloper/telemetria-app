@@ -11,6 +11,7 @@ export const SPANISH: LanguageInterface = {
       actionManagementTitle: "Ir a la gestión del vehículo",
       actionTelemetryTitle: "Ir al reporte de telemetría",
       inputPlaceholder: "Buscar vehiculo...",
+      inputNoMatch: "No hay coincidencias",
     },
     calendar: {
       buttonHover: "Abrir opciones de calendario",

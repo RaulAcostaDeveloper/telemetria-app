@@ -2,11 +2,14 @@
 import { useSelector } from "react-redux";
 import { RootState } from "@/globalConfig/redux/store";
 
+//Tipado
 import {
   columnsTable,
   dataTable,
 } from "@/modules/global/components/table/table.model";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+
+//Módulos
 import { Table, TabsContent } from "@/modules/global/components";
 
 interface Props {
@@ -68,6 +71,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       carNumber: value.carNumber,
       carLabel: value.carLabel,
       carShortcut: value.carShortcut,
+      imeIs: value.imeIs[0],
     }));
 
   // falta numero de teléfono, fecha de registro, poner tarjeta SIM
@@ -161,7 +165,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
                 data={vehiclesTableData}
                 showGoFuel
                 showGoOBT
-                idKey="id"
+                idKey="imeIs"
               />
             ) : (
               // Añadir un loading

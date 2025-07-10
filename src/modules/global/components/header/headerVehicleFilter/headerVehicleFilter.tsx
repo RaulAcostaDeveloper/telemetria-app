@@ -11,8 +11,10 @@ import {
 } from "@mui/icons-material";
 
 import styles from "./headerVehicleFilter.module.css";
+// Tipado
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { RootState } from "@/globalConfig/redux/store";
+import { Vehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
 
 type Action = { label: string; routePrefix: string; title: string };
 const iconMapping: { [key: string]: JSX.Element } = {
@@ -29,7 +31,6 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const { vehiclesData } = useSelector((state: RootState) => state.vehicles);
-
   const containerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
@@ -57,10 +58,15 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
     setShowDropdown(false);
   }, [pathname]);
 
-  // filtrar todos los resultados que coincidan
-  const filtered = vehiclesData?.value.vehicles?.filter((v) =>
+  /** Filtra todos los resultados que coincidan por "carNumber" */
+  const filteredByCarNumber = vehiclesData?.value.vehicles?.filter((v) =>
     v.carNumber.toLowerCase().includes(query.toLowerCase())
   );
+  /** Filtra todos los resultados que coincidan por el primer "imeIs" en el array.
+  *   Ejemplo imei con proposito de saber que teclear en input: 868689060250000 */
+  const filteredByImei = vehiclesData?.value.vehicles?.filter((v) =>
+    v.imeIs[0].toLowerCase().includes(query.toLowerCase())
+  )
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
@@ -68,20 +74,22 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
     setShowDropdown(val.trim() !== "");
   };
 
-  return (
-    <div ref={containerRef} className={styles.container}>
-      <input
-        className={styles.input}
-        type="text"
-        placeholder={LANGUAGE.header.vehicleFilter.inputPlaceholder}
-        value={query}
-        onChange={handleInput}
-        title={LANGUAGE.header.vehicleFilter.inputPlaceholder}
-      />
+  function answerScenarios(){
+    let hasCarNumber, hasIMEI = false;
+    filteredByCarNumber && filteredByCarNumber.length > 0 ? hasCarNumber = true : hasCarNumber = false
+    filteredByImei && filteredByImei.length > 0 ? hasIMEI = true : hasIMEI = false
 
-      {showDropdown && query && filtered && filtered.length > 0 && (
+    /** Se hace una busqueda, y existe informacion de IMEI o de placas */
+    if(showDropdown && query && (hasIMEI || hasCarNumber)){
+      let filteredByPivot: Vehicles[] =[];
+      hasIMEI ? 
+        filteredByPivot = filteredByImei as Vehicles[]
+        : 
+        hasCarNumber && (filteredByPivot = filteredByCarNumber as Vehicles[])
+
+      return (
         <ul className={styles.dropdown}>
-          {filtered.map((v, i) => (
+          {filteredByPivot.map((v, i) => (
             <li key={i} className={styles.dropdownItem}>
               <div className={styles.vehicleDetails}>
                 <strong>{v.carNumber}</strong> - <span>{v.carLabel}</span>
@@ -103,7 +111,7 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
                 ).map((action, idx) => (
                   <Link
                     key={idx}
-                    href={`/${action.routePrefix}/vehicle/${v.id}`}
+                    href={`/${action.routePrefix}/vehicle/${v.imeIs[0]}`}
                     onClick={() => setShowDropdown(false)}
                     className={styles.linkIcon}
                   >
@@ -116,7 +124,31 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
             </li>
           ))}
         </ul>
-      )}
+      )
+    }else if(showDropdown && query && !hasIMEI && !hasCarNumber){
+      /** Cuando la consulta a vehículo no coincide con la lista de IMEIs ni de placas. */
+      return(
+        <ul className={styles.dropdown}>
+          <li key={0} className={styles.dropdownItem}>
+            <div className={styles.vehicleDetails}><strong>{LANGUAGE.header.vehicleFilter.inputNoMatch}</strong></div>
+          </li>
+        </ul>
+      )
+    }
+  }
+
+  return (
+    <div ref={containerRef} className={styles.container}>
+      <input
+        className={styles.input}
+        type="text"
+        placeholder={LANGUAGE.header.vehicleFilter.inputPlaceholder}
+        value={query}
+        onChange={handleInput}
+        title={LANGUAGE.header.vehicleFilter.inputPlaceholder}
+      />
+
+      {answerScenarios()}
     </div>
   );
 };
