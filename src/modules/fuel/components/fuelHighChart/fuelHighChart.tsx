@@ -14,24 +14,13 @@ import {
   getLevelMessagesTooltipFields,
   getPerformancesBetweenChargesTooltipFields,
 } from "../../utils/tooltipHighchartFormatter";
+import { FuelMetricsValues } from "@/globalConfig/redux/slices/fuelMetricsSlice";
 import { GeoModalData } from "@/modules/global/components/geoModal/geoModal";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { fuelVehicleMetricsDataMock } from "@/modules/global/dataMock/fuelVehicleMetrics/fuelVehicleMetrics";
-
-const {
-  value: [
-    {
-      charges,
-      dailyPerformances,
-      discharges,
-      levelMessages,
-      performancesBetweenCharges,
-    },
-  ],
-} = fuelVehicleMetricsDataMock;
 
 interface Props {
   LANGUAGE: LanguageInterface;
+  fuelMetricsData: FuelMetricsValues;
   handleClicGeoData: (geoModalData: GeoModalData) => void;
 }
 
@@ -39,7 +28,11 @@ if (typeof HighstockInit === "function") {
   (HighstockInit as (hc: typeof Highcharts) => void)(Highcharts);
 }
 
-export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
+export const FuelHighChart = ({
+  LANGUAGE,
+  fuelMetricsData,
+  handleClicGeoData,
+}: Props) => {
   // Tooltip de cada serie
   const chargesTooltipFields = getChargesTooltipFields(
     LANGUAGE.fuelVehicle.fuelChargesLabels
@@ -59,9 +52,9 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
     );
 
   const chargesData = useMemo(() => {
-    return charges
+    return fuelMetricsData.charges
       .map((c) => ({
-        x: new Date(c.endDate).getTime(),
+        x: new Date(c.dateGps).getTime(),
         y: c.magnitude,
         custom: {
           eventId: c.eventId,
@@ -77,7 +70,7 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
           initialFuel: c.initialFuel,
           finalFuel: c.finalFuel,
           startDate: c.startDate,
-          endDate: c.endDate,
+          endDate: c.dateGps,
           origin: c.origin,
         },
       }))
@@ -85,9 +78,9 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
   }, []);
 
   const disChargesData = useMemo(() => {
-    return discharges
+    return fuelMetricsData.discharges
       .map((c) => ({
-        x: new Date(c.endDate).getTime(),
+        x: new Date(c.dateGps).getTime(),
         y: c.magnitude,
         custom: {
           eventId: c.eventId,
@@ -103,7 +96,7 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
           initialFuel: c.initialFuel,
           finalFuel: c.finalFuel,
           startDate: c.startDate,
-          endDate: c.endDate,
+          endDate: c.dateGps,
           origin: c.origin,
         },
       }))
@@ -111,7 +104,7 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
   }, []);
 
   const levelMessagesData = useMemo(() => {
-    return levelMessages
+    return fuelMetricsData.levelMessages
       .map((c) => ({
         x: new Date(c.dateGps).getTime(),
         y: c.currentFuel,
@@ -131,7 +124,7 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
 
   // Performance es km/L
   const performancesBetweenChargesData = useMemo(() => {
-    return performancesBetweenCharges
+    return fuelMetricsData.performancesBetweenCharges
       .map((c) => ({
         x: new Date(c.endDatePerformance).getTime(),
         y: c.averagePerformance,
@@ -148,7 +141,7 @@ export const FuelHighChart = ({ LANGUAGE, handleClicGeoData }: Props) => {
   }, []);
 
   const dailyPerformancesData = useMemo(() => {
-    return dailyPerformances
+    return fuelMetricsData.dailyPerformances
       .map((c) => ({
         x: new Date(c.endDate).getTime(),
         y: c.averagePerformance,

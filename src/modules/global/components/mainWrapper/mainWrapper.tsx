@@ -108,7 +108,6 @@ export const MainWrapper = ({ children }: Props) => {
   }, []);
 
   // Servicios al inicio de la sesión del usuario
-
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(
