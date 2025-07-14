@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import styles from "./geoModal.module.css";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { Modal } from "../modal/modal";
-import { TooltipField } from "@/modules/fuel/utils/tooltipHighchartFormatter";
+import { TooltipGeoField } from "@/modules/fuel/utils/tooltipHighchartFormatter";
 
 const GoogleMapClientOnly = dynamic(
   () => import("./googleMapClientComponent/googleMapClientComponent"),
@@ -16,7 +16,7 @@ export interface GeoModalData {
   lat: number;
   lon: number;
   title: string;
-  rows: TooltipField[];
+  rows: TooltipGeoField[];
 }
 
 interface Props {
