@@ -16,7 +16,7 @@ export function getChargesTooltipFields(
   LANGUAGE: StringObject
 ): TooltipField[] {
   return [
-    // { label: LANGUAGE.date, value: (c) => `${c.endDate}` },
+    { label: LANGUAGE.date, value: (c) => `${c.dateGps}` },
     { label: LANGUAGE.initialFuel, value: (c) => `${c.initialFuel} L` },
     { label: LANGUAGE.finalFuel, value: (c) => `${c.finalFuel} L` },
     { label: LANGUAGE.totalCharges, value: (c) => `${c.magnitude} L` },
@@ -38,8 +38,11 @@ export function getDisChargesTooltipFields(
   LANGUAGE: StringObject
 ): TooltipField[] {
   return [
-    // { label: LANGUAGE.date, value: (c) => `${c.dateGps}` },
-    { label: LANGUAGE.initialFuel, value: (c) => `${c.initialFuel} L` },
+    { label: LANGUAGE.date, value: (c) => `${c.dateGps}` },
+    {
+      label: LANGUAGE.initialFuel,
+      value: (c) => `${c.initialFuel} L`,
+    },
     { label: LANGUAGE.finalFuel, value: (c) => `${c.finalFuel} L` },
     { label: LANGUAGE.totalDischarges, value: (c) => `${c.magnitude} L` },
     // { label: LANGUAGE.address, value: (c) => c.address },
@@ -60,7 +63,7 @@ export function getLevelMessagesTooltipFields(
   LANGUAGE: StringObject
 ): TooltipField[] {
   return [
-    // { label: LANGUAGE.date, value: (c) => `${c.dateGps}` },
+    { label: LANGUAGE.date, value: (c) => `${c.dateGps}` },
     { label: LANGUAGE.lat, value: (c) => c.lat },
     { label: LANGUAGE.lon, value: (c) => c.lon },
     { label: LANGUAGE.odometer, value: (c) => `${c.odometer} Km` },
