@@ -187,7 +187,7 @@ export const SPANISH: LanguageInterface = {
       fuelLoaded: "Combustible cargado",
       fuelStart: "Combustible inicial",
       operatingHours: "Horas operando",
-      timeEfficiency: "Eficiencia de tiempo",
+      timeEfficiency: "Rendimiento por tiempo",
     },
     fuelNow: {
       lastDateReport: "Fecha del último reporte",

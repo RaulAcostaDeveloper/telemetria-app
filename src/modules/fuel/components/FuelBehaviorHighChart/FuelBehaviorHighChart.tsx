@@ -14,13 +14,13 @@ import {
   getLevelMessagesTooltipFields,
   getPerformancesBetweenChargesTooltipFields,
 } from "../../utils/tooltipHighchartFormatter";
-import { FuelMetricsValues } from "@/globalConfig/redux/slices/fuelMetricsSlice";
+import { FuelDataValues } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { GeoModalData } from "@/modules/global/components/geoModal/geoModal";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  fuelMetricsData: FuelMetricsValues;
+  fuelDataData: FuelDataValues;
   handleClicGeoData: (geoModalData: GeoModalData) => void;
 }
 
@@ -30,7 +30,7 @@ if (typeof HighstockInit === "function") {
 
 export const FuelBehaviorHighChart = ({
   LANGUAGE,
-  fuelMetricsData,
+  fuelDataData,
   handleClicGeoData,
 }: Props) => {
   // Tooltip de cada serie
@@ -52,7 +52,7 @@ export const FuelBehaviorHighChart = ({
     );
 
   const chargesData = useMemo(() => {
-    return fuelMetricsData.charges
+    return fuelDataData.charges
       .map((c) => ({
         x: new Date(c.dateGps).getTime(),
         y: c.magnitude,
@@ -77,7 +77,7 @@ export const FuelBehaviorHighChart = ({
   }, []);
 
   const disChargesData = useMemo(() => {
-    return fuelMetricsData.discharges
+    return fuelDataData.discharges
       .map((c) => ({
         x: new Date(c.dateGps).getTime(),
         y: c.magnitude,
@@ -103,7 +103,7 @@ export const FuelBehaviorHighChart = ({
   }, []);
 
   const levelMessagesData = useMemo(() => {
-    return fuelMetricsData.levelMessages
+    return fuelDataData.levelMessages
       .map((c) => ({
         x: new Date(c.dateGps).getTime(),
         y: c.currentFuel,
@@ -123,7 +123,7 @@ export const FuelBehaviorHighChart = ({
 
   // Performance es km/L
   const performancesBetweenChargesData = useMemo(() => {
-    return fuelMetricsData.performancesBetweenCharges
+    return fuelDataData.performancesBetweenCharges
       .map((c) => ({
         x: new Date(c.endDatePerformance).getTime(),
         y: c.averagePerformance,
@@ -140,7 +140,7 @@ export const FuelBehaviorHighChart = ({
   }, []);
 
   const dailyPerformancesData = useMemo(() => {
-    return fuelMetricsData.dailyPerformances
+    return fuelDataData.dailyPerformances
       .map((c) => ({
         x: new Date(c.endDate).getTime(),
         y: c.averagePerformance,

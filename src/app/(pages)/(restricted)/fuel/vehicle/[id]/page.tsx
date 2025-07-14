@@ -9,7 +9,8 @@ import {
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 import { FuelBehaviorTab } from "@/modules/fuel/components/fuelBehaviorTab/fuelBehaviorTab";
 import { TabsContent } from "@/modules/global/components";
-import { fetchFuelMetrics } from "@/globalConfig/redux/slices/fuelMetricsSlice";
+import { fetchFuelData } from "@/globalConfig/redux/slices/fuelDataSlice";
+import { fetchFuelPerformance } from "@/globalConfig/redux/slices/fuelPerformanceSlice";
 import { useAuth } from "@/modules/auth/utils";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 // import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
@@ -32,8 +33,12 @@ export default function FuelVehicle({ params }: Page) {
     (state: RootState) => state.calendar
   );
 
-  const { fuelMetricsData, fuelMetricsStatus } = useSelector(
-    (state: RootState) => state.fuelMetrics
+  const { fuelDataData, fuelDataStatus } = useSelector(
+    (state: RootState) => state.fuelData
+  );
+
+  const { fuelPerformanceData, fuelPerformanceStatus } = useSelector(
+    (state: RootState) => state.fuelPerformance
   );
 
   const LANGUAGE = useLanguage();
@@ -48,7 +53,15 @@ export default function FuelVehicle({ params }: Page) {
   useEffect(() => {
     if (isAuthenticated && startDate && endDate) {
       dispatch(
-        fetchFuelMetrics({
+        fetchFuelData({
+          imei: "862599050434198", // id.toString(),
+          startDate: "2024-09-01T06:00:01", // formatToLocalIso8601(startDate), "2024-08-05T00:00:00"
+          endDate: "2024-09-06T15:48:01", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
+        })
+      );
+
+      dispatch(
+        fetchFuelPerformance({
           imei: "862599050434198", // id.toString(),
           startDate: "2024-09-01T06:00:01", // formatToLocalIso8601(startDate), "2024-08-05T00:00:00"
           endDate: "2024-09-06T15:48:01", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
@@ -63,11 +76,11 @@ export default function FuelVehicle({ params }: Page) {
         tabOptions={vehicleTabs}
         tabContents={[
           <div key={0}>
-            {fuelMetricsStatus === "succeeded" && fuelMetricsData ? (
+            {fuelDataStatus === "succeeded" && fuelDataData ? (
               <>
                 <FuelBehaviorTab
                   LANGUAGE={LANGUAGE}
-                  fuelMetricsData={fuelMetricsData.value}
+                  fuelDataData={fuelDataData.value}
                 />
               </>
             ) : (
@@ -76,7 +89,17 @@ export default function FuelVehicle({ params }: Page) {
             )}
           </div>,
           <div key={1}>
-            <FuelPerformanceMetrics LANGUAGE={LANGUAGE} />
+            {fuelPerformanceStatus === "succeeded" && fuelPerformanceData ? (
+              <>
+                <FuelPerformanceMetrics
+                  LANGUAGE={LANGUAGE}
+                  fuelPerformanceData={fuelPerformanceData.value}
+                />
+              </>
+            ) : (
+              // Añadir un loading
+              <div>...</div>
+            )}
           </div>,
           <div key={2}>
             <FuelNowContainer LANGUAGE={LANGUAGE} />

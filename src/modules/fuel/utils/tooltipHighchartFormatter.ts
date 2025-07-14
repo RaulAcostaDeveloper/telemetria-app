@@ -1,10 +1,20 @@
-export interface TooltipField<T = any> {
+type StringObject = Record<string, string>;
+type DataObject = Record<string, string | number>;
+
+export interface TooltipField {
   label: string;
-  value: (data: T) => string | number | undefined | null;
+  value: (data: StringObject) => string;
+}
+
+export interface TooltipGeoField {
+  label: string;
+  value: string;
 }
 
 // Tooltips para diferentes series de datos
-export function getChargesTooltipFields(LANGUAGE: any): TooltipField[] {
+export function getChargesTooltipFields(
+  LANGUAGE: StringObject
+): TooltipField[] {
   return [
     { label: LANGUAGE.initialFuel, value: (c) => `${c.initialFuel} L` },
     { label: LANGUAGE.finalFuel, value: (c) => `${c.finalFuel} L` },
@@ -23,7 +33,9 @@ export function getChargesTooltipFields(LANGUAGE: any): TooltipField[] {
   ];
 }
 
-export function getDisChargesTooltipFields(LANGUAGE: any): TooltipField[] {
+export function getDisChargesTooltipFields(
+  LANGUAGE: StringObject
+): TooltipField[] {
   return [
     { label: LANGUAGE.initialFuel, value: (c) => `${c.initialFuel} L` },
     { label: LANGUAGE.finalFuel, value: (c) => `${c.finalFuel} L` },
@@ -42,7 +54,9 @@ export function getDisChargesTooltipFields(LANGUAGE: any): TooltipField[] {
   ];
 }
 
-export function getLevelMessagesTooltipFields(LANGUAGE: any): TooltipField[] {
+export function getLevelMessagesTooltipFields(
+  LANGUAGE: StringObject
+): TooltipField[] {
   return [
     { label: LANGUAGE.lat, value: (c) => c.lat },
     { label: LANGUAGE.lon, value: (c) => c.lon },
@@ -59,7 +73,7 @@ export function getLevelMessagesTooltipFields(LANGUAGE: any): TooltipField[] {
 }
 
 export function getPerformancesBetweenChargesTooltipFields(
-  LANGUAGE: any
+  LANGUAGE: StringObject
 ): TooltipField[] {
   return [
     {
@@ -79,25 +93,25 @@ export function getPerformancesBetweenChargesTooltipFields(
     },
     {
       label: LANGUAGE.distanceTravelled,
-      value: (c) => `${c.finalOdometer - c.initialOdometer} Km`,
+      value: (c) => `${Number(c.finalOdometer) - Number(c.initialOdometer)} Km`,
     },
   ];
 }
 
 export function getLabelsForChargeGeoMap(
-  LANGUAGE: any,
-  data: any
-): TooltipField[] {
+  LANGUAGE: StringObject,
+  data: DataObject
+): TooltipGeoField[] {
   return [
     { label: LANGUAGE.initialFuel, value: `${data.initialFuel} L` },
     { label: LANGUAGE.finalFuel, value: `${data.finalFuel} L` },
     { label: LANGUAGE.totalCharges, value: `${data.magnitude} L` },
-    { label: LANGUAGE.address, value: data.address },
-    { label: LANGUAGE.lat, value: data.lat },
-    { label: LANGUAGE.lon, value: data.lon },
+    { label: LANGUAGE.address, value: `${data.address}` },
+    { label: LANGUAGE.lat, value: `${data.lat}` },
+    { label: LANGUAGE.lon, value: `${data.lon}` },
     { label: LANGUAGE.odometer, value: `${data.odometer} Km` },
     { label: LANGUAGE.speed, value: `${data.speed}  km/h` },
-    { label: LANGUAGE.ignition, value: data.ignition },
+    { label: LANGUAGE.ignition, value: `${data.ignition}` },
     {
       label: LANGUAGE.deviceBattery,
       value: `${data.deviceBattery} (%)`,
@@ -107,19 +121,19 @@ export function getLabelsForChargeGeoMap(
 }
 
 export function getLabelsForDischargeGeoMap(
-  LANGUAGE: any,
-  data: any
-): TooltipField[] {
+  LANGUAGE: StringObject,
+  data: DataObject
+): TooltipGeoField[] {
   return [
     { label: LANGUAGE.initialFuel, value: `${data.initialFuel} L` },
     { label: LANGUAGE.finalFuel, value: `${data.finalFuel} L` },
     { label: LANGUAGE.totalDischarges, value: `${data.magnitude} L` },
-    { label: LANGUAGE.address, value: data.address },
-    { label: LANGUAGE.lat, value: data.lat },
-    { label: LANGUAGE.lon, value: data.lon },
+    { label: LANGUAGE.address, value: `${data.address}` },
+    { label: LANGUAGE.lat, value: `${data.lat}` },
+    { label: LANGUAGE.lon, value: `${data.lon}` },
     { label: LANGUAGE.odometer, value: `${data.odometer} Km` },
     { label: LANGUAGE.speed, value: `${data.speed}  km/h` },
-    { label: LANGUAGE.ignition, value: data.ignition },
+    { label: LANGUAGE.ignition, value: `${data.ignition}` },
     {
       label: LANGUAGE.deviceBattery,
       value: `${data.deviceBattery} (%)`,
@@ -129,9 +143,9 @@ export function getLabelsForDischargeGeoMap(
 }
 
 export function getLabelsForLevelMessagesGeoMap(
-  LANGUAGE: any,
-  data: any
-): TooltipField[] {
+  LANGUAGE: StringObject,
+  data: DataObject
+): TooltipGeoField[] {
   return [
     {
       label: LANGUAGE.lat,
@@ -140,7 +154,7 @@ export function getLabelsForLevelMessagesGeoMap(
     { label: LANGUAGE.lon, value: `${data.lon}` },
     { label: LANGUAGE.odometer, value: `${data.odometer} Km` },
     { label: LANGUAGE.speed, value: `${data.speed}  km/h` },
-    { label: LANGUAGE.ignition, value: data.ignition },
+    { label: LANGUAGE.ignition, value: `${data.ignition}` },
     { label: LANGUAGE.deviceBattery, value: `${data.deviceBattery} (%)` },
     { label: LANGUAGE.mainPower, value: `${data.mainPower} (V)` },
     { label: LANGUAGE.tanks, value: `${data.tanks} (L)` },
@@ -148,10 +162,7 @@ export function getLabelsForLevelMessagesGeoMap(
 }
 
 // Constructor del tooltip
-function buildTooltipSection(
-  label: string,
-  value: string | number | null | undefined
-): string {
+function buildTooltipSection(label: string, value: string): string {
   return `
   <div style="width: 100%; font-size: 18px; display: flex; justify-content: space-between;">
     <strong>${label}:</strong> <p>${value}</p>
@@ -159,11 +170,11 @@ function buildTooltipSection(
   `;
 }
 
-export function createTooltipFormatter<T = any>(
-  fields: TooltipField<T>[]
-): (this: Highcharts.Point & { options: { custom: T } }) => string {
+export function createTooltipFormatter(
+  fields: TooltipField[]
+): (this: Highcharts.Point & { options: { custom: string } }) => string {
   return function (
-    this: Highcharts.Point & { options: { custom: T } }
+    this: Highcharts.Point & { options: { custom: string } }
   ): string {
     const c = this.options.custom;
 
