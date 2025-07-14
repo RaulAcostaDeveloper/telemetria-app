@@ -4,7 +4,7 @@ import authReducer from "@/globalConfig/redux/slices/authSlice";
 import calendarReducer from "@/globalConfig/redux/slices/calendarSlice";
 import devicesSlice from "@/globalConfig/redux/slices/devicesSlice";
 import driversSlice from "@/globalConfig/redux/slices/driversSlice";
-import fuelMetricsSlice from "@/globalConfig/redux/slices/fuelMetricsSlice";
+import fuelDataSlice from "@/globalConfig/redux/slices/fuelDataSlice";
 import fuelSummaryReducer from "@/globalConfig/redux/slices/fuelSummarySlice";
 import groupsSlice from "@/globalConfig/redux/slices/groupsSlice";
 import languageReducer from "@/globalConfig/redux/slices/languageSlice";
@@ -16,7 +16,7 @@ export const store = configureStore({
     calendar: calendarReducer,
     devices: devicesSlice,
     drivers: driversSlice,
-    fuelMetrics: fuelMetricsSlice,
+    fuelData: fuelDataSlice,
     fuelSummary: fuelSummaryReducer,
     groups: groupsSlice,
     languageOption: languageReducer,

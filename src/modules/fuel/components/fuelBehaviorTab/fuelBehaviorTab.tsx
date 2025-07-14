@@ -4,15 +4,15 @@ import GeoModal, {
   GeoModalData,
 } from "@/modules/global/components/geoModal/geoModal";
 import { FuelBehaviorHighChart } from "../FuelBehaviorHighChart/FuelBehaviorHighChart";
-import { FuelMetricsValues } from "@/globalConfig/redux/slices/fuelMetricsSlice";
+import { FuelDataValues } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  fuelMetricsData: FuelMetricsValues;
+  fuelDataData: FuelDataValues;
 }
 
-export const FuelBehaviorTab = ({ LANGUAGE, fuelMetricsData }: Props) => {
+export const FuelBehaviorTab = ({ LANGUAGE, fuelDataData }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [geoModalData, setGeoModalData] = useState<GeoModalData>();
 
@@ -25,7 +25,7 @@ export const FuelBehaviorTab = ({ LANGUAGE, fuelMetricsData }: Props) => {
     <div>
       <FuelBehaviorHighChart
         LANGUAGE={LANGUAGE}
-        fuelMetricsData={fuelMetricsData}
+        fuelDataData={fuelDataData}
         handleClicGeoData={handleClicGeoData}
       />
       {isModalOpen && geoModalData && (
