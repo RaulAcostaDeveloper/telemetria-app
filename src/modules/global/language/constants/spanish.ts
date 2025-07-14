@@ -210,6 +210,7 @@ export const SPANISH: LanguageInterface = {
       dailyPerformance: "Rendimiento diario",
     },
     fuelChargesLabels: {
+      date: "Fecha del evento",
       eventId: "Evento ID",
       address: "Dirección",
       lat: "Latitud",
