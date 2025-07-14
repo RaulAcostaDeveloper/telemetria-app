@@ -3,7 +3,7 @@ import { useState } from "react";
 import GeoModal, {
   GeoModalData,
 } from "@/modules/global/components/geoModal/geoModal";
-import { FuelHighChart } from "../fuelHighChart/fuelHighChart";
+import { FuelBehaviorHighChart } from "../FuelBehaviorHighChart/FuelBehaviorHighChart";
 import { FuelMetricsValues } from "@/globalConfig/redux/slices/fuelMetricsSlice";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 
@@ -23,7 +23,7 @@ export const FuelBehaviorTab = ({ LANGUAGE, fuelMetricsData }: Props) => {
 
   return (
     <div>
-      <FuelHighChart
+      <FuelBehaviorHighChart
         LANGUAGE={LANGUAGE}
         fuelMetricsData={fuelMetricsData}
         handleClicGeoData={handleClicGeoData}
