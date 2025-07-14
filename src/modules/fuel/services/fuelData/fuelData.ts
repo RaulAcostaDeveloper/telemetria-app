@@ -6,8 +6,8 @@ const url = "https://stage.transtelemetrix.com/api/analytics/fuel/devices";
 export async function getFuelData(
   imei: string,
   startDate: string,
-  endDate: string
-  // forceRefresh = true // Se le puede indicar que no busque en caché
+  endDate: string,
+  forceRefresh = true // Se le puede indicar que no busque en caché
 ) {
   // Construcción de la url con parámetros
   const fullUrl = `${url}/${imei}/data?startDate=${startDate}&endDate=${endDate}`;
@@ -22,7 +22,7 @@ export async function getFuelData(
       const res = await fetch(fullUrl);
       if (!res.ok) throw new Error("Error al obtener datos del dispositivo");
       return res.json();
-    }
-    // forceRefresh
+    },
+    forceRefresh
   );
 }

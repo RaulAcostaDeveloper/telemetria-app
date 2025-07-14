@@ -238,7 +238,6 @@ export const FuelBehaviorHighChart = ({
               },
             },
           },
-          dataLabels: { enabled: false },
           tooltip: {
             pointFormatter: createTooltipFormatter(chargesTooltipFields),
           },
@@ -268,7 +267,6 @@ export const FuelBehaviorHighChart = ({
               },
             },
           },
-          dataLabels: { enabled: false },
           tooltip: {
             pointFormatter: createTooltipFormatter(dischargesTooltipFields),
           },
@@ -338,7 +336,7 @@ export const FuelBehaviorHighChart = ({
         },
       },
       chart: {
-        height: 500,
+        height: 600,
         panning: true,
       },
       legend: {
