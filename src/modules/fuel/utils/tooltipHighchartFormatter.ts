@@ -9,7 +9,7 @@ export function getChargesTooltipFields(LANGUAGE: any): TooltipField[] {
     { label: LANGUAGE.initialFuel, value: (c) => `${c.initialFuel} L` },
     { label: LANGUAGE.finalFuel, value: (c) => `${c.finalFuel} L` },
     { label: LANGUAGE.totalCharges, value: (c) => `${c.magnitude} L` },
-    { label: LANGUAGE.address, value: (c) => c.address },
+    // { label: LANGUAGE.address, value: (c) => c.address },
     { label: LANGUAGE.lat, value: (c) => c.lat },
     { label: LANGUAGE.lon, value: (c) => c.lon },
     { label: LANGUAGE.odometer, value: (c) => `${c.odometer} Km` },
@@ -20,7 +20,6 @@ export function getChargesTooltipFields(LANGUAGE: any): TooltipField[] {
       value: (c) => `${c.deviceBattery} (%)`,
     },
     { label: LANGUAGE.mainPower, value: (c) => `${c.mainPower} (V)` },
-    { label: LANGUAGE.eventId, value: (c) => c.eventId },
   ];
 }
 
@@ -29,7 +28,7 @@ export function getDisChargesTooltipFields(LANGUAGE: any): TooltipField[] {
     { label: LANGUAGE.initialFuel, value: (c) => `${c.initialFuel} L` },
     { label: LANGUAGE.finalFuel, value: (c) => `${c.finalFuel} L` },
     { label: LANGUAGE.totalDischarges, value: (c) => `${c.magnitude} L` },
-    { label: LANGUAGE.address, value: (c) => c.address },
+    // { label: LANGUAGE.address, value: (c) => c.address },
     { label: LANGUAGE.lat, value: (c) => c.lat },
     { label: LANGUAGE.lon, value: (c) => c.lon },
     { label: LANGUAGE.odometer, value: (c) => `${c.odometer} Km` },
@@ -40,7 +39,6 @@ export function getDisChargesTooltipFields(LANGUAGE: any): TooltipField[] {
       value: (c) => `${c.deviceBattery} (%)`,
     },
     { label: LANGUAGE.mainPower, value: (c) => `${c.mainPower} (V)` },
-    { label: LANGUAGE.eventId, value: (c) => c.eventId },
   ];
 }
 
@@ -105,7 +103,6 @@ export function getLabelsForChargeGeoMap(
       value: `${data.deviceBattery} (%)`,
     },
     { label: LANGUAGE.mainPower, value: `${data.mainPower} (V)` },
-    { label: LANGUAGE.eventId, value: data.eventId },
   ];
 }
 
@@ -128,7 +125,6 @@ export function getLabelsForDischargeGeoMap(
       value: `${data.deviceBattery} (%)`,
     },
     { label: LANGUAGE.mainPower, value: `${data.mainPower} (V)` },
-    { label: LANGUAGE.eventId, value: data.eventId },
   ];
 }
 

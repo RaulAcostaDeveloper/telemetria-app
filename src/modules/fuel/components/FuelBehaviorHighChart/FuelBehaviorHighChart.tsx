@@ -28,7 +28,7 @@ if (typeof HighstockInit === "function") {
   (HighstockInit as (hc: typeof Highcharts) => void)(Highcharts);
 }
 
-export const FuelHighChart = ({
+export const FuelBehaviorHighChart = ({
   LANGUAGE,
   fuelMetricsData,
   handleClicGeoData,
@@ -57,7 +57,6 @@ export const FuelHighChart = ({
         x: new Date(c.dateGps).getTime(),
         y: c.magnitude,
         custom: {
-          eventId: c.eventId,
           address: c.address,
           lat: c.lat,
           lon: c.lon,
