@@ -107,7 +107,7 @@ interface InitialState {
 }
 
 export const fetchFuelData = createAsyncThunk(
-  "fuelMetrics/fetch",
+  "fuelData/fetch",
   async ({
     imei,
     startDate,
@@ -127,8 +127,8 @@ const initialState: InitialState = {
 };
 
 // Slice del servicio
-const fuelMetricsSlice = createSlice({
-  name: "fuelMetrics",
+const fuelDataSlice = createSlice({
+  name: "fuelData",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -146,4 +146,4 @@ const fuelMetricsSlice = createSlice({
   },
 });
 
-export default fuelMetricsSlice.reducer;
+export default fuelDataSlice.reducer;
