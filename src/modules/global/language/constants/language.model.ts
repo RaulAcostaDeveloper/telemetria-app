@@ -190,6 +190,7 @@ export interface LanguageInterface {
       dailyPerformance: string;
     };
     fuelChargesLabels: {
+      date: string;
       eventId: string;
       address: string;
       lat: string;
