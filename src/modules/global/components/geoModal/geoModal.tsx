@@ -23,9 +23,17 @@ interface Props {
   LANGUAGE: LanguageInterface;
   closeModal: () => void;
   geoModalData: GeoModalData;
+  height?: number;
+  width?: number;
 }
 
-const GeoModal = ({ LANGUAGE, closeModal, geoModalData }: Props) => {
+const GeoModal = ({
+  LANGUAGE,
+  closeModal,
+  geoModalData,
+  height,
+  width,
+}: Props) => {
   return (
     <Modal LANGUAGE={LANGUAGE} closeModal={closeModal}>
       <h3 className={styles.title}>{geoModalData.title}</h3>
@@ -40,8 +48,20 @@ const GeoModal = ({ LANGUAGE, closeModal, geoModalData }: Props) => {
             ))}
           </div>
         )}
-        <div className={styles.mapSide}>
-          <div className={styles.mapa}>
+        <div
+          className={styles.mapSide}
+          style={{
+            ...(width !== undefined && { width: `${width}px` }),
+            ...(height !== undefined && { height: `${height}px` }),
+          }}
+        >
+          <div
+            className={styles.mapa}
+            style={{
+              ...(width !== undefined && { width: `${width}px` }),
+              ...(height !== undefined && { height: `${height}px` }),
+            }}
+          >
             <GoogleMapClientOnly
               LANGUAGE={LANGUAGE}
               geoModalData={geoModalData}

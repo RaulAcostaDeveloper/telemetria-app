@@ -81,6 +81,8 @@ export const FuelNowContainer = ({ LANGUAGE }: Props) => {
           LANGUAGE={LANGUAGE}
           closeModal={() => setIsModalOpen(false)}
           geoModalData={geoModalData}
+          height={600}
+          width={600}
         />
       )}
 
