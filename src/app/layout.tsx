@@ -12,8 +12,9 @@ import {
 } from "@/globalConfig/fonts/fonts";
 
 export const metadata: Metadata = {
-  title: "Blackfyre - Transtelemetrix",
-  description: "Innovaria app for telemetrix",
+  title: "Core - Transtelemetrix",
+  description:
+    "Advanced web app for real-time monitoring and historial analysis of vehicle fleets",
 };
 
 export default function RootLayout({

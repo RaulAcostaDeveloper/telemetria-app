@@ -5,7 +5,7 @@ export const accountsDataMock = {
     accounts: [
       {
         id: 59669,
-        accountName: "Innovaria",
+        accountName: "Transtelemetrix",
       },
       {
         id: 61617,
