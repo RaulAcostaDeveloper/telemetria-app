@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+
 import dynamic from "next/dynamic";
 
 import styles from "./geoModal.module.css";
@@ -23,15 +23,17 @@ interface Props {
   LANGUAGE: LanguageInterface;
   closeModal: () => void;
   geoModalData: GeoModalData;
+  height?: number;
+  width?: number;
 }
 
-const GeoModal = ({ LANGUAGE, closeModal, geoModalData }: Props) => {
-  const [mapType, setMapType] = useState<"roadmap" | "satellite">("satellite");
-
-  const toggleMapType = () => {
-    setMapType((prev) => (prev === "roadmap" ? "satellite" : "roadmap"));
-  };
-
+const GeoModal = ({
+  LANGUAGE,
+  closeModal,
+  geoModalData,
+  height,
+  width,
+}: Props) => {
   return (
     <Modal LANGUAGE={LANGUAGE} closeModal={closeModal}>
       <h3 className={styles.title}>{geoModalData.title}</h3>
@@ -46,27 +48,24 @@ const GeoModal = ({ LANGUAGE, closeModal, geoModalData }: Props) => {
             ))}
           </div>
         )}
-        <div className={styles.mapSide}>
-          <div className={styles.toggleWrapper}>
-            <span className={styles.toggleLabel}>
-              {mapType === "roadmap"
-                ? LANGUAGE.fuelVehicle.geoModalTitles.roadmap
-                : LANGUAGE.fuelVehicle.geoModalTitles.satellite}
-            </span>
-            <label className={styles.toggleSwitch}>
-              <input
-                type="checkbox"
-                checked={mapType === "satellite"}
-                onChange={toggleMapType}
-              />
-              <span className={styles.slider}></span>
-            </label>
-          </div>
-          <div className={styles.mapa}>
+        <div
+          className={styles.mapSide}
+          style={{
+            ...(width !== undefined && { width: `${width}px` }),
+            ...(height !== undefined && { height: `${height}px` }),
+          }}
+        >
+          <div
+            className={styles.mapa}
+            style={{
+              ...(width !== undefined && { width: `${width}px` }),
+              ...(height !== undefined && { height: `${height}px` }),
+            }}
+          >
             <GoogleMapClientOnly
               LANGUAGE={LANGUAGE}
               geoModalData={geoModalData}
-              mapType={mapType}
+              mapType={"satellite"}
             />
           </div>
         </div>
