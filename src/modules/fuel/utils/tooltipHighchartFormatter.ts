@@ -1,3 +1,5 @@
+import { formatDateTime } from "@/modules/global/utils/utils";
+
 type StringObject = Record<string, string>;
 type DataObject = Record<string, string | number>;
 
@@ -16,7 +18,7 @@ export function getChargesTooltipFields(
   LANGUAGE: StringObject
 ): TooltipField[] {
   return [
-    { label: LANGUAGE.date, value: (c) => `${c.dateGps}` },
+    { label: LANGUAGE.date, value: (c) => `${formatDateTime(c.dateGps)}` },
     { label: LANGUAGE.initialFuel, value: (c) => `${c.initialFuel} L` },
     { label: LANGUAGE.finalFuel, value: (c) => `${c.finalFuel} L` },
     { label: LANGUAGE.totalCharges, value: (c) => `${c.magnitude} L` },
@@ -38,7 +40,7 @@ export function getDisChargesTooltipFields(
   LANGUAGE: StringObject
 ): TooltipField[] {
   return [
-    { label: LANGUAGE.date, value: (c) => `${c.dateGps}` },
+    { label: LANGUAGE.date, value: (c) => `${formatDateTime(c.dateGps)}` },
     { label: LANGUAGE.initialFuel, value: (c) => `${c.initialFuel} L` },
     { label: LANGUAGE.finalFuel, value: (c) => `${c.finalFuel} L` },
     { label: LANGUAGE.totalDischarges, value: (c) => `${c.magnitude} L` },
@@ -60,7 +62,7 @@ export function getLevelMessagesTooltipFields(
   LANGUAGE: StringObject
 ): TooltipField[] {
   return [
-    { label: LANGUAGE.date, value: (c) => `${c.dateGps}` },
+    { label: LANGUAGE.date, value: (c) => `${formatDateTime(c.dateGps)}` },
     { label: LANGUAGE.lat, value: (c) => c.lat },
     { label: LANGUAGE.lon, value: (c) => c.lon },
     { label: LANGUAGE.odometer, value: (c) => `${c.odometer} Km` },
@@ -79,7 +81,7 @@ export function getPerformancesBetweenChargesTooltipFields(
   LANGUAGE: StringObject
 ): TooltipField[] {
   return [
-    { label: LANGUAGE.date, value: (c) => `${c.dateGps}` },
+    { label: LANGUAGE.date, value: (c) => `${formatDateTime(c.dateGps)}` },
     {
       label: LANGUAGE.averagePerformance,
       value: (c) => `${c.averagePerformance}  Km/h`,
@@ -107,7 +109,10 @@ export function getLabelsForChargeGeoMap(
   data: DataObject
 ): TooltipGeoField[] {
   return [
-    { label: LANGUAGE.date, value: `${data.dateGps}` },
+    {
+      label: LANGUAGE.date,
+      value: `${formatDateTime(data.dateGps.toString())}`,
+    },
     { label: LANGUAGE.initialFuel, value: `${data.initialFuel} L` },
     { label: LANGUAGE.finalFuel, value: `${data.finalFuel} L` },
     { label: LANGUAGE.totalCharges, value: `${data.magnitude} L` },
@@ -130,7 +135,10 @@ export function getLabelsForDischargeGeoMap(
   data: DataObject
 ): TooltipGeoField[] {
   return [
-    { label: LANGUAGE.date, value: `${data.dateGps}` },
+    {
+      label: LANGUAGE.date,
+      value: `${formatDateTime(data.dateGps.toString())}`,
+    },
     { label: LANGUAGE.initialFuel, value: `${data.initialFuel} L` },
     { label: LANGUAGE.finalFuel, value: `${data.finalFuel} L` },
     { label: LANGUAGE.totalDischarges, value: `${data.magnitude} L` },
@@ -153,7 +161,10 @@ export function getLabelsForLevelMessagesGeoMap(
   data: DataObject
 ): TooltipGeoField[] {
   return [
-    { label: LANGUAGE.date, value: `${data.dateGps}` },
+    {
+      label: LANGUAGE.date,
+      value: `${formatDateTime(data.dateGps.toString())}`,
+    },
     {
       label: LANGUAGE.lat,
       value: `${data.lat}`,
