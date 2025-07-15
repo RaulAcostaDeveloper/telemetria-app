@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+
 import dynamic from "next/dynamic";
 
 import styles from "./geoModal.module.css";
@@ -26,12 +26,6 @@ interface Props {
 }
 
 const GeoModal = ({ LANGUAGE, closeModal, geoModalData }: Props) => {
-  const [mapType, setMapType] = useState<"roadmap" | "satellite">("satellite");
-
-  const toggleMapType = () => {
-    setMapType((prev) => (prev === "roadmap" ? "satellite" : "roadmap"));
-  };
-
   return (
     <Modal LANGUAGE={LANGUAGE} closeModal={closeModal}>
       <h3 className={styles.title}>{geoModalData.title}</h3>
@@ -47,26 +41,11 @@ const GeoModal = ({ LANGUAGE, closeModal, geoModalData }: Props) => {
           </div>
         )}
         <div className={styles.mapSide}>
-          <div className={styles.toggleWrapper}>
-            <span className={styles.toggleLabel}>
-              {mapType === "roadmap"
-                ? LANGUAGE.fuelVehicle.geoModalTitles.roadmap
-                : LANGUAGE.fuelVehicle.geoModalTitles.satellite}
-            </span>
-            <label className={styles.toggleSwitch}>
-              <input
-                type="checkbox"
-                checked={mapType === "satellite"}
-                onChange={toggleMapType}
-              />
-              <span className={styles.slider}></span>
-            </label>
-          </div>
           <div className={styles.mapa}>
             <GoogleMapClientOnly
               LANGUAGE={LANGUAGE}
               geoModalData={geoModalData}
-              mapType={mapType}
+              mapType={"satellite"}
             />
           </div>
         </div>
