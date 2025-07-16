@@ -29,6 +29,10 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
     (state: RootState) => state.fuelSummary
   );
 
+  const { brandsData, brandsStatus } = useSelector(
+    (state: RootState) => state.brands
+  );
+
   const callFetchFuelSummary = useCallback(() => {
     dispatch(
       fetchFuelSummary({
@@ -118,14 +122,21 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
 
   return (
     <div>
-      <FuelFilter
-        LANGUAGE={LANGUAGE}
-        callFetchFuelSummary={callFetchFuelSummary}
-      />
+      {brandsStatus === "succeeded" && brandsData ? (
+        <FuelFilter
+          LANGUAGE={LANGUAGE}
+          callFetchFuelSummary={callFetchFuelSummary}
+          brandsData={brandsData.value.brands.map((item) => item.name)}
+        />
+      ) : (
+        // Añadir un loading
+        <div>...</div>
+      )}
+
       <div className={styles.topResumeData}>
         {fuelSummaryStatus === "succeeded" && fuelSummaryData ? (
           <>
-            <ReportSummary summaryValues={fuelSummaryData.value}/>
+            <ReportSummary summaryValues={fuelSummaryData.value} />
             <DonutGraphic devices={fuelSummaryData.value.devices} />
           </>
         ) : (

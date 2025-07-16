@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import authReducer from "@/globalConfig/redux/slices/authSlice";
+import brandsSlice from "@/globalConfig/redux/slices/brandsSlice";
 import calendarReducer from "@/globalConfig/redux/slices/calendarSlice";
 import devicesSlice from "@/globalConfig/redux/slices/devicesSlice";
 import driversSlice from "@/globalConfig/redux/slices/driversSlice";
@@ -14,6 +15,7 @@ import vehiclesSlice from "@/globalConfig/redux/slices/vehiclesSlice";
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+    brands: brandsSlice,
     calendar: calendarReducer,
     devices: devicesSlice,
     drivers: driversSlice,
