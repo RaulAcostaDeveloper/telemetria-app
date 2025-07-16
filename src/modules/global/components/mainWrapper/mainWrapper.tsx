@@ -18,11 +18,12 @@ import { PageContainer } from "../pageContainer/pageContainer";
 import { SPANISH } from "../../language/constants/spanish";
 import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
 import { UserData } from "@/globalConfig/redux/slices/authSlice";
-import { useAuth } from "../../../auth/utils";
-import { fetchVehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
+import { fetchBrands } from "@/globalConfig/redux/slices/brandsSlice";
 import { fetchDevices } from "@/globalConfig/redux/slices/devicesSlice";
 import { fetchDrivers } from "@/globalConfig/redux/slices/driversSlice";
 import { fetchGroups } from "@/globalConfig/redux/slices/groupsSlice";
+import { fetchVehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
+import { useAuth } from "../../../auth/utils";
 
 interface Props {
   children: React.ReactNode;
@@ -130,6 +131,7 @@ export const MainWrapper = ({ children }: Props) => {
           accountId: "62856",
         })
       );
+      dispatch(fetchBrands());
     }
   }, [dispatch, isAuthenticated]);
 
