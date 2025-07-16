@@ -7,9 +7,9 @@ import Calendar from "@/modules/global/components/calendar/Calendar";
 import HeaderVehicleFilter from "./headerVehicleFilter/headerVehicleFilter";
 import styles from "./header.module.css";
 import { formatDateTime } from "@/modules/global/utils/utils";
-import { isSingleFuelPage } from "./utils";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { HeaderBackButton } from "./headerBackButton/headerBackButton";
+import { HeaderTextContent } from "./headerTextContent/headerTextContent";
 
 interface CalendarState {
   endDate: string | null;
@@ -29,7 +29,6 @@ export const Header = ({ isMenuOpen, LANGUAGE }: Props) => {
   const [mounted, setMounted] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const pathname = usePathname();
-  const areWeinSingleFuelPage = isSingleFuelPage(pathname);
 
   const { startDate: reduxStartDate, endDate: reduxEndDate } = useSelector(
     (state: RootState) => state.calendar
@@ -63,12 +62,7 @@ export const Header = ({ isMenuOpen, LANGUAGE }: Props) => {
               <div className={styles.subContainer}>
                 {" "}
                 <HeaderBackButton LANGUAGE={LANGUAGE} />
-                {areWeinSingleFuelPage && (
-                  <div className={styles.platesAndName}>
-                    <span>VA4784A</span>
-                    <span>HILUX</span>
-                  </div>
-                )}
+                <HeaderTextContent LANGUAGE={LANGUAGE} currentUrl={pathname}/>
               </div>
 
               <div className={styles.inputAndDatesContainer}>

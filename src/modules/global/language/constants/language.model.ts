@@ -2,6 +2,11 @@
 
 export interface LanguageInterface {
   localeLanguage: string;
+  sectionName: {
+    home: string;
+    management: string;
+    fuel: string;
+  };
   header: {
     backButton: {
       hover: string;
@@ -38,10 +43,7 @@ export interface LanguageInterface {
   menu: {
     titles: {
       close: string;
-      fuel: string;
-      home: string;
       logo: string;
-      management: string;
       open: string;
     };
     buttons: {
