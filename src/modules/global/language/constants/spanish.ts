@@ -2,6 +2,11 @@ import { LanguageInterface } from "./language.model";
 
 export const SPANISH: LanguageInterface = {
   localeLanguage: "ex-MX",
+  sectionName: {
+    home: "Inicio",
+    management: "Recursos",
+    fuel: "Combustible",
+  },
   header: {
     backButton: {
       hover: "Regresar",
@@ -57,11 +62,8 @@ export const SPANISH: LanguageInterface = {
   },
   menu: {
     titles: {
-      home: "Inicio",
       close: "Cerrar menú",
-      fuel: "Combustible",
       logo: "Logo de la compañía",
-      management: "Recursos",
       open: "Abrir menú",
     },
     buttons: {

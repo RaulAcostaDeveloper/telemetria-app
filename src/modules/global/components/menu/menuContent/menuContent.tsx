@@ -24,17 +24,17 @@ export const MenuContent = ({ isOpen, LANGUAGE, logoutHook }: Props) => {
     {
       icon: HomeIcon,
       route: "/home",
-      title: LANGUAGE.menu.titles.home,
+      title: LANGUAGE.sectionName.home,
     },
     {
       icon: AddCardIcon,
       route: "/management",
-      title: LANGUAGE.menu.titles.management,
+      title: LANGUAGE.sectionName.management,
     },
     {
       icon: LocalGasStationIcon,
       route: "/fuel",
-      title: LANGUAGE.menu.titles.fuel,
+      title: LANGUAGE.sectionName.fuel,
     },
   ];
 
