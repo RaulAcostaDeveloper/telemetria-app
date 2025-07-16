@@ -4,7 +4,7 @@ export const ENGLISH: LanguageInterface = {
   localeLanguage: "en-US",
   sectionName: {
     home: "Home",
-    management: "Recursos",
+    management: "Management",
     fuel: "Fuel",
   },
   header: {
