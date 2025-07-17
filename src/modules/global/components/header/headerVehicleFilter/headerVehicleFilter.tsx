@@ -58,9 +58,9 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
     setShowDropdown(false);
   }, [pathname]);
 
-  /** Filtra todos los resultados que coincidan por "carNumber" */
-  const filteredByCarNumber = vehiclesData?.value.vehicles?.filter((v) =>
-    v.carNumber.toLowerCase().includes(query.toLowerCase())
+  /** Filtra todos los resultados que coincidan por "plate" */
+  const filteredByPlate = vehiclesData?.value.vehicles?.filter((v) =>
+    v.plate.toLowerCase().includes(query.toLowerCase())
   );
   /** Filtra todos los resultados que coincidan por el primer "imeIs" en el array.
   *   Ejemplo imei con proposito de saber que teclear en input: 868689060250000 */
@@ -75,24 +75,24 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
   };
 
   function answerScenarios(){
-    let hasCarNumber, hasIMEI = false;
-    filteredByCarNumber && filteredByCarNumber.length > 0 ? hasCarNumber = true : hasCarNumber = false
+    let hasPlate, hasIMEI = false;
+    filteredByPlate && filteredByPlate.length > 0 ? hasPlate = true : hasPlate = false
     filteredByImei && filteredByImei.length > 0 ? hasIMEI = true : hasIMEI = false
 
     /** Se hace una busqueda, y existe informacion de IMEI o de placas */
-    if(showDropdown && query && (hasIMEI || hasCarNumber)){
+    if(showDropdown && query && (hasIMEI || hasPlate)){
       let filteredByPivot: Vehicles[] =[];
       hasIMEI ? 
         filteredByPivot = filteredByImei as Vehicles[]
         : 
-        hasCarNumber && (filteredByPivot = filteredByCarNumber as Vehicles[])
+        hasPlate && (filteredByPivot = filteredByPlate as Vehicles[])
 
       return (
         <ul className={styles.dropdown}>
           {filteredByPivot.map((v, i) => (
             <li key={i} className={styles.dropdownItem}>
               <div className={styles.vehicleDetails}>
-                <strong>{v.carNumber}</strong> - <span>{v.carLabel}</span>
+                <strong>{v.plate}</strong> - <span>{v.brand}</span>
               </div>
               <div className={styles.buttonsContainer}>
                 {(
@@ -125,7 +125,7 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
           ))}
         </ul>
       )
-    }else if(showDropdown && query && !hasIMEI && !hasCarNumber){
+    }else if(showDropdown && query && !hasIMEI && !hasPlate){
       /** Cuando la consulta a vehículo no coincide con la lista de IMEIs ni de placas. */
       return(
         <ul className={styles.dropdown}>

@@ -3,16 +3,15 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 interface Devices { 
   id: number,
+  name: string,
+  type: string,
+  brand: string,
+  createdAt: string,
   model: string,
-  modelVersion: string,
-  status: string,
-  statusAt: string,
-  serial: string,
-  sim: string,
-  firmware: string,
-  hardware: string,
   imei: string,
-  lastDataAt: string,
+  phoneNumber: string,
+  status: string,
+  registrationDate: string,
 }
 
 interface ArrayDevices {

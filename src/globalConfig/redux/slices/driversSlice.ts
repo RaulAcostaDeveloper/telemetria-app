@@ -4,12 +4,15 @@ import { getDrivers } from "@/modules/management/services/drivers/drivers";
 interface Drivers {
   id: number;
   name: string;
-  created: string;
   email: string;
-  language: string;
-  phone: string;
-  surname: string;
+  lastName: string;
+  address: string;
+  entryDate: string;
+  alias: string;
+  groupName: string;
+  license: string;
 }
+
 
 interface ArrayDrivers {
   drivers: Drivers[];

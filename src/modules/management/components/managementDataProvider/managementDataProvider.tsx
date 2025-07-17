@@ -1,6 +1,7 @@
 "use client";
 import { useSelector } from "react-redux";
 import { RootState } from "@/globalConfig/redux/store";
+import { formatDateTime } from "@/modules/global/utils/utils";
 
 //Tipado
 import {
@@ -33,6 +34,20 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     (state: RootState) => state.groups
   );
 
+  function ndIfEmptyStr(evaluatedStr: string | null){
+    let reviewedStr = "ND";
+    /* La funcion trim() remueve espacios a ambas orillas de una cadena, con ello quitamos la
+      posibilidad de cadenas con espacios vacios. Luego, usé doble condicional porque segun
+      el interprete web existe la posibilidad de que trim() genere un valor null. */
+    if(evaluatedStr && 0 < evaluatedStr.length){
+      evaluatedStr = evaluatedStr.trim()
+      if(evaluatedStr && 0 < evaluatedStr.length){
+        reviewedStr = evaluatedStr;
+      }
+    }
+    return reviewedStr;
+  }
+
   const fuelTabs = [
     LANGUAGE.management.tabs.vehicles,
     LANGUAGE.management.tabs.devices,
@@ -45,21 +60,36 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   const vehicleColumns: columnsTable = [
     {
       columnName: LANGUAGE.management.tableColumns.id,
-      defaultSpace: 3,
+      defaultSpace: 6,
     },
     {
       columnName: LANGUAGE.management.tableColumns.plates,
-      defaultSpace: 4,
+      defaultSpace: 2,
       orderColumn: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.brand,
-      defaultSpace: 5,
-      filterSelector: true,
+      defaultSpace: 3,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.model,
+      defaultSpace: 2,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.vehicleType,
+      defaultSpace: 3,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.year,
+      defaultSpace: 1,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.serialNumber,
+      defaultSpace: 3,
     },
     {
       columnName: LANGUAGE.management.tableColumns.alias,
-      defaultSpace: 6,
+      defaultSpace: 3,
       orderColumn: true,
     },
   ];
@@ -68,39 +98,67 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   const vehiclesTableData: dataTable | undefined =
     vehiclesData?.value.vehicles.map((value) => ({
       id: value.id,
-      carNumber: value.carNumber,
-      carLabel: value.carLabel,
-      carShortcut: value.carShortcut,
-      imeIs: value.imeIs[0],
+      plate: ndIfEmptyStr(value.plate),
+      brand: ndIfEmptyStr(value.brand),
+      model: ndIfEmptyStr(value.model),
+      vehicleType: ndIfEmptyStr(value.vehicleType),
+      year: ndIfEmptyStr(value.year),
+      serialNumber: ndIfEmptyStr(value.serialNumber),
+      imeIs: ndIfEmptyStr(value.imeIs[0]),
     }));
 
   // falta numero de teléfono, fecha de registro, poner tarjeta SIM
   const devicesColumns: columnsTable = [
     {
       columnName: LANGUAGE.management.tableColumns.imei,
-      defaultSpace: 4,
+      defaultSpace: 3,
     },
     {
       columnName: LANGUAGE.management.tableColumns.model,
       defaultSpace: 2,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.version,
-      defaultSpace: 2,
+      columnName: LANGUAGE.management.tableColumns.brand,
+      defaultSpace: 3,
     },
     {
       columnName: LANGUAGE.management.tableColumns.status,
       defaultSpace: 2,
       filterSelector: true,
     },
+    {
+      columnName: LANGUAGE.management.tableColumns.name,
+      defaultSpace: 4,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.type,
+      defaultSpace: 2,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.createdAt,
+      defaultSpace: 4,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.phoneNumber,
+      defaultSpace: 3,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.registrationDate,
+      defaultSpace: 4,
+    }
   ];
 
   const devicesTableData: dataTable | undefined =
     devicesData?.value.devices.map((value) => ({
-      imei: value.imei,
-      model: value.model,
-      modelVersion: value.modelVersion,
-      status: value.status,
+      imei: ndIfEmptyStr(value.imei),
+      model: ndIfEmptyStr(value.model),
+      brand: ndIfEmptyStr(value.brand),
+      status: ndIfEmptyStr(value.status),
+      name: ndIfEmptyStr(value.name),
+      type: ndIfEmptyStr(value.type),
+      createdAt: formatDateTime(value.createdAt),
+      phoneNumber: ndIfEmptyStr(value.phoneNumber),
+      registrationDate: formatDateTime(value.registrationDate),
     }));
 
   const groupsColumns: columnsTable = [
@@ -116,7 +174,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   const groupsTableData: dataTable | undefined = groupsData?.value.groups.map(
     (value) => ({
       id: value.id,
-      name: value.name,
+      name: ndIfEmptyStr(value.name),
     })
   );
 
@@ -131,25 +189,45 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     },
     {
       columnName: LANGUAGE.management.tableColumns.lastnames,
-      defaultSpace: 3,
+      defaultSpace: 4,
       orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.celphone,
-      defaultSpace: 2,
     },
     {
       columnName: LANGUAGE.management.tableColumns.email,
       defaultSpace: 4,
     },
+    {
+      columnName: LANGUAGE.management.tableColumns.address,
+      defaultSpace: 4,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.entryDate,
+      defaultSpace: 2,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.alias,
+      defaultSpace: 3,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.groupName,
+      defaultSpace: 4,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.license,
+      defaultSpace: 2,
+    },
   ];
 
   const driversTableData: dataTable | undefined =
     driversData?.value.drivers.map((value) => ({
-      name: value.name,
-      surname: value.surname,
-      phone: value.phone,
-      email: value.email,
+      name: ndIfEmptyStr(value.name),
+      lastName: ndIfEmptyStr(value.lastName),
+      email: ndIfEmptyStr(value.email),
+      address: ndIfEmptyStr(value.address),
+      entryDate: ndIfEmptyStr(value.entryDate),
+      alias: ndIfEmptyStr(value.alias),
+      groupName: ndIfEmptyStr(value.groupName),
+      license: ndIfEmptyStr(value.license)
     }));
 
   return (

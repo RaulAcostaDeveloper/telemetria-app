@@ -3,9 +3,13 @@ import { getVehicles } from "@/modules/management/services/vehicles/vehicles";
 
 export interface Vehicles {
   id: number;
-  carNumber: string;
-  carLabel: string;
-  carShortcut: string;
+  plate: string;
+  brand: string;
+  model: string;
+  vehicleType: string;
+  year: string;
+  serialNumber: string;
+  driver: string;
   imeIs: string[] | []; //Un vehículo puede no tener IMEIs asignadas
 }
 
