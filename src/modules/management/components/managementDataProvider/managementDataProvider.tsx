@@ -34,20 +34,6 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     (state: RootState) => state.groups
   );
 
-  function ndIfEmptyStr(evaluatedStr: string | null){
-    let reviewedStr = "ND";
-    /* La funcion trim() remueve espacios a ambas orillas de una cadena, con ello quitamos la
-      posibilidad de cadenas con espacios vacios. Luego, usé doble condicional porque segun
-      el interprete web existe la posibilidad de que trim() genere un valor null. */
-    if(evaluatedStr && 0 < evaluatedStr.length){
-      evaluatedStr = evaluatedStr.trim()
-      if(evaluatedStr && 0 < evaluatedStr.length){
-        reviewedStr = evaluatedStr;
-      }
-    }
-    return reviewedStr;
-  }
-
   const fuelTabs = [
     LANGUAGE.management.tabs.vehicles,
     LANGUAGE.management.tabs.devices,
@@ -59,12 +45,17 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   // En grupo, poder filtrar por nombre del grupo
   const vehicleColumns: columnsTable = [
     {
-      columnName: LANGUAGE.management.tableColumns.id,
-      defaultSpace: 6,
+      columnName: LANGUAGE.management.tableColumns.serialNumber,
+      defaultSpace: 3,
     },
     {
       columnName: LANGUAGE.management.tableColumns.plates,
       defaultSpace: 2,
+      orderColumn: true,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.alias,
+      defaultSpace: 3,
       orderColumn: true,
     },
     {
@@ -84,27 +75,29 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       defaultSpace: 1,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.serialNumber,
-      defaultSpace: 3,
+      columnName: LANGUAGE.management.tableColumns.driver,
+      defaultSpace: 4,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.alias,
+      columnName: LANGUAGE.management.tableColumns.groupName,
       defaultSpace: 3,
-      orderColumn: true,
     },
   ];
 
   // Ejemplo de como añadir o quitar elementos en la tabla
   const vehiclesTableData: dataTable | undefined =
     vehiclesData?.value.vehicles.map((value) => ({
+      serialNumber: value.serialNumber,
+      plate: value.plate,
+      name: value.name,
+      brand: value.brand,
+      model: value.model,
+      vehicleType: value.vehicleType,
+      year: value.year,
+      driver: value.driver,
+      group: value.group,
+      imeIs: value.imeIs, ///aqui name, no mostrar imeis pero si que exista.
       id: value.id,
-      plate: ndIfEmptyStr(value.plate),
-      brand: ndIfEmptyStr(value.brand),
-      model: ndIfEmptyStr(value.model),
-      vehicleType: ndIfEmptyStr(value.vehicleType),
-      year: ndIfEmptyStr(value.year),
-      serialNumber: ndIfEmptyStr(value.serialNumber),
-      imeIs: ndIfEmptyStr(value.imeIs[0]),
     }));
 
   // falta numero de teléfono, fecha de registro, poner tarjeta SIM
@@ -150,14 +143,14 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
 
   const devicesTableData: dataTable | undefined =
     devicesData?.value.devices.map((value) => ({
-      imei: ndIfEmptyStr(value.imei),
-      model: ndIfEmptyStr(value.model),
-      brand: ndIfEmptyStr(value.brand),
-      status: ndIfEmptyStr(value.status),
-      name: ndIfEmptyStr(value.name),
-      type: ndIfEmptyStr(value.type),
+      imei: value.imei,
+      model: value.model,
+      brand: value.brand,
+      status: value.status,
+      name: value.name,
+      type: value.type,
       createdAt: formatDateTime(value.createdAt),
-      phoneNumber: ndIfEmptyStr(value.phoneNumber),
+      phoneNumber: value.phoneNumber,
       registrationDate: formatDateTime(value.registrationDate),
     }));
 
@@ -174,7 +167,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   const groupsTableData: dataTable | undefined = groupsData?.value.groups.map(
     (value) => ({
       id: value.id,
-      name: ndIfEmptyStr(value.name),
+      group: value.name,
     })
   );
 
@@ -220,14 +213,14 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
 
   const driversTableData: dataTable | undefined =
     driversData?.value.drivers.map((value) => ({
-      name: ndIfEmptyStr(value.name),
-      lastName: ndIfEmptyStr(value.lastName),
-      email: ndIfEmptyStr(value.email),
-      address: ndIfEmptyStr(value.address),
-      entryDate: ndIfEmptyStr(value.entryDate),
-      alias: ndIfEmptyStr(value.alias),
-      groupName: ndIfEmptyStr(value.groupName),
-      license: ndIfEmptyStr(value.license)
+      name: value.name,
+      lastName: value.lastName,
+      email: value.email,
+      address: value.address,
+      entryDate: value.entryDate,
+      alias: value.alias,
+      groupName: value.groupName,
+      license: value.license
     }));
 
   return (

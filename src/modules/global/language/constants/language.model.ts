@@ -261,6 +261,7 @@ export interface LanguageInterface {
       celphone: string;
       createdAt: string;
       date: string;
+      driver: string;
       email: string;
       entryDate: string;
       firmware: string;

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getDrivers } from "@/modules/management/services/drivers/drivers";
+import { ndIfEmpty } from "@/globalConfig/utils/utils";
 
 interface Drivers {
   id: number;
@@ -41,6 +42,24 @@ const initialState: InitialState = {
   driversStatus: "idle",
 };
 
+/** Asigna "ND" a valores null, undefined y cadenas vacias.*/
+function setObjNDIfEmpty(payload: Data){
+  const revisedArr = payload.value.drivers.map( (driver) => {
+    //No altera a driver.id
+    driver.name = ndIfEmpty(driver.name).toString();
+    driver.email = ndIfEmpty(driver.email).toString();
+    driver.lastName = ndIfEmpty(driver.lastName).toString();
+    driver.address = ndIfEmpty(driver.address).toString();
+    driver.entryDate = ndIfEmpty(driver.entryDate).toString();
+    driver.alias = ndIfEmpty(driver.alias).toString();
+    driver.groupName = ndIfEmpty(driver.groupName).toString();
+    driver.license = ndIfEmpty(driver.license).toString();
+    return driver
+  })
+  payload.value.drivers = revisedArr;
+  return payload;
+}
+
 // Slice del servicio
 const driversSlice = createSlice({
   name: "drivers",
@@ -53,7 +72,7 @@ const driversSlice = createSlice({
       })
       .addCase(fetchDrivers.fulfilled, (state, action) => {
         state.driversStatus = "succeeded";
-        state.driversData = action.payload;
+        state.driversData = setObjNDIfEmpty(action.payload);
       })
       .addCase(fetchDrivers.rejected, (state) => {
         state.driversStatus = "failed";

@@ -281,6 +281,7 @@ export const SPANISH: LanguageInterface = {
       celphone: "Teléfono",
       createdAt: "Fecha de creación",
       date: "Fecha",
+      driver: "Conductor",
       email: "Correo electrónico",
       entryDate: "Fecha de ingreso",
       firmware: "Firmware",
