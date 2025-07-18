@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getGroups } from "@/modules/management/services/groups/groups";
+import { ndIfEmpty } from "@/globalConfig/utils/utils";
 
 interface Groups {
   id: number;
@@ -33,6 +34,16 @@ const initialState: InitialState = {
   groupsStatus: "idle",
 };
 
+function setObjNDIfEmpty(payload: Data){
+    const revisedArr = payload.value.groups.map( (group) => {
+    //No altera a group.id
+    group.name = ndIfEmpty(group.name).toString();
+    return group
+  })
+  payload.value.groups = revisedArr;
+  return payload;
+}
+
 // Slice del servicio
 const groupsSlice = createSlice({
   name: "groups",
@@ -45,7 +56,7 @@ const groupsSlice = createSlice({
       })
       .addCase(fetchGroups.fulfilled, (state, action) => {
         state.groupsStatus = "succeeded";
-        state.groupsData = action.payload;
+        state.groupsData = setObjNDIfEmpty(action.payload);
       })
       .addCase(fetchGroups.rejected, (state) => {
         state.groupsStatus = "failed";

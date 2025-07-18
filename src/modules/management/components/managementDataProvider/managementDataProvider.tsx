@@ -1,6 +1,7 @@
 "use client";
 import { useSelector } from "react-redux";
 import { RootState } from "@/globalConfig/redux/store";
+import { formatDateTime } from "@/modules/global/utils/utils";
 
 //Tipado
 import {
@@ -44,63 +45,113 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   // En grupo, poder filtrar por nombre del grupo
   const vehicleColumns: columnsTable = [
     {
-      columnName: LANGUAGE.management.tableColumns.id,
+      columnName: LANGUAGE.management.tableColumns.serialNumber,
       defaultSpace: 3,
     },
     {
       columnName: LANGUAGE.management.tableColumns.plates,
-      defaultSpace: 4,
+      defaultSpace: 2,
+      orderColumn: true,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.alias,
+      defaultSpace: 3,
       orderColumn: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.brand,
-      defaultSpace: 5,
-      filterSelector: true,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.alias,
-      defaultSpace: 6,
-      orderColumn: true,
-    },
-  ];
-
-  // Ejemplo de como añadir o quitar elementos en la tabla
-  const vehiclesTableData: dataTable | undefined =
-    vehiclesData?.value.vehicles.map((value) => ({
-      id: value.id,
-      carNumber: value.carNumber,
-      carLabel: value.carLabel,
-      carShortcut: value.carShortcut,
-      imeIs: value.imeIs[0],
-    }));
-
-  // falta numero de teléfono, fecha de registro, poner tarjeta SIM
-  const devicesColumns: columnsTable = [
-    {
-      columnName: LANGUAGE.management.tableColumns.imei,
-      defaultSpace: 4,
+      defaultSpace: 3,
     },
     {
       columnName: LANGUAGE.management.tableColumns.model,
       defaultSpace: 2,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.version,
+      columnName: LANGUAGE.management.tableColumns.vehicleType,
+      defaultSpace: 3,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.year,
+      defaultSpace: 1,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.driver,
+      defaultSpace: 4,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.groupName,
+      defaultSpace: 3,
+    },
+  ];
+
+  // Ejemplo de como añadir o quitar elementos en la tabla
+  const vehiclesTableData: dataTable | undefined =
+    vehiclesData?.value.vehicles.map((value) => ({
+      serialNumber: value.serialNumber,
+      plate: value.plate,
+      name: value.name,
+      brand: value.brand,
+      model: value.model,
+      vehicleType: value.vehicleType,
+      year: value.year,
+      driver: value.driver,
+      group: value.group,
+      imeIs: value.imeIs, ///aqui name, no mostrar imeis pero si que exista.
+      id: value.id,
+    }));
+
+  // falta numero de teléfono, fecha de registro, poner tarjeta SIM
+  const devicesColumns: columnsTable = [
+    {
+      columnName: LANGUAGE.management.tableColumns.imei,
+      defaultSpace: 3,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.model,
       defaultSpace: 2,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.brand,
+      defaultSpace: 3,
     },
     {
       columnName: LANGUAGE.management.tableColumns.status,
       defaultSpace: 2,
       filterSelector: true,
     },
+    {
+      columnName: LANGUAGE.management.tableColumns.name,
+      defaultSpace: 4,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.type,
+      defaultSpace: 2,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.createdAt,
+      defaultSpace: 4,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.phoneNumber,
+      defaultSpace: 3,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.registrationDate,
+      defaultSpace: 4,
+    }
   ];
 
   const devicesTableData: dataTable | undefined =
     devicesData?.value.devices.map((value) => ({
       imei: value.imei,
       model: value.model,
-      modelVersion: value.modelVersion,
+      brand: value.brand,
       status: value.status,
+      name: value.name,
+      type: value.type,
+      createdAt: formatDateTime(value.createdAt),
+      phoneNumber: value.phoneNumber,
+      registrationDate: formatDateTime(value.registrationDate),
     }));
 
   const groupsColumns: columnsTable = [
@@ -116,7 +167,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   const groupsTableData: dataTable | undefined = groupsData?.value.groups.map(
     (value) => ({
       id: value.id,
-      name: value.name,
+      group: value.name,
     })
   );
 
@@ -131,25 +182,45 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     },
     {
       columnName: LANGUAGE.management.tableColumns.lastnames,
-      defaultSpace: 3,
+      defaultSpace: 4,
       orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.celphone,
-      defaultSpace: 2,
     },
     {
       columnName: LANGUAGE.management.tableColumns.email,
       defaultSpace: 4,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.address,
+      defaultSpace: 4,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.entryDate,
+      defaultSpace: 2,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.alias,
+      defaultSpace: 3,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.groupName,
+      defaultSpace: 4,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.license,
+      defaultSpace: 2,
     },
   ];
 
   const driversTableData: dataTable | undefined =
     driversData?.value.drivers.map((value) => ({
       name: value.name,
-      surname: value.surname,
-      phone: value.phone,
+      lastName: value.lastName,
       email: value.email,
+      address: value.address,
+      entryDate: value.entryDate,
+      alias: value.alias,
+      groupName: value.groupName,
+      license: value.license
     }));
 
   return (

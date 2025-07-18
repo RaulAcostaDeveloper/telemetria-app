@@ -126,3 +126,90 @@ export const vehidlesDataMock = {
     ],
   },
 };
+
+/*
+ * La nueva estructura es:
+De: carNumber
+A: plate ó (prefijo)Plate
+
+De: carLabel
+A: brand
+
+De: carShortcut
+A: model
+
+etc...
+ */
+
+/*
+  value: {
+    vehicles: [
+      {
+        "id": "086a618e-ed5b-463f-8688-3fbc025b6fde",
+        "name": "Nissan Versa",
+        "clientOwnerName": "DEMO Transtelemetrix",
+        "plate": "PHX4714",
+        "driver": "",
+        "group": "Grupo TTLRX                                                                                                                                                                                                                                                                                                 ",
+        "brand": "Nissan",
+        "model": "Versa",
+        "year": 2025,
+        "color": "",
+        "serialNumber": "",
+        "economicNumber": "",
+        "vehicleType": "Sedan",
+        "createdAt": "2025-07-02T21:44:34.557",
+        "imeIs": [
+          "868589060256248",
+          "868589060286575",
+          "868589060157016",
+          "863457051635025"
+        ]
+      },
+      {
+        "id": "52fd1671-58af-4898-a5a4-5fb4680172a9",
+        "name": "Chevrolet Aveo",
+        "clientOwnerName": "DEMO Transtelemetrix",
+        "plate": "PHX4713",
+        "driver": "Ivan Rosales Barreto",
+        "group": "Grupo TTLRX                                                                                                                                                                                                                                                                                                 ",
+        "brand": "Chevrolet",
+        "model": "Aveo",
+        "year": 2017,
+        "color": "",
+        "serialNumber": "3N1CN8AE9SK609416",
+        "economicNumber": "",
+        "vehicleType": "Sedan",
+        "createdAt": "2025-07-02T21:44:39.417",
+        "imeIs": [
+          "868589060256248",
+          "868589060286575",
+          "868589060157016",
+          "863457051635025"
+        ]
+      },
+      {
+        "id": "1e907adb-c82f-4171-83ab-83bbab74ab7b",
+        "name": "Activo Simulado 1",
+        "clientOwnerName": "DEMO Transtelemetrix",
+        "plate": " ",
+        "driver": "",
+        "group": null,
+        "brand": null,
+        "model": " ",
+        "year": 0,
+        "color": " ",
+        "serialNumber": "",
+        "economicNumber": " ",
+        "vehicleType": "Caja Señuelo",
+        "createdAt": "2025-07-02T21:43:56.69",
+        "imeIs": [
+          "868589060256248",
+          "868589060286575",
+          "868589060157016",
+          "863457051635025"
+        ]
+      }
+    ]
+  }
+*/
