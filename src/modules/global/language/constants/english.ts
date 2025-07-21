@@ -264,6 +264,14 @@ export const ENGLISH: LanguageInterface = {
       performance: "Performance (L)",
     },
   },
+  onBoardDiagnosticsVehicle: {
+    tabs: {
+      averageRpm: "Average RPM",
+      analysis: "Analysis",
+      totalDistance: "Total distance",
+      totalTimeWorked: "Total time worked",
+    },
+  },
   management: {
     tabs: {
       vehicles: "Vehicles",
