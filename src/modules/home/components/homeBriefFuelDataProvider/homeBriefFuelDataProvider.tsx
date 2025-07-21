@@ -18,29 +18,29 @@ interface Props {
   LANGUAGE: LanguageInterface;
 }
 
-export const HomeBriefFuelDataProvider = ({ LANGUAGE}: Props) => {
+export const HomeBriefFuelDataProvider = ({ LANGUAGE }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { startDate, endDate } = useSelector(
     (state: RootState) => state.calendar
-  )
+  );
 
-  const { fuelSummaryData, fuelSummaryStatus} = useSelector(
+  const { fuelSummaryData, fuelSummaryStatus } = useSelector(
     (state: RootState) => state.fuelSummary
-  )
+  );
 
   /* Llamada al dispatch para tener información que presentar y poder "pasar" la validacion
-  * existente para mostrar componentes ReportSummary y su vecina DonutGraphic.
-  */
+   * existente para mostrar componentes ReportSummary y su vecina DonutGraphic.
+   */
   const callFetchFuelSummary = useCallback(() => {
     dispatch(
       fetchFuelSummary({
         accountId: "4992",
-        startDate: "2024-08-05T00:00:00", // formatToLocalIso8601(startDate),
-        endDate: "2024-09-07T00:00:00",
+        startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate),
+        endDate: "2024-08-21T00:00:00",
         performanceType: "1",
       })
-    )
+    );
   }, [dispatch]);
 
   useEffect(() => {
@@ -50,19 +50,16 @@ export const HomeBriefFuelDataProvider = ({ LANGUAGE}: Props) => {
   return (
     <div>
       <div className={styles.topResumeData}>
-        {"succeeded" === fuelSummaryStatus && fuelSummaryData ?
-          (
-            <>
-              <ReportSummary summaryValues={fuelSummaryData.value}/>
-              <DonutGraphic devices={fuelSummaryData.value.devices} />
-            </>  
-          ) :
-          (
-            //TODO: Añadir loading
-            <div>...</div>
-          )
-        }
+        {"succeeded" === fuelSummaryStatus && fuelSummaryData ? (
+          <>
+            <ReportSummary summaryValues={fuelSummaryData.value} />
+            <DonutGraphic devices={fuelSummaryData.value.devices} />
+          </>
+        ) : (
+          //TODO: Añadir loading
+          <div>...</div>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};

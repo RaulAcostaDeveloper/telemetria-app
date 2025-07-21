@@ -37,8 +37,8 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
     dispatch(
       fetchFuelSummary({
         accountId: "4992",
-        startDate: "2024-08-05T00:00:00", // formatToLocalIso8601(startDate),
-        endDate: "2024-09-07T00:00:00",
+        startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate),
+        endDate: "2024-08-21T00:00:00",
         performanceType: "1",
       })
     );
