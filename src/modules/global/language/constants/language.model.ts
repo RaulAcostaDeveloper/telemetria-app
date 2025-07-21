@@ -90,6 +90,60 @@ export interface LanguageInterface {
       deleteSubString: string;
     };
   };
+  highCharts: {
+    options: {
+      rangeSelectorShowAll: string;
+    };
+    axisTitles: {
+      time: string;
+      fuelVariation: string;
+      performance: string;
+    };
+    titles: {
+      charges: string;
+      disCharges: string;
+      fuelVariation: string;
+      performancesBetweenCharges: string;
+      dailyPerformance: string;
+    };
+    tooltips: {
+      date: string;
+      lat: string;
+      lon: string;
+      fuel: {
+        initialFuel: string;
+        finalFuel: string;
+        totalCharges: string;
+        odometer: string;
+        speed: string;
+        ignition: string;
+        deviceBattery: string;
+        mainPower: string;
+        address: string;
+        totalDischarges: string;
+        averagePerformance: string;
+        fuelConsumed: string;
+        initialLevel: string;
+        finalLevel: string;
+        initialOdometer: string;
+        finalOdometer: string;
+        distanceTravelled: string;
+        tanks: string;
+      };
+      rpm: {
+        rpm: string;
+      };
+    };
+  };
+  geoModalTitles: {
+    rpmTitle: string;
+    fuelChargeTitle: string;
+    fuelDischargeTitle: string;
+    levelMessageTitle: string;
+    fuelNowTitle: string;
+    roadmap: string;
+    satellite: string;
+  };
   auth: {
     principalTitle: string;
     authForm: {
@@ -184,64 +238,11 @@ export interface LanguageInterface {
       showLocation: string;
       hideLocation: string;
     };
-    fuelGraphicSeries: {
-      charges: string;
-      disCharges: string;
-      fuelVariaiton: string;
-      performancesBetweenCharges: string;
-      dailyPerformance: string;
-    };
     fuelChargesLabels: {
-      date: string;
       eventId: string;
-      address: string;
-      lat: string;
-      lon: string;
-      odometer: string;
-      speed: string;
-      ignition: string;
-      deviceBattery: string;
-      mainPower: string;
-      totalCharges: string;
-      totalDischarges: string;
-      initialFuel: string;
-      finalFuel: string;
       startDate: string;
       endDate: string;
       origin: string;
-      averagePerformance: string;
-      tanks: string;
-      fuelConsumed: string;
-      initialLevel: string;
-      finalLevel: string;
-      initialOdometer: string;
-      finalOdometer: string;
-      distanceTravelled: string;
-    };
-    fuelNowLabels: {
-      AccountId: string;
-      DeviceId: string;
-      DeviceName: string;
-      EventId: string;
-      DateGps: string;
-      lat: string;
-      lon: string;
-      Address: string;
-      Speed: string;
-    };
-    geoModalTitles: {
-      fuelChargeTitle: string;
-      fuelDischargeTitle: string;
-      levelMessageTitle: string;
-      fuelNowTitle: string;
-      roadmap: string;
-      satellite: string;
-    };
-    fuelLoadsChart: {
-      rangeSelectorShowAll: string;
-      fuelVariation: string;
-      time: string;
-      performance: string;
     };
   };
   onBoardDiagnosticsVehicle: {
