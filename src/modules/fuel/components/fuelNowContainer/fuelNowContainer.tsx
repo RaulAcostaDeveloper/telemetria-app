@@ -31,7 +31,7 @@ export const FuelNowContainer = ({ LANGUAGE }: Props) => {
     setGeoModalData({
       lat: parseFloat(rabbitVehicleFuelNow.Lat),
       lon: parseFloat(rabbitVehicleFuelNow.Lon),
-      title: LANGUAGE.fuelVehicle.geoModalTitles.fuelNowTitle,
+      title: LANGUAGE.geoModalTitles.fuelNowTitle,
       rows: [],
     });
   }, []);

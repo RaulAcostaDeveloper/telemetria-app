@@ -8,12 +8,14 @@ import {
   createTooltipFormatter,
   getChargesTooltipFields,
   getDisChargesTooltipFields,
+  getLevelMessagesTooltipFields,
+  getPerformancesBetweenChargesTooltipFields,
+} from "@/modules/global/utils/highChartUtils";
+import {
   getLabelsForChargeGeoMap,
   getLabelsForDischargeGeoMap,
   getLabelsForLevelMessagesGeoMap,
-  getLevelMessagesTooltipFields,
-  getPerformancesBetweenChargesTooltipFields,
-} from "../../utils/tooltipHighchartFormatter";
+} from "@/modules/global/utils/geoMapUtils";
 import { FuelDataValues } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { GeoModalData } from "@/modules/global/components/geoModal/geoModal";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
@@ -34,22 +36,14 @@ export const FuelBehaviorHighChart = ({
   handleClicGeoData,
 }: Props) => {
   // Tooltip de cada serie
-  const chargesTooltipFields = getChargesTooltipFields(
-    LANGUAGE.fuelVehicle.fuelChargesLabels
-  );
+  const chargesTooltipFields = getChargesTooltipFields(LANGUAGE);
 
-  const dischargesTooltipFields = getDisChargesTooltipFields(
-    LANGUAGE.fuelVehicle.fuelChargesLabels
-  );
+  const dischargesTooltipFields = getDisChargesTooltipFields(LANGUAGE);
 
-  const levelMessagesTooltipFields = getLevelMessagesTooltipFields(
-    LANGUAGE.fuelVehicle.fuelChargesLabels
-  );
+  const levelMessagesTooltipFields = getLevelMessagesTooltipFields(LANGUAGE);
 
   const performancesBetweenChargesTooltipFields =
-    getPerformancesBetweenChargesTooltipFields(
-      LANGUAGE.fuelVehicle.fuelChargesLabels
-    );
+    getPerformancesBetweenChargesTooltipFields(LANGUAGE);
 
   const chargesData = useMemo(() => {
     return fuelDataData.charges
@@ -171,7 +165,7 @@ export const FuelBehaviorHighChart = ({
           },
         },
         title: {
-          text: LANGUAGE.fuelVehicle.fuelLoadsChart.time,
+          text: LANGUAGE.highCharts.axisTitles.time,
           style: {
             fontSize: "14px",
             fontWeight: "bold",
@@ -187,7 +181,7 @@ export const FuelBehaviorHighChart = ({
             },
           },
           title: {
-            text: LANGUAGE.fuelVehicle.fuelLoadsChart.fuelVariation,
+            text: LANGUAGE.highCharts.axisTitles.fuelVariation,
             style: {
               fontSize: "13px",
               fontWeight: "bold",
@@ -203,7 +197,7 @@ export const FuelBehaviorHighChart = ({
             },
           },
           title: {
-            text: LANGUAGE.fuelVehicle.fuelLoadsChart.performance,
+            text: LANGUAGE.highCharts.axisTitles.performance,
             style: {
               fontSize: "13px",
               fontWeight: "bold",
@@ -217,7 +211,7 @@ export const FuelBehaviorHighChart = ({
           yAxis: 0,
           type: "column",
           pointWidth: 20,
-          name: LANGUAGE.fuelVehicle.fuelGraphicSeries.charges,
+          name: LANGUAGE.highCharts.titles.charges,
           data: chargesData,
           color: "#4ec516",
           point: {
@@ -227,13 +221,10 @@ export const FuelBehaviorHighChart = ({
                   e.point.options as { custom: { lat: number; lon: number } }
                 ).custom;
                 handleClicGeoData({
-                  title: LANGUAGE.fuelVehicle.geoModalTitles.fuelChargeTitle,
+                  title: LANGUAGE.geoModalTitles.fuelChargeTitle,
                   lat: charge.lat,
                   lon: charge.lon,
-                  rows: getLabelsForChargeGeoMap(
-                    LANGUAGE.fuelVehicle.fuelChargesLabels,
-                    charge
-                  ),
+                  rows: getLabelsForChargeGeoMap(LANGUAGE, charge),
                 });
               },
             },
@@ -246,7 +237,7 @@ export const FuelBehaviorHighChart = ({
           yAxis: 0,
           type: "column",
           pointWidth: 20,
-          name: LANGUAGE.fuelVehicle.fuelGraphicSeries.disCharges,
+          name: LANGUAGE.highCharts.titles.disCharges,
           data: disChargesData,
           color: "#ca5252",
           point: {
@@ -256,13 +247,10 @@ export const FuelBehaviorHighChart = ({
                   e.point.options as { custom: { lat: number; lon: number } }
                 ).custom;
                 handleClicGeoData({
-                  title: LANGUAGE.fuelVehicle.geoModalTitles.fuelDischargeTitle,
+                  title: LANGUAGE.geoModalTitles.fuelDischargeTitle,
                   lat: disCharge.lat,
                   lon: disCharge.lon,
-                  rows: getLabelsForDischargeGeoMap(
-                    LANGUAGE.fuelVehicle.fuelChargesLabels,
-                    disCharge
-                  ),
+                  rows: getLabelsForDischargeGeoMap(LANGUAGE, disCharge),
                 });
               },
             },
@@ -273,7 +261,7 @@ export const FuelBehaviorHighChart = ({
         },
         {
           yAxis: 0,
-          name: LANGUAGE.fuelVehicle.fuelGraphicSeries.fuelVariaiton,
+          name: LANGUAGE.highCharts.titles.fuelVariation,
           data: levelMessagesData,
           color: "#006af5",
           lineWidth: 2,
@@ -287,13 +275,10 @@ export const FuelBehaviorHighChart = ({
                   e.point.options as { custom: { lat: number; lon: number } }
                 ).custom;
                 handleClicGeoData({
-                  title: LANGUAGE.fuelVehicle.geoModalTitles.levelMessageTitle,
+                  title: LANGUAGE.geoModalTitles.levelMessageTitle,
                   lat: message.lat,
                   lon: message.lon,
-                  rows: getLabelsForLevelMessagesGeoMap(
-                    LANGUAGE.fuelVehicle.fuelChargesLabels,
-                    message
-                  ),
+                  rows: getLabelsForLevelMessagesGeoMap(LANGUAGE, message),
                 });
               },
             },
@@ -301,8 +286,7 @@ export const FuelBehaviorHighChart = ({
         },
         {
           yAxis: 1,
-          name: LANGUAGE.fuelVehicle.fuelGraphicSeries
-            .performancesBetweenCharges,
+          name: LANGUAGE.highCharts.titles.performancesBetweenCharges,
           data: performancesBetweenChargesData,
           marker: { enabled: true, radius: 4, symbol: "square" },
           color: "#f5c800",
@@ -314,7 +298,7 @@ export const FuelBehaviorHighChart = ({
         },
         {
           yAxis: 1,
-          name: LANGUAGE.fuelVehicle.fuelGraphicSeries.dailyPerformance,
+          name: LANGUAGE.highCharts.titles.dailyPerformance,
           data: dailyPerformancesData,
           marker: { enabled: true, radius: 4, symbol: "circle" },
           color: "#07b9ff",
@@ -357,7 +341,7 @@ export const FuelBehaviorHighChart = ({
           },
           {
             type: "all",
-            text: LANGUAGE.fuelVehicle.fuelLoadsChart.rangeSelectorShowAll,
+            text: LANGUAGE.highCharts.options.rangeSelectorShowAll,
           },
         ],
         buttonTheme: {
