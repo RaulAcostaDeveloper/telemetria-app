@@ -244,6 +244,14 @@ export interface LanguageInterface {
       performance: string;
     };
   };
+  onBoardDiagnosticsVehicle: {
+    tabs: {
+      averageRpm: string;
+      analysis: string;
+      totalDistance: string;
+      totalTimeWorked: string;
+    };
+  };
   management: {
     tabs: {
       vehicles: string;
