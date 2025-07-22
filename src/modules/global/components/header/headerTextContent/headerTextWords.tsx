@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useSelector } from "react-redux";
+import styles from "./headerTextWords.module.css";
 
 // Tipado
 import { RootState } from "@/globalConfig/redux/store";
@@ -19,11 +20,17 @@ export const HeaderTextWords = ({ LANGUAGE, section }: Props) => {
     if ("succeeded" === vehicleByImeiStatus && vehicleByImeiData) {
       let resultantHTML = [];
       vehicleByImeiData.value.plate &&
-        resultantHTML.push(<span>[{vehicleByImeiData.value.plate}] · </span>);
+        resultantHTML.push(
+          <span className={styles.plate}>
+            {vehicleByImeiData.value.plate} ·{" "}
+          </span>
+        );
       vehicleByImeiData.value.brand &&
         resultantHTML.push(<span>{vehicleByImeiData.value.brand}</span>);
       vehicleByImeiData.value.imeIs &&
-        resultantHTML.push(<span> · {vehicleByImeiData.value.imeIs[0]}</span>);
+        resultantHTML.push(
+          <span> · (IMEI: {vehicleByImeiData.value.imeIs[0]})</span>
+        );
       return <>{resultantHTML}</>;
     } else {
       if ("single-fuel" === section) {
