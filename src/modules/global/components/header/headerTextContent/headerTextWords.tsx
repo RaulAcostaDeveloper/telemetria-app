@@ -18,7 +18,7 @@ export const HeaderTextWords = ({ LANGUAGE, section }: Props) => {
 
   function jsxOption(): JSX.Element {
     if ("succeeded" === vehicleByImeiStatus && vehicleByImeiData) {
-      let resultantHTML = [];
+      const resultantHTML = [];
       vehicleByImeiData.value.plate &&
         resultantHTML.push(
           <span className={styles.plate}>
@@ -29,7 +29,7 @@ export const HeaderTextWords = ({ LANGUAGE, section }: Props) => {
         resultantHTML.push(<span>{vehicleByImeiData.value.brand}</span>);
       vehicleByImeiData.value.imeIs &&
         resultantHTML.push(
-          <span> · (IMEI: {vehicleByImeiData.value.imeIs[0]})</span>
+          <span> · ({vehicleByImeiData.value.imeIs[0]})</span>
         );
       return <>{resultantHTML}</>;
     } else {
