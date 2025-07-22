@@ -2,6 +2,7 @@
 import AddCardIcon from "@mui/icons-material/AddCard";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import HomeIcon from "@mui/icons-material/Home";
+import QueryStats from "@mui/icons-material/QueryStats";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 import styles from "./menuContent.module.css";
@@ -35,6 +36,11 @@ export const MenuContent = ({ isOpen, LANGUAGE, logoutHook }: Props) => {
       icon: LocalGasStationIcon,
       route: "/fuel",
       title: LANGUAGE.sectionName.fuel,
+    },
+    {
+      icon: QueryStats,
+      route: "/telemetry",
+      title: LANGUAGE.sectionName.telemetryobd,
     },
   ];
 

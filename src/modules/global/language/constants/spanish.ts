@@ -6,6 +6,7 @@ export const SPANISH: LanguageInterface = {
     home: "Inicio",
     management: "Recursos",
     fuel: "Combustible",
+    telemetryobd: "Diagnósticos",
   },
   header: {
     backButton: {

@@ -6,6 +6,7 @@ export interface LanguageInterface {
     home: string;
     management: string;
     fuel: string;
+    telemetryobd: string;
   };
   header: {
     backButton: {

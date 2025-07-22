@@ -6,6 +6,7 @@ export const ENGLISH: LanguageInterface = {
     home: "Home",
     management: "Management",
     fuel: "Fuel",
+    telemetryobd: "Diagnostics",
   },
   header: {
     backButton: {
