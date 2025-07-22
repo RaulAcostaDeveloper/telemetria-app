@@ -21,6 +21,8 @@ export const HeaderTextContent = ({ LANGUAGE, currentUrl }: Props) => {
       return "management";
     } else if (currentUrl.match(/fuel/)) {
       return "fuel";
+    } else if (currentUrl.match(/telemetry/)) {
+      return "telemetryobd";
     } else {
       return "";
     }
@@ -61,6 +63,12 @@ export const HeaderTextContent = ({ LANGUAGE, currentUrl }: Props) => {
         return (
           <div className={styles.platesAndName}>
             <span>{LANGUAGE.sectionName.fuel}</span>
+          </div>
+        );
+      case "telemetryobd":
+        return (
+          <div className={styles.platesAndName}>
+            <span>{LANGUAGE.sectionName.telemetryobd}</span>
           </div>
         );
       default:

@@ -7,18 +7,13 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import styles from "@/modules/fuel/components/fuelDataProvider/fuelDataProvider.module.css";
 import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 import DonutGraphic from "@/modules/global/components/donutGraphic/DonutGraphic";
 import { fetchFuelSummary } from "@/globalConfig/redux/slices/fuelSummarySlice";
 
-interface Props {
-  LANGUAGE: LanguageInterface;
-}
-
-export const HomeBriefFuelDataProvider = ({ LANGUAGE }: Props) => {
+export const HomeBriefFuelDataProvider = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { startDate, endDate } = useSelector(
