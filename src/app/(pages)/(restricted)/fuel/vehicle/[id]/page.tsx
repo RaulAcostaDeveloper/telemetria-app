@@ -11,19 +11,20 @@ import { FuelBehaviorTab } from "@/modules/fuel/components/fuelBehaviorTab/fuelB
 import { TabsContent } from "@/modules/global/components";
 import { fetchFuelData } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { fetchFuelPerformance } from "@/globalConfig/redux/slices/fuelPerformanceSlice";
+import { fetchVehicleByImei } from "@/globalConfig/redux/slices/vehicleByImeiSlice";
 import { useAuth } from "@/modules/auth/utils";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 // import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
 
 interface Page {
   params: {
-    id: string;
+    imei: string;
   };
 }
 
 export default function FuelVehicle({ params }: Page) {
-  const { id } = params; // id es el imei del dispositivo
-  console.log("Imei: ", id);
+  const { imei } = params; // imei del vehiculo
+  console.log("Imei: ", imei);
 
   const { isAuthenticated } = useAuth();
 
@@ -54,7 +55,7 @@ export default function FuelVehicle({ params }: Page) {
     if (isAuthenticated && startDate && endDate) {
       dispatch(
         fetchFuelData({
-          imei: "862524060822760", // id.toString(),
+          imei: "862524060822760", // imei.toString(),
           startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate), "2024-08-05T00:00:00"
           endDate: "2024-08-21T00:00:00", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
         })
@@ -62,13 +63,20 @@ export default function FuelVehicle({ params }: Page) {
 
       dispatch(
         fetchFuelPerformance({
-          imei: "862524060822760", // id.toString(),
+          imei: "862524060822760", // imei.toString(),
           startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate), "2024-08-05T00:00:00"
           endDate: "2024-08-21T00:00:00", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
         })
       );
     }
   }, [dispatch, isAuthenticated, startDate, endDate]);
+
+  // Actualiza datos del vehiculo cuando el imei no es ND ni indefinido.
+  useEffect(() => {
+    if (isAuthenticated && imei && imei.length > 3) {
+      dispatch(fetchVehicleByImei({ imei: imei }));
+    }
+  }, [dispatch, isAuthenticated, imei]);
 
   return (
     <div>
