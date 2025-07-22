@@ -6,11 +6,16 @@ import HighstockInit from "highcharts/modules/stock";
 
 import {
   createTooltipFormatter,
+  getDistanceTooltipFields,
   getRPMTooltipFields,
 } from "@/modules/global/utils/highChartUtils";
 import { GeoModalData } from "@/modules/global/components/geoModal/geoModal";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { getLabelsForRPMGeoMap } from "@/modules/global/utils/geoMapUtils";
+import {
+  DataObject,
+  getLabelsForDistanceGeoMap,
+  getLabelsForRPMGeoMap,
+} from "@/modules/global/utils/geoMapUtils";
 
 export interface ObdChartPoint {
   eventId: number;
@@ -20,10 +25,17 @@ export interface ObdChartPoint {
   value: number;
 }
 
+export enum SINGLE_CHART_TYPES {
+  rpm = "rpm_type",
+  distance = "distance_type",
+  work = "work_time_type",
+}
+
 interface Props {
-  data: ObdChartPoint[];
   LANGUAGE: LanguageInterface;
+  data: ObdChartPoint[];
   handleClicGeoData: (geoModalData: GeoModalData) => void;
+  type: SINGLE_CHART_TYPES;
 }
 
 if (typeof HighstockInit === "function") {
@@ -31,13 +43,15 @@ if (typeof HighstockInit === "function") {
 }
 
 export const SingleLineHighChart = ({
-  data,
   LANGUAGE,
+  data,
   handleClicGeoData,
+  type,
 }: Props) => {
   const rpmTooltipFields = getRPMTooltipFields(LANGUAGE);
+  const distanceTooltipFields = getDistanceTooltipFields(LANGUAGE);
 
-  const rpmData = useMemo(() => {
+  const chartData = useMemo(() => {
     return data
       .map((c) => ({
         x: new Date(c.dateGps).getTime(),
@@ -46,15 +60,63 @@ export const SingleLineHighChart = ({
           dateGps: c.dateGps,
           lat: c.lat,
           lon: c.lon,
-          rpm: c.value,
+          value: c.value,
         },
       }))
       .sort((a, b) => a.x - b.x);
   }, []);
 
-  const chartData = rpmData;
-  const tooltipFields = rpmTooltipFields;
-  const labelsForGeoMap = getLabelsForRPMGeoMap;
+  const yAxisTitle = () => {
+    switch (type) {
+      case SINGLE_CHART_TYPES.rpm:
+        return LANGUAGE.highCharts.tooltips.rpm.rpm;
+      case SINGLE_CHART_TYPES.distance:
+        return LANGUAGE.highCharts.axisTitles.distance;
+      case SINGLE_CHART_TYPES.work:
+        return LANGUAGE.highCharts.axisTitles.distance;
+      default:
+        return LANGUAGE.highCharts.axisTitles.distance;
+    }
+  };
+
+  const tooltipFields = () => {
+    switch (type) {
+      case SINGLE_CHART_TYPES.rpm:
+        return rpmTooltipFields;
+      case SINGLE_CHART_TYPES.distance:
+        return distanceTooltipFields;
+      case SINGLE_CHART_TYPES.work:
+        return distanceTooltipFields;
+      default:
+        return distanceTooltipFields;
+    }
+  };
+
+  const labelsForGeoMap = (lang: LanguageInterface, mess: DataObject) => {
+    switch (type) {
+      case SINGLE_CHART_TYPES.rpm:
+        return getLabelsForRPMGeoMap(lang, mess);
+      case SINGLE_CHART_TYPES.distance:
+        return getLabelsForDistanceGeoMap(lang, mess);
+      case SINGLE_CHART_TYPES.work:
+        return getLabelsForDistanceGeoMap(lang, mess);
+      default:
+        return getLabelsForDistanceGeoMap(lang, mess);
+    }
+  };
+
+  const geoModalTitle = () => {
+    switch (type) {
+      case SINGLE_CHART_TYPES.rpm:
+        return LANGUAGE.geoModalTitles.rpmTitle;
+      case SINGLE_CHART_TYPES.distance:
+        return LANGUAGE.geoModalTitles.totalDistanceTitle;
+      case SINGLE_CHART_TYPES.work:
+        return LANGUAGE.geoModalTitles.totalDistanceTitle;
+      default:
+        return LANGUAGE.geoModalTitles.totalDistanceTitle;
+    }
+  };
 
   const chartOptions = useMemo(
     () => ({
@@ -82,7 +144,7 @@ export const SingleLineHighChart = ({
             },
           },
           title: {
-            text: LANGUAGE.highCharts.tooltips.rpm, // aquí
+            text: yAxisTitle(),
             style: {
               fontSize: "13px",
               fontWeight: "bold",
@@ -98,7 +160,7 @@ export const SingleLineHighChart = ({
           color: "#006af5",
           lineWidth: 2,
           tooltip: {
-            pointFormatter: createTooltipFormatter(tooltipFields),
+            pointFormatter: createTooltipFormatter(tooltipFields()),
           },
           point: {
             events: {
@@ -107,7 +169,7 @@ export const SingleLineHighChart = ({
                   e.point.options as { custom: { lat: number; lon: number } }
                 ).custom;
                 handleClicGeoData({
-                  title: LANGUAGE.geoModalTitles.rpmTitle,
+                  title: geoModalTitle(),
                   lat: message.lat,
                   lon: message.lon,
                   rows: labelsForGeoMap(LANGUAGE, message),

@@ -118,6 +118,7 @@ export const ENGLISH: LanguageInterface = {
       fuelVariation: "Fuel Variation (L)",
       time: "Time",
       performance: "Performance (L)",
+      distance: "Distance (Km)",
     },
     titles: {
       charges: "Charges",
@@ -153,10 +154,18 @@ export const ENGLISH: LanguageInterface = {
       rpm: {
         rpm: "Revolutions per minute",
       },
+      distance: {
+        distance: "Distance",
+        distanceTraveled: "Distance traveled",
+      },
+      workTime: {
+        workTime: "Time worked",
+      },
     },
   },
   geoModalTitles: {
     rpmTitle: "RPM map",
+    totalDistanceTitle: "Total distance map",
     fuelChargeTitle: "Charge map",
     fuelDischargeTitle: "Discharge map",
     levelMessageTitle: "Level change map",
