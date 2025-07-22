@@ -1,7 +1,7 @@
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { formatDateTime } from "@/modules/global/utils/utils";
 
-type DataObject = Record<string, string | number>;
+export type DataObject = Record<string, string | number>;
 
 export interface TooltipGeoField {
   label: string;
@@ -160,6 +160,24 @@ export function getLabelsForRPMGeoMap(
     },
     { label: LANGUAGE.highCharts.tooltips.lat, value: `${data.lat}` },
     { label: LANGUAGE.highCharts.tooltips.lon, value: `${data.lon}` },
-    { label: LANGUAGE.highCharts.tooltips.rpm.rpm, value: `${data.rpm}` },
+    { label: LANGUAGE.highCharts.tooltips.rpm.rpm, value: `${data.value}` },
+  ];
+}
+
+export function getLabelsForDistanceGeoMap(
+  LANGUAGE: LanguageInterface,
+  data: DataObject
+): TooltipGeoField[] {
+  return [
+    {
+      label: LANGUAGE.highCharts.tooltips.date,
+      value: `${formatDateTime(data.dateGps.toString())}`,
+    },
+    { label: LANGUAGE.highCharts.tooltips.lat, value: `${data.lat}` },
+    { label: LANGUAGE.highCharts.tooltips.lon, value: `${data.lon}` },
+    {
+      label: LANGUAGE.highCharts.tooltips.distance.distanceTraveled,
+      value: `${data.value}`,
+    },
   ];
 }

@@ -118,6 +118,7 @@ export const SPANISH: LanguageInterface = {
       fuelVariation: "Variación de combustible (L)",
       time: "Tiempo",
       performance: "Rendimiento (L)",
+      distance: "Distancia (Km)",
     },
     titles: {
       charges: "Cargas",
@@ -153,10 +154,18 @@ export const SPANISH: LanguageInterface = {
       rpm: {
         rpm: "Revoluciones por minuto",
       },
+      distance: {
+        distance: "Distancia",
+        distanceTraveled: "Distancia recorrida",
+      },
+      workTime: {
+        workTime: "Tiempo trabajado",
+      },
     },
   },
   geoModalTitles: {
     rpmTitle: "Mapa del reporte de RPM",
+    totalDistanceTitle: "Mapa del reporte de distancia",
     fuelChargeTitle: "Mapa de la carga",
     fuelDischargeTitle: "Mapa de la descarga",
     levelMessageTitle: "Mapa del cambio de nivel",

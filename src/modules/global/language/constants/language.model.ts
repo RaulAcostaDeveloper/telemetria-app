@@ -98,6 +98,7 @@ export interface LanguageInterface {
       time: string;
       fuelVariation: string;
       performance: string;
+      distance: string;
     };
     titles: {
       charges: string;
@@ -133,10 +134,18 @@ export interface LanguageInterface {
       rpm: {
         rpm: string;
       };
+      distance: {
+        distance: string;
+        distanceTraveled: string;
+      };
+      workTime: {
+        workTime: string;
+      };
     };
   };
   geoModalTitles: {
     rpmTitle: string;
+    totalDistanceTitle: string;
     fuelChargeTitle: string;
     fuelDischargeTitle: string;
     levelMessageTitle: string;

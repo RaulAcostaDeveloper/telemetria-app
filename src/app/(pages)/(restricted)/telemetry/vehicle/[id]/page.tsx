@@ -6,6 +6,7 @@ import GeoModal, {
 } from "@/modules/global/components/geoModal/geoModal";
 import {
   ObdChartPoint,
+  SINGLE_CHART_TYPES,
   SingleLineHighChart,
 } from "@/modules/telemetryObd/components";
 import { TabsContent } from "@/modules/global/components";
@@ -38,6 +39,12 @@ export default function TelemetryVehicle({}: Page) {
     })
   );
 
+  const distanceData: ObdChartPoint[] =
+    fuelVehicleOBDDataMock.value.distance.map((distance) => ({
+      ...distance,
+      value: distance.distance,
+    }));
+
   const handleClicGeoData = (geoModalData: GeoModalData) => {
     setGeoModalData(geoModalData);
     setIsModalOpen(true);
@@ -52,11 +59,19 @@ export default function TelemetryVehicle({}: Page) {
             <SingleLineHighChart
               data={RPMData}
               LANGUAGE={LANGUAGE}
+              type={SINGLE_CHART_TYPES.rpm}
               handleClicGeoData={handleClicGeoData}
             />
           </div>,
           <div key={2}></div>,
-          <div key={3}></div>,
+          <div key={3}>
+            <SingleLineHighChart
+              data={distanceData}
+              LANGUAGE={LANGUAGE}
+              type={SINGLE_CHART_TYPES.distance}
+              handleClicGeoData={handleClicGeoData}
+            />
+          </div>,
           <div key={4}></div>,
         ]}
       />

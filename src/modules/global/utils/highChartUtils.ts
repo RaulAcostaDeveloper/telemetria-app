@@ -228,7 +228,24 @@ export function getRPMTooltipFields(
     { label: LANGUAGE.highCharts.tooltips.lon, value: (data) => data.lon },
     {
       label: LANGUAGE.highCharts.tooltips.rpm.rpm,
-      value: (data) => `${data.rpm}`,
+      value: (data) => `${data.value}`,
+    },
+  ];
+}
+
+export function getDistanceTooltipFields(
+  LANGUAGE: LanguageInterface
+): TooltipField[] {
+  return [
+    {
+      label: LANGUAGE.highCharts.tooltips.date,
+      value: (data) => `${formatDateTime(data.dateGps)}`,
+    },
+    { label: LANGUAGE.highCharts.tooltips.lat, value: (data) => data.lat },
+    { label: LANGUAGE.highCharts.tooltips.lon, value: (data) => data.lon },
+    {
+      label: LANGUAGE.highCharts.tooltips.distance.distanceTraveled,
+      value: (data) => `${data.value}`,
     },
   ];
 }
