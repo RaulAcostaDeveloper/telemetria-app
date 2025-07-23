@@ -1,5 +1,7 @@
 import { Table } from "@/modules/global/components";
 import { telemetryVehiclesOBD } from "@/modules/global/dataMock/telemetryVehiclesOBD/telemetryVehiclesOBD";
+import CardContentTCT5 from "@/modules/global/components/cardsDeck/cardContentTCT5";
+import CardGenThird from "@/modules/global/components/cardsDeck/cardGenThird";
 
 //Tipado
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
@@ -93,6 +95,9 @@ export const TelemetryHome = ({ LANGUAGE }: Props) => {
       ) : (
         <div>...</div>
       )}
+      <CardGenThird>
+        <CardContentTCT5 title="Título" />
+      </CardGenThird>
     </div>
   );
 };
