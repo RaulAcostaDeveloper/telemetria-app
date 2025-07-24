@@ -328,4 +328,20 @@ export const ENGLISH: LanguageInterface = {
       year: "Year",
     },
   },
+  teleOBD: {
+    tableColumns: {
+      plate: "Plate",
+      name: "Vehicle",
+      kilometerMarker: "Kilometer Marker",
+      fuelType: "Fuel Type",
+      litersPerHour: "Liters per Hour (L/h)",
+      totalDistance: "Total Distance (Km)",
+      totalEngineHours: "Total Engine Hours",
+      totalConsumed: "Total Consumed (L)",
+      totalIdleHours: "Total Idle Hours",
+    },
+    tableTitle: {
+      registerTeleOBD: "Register Telemetry OBD (On Board Diagnostics)",
+    },
+  },
 };
