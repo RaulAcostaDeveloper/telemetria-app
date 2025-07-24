@@ -45,6 +45,12 @@ export default function TelemetryVehicle({}: Page) {
       value: distance.distance,
     }));
 
+  const timeTraveledData: ObdChartPoint[] =
+    fuelVehicleOBDDataMock.value.timeTraveled.map((timeTraveled) => ({
+      ...timeTraveled,
+      value: timeTraveled.hours,
+    }));
+
   const handleClicGeoData = (geoModalData: GeoModalData) => {
     setGeoModalData(geoModalData);
     setIsModalOpen(true);
@@ -72,7 +78,14 @@ export default function TelemetryVehicle({}: Page) {
               handleClicGeoData={handleClicGeoData}
             />
           </div>,
-          <div key={4}></div>,
+          <div key={4}>
+            <SingleLineHighChart
+              data={timeTraveledData}
+              LANGUAGE={LANGUAGE}
+              type={SINGLE_CHART_TYPES.timeTraveled}
+              handleClicGeoData={handleClicGeoData}
+            />
+          </div>,
         ]}
       />
       {isModalOpen && geoModalData && (

@@ -100,6 +100,7 @@ export interface LanguageInterface {
       fuelVariation: string;
       performance: string;
       distance: string;
+      timeTraveled: string;
     };
     titles: {
       charges: string;
@@ -139,8 +140,8 @@ export interface LanguageInterface {
         distance: string;
         distanceTraveled: string;
       };
-      workTime: {
-        workTime: string;
+      timeTraveled: {
+        timeTraveled: string;
       };
     };
   };
@@ -153,6 +154,7 @@ export interface LanguageInterface {
     fuelNowTitle: string;
     roadmap: string;
     satellite: string;
+    timeTraveledTitle: string;
   };
   auth: {
     principalTitle: string;

@@ -245,7 +245,24 @@ export function getDistanceTooltipFields(
     { label: LANGUAGE.highCharts.tooltips.lon, value: (data) => data.lon },
     {
       label: LANGUAGE.highCharts.tooltips.distance.distanceTraveled,
-      value: (data) => `${data.value}`,
+      value: (data) => `${data.value} Km`,
+    },
+  ];
+}
+
+export function getTimeTraveledTooltipFields(
+  LANGUAGE: LanguageInterface
+): TooltipField[] {
+  return [
+    {
+      label: LANGUAGE.highCharts.tooltips.date,
+      value: (data) => `${formatDateTime(data.dateGps)}`,
+    },
+    { label: LANGUAGE.highCharts.tooltips.lat, value: (data) => data.lat },
+    { label: LANGUAGE.highCharts.tooltips.lon, value: (data) => data.lon },
+    {
+      label: LANGUAGE.highCharts.tooltips.timeTraveled.timeTraveled,
+      value: (data) => `${data.value} H`,
     },
   ];
 }

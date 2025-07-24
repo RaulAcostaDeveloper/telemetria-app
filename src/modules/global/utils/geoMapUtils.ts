@@ -177,7 +177,25 @@ export function getLabelsForDistanceGeoMap(
     { label: LANGUAGE.highCharts.tooltips.lon, value: `${data.lon}` },
     {
       label: LANGUAGE.highCharts.tooltips.distance.distanceTraveled,
-      value: `${data.value}`,
+      value: `${data.value} Km`,
+    },
+  ];
+}
+
+export function getLabelsForTimeTraveledGeoMap(
+  LANGUAGE: LanguageInterface,
+  data: DataObject
+): TooltipGeoField[] {
+  return [
+    {
+      label: LANGUAGE.highCharts.tooltips.date,
+      value: `${formatDateTime(data.dateGps.toString())}`,
+    },
+    { label: LANGUAGE.highCharts.tooltips.lat, value: `${data.lat}` },
+    { label: LANGUAGE.highCharts.tooltips.lon, value: `${data.lon}` },
+    {
+      label: LANGUAGE.highCharts.tooltips.timeTraveled.timeTraveled,
+      value: `${data.value} H`,
     },
   ];
 }
