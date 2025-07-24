@@ -329,4 +329,20 @@ export const SPANISH: LanguageInterface = {
       year: "Año",
     },
   },
+  teleOBD: {
+    tableColumns: {
+      plate: "Placas",
+      name: "Vehículo",
+      kilometerMarker: "Kilometraje",
+      fuelType: "Tipo de combustible",
+      litersPerHour: "Litros por hora (L/h)",
+      totalDistance: "Distancia total (Km)",
+      totalEngineHours: "Total horas motor",
+      totalConsumed: "Total consumido (L)",
+      totalIdleHours: "Total horas detenido",
+    },
+    tableTitle: {
+      registerTeleOBD: "Registro Telemetria OBD (On Board Diagnostics)",
+    },
+  },
 };

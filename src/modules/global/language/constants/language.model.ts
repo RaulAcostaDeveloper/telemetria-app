@@ -309,4 +309,20 @@ export interface LanguageInterface {
       year: string;
     };
   };
+  teleOBD: {
+    tableColumns: {
+      plate: string;
+      name: string;
+      kilometerMarker: string;
+      fuelType: string;
+      litersPerHour: string;
+      totalDistance: string;
+      totalEngineHours: string;
+      totalConsumed: string;
+      totalIdleHours: string;
+    };
+    tableTitle: {
+      registerTeleOBD: string;
+    };
+  };
 }
