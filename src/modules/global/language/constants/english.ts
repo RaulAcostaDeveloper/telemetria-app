@@ -120,6 +120,7 @@ export const ENGLISH: LanguageInterface = {
       time: "Time",
       performance: "Performance (L)",
       distance: "Distance (Km)",
+      timeTraveled: "Hours worked (H)",
     },
     titles: {
       charges: "Charges",
@@ -159,12 +160,13 @@ export const ENGLISH: LanguageInterface = {
         distance: "Distance",
         distanceTraveled: "Distance traveled",
       },
-      workTime: {
-        workTime: "Time worked",
+      timeTraveled: {
+        timeTraveled: "Hours worked",
       },
     },
   },
   geoModalTitles: {
+    timeTraveledTitle: "Hours worked map",
     rpmTitle: "RPM map",
     totalDistanceTitle: "Total distance map",
     fuelChargeTitle: "Charge map",

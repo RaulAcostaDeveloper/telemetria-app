@@ -120,6 +120,7 @@ export const SPANISH: LanguageInterface = {
       time: "Tiempo",
       performance: "Rendimiento (L)",
       distance: "Distancia (Km)",
+      timeTraveled: "Horas trabajadas (H)",
     },
     titles: {
       charges: "Cargas",
@@ -159,12 +160,13 @@ export const SPANISH: LanguageInterface = {
         distance: "Distancia",
         distanceTraveled: "Distancia recorrida",
       },
-      workTime: {
-        workTime: "Tiempo trabajado",
+      timeTraveled: {
+        timeTraveled: "Horas trabajadas",
       },
     },
   },
   geoModalTitles: {
+    timeTraveledTitle: "Mapa del reporte de horas trabajadas",
     rpmTitle: "Mapa del reporte de RPM",
     totalDistanceTitle: "Mapa del reporte de distancia",
     fuelChargeTitle: "Mapa de la carga",

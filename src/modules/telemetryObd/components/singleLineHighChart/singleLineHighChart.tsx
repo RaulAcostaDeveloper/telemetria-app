@@ -8,6 +8,7 @@ import {
   createTooltipFormatter,
   getDistanceTooltipFields,
   getRPMTooltipFields,
+  getTimeTraveledTooltipFields,
 } from "@/modules/global/utils/highChartUtils";
 import { GeoModalData } from "@/modules/global/components/geoModal/geoModal";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
@@ -15,6 +16,7 @@ import {
   DataObject,
   getLabelsForDistanceGeoMap,
   getLabelsForRPMGeoMap,
+  getLabelsForTimeTraveledGeoMap,
 } from "@/modules/global/utils/geoMapUtils";
 
 export interface ObdChartPoint {
@@ -28,7 +30,7 @@ export interface ObdChartPoint {
 export enum SINGLE_CHART_TYPES {
   rpm = "rpm_type",
   distance = "distance_type",
-  work = "work_time_type",
+  timeTraveled = "time_type",
 }
 
 interface Props {
@@ -50,6 +52,7 @@ export const SingleLineHighChart = ({
 }: Props) => {
   const rpmTooltipFields = getRPMTooltipFields(LANGUAGE);
   const distanceTooltipFields = getDistanceTooltipFields(LANGUAGE);
+  const timeTraveledTooltipFields = getTimeTraveledTooltipFields(LANGUAGE);
 
   const chartData = useMemo(() => {
     return data
@@ -72,10 +75,10 @@ export const SingleLineHighChart = ({
         return LANGUAGE.highCharts.tooltips.rpm.rpm;
       case SINGLE_CHART_TYPES.distance:
         return LANGUAGE.highCharts.axisTitles.distance;
-      case SINGLE_CHART_TYPES.work:
-        return LANGUAGE.highCharts.axisTitles.distance;
+      case SINGLE_CHART_TYPES.timeTraveled:
+        return LANGUAGE.highCharts.axisTitles.timeTraveled;
       default:
-        return LANGUAGE.highCharts.axisTitles.distance;
+        return LANGUAGE.highCharts.axisTitles.timeTraveled;
     }
   };
 
@@ -85,10 +88,10 @@ export const SingleLineHighChart = ({
         return rpmTooltipFields;
       case SINGLE_CHART_TYPES.distance:
         return distanceTooltipFields;
-      case SINGLE_CHART_TYPES.work:
-        return distanceTooltipFields;
+      case SINGLE_CHART_TYPES.timeTraveled:
+        return timeTraveledTooltipFields;
       default:
-        return distanceTooltipFields;
+        return timeTraveledTooltipFields;
     }
   };
 
@@ -98,10 +101,10 @@ export const SingleLineHighChart = ({
         return getLabelsForRPMGeoMap(lang, mess);
       case SINGLE_CHART_TYPES.distance:
         return getLabelsForDistanceGeoMap(lang, mess);
-      case SINGLE_CHART_TYPES.work:
-        return getLabelsForDistanceGeoMap(lang, mess);
+      case SINGLE_CHART_TYPES.timeTraveled:
+        return getLabelsForTimeTraveledGeoMap(lang, mess);
       default:
-        return getLabelsForDistanceGeoMap(lang, mess);
+        return getLabelsForTimeTraveledGeoMap(lang, mess);
     }
   };
 
@@ -111,10 +114,10 @@ export const SingleLineHighChart = ({
         return LANGUAGE.geoModalTitles.rpmTitle;
       case SINGLE_CHART_TYPES.distance:
         return LANGUAGE.geoModalTitles.totalDistanceTitle;
-      case SINGLE_CHART_TYPES.work:
-        return LANGUAGE.geoModalTitles.totalDistanceTitle;
+      case SINGLE_CHART_TYPES.timeTraveled:
+        return LANGUAGE.geoModalTitles.timeTraveledTitle;
       default:
-        return LANGUAGE.geoModalTitles.totalDistanceTitle;
+        return LANGUAGE.geoModalTitles.timeTraveledTitle;
     }
   };
 
