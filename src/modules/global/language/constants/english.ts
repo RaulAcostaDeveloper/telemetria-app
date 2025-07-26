@@ -345,5 +345,8 @@ export const ENGLISH: LanguageInterface = {
     tableTitle: {
       registerTeleOBD: "Register Telemetry OBD (On Board Diagnostics)",
     },
+    charts: {
+      driveDistance: "Drive Distance",
+    },
   },
 };
