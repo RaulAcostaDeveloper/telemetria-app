@@ -5,12 +5,14 @@ import GeoModal, {
   GeoModalData,
 } from "@/modules/global/components/geoModal/geoModal";
 import {
+  ObdAnalysisTab,
   ObdChartPoint,
   SINGLE_CHART_TYPES,
   SingleLineHighChart,
 } from "@/modules/telemetryObd/components";
 import { TabsContent } from "@/modules/global/components";
 import { fuelVehicleOBDDataMock } from "@/modules/global/dataMock/fuelVehicleOBD/fuelVehicleOBD";
+import { obdAnalyticsDataMock } from "@/modules/global/dataMock/obdAnalysis/obdAnalysis";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
 interface Page {
@@ -69,7 +71,12 @@ export default function TelemetryVehicle({}: Page) {
               handleClicGeoData={handleClicGeoData}
             />
           </div>,
-          <div key={2}></div>,
+          <div key={2}>
+            <ObdAnalysisTab
+              LANGUAGE={LANGUAGE}
+              obdAnalyticsData={obdAnalyticsDataMock}
+            />
+          </div>,
           <div key={3}>
             <SingleLineHighChart
               data={distanceData}

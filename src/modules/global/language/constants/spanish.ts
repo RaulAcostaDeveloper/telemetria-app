@@ -284,6 +284,19 @@ export const SPANISH: LanguageInterface = {
       totalDistance: "Distancia total",
       totalTimeWorked: "Total tiempo trabajado",
     },
+    analysisTab: {
+      plate: "Matrícula",
+      vehicle: "Vehículo",
+      km: "Kilometraje",
+      workingShift: "Jornada laboral",
+      fuelType: "Tipo de combustible",
+      fuelConsumed: "Combustible consumido",
+      averageConsumption: "Consumo promedio",
+      litersPerHour: "Litros por hora",
+      totalDistance: "Distancia total",
+      totalEngineHours: "Total de horas del motor",
+      totalFuelConsumed: "Total del combustible consumido",
+    },
   },
   management: {
     tabs: {
