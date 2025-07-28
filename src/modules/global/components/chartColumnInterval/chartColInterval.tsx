@@ -11,15 +11,22 @@ const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
 });
 
 interface Props {
-  title: string;
   objData: dataTable;
+  title: string;
+  xAxisTitle?: string;
+  yAxisTitle?: string;
 }
 interface rangeNVehicles {
   range: number;
   vehicles: number;
 }
 
-const ChartColInterval = ({ title, objData }: Props) => {
+const ChartColInterval = ({
+  objData,
+  title,
+  xAxisTitle,
+  yAxisTitle,
+}: Props) => {
   const [isReady, setIsReady] = useState(false);
 
   const magnitudes: number[] = objData.map(
@@ -64,17 +71,15 @@ const ChartColInterval = ({ title, objData }: Props) => {
   const chartOptions: Highcharts.Options = useMemo(() => {
     return {
       chart: {
-        /* LO QUE VIENE DE GAUGE. TAL VEZ NO DEBE IR */
-        /* type: ...Highcharts o Highstock o Highmaps o Gantt. */
         type: "column",
         height: 300,
         width: 340,
       },
-      title: { text: "Distancia de conducción" },
+      title: { text: title },
       series: [
         {
           type: "column",
-          name: "Distancia de conducción",
+          name: title,
           yAxis: 0,
           color: "#4ec516",
           data: distanceData,
@@ -91,7 +96,7 @@ const ChartColInterval = ({ title, objData }: Props) => {
           }, // Evita que malinterprete la gráfica que es un valor de fecha.
         },
         title: {
-          text: "Titulo en X",
+          text: xAxisTitle,
           style: {
             fontSize: "12px",
             fontWeight: "bold",
@@ -106,7 +111,7 @@ const ChartColInterval = ({ title, objData }: Props) => {
           },
         },
         title: {
-          text: "Titulo en Y",
+          text: yAxisTitle,
           style: {
             fontSize: "12px",
             fontWeight: "bold",

@@ -84,8 +84,10 @@ export const TelemetryHome = ({ LANGUAGE }: Props) => {
         <>
           <CardGenThird>
             <CardContentTCT5
-              title={LANGUAGE.teleOBD.charts.driveDistance}
               data={teleVehiclesOBDData}
+              title={LANGUAGE.teleOBD.charts.driveDistance}
+              xAxisTitle={LANGUAGE.teleOBD.charts.xAxis}
+              yAxisTitle={LANGUAGE.teleOBD.charts.yAxis}
             />
           </CardGenThird>
 

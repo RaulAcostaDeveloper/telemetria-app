@@ -346,6 +346,8 @@ export const SPANISH: LanguageInterface = {
     },
     charts: {
       driveDistance: "Distancia de conducción",
+      xAxis: "Distancia (Km)",
+      yAxis: "Vehículos",
     },
   },
 };

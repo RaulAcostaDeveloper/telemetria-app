@@ -326,6 +326,8 @@ export interface LanguageInterface {
     };
     charts: {
       driveDistance: string;
+      xAxis: string;
+      yAxis: string;
     };
   };
 }

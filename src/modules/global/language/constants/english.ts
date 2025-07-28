@@ -347,6 +347,8 @@ export const ENGLISH: LanguageInterface = {
     },
     charts: {
       driveDistance: "Drive Distance",
+      xAxis: "Distance (Km)",
+      yAxis: "Vehicles",
     },
   },
 };
