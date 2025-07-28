@@ -285,6 +285,19 @@ export const ENGLISH: LanguageInterface = {
       totalDistance: "Total distance",
       totalTimeWorked: "Total time worked",
     },
+    analysisTab: {
+      plate: "License Plate",
+      vehicle: "Vehicle",
+      km: "Kilometers",
+      workingShift: "Working Shift",
+      fuelType: "Fuel Type",
+      fuelConsumed: "Fuel Consumed",
+      averageConsumption: "Average Consumption",
+      litersPerHour: "Liters per Hour",
+      totalDistance: "Total Distance",
+      totalEngineHours: "Total Engine Hours",
+      totalFuelConsumed: "Total Fuel Consumed",
+    },
   },
   management: {
     tabs: {

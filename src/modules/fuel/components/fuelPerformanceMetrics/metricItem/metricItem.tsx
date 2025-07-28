@@ -8,7 +8,7 @@ interface Props {
   isLast?: boolean;
   metric: string;
   name: string;
-  value: string;
+  value: string | number;
 }
 
 export const MetricItem = ({

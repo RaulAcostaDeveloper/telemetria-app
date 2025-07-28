@@ -24,7 +24,6 @@ interface Page {
 
 export default function FuelVehicle({ params }: Page) {
   const { imei } = params; // imei del vehiculo
-  console.log("Imei: ", imei);
 
   const { isAuthenticated } = useAuth();
 
