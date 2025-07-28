@@ -344,5 +344,10 @@ export const SPANISH: LanguageInterface = {
     tableTitle: {
       registerTeleOBD: "Registro Telemetria OBD (On Board Diagnostics)",
     },
+    charts: {
+      driveDistance: "Distancia de conducción",
+      xAxis: "Distancia (Km)",
+      yAxis: "Vehículos",
+    },
   },
 };

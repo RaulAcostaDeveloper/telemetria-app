@@ -1,0 +1,15 @@
+.table-wrapper {
+  display: inline-block;
+  font-size: 1rem;
+}
+.t-main {
+  width: auto;
+  max-width: 100%; /*Evita desbordar horizontalmente*/
+  table-layout: auto;
+  border-collapse: collapse;
+}
+.t-main th,
+.t-main td {
+  padding: 4px;
+  font-size: 1.2rem;
+}

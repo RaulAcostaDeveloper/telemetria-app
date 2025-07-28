@@ -324,5 +324,10 @@ export interface LanguageInterface {
     tableTitle: {
       registerTeleOBD: string;
     };
+    charts: {
+      driveDistance: string;
+      xAxis: string;
+      yAxis: string;
+    };
   };
 }

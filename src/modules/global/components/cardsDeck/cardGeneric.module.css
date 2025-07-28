@@ -1,0 +1,19 @@
+.cardborder {
+  border: solid 2px #aaa;
+  border-radius: 10px;
+  background-color: #fff;
+  width: fit-content;
+  margin: 5px;
+  padding: 5px;
+
+  display: flex;
+  align-items: flex-end;
+  overflow: auto;
+
+  box-shadow: 0 0 1rem 0 hsla(200, 37%, 81%, 0.5); /* #bdd5e1 ó --company-color-2 */
+  &:hover,
+  &:focus-within {
+    box-shadow: 0 0 0 2px hsla(198, 75%, 75%, 1),
+      0 0 1rem 0 hsla(200, 37%, 81%, 0.2); /* --company-color-3: #8ed2ef; */
+  }
+}
