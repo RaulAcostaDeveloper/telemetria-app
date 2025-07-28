@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -7,7 +8,6 @@ import { useSelector } from "react-redux";
 import {
   LocalGasStation as LocalGasStationIcon,
   ManageAccounts as ManageAccountsIcon,
-  Speed as SpeedIcon,
 } from "@mui/icons-material";
 
 import styles from "./headerVehicleFilter.module.css";
@@ -19,7 +19,9 @@ import { Vehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
 type Action = { label: string; routePrefix: string; title: string };
 const iconMapping: { [key: string]: JSX.Element } = {
   management: <ManageAccountsIcon />,
-  telemetry: <SpeedIcon />,
+  telemetry: (
+    <Image src={"/png/car-gps.png"} width={22} height={22} alt="car services" />
+  ),
   fuel: <LocalGasStationIcon />,
 };
 
@@ -99,14 +101,14 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
                 {(
                   [
                     {
-                      label: "telemetry",
-                      routePrefix: "telemetry",
-                      title: LANGUAGE.header.vehicleFilter.actionTelemetryTitle,
-                    },
-                    {
                       label: "fuel",
                       routePrefix: "fuel",
                       title: LANGUAGE.header.vehicleFilter.actionFuelTitle,
+                    },
+                    {
+                      label: "telemetry",
+                      routePrefix: "telemetry",
+                      title: LANGUAGE.header.vehicleFilter.actionTelemetryTitle,
                     },
                   ] as Action[]
                 ).map((action, idx) => (

@@ -2,14 +2,16 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
-import { ArrowDownward, CalendarToday } from "@mui/icons-material";
+
 import Calendar from "@/modules/global/components/calendar/Calendar";
 import HeaderVehicleFilter from "./headerVehicleFilter/headerVehicleFilter";
+import SouthIcon from "@mui/icons-material/South";
 import styles from "./header.module.css";
-import { formatDateTime } from "@/modules/global/utils/utils";
-import { LanguageInterface } from "../../language/constants/language.model";
+import { CalendarToday } from "@mui/icons-material";
 import { HeaderBackButton } from "./headerBackButton/headerBackButton";
 import { HeaderTextContent } from "./headerTextContent/headerTextContent";
+import { LanguageInterface } from "../../language/constants/language.model";
+import { formatDateTime } from "@/modules/global/utils/utils";
 
 interface CalendarState {
   endDate: string | null;
@@ -62,7 +64,7 @@ export const Header = ({ isMenuOpen, LANGUAGE }: Props) => {
               <div className={styles.subContainer}>
                 {" "}
                 <HeaderBackButton LANGUAGE={LANGUAGE} />
-                <HeaderTextContent LANGUAGE={LANGUAGE} currentUrl={pathname}/>
+                <HeaderTextContent LANGUAGE={LANGUAGE} currentUrl={pathname} />
               </div>
 
               <div className={styles.inputAndDatesContainer}>
@@ -76,7 +78,7 @@ export const Header = ({ isMenuOpen, LANGUAGE }: Props) => {
                   title={LANGUAGE.header.calendar.buttonHover}
                 >
                   <CalendarToday className={styles.calendarIcon} />
-                  <ArrowDownward className={styles.arrowIcon} />
+                  <SouthIcon className={styles.arrowIcon} />
                   <div className={styles.dateContainer}>
                     <span className={styles.startDate}>{start}</span>
                     <span className={styles.endDate}>{end}</span>

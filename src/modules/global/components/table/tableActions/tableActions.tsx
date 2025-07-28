@@ -1,13 +1,12 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 import DeleteIcon from "@mui/icons-material/Delete";
+import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-
-import LeakAddIcon from "@mui/icons-material/LeakAdd";
-import ShowChartIcon from "@mui/icons-material/ShowChart";
 import styles from "./tableActions.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { PrimitiveValue } from "../table.model";
@@ -72,7 +71,7 @@ export const TableActions = ({
                   title={LANGUAGE.table.actions.goFuelReport}
                   href={`/fuel/vehicle/${dataObject[idKey]}`}
                 >
-                  <ShowChartIcon />
+                  <LocalGasStationIcon sx={{ fontSize: "2rem" }} />
                 </Link>
               )}
 
@@ -83,7 +82,12 @@ export const TableActions = ({
                   title={LANGUAGE.table.actions.goObtReport}
                   href={`/telemetry/vehicle/${dataObject[idKey]}`}
                 >
-                  <LeakAddIcon />
+                  <Image
+                    src={"/png/car-gps.png"}
+                    width={22}
+                    height={22}
+                    alt="car services"
+                  />
                 </Link>
               )}
             </>
