@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -7,7 +8,6 @@ import { useSelector } from "react-redux";
 import {
   LocalGasStation as LocalGasStationIcon,
   ManageAccounts as ManageAccountsIcon,
-  Speed as SpeedIcon,
 } from "@mui/icons-material";
 
 import styles from "./headerVehicleFilter.module.css";
@@ -19,7 +19,9 @@ import { Vehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
 type Action = { label: string; routePrefix: string; title: string };
 const iconMapping: { [key: string]: JSX.Element } = {
   management: <ManageAccountsIcon />,
-  telemetry: <SpeedIcon />,
+  telemetry: (
+    <Image src={"/png/car-gps.png"} width={22} height={22} alt="car services" />
+  ),
   fuel: <LocalGasStationIcon />,
 };
 
@@ -59,14 +61,14 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
   }, [pathname]);
 
   /** Filtra todos los resultados que coincidan por "plate" */
-  const filteredByPlate = vehiclesData?.value.vehicles?.filter((v) =>
-    v.plate.toLowerCase().includes(query.toLowerCase())
+  const filteredByPlate = vehiclesData?.value.vehicles?.filter((vehicle) =>
+    vehicle.plate.toLowerCase().includes(query.toLowerCase())
   );
   /** Filtra todos los resultados que coincidan por el primer "imeIs" en el array.
-  *   Ejemplo imei con proposito de saber que teclear en input: 868689060250000 */
-  const filteredByImei = vehiclesData?.value.vehicles?.filter((v) =>
-    v.imeIs[0].toLowerCase().includes(query.toLowerCase())
-  )
+   *   Ejemplo imei con proposito de saber que teclear en input: 868689060250000 */
+  const filteredByImei = vehiclesData?.value.vehicles?.filter((vehicle) =>
+    vehicle.imeIs.toLowerCase().includes(query.toLowerCase())
+  );
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
@@ -74,66 +76,76 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
     setShowDropdown(val.trim() !== "");
   };
 
-  function answerScenarios(){
-    let hasPlate, hasIMEI = false;
-    filteredByPlate && filteredByPlate.length > 0 ? hasPlate = true : hasPlate = false
-    filteredByImei && filteredByImei.length > 0 ? hasIMEI = true : hasIMEI = false
+  function answerScenarios() {
+    const hasPlate = !!(filteredByPlate && filteredByPlate.length > 0);
+    const hasIMEI = !!(filteredByImei && filteredByImei.length > 0);
 
     /** Se hace una busqueda, y existe informacion de IMEI o de placas */
-    if(showDropdown && query && (hasIMEI || hasPlate)){
-      let filteredByPivot: Vehicles[] =[];
-      hasIMEI ? 
-        filteredByPivot = filteredByImei as Vehicles[]
-        : 
-        hasPlate && (filteredByPivot = filteredByPlate as Vehicles[])
+    if (showDropdown && query && (hasIMEI || hasPlate)) {
+      let filteredByPivot: Vehicles[] = [];
+
+      if (hasIMEI) {
+        filteredByPivot = filteredByImei as Vehicles[];
+      } else if (hasPlate) {
+        filteredByPivot = filteredByPlate as Vehicles[];
+      }
 
       return (
         <ul className={styles.dropdown}>
-          {filteredByPivot.map((v, i) => (
-            <li key={i} className={styles.dropdownItem}>
+          {filteredByPivot.map((vehicle, index) => (
+            <li key={index} className={styles.dropdownItem}>
               <div className={styles.vehicleDetails}>
-                <strong>{v.plate}</strong> - <span>{v.brand}</span>
+                <strong>{vehicle.plate}</strong> - <span>{vehicle.brand}</span>
               </div>
               <div className={styles.buttonsContainer}>
                 {(
                   [
                     {
-                      label: "telemetry",
-                      routePrefix: "telemetry",
-                      title: LANGUAGE.header.vehicleFilter.actionTelemetryTitle,
-                    },
-                    {
                       label: "fuel",
                       routePrefix: "fuel",
                       title: LANGUAGE.header.vehicleFilter.actionFuelTitle,
                     },
+                    {
+                      label: "telemetry",
+                      routePrefix: "telemetry",
+                      title: LANGUAGE.header.vehicleFilter.actionTelemetryTitle,
+                    },
                   ] as Action[]
                 ).map((action, idx) => (
-                  <Link
-                    key={idx}
-                    href={`/${action.routePrefix}/vehicle/${v.imeIs[0]}`}
-                    onClick={() => setShowDropdown(false)}
-                    className={styles.linkIcon}
-                  >
-                    <button className={styles.iconButton} title={action.title}>
-                      {iconMapping[action.label]}
-                    </button>
-                  </Link>
+                  <>
+                    {vehicle.imeIs.length > 10 && (
+                      <Link
+                        key={idx}
+                        href={`/${action.routePrefix}/vehicle/${vehicle.imeIs}`}
+                        onClick={() => setShowDropdown(false)}
+                        className={styles.linkIcon}
+                      >
+                        <button
+                          className={styles.iconButton}
+                          title={action.title}
+                        >
+                          {iconMapping[action.label]}
+                        </button>
+                      </Link>
+                    )}
+                  </>
                 ))}
               </div>
             </li>
           ))}
         </ul>
-      )
-    }else if(showDropdown && query && !hasIMEI && !hasPlate){
+      );
+    } else if (showDropdown && query && !hasIMEI && !hasPlate) {
       /** Cuando la consulta a vehículo no coincide con la lista de IMEIs ni de placas. */
-      return(
+      return (
         <ul className={styles.dropdown}>
           <li key={0} className={styles.dropdownItem}>
-            <div className={styles.vehicleDetails}><strong>{LANGUAGE.header.vehicleFilter.inputNoMatch}</strong></div>
+            <div className={styles.vehicleDetails}>
+              <strong>{LANGUAGE.header.vehicleFilter.inputNoMatch}</strong>
+            </div>
           </li>
         </ul>
-      )
+      );
     }
   }
 
