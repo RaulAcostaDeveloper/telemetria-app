@@ -83,12 +83,7 @@ export const TelemetryHome = ({ LANGUAGE }: Props) => {
       {teleVehiclesOBDStatus === "succeeded" && teleVehiclesOBDData ? (
         <>
           <CardGenThird>
-            <CardContentTCT5
-              data={teleVehiclesOBDData}
-              title={LANGUAGE.teleOBD.charts.driveDistance}
-              xAxisTitle={LANGUAGE.teleOBD.charts.xAxis}
-              yAxisTitle={LANGUAGE.teleOBD.charts.yAxis}
-            />
+            <CardContentTCT5 data={teleVehiclesOBDData} LANGUAGE={LANGUAGE} />
           </CardGenThird>
 
           <Table

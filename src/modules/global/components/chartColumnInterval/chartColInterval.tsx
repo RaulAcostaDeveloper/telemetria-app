@@ -4,69 +4,30 @@ import Highcharts from "highcharts";
 import dynamic from "next/dynamic";
 
 //Tipado
-import { dataTable } from "@/modules/global/components/table/table.model";
+import { LanguageInterface } from "../../language/constants/language.model";
 
 const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
   ssr: false,
 });
 
-interface Props {
-  objData: dataTable;
-  title: string;
-  xAxisTitle?: string;
-  yAxisTitle?: string;
-}
 interface rangeNVehicles {
   range: number;
   vehicles: number;
 }
+interface Props {
+  LANGUAGE: LanguageInterface;
+  rangesArray: rangeNVehicles[];
+}
 
-const ChartColInterval = ({
-  objData,
-  title,
-  xAxisTitle,
-  yAxisTitle,
-}: Props) => {
+const ChartColInterval = ({ LANGUAGE, rangesArray }: Props) => {
   const [isReady, setIsReady] = useState(false);
-
-  const magnitudes: number[] = objData.map(
-    (value) => value.totalDistance as number
-  );
-  const average =
-    magnitudes.reduce(function (a, b) {
-      return a + b;
-    }) / magnitudes.length;
-  const totalVehiculos = magnitudes.length;
-  const minDistance = magnitudes.sort()[0];
-  const maxDistance = magnitudes.sort().reverse()[0];
-  const evalRange = maxDistance - minDistance;
-  const rangeSize = evalRange / 10;
-
-  // Array de objetos con 1. rango a usar. 2. vehiculos que entran en dicho rango.
-  // Se usa el limite superior como numérico de cada rango.
-  const rangesArray: rangeNVehicles[] = [];
-  for (let index = 0; index < 10; index++) {
-    rangesArray.push({
-      range: rangeSize * (index + 1) + minDistance,
-      vehicles: 0,
-    });
-  }
-
-  // Incrementa contador de vehiculos que se encuentren en el rango.
-  magnitudes.map((mag) => {
-    rangesArray.map((category, index) => {
-      if (mag < category.range) {
-        return (rangesArray[index].vehicles = rangesArray[index].vehicles + 1);
-      }
-    });
-  });
 
   const distanceData = useMemo(() => {
     return rangesArray.map((r) => ({
       x: r.range,
       y: r.vehicles,
     }));
-  }, []);
+  }, [rangesArray]);
 
   const chartOptions: Highcharts.Options = useMemo(() => {
     return {
@@ -75,11 +36,11 @@ const ChartColInterval = ({
         height: 300,
         width: 340,
       },
-      title: { text: title },
+      title: { text: LANGUAGE.teleOBD.charts.driveDistance },
       series: [
         {
           type: "column",
-          name: title,
+          name: LANGUAGE.teleOBD.charts.driveDistance,
           yAxis: 0,
           color: "#4ec516",
           data: distanceData,
@@ -96,7 +57,7 @@ const ChartColInterval = ({
           }, // Evita que malinterprete la gráfica que es un valor de fecha.
         },
         title: {
-          text: xAxisTitle,
+          text: LANGUAGE.teleOBD.charts.xAxis,
           style: {
             fontSize: "12px",
             fontWeight: "bold",
@@ -111,7 +72,7 @@ const ChartColInterval = ({
           },
         },
         title: {
-          text: yAxisTitle,
+          text: LANGUAGE.teleOBD.charts.yAxis,
           style: {
             fontSize: "12px",
             fontWeight: "bold",
