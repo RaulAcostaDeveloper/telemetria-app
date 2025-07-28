@@ -3,6 +3,8 @@ import { useEffect, useMemo, useState } from "react";
 import Highcharts from "highcharts";
 import dynamic from "next/dynamic";
 
+import { createTooltipFormatter } from "../../utils/highChartUtils";
+
 //Tipado
 import { LanguageInterface } from "../../language/constants/language.model";
 
@@ -84,8 +86,9 @@ const ChartColInterval = ({ LANGUAGE, rangesArray }: Props) => {
         useHTML: true,
         formatter: function () {
           return `
-            <div style="font-size: 20px">
-              <div>Distancia: <b>${this.x}</b><br/>Vehículos: <b>${this.y}</b><div>
+            <div style="width: 100%; font-size: 18px; display: flex; flex-direction: column; justify-content: space-between;">
+              <strong style="margin-right: 10px;">${LANGUAGE.teleOBD.charts.xAxis}:</strong> <p style="padding-bottom: 1em;">${this.x}</p>
+              <strong style="margin-right: 10px;">${LANGUAGE.teleOBD.charts.yAxis}:</strong> <p>${this.y}</p>
             </div>
           `;
         },
