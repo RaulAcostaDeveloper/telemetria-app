@@ -19,11 +19,16 @@ import {
 import { FuelDataValues } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { GeoModalData } from "@/modules/global/components/geoModal/geoModal";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { OperationalBehaviorValue } from "@/app/(pages)/(restricted)/fuel/vehicle/[imei]/page";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   fuelDataData: FuelDataValues;
   handleClicGeoData: (geoModalData: GeoModalData) => void;
+  operationalBehaviorEngineOff: OperationalBehaviorValue[];
+  operationalBehaviorEngineOffCoasting: OperationalBehaviorValue[];
+  operationalBehaviorEngineOnIdle: OperationalBehaviorValue[];
+  operationalBehaviorEngineOnMoving: OperationalBehaviorValue[];
 }
 
 if (typeof HighstockInit === "function") {
@@ -34,6 +39,10 @@ export const FuelBehaviorHighChart = ({
   LANGUAGE,
   fuelDataData,
   handleClicGeoData,
+  operationalBehaviorEngineOff,
+  operationalBehaviorEngineOffCoasting,
+  operationalBehaviorEngineOnIdle,
+  operationalBehaviorEngineOnMoving,
 }: Props) => {
   // Tooltip de cada serie
   const chargesTooltipFields = getChargesTooltipFields(LANGUAGE);
@@ -69,7 +78,7 @@ export const FuelBehaviorHighChart = ({
         },
       }))
       .sort((a, b) => a.x - b.x);
-  }, []);
+  }, [fuelDataData]);
 
   const disChargesData = useMemo(() => {
     return fuelDataData.discharges
@@ -96,7 +105,7 @@ export const FuelBehaviorHighChart = ({
         },
       }))
       .sort((a, b) => a.x - b.x);
-  }, []);
+  }, [fuelDataData]);
 
   const levelMessagesData = useMemo(() => {
     return fuelDataData.levelMessages
@@ -116,7 +125,7 @@ export const FuelBehaviorHighChart = ({
         },
       }))
       .sort((a, b) => a.x - b.x);
-  }, []);
+  }, [fuelDataData]);
 
   // Performance es km/L
   const performancesBetweenChargesData = useMemo(() => {
@@ -135,7 +144,7 @@ export const FuelBehaviorHighChart = ({
         },
       }))
       .sort((a, b) => a.x - b.x);
-  }, []);
+  }, [fuelDataData]);
 
   const dailyPerformancesData = useMemo(() => {
     return fuelDataData.dailyPerformances
@@ -153,12 +162,56 @@ export const FuelBehaviorHighChart = ({
         },
       }))
       .sort((a, b) => a.x - b.x);
-  }, []);
+  }, [fuelDataData]);
 
-  const chartOptions = useMemo(
-    () => ({
+  const chartOptions = useMemo(() => {
+    const plotBands = [
+      ...operationalBehaviorEngineOff.map((c) => ({
+        from: new Date(c.startDate).getTime(),
+        to: new Date(c.endDate).getTime(),
+        color: "#15ff0081",
+        zIndex: 0,
+        custom: {
+          speed: c.speed,
+          dateGps: c.startDate,
+        },
+      })),
+      ...operationalBehaviorEngineOffCoasting.map((c) => ({
+        from: new Date(c.startDate).getTime(),
+        to: new Date(c.endDate).getTime(),
+        color: "#ff000085",
+        zIndex: 0,
+        custom: {
+          speed: c.speed,
+          dateGps: c.startDate,
+        },
+      })),
+      ...operationalBehaviorEngineOnMoving.map((c) => ({
+        from: new Date(c.startDate).getTime(),
+        to: new Date(c.endDate).getTime(),
+        color: "#00fff281",
+        zIndex: 0,
+        custom: {
+          speed: c.speed,
+          dateGps: c.startDate,
+        },
+      })),
+      ...operationalBehaviorEngineOnIdle.map((c) => ({
+        from: new Date(c.startDate).getTime(),
+        to: new Date(c.endDate).getTime(),
+        color: "#008cff80",
+        zIndex: 0,
+        custom: {
+          speed: c.speed,
+          dateGps: c.startDate,
+        },
+      })),
+    ];
+
+    return {
       xAxis: {
         type: "datetime",
+        plotBands: plotBands,
         labels: {
           style: {
             fontSize: "12px",
@@ -207,6 +260,46 @@ export const FuelBehaviorHighChart = ({
         },
       ],
       series: [
+        // {
+        //   yAxis: 2,
+        //   type: "datetime",
+        //   name: "Apagado",
+        //   plotBands: operationalBehaviorEngineOffData,
+        //   color: "#15ff0081",
+        //   tooltip: {
+        //     pointFormatter: createTooltipFormatter(chargesTooltipFields),
+        //   },
+        // },
+        // {
+        //   yAxis: 2,
+        //   type: "datetime",
+        //   name: "Apagado y avanzando",
+        //   plotBands: operationalBehaviorEngineOffCoastingData,
+        //   color: "#ff000085",
+        //   tooltip: {
+        //     pointFormatter: createTooltipFormatter(chargesTooltipFields),
+        //   },
+        // },
+        // {
+        //   yAxis: 2,
+        //   type: "datetime",
+        //   name: "Estacionado",
+        //   plotBands: operationalBehaviorEngineOnIdleData,
+        //   color: "#00fff281",
+        //   tooltip: {
+        //     pointFormatter: createTooltipFormatter(chargesTooltipFields),
+        //   },
+        // },
+        // {
+        //   yAxis: 2,
+        //   type: "datetime",
+        //   name: "En movimiento",
+        //   plotBands: operationalBehaviorEngineOnMovingData,
+        //   color: "#008cff80",
+        //   tooltip: {
+        //     pointFormatter: createTooltipFormatter(chargesTooltipFields),
+        //   },
+        // },
         {
           yAxis: 0,
           type: "column",
@@ -384,10 +477,30 @@ export const FuelBehaviorHighChart = ({
         series: {
           turboThreshold: 50000,
         },
+        xrange: {
+          pointPadding: 0,
+          groupPadding: 0,
+          borderWidth: 0,
+        },
       },
-    }),
-    []
-  );
+    };
+  }, [
+    LANGUAGE,
+    chargesData,
+    chargesTooltipFields,
+    dailyPerformancesData,
+    disChargesData,
+    dischargesTooltipFields,
+    handleClicGeoData,
+    levelMessagesData,
+    levelMessagesTooltipFields,
+    operationalBehaviorEngineOff,
+    operationalBehaviorEngineOffCoasting,
+    operationalBehaviorEngineOnIdle,
+    operationalBehaviorEngineOnMoving,
+    performancesBetweenChargesData,
+    performancesBetweenChargesTooltipFields,
+  ]);
 
   return (
     <HighchartsReact

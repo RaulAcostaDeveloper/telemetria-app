@@ -16,6 +16,12 @@ import { useAuth } from "@/modules/auth/utils";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 // import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
 
+export interface OperationalBehaviorValue {
+  startDate: string;
+  endDate: string;
+  speed: number;
+}
+
 interface Page {
   params: {
     imei: string;
@@ -41,13 +47,73 @@ export default function FuelVehicle({ params }: Page) {
     (state: RootState) => state.fuelPerformance
   );
 
+  const operationalBehaviorEngineOnMoving: OperationalBehaviorValue[] = [];
+  const operationalBehaviorEngineOnIdle: OperationalBehaviorValue[] = [];
+  const operationalBehaviorEngineOff: OperationalBehaviorValue[] = [];
+  const operationalBehaviorEngineOffCoasting: OperationalBehaviorValue[] = [];
+
+  const resetOperationalBehavior = () => {
+    operationalBehaviorEngineOnMoving.splice(
+      0,
+      operationalBehaviorEngineOnMoving.length
+    );
+    operationalBehaviorEngineOffCoasting.splice(
+      0,
+      operationalBehaviorEngineOffCoasting.length
+    );
+    operationalBehaviorEngineOnIdle.splice(
+      0,
+      operationalBehaviorEngineOnIdle.length
+    );
+    operationalBehaviorEngineOnMoving.splice(
+      0,
+      operationalBehaviorEngineOnMoving.length
+    );
+  };
+
+  useEffect(() => {
+    resetOperationalBehavior();
+
+    const levelMessages = fuelDataData?.value.levelMessages;
+    if (!levelMessages) return;
+
+    levelMessages.forEach((el, i) => {
+      const nextDateGps = levelMessages[i + 1];
+      const endDate = nextDateGps?.dateGps ?? el.dateServer; // fallback por si es el último
+
+      if (el.ignition === 0 && el.speed === 0) {
+        operationalBehaviorEngineOff.push({
+          startDate: el.dateGps,
+          endDate,
+          speed: el.speed,
+        });
+      } else if (el.ignition === 0 && el.speed >= 1) {
+        operationalBehaviorEngineOffCoasting.push({
+          startDate: el.dateGps,
+          endDate,
+          speed: el.speed,
+        });
+      } else if (el.ignition === 1 && el.speed === 0) {
+        operationalBehaviorEngineOnIdle.push({
+          startDate: el.dateGps,
+          endDate,
+          speed: el.speed,
+        });
+      } else if (el.ignition === 1 && el.speed >= 1) {
+        operationalBehaviorEngineOnMoving.push({
+          startDate: el.dateGps,
+          endDate,
+          speed: el.speed,
+        });
+      }
+    });
+  }, [fuelDataData]);
+
   const LANGUAGE = useLanguage();
   const vehicleTabs = [
     LANGUAGE.fuelVehicle.tabs.behavior,
     LANGUAGE.fuelVehicle.tabs.reports,
     LANGUAGE.fuelVehicle.tabs.fuelNow,
-    // LANGUAGE.fuelVehicle.tabs.charges,
-    // LANGUAGE.fuelVehicle.tabs.discharges,
   ];
 
   useEffect(() => {
@@ -88,6 +154,16 @@ export default function FuelVehicle({ params }: Page) {
                 <FuelBehaviorTab
                   LANGUAGE={LANGUAGE}
                   fuelDataData={fuelDataData.value}
+                  operationalBehaviorEngineOffCoasting={
+                    operationalBehaviorEngineOffCoasting
+                  }
+                  operationalBehaviorEngineOff={operationalBehaviorEngineOff}
+                  operationalBehaviorEngineOnIdle={
+                    operationalBehaviorEngineOnIdle
+                  }
+                  operationalBehaviorEngineOnMoving={
+                    operationalBehaviorEngineOnMoving
+                  }
                 />
               </>
             ) : (
