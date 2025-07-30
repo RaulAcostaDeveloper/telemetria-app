@@ -6,24 +6,24 @@ import GeoModal, {
 import { FuelBehaviorHighChart } from "../FuelBehaviorHighChart/FuelBehaviorHighChart";
 import { FuelDataValues } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { OperationalBehaviorValue } from "@/app/(pages)/(restricted)/fuel/vehicle/[imei]/page";
+import { OBValue } from "@/app/(pages)/(restricted)/fuel/vehicle/[imei]/page";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   fuelDataData: FuelDataValues;
-  operationalBehaviorEngineOff: OperationalBehaviorValue[];
-  operationalBehaviorEngineOffCoasting: OperationalBehaviorValue[];
-  operationalBehaviorEngineOnIdle: OperationalBehaviorValue[];
-  operationalBehaviorEngineOnMoving: OperationalBehaviorValue[];
+  opBEngineOff: OBValue[];
+  opBEngineOffCoasting: OBValue[];
+  opBEngineOnIdle: OBValue[];
+  opBEngineOnMoving: OBValue[];
 }
 
 export const FuelBehaviorTab = ({
   LANGUAGE,
   fuelDataData,
-  operationalBehaviorEngineOff,
-  operationalBehaviorEngineOffCoasting,
-  operationalBehaviorEngineOnIdle,
-  operationalBehaviorEngineOnMoving,
+  opBEngineOff,
+  opBEngineOffCoasting,
+  opBEngineOnIdle,
+  opBEngineOnMoving,
 }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [geoModalData, setGeoModalData] = useState<GeoModalData>();
@@ -39,12 +39,10 @@ export const FuelBehaviorTab = ({
         LANGUAGE={LANGUAGE}
         fuelDataData={fuelDataData}
         handleClicGeoData={handleClicGeoData}
-        operationalBehaviorEngineOff={operationalBehaviorEngineOff}
-        operationalBehaviorEngineOffCoasting={
-          operationalBehaviorEngineOffCoasting
-        }
-        operationalBehaviorEngineOnIdle={operationalBehaviorEngineOnIdle}
-        operationalBehaviorEngineOnMoving={operationalBehaviorEngineOnMoving}
+        opBEngineOff={opBEngineOff}
+        opBEngineOffCoasting={opBEngineOffCoasting}
+        opBEngineOnIdle={opBEngineOnIdle}
+        opBEngineOnMoving={opBEngineOnMoving}
       />
       {isModalOpen && geoModalData && (
         <GeoModal

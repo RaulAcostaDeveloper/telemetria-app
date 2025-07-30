@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -16,7 +16,7 @@ import { useAuth } from "@/modules/auth/utils";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 // import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
 
-export interface OperationalBehaviorValue {
+export interface OBValue {
   startDate: string;
   endDate: string;
   speed: number;
@@ -30,6 +30,12 @@ interface Page {
 
 export default function FuelVehicle({ params }: Page) {
   const { imei } = params; // imei del vehiculo
+
+  // Operational Behavior (Estacionado, apagado, Avanzando, apagado y avanzando)
+  const [opBEngineOff, setOpBEngineOff] = useState<OBValue[]>([]);
+  const [opBEngineOffCoast, setOpBEngineOffCoast] = useState<OBValue[]>([]);
+  const [opBEngineOnIdle, setOpBEngineOnIdle] = useState<OBValue[]>([]);
+  const [opBEngineOnMoving, setOpBEngineOnMoving] = useState<OBValue[]>([]);
 
   const { isAuthenticated } = useAuth();
 
@@ -47,32 +53,11 @@ export default function FuelVehicle({ params }: Page) {
     (state: RootState) => state.fuelPerformance
   );
 
-  const operationalBehaviorEngineOnMoving: OperationalBehaviorValue[] = [];
-  const operationalBehaviorEngineOnIdle: OperationalBehaviorValue[] = [];
-  const operationalBehaviorEngineOff: OperationalBehaviorValue[] = [];
-  const operationalBehaviorEngineOffCoasting: OperationalBehaviorValue[] = [];
-
-  const resetOperationalBehavior = () => {
-    operationalBehaviorEngineOnMoving.splice(
-      0,
-      operationalBehaviorEngineOnMoving.length
-    );
-    operationalBehaviorEngineOffCoasting.splice(
-      0,
-      operationalBehaviorEngineOffCoasting.length
-    );
-    operationalBehaviorEngineOnIdle.splice(
-      0,
-      operationalBehaviorEngineOnIdle.length
-    );
-    operationalBehaviorEngineOnMoving.splice(
-      0,
-      operationalBehaviorEngineOnMoving.length
-    );
-  };
-
   useEffect(() => {
-    resetOperationalBehavior();
+    const engineOff: OBValue[] = [];
+    const engineOffCoasting: OBValue[] = [];
+    const engineOnIdle: OBValue[] = [];
+    const engineOnMoving: OBValue[] = [];
 
     const levelMessages = fuelDataData?.value.levelMessages;
     if (!levelMessages) return;
@@ -82,31 +67,36 @@ export default function FuelVehicle({ params }: Page) {
       const endDate = nextDateGps?.dateGps ?? el.dateServer; // fallback por si es el último
 
       if (el.ignition === 0 && el.speed === 0) {
-        operationalBehaviorEngineOff.push({
+        engineOff.push({
           startDate: el.dateGps,
           endDate,
           speed: el.speed,
         });
       } else if (el.ignition === 0 && el.speed >= 1) {
-        operationalBehaviorEngineOffCoasting.push({
+        engineOffCoasting.push({
           startDate: el.dateGps,
           endDate,
           speed: el.speed,
         });
       } else if (el.ignition === 1 && el.speed === 0) {
-        operationalBehaviorEngineOnIdle.push({
+        engineOnIdle.push({
           startDate: el.dateGps,
           endDate,
           speed: el.speed,
         });
       } else if (el.ignition === 1 && el.speed >= 1) {
-        operationalBehaviorEngineOnMoving.push({
+        engineOnMoving.push({
           startDate: el.dateGps,
           endDate,
           speed: el.speed,
         });
       }
     });
+
+    setOpBEngineOff(engineOff);
+    setOpBEngineOffCoast(engineOffCoasting);
+    setOpBEngineOnIdle(engineOnIdle);
+    setOpBEngineOnMoving(engineOnMoving);
   }, [fuelDataData]);
 
   const LANGUAGE = useLanguage();
@@ -154,16 +144,10 @@ export default function FuelVehicle({ params }: Page) {
                 <FuelBehaviorTab
                   LANGUAGE={LANGUAGE}
                   fuelDataData={fuelDataData.value}
-                  operationalBehaviorEngineOffCoasting={
-                    operationalBehaviorEngineOffCoasting
-                  }
-                  operationalBehaviorEngineOff={operationalBehaviorEngineOff}
-                  operationalBehaviorEngineOnIdle={
-                    operationalBehaviorEngineOnIdle
-                  }
-                  operationalBehaviorEngineOnMoving={
-                    operationalBehaviorEngineOnMoving
-                  }
+                  opBEngineOff={opBEngineOff}
+                  opBEngineOffCoasting={opBEngineOffCoast}
+                  opBEngineOnIdle={opBEngineOnIdle}
+                  opBEngineOnMoving={opBEngineOnMoving}
                 />
               </>
             ) : (

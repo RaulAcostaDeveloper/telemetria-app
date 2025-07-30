@@ -19,16 +19,16 @@ import {
 import { FuelDataValues } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { GeoModalData } from "@/modules/global/components/geoModal/geoModal";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { OperationalBehaviorValue } from "@/app/(pages)/(restricted)/fuel/vehicle/[imei]/page";
+import { OBValue } from "@/app/(pages)/(restricted)/fuel/vehicle/[imei]/page";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   fuelDataData: FuelDataValues;
   handleClicGeoData: (geoModalData: GeoModalData) => void;
-  operationalBehaviorEngineOff: OperationalBehaviorValue[];
-  operationalBehaviorEngineOffCoasting: OperationalBehaviorValue[];
-  operationalBehaviorEngineOnIdle: OperationalBehaviorValue[];
-  operationalBehaviorEngineOnMoving: OperationalBehaviorValue[];
+  opBEngineOff: OBValue[];
+  opBEngineOffCoasting: OBValue[];
+  opBEngineOnIdle: OBValue[];
+  opBEngineOnMoving: OBValue[];
 }
 
 if (typeof HighstockInit === "function") {
@@ -39,10 +39,10 @@ export const FuelBehaviorHighChart = ({
   LANGUAGE,
   fuelDataData,
   handleClicGeoData,
-  operationalBehaviorEngineOff,
-  operationalBehaviorEngineOffCoasting,
-  operationalBehaviorEngineOnIdle,
-  operationalBehaviorEngineOnMoving,
+  opBEngineOff,
+  opBEngineOffCoasting,
+  opBEngineOnIdle,
+  opBEngineOnMoving,
 }: Props) => {
   // Tooltip de cada serie
   const chargesTooltipFields = getChargesTooltipFields(LANGUAGE);
@@ -166,7 +166,7 @@ export const FuelBehaviorHighChart = ({
 
   const chartOptions = useMemo(() => {
     const plotBands = [
-      ...operationalBehaviorEngineOff.map((c) => ({
+      ...opBEngineOff.map((c) => ({
         from: new Date(c.startDate).getTime(),
         to: new Date(c.endDate).getTime(),
         color: "#15ff0081",
@@ -176,7 +176,7 @@ export const FuelBehaviorHighChart = ({
           dateGps: c.startDate,
         },
       })),
-      ...operationalBehaviorEngineOffCoasting.map((c) => ({
+      ...opBEngineOffCoasting.map((c) => ({
         from: new Date(c.startDate).getTime(),
         to: new Date(c.endDate).getTime(),
         color: "#ff000085",
@@ -186,7 +186,7 @@ export const FuelBehaviorHighChart = ({
           dateGps: c.startDate,
         },
       })),
-      ...operationalBehaviorEngineOnMoving.map((c) => ({
+      ...opBEngineOnMoving.map((c) => ({
         from: new Date(c.startDate).getTime(),
         to: new Date(c.endDate).getTime(),
         color: "#00fff281",
@@ -196,7 +196,7 @@ export const FuelBehaviorHighChart = ({
           dateGps: c.startDate,
         },
       })),
-      ...operationalBehaviorEngineOnIdle.map((c) => ({
+      ...opBEngineOnIdle.map((c) => ({
         from: new Date(c.startDate).getTime(),
         to: new Date(c.endDate).getTime(),
         color: "#008cff80",
@@ -260,46 +260,6 @@ export const FuelBehaviorHighChart = ({
         },
       ],
       series: [
-        // {
-        //   yAxis: 2,
-        //   type: "datetime",
-        //   name: "Apagado",
-        //   plotBands: operationalBehaviorEngineOffData,
-        //   color: "#15ff0081",
-        //   tooltip: {
-        //     pointFormatter: createTooltipFormatter(chargesTooltipFields),
-        //   },
-        // },
-        // {
-        //   yAxis: 2,
-        //   type: "datetime",
-        //   name: "Apagado y avanzando",
-        //   plotBands: operationalBehaviorEngineOffCoastingData,
-        //   color: "#ff000085",
-        //   tooltip: {
-        //     pointFormatter: createTooltipFormatter(chargesTooltipFields),
-        //   },
-        // },
-        // {
-        //   yAxis: 2,
-        //   type: "datetime",
-        //   name: "Estacionado",
-        //   plotBands: operationalBehaviorEngineOnIdleData,
-        //   color: "#00fff281",
-        //   tooltip: {
-        //     pointFormatter: createTooltipFormatter(chargesTooltipFields),
-        //   },
-        // },
-        // {
-        //   yAxis: 2,
-        //   type: "datetime",
-        //   name: "En movimiento",
-        //   plotBands: operationalBehaviorEngineOnMovingData,
-        //   color: "#008cff80",
-        //   tooltip: {
-        //     pointFormatter: createTooltipFormatter(chargesTooltipFields),
-        //   },
-        // },
         {
           yAxis: 0,
           type: "column",
@@ -494,10 +454,10 @@ export const FuelBehaviorHighChart = ({
     handleClicGeoData,
     levelMessagesData,
     levelMessagesTooltipFields,
-    operationalBehaviorEngineOff,
-    operationalBehaviorEngineOffCoasting,
-    operationalBehaviorEngineOnIdle,
-    operationalBehaviorEngineOnMoving,
+    opBEngineOff,
+    opBEngineOffCoasting,
+    opBEngineOnIdle,
+    opBEngineOnMoving,
     performancesBetweenChargesData,
     performancesBetweenChargesTooltipFields,
   ]);
