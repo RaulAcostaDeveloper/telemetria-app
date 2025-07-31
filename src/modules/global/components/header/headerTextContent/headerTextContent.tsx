@@ -37,13 +37,21 @@ export const HeaderTextContent = ({ LANGUAGE, currentUrl }: Props) => {
       case "single-fuel":
         return (
           <div className={styles.platesAndName}>
-            <HeaderTextWords LANGUAGE={LANGUAGE} section={site} />
+            <HeaderTextWords
+              LANGUAGE={LANGUAGE}
+              section={site}
+              url={currentUrl}
+            />
           </div>
         );
       case "single-telemetry":
         return (
           <div className={styles.platesAndName}>
-            <HeaderTextWords LANGUAGE={LANGUAGE} section={site} />
+            <HeaderTextWords
+              LANGUAGE={LANGUAGE}
+              section={site}
+              url={currentUrl}
+            />
           </div>
         );
       case "home":
