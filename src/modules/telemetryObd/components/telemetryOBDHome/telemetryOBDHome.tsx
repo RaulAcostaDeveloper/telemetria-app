@@ -2,6 +2,7 @@ import { Table } from "@/modules/global/components";
 import { telemetryVehiclesOBD } from "@/modules/global/dataMock/telemetryVehiclesOBD/telemetryVehiclesOBD";
 import CardContentTCT5 from "@/modules/global/components/cardsDeck/cardContentTCT5";
 import CardContentDrivenTime from "@/modules/global/components/cardsDeck/cardContentDrivenTime";
+import CardContentIdle from "@/modules/global/components/cardsDeck/cardContentIdle";
 import CardGenThird from "@/modules/global/components/cardsDeck/cardGenThird";
 
 import styles from "./telemetryOBDHome.module.css";
@@ -96,7 +97,7 @@ export const TelemetryHome = ({ LANGUAGE }: Props) => {
               />
             </CardGenThird>
             <CardGenThird>
-              <h1>Otra carta</h1>
+              <CardContentIdle data={teleVehiclesOBDData} LANGUAGE={LANGUAGE} />
             </CardGenThird>
           </section>
           <Table

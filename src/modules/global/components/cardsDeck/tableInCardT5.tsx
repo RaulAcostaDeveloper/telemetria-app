@@ -1,6 +1,5 @@
 import { dataTable } from "@/modules/global/components/table/table.model";
 import styles from "./tableInCardT5.module.css";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 
 interface langObj {
   col1: string;
