@@ -169,7 +169,7 @@ export const FuelBehaviorHighChart = ({
       ...opBEngineOff.map((c) => ({
         from: new Date(c.startDate).getTime(),
         to: new Date(c.endDate).getTime(),
-        color: "#15ff0081",
+        color: "#52ce0041",
         zIndex: 0,
         custom: {
           speed: c.speed,
@@ -179,7 +179,7 @@ export const FuelBehaviorHighChart = ({
       ...opBEngineOffCoasting.map((c) => ({
         from: new Date(c.startDate).getTime(),
         to: new Date(c.endDate).getTime(),
-        color: "#ff000085",
+        color: "#ff000098",
         zIndex: 0,
         custom: {
           speed: c.speed,
@@ -189,7 +189,7 @@ export const FuelBehaviorHighChart = ({
       ...opBEngineOnMoving.map((c) => ({
         from: new Date(c.startDate).getTime(),
         to: new Date(c.endDate).getTime(),
-        color: "#00fff281",
+        color: "#fffb0033",
         zIndex: 0,
         custom: {
           speed: c.speed,
@@ -199,7 +199,7 @@ export const FuelBehaviorHighChart = ({
       ...opBEngineOnIdle.map((c) => ({
         from: new Date(c.startDate).getTime(),
         to: new Date(c.endDate).getTime(),
-        color: "#008cff80",
+        color: "#006eff44",
         zIndex: 0,
         custom: {
           speed: c.speed,
