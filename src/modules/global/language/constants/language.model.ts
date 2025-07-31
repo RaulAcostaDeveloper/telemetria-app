@@ -345,10 +345,13 @@ export interface LanguageInterface {
     charts: {
       titleDistance: string;
       titleDriven: string;
+      titleIdle: string;
       subtitleDistance: string;
       subtitleDriven: string;
+      subtitleIdle: string;
       xAxisDistance: string;
       xAxisDriven: string;
+      xAxisIdle: string;
       yAxis: string;
     };
   };

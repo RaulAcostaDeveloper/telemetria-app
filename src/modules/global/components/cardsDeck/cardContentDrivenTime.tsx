@@ -1,5 +1,5 @@
 import ChartColInterval from "../chartColumnInterval/chartColInterval";
-import styles from "./cardContentDrivenTime.module.css";
+import styles from "./cardContentStyle.module.css";
 import { format2DecimalsString } from "../../utils/utils";
 import TableInCardT5 from "./tableInCardT5";
 

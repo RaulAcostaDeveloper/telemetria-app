@@ -366,10 +366,13 @@ export const ENGLISH: LanguageInterface = {
     charts: {
       titleDistance: "Drive Distance",
       titleDriven: "Driven Hours",
+      titleIdle: "Idle Hours",
       subtitleDistance: "Average Distance Traveled:",
       subtitleDriven: "Average Driven Hours",
+      subtitleIdle: "Average Idle Hours",
       xAxisDistance: "Distance (Km)",
       xAxisDriven: "Hours",
+      xAxisIdle: "Idle Time",
       yAxis: "Vehicles",
     },
   },
