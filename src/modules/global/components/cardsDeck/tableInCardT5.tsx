@@ -2,12 +2,17 @@ import { dataTable } from "@/modules/global/components/table/table.model";
 import styles from "./tableInCardT5.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 
+interface langObj {
+  col1: string;
+  col2: string;
+  col3: string;
+}
 interface TableDistancesProps {
   data: dataTable;
-  LANGUAGE: LanguageInterface;
+  langSelection: langObj;
 }
 
-const TableInCardT5 = ({ LANGUAGE, data }: TableDistancesProps) => {
+const TableInCardT5 = ({ langSelection, data }: TableDistancesProps) => {
   const headers = Object.keys(data[0]);
 
   const table = (
@@ -15,9 +20,9 @@ const TableInCardT5 = ({ LANGUAGE, data }: TableDistancesProps) => {
       <table className={styles["t-main"]}>
         <thead>
           <tr>
-            <th>{LANGUAGE.teleOBD.tableColumns.plate}</th>
-            <th>{LANGUAGE.teleOBD.tableColumns.name}</th>
-            <th>{LANGUAGE.teleOBD.tableColumns.totalDistance}</th>
+            <th>{langSelection.col1}</th>
+            <th>{langSelection.col2}</th>
+            <th>{langSelection.col3}</th>
           </tr>
         </thead>
         <tbody>

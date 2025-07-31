@@ -1,10 +1,11 @@
 import ChartColInterval from "../chartColumnInterval/chartColInterval";
 import styles from "./cardContentTCT5.module.css";
-import { dataTable } from "@/modules/global/components/table/table.model";
+import { format2DecimalsString } from "../../utils/utils";
+import TableInCardT5 from "./tableInCardT5";
 
 //Tipado
+import { dataTable } from "@/modules/global/components/table/table.model";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import TableInCardT5 from "./tableInCardT5";
 
 interface Props {
   data: dataTable;
@@ -23,14 +24,20 @@ export default function CardContentTCT5({ data, LANGUAGE }: Props) {
   const magnitudes: number[] = data.map(
     (value) => value.totalDistance as number
   );
-
-  const ascendingDistance = magnitudes.toSorted();
+  const compareNumbers = (a: number, b: number) => {
+    return a - b;
+  };
+  const ascendingDistance = magnitudes.toSorted(compareNumbers);
   const descendingDistance = ascendingDistance.toReversed();
   const top5Distance = descendingDistance.slice(0, 5);
-  /*   const average =
-    magnitudes.reduce(function (a, b) {
+  const average =
+    magnitudes.reduce((a, b) => {
       return a + b;
-    }) / totalVehiculos; */
+    }) / data.length;
+  const titleValueSubtitle = {
+    text: LANGUAGE.teleOBD.charts.subtitleDistance,
+    value: Math.trunc(average),
+  };
   const minDistance = ascendingDistance[0];
   const maxDistance = descendingDistance[0];
   const evalRange = maxDistance - minDistance;
@@ -41,7 +48,7 @@ export default function CardContentTCT5({ data, LANGUAGE }: Props) {
   const rangesArray: rangeNVehicles[] = [];
   for (let index = 0; index < 10; index++) {
     rangesArray.push({
-      range: rangeSize * (index + 1) + minDistance,
+      range: Math.ceil(rangeSize * (index + 1) + minDistance),
       vehicles: 0,
     });
   }
@@ -65,15 +72,33 @@ export default function CardContentTCT5({ data, LANGUAGE }: Props) {
     const pivotClean = {
       plate: pivot.plate as string,
       name: pivot.name as string,
-      totalDistance: pivot.totalDistance as number,
+      totalDistance: format2DecimalsString(pivot.totalDistance as number),
     };
     top5DistanceData.push(pivotClean);
   }
 
+  const langSelection = {
+    title: LANGUAGE.teleOBD.charts.titleDistance,
+    xAxisTitle: LANGUAGE.teleOBD.charts.xAxisDistance,
+    yAxisTitle: LANGUAGE.teleOBD.charts.yAxis,
+  };
+  const langInTable = {
+    col1: LANGUAGE.teleOBD.tableColumns.plate,
+    col2: LANGUAGE.teleOBD.tableColumns.name,
+    col3: LANGUAGE.teleOBD.tableColumns.totalDistance,
+  };
+
   return (
     <div className={styles.distribution}>
-      <ChartColInterval LANGUAGE={LANGUAGE} rangesArray={rangesArray} />
-      <TableInCardT5 LANGUAGE={LANGUAGE} data={top5DistanceData} />
+      <h1>{LANGUAGE.teleOBD.charts.titleDistance}</h1>
+      <h2>
+        {titleValueSubtitle.text} <span>{titleValueSubtitle.value}</span> Km
+      </h2>
+      <ChartColInterval
+        langSelection={langSelection}
+        rangesArray={rangesArray}
+      />
+      <TableInCardT5 langSelection={langInTable} data={top5DistanceData} />
     </div>
   );
 }
