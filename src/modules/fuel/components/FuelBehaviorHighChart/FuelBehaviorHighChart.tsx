@@ -176,16 +176,16 @@ export const FuelBehaviorHighChart = ({
           dateGps: c.startDate,
         },
       })),
-      ...opBEngineOffCoasting.map((c) => ({
-        from: new Date(c.startDate).getTime(),
-        to: new Date(c.endDate).getTime(),
-        color: "#ff000098",
-        zIndex: 0,
-        custom: {
-          speed: c.speed,
-          dateGps: c.startDate,
-        },
-      })),
+      // ...opBEngineOffCoasting.map((c) => ({
+      //   from: new Date(c.startDate).getTime(),
+      //   to: new Date(c.endDate).getTime(),
+      //   color: "#ff000098",
+      //   zIndex: 0,
+      //   custom: {
+      //     speed: c.speed,
+      //     dateGps: c.startDate,
+      //   },
+      // })),
       ...opBEngineOnMoving.map((c) => ({
         from: new Date(c.startDate).getTime(),
         to: new Date(c.endDate).getTime(),

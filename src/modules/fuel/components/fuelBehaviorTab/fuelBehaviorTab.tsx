@@ -105,12 +105,12 @@ export const FuelBehaviorTab = ({
           isOn={insideOpBEngineOff.length > 0}
           activeColor="#52ce009a"
         />
-        <ToggleButton
+        {/* <ToggleButton
           action={() => toggleInsideOpBEngineOffCoast()}
           title="Motor apagado y en movimiento"
           isOn={insideOpBEngineOffCoast.length > 0}
           activeColor="#ff000085"
-        />
+        /> */}
         <ToggleButton
           action={() => toggleInsideOpBEngineOnIdle()}
           title="Motor encendido y estacionado"
