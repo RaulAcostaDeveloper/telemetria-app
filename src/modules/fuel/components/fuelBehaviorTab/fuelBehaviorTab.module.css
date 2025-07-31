@@ -1,0 +1,6 @@
+.toggleButtonsGroup {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  flex-wrap: wrap;
+}
