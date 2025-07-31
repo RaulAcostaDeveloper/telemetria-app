@@ -211,7 +211,7 @@ export const FuelBehaviorHighChart = ({
     return {
       xAxis: {
         type: "datetime",
-        plotBands: plotBands,
+        // plotBands: plotBands,
         labels: {
           style: {
             fontSize: "12px",
