@@ -19,11 +19,16 @@ import {
 import { FuelDataValues } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { GeoModalData } from "@/modules/global/components/geoModal/geoModal";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { OBValue } from "@/app/(pages)/(restricted)/fuel/vehicle/[imei]/page";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   fuelDataData: FuelDataValues;
   handleClicGeoData: (geoModalData: GeoModalData) => void;
+  opBEngineOff: OBValue[];
+  opBEngineOffCoasting: OBValue[];
+  opBEngineOnIdle: OBValue[];
+  opBEngineOnMoving: OBValue[];
 }
 
 if (typeof HighstockInit === "function") {
@@ -34,6 +39,10 @@ export const FuelBehaviorHighChart = ({
   LANGUAGE,
   fuelDataData,
   handleClicGeoData,
+  opBEngineOff,
+  opBEngineOffCoasting,
+  opBEngineOnIdle,
+  opBEngineOnMoving,
 }: Props) => {
   // Tooltip de cada serie
   const chargesTooltipFields = getChargesTooltipFields(LANGUAGE);
@@ -69,7 +78,7 @@ export const FuelBehaviorHighChart = ({
         },
       }))
       .sort((a, b) => a.x - b.x);
-  }, []);
+  }, [fuelDataData]);
 
   const disChargesData = useMemo(() => {
     return fuelDataData.discharges
@@ -96,7 +105,7 @@ export const FuelBehaviorHighChart = ({
         },
       }))
       .sort((a, b) => a.x - b.x);
-  }, []);
+  }, [fuelDataData]);
 
   const levelMessagesData = useMemo(() => {
     return fuelDataData.levelMessages
@@ -116,7 +125,7 @@ export const FuelBehaviorHighChart = ({
         },
       }))
       .sort((a, b) => a.x - b.x);
-  }, []);
+  }, [fuelDataData]);
 
   // Performance es km/L
   const performancesBetweenChargesData = useMemo(() => {
@@ -135,7 +144,7 @@ export const FuelBehaviorHighChart = ({
         },
       }))
       .sort((a, b) => a.x - b.x);
-  }, []);
+  }, [fuelDataData]);
 
   const dailyPerformancesData = useMemo(() => {
     return fuelDataData.dailyPerformances
@@ -153,12 +162,56 @@ export const FuelBehaviorHighChart = ({
         },
       }))
       .sort((a, b) => a.x - b.x);
-  }, []);
+  }, [fuelDataData]);
 
-  const chartOptions = useMemo(
-    () => ({
+  const chartOptions = useMemo(() => {
+    const plotBands = [
+      ...opBEngineOff.map((c) => ({
+        from: new Date(c.startDate).getTime(),
+        to: new Date(c.endDate).getTime(),
+        color: "#15ff0081",
+        zIndex: 0,
+        custom: {
+          speed: c.speed,
+          dateGps: c.startDate,
+        },
+      })),
+      ...opBEngineOffCoasting.map((c) => ({
+        from: new Date(c.startDate).getTime(),
+        to: new Date(c.endDate).getTime(),
+        color: "#ff000085",
+        zIndex: 0,
+        custom: {
+          speed: c.speed,
+          dateGps: c.startDate,
+        },
+      })),
+      ...opBEngineOnMoving.map((c) => ({
+        from: new Date(c.startDate).getTime(),
+        to: new Date(c.endDate).getTime(),
+        color: "#00fff281",
+        zIndex: 0,
+        custom: {
+          speed: c.speed,
+          dateGps: c.startDate,
+        },
+      })),
+      ...opBEngineOnIdle.map((c) => ({
+        from: new Date(c.startDate).getTime(),
+        to: new Date(c.endDate).getTime(),
+        color: "#008cff80",
+        zIndex: 0,
+        custom: {
+          speed: c.speed,
+          dateGps: c.startDate,
+        },
+      })),
+    ];
+
+    return {
       xAxis: {
         type: "datetime",
+        // plotBands: plotBands,
         labels: {
           style: {
             fontSize: "12px",
@@ -384,10 +437,30 @@ export const FuelBehaviorHighChart = ({
         series: {
           turboThreshold: 50000,
         },
+        xrange: {
+          pointPadding: 0,
+          groupPadding: 0,
+          borderWidth: 0,
+        },
       },
-    }),
-    []
-  );
+    };
+  }, [
+    LANGUAGE,
+    chargesData,
+    chargesTooltipFields,
+    dailyPerformancesData,
+    disChargesData,
+    dischargesTooltipFields,
+    handleClicGeoData,
+    levelMessagesData,
+    levelMessagesTooltipFields,
+    opBEngineOff,
+    opBEngineOffCoasting,
+    opBEngineOnIdle,
+    opBEngineOnMoving,
+    performancesBetweenChargesData,
+    performancesBetweenChargesTooltipFields,
+  ]);
 
   return (
     <HighchartsReact
