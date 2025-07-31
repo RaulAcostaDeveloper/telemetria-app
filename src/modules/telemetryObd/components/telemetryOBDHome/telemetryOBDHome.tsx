@@ -1,7 +1,10 @@
 import { Table } from "@/modules/global/components";
 import { telemetryVehiclesOBD } from "@/modules/global/dataMock/telemetryVehiclesOBD/telemetryVehiclesOBD";
 import CardContentTCT5 from "@/modules/global/components/cardsDeck/cardContentTCT5";
+import CardContentDrivenTime from "@/modules/global/components/cardsDeck/cardContentDrivenTime";
 import CardGenThird from "@/modules/global/components/cardsDeck/cardGenThird";
+
+import styles from "./telemetryOBDHome.module.css";
 
 //Tipado
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
@@ -82,10 +85,20 @@ export const TelemetryHome = ({ LANGUAGE }: Props) => {
     <div>
       {teleVehiclesOBDStatus === "succeeded" && teleVehiclesOBDData ? (
         <>
-          <CardGenThird>
-            <CardContentTCT5 data={teleVehiclesOBDData} LANGUAGE={LANGUAGE} />
-          </CardGenThird>
-
+          <section className={styles.cardssection}>
+            <CardGenThird>
+              <CardContentTCT5 data={teleVehiclesOBDData} LANGUAGE={LANGUAGE} />
+            </CardGenThird>
+            <CardGenThird>
+              <CardContentDrivenTime
+                data={teleVehiclesOBDData}
+                LANGUAGE={LANGUAGE}
+              />
+            </CardGenThird>
+            <CardGenThird>
+              <h1>Otra carta</h1>
+            </CardGenThird>
+          </section>
           <Table
             title={LANGUAGE.teleOBD.tableTitle.registerTeleOBD}
             LANGUAGE={LANGUAGE}

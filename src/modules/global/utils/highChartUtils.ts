@@ -266,3 +266,18 @@ export function getTimeTraveledTooltipFields(
     },
   ];
 }
+
+/* export function getDrivenTooltipFields(
+  LANGUAGE: LanguageInterface
+): TooltipField[] {
+  return [
+    {
+      label: LANGUAGE.highCharts.tooltips.telemetryOBD.xAxisDriven,
+      value: (data) => `${data.x}`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.telemetryOBD.yAxis,
+      value: (data) => `${data.y}`,
+    },
+  ];
+} */

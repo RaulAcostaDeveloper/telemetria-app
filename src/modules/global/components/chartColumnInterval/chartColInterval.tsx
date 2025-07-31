@@ -3,11 +3,6 @@ import { useEffect, useMemo, useState } from "react";
 import Highcharts from "highcharts";
 import dynamic from "next/dynamic";
 
-import { createTooltipFormatter } from "../../utils/highChartUtils";
-
-//Tipado
-import { LanguageInterface } from "../../language/constants/language.model";
-
 const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
   ssr: false,
 });
@@ -16,15 +11,20 @@ interface rangeNVehicles {
   range: number;
   vehicles: number;
 }
+interface langObj {
+  title: string;
+  xAxisTitle: string;
+  yAxisTitle: string;
+}
 interface Props {
-  LANGUAGE: LanguageInterface;
+  langSelection: langObj;
   rangesArray: rangeNVehicles[];
 }
 
-const ChartColInterval = ({ LANGUAGE, rangesArray }: Props) => {
+const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
   const [isReady, setIsReady] = useState(false);
 
-  const distanceData = useMemo(() => {
+  const measureData = useMemo(() => {
     return rangesArray.map((r) => ({
       x: r.range,
       y: r.vehicles,
@@ -37,15 +37,16 @@ const ChartColInterval = ({ LANGUAGE, rangesArray }: Props) => {
         type: "column",
         height: 300,
         width: 340,
+        spacingLeft: 0,
+        spacingRight: 30, //espacio adicional para centrar gráfica. 10 es el default.
       },
-      title: { text: LANGUAGE.teleOBD.charts.driveDistance },
       series: [
         {
           type: "column",
-          name: LANGUAGE.teleOBD.charts.driveDistance,
+          name: langSelection.title,
           yAxis: 0,
           color: "#4ec516",
-          data: distanceData,
+          data: measureData,
         },
       ],
       xAxis: {
@@ -59,7 +60,7 @@ const ChartColInterval = ({ LANGUAGE, rangesArray }: Props) => {
           }, // Evita que malinterprete la gráfica que es un valor de fecha.
         },
         title: {
-          text: LANGUAGE.teleOBD.charts.xAxis,
+          text: langSelection.xAxisTitle,
           style: {
             fontSize: "12px",
             fontWeight: "bold",
@@ -74,7 +75,7 @@ const ChartColInterval = ({ LANGUAGE, rangesArray }: Props) => {
           },
         },
         title: {
-          text: LANGUAGE.teleOBD.charts.yAxis,
+          text: langSelection.yAxisTitle,
           style: {
             fontSize: "12px",
             fontWeight: "bold",
@@ -87,8 +88,8 @@ const ChartColInterval = ({ LANGUAGE, rangesArray }: Props) => {
         formatter: function () {
           return `
             <div style="width: 100%; font-size: 18px; display: flex; flex-direction: column; justify-content: space-between;">
-              <strong style="margin-right: 10px;">${LANGUAGE.teleOBD.charts.xAxis}:</strong> <p style="padding-bottom: 1em;">${this.x}</p>
-              <strong style="margin-right: 10px;">${LANGUAGE.teleOBD.charts.yAxis}:</strong> <p>${this.y}</p>
+              <strong style="margin-right: 10px;">${langSelection.xAxisTitle}:</strong> <p style="padding-bottom: 1em;">${this.x}</p>
+              <strong style="margin-right: 10px;">${langSelection.yAxisTitle}:</strong> <p>${this.y}</p>
             </div>
           `;
         },
@@ -111,7 +112,7 @@ const ChartColInterval = ({ LANGUAGE, rangesArray }: Props) => {
         enabled: false,
       },
     };
-  }, []);
+  }, [langSelection, measureData]);
 
   useEffect(() => {
     (async () => {

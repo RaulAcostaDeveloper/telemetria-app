@@ -143,6 +143,11 @@ export interface LanguageInterface {
       timeTraveled: {
         timeTraveled: string;
       };
+      telemetryOBD: {
+        xAxisDistance: string;
+        xAxisDriven: string;
+        yAxis: string;
+      };
     };
   };
   geoModalTitles: {
@@ -338,8 +343,12 @@ export interface LanguageInterface {
       registerTeleOBD: string;
     };
     charts: {
-      driveDistance: string;
-      xAxis: string;
+      titleDistance: string;
+      titleDriven: string;
+      subtitleDistance: string;
+      subtitleDriven: string;
+      xAxisDistance: string;
+      xAxisDriven: string;
       yAxis: string;
     };
   };

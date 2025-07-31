@@ -163,6 +163,11 @@ export const ENGLISH: LanguageInterface = {
       timeTraveled: {
         timeTraveled: "Hours worked",
       },
+      telemetryOBD: {
+        xAxisDistance: "Distance (Km)",
+        xAxisDriven: "Hours",
+        yAxis: "Vehicles",
+      },
     },
   },
   geoModalTitles: {
@@ -359,8 +364,12 @@ export const ENGLISH: LanguageInterface = {
       registerTeleOBD: "Register Telemetry OBD (On Board Diagnostics)",
     },
     charts: {
-      driveDistance: "Drive Distance",
-      xAxis: "Distance (Km)",
+      titleDistance: "Drive Distance",
+      titleDriven: "Driven Hours",
+      subtitleDistance: "Average Distance Traveled:",
+      subtitleDriven: "Average Driven Hours",
+      xAxisDistance: "Distance (Km)",
+      xAxisDriven: "Hours",
       yAxis: "Vehicles",
     },
   },

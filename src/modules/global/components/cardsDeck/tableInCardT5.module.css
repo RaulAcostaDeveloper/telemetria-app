@@ -13,3 +13,14 @@
   padding: 4px;
   font-size: 1.2rem;
 }
+.t-main th:nth-child(-n + 2),
+.t-main tbody td:nth-child(-n + 2) {
+  text-align: left;
+}
+.t-main th:nth-child(3),
+.t-main tbody td:nth-child(3) {
+  text-align: right;
+}
+.t-main tbody td {
+  vertical-align: top;
+}
