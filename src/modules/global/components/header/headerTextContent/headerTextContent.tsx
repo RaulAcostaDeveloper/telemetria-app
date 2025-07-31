@@ -43,8 +43,7 @@ export const HeaderTextContent = ({ LANGUAGE, currentUrl }: Props) => {
       case "single-telemetry":
         return (
           <div className={styles.platesAndName}>
-            <span>VA4784A</span>
-            <span>HILUX</span>
+            <HeaderTextWords LANGUAGE={LANGUAGE} section={site} />
           </div>
         );
       case "home":

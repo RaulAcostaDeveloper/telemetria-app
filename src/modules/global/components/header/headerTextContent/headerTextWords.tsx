@@ -39,14 +39,13 @@ export const HeaderTextWords = ({ LANGUAGE, section }: Props) => {
             <span>{LANGUAGE.sectionName.fuel}</span>
           </>
         );
-      } else {
-        /*       else if ("single-telemetry" === section) {
+      } else if ("single-telemetry" === section) {
         return (
           <>
-            <span>{LANGUAGE.sectionName.telemetry}</span>
+            <span>{LANGUAGE.sectionName.telemetryobd}</span>
           </>
         );
-      } */
+      } else {
         return (
           <>
             <span></span>
