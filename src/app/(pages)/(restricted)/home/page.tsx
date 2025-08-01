@@ -1,5 +1,8 @@
 "use client";
-import { HomeBriefFuelDataProvider } from "@/modules/home/components";
+import {
+  HomeBriefFuelDataProvider,
+  HomeBriefTelemetryOBD,
+} from "@/modules/home/components";
 
 export default function Home() {
   return (
@@ -7,6 +10,7 @@ export default function Home() {
       {/* <section> */}
       <HomeBriefFuelDataProvider />
       {/* </section> */}
+      <HomeBriefTelemetryOBD />
     </div>
   );
 }
