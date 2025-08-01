@@ -1,5 +1,7 @@
 "use client";
 import { useSelector } from "react-redux";
+
+import styles from "./managementDataProvider.module.css";
 import { RootState } from "@/globalConfig/redux/store";
 import { formatDateTime } from "@/modules/global/utils/utils";
 
@@ -138,7 +140,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     {
       columnName: LANGUAGE.management.tableColumns.registrationDate,
       defaultSpace: 4,
-    }
+    },
   ];
 
   const devicesTableData: dataTable | undefined =
@@ -220,11 +222,11 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       entryDate: value.entryDate,
       alias: value.alias,
       groupName: value.groupName,
-      license: value.license
+      license: value.license,
     }));
 
   return (
-    <div>
+    <div className={styles.managementDataProvider}>
       <TabsContent
         tabOptions={fuelTabs}
         tabContents={[

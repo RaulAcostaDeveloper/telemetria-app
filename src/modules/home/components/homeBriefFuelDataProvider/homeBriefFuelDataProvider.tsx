@@ -7,10 +7,11 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import styles from "@/modules/fuel/components/fuelDataProvider/fuelDataProvider.module.css";
-import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
-import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 import DonutGraphic from "@/modules/global/components/donutGraphic/DonutGraphic";
+import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
+import styles from "@/modules/fuel/components/fuelDataProvider/fuelDataProvider.module.css";
+import stylesHome from "./homeBriefFuelDataProvider.module.css";
+import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 import { fetchFuelSummary } from "@/globalConfig/redux/slices/fuelSummarySlice";
 
 export const HomeBriefFuelDataProvider = () => {
@@ -43,7 +44,7 @@ export const HomeBriefFuelDataProvider = () => {
   }, [callFetchFuelSummary, startDate, endDate]);
 
   return (
-    <div>
+    <div className={stylesHome.container}>
       <div className={styles.topResumeData}>
         {"succeeded" === fuelSummaryStatus && fuelSummaryData ? (
           <>
