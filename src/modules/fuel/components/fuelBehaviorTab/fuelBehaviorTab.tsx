@@ -7,7 +7,7 @@ import GeoModal, {
 import { FuelBehaviorHighChart } from "../FuelBehaviorHighChart/FuelBehaviorHighChart";
 import { FuelDataValues } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { OBValue } from "@/app/(pages)/(restricted)/fuel/vehicle/[imei]/page";
+import { OBValue } from "../fuelReportDataProvider/fuelReportDataProvider";
 import { ToggleButton } from "../FuelBehaviorHighChart/toggleButton/toggleButton";
 
 interface Props {
@@ -58,13 +58,13 @@ export const FuelBehaviorTab = ({
     }
   };
 
-  const toggleInsideOpBEngineOffCoast = () => {
-    if (insideOpBEngineOffCoast.length > 0) {
-      setinsideOpBEngineOffCoast([]);
-    } else {
-      setinsideOpBEngineOffCoast(opBEngineOffCoasting);
-    }
-  };
+  // const toggleInsideOpBEngineOffCoast = () => {
+  //   if (insideOpBEngineOffCoast.length > 0) {
+  //     setinsideOpBEngineOffCoast([]);
+  //   } else {
+  //     setinsideOpBEngineOffCoast(opBEngineOffCoasting);
+  //   }
+  // };
 
   const toggleInsideOpBEngineOnIdle = () => {
     if (insideOpBEngineOnIdle.length > 0) {
