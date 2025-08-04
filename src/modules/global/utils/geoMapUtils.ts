@@ -41,7 +41,11 @@ export function getLabelsForChargeGeoMap(
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
-      value: `${data.ignition}`,
+      value: `${
+        data.ignition
+          ? LANGUAGE.highCharts.tooltips.fuel.on
+          : LANGUAGE.highCharts.tooltips.fuel.off
+      }`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.deviceBattery,
@@ -91,7 +95,11 @@ export function getLabelsForDischargeGeoMap(
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
-      value: `${data.ignition}`,
+      value: `${
+        data.ignition
+          ? LANGUAGE.highCharts.tooltips.fuel.on
+          : LANGUAGE.highCharts.tooltips.fuel.off
+      }`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.deviceBattery,
@@ -132,7 +140,11 @@ export function getLabelsForLevelMessagesGeoMap(
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
-      value: `${data.ignition}`,
+      value: `${
+        data.ignition
+          ? LANGUAGE.highCharts.tooltips.fuel.on
+          : LANGUAGE.highCharts.tooltips.fuel.off
+      }`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.deviceBattery,
