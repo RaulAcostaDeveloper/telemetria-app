@@ -128,6 +128,9 @@ export const SPANISH: LanguageInterface = {
       fuelVariation: "Variación de combustible",
       performancesBetweenCharges: "Rendimiento entre cargas",
       dailyPerformance: "Rendimiento diario",
+      engineOff: "Motor apagado",
+      engineOnIdle: "Motor encendido y estacionado",
+      engineOnMoving: "Motor encendido y en movimiento",
     },
     tooltips: {
       date: "Fecha del evento",

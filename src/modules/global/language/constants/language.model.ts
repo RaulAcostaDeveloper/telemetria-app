@@ -108,6 +108,9 @@ export interface LanguageInterface {
       fuelVariation: string;
       performancesBetweenCharges: string;
       dailyPerformance: string;
+      engineOff: string;
+      engineOnIdle: string;
+      engineOnMoving: string;
     };
     tooltips: {
       date: string;
