@@ -363,6 +363,7 @@ export const FuelBehaviorHighChart = ({
         },
       ],
       tooltip: {
+        split: false,
         useHTML: true,
         shared: false,
         borderRadius: 6,
