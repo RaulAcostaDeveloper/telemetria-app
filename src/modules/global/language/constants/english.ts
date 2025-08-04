@@ -128,6 +128,9 @@ export const ENGLISH: LanguageInterface = {
       fuelVariation: "Fuel variation",
       performancesBetweenCharges: "Performance between charges",
       dailyPerformance: "Daily performance",
+      engineOff: "Engine off",
+      engineOnIdle: "Engine on idle",
+      engineOnMoving: "Engine on moving",
     },
     tooltips: {
       date: "Event date",
@@ -138,6 +141,8 @@ export const ENGLISH: LanguageInterface = {
         odometer: "Odometer",
         speed: "Speed",
         ignition: "Ignition",
+        on: "On",
+        off: "Off",
         deviceBattery: "Device battery",
         mainPower: "Main power",
         totalCharges: "Total charge",

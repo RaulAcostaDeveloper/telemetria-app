@@ -67,62 +67,61 @@ export const SingleLineHighChart = ({
         },
       }))
       .sort((a, b) => a.x - b.x);
-  }, []);
+  }, [data]);
 
-  const yAxisTitle = () => {
-    switch (type) {
-      case SINGLE_CHART_TYPES.rpm:
-        return LANGUAGE.highCharts.tooltips.rpm.rpm;
-      case SINGLE_CHART_TYPES.distance:
-        return LANGUAGE.highCharts.axisTitles.distance;
-      case SINGLE_CHART_TYPES.timeTraveled:
-        return LANGUAGE.highCharts.axisTitles.timeTraveled;
-      default:
-        return LANGUAGE.highCharts.axisTitles.timeTraveled;
-    }
-  };
+  const chartOptions = useMemo(() => {
+    const yAxisTitle = () => {
+      switch (type) {
+        case SINGLE_CHART_TYPES.rpm:
+          return LANGUAGE.highCharts.tooltips.rpm.rpm;
+        case SINGLE_CHART_TYPES.distance:
+          return LANGUAGE.highCharts.axisTitles.distance;
+        case SINGLE_CHART_TYPES.timeTraveled:
+          return LANGUAGE.highCharts.axisTitles.timeTraveled;
+        default:
+          return LANGUAGE.highCharts.axisTitles.timeTraveled;
+      }
+    };
 
-  const tooltipFields = () => {
-    switch (type) {
-      case SINGLE_CHART_TYPES.rpm:
-        return rpmTooltipFields;
-      case SINGLE_CHART_TYPES.distance:
-        return distanceTooltipFields;
-      case SINGLE_CHART_TYPES.timeTraveled:
-        return timeTraveledTooltipFields;
-      default:
-        return timeTraveledTooltipFields;
-    }
-  };
+    const tooltipFields = () => {
+      switch (type) {
+        case SINGLE_CHART_TYPES.rpm:
+          return rpmTooltipFields;
+        case SINGLE_CHART_TYPES.distance:
+          return distanceTooltipFields;
+        case SINGLE_CHART_TYPES.timeTraveled:
+          return timeTraveledTooltipFields;
+        default:
+          return timeTraveledTooltipFields;
+      }
+    };
 
-  const labelsForGeoMap = (lang: LanguageInterface, mess: DataObject) => {
-    switch (type) {
-      case SINGLE_CHART_TYPES.rpm:
-        return getLabelsForRPMGeoMap(lang, mess);
-      case SINGLE_CHART_TYPES.distance:
-        return getLabelsForDistanceGeoMap(lang, mess);
-      case SINGLE_CHART_TYPES.timeTraveled:
-        return getLabelsForTimeTraveledGeoMap(lang, mess);
-      default:
-        return getLabelsForTimeTraveledGeoMap(lang, mess);
-    }
-  };
+    const labelsForGeoMap = (lang: LanguageInterface, mess: DataObject) => {
+      switch (type) {
+        case SINGLE_CHART_TYPES.rpm:
+          return getLabelsForRPMGeoMap(lang, mess);
+        case SINGLE_CHART_TYPES.distance:
+          return getLabelsForDistanceGeoMap(lang, mess);
+        case SINGLE_CHART_TYPES.timeTraveled:
+          return getLabelsForTimeTraveledGeoMap(lang, mess);
+        default:
+          return getLabelsForTimeTraveledGeoMap(lang, mess);
+      }
+    };
 
-  const geoModalTitle = () => {
-    switch (type) {
-      case SINGLE_CHART_TYPES.rpm:
-        return LANGUAGE.geoModalTitles.rpmTitle;
-      case SINGLE_CHART_TYPES.distance:
-        return LANGUAGE.geoModalTitles.totalDistanceTitle;
-      case SINGLE_CHART_TYPES.timeTraveled:
-        return LANGUAGE.geoModalTitles.timeTraveledTitle;
-      default:
-        return LANGUAGE.geoModalTitles.timeTraveledTitle;
-    }
-  };
-
-  const chartOptions = useMemo(
-    () => ({
+    const geoModalTitle = () => {
+      switch (type) {
+        case SINGLE_CHART_TYPES.rpm:
+          return LANGUAGE.geoModalTitles.rpmTitle;
+        case SINGLE_CHART_TYPES.distance:
+          return LANGUAGE.geoModalTitles.totalDistanceTitle;
+        case SINGLE_CHART_TYPES.timeTraveled:
+          return LANGUAGE.geoModalTitles.timeTraveledTitle;
+        default:
+          return LANGUAGE.geoModalTitles.timeTraveledTitle;
+      }
+    };
+    return {
       xAxis: {
         type: "datetime",
         labels: {
@@ -183,6 +182,7 @@ export const SingleLineHighChart = ({
         },
       ],
       tooltip: {
+        split: false,
         useHTML: true,
         shared: false,
         borderRadius: 6,
@@ -252,9 +252,16 @@ export const SingleLineHighChart = ({
           turboThreshold: 50000,
         },
       },
-    }),
-    []
-  );
+    };
+  }, [
+    LANGUAGE,
+    chartData,
+    distanceTooltipFields,
+    handleClicGeoData,
+    rpmTooltipFields,
+    timeTraveledTooltipFields,
+    type,
+  ]);
 
   return (
     <HighchartsReact

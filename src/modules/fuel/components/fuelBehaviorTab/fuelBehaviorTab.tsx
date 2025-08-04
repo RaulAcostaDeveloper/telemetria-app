@@ -7,7 +7,7 @@ import GeoModal, {
 import { FuelBehaviorHighChart } from "../FuelBehaviorHighChart/FuelBehaviorHighChart";
 import { FuelDataValues } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { OBValue } from "@/app/(pages)/(restricted)/fuel/vehicle/[imei]/page";
+import { OBValue } from "../fuelReportDataProvider/fuelReportDataProvider";
 import { ToggleButton } from "../FuelBehaviorHighChart/toggleButton/toggleButton";
 
 interface Props {
@@ -58,13 +58,13 @@ export const FuelBehaviorTab = ({
     }
   };
 
-  const toggleInsideOpBEngineOffCoast = () => {
-    if (insideOpBEngineOffCoast.length > 0) {
-      setinsideOpBEngineOffCoast([]);
-    } else {
-      setinsideOpBEngineOffCoast(opBEngineOffCoasting);
-    }
-  };
+  // const toggleInsideOpBEngineOffCoast = () => {
+  //   if (insideOpBEngineOffCoast.length > 0) {
+  //     setinsideOpBEngineOffCoast([]);
+  //   } else {
+  //     setinsideOpBEngineOffCoast(opBEngineOffCoasting);
+  //   }
+  // };
 
   const toggleInsideOpBEngineOnIdle = () => {
     if (insideOpBEngineOnIdle.length > 0) {
@@ -101,7 +101,7 @@ export const FuelBehaviorTab = ({
       <div className={styles.toggleButtonsGroup}>
         <ToggleButton
           action={() => toggleInsideOpBEngineOff()}
-          title="Motor apagado"
+          title={LANGUAGE.highCharts.titles.engineOff}
           isOn={insideOpBEngineOff.length > 0}
           activeColor="#52ce009a"
         />
@@ -113,13 +113,13 @@ export const FuelBehaviorTab = ({
         /> */}
         <ToggleButton
           action={() => toggleInsideOpBEngineOnIdle()}
-          title="Motor encendido y estacionado"
+          title={LANGUAGE.highCharts.titles.engineOnIdle}
           isOn={insideOpBEngineOnIdle.length > 0}
           activeColor="#ffd900ff"
         />
         <ToggleButton
           action={() => toggleInsideOpBEngineOnMoving()}
-          title="Motor encendido y en movimiento"
+          title={LANGUAGE.highCharts.titles.engineOnMoving}
           isOn={insideOpBEngineOnMoving.length > 0}
           activeColor="#006eff80"
         />

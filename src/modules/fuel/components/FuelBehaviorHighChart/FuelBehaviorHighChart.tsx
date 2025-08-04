@@ -19,7 +19,7 @@ import {
 import { FuelDataValues } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { GeoModalData } from "@/modules/global/components/geoModal/geoModal";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { OBValue } from "@/app/(pages)/(restricted)/fuel/vehicle/[imei]/page";
+import { OBValue } from "../fuelReportDataProvider/fuelReportDataProvider";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -40,7 +40,7 @@ export const FuelBehaviorHighChart = ({
   fuelDataData,
   handleClicGeoData,
   opBEngineOff,
-  opBEngineOffCoasting,
+  // opBEngineOffCoasting,
   opBEngineOnIdle,
   opBEngineOnMoving,
 }: Props) => {
@@ -189,7 +189,7 @@ export const FuelBehaviorHighChart = ({
       ...opBEngineOnMoving.map((c) => ({
         from: new Date(c.startDate).getTime(),
         to: new Date(c.endDate).getTime(),
-        color: "#fffb0033",
+        color: "#006eff44",
         zIndex: 0,
         custom: {
           speed: c.speed,
@@ -199,7 +199,7 @@ export const FuelBehaviorHighChart = ({
       ...opBEngineOnIdle.map((c) => ({
         from: new Date(c.startDate).getTime(),
         to: new Date(c.endDate).getTime(),
-        color: "#006eff44",
+        color: "#fffb0033",
         zIndex: 0,
         custom: {
           speed: c.speed,
@@ -363,6 +363,7 @@ export const FuelBehaviorHighChart = ({
         },
       ],
       tooltip: {
+        split: false,
         useHTML: true,
         shared: false,
         borderRadius: 6,
@@ -455,7 +456,6 @@ export const FuelBehaviorHighChart = ({
     levelMessagesData,
     levelMessagesTooltipFields,
     opBEngineOff,
-    opBEngineOffCoasting,
     opBEngineOnIdle,
     opBEngineOnMoving,
     performancesBetweenChargesData,
