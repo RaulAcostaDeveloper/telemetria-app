@@ -123,6 +123,8 @@ export interface LanguageInterface {
         odometer: string;
         speed: string;
         ignition: string;
+        on: string;
+        off: string;
         deviceBattery: string;
         mainPower: string;
         address: string;

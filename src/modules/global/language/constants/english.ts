@@ -141,6 +141,8 @@ export const ENGLISH: LanguageInterface = {
         odometer: "Odometer",
         speed: "Speed",
         ignition: "Ignition",
+        on: "On",
+        off: "Off",
         deviceBattery: "Device battery",
         mainPower: "Main power",
         totalCharges: "Total charge",

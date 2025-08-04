@@ -67,11 +67,16 @@ export function getChargesTooltipFields(
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.speed,
-      value: (data) => `${data.speed}  km/h`,
+      value: (data) => `${data.speed}  Km/h`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
-      value: (data) => data.ignition,
+      value: (data) =>
+        `${
+          data.ignition
+            ? LANGUAGE.highCharts.tooltips.fuel.on
+            : LANGUAGE.highCharts.tooltips.fuel.off
+        }`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.deviceBattery,
@@ -120,7 +125,12 @@ export function getDisChargesTooltipFields(
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
-      value: (data) => data.ignition,
+      value: (data) =>
+        `${
+          data.ignition
+            ? LANGUAGE.highCharts.tooltips.fuel.on
+            : LANGUAGE.highCharts.tooltips.fuel.off
+        }`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.deviceBattery,
@@ -157,7 +167,12 @@ export function getLevelMessagesTooltipFields(
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
-      value: (data) => data.ignition,
+      value: (data) =>
+        `${
+          data.ignition
+            ? LANGUAGE.highCharts.tooltips.fuel.on
+            : LANGUAGE.highCharts.tooltips.fuel.off
+        }`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.deviceBattery,
@@ -182,8 +197,6 @@ export function getPerformancesBetweenChargesTooltipFields(
       label: LANGUAGE.highCharts.tooltips.date,
       value: (data) => `${formatDateTime(data.dateGps)}`,
     },
-    { label: LANGUAGE.highCharts.tooltips.lat, value: (data) => data.lat },
-    { label: LANGUAGE.highCharts.tooltips.lon, value: (data) => data.lon },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.averagePerformance,
       value: (data) => `${data.averagePerformance}  Km/h`,
