@@ -16,9 +16,11 @@ import {
 
 interface Props {
   LANGUAGE: LanguageInterface;
+  showTable?: boolean; //Esconde la tabla si el módulo es usado en Home.
 }
 
-export const TelemetryHome = ({ LANGUAGE }: Props) => {
+export const TelemetryHome = ({ LANGUAGE, showTable }: Props) => {
+  // Llamado a slice para cuando haya endpoint disponible:
   /* const { teleVehiclesOBDData, teleVehiclesOBDStatus } = useSelector(
     (state: RootState ) => state.teleVehiclesOBD
   ); */
@@ -100,15 +102,17 @@ export const TelemetryHome = ({ LANGUAGE }: Props) => {
               <CardContentIdle data={teleVehiclesOBDData} LANGUAGE={LANGUAGE} />
             </CardGenThird>
           </section>
-          <Table
-            title={LANGUAGE.teleOBD.tableTitle.registerTeleOBD}
-            LANGUAGE={LANGUAGE}
-            columns={teleVehiclesOBDColumns}
-            data={teleVehiclesOBDData}
-            showGoFuel
-            showGoOBT
-            idKey="imeIs"
-          />
+          {showTable && (
+            <Table
+              title={LANGUAGE.teleOBD.tableTitle.registerTeleOBD}
+              LANGUAGE={LANGUAGE}
+              columns={teleVehiclesOBDColumns}
+              data={teleVehiclesOBDData}
+              showGoFuel
+              showGoOBT
+              idKey="imeIs"
+            />
+          )}
         </>
       ) : (
         <div>...</div>

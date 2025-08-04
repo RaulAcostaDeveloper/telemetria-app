@@ -7,7 +7,7 @@ export default function Telemetry() {
 
   return (
     <div>
-      <TelemetryHome LANGUAGE={LANGUAGE} />
+      <TelemetryHome LANGUAGE={LANGUAGE} showTable />
     </div>
   );
 }
