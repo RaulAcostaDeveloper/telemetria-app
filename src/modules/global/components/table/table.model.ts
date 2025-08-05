@@ -2,6 +2,7 @@ interface column {
   columnName: string;
   defaultSpace: number;
   filterSelector?: boolean;
+  minMaxFilter?: boolean;
   orderColumn?: boolean;
   showTotal?: boolean;
 }
@@ -20,4 +21,15 @@ export type SelectorOrdered = {
 export type SelectorFilter = {
   propIndex: number;
   value: string;
+};
+
+export type MinMaxFilter = {
+  propIndex: number;
+  min: number;
+  max: number;
+};
+
+export type MinMax = {
+  min: number | null; //Null significa sin límite o no filtrar
+  max: number | null;
 };

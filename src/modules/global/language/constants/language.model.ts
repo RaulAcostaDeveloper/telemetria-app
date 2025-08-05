@@ -86,6 +86,7 @@ export interface LanguageInterface {
       total: string;
     };
     formTitles: {
+      filters: string;
       createElement: string;
       deleteElement: string;
       deleteSubString: string;

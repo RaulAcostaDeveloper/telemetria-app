@@ -35,26 +35,20 @@ export const TableFilter = ({
 
   // Va a usar el arreglo de selectedOptions
   return (
-    <div
-      className={styles.selector}
-      title={`${LANGUAGE.table.actions.filterBy} "${columnName}"`}
+    <select
+      id={`filter-${columnName}`}
+      className={`${styles.selectInput} ${
+        selectedOptions[filterRenderIndex] ? styles.selectedOption : ""
+      }`}
+      value={selectedOptions[filterRenderIndex]}
+      onChange={handleChange}
     >
-      <label className={styles.title}>{columnName} </label>
-      <select
-        id={`filter-${columnName}`}
-        className={`${styles.selectInput} ${
-          selectedOptions[filterRenderIndex] ? styles.selectedOption : ""
-        }`}
-        value={selectedOptions[filterRenderIndex]}
-        onChange={handleChange}
-      >
-        <option value="">{LANGUAGE.table.actions.any}</option>
-        {options.map((opt) => (
-          <option key={opt} value={opt ?? ""}>
-            {opt}
-          </option>
-        ))}
-      </select>
-    </div>
+      <option value="">{LANGUAGE.table.actions.any}</option>
+      {options.map((opt) => (
+        <option key={opt} value={opt ?? ""}>
+          {opt}
+        </option>
+      ))}
+    </select>
   );
 };

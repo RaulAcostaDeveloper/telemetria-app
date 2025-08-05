@@ -5,6 +5,7 @@ import styles from "./table.module.css";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { TableServerContent } from "./tableServerContent/tableServerContent";
 import {
+  // MinMaxFilter,
   PrimitiveValue,
   SelectorFilter,
   SelectorOrdered,
@@ -60,6 +61,8 @@ export const Table = ({
     value: true,
   });
   const [filterSelectors, setFilterSelectors] = useState<SelectorFilter[]>([]);
+  // const [minMaxFilters, setMinMaxFilters] = useState<MinMaxFilter[]>([]);
+
   const [filteredData, setFilteredData] = useState<dataTable>(data);
   const [inputFilterValue, setInputFilterValue] = useState<string>("");
   const [minHeight, setMinHeight] = useState(0);
@@ -149,6 +152,18 @@ export const Table = ({
       return [...filtros, { propIndex, value }];
     });
   };
+
+  // const handleMinMaxFilter = (propIndex: number, min: number, max: number) => {
+  //   setMinMaxFilters((filtros) => {
+  //     const existing = filtros.find((filtro) => filtro.propIndex === propIndex);
+  //     if (existing) {
+  //       return filtros.map((filtro) =>
+  //         filtro.propIndex === propIndex ? { ...filtro, min, max } : filtro
+  //       );
+  //     }
+  //     return [...filtros, { propIndex, min, max }];
+  //   });
+  // };
 
   return (
     <div

@@ -7,7 +7,7 @@ import { ButtonTypes } from "../../generalButton/generalButton.model";
 import { GeneralButton } from "../../generalButton/generalButton";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { TableFilters } from "../tableFilters/tableFilters";
-import { columnsTable, dataTable } from "../table.model";
+import { columnsTable, dataTable, MinMax } from "../table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -25,6 +25,7 @@ export const TableFiltersButton = ({
   setMinHeight,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [minMaxOptions, setMinMaxOptions] = useState<MinMax[]>([]);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   const filtersRef = useRef<HTMLDivElement>(null);
@@ -59,6 +60,10 @@ export const TableFiltersButton = ({
       .map((col, indexCol) => ({ col, indexCol }))
       .filter(({ col }) => col.filterSelector);
 
+    const minMaxFilterableColumns = columns
+      .map((col, indexCol) => ({ col, indexCol }))
+      .filter(({ col }) => col.minMaxFilter);
+
     // Reiniciar los selectores
     setSelectedOptions(filterableColumns.map(() => ""));
 
@@ -66,6 +71,15 @@ export const TableFiltersButton = ({
     filterableColumns.forEach(({ indexCol }) => {
       handleSelectorFilter(indexCol, "");
     });
+
+    setMinMaxOptions(
+      minMaxFilterableColumns.map(() => {
+        return {
+          min: null,
+          max: null,
+        };
+      })
+    );
   };
 
   return (
@@ -80,50 +94,50 @@ export const TableFiltersButton = ({
         placeholder={LANGUAGE.table.buttons.filtersButton}
         Icon={<FilterAltIcon />}
       />
-      <div
-        ref={filtersRef}
-        className={`${styles.filtersContent} ${isOpen ? styles.show : ""}`}
-      >
-        {selectedOptions.length > 0 ? (
-          <>
-            <TableFilters
-              LANGUAGE={LANGUAGE}
-              columns={columns}
-              data={data}
-              handleSelectorFilter={handleSelectorFilter}
-              selectedOptions={selectedOptions}
-              setSelectedOptions={setSelectedOptions}
-            />
-            <div className={styles.buttonsContainer}>
-              <GeneralButton
-                type={ButtonTypes.WARNING}
-                callback={() => resetSelectedOptions()}
-                title={LANGUAGE.table.actions.cleanFilters}
-                placeholder={LANGUAGE.table.actions.cleanFilters}
-              />
-              <GeneralButton
-                type={ButtonTypes.NEUTRAL}
-                callback={() => setIsOpen(!isOpen)}
-                title={LANGUAGE.table.actions.close}
-                placeholder={LANGUAGE.table.actions.close}
-              />
-            </div>
-          </>
-        ) : (
-          <>
-            <p className={styles.noFilters}>
-              {LANGUAGE.table.actions.noFilters}
-            </p>
-            <GeneralButton
-              type={ButtonTypes.NEUTRAL}
-              callback={() => setIsOpen(!isOpen)}
-              title={LANGUAGE.table.actions.close}
-              placeholder={LANGUAGE.table.actions.close}
-            />
-          </>
-        )}
-      </div>
-      {/* Agregar "no hay filtros disponibles para esta tabla" */}
+      {isOpen && (
+        <div className={styles.filtersContainer}>
+          <div ref={filtersRef} className={`${styles.filtersContent}`}>
+            {selectedOptions.length > 0 || minMaxOptions.length > 0 ? (
+              <>
+                <TableFilters
+                  LANGUAGE={LANGUAGE}
+                  columns={columns}
+                  data={data}
+                  handleSelectorFilter={handleSelectorFilter}
+                  selectedOptions={selectedOptions}
+                  setSelectedOptions={setSelectedOptions}
+                />
+                <div className={styles.buttonsContainer}>
+                  <GeneralButton
+                    type={ButtonTypes.WARNING}
+                    callback={() => resetSelectedOptions()}
+                    title={LANGUAGE.table.actions.cleanFilters}
+                    placeholder={LANGUAGE.table.actions.cleanFilters}
+                  />
+                  <GeneralButton
+                    type={ButtonTypes.NEUTRAL}
+                    callback={() => setIsOpen(!isOpen)}
+                    title={LANGUAGE.table.actions.close}
+                    placeholder={LANGUAGE.table.actions.close}
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <p className={styles.noFilters}>
+                  {LANGUAGE.table.actions.noFilters}
+                </p>
+                <GeneralButton
+                  type={ButtonTypes.NEUTRAL}
+                  callback={() => setIsOpen(!isOpen)}
+                  title={LANGUAGE.table.actions.close}
+                  placeholder={LANGUAGE.table.actions.close}
+                />
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

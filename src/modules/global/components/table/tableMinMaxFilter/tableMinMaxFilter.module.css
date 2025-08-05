@@ -1,0 +1,52 @@
+.tableMinMaxFilter {
+  margin-top: 5px;
+  padding: 2px;
+}
+
+.title {
+  color: rgba(0, 0, 0, 0.753);
+  display: flex;
+  justify-content: space-between;
+}
+
+.title span {
+  font-size: 1.4rem;
+}
+
+.inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputs input {
+  width: 45%;
+  height: 28px;
+  padding: 4px;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.753);
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.inputs input[type="number"]::-webkit-inner-spin-button,
+.inputs input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inputs input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.inputs input:focus {
+  outline: none;
+}
+
+.inputs input:hover {
+  -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-4);
+  -moz-box-shadow: 2px 2px 5px 0px var(--company-color-4);
+  box-shadow: 2px 2px 5px 0px var(--company-color-4);
+}
