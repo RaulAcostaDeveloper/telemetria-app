@@ -1,5 +1,4 @@
 .graphic {
-  width: 40%;
-  min-width: 420px;
+  width: clamp(385px, 32%, 600px);
   margin: 10px;
 }
