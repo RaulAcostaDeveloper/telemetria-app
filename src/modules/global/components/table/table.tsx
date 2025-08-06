@@ -164,10 +164,6 @@ export const Table = ({
   // Actualiza filterSelectors
   const handleSelectorFilter = ({ colIndex, value }: SelectorFilter) => {
     setFilterSelectors((filtros) => {
-      if (value.trim() === "") {
-        return filtros.filter((filtro) => filtro.colIndex !== colIndex);
-      }
-
       const existing = filtros.find((filtro) => filtro.colIndex === colIndex);
       if (existing) {
         return filtros.map((filtro) =>
