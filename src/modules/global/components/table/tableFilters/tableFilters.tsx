@@ -4,15 +4,23 @@ import { useMemo } from "react";
 import styles from "./tableFilters.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { TableFilter } from "../tableFilter/tableFilter";
-import { columnsTable, dataTable, PrimitiveValue } from "../table.model";
+import { TableMinMaxFilter } from "../tableMinMaxFilter/tableMinMaxFilter";
+import {
+  columnsTable,
+  dataTable,
+  MinMaxFilter,
+  PrimitiveValue,
+  SelectorFilter,
+} from "../table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   columns: columnsTable;
   data: dataTable;
-  handleSelectorFilter: (propIndex: number, value: string) => void;
-  selectedOptions: string[];
-  setSelectedOptions: React.Dispatch<React.SetStateAction<string[]>>;
+  filterSelectors: SelectorFilter[];
+  handleMinMaxFilter: ({ colIndex, min, max }: MinMaxFilter) => void;
+  handleSelectorFilter: ({ colIndex, value }: SelectorFilter) => void;
+  minMaxFilters: MinMaxFilter[];
 }
 
 const getAllUniqueFilterValues = (
@@ -41,9 +49,10 @@ export const TableFilters = ({
   LANGUAGE,
   columns,
   data,
+  filterSelectors,
+  handleMinMaxFilter,
   handleSelectorFilter,
-  selectedOptions,
-  setSelectedOptions,
+  minMaxFilters,
 }: Props) => {
   const uniqueFilterValues = useMemo(
     () => getAllUniqueFilterValues(columns, data),
@@ -51,28 +60,49 @@ export const TableFilters = ({
   );
 
   // Índices de columnas que tienen filtro
-  const filteredColumnIndexes = useMemo(
-    () =>
-      columns
-        .map((col, i) => (col.filterSelector ? i : null))
-        .filter((i): i is number => i !== null),
-    [columns]
-  );
+  // const filteredColumnIndexes = useMemo(
+  //   () =>
+  //     columns
+  //       .map((col, i) => (col.filterSelector ? i : null))
+  //       .filter((i): i is number => i !== null),
+  //   [columns]
+  // );
 
   return (
     <div className={styles.tableFilters}>
-      {filteredColumnIndexes.map((colIndex, renderIndex) => (
+      <div className={styles.tableFiltersTitle}>
+        <h3>{LANGUAGE.table.formTitles.filters}</h3>
+      </div>
+      {columns.map((col, colIndex) => (
         <div key={colIndex}>
-          <TableFilter
-            LANGUAGE={LANGUAGE}
-            columnName={columns[colIndex].columnName}
-            filterRenderIndex={renderIndex}
-            handleSelectorFilter={handleSelectorFilter}
-            options={uniqueFilterValues[colIndex]}
-            propIndex={colIndex}
-            selectedOptions={selectedOptions}
-            setSelectedOptions={setSelectedOptions}
-          />
+          {(col.filterSelector || col.minMaxFilter) && (
+            <div
+              className={styles.filterContainer}
+              title={`${LANGUAGE.table.actions.filterBy} "${columns[colIndex].columnName}"`}
+            >
+              <label className={styles.title}>
+                {columns[colIndex].columnName}
+              </label>
+              {col.filterSelector && (
+                <TableFilter
+                  LANGUAGE={LANGUAGE}
+                  colIndex={colIndex}
+                  columnName={columns[colIndex].columnName}
+                  filterSelectors={filterSelectors}
+                  handleSelectorFilter={handleSelectorFilter}
+                  options={uniqueFilterValues[colIndex]}
+                />
+              )}
+              {col.minMaxFilter && (
+                <TableMinMaxFilter
+                  LANGUAGE={LANGUAGE}
+                  colIndex={colIndex}
+                  handleMinMaxFilter={handleMinMaxFilter}
+                  minMaxFilters={minMaxFilters}
+                />
+              )}
+            </div>
+          )}
         </div>
       ))}
     </div>

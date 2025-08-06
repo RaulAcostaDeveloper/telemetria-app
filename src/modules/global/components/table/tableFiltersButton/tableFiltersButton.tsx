@@ -7,13 +7,22 @@ import { ButtonTypes } from "../../generalButton/generalButton.model";
 import { GeneralButton } from "../../generalButton/generalButton";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { TableFilters } from "../tableFilters/tableFilters";
-import { columnsTable, dataTable } from "../table.model";
+import {
+  MinMaxFilter,
+  SelectorFilter,
+  columnsTable,
+  dataTable,
+} from "../table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   columns: columnsTable;
   data: dataTable;
-  handleSelectorFilter: (propIndex: number, value: string) => void;
+  filterSelectors: SelectorFilter[];
+  handleMinMaxFilter: ({ colIndex, min, max }: MinMaxFilter) => void;
+  handleSelectorFilter: ({ colIndex, value }: SelectorFilter) => void;
+  minMaxFilters: MinMaxFilter[];
+  resetFilters: () => void;
   setMinHeight: (height: number) => void;
 }
 
@@ -21,12 +30,14 @@ export const TableFiltersButton = ({
   LANGUAGE,
   columns,
   data,
+  filterSelectors,
+  handleMinMaxFilter,
   handleSelectorFilter,
+  minMaxFilters,
+  resetFilters,
   setMinHeight,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-
   const filtersRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,7 +45,7 @@ export const TableFiltersButton = ({
       const height = filtersRef.current.offsetHeight;
       setMinHeight(height + 100);
     }
-    resetSelectedOptions();
+    resetFilters();
   }, []);
 
   useEffect(() => {
@@ -53,20 +64,9 @@ export const TableFiltersButton = ({
     }
   }, []);
 
-  const resetSelectedOptions = () => {
-    // Obtener las columnas con filterSelector y también conocer su indice (para reiniciar los filtros)
-    const filterableColumns = columns
-      .map((col, indexCol) => ({ col, indexCol }))
-      .filter(({ col }) => col.filterSelector);
-
-    // Reiniciar los selectores
-    setSelectedOptions(filterableColumns.map(() => ""));
-
-    // Reiniciar los filtros
-    filterableColumns.forEach(({ indexCol }) => {
-      handleSelectorFilter(indexCol, "");
-    });
-  };
+  const filtersOn: boolean = columns.some(
+    (column) => "filterSelector" in column || "minMaxFilter" in column
+  );
 
   return (
     <div className={styles.container}>
@@ -80,50 +80,53 @@ export const TableFiltersButton = ({
         placeholder={LANGUAGE.table.buttons.filtersButton}
         Icon={<FilterAltIcon />}
       />
-      <div
-        ref={filtersRef}
-        className={`${styles.filtersContent} ${isOpen ? styles.show : ""}`}
-      >
-        {selectedOptions.length > 0 ? (
-          <>
-            <TableFilters
-              LANGUAGE={LANGUAGE}
-              columns={columns}
-              data={data}
-              handleSelectorFilter={handleSelectorFilter}
-              selectedOptions={selectedOptions}
-              setSelectedOptions={setSelectedOptions}
-            />
-            <div className={styles.buttonsContainer}>
-              <GeneralButton
-                type={ButtonTypes.WARNING}
-                callback={() => resetSelectedOptions()}
-                title={LANGUAGE.table.actions.cleanFilters}
-                placeholder={LANGUAGE.table.actions.cleanFilters}
-              />
-              <GeneralButton
-                type={ButtonTypes.NEUTRAL}
-                callback={() => setIsOpen(!isOpen)}
-                title={LANGUAGE.table.actions.close}
-                placeholder={LANGUAGE.table.actions.close}
-              />
-            </div>
-          </>
-        ) : (
-          <>
-            <p className={styles.noFilters}>
-              {LANGUAGE.table.actions.noFilters}
-            </p>
-            <GeneralButton
-              type={ButtonTypes.NEUTRAL}
-              callback={() => setIsOpen(!isOpen)}
-              title={LANGUAGE.table.actions.close}
-              placeholder={LANGUAGE.table.actions.close}
-            />
-          </>
-        )}
-      </div>
-      {/* Agregar "no hay filtros disponibles para esta tabla" */}
+      {isOpen && (
+        <div className={styles.filtersContainer}>
+          <div ref={filtersRef} className={`${styles.filtersContent}`}>
+            {filtersOn ? (
+              <>
+                <TableFilters
+                  LANGUAGE={LANGUAGE}
+                  columns={columns}
+                  data={data}
+                  minMaxFilters={minMaxFilters}
+                  handleMinMaxFilter={handleMinMaxFilter}
+                  handleSelectorFilter={handleSelectorFilter}
+                  filterSelectors={filterSelectors}
+                />
+                <div className={styles.buttonsContainer}>
+                  <GeneralButton
+                    type={ButtonTypes.WARNING}
+                    callback={resetFilters}
+                    title={LANGUAGE.table.actions.cleanFilters}
+                    placeholder={LANGUAGE.table.actions.cleanFilters}
+                  />
+                  <GeneralButton
+                    type={ButtonTypes.NEUTRAL}
+                    callback={() => setIsOpen(!isOpen)}
+                    title={LANGUAGE.table.actions.close}
+                    placeholder={LANGUAGE.table.actions.close}
+                  />
+                </div>
+              </>
+            ) : (
+              <div className={styles.noFiltersContainer}>
+                <p className={styles.noFiltersTitle}>
+                  {LANGUAGE.table.actions.noFilters}
+                </p>
+                <div className={styles.closeButton}>
+                  <GeneralButton
+                    type={ButtonTypes.NEUTRAL}
+                    callback={() => setIsOpen(!isOpen)}
+                    title={LANGUAGE.table.actions.close}
+                    placeholder={LANGUAGE.table.actions.close}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

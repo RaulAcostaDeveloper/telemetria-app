@@ -49,7 +49,8 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   const vehicleColumns: columnsTable = [
     {
       columnName: LANGUAGE.management.tableColumns.serialNumber,
-      defaultSpace: 3,
+      defaultSpace: 4,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.plates,
@@ -64,26 +65,37 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     {
       columnName: LANGUAGE.management.tableColumns.brand,
       defaultSpace: 3,
+      filterSelector: true,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.model,
       defaultSpace: 2,
+      orderColumn: true,
+      filterSelector: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.vehicleType,
-      defaultSpace: 3,
+      defaultSpace: 4,
+      orderColumn: true,
+      filterSelector: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.year,
-      defaultSpace: 1,
+      defaultSpace: 2,
+      orderColumn: true,
+      minMaxFilter: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.driver,
       defaultSpace: 4,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.groupName,
       defaultSpace: 3,
+      filterSelector: true,
+      orderColumn: true,
     },
   ];
 
@@ -108,27 +120,35 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     {
       columnName: LANGUAGE.management.tableColumns.imei,
       defaultSpace: 3,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.model,
       defaultSpace: 2,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.brand,
       defaultSpace: 3,
+      orderColumn: true,
+      filterSelector: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.status,
       defaultSpace: 2,
       filterSelector: true,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.name,
       defaultSpace: 4,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.type,
-      defaultSpace: 2,
+      defaultSpace: 4,
+      orderColumn: true,
+      filterSelector: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.createdAt,
@@ -136,7 +156,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     },
     {
       columnName: LANGUAGE.management.tableColumns.phoneNumber,
-      defaultSpace: 3,
+      defaultSpace: 4,
     },
     {
       columnName: LANGUAGE.management.tableColumns.registrationDate,
@@ -165,6 +185,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     {
       columnName: LANGUAGE.management.tableColumns.names,
       defaultSpace: 4,
+      orderColumn: true,
     },
   ];
   const groupsTableData: dataTable | undefined = groupsData?.value.groups.map(
@@ -185,32 +206,39 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     },
     {
       columnName: LANGUAGE.management.tableColumns.lastnames,
-      defaultSpace: 4,
+      defaultSpace: 3,
       orderColumn: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.email,
       defaultSpace: 4,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.address,
       defaultSpace: 4,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.entryDate,
-      defaultSpace: 2,
+      defaultSpace: 4,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.alias,
-      defaultSpace: 3,
+      defaultSpace: 2,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.groupName,
-      defaultSpace: 4,
+      defaultSpace: 2,
+      orderColumn: true,
+      filterSelector: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.license,
-      defaultSpace: 2,
+      defaultSpace: 3,
+      orderColumn: true,
     },
   ];
 

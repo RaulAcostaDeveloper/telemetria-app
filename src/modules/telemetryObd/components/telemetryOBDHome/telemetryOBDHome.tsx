@@ -43,45 +43,60 @@ export const TelemetryHome = ({ LANGUAGE, showTable }: Props) => {
     {
       columnName: LANGUAGE.teleOBD.tableColumns.name,
       defaultSpace: 3,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.teleOBD.tableColumns.plate,
       defaultSpace: 2,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.teleOBD.tableColumns.kilometerMarker,
       defaultSpace: 3,
       orderColumn: true,
+      minMaxFilter: true,
+      showTotal: true,
     },
     {
       columnName: LANGUAGE.teleOBD.tableColumns.fuelType,
-      defaultSpace: 2,
+      defaultSpace: 3,
       filterSelector: true,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.teleOBD.tableColumns.litersPerHour,
       defaultSpace: 3,
       orderColumn: true,
+      minMaxFilter: true,
+      showTotal: true,
     },
     {
       columnName: LANGUAGE.teleOBD.tableColumns.totalDistance,
       defaultSpace: 3,
       orderColumn: true,
+      minMaxFilter: true,
+      showTotal: true,
     },
     {
       columnName: LANGUAGE.teleOBD.tableColumns.totalEngineHours,
       defaultSpace: 3,
       orderColumn: true,
+      minMaxFilter: true,
+      showTotal: true,
     },
     {
       columnName: LANGUAGE.teleOBD.tableColumns.totalConsumed,
       defaultSpace: 3,
+      minMaxFilter: true,
+      showTotal: true,
       orderColumn: true,
     },
     {
       columnName: LANGUAGE.teleOBD.tableColumns.totalIdleHours,
       defaultSpace: 3,
       orderColumn: true,
+      minMaxFilter: true,
+      showTotal: true,
     },
   ];
   return (
