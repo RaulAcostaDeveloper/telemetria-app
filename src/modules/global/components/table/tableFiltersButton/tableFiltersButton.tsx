@@ -64,6 +64,10 @@ export const TableFiltersButton = ({
     }
   }, []);
 
+  const filtersOn: boolean = columns.some(
+    (column) => "filterSelector" in column || "minMaxFilter" in column
+  );
+
   return (
     <div className={styles.container}>
       <GeneralButton
@@ -79,7 +83,7 @@ export const TableFiltersButton = ({
       {isOpen && (
         <div className={styles.filtersContainer}>
           <div ref={filtersRef} className={`${styles.filtersContent}`}>
-            {filterSelectors.length > 0 || minMaxFilters.length > 0 ? (
+            {filtersOn ? (
               <>
                 <TableFilters
                   LANGUAGE={LANGUAGE}
@@ -106,17 +110,19 @@ export const TableFiltersButton = ({
                 </div>
               </>
             ) : (
-              <>
-                <p className={styles.noFilters}>
+              <div className={styles.noFiltersContainer}>
+                <p className={styles.noFiltersTitle}>
                   {LANGUAGE.table.actions.noFilters}
                 </p>
-                <GeneralButton
-                  type={ButtonTypes.NEUTRAL}
-                  callback={() => setIsOpen(!isOpen)}
-                  title={LANGUAGE.table.actions.close}
-                  placeholder={LANGUAGE.table.actions.close}
-                />
-              </>
+                <div className={styles.closeButton}>
+                  <GeneralButton
+                    type={ButtonTypes.NEUTRAL}
+                    callback={() => setIsOpen(!isOpen)}
+                    title={LANGUAGE.table.actions.close}
+                    placeholder={LANGUAGE.table.actions.close}
+                  />
+                </div>
+              </div>
             )}
           </div>
         </div>

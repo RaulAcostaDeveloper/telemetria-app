@@ -35,7 +35,19 @@
   padding: 20px;
 }
 
-.noFilters {
+.noFiltersContainer {
+  width: 300px;
+  padding: 10px;
+}
+
+.closeButton {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+}
+
+.noFiltersTitle {
+  text-align: center;
   margin-bottom: 10px;
   font-size: 1.5rem;
 }
