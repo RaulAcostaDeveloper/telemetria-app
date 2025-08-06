@@ -15,18 +15,24 @@ export const TableMinMaxFilter = ({
   minMaxFilters,
 }: Props) => {
   const handleChangeMin = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    const numericValue = value === "" ? undefined : Number(value);
+
     handleMinMaxFilter({
       colIndex,
-      min: Number(event.target.value),
+      min: numericValue,
       max: minMaxFilters[colIndex].max,
     });
   };
 
   const handleChangeMax = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    const numericValue = value === "" ? undefined : Number(value);
+
     handleMinMaxFilter({
       colIndex,
       min: minMaxFilters[colIndex].min,
-      max: Number(event.target.value),
+      max: numericValue,
     });
   };
 
