@@ -9,8 +9,6 @@ export default function LoaderAnimation({ cellSize = 26 }: Props) {
   const totalSize = cells * (cellSize + 2);
   const calcFlex = `0 0 ${cellSize}`;
 
-  console.log("totalSize: ", totalSize);
-
   return (
     <div
       className={styles.loader}
