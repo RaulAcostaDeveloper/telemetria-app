@@ -42,12 +42,22 @@ export const TableMinMaxFilter = ({
           onChange={handleChangeMin}
           value={minMaxFilters[colIndex].min ?? ""}
           placeholder={LANGUAGE.table.actions.any}
+          className={`${styles.input} ${
+            minMaxFilters[colIndex].min !== undefined
+              ? styles.selectedOption
+              : ""
+          }`}
         />
         <input
           type="number"
           onChange={handleChangeMax}
           value={minMaxFilters[colIndex].max ?? ""}
           placeholder={LANGUAGE.table.actions.any}
+          className={`${styles.input} ${
+            minMaxFilters[colIndex].max !== undefined
+              ? styles.selectedOption
+              : ""
+          }`}
         />
       </div>
     </div>
