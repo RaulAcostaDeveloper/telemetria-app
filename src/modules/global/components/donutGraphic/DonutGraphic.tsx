@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import styles from "./donutGraphic.module.css";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 import { Devices } from "@/globalConfig/redux/slices/fuelSummarySlice";
+import LoaderAnimation from "../loaderAnimation/loaderAnimation";
 
 // Cargamos HighchartsReact dinámicamente para evitar que se cargue del lado del servidor
 const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
@@ -234,6 +235,7 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
         {!is3DReady || !HighchartsReact ? (
           <div className={styles.loadingText}>
             {LANGUAGE.fuel.donutGrpahic.waitingMessage}
+            <LoaderAnimation />
           </div>
         ) : (
           <div className={styles.highchartsContainer}>

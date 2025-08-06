@@ -16,6 +16,7 @@ import { useAuth } from "@/modules/auth/utils";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 // import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
 import styles from "./fuelReportDataProvider.module.css";
+import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 
 export interface OBValue {
   startDate: string;
@@ -148,8 +149,9 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
                 />
               </>
             ) : (
-              // Añadir un loading
-              <div>...</div>
+              <div>
+                <LoaderAnimation />
+              </div>
             )}
           </div>,
           <div key={1}>
@@ -161,8 +163,9 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
                 />
               </>
             ) : (
-              // Añadir un loading
-              <div>...</div>
+              <div>
+                <LoaderAnimation />
+              </div>
             )}
           </div>,
           <div key={2}>

@@ -14,6 +14,7 @@ import { FuelFilter } from "../fuelFilter/fuelFilter";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Table, TabsContent } from "@/modules/global/components";
 import { fetchFuelSummary } from "@/globalConfig/redux/slices/fuelSummarySlice";
+import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -138,8 +139,9 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
           brandsData={brandsData.value.brands.map((item) => item.name)}
         />
       ) : (
-        // Añadir un loading
-        <div>...</div>
+        <div>
+          <LoaderAnimation />
+        </div>
       )}
 
       <div className={styles.topResumeData}>
@@ -149,8 +151,9 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
             <DonutGraphic devices={fuelSummaryData.value.devices} />
           </>
         ) : (
-          // Añadir un loading
-          <div>...</div>
+          <div>
+            <LoaderAnimation />
+          </div>
         )}
       </div>
       <TabsContent
@@ -167,8 +170,9 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
                 showGoOBT
               />
             ) : (
-              // Añadir un loading
-              <div>...</div>
+              <div>
+                <LoaderAnimation />
+              </div>
             )}
           </div>,
         ]}

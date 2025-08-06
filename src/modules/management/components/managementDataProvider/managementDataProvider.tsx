@@ -14,6 +14,7 @@ import { LanguageInterface } from "@/modules/global/language/constants/language.
 
 //Módulos
 import { Table, TabsContent } from "@/modules/global/components";
+import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -269,8 +270,9 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
                 idKey="imeIs"
               />
             ) : (
-              // Añadir un loading
-              <div>...</div>
+              <div>
+                <LoaderAnimation />
+              </div>
             )}
           </div>,
           <div key={2}>
@@ -281,8 +283,9 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
                 data={devicesTableData}
               />
             ) : (
-              // Añadir un loading
-              <div>...</div>
+              <div>
+                <LoaderAnimation />
+              </div>
             )}
           </div>,
           <div key={3}>
@@ -293,8 +296,9 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
                 data={driversTableData}
               />
             ) : (
-              // Añadir un loading
-              <div>...</div>
+              <div>
+                <LoaderAnimation />
+              </div>
             )}
           </div>,
           <div key={4}>
@@ -305,8 +309,9 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
                 data={groupsTableData}
               />
             ) : (
-              // Añadir un loading
-              <div>...</div>
+              <div>
+                <LoaderAnimation />
+              </div>
             )}
           </div>,
         ]}
