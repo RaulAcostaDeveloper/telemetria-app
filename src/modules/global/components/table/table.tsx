@@ -121,13 +121,16 @@ export const Table = ({
 
       // Filtros por columna (selectors)
       filterSelectors.forEach(({ colIndex, value }) => {
+        const target = value.toLowerCase().trim();
+
+        if (target === "") return;
+
         result = result.filter((item) => {
           const keys = Object.keys(item);
           const key = keys[colIndex];
           const raw = item[key];
 
           const strValue = raw?.toString().toLowerCase().trim() ?? "";
-          const target = value.toLowerCase().trim();
 
           return strValue === target;
         });
@@ -200,6 +203,7 @@ export const Table = ({
     setFilterSelectors(filterSelectorsEmpty);
     setMinMaxFilters(filterMinMaxEmpty);
   };
+  console.log("filteredData ", filteredData);
 
   return (
     <div

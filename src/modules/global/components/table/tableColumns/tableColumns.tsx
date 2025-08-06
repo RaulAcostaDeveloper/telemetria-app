@@ -21,14 +21,14 @@ export const TableColumns = ({
   setColumnOrdered,
   showActions,
 }: Props) => {
-  const handleSelectorFilter = (propIndex: number) => {
+  const handleSelectorFilter = (colIndex: number) => {
     setColumnOrdered((prev) => {
-      if (prev.propIndex !== propIndex) {
+      if (prev.colIndex !== colIndex) {
         // Nuevo ordenamiento ascendente
-        return { propIndex, value: true };
+        return { colIndex, value: true };
       }
       // Invertir ascendente | descendente
-      return { propIndex, value: !prev.value };
+      return { colIndex, value: !prev.value };
     });
   };
 
@@ -44,7 +44,7 @@ export const TableColumns = ({
         // Decisiones de renderizado
         const isFirstColumn = index === 0;
         const isLastColumn = index === columns.length - 1 && !showActions;
-        const isOrderedSelected = columnOrdered.propIndex === index;
+        const isOrderedSelected = columnOrdered.colIndex === index;
         const isAscendant = columnOrdered.value;
 
         const constructedClass = `
