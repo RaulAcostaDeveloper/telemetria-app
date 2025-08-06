@@ -140,23 +140,18 @@ export const Table = ({
         return minMaxFilters.every(({ colIndex, min, max }) => {
           const key = keys[colIndex];
           if (!key) return true;
-          const raw = item[key];
-          const num = typeof raw === "number" ? raw : Number(raw);
-          if (min === undefined) return true;
-          if (num >= min) return true;
-          return false;
-        });
-      });
 
-      result = result.filter((item) => {
-        return minMaxFilters.every(({ colIndex, min, max }) => {
-          const key = keys[colIndex];
-          if (!key) return true;
+          // Si no hay filtro ni min ni max definidos, no filtrar
+          if (min === undefined && max === undefined) return true;
+
           const raw = item[key];
           const num = typeof raw === "number" ? raw : Number(raw);
-          if (max === undefined) return true;
-          if (num <= max) return true;
-          return false;
+          if (Number.isNaN(num)) return false;
+
+          if (min !== undefined && num < min) return false;
+          if (max !== undefined && num > max) return false;
+
+          return true;
         });
       });
 
