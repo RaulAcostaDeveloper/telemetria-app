@@ -4,6 +4,7 @@ import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 
 import { GeoModalData } from "../geoModal";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import LoaderAnimation from "../../loaderAnimation/loaderAnimation";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -61,7 +62,12 @@ const GoogleMapClientComponent = ({
     }
   }, [center, mapLoaded]);
 
-  if (!isLoaded) return <div>...</div>;
+  if (!isLoaded)
+    return (
+      <div>
+        <LoaderAnimation />
+      </div>
+    );
 
   // No dar tamaño aquí si no en el componente padre
   return (

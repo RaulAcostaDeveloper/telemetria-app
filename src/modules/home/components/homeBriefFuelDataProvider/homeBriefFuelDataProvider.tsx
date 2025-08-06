@@ -13,6 +13,7 @@ import styles from "@/modules/fuel/components/fuelDataProvider/fuelDataProvider.
 import stylesHome from "./homeBriefFuelDataProvider.module.css";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 import { fetchFuelSummary } from "@/globalConfig/redux/slices/fuelSummarySlice";
+import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 
 export const HomeBriefFuelDataProvider = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -52,8 +53,9 @@ export const HomeBriefFuelDataProvider = () => {
             <DonutGraphic devices={fuelSummaryData.value.devices} />
           </>
         ) : (
-          //TODO: Añadir loading
-          <div>...</div>
+          <div>
+            <LoaderAnimation />
+          </div>
         )}
       </div>
     </div>

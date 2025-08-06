@@ -1,0 +1,83 @@
+.loader {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cell {
+  margin: 1px;
+  background-color: transparent;
+  box-sizing: border-box;
+  border-radius: 4px;
+  animation: 1.1s ripple ease infinite;
+}
+
+.cell.d-1 {
+  animation-delay: 100ms;
+}
+
+.cell.d-2 {
+  animation-delay: 200ms;
+}
+
+.cell.d-3 {
+  animation-delay: 300ms;
+}
+
+.cell.d-4 {
+  animation-delay: 400ms;
+}
+
+.cell:nth-child(1) {
+  --cell-color: var(--cell-color1);
+}
+
+.cell:nth-child(2) {
+  --cell-color: var(--cell-color2);
+}
+
+.cell:nth-child(3) {
+  --cell-color: var(--cell-color3);
+}
+
+.cell:nth-child(4) {
+  --cell-color: var(--cell-color4);
+}
+
+.cell:nth-child(5) {
+  --cell-color: var(--cell-color5);
+}
+
+.cell:nth-child(6) {
+  --cell-color: var(--cell-color6);
+}
+
+.cell:nth-child(7) {
+  --cell-color: var(--cell-color7);
+}
+
+.cell:nth-child(8) {
+  --cell-color: var(--cell-color8);
+}
+
+.cell:nth-child(9) {
+  --cell-color: var(--cell-color9);
+}
+
+/*Animation*/
+@keyframes ripple {
+  0% {
+    background-color: transparent;
+  }
+
+  30% {
+    background-color: var(--cell-color);
+  }
+
+  60% {
+    background-color: transparent;
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
