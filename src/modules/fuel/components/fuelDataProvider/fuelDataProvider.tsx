@@ -59,24 +59,27 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.name,
       defaultSpace: 2,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.lastFuelLevel,
       defaultSpace: 3,
       orderColumn: true,
-      filterSelector: true,
+      minMaxFilter: true,
+      showTotal: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.performanceOdometer,
       defaultSpace: 3,
       orderColumn: true,
+      minMaxFilter: true,
+      showTotal: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelLoadCount,
       defaultSpace: 2,
       orderColumn: true,
       showTotal: true,
-      filterSelector: true,
       minMaxFilter: true,
     },
     {
@@ -91,7 +94,6 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
       defaultSpace: 3,
       orderColumn: true,
       showTotal: true,
-      filterSelector: true,
       minMaxFilter: true,
     },
     {
@@ -104,10 +106,12 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.plate,
       defaultSpace: 6,
+      orderColumn: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.lastReportDate,
       defaultSpace: 3,
+      orderColumn: true,
     },
   ];
 

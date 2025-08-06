@@ -203,7 +203,6 @@ export const Table = ({
     setFilterSelectors(filterSelectorsEmpty);
     setMinMaxFilters(filterMinMaxEmpty);
   };
-  console.log("filteredData ", filteredData);
 
   return (
     <div
