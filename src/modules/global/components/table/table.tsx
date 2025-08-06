@@ -120,19 +120,43 @@ export const Table = ({
       }
 
       // Filtros por columna (selectors)
+      const keys = Object.keys(data[0] ?? {});
+
       filterSelectors.forEach(({ colIndex, value }) => {
         const target = value.toLowerCase().trim();
-
         if (target === "") return;
 
+        const key = keys[colIndex];
+        if (!key) return;
+
         result = result.filter((item) => {
-          const keys = Object.keys(item);
-          const key = keys[colIndex];
           const raw = item[key];
-
           const strValue = raw?.toString().toLowerCase().trim() ?? "";
-
           return strValue === target;
+        });
+      });
+
+      result = result.filter((item) => {
+        return minMaxFilters.every(({ colIndex, min, max }) => {
+          const key = keys[colIndex];
+          if (!key) return true;
+          const raw = item[key];
+          const num = typeof raw === "number" ? raw : Number(raw);
+          if (min === undefined) return true;
+          if (num >= min) return true;
+          return false;
+        });
+      });
+
+      result = result.filter((item) => {
+        return minMaxFilters.every(({ colIndex, min, max }) => {
+          const key = keys[colIndex];
+          if (!key) return true;
+          const raw = item[key];
+          const num = typeof raw === "number" ? raw : Number(raw);
+          if (max === undefined) return true;
+          if (num <= max) return true;
+          return false;
         });
       });
 
@@ -140,7 +164,7 @@ export const Table = ({
     };
 
     applyFilters();
-  }, [data, inputFilterValue, filterSelectors]);
+  }, [data, inputFilterValue, filterSelectors, minMaxFilters]);
 
   // Actualiza filterSelectors
   const handleSelectorFilter = ({ colIndex, value }: SelectorFilter) => {
