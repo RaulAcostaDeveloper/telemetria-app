@@ -106,7 +106,7 @@ export const SPANISH: LanguageInterface = {
       total: "Total",
     },
     formTitles: {
-      filters: "Filtros de la tabla",
+      filters: "Filtros",
       createElement: "Crear elemento",
       deleteElement: "¿Seguro que quieres eliminar este elemento?",
       deleteSubString: "Esta acción es permanente y no se puede deshacer.",

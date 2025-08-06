@@ -5,15 +5,22 @@ import styles from "./tableFilters.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { TableFilter } from "../tableFilter/tableFilter";
 import { TableMinMaxFilter } from "../tableMinMaxFilter/tableMinMaxFilter";
-import { columnsTable, dataTable, PrimitiveValue } from "../table.model";
+import {
+  columnsTable,
+  dataTable,
+  MinMaxFilter,
+  PrimitiveValue,
+  SelectorFilter,
+} from "../table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   columns: columnsTable;
   data: dataTable;
-  handleSelectorFilter: (propIndex: number, value: string) => void;
-  selectedOptions: string[];
-  setSelectedOptions: React.Dispatch<React.SetStateAction<string[]>>;
+  filterSelectors: SelectorFilter[];
+  handleMinMaxFilter: ({ colIndex, min, max }: MinMaxFilter) => void;
+  handleSelectorFilter: ({ colIndex, value }: SelectorFilter) => void;
+  minMaxFilters: MinMaxFilter[];
 }
 
 const getAllUniqueFilterValues = (
@@ -42,9 +49,10 @@ export const TableFilters = ({
   LANGUAGE,
   columns,
   data,
+  filterSelectors,
+  handleMinMaxFilter,
   handleSelectorFilter,
-  selectedOptions,
-  setSelectedOptions,
+  minMaxFilters,
 }: Props) => {
   const uniqueFilterValues = useMemo(
     () => getAllUniqueFilterValues(columns, data),
@@ -66,10 +74,9 @@ export const TableFilters = ({
         <h3>{LANGUAGE.table.formTitles.filters}</h3>
       </div>
       {columns.map((col, colIndex) => (
-        <>
+        <div key={colIndex}>
           {(col.filterSelector || col.minMaxFilter) && (
             <div
-              key={colIndex}
               className={styles.filterContainer}
               title={`${LANGUAGE.table.actions.filterBy} "${columns[colIndex].columnName}"`}
             >
@@ -79,19 +86,24 @@ export const TableFilters = ({
               {col.filterSelector && (
                 <TableFilter
                   LANGUAGE={LANGUAGE}
+                  colIndex={colIndex}
                   columnName={columns[colIndex].columnName}
-                  filterRenderIndex={colIndex}
+                  filterSelectors={filterSelectors}
                   handleSelectorFilter={handleSelectorFilter}
                   options={uniqueFilterValues[colIndex]}
-                  propIndex={colIndex}
-                  selectedOptions={selectedOptions}
-                  setSelectedOptions={setSelectedOptions}
                 />
               )}
-              {col.minMaxFilter && <TableMinMaxFilter />}
+              {col.minMaxFilter && (
+                <TableMinMaxFilter
+                  LANGUAGE={LANGUAGE}
+                  colIndex={colIndex}
+                  handleMinMaxFilter={handleMinMaxFilter}
+                  minMaxFilters={minMaxFilters}
+                />
+              )}
             </div>
           )}
-        </>
+        </div>
       ))}
     </div>
   );

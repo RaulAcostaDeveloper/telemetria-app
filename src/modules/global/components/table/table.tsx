@@ -5,7 +5,7 @@ import styles from "./table.module.css";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { TableServerContent } from "./tableServerContent/tableServerContent";
 import {
-  // MinMaxFilter,
+  MinMaxFilter,
   PrimitiveValue,
   SelectorFilter,
   SelectorOrdered,
@@ -57,21 +57,25 @@ export const Table = ({
   viewPath,
 }: Props) => {
   const [columnOrdered, setColumnOrdered] = useState<SelectorOrdered>({
-    propIndex: 0,
+    colIndex: 0,
     value: true,
   });
   const [filterSelectors, setFilterSelectors] = useState<SelectorFilter[]>([]);
-  // const [minMaxFilters, setMinMaxFilters] = useState<MinMaxFilter[]>([]);
+  const [minMaxFilters, setMinMaxFilters] = useState<MinMaxFilter[]>([]);
 
   const [filteredData, setFilteredData] = useState<dataTable>(data);
   const [inputFilterValue, setInputFilterValue] = useState<string>("");
   const [minHeight, setMinHeight] = useState(0);
 
+  useEffect(() => {
+    initFilters();
+  }, []);
+
   // Ordenamiento ascendente y descendente
   useEffect(() => {
     if (filteredData.length === 0) return;
 
-    const columnKey = Object.keys(filteredData[0])[columnOrdered.propIndex];
+    const columnKey = Object.keys(filteredData[0])[columnOrdered.colIndex];
     if (!columnKey) return;
 
     const sorted = [...filteredData].sort((a, b) => {
@@ -116,10 +120,10 @@ export const Table = ({
       }
 
       // Filtros por columna (selectors)
-      filterSelectors.forEach(({ propIndex, value }) => {
+      filterSelectors.forEach(({ colIndex, value }) => {
         result = result.filter((item) => {
           const keys = Object.keys(item);
-          const key = keys[propIndex];
+          const key = keys[colIndex];
           const raw = item[key];
 
           const strValue = raw?.toString().toLowerCase().trim() ?? "";
@@ -136,34 +140,66 @@ export const Table = ({
   }, [data, inputFilterValue, filterSelectors]);
 
   // Actualiza filterSelectors
-  const handleSelectorFilter = (propIndex: number, value: string) => {
+  const handleSelectorFilter = ({ colIndex, value }: SelectorFilter) => {
     setFilterSelectors((filtros) => {
       if (value.trim() === "") {
-        return filtros.filter((filtro) => filtro.propIndex !== propIndex);
+        return filtros.filter((filtro) => filtro.colIndex !== colIndex);
       }
 
-      const existing = filtros.find((filtro) => filtro.propIndex === propIndex);
+      const existing = filtros.find((filtro) => filtro.colIndex === colIndex);
       if (existing) {
         return filtros.map((filtro) =>
-          filtro.propIndex === propIndex ? { ...filtro, value } : filtro
+          filtro.colIndex === colIndex ? { ...filtro, value } : filtro
         );
       }
 
-      return [...filtros, { propIndex, value }];
+      return [...filtros, { colIndex, value }];
     });
   };
 
-  // const handleMinMaxFilter = (propIndex: number, min: number, max: number) => {
-  //   setMinMaxFilters((filtros) => {
-  //     const existing = filtros.find((filtro) => filtro.propIndex === propIndex);
-  //     if (existing) {
-  //       return filtros.map((filtro) =>
-  //         filtro.propIndex === propIndex ? { ...filtro, min, max } : filtro
-  //       );
-  //     }
-  //     return [...filtros, { propIndex, min, max }];
-  //   });
-  // };
+  const handleMinMaxFilter = ({ colIndex, min, max }: MinMaxFilter) => {
+    setMinMaxFilters((filtros) => {
+      const existing = filtros.find((filtro) => filtro.colIndex === colIndex);
+      if (existing) {
+        return filtros.map((filtro) =>
+          filtro.colIndex === colIndex ? { ...filtro, min, max } : filtro
+        );
+      }
+      return [...filtros, { colIndex, min, max }];
+    });
+  };
+
+  const resetFilters = () => {
+    setFilterSelectors((prev) =>
+      prev.map((filter) => ({ ...filter, value: "" }))
+    );
+
+    setMinMaxFilters((prev) =>
+      prev.map((filter) => ({ ...filter, min: undefined, max: undefined }))
+    );
+  };
+
+  const initFilters = () => {
+    const filterSelectorsEmpty: SelectorFilter[] = columns.map(
+      (column, colIndex) => {
+        return {
+          colIndex,
+          value: "",
+        };
+      }
+    );
+    const filterMinMaxEmpty: MinMaxFilter[] = columns.map(
+      (column, colIndex) => {
+        return {
+          colIndex,
+          min: undefined,
+          max: undefined,
+        };
+      }
+    );
+    setFilterSelectors(filterSelectorsEmpty);
+    setMinMaxFilters(filterMinMaxEmpty);
+  };
 
   return (
     <div
@@ -178,9 +214,13 @@ export const Table = ({
         data={data}
         deleteFunction={deleteFunction}
         editFormContent={editFormContent}
+        filterSelectors={filterSelectors}
         filteredData={filteredData}
+        handleMinMaxFilter={handleMinMaxFilter}
         handleSelectorFilter={handleSelectorFilter}
         idKey={idKey}
+        minMaxFilters={minMaxFilters}
+        resetFilters={resetFilters}
         setColumnOrdered={setColumnOrdered}
         setInputFilterValue={setInputFilterValue}
         setMinHeight={setMinHeight}

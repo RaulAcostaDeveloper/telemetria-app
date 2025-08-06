@@ -106,7 +106,7 @@ export const ENGLISH: LanguageInterface = {
       total: "Total",
     },
     formTitles: {
-      filters: "Table filters",
+      filters: "Filters",
       createElement: "Create item",
       deleteElement: "Are you sure you want to delete this item?",
       deleteSubString: "This action is permanent and cannot be undone.",

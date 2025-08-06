@@ -7,13 +7,22 @@ import { ButtonTypes } from "../../generalButton/generalButton.model";
 import { GeneralButton } from "../../generalButton/generalButton";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { TableFilters } from "../tableFilters/tableFilters";
-import { columnsTable, dataTable, MinMax } from "../table.model";
+import {
+  MinMaxFilter,
+  SelectorFilter,
+  columnsTable,
+  dataTable,
+} from "../table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   columns: columnsTable;
   data: dataTable;
-  handleSelectorFilter: (propIndex: number, value: string) => void;
+  filterSelectors: SelectorFilter[];
+  handleMinMaxFilter: ({ colIndex, min, max }: MinMaxFilter) => void;
+  handleSelectorFilter: ({ colIndex, value }: SelectorFilter) => void;
+  minMaxFilters: MinMaxFilter[];
+  resetFilters: () => void;
   setMinHeight: (height: number) => void;
 }
 
@@ -21,13 +30,14 @@ export const TableFiltersButton = ({
   LANGUAGE,
   columns,
   data,
+  filterSelectors,
+  handleMinMaxFilter,
   handleSelectorFilter,
+  minMaxFilters,
+  resetFilters,
   setMinHeight,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [minMaxOptions, setMinMaxOptions] = useState<MinMax[]>([]);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-
   const filtersRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -35,7 +45,7 @@ export const TableFiltersButton = ({
       const height = filtersRef.current.offsetHeight;
       setMinHeight(height + 100);
     }
-    resetSelectedOptions();
+    resetFilters();
   }, []);
 
   useEffect(() => {
@@ -54,34 +64,6 @@ export const TableFiltersButton = ({
     }
   }, []);
 
-  const resetSelectedOptions = () => {
-    // Obtener las columnas con filterSelector y también conocer su indice (para reiniciar los filtros)
-    const filterableColumns = columns
-      .map((col, indexCol) => ({ col, indexCol }))
-      .filter(({ col }) => col.filterSelector);
-
-    const minMaxFilterableColumns = columns
-      .map((col, indexCol) => ({ col, indexCol }))
-      .filter(({ col }) => col.minMaxFilter);
-
-    // Reiniciar los selectores
-    setSelectedOptions(filterableColumns.map(() => ""));
-
-    // Reiniciar los filtros
-    filterableColumns.forEach(({ indexCol }) => {
-      handleSelectorFilter(indexCol, "");
-    });
-
-    setMinMaxOptions(
-      minMaxFilterableColumns.map(() => {
-        return {
-          min: null,
-          max: null,
-        };
-      })
-    );
-  };
-
   return (
     <div className={styles.container}>
       <GeneralButton
@@ -97,20 +79,21 @@ export const TableFiltersButton = ({
       {isOpen && (
         <div className={styles.filtersContainer}>
           <div ref={filtersRef} className={`${styles.filtersContent}`}>
-            {selectedOptions.length > 0 || minMaxOptions.length > 0 ? (
+            {filterSelectors.length > 0 || minMaxFilters.length > 0 ? (
               <>
                 <TableFilters
                   LANGUAGE={LANGUAGE}
                   columns={columns}
                   data={data}
+                  minMaxFilters={minMaxFilters}
+                  handleMinMaxFilter={handleMinMaxFilter}
                   handleSelectorFilter={handleSelectorFilter}
-                  selectedOptions={selectedOptions}
-                  setSelectedOptions={setSelectedOptions}
+                  filterSelectors={filterSelectors}
                 />
                 <div className={styles.buttonsContainer}>
                   <GeneralButton
                     type={ButtonTypes.WARNING}
-                    callback={() => resetSelectedOptions()}
+                    callback={resetFilters}
                     title={LANGUAGE.table.actions.cleanFilters}
                     placeholder={LANGUAGE.table.actions.cleanFilters}
                   />

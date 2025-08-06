@@ -14,22 +14,17 @@ export type PrimitiveValue = string | number | null;
 export type dataTable = Record<string, PrimitiveValue>[];
 
 export type SelectorOrdered = {
-  propIndex: number;
+  colIndex: number;
   value: boolean;
 };
 
 export type SelectorFilter = {
-  propIndex: number;
+  colIndex: number;
   value: string;
 };
 
 export type MinMaxFilter = {
-  propIndex: number;
-  min: number;
-  max: number;
-};
-
-export type MinMax = {
-  min: number | null; //Null significa sin límite o no filtrar
-  max: number | null;
+  colIndex: number;
+  min: number | undefined; // undefined significa sin límite o no filtrar
+  max: number | undefined;
 };

@@ -1,6 +1,8 @@
 import styles from "./tableServerContent.module.css";
 import {
+  MinMaxFilter,
   PrimitiveValue,
+  SelectorFilter,
   SelectorOrdered,
   columnsTable,
   dataTable,
@@ -20,9 +22,13 @@ interface Props {
   columns: columnsTable;
   data: dataTable;
   deleteFunction?: (idElement: string | number) => void;
+  filterSelectors: SelectorFilter[];
   filteredData: dataTable;
-  handleSelectorFilter: (propIndex: number, value: string) => void;
+  handleMinMaxFilter: ({ colIndex, min, max }: MinMaxFilter) => void;
+  handleSelectorFilter: ({ colIndex, value }: SelectorFilter) => void;
   idKey?: string;
+  minMaxFilters: MinMaxFilter[];
+  resetFilters: () => void;
   setColumnOrdered: React.Dispatch<React.SetStateAction<SelectorOrdered>>;
   setInputFilterValue: (value: string) => void;
   setMinHeight: (height: number) => void;
@@ -54,9 +60,13 @@ export const TableServerContent = ({
   data,
   deleteFunction,
   editFormContent,
+  filterSelectors,
   filteredData,
+  handleMinMaxFilter,
   handleSelectorFilter,
   idKey,
+  minMaxFilters,
+  resetFilters,
   setColumnOrdered,
   setInputFilterValue,
   setMinHeight,
@@ -98,7 +108,11 @@ export const TableServerContent = ({
             LANGUAGE={LANGUAGE}
             columns={columns}
             data={data}
+            filterSelectors={filterSelectors}
+            handleMinMaxFilter={handleMinMaxFilter}
             handleSelectorFilter={handleSelectorFilter}
+            minMaxFilters={minMaxFilters}
+            resetFilters={resetFilters}
             setMinHeight={setMinHeight}
           />
         </div>
