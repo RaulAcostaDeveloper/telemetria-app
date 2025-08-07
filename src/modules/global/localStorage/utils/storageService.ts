@@ -56,6 +56,7 @@ export const localStorageGetItem = <T>(key: string): T | null => {
           endDate: presentTime.toISOString().split("T")[0] + "T00:00:00",
         },
       };
+      localStorage.setItem(defaultData.key, JSON.stringify(defaultData.value));
       return defaultData.value as T;
     }
 
