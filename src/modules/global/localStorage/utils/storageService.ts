@@ -25,14 +25,39 @@ export const localStorageSetItem = <T>(
   }
 };
 
+function move3MonthsBack(fromDate: Date): string {
+  const threeMonthsAgo = new Date(fromDate);
+  threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+
+  // Asegurar que la hora sea 00:00:00
+  threeMonthsAgo.setHours(0, 0, 0, 0);
+
+  // Formatear como "YYYY-MM-DDT00:00:00"
+  const year = threeMonthsAgo.getFullYear();
+  const month = String(threeMonthsAgo.getMonth() + 1).padStart(2, "0"); // Los meses van de 0 a 11
+  const day = String(threeMonthsAgo.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}T00:00:00`;
+}
+
 /**
- * Obtiene un valor de localStorage.
+ * Obtiene un valor de localStorage. Genera un default si no hay fecha.
  * Si tiene expiración y ya ha caducado, lo elimina y devuelve `null`.
  */
 export const localStorageGetItem = <T>(key: string): T | null => {
   try {
     const item = localStorage.getItem(key);
-    if (!item) return null;
+    if (!item) {
+      const presentTime = new Date();
+      const defaultData = {
+        key: "CALENDAR",
+        value: {
+          startDate: move3MonthsBack(presentTime),
+          endDate: presentTime.toISOString().split("T")[0] + "T00:00:00",
+        },
+      };
+      return defaultData.value as T;
+    }
 
     const data: StorageItem<T> = JSON.parse(item);
 
