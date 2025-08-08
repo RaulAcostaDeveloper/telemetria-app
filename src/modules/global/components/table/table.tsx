@@ -111,11 +111,12 @@ export const Table = ({
       // Filtro de texto (por la primera columna)
       if (inputFilterValue.trim() !== "") {
         result = result.filter((item) => {
-          const firstKey = Object.keys(item)[0];
-          const raw = item[firstKey];
+          const filterText = inputFilterValue.toLowerCase().trim();
 
-          const strValue = raw?.toString().toLowerCase() ?? "";
-          return strValue.includes(inputFilterValue.toLowerCase());
+          return Object.values(item).some((value) => {
+            const strValue = value?.toString().toLowerCase() ?? "";
+            return strValue.includes(filterText);
+          });
         });
       }
 
