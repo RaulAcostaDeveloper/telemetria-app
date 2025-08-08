@@ -100,7 +100,7 @@ export const TelemetryHome = ({ LANGUAGE, showTable }: Props) => {
     },
   ];
   return (
-    <div>
+    <div className={styles.telemetryObd}>
       {teleVehiclesOBDStatus === "succeeded" && teleVehiclesOBDData ? (
         <>
           <section className={styles.cardssection}>
