@@ -34,12 +34,12 @@ export const TableAddFormModal = ({
   const CreateFormContent = createFormContent;
 
   return (
-    <Modal LANGUAGE={LANGUAGE} closeModal={closeModal}>
+    <Modal
+      LANGUAGE={LANGUAGE}
+      closeModal={closeModal}
+      title={LANGUAGE.table.formTitles.createElement}
+    >
       <div className={`${styles.inside}`}>
-        <div className={`${styles.formTitle}`}>
-          <h3>{LANGUAGE.table.formTitles.createElement}</h3>
-        </div>
-
         {/* Renderizado de CreateFormContent */}
         {/* Recibe como parámetro setIsDisabled para controlar el activar el botón */}
         {/* Y recibe como parámetro setSaveFunction para definir la función de CREAR */}

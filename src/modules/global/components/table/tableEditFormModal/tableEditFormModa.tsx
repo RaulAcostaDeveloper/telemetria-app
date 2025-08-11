@@ -36,12 +36,12 @@ export const TableEditFormModal = ({
   const EditFormContent = editFormContent;
 
   return (
-    <Modal LANGUAGE={LANGUAGE} closeModal={closeModal}>
+    <Modal
+      LANGUAGE={LANGUAGE}
+      closeModal={closeModal}
+      title={LANGUAGE.table.actions.editElement}
+    >
       <div className={`${styles.inside}`}>
-        <div className={`${styles.formTitle}`}>
-          <h3>{LANGUAGE.table.actions.editElement}</h3>
-        </div>
-
         {/* Renderizado de editFormContent */}
         {/* Recibe como parámetro setIsDisabled para controlar el activar el botón */}
         {/* Y recibe como parámetro setSaveFunction para definir la función de EDITAR */}

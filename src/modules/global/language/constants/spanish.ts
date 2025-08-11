@@ -321,6 +321,7 @@ export const SPANISH: LanguageInterface = {
       drivers: "Conductores",
     },
     tableColumns: {
+      vehicleInformation: "Información del vehículo",
       address: "Dirección",
       alias: "Alias",
       brand: "Marca",

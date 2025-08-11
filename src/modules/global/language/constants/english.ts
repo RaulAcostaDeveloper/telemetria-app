@@ -322,6 +322,7 @@ export const ENGLISH: LanguageInterface = {
       drivers: "Drivers",
     },
     tableColumns: {
+      vehicleInformation: "Vehicle information",
       address: "Address",
       alias: "Alias",
       brand: "Brand",

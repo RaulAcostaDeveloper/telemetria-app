@@ -6,12 +6,13 @@ import styles from "./modal.module.css";
 import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
+  LANGUAGE: LanguageInterface;
   children: React.ReactNode;
   closeModal: () => void;
-  LANGUAGE: LanguageInterface;
+  title?: string;
 }
 
-export const Modal = ({ children, closeModal, LANGUAGE }: Props) => {
+export const Modal = ({ children, closeModal, LANGUAGE, title }: Props) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -35,9 +36,11 @@ export const Modal = ({ children, closeModal, LANGUAGE }: Props) => {
           onClick={closeModal}
           title={LANGUAGE.table.actions.close}
         >
-          <CloseIcon sx={{ fontSize: "2rem" }} />
+          <CloseIcon sx={{ fontSize: "2.5rem" }} />
         </button>
-
+        <div className={styles.title}>
+          <h3>{title}</h3>
+        </div>
         <>{children}</>
       </div>
     </div>

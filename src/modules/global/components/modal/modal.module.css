@@ -27,12 +27,24 @@
   border-radius: 10%;
   border: none;
   cursor: pointer;
-  padding: 5px;
+  padding: 10px;
   position: absolute;
-  right: 6px;
-  top: 6px;
+  right: 5px;
+  top: 0px;
+  color: white;
 }
 
 .closeButton:hover {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.title h3 {
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 0;
+  background-color: var(--company-color-6);
+  color: white;
 }

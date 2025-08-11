@@ -26,14 +26,14 @@
 }
 
 .label {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   width: 150px;
   text-align: left;
 }
 
 .value {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   max-width: 250px;
   text-align: right;
 }
