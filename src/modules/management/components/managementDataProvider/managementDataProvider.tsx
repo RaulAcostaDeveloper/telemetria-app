@@ -266,7 +266,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
                 columns={vehicleColumns}
                 data={vehiclesTableData}
                 showGoFuel
-                showGoOBT
+                showGoOBD
                 idKey="imeIs"
               />
             ) : (

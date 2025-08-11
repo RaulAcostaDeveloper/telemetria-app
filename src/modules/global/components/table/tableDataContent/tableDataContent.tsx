@@ -14,8 +14,8 @@ interface Props {
   showDelete?: boolean;
   showEdit?: boolean;
   showGoFuel?: boolean;
-  showGoOBT?: boolean;
-  showView?: boolean;
+  showGoOBD?: boolean;
+  showGoPageView?: boolean;
   viewPath?: string;
   editFormContent?: React.FC<{
     dataObject: { [key: string]: PrimitiveValue };
@@ -35,8 +35,8 @@ export const TableDataContent = ({
   showDelete,
   showEdit,
   showGoFuel,
-  showGoOBT,
-  showView,
+  showGoOBD,
+  showGoPageView,
   viewPath,
 }: Props) => {
   return (
@@ -74,9 +74,9 @@ export const TableDataContent = ({
               showDelete={showDelete}
               showEdit={showEdit}
               showGoFuel={showGoFuel}
-              showGoOBT={showGoOBT}
-              showView={showView}
-              viewPath={`${viewPath}${dataObject[idKey ?? ""]}`}
+              showGoOBD={showGoOBD}
+              showGoPageView={showGoPageView}
+              viewPath={`${viewPath}${dataObject[idKey ?? ""] ?? ""}`}
             />
           )}
         </div>

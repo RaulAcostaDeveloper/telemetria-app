@@ -36,8 +36,8 @@ interface Props {
   showDelete?: boolean;
   showEdit?: boolean;
   showGoFuel?: boolean;
-  showGoOBT?: boolean;
-  showView?: boolean;
+  showGoOBD?: boolean;
+  showGoPageView?: boolean;
   title?: string;
   viewPath?: string;
   createFormContent?: React.FC<{
@@ -74,8 +74,8 @@ export const TableServerContent = ({
   showDelete,
   showEdit,
   showGoFuel,
-  showGoOBT,
-  showView,
+  showGoOBD,
+  showGoPageView,
   title,
   viewPath,
 }: Props) => {
@@ -127,7 +127,11 @@ export const TableServerContent = ({
               columns={columns}
               setColumnOrdered={setColumnOrdered}
               showActions={
-                showDelete || showEdit || showView || showGoFuel || showGoOBT
+                showDelete ||
+                showEdit ||
+                showGoPageView ||
+                showGoFuel ||
+                showGoOBD
               }
             />
 
@@ -140,13 +144,17 @@ export const TableServerContent = ({
               editFormContent={editFormContent}
               idKey={idKey}
               showActions={
-                showDelete || showEdit || showView || showGoFuel || showGoOBT
+                showDelete ||
+                showEdit ||
+                showGoPageView ||
+                showGoFuel ||
+                showGoOBD
               }
               showDelete={showDelete}
               showEdit={showEdit}
               showGoFuel={showGoFuel}
-              showGoOBT={showGoOBT}
-              showView={showView}
+              showGoOBD={showGoOBD}
+              showGoPageView={showGoPageView}
               viewPath={viewPath}
             />
           </div>

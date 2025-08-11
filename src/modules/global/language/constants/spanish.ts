@@ -96,8 +96,9 @@ export const SPANISH: LanguageInterface = {
       sortItems: "Ordenar elementos por",
       viewDetail: "Ver detalles",
       goFuelReport: "Ir a reporte de combustible",
-      goObtReport: "Ir a reporte de OBT",
+      goObdReport: "Ir a reporte de OBD",
       cleanFilters: "Limpiar",
+      goPage: "Ir a la página",
       noFilters: "No hay filtros para esta tabla",
     },
     elements: {
