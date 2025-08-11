@@ -3,26 +3,31 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import ArticleIcon from "@mui/icons-material/Article";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+
 import styles from "./tableActions.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { PrimitiveValue } from "../table.model";
+import { MODAL_OPTION, PrimitiveValue } from "../table.model";
 import { TableDeleteModal } from "../tableDeleteModal/tableDeleteModa";
 import { TableEditFormModal } from "../tableEditFormModal/tableEditFormModa";
-import ArticleIcon from "@mui/icons-material/Article";
+import { TableModalViewHandler } from "../tableModalViewHandler/tableModalHandler";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   dataObject: { [key: string]: PrimitiveValue };
   deleteFunction?: (idElement: string | number) => void;
   idKey?: string;
+  modalOption?: MODAL_OPTION;
   showDelete?: boolean;
   showEdit?: boolean;
   showGoFuel?: boolean;
   showGoOBD?: boolean;
   showGoPageView?: boolean;
+  showViewModal?: boolean;
   viewPath?: string;
   editFormContent?: React.FC<{
     dataObject: { [key: string]: PrimitiveValue };
@@ -38,15 +43,19 @@ export const TableActions = ({
   deleteFunction,
   editFormContent,
   idKey,
+  modalOption,
   showDelete,
   showEdit,
   showGoFuel,
   showGoOBD,
   showGoPageView,
+  showViewModal,
   viewPath,
 }: Props) => {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
+  const [viewModal, setViewModal] = useState<boolean>(false);
+
   return (
     <div className={`${styles.tableActions}`}>
       {/* Botón "Ver" */}
@@ -58,6 +67,15 @@ export const TableActions = ({
         >
           <ArticleIcon sx={{ fontSize: "2rem" }} />
         </Link>
+      )}
+      {showViewModal && modalOption && (
+        <button
+          className={`${styles.button}`}
+          title={LANGUAGE.table.actions.viewDetail}
+          onClick={() => setViewModal(true)}
+        >
+          <VisibilityIcon sx={{ fontSize: "2rem" }} />
+        </button>
       )}
       {idKey && dataObject[idKey] !== null && (
         <>
@@ -135,6 +153,15 @@ export const TableActions = ({
             closeModal={() => setShowDeleteModal(false)}
             deleteFunction={deleteFunction}
             idObject={idKey ? dataObject[idKey] : undefined}
+          />
+        )}
+
+        {viewModal && modalOption && (
+          <TableModalViewHandler
+            LANGUAGE={LANGUAGE}
+            closeModal={() => setViewModal(false)}
+            dataObject={dataObject}
+            modalOption={modalOption}
           />
         )}
       </>

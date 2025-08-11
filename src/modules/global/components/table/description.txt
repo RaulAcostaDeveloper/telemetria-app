@@ -12,6 +12,8 @@ De todos modos comparto las instrucciones de uso del componente:
     o	filterSelector: Opcional: Si la columna se puede usar con un filtro de registros (selector y opciones únicas)
     o	orderColumn: Opcional: Si la columna se puede usar para ordenar los registros
     o	showTotal: Opcional: Si los valores de los registros se pueden sumar y mostrar la suma al final
+•	showViewModal: Mostrar un modal con información
+•	modalOption: Seleccionar de MODAL_OPTION.OPTION una opción para mostrar en el modal del botón showViewModal y formularios (EJEMPLO: MODAL_OPTION.VEHICLES)
 •	data:  Requerido: Arreglo de objetos con los registros de la tabla
     o	Usar el modelo "dataTable" exportado en "@/modules/global/components/table/table.model"
     o	Procurar que en los objetos haya una propiedad relacionada al ID del elemento

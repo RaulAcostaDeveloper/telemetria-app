@@ -1,5 +1,6 @@
 import styles from "./tableServerContent.module.css";
 import {
+  MODAL_OPTION,
   MinMaxFilter,
   PrimitiveValue,
   SelectorFilter,
@@ -28,6 +29,7 @@ interface Props {
   handleSelectorFilter: ({ colIndex, value }: SelectorFilter) => void;
   idKey?: string;
   minMaxFilters: MinMaxFilter[];
+  modalOption?: MODAL_OPTION;
   resetFilters: () => void;
   setColumnOrdered: React.Dispatch<React.SetStateAction<SelectorOrdered>>;
   setInputFilterValue: (value: string) => void;
@@ -38,6 +40,7 @@ interface Props {
   showGoFuel?: boolean;
   showGoOBD?: boolean;
   showGoPageView?: boolean;
+  showViewModal?: boolean;
   title?: string;
   viewPath?: string;
   createFormContent?: React.FC<{
@@ -66,6 +69,7 @@ export const TableServerContent = ({
   handleSelectorFilter,
   idKey,
   minMaxFilters,
+  modalOption,
   resetFilters,
   setColumnOrdered,
   setInputFilterValue,
@@ -76,6 +80,7 @@ export const TableServerContent = ({
   showGoFuel,
   showGoOBD,
   showGoPageView,
+  showViewModal,
   title,
   viewPath,
 }: Props) => {
@@ -129,9 +134,10 @@ export const TableServerContent = ({
               showActions={
                 showDelete ||
                 showEdit ||
-                showGoPageView ||
                 showGoFuel ||
-                showGoOBD
+                showGoOBD ||
+                showGoPageView ||
+                showViewModal
               }
             />
 
@@ -143,18 +149,21 @@ export const TableServerContent = ({
               deleteFunction={deleteFunction}
               editFormContent={editFormContent}
               idKey={idKey}
+              modalOption={modalOption}
               showActions={
                 showDelete ||
                 showEdit ||
-                showGoPageView ||
                 showGoFuel ||
-                showGoOBD
+                showGoOBD ||
+                showGoPageView ||
+                showViewModal
               }
               showDelete={showDelete}
               showEdit={showEdit}
               showGoFuel={showGoFuel}
               showGoOBD={showGoOBD}
               showGoPageView={showGoPageView}
+              showViewModal={showViewModal}
               viewPath={viewPath}
             />
           </div>
