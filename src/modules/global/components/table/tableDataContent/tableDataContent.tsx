@@ -2,12 +2,7 @@ import styles from "./tableDataContent.module.css";
 import { LanguageInterface } from "../../../language/constants/language.model";
 import { TableActions } from "../tableActions/tableActions";
 import { TableDataProp } from "../tableDataProp/tableDataProp";
-import {
-  MODAL_OPTION,
-  PrimitiveValue,
-  columnsTable,
-  dataTable,
-} from "../table.model";
+import { MODAL_OPTION, columnsTable, dataTable } from "../table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -24,11 +19,6 @@ interface Props {
   showGoPageView?: boolean;
   showViewModal?: boolean;
   viewPath?: string;
-  editFormContent?: React.FC<{
-    dataObject: { [key: string]: PrimitiveValue };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
 }
 
 export const TableDataContent = ({
@@ -36,7 +26,6 @@ export const TableDataContent = ({
   columns,
   data,
   deleteFunction,
-  editFormContent,
   idKey,
   modalOption,
   showActions,
@@ -78,7 +67,6 @@ export const TableDataContent = ({
               LANGUAGE={LANGUAGE}
               dataObject={dataObject}
               deleteFunction={deleteFunction}
-              editFormContent={editFormContent}
               idKey={idKey}
               modalOption={modalOption}
               showDelete={showDelete}

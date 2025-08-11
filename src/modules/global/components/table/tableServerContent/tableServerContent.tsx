@@ -2,7 +2,6 @@ import styles from "./tableServerContent.module.css";
 import {
   MODAL_OPTION,
   MinMaxFilter,
-  PrimitiveValue,
   SelectorFilter,
   SelectorOrdered,
   columnsTable,
@@ -43,26 +42,14 @@ interface Props {
   showViewModal?: boolean;
   title?: string;
   viewPath?: string;
-  createFormContent?: React.FC<{
-    dataObject?: { [key: string]: PrimitiveValue };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
-  editFormContent?: React.FC<{
-    dataObject: { [key: string]: PrimitiveValue };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
 }
 
 export const TableServerContent = ({
   LANGUAGE,
   columnOrdered,
   columns,
-  createFormContent,
   data,
   deleteFunction,
-  editFormContent,
   filterSelectors,
   filteredData,
   handleMinMaxFilter,
@@ -97,10 +84,7 @@ export const TableServerContent = ({
             setInputFilterValue={setInputFilterValue}
           />
           {showCreateButton && (
-            <TableAddNewButton
-              LANGUAGE={LANGUAGE}
-              createFormContent={createFormContent}
-            />
+            <TableAddNewButton LANGUAGE={LANGUAGE} modalOption={modalOption} />
           )}
           <TableCSVButtonsContainer
             LANGUAGE={LANGUAGE}
@@ -147,7 +131,6 @@ export const TableServerContent = ({
               columns={columns}
               data={filteredData}
               deleteFunction={deleteFunction}
-              editFormContent={editFormContent}
               idKey={idKey}
               modalOption={modalOption}
               showActions={

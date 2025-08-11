@@ -13,7 +13,7 @@ import styles from "./tableActions.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { MODAL_OPTION, PrimitiveValue } from "../table.model";
 import { TableDeleteModal } from "../tableDeleteModal/tableDeleteModa";
-import { TableEditFormModal } from "../tableEditFormModal/tableEditFormModa";
+import { TableModalEditHandler } from "../tableModalEditHandler/tableModalEditHandler";
 import { TableModalViewHandler } from "../tableModalViewHandler/tableModalHandler";
 
 interface Props {
@@ -29,11 +29,6 @@ interface Props {
   showGoPageView?: boolean;
   showViewModal?: boolean;
   viewPath?: string;
-  editFormContent?: React.FC<{
-    dataObject: { [key: string]: PrimitiveValue };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
 }
 
 // Acciones de la tabla para los registros
@@ -41,7 +36,6 @@ export const TableActions = ({
   LANGUAGE,
   dataObject,
   deleteFunction,
-  editFormContent,
   idKey,
   modalOption,
   showDelete,
@@ -137,12 +131,11 @@ export const TableActions = ({
       )}
       <>
         {/* Modal que contiene el formulario de Editar*/}
-        {showEditModal && (
-          <TableEditFormModal
+        {showEditModal && modalOption && (
+          <TableModalEditHandler
             LANGUAGE={LANGUAGE}
             closeModal={() => setShowEditModal(false)}
-            dataObject={dataObject}
-            editFormContent={editFormContent}
+            modalOption={modalOption}
           />
         )}
 

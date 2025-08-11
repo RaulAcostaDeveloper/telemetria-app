@@ -7,7 +7,6 @@ import { TableServerContent } from "./tableServerContent/tableServerContent";
 import {
   MODAL_OPTION,
   MinMaxFilter,
-  PrimitiveValue,
   SelectorFilter,
   SelectorOrdered,
   columnsTable,
@@ -30,25 +29,13 @@ interface Props {
   showViewModal?: boolean;
   title?: string;
   viewPath?: string;
-  createFormContent?: React.FC<{
-    dataObject?: { [key: string]: PrimitiveValue };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
-  editFormContent?: React.FC<{
-    dataObject: { [key: string]: PrimitiveValue };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
 }
 
 export const Table = ({
   LANGUAGE,
   columns,
-  createFormContent,
   data,
   deleteFunction,
-  editFormContent,
   idKey,
   modalOption,
   showCreateButton,
@@ -234,10 +221,8 @@ export const Table = ({
         LANGUAGE={LANGUAGE}
         columnOrdered={columnOrdered}
         columns={columns}
-        createFormContent={createFormContent}
         data={data}
         deleteFunction={deleteFunction}
-        editFormContent={editFormContent}
         filterSelectors={filterSelectors}
         filteredData={filteredData}
         handleMinMaxFilter={handleMinMaxFilter}

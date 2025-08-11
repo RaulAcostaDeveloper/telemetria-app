@@ -35,7 +35,11 @@ export const TableDeleteModal = ({
   };
 
   return (
-    <Modal LANGUAGE={LANGUAGE} closeModal={closeModal}>
+    <Modal
+      LANGUAGE={LANGUAGE}
+      closeModal={closeModal}
+      title={LANGUAGE.table.buttons.delete}
+    >
       <div className={`${styles.inside}`}>
         <div className={`${styles.warningIconContainer}`}>
           <div className={`${styles.warningIcon}`}>
