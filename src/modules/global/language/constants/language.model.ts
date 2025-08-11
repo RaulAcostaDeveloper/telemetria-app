@@ -76,9 +76,10 @@ export interface LanguageInterface {
       sortItems: string;
       viewDetail: string;
       goFuelReport: string;
-      goObtReport: string;
+      goObdReport: string;
       cleanFilters: string;
       noFilters: string;
+      goPage: string;
     };
     elements: {
       actions: string;

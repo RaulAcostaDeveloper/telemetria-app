@@ -23,8 +23,8 @@ interface Props {
   showDelete?: boolean;
   showEdit?: boolean;
   showGoFuel?: boolean;
-  showGoOBT?: boolean;
-  showView?: boolean;
+  showGoOBD?: boolean;
+  showGoPageView?: boolean;
   title?: string;
   viewPath?: string;
   createFormContent?: React.FC<{
@@ -51,8 +51,8 @@ export const Table = ({
   showDelete,
   showEdit,
   showGoFuel,
-  showGoOBT,
-  showView,
+  showGoOBD,
+  showGoPageView,
   title,
   viewPath,
 }: Props) => {
@@ -247,8 +247,8 @@ export const Table = ({
         showDelete={showDelete}
         showEdit={showEdit}
         showGoFuel={showGoFuel}
-        showGoOBT={showGoOBT}
-        showView={showView}
+        showGoOBD={showGoOBD}
+        showGoPageView={showGoPageView}
         title={title}
         viewPath={viewPath}
       />

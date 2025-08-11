@@ -23,13 +23,14 @@ De todos modos comparto las instrucciones de uso del componente:
     o	Usar como base el componente de ejemplo ExampleTableForm en "@/modules/global/components/exampleTableForm/"
     o   createFormContent={CreateFormVehicles} // Pasarlo así
     o	Leer las instrucciones centro de ExampleTableForm para poder activar/desactivar el botón y definir una función de crear
-•	showView: Opcional: Mostrar la acción "Ver" para ir a su pantalla individual
+•	showGoPageView: Opcional: Mostrar la acción "Ver" para ir a una ruta especificada en viewPath
+    o	Nota, si se pasa idKey va a tomar el id en la ruta /12412, entonces preparar la ruta para que reciba o ignore el id  
 •	viewPath: Opcional: Ruta de la pantalla para "showView". Ejemplo: "/management/vehicle/"
 •	showGoFuel: Opcional: acción para ir a /fuel/vehicle/[id]
-•	showGoOBT: Opcional: acción para ir a /telemetry/vehicle/[id]
+•	showGoOBD: Opcional: acción para ir a /telemetry/vehicle/[id]
     o	 Requerido si se usó showView
 •	idKey: Opcional: Nombre del parámetro en data que corresponde al id del elemento
-    o	 Requerido si se usó showView, showDelete, showEdit, showGoFuel o showGoOBT
+    o	 Requerido si se usó showView, showDelete, showEdit, showGoFuel o showGoOBD
 •	showDelete: Opcional: Mostrar la acción "Eliminar" para eliminar el registro
     o	Queda pendiente cómo definir la función de eliminar el registro
 •	showEdit: Opcional: Mostrar la acción "Editar" para editar el registro

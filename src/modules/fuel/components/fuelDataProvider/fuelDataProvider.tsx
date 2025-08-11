@@ -167,7 +167,7 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
                 data={vehiclesReport}
                 idKey="imei"
                 showGoFuel
-                showGoOBT
+                showGoOBD
               />
             ) : (
               <div>

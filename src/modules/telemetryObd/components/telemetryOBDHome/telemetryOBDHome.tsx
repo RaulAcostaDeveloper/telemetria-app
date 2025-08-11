@@ -124,7 +124,7 @@ export const TelemetryHome = ({ LANGUAGE, showTable }: Props) => {
               columns={teleVehiclesOBDColumns}
               data={teleVehiclesOBDData}
               showGoFuel
-              showGoOBT
+              showGoOBD
               idKey="imeIs"
             />
           )}

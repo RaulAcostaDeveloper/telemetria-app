@@ -5,6 +5,7 @@ interface column {
   minMaxFilter?: boolean;
   orderColumn?: boolean;
   showTotal?: boolean;
+  showView?: boolean;
 }
 
 export type columnsTable = column[];

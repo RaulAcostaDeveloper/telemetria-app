@@ -6,12 +6,12 @@ import Link from "next/link";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import styles from "./tableActions.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { PrimitiveValue } from "../table.model";
 import { TableDeleteModal } from "../tableDeleteModal/tableDeleteModa";
 import { TableEditFormModal } from "../tableEditFormModal/tableEditFormModa";
+import ArticleIcon from "@mui/icons-material/Article";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -21,8 +21,8 @@ interface Props {
   showDelete?: boolean;
   showEdit?: boolean;
   showGoFuel?: boolean;
-  showGoOBT?: boolean;
-  showView?: boolean;
+  showGoOBD?: boolean;
+  showGoPageView?: boolean;
   viewPath?: string;
   editFormContent?: React.FC<{
     dataObject: { [key: string]: PrimitiveValue };
@@ -41,8 +41,8 @@ export const TableActions = ({
   showDelete,
   showEdit,
   showGoFuel,
-  showGoOBT,
-  showView,
+  showGoOBD,
+  showGoPageView,
   viewPath,
 }: Props) => {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
@@ -50,13 +50,13 @@ export const TableActions = ({
   return (
     <div className={`${styles.tableActions}`}>
       {/* Botón "Ver" */}
-      {showView && viewPath && (
+      {showGoPageView && viewPath && (
         <Link
           className={`${styles.button}`}
-          title={LANGUAGE.table.actions.viewDetail}
+          title={LANGUAGE.table.actions.goPage + " " + viewPath}
           href={viewPath}
         >
-          <VisibilityIcon />
+          <ArticleIcon sx={{ fontSize: "2rem" }} />
         </Link>
       )}
       {idKey && dataObject[idKey] !== null && (
@@ -75,11 +75,11 @@ export const TableActions = ({
                 </Link>
               )}
 
-              {/* Reporte individual de OBT */}
-              {showGoOBT && (
+              {/* Reporte individual de OBD */}
+              {showGoOBD && (
                 <Link
                   className={`${styles.button}`}
-                  title={LANGUAGE.table.actions.goObtReport}
+                  title={LANGUAGE.table.actions.goObdReport}
                   href={`/telemetry/vehicle/${dataObject[idKey]}`}
                 >
                   <Image
