@@ -111,7 +111,8 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       vehicleType: value.vehicleType,
       year: value.year,
       driver: value.driver,
-      group: value.group,
+      groupName: value.group[0].name,
+      groupId: value.group[0].id,
       imeIs: value.imeIs, ///aqui name, no mostrar imeis pero si que exista.
       id: value.id,
     }));
