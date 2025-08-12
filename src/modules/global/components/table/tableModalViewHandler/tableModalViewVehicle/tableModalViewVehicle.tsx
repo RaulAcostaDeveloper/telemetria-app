@@ -1,8 +1,9 @@
+import Image from "next/image";
+
 import styles from "./tableModalViewVehicle.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Modal } from "../../../modal/modal";
 import { PrimitiveValue } from "../../table.model";
-import Image from "next/image";
 
 interface Props {
   LANGUAGE: LanguageInterface;

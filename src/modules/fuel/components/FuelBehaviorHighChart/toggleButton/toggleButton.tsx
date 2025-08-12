@@ -11,7 +11,7 @@ export const ToggleButton = ({ isOn, action, title, activeColor }: Props) => {
   return (
     <div className={styles.toggleButton} onClick={() => action()}>
       <label className={`${styles.switch}`}>
-        <input type="checkbox" checked={isOn} />
+        <input type="checkbox" checked={isOn} onChange={() => {}} />
         <span
           className={styles.slider}
           style={isOn ? { backgroundColor: activeColor } : undefined}
