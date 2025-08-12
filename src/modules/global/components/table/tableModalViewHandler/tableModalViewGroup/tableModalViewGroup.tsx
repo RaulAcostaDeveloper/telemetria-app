@@ -14,6 +14,8 @@ import { LanguageInterface } from "@/modules/global/language/constants/language.
 import { Modal } from "../../../modal/modal";
 import { RootState } from "@/globalConfig/redux/store";
 import { Table } from "../../table";
+import { useEffect, useState } from "react";
+import { Vehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -32,9 +34,19 @@ export const TableModalViewGroup = ({
   closeModal,
   dataObject,
 }: Props) => {
+  const [groupsVehicles, setGroupsVehicles] = useState<Vehicles[]>([]);
+
   const { vehiclesData, vehiclesStatus } = useSelector(
     (state: RootState) => state.vehicles
   );
+
+  useEffect(() => {
+    if (!vehiclesData || !dataObject?.id) return;
+    const filtered: Vehicles[] = vehiclesData.value.vehicles.filter(
+      (vehicle) => vehicle.group === dataObject.id // cambiar group por el id
+    );
+    setGroupsVehicles(filtered);
+  }, [vehiclesData, dataObject]);
 
   const vehicleColumns: columnsTable = [
     {
@@ -67,8 +79,8 @@ export const TableModalViewGroup = ({
     },
   ];
 
-  const vehiclesTableData: dataTable | undefined =
-    vehiclesData?.value.vehicles.map((value) => ({
+  const vehiclesTableData: dataTable | undefined = groupsVehicles?.map(
+    (value) => ({
       plate: value.plate,
       year: value.year,
       name: value.name,
@@ -76,7 +88,8 @@ export const TableModalViewGroup = ({
       model: value.model,
       imeIs: value.imeIs,
       id: value.id,
-    }));
+    })
+  );
 
   return (
     <Modal
