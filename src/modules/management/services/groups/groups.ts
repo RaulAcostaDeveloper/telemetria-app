@@ -7,7 +7,7 @@ export async function getGroups(
   forceRefresh = true // Se le puede indicar que no busque en caché
 ) {
   // Construcción de la url con parámetros
-  const fullUrl = `${url}${accountId}/groups`;
+  const fullUrl = `${url}${accountId}/vehicles/groups`;
 
   // Construcción del key único para caché
   const key = `managementGroups-${accountId}`;
