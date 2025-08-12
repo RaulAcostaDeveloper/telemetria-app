@@ -42,7 +42,7 @@ export const TableModalViewVehicle = ({
 
           <div>
             <h4>{LANGUAGE.management.tableColumns.groupName}</h4>
-            <p>{dataObject.group}</p>
+            <p>{dataObject.groupName ?? "ND"}</p>
           </div>
           <div>
             <h4>{LANGUAGE.management.tableColumns.driver}</h4>
