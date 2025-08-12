@@ -311,6 +311,9 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
                 LANGUAGE={LANGUAGE}
                 columns={groupsColumns}
                 data={groupsTableData}
+                idKey="id"
+                modalOption={MODAL_OPTION.GROUPS}
+                showViewModal
               />
             ) : (
               <div>

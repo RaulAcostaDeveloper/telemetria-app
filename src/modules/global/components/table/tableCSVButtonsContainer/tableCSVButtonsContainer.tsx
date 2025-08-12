@@ -27,7 +27,7 @@ interface Props {
 export const TableCSVButtonsContainer = ({
   LANGUAGE,
   columns,
-  // filteredData,
+  filteredData,
   tableData,
   title,
 }: Props) => {
@@ -48,7 +48,7 @@ export const TableCSVButtonsContainer = ({
 
   return (
     <>
-      <CSVLink
+      {/* <CSVLink
         className={styles.title}
         data={tableData}
         filename={title ? `${toKebabCase(title)}.csv` : "data-table.csv"}
@@ -62,26 +62,24 @@ export const TableCSVButtonsContainer = ({
           placeholder={LANGUAGE.table.buttons.downloadCSV}
           type={ButtonTypes.SUCCESS}
         />
-      </CSVLink>
+      </CSVLink> */}
 
       {/* Descomentar si se quiere el botón de descargar solo lo filtrado de regreso */}
-      {/* <CSVLink
+      <CSVLink
         className={styles.title}
         data={filteredData}
-        filename={
-          title ? `filtred-${toKebabCase(title)}.csv` : "data-table.csv"
-        }
+        filename={title ? `${toKebabCase(title)}.csv` : "data-table.csv"}
         headers={headersCSV}
       >
         <GeneralButton
-          Icon={<BrowserUpdatedIcon />}
+          Icon={<DownloadIcon />}
           buttonStyle={styles.tableDownloadCSV}
           callback={() => {}}
-          title={LANGUAGE.table.buttons.filtered}
-          placeholder={LANGUAGE.table.buttons.downloadFiltredCSV}
+          title={LANGUAGE.table.buttons.downloadCSV}
+          placeholder={LANGUAGE.table.buttons.downloadCSV}
           type={ButtonTypes.SUCCESS}
         />
-      </CSVLink> */}
+      </CSVLink>
     </>
   );
 };

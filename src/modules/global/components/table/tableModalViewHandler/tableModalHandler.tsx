@@ -1,5 +1,6 @@
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { MODAL_OPTION, PrimitiveValue } from "../table.model";
+import { TableModalViewGroup } from "./tableModalViewGroup/tableModalViewGroup";
 import { TableModalViewVehicle } from "./tableModalViewVehicle/tableModalViewVehicle";
 
 interface Props {
@@ -19,6 +20,14 @@ export const TableModalViewHandler = ({
     case MODAL_OPTION.VEHICLES:
       return (
         <TableModalViewVehicle
+          LANGUAGE={LANGUAGE}
+          closeModal={closeModal}
+          dataObject={dataObject}
+        />
+      );
+    case MODAL_OPTION.GROUPS:
+      return (
+        <TableModalViewGroup
           LANGUAGE={LANGUAGE}
           closeModal={closeModal}
           dataObject={dataObject}
