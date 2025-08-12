@@ -1,7 +1,7 @@
 import styles from "./tableServerContent.module.css";
 import {
+  MODAL_OPTION,
   MinMaxFilter,
-  PrimitiveValue,
   SelectorFilter,
   SelectorOrdered,
   columnsTable,
@@ -28,6 +28,7 @@ interface Props {
   handleSelectorFilter: ({ colIndex, value }: SelectorFilter) => void;
   idKey?: string;
   minMaxFilters: MinMaxFilter[];
+  modalOption?: MODAL_OPTION;
   resetFilters: () => void;
   setColumnOrdered: React.Dispatch<React.SetStateAction<SelectorOrdered>>;
   setInputFilterValue: (value: string) => void;
@@ -38,34 +39,24 @@ interface Props {
   showGoFuel?: boolean;
   showGoOBD?: boolean;
   showGoPageView?: boolean;
+  showViewModal?: boolean;
   title?: string;
   viewPath?: string;
-  createFormContent?: React.FC<{
-    dataObject?: { [key: string]: PrimitiveValue };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
-  editFormContent?: React.FC<{
-    dataObject: { [key: string]: PrimitiveValue };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
 }
 
 export const TableServerContent = ({
   LANGUAGE,
   columnOrdered,
   columns,
-  createFormContent,
   data,
   deleteFunction,
-  editFormContent,
   filterSelectors,
   filteredData,
   handleMinMaxFilter,
   handleSelectorFilter,
   idKey,
   minMaxFilters,
+  modalOption,
   resetFilters,
   setColumnOrdered,
   setInputFilterValue,
@@ -76,6 +67,7 @@ export const TableServerContent = ({
   showGoFuel,
   showGoOBD,
   showGoPageView,
+  showViewModal,
   title,
   viewPath,
 }: Props) => {
@@ -92,10 +84,7 @@ export const TableServerContent = ({
             setInputFilterValue={setInputFilterValue}
           />
           {showCreateButton && (
-            <TableAddNewButton
-              LANGUAGE={LANGUAGE}
-              createFormContent={createFormContent}
-            />
+            <TableAddNewButton LANGUAGE={LANGUAGE} modalOption={modalOption} />
           )}
           <TableCSVButtonsContainer
             LANGUAGE={LANGUAGE}
@@ -129,9 +118,10 @@ export const TableServerContent = ({
               showActions={
                 showDelete ||
                 showEdit ||
-                showGoPageView ||
                 showGoFuel ||
-                showGoOBD
+                showGoOBD ||
+                showGoPageView ||
+                showViewModal
               }
             />
 
@@ -141,20 +131,22 @@ export const TableServerContent = ({
               columns={columns}
               data={filteredData}
               deleteFunction={deleteFunction}
-              editFormContent={editFormContent}
               idKey={idKey}
+              modalOption={modalOption}
               showActions={
                 showDelete ||
                 showEdit ||
-                showGoPageView ||
                 showGoFuel ||
-                showGoOBD
+                showGoOBD ||
+                showGoPageView ||
+                showViewModal
               }
               showDelete={showDelete}
               showEdit={showEdit}
               showGoFuel={showGoFuel}
               showGoOBD={showGoOBD}
               showGoPageView={showGoPageView}
+              showViewModal={showViewModal}
               viewPath={viewPath}
             />
           </div>

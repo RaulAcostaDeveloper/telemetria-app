@@ -7,6 +7,7 @@ import { formatDateTime } from "@/modules/global/utils/utils";
 
 //Tipado
 import {
+  MODAL_OPTION,
   columnsTable,
   dataTable,
 } from "@/modules/global/components/table/table.model";
@@ -265,9 +266,11 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
                 LANGUAGE={LANGUAGE}
                 columns={vehicleColumns}
                 data={vehiclesTableData}
+                idKey="imeIs"
+                modalOption={MODAL_OPTION.VEHICLES}
                 showGoFuel
                 showGoOBD
-                idKey="imeIs"
+                showViewModal
               />
             ) : (
               <div>

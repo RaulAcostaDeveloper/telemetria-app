@@ -5,7 +5,6 @@ interface column {
   minMaxFilter?: boolean;
   orderColumn?: boolean;
   showTotal?: boolean;
-  showView?: boolean;
 }
 
 export type columnsTable = column[];
@@ -29,3 +28,7 @@ export type MinMaxFilter = {
   min: number | undefined; // undefined significa sin límite o no filtrar
   max: number | undefined;
 };
+
+export enum MODAL_OPTION {
+  VEHICLES = "vehicles",
+}

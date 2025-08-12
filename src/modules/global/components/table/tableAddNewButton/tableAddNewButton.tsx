@@ -6,19 +6,15 @@ import styles from "./tableAddNewButton.module.css";
 import { ButtonTypes } from "../../generalButton/generalButton.model";
 import { GeneralButton } from "../../generalButton/generalButton";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { TableAddFormModal } from "../tableAddFormModal/tableAddFormModal";
-import { PrimitiveValue } from "../table.model";
+import { MODAL_OPTION } from "../table.model";
+import { TableModalCreateHandler } from "../tableModalCreateHandler/tableModalCreateHandler";
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  createFormContent?: React.FC<{
-    dataObject?: { [key: string]: PrimitiveValue };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
+  modalOption?: MODAL_OPTION;
 }
 
-export const TableAddNewButton = ({ createFormContent, LANGUAGE }: Props) => {
+export const TableAddNewButton = ({ LANGUAGE, modalOption }: Props) => {
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
   return (
@@ -33,11 +29,11 @@ export const TableAddNewButton = ({ createFormContent, LANGUAGE }: Props) => {
 
       {/* Modal de CREAR registro */}
       {/* Recibe el componente de formulario de CREAR */}
-      {showEditModal && createFormContent && (
-        <TableAddFormModal
+      {showEditModal && modalOption && (
+        <TableModalCreateHandler
           LANGUAGE={LANGUAGE}
-          createFormContent={createFormContent}
           closeModal={() => setShowEditModal(false)}
+          modalOption={modalOption}
         />
       )}
     </>

@@ -2,7 +2,7 @@ import styles from "./tableDataContent.module.css";
 import { LanguageInterface } from "../../../language/constants/language.model";
 import { TableActions } from "../tableActions/tableActions";
 import { TableDataProp } from "../tableDataProp/tableDataProp";
-import { columnsTable, dataTable, PrimitiveValue } from "../table.model";
+import { MODAL_OPTION, columnsTable, dataTable } from "../table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -10,18 +10,15 @@ interface Props {
   data: dataTable;
   deleteFunction?: (idElement: string | number) => void;
   idKey?: string;
+  modalOption?: MODAL_OPTION;
   showActions?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
   showGoFuel?: boolean;
   showGoOBD?: boolean;
   showGoPageView?: boolean;
+  showViewModal?: boolean;
   viewPath?: string;
-  editFormContent?: React.FC<{
-    dataObject: { [key: string]: PrimitiveValue };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
 }
 
 export const TableDataContent = ({
@@ -29,14 +26,15 @@ export const TableDataContent = ({
   columns,
   data,
   deleteFunction,
-  editFormContent,
   idKey,
+  modalOption,
   showActions,
   showDelete,
   showEdit,
   showGoFuel,
   showGoOBD,
   showGoPageView,
+  showViewModal,
   viewPath,
 }: Props) => {
   return (
@@ -69,13 +67,14 @@ export const TableDataContent = ({
               LANGUAGE={LANGUAGE}
               dataObject={dataObject}
               deleteFunction={deleteFunction}
-              editFormContent={editFormContent}
               idKey={idKey}
+              modalOption={modalOption}
               showDelete={showDelete}
               showEdit={showEdit}
               showGoFuel={showGoFuel}
               showGoOBD={showGoOBD}
               showGoPageView={showGoPageView}
+              showViewModal={showViewModal}
               viewPath={`${viewPath}${dataObject[idKey ?? ""] ?? ""}`}
             />
           )}

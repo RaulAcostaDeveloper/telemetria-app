@@ -5,8 +5,8 @@ import styles from "./table.module.css";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { TableServerContent } from "./tableServerContent/tableServerContent";
 import {
+  MODAL_OPTION,
   MinMaxFilter,
-  PrimitiveValue,
   SelectorFilter,
   SelectorOrdered,
   columnsTable,
@@ -19,40 +19,32 @@ interface Props {
   data: dataTable;
   deleteFunction?: (idElement: string | number) => void;
   idKey?: string;
+  modalOption?: MODAL_OPTION;
   showCreateButton?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
   showGoFuel?: boolean;
   showGoOBD?: boolean;
   showGoPageView?: boolean;
+  showViewModal?: boolean;
   title?: string;
   viewPath?: string;
-  createFormContent?: React.FC<{
-    dataObject?: { [key: string]: PrimitiveValue };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
-  editFormContent?: React.FC<{
-    dataObject: { [key: string]: PrimitiveValue };
-    setIsDisabled: (val: boolean) => void;
-    setSaveFunction: (cb: () => void) => void;
-  }>;
 }
 
 export const Table = ({
   LANGUAGE,
   columns,
-  createFormContent,
   data,
   deleteFunction,
-  editFormContent,
   idKey,
+  modalOption,
   showCreateButton,
   showDelete,
   showEdit,
   showGoFuel,
   showGoOBD,
   showGoPageView,
+  showViewModal,
   title,
   viewPath,
 }: Props) => {
@@ -229,16 +221,15 @@ export const Table = ({
         LANGUAGE={LANGUAGE}
         columnOrdered={columnOrdered}
         columns={columns}
-        createFormContent={createFormContent}
         data={data}
         deleteFunction={deleteFunction}
-        editFormContent={editFormContent}
         filterSelectors={filterSelectors}
         filteredData={filteredData}
         handleMinMaxFilter={handleMinMaxFilter}
         handleSelectorFilter={handleSelectorFilter}
         idKey={idKey}
         minMaxFilters={minMaxFilters}
+        modalOption={modalOption}
         resetFilters={resetFilters}
         setColumnOrdered={setColumnOrdered}
         setInputFilterValue={setInputFilterValue}
@@ -249,6 +240,7 @@ export const Table = ({
         showGoFuel={showGoFuel}
         showGoOBD={showGoOBD}
         showGoPageView={showGoPageView}
+        showViewModal={showViewModal}
         title={title}
         viewPath={viewPath}
       />

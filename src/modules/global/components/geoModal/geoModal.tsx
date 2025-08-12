@@ -35,8 +35,11 @@ const GeoModal = ({
   width,
 }: Props) => {
   return (
-    <Modal LANGUAGE={LANGUAGE} closeModal={closeModal}>
-      <h3 className={styles.title}>{geoModalData.title}</h3>
+    <Modal
+      LANGUAGE={LANGUAGE}
+      closeModal={closeModal}
+      title={geoModalData.title}
+    >
       <div className={styles.bottom}>
         {geoModalData.rows.length > 0 && (
           <div className={styles.rows}>

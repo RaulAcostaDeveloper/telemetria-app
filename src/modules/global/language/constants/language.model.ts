@@ -301,6 +301,7 @@ export interface LanguageInterface {
       drivers: string;
     };
     tableColumns: {
+      vehicleInformation: string;
       address: string;
       alias: string;
       brand: string;
