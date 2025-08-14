@@ -186,6 +186,7 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
         borderRadius: 4,
         padding: 8,
       },
+      accessibility: { enabled: false },
     };
   }, [devices, selectedMetric, segmentsCount, is3DReady]);
 

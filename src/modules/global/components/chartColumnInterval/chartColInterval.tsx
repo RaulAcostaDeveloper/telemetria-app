@@ -111,6 +111,7 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
       credits: {
         enabled: false,
       },
+      accessibility: { enabled: false },
     };
   }, [langSelection, measureData]);
 
