@@ -35,6 +35,6 @@ export default async function encryptAesCbc(plainText: string) {
 }
 
 // ⚠️ Usa la clave como bytes UTF-8 (igual que en C# si hacías Encoding.UTF8.GetBytes)
-//const key = Buffer.from("^epc8xtv_f))nw1XwTwN}G=v0n.4)t2z", "utf8");
-//const b64 = encryptAesCbc("demottlrx:123456", key);
+//const key = Buffer.from("lallave", "utf8");
+//const b64 = encryptAesCbc("usuario:contraseña", key);
 //console.log(b64);
