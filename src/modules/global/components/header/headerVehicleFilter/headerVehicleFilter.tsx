@@ -124,22 +124,35 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
                     },
                   ] as Action[]
                 ).map((action, idx) => (
-                  <>
-                    {vehicle.imeIs.length > 10 && (
-                      <Link
-                        key={idx}
-                        href={`/${action.routePrefix}/vehicle/${vehicle.imeIs}`}
-                        onClick={() => setShowDropdown(false)}
+                  <div
+                    key={idx}
+                    className={`${styles.button}  ${
+                      vehicle.imeIs.length > 10
+                        ? ""
+                        : `${styles.reportsDisabled}`
+                    }`}
+                    title={`${
+                      vehicle.imeIs.length > 10
+                        ? ""
+                        : LANGUAGE.table.actions.noImei
+                    }`}
+                  >
+                    <Link
+                      key={idx}
+                      href={`/${action.routePrefix}/vehicle/${vehicle.imeIs}`}
+                      onClick={() => setShowDropdown(false)}
+                      className={`${
+                        vehicle.imeIs.length > 10 ? "" : styles.reportDisabled
+                      }`}
+                    >
+                      <button
+                        className={styles.iconButton}
+                        title={action.title}
                       >
-                        <button
-                          className={styles.iconButton}
-                          title={action.title}
-                        >
-                          {iconMapping[action.label]}
-                        </button>
-                      </Link>
-                    )}
-                  </>
+                        {iconMapping[action.label]}
+                      </button>
+                    </Link>
+                  </div>
                 ))}
               </div>
             </li>
