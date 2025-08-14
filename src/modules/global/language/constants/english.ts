@@ -97,6 +97,7 @@ export const ENGLISH: LanguageInterface = {
       viewDetail: "View details",
       goFuelReport: "Go to fuel report",
       goObdReport: "Go to OBD report",
+      noImei: "This vehicle has not an integrated device",
       cleanFilters: "Clean",
       goPage: "Go to page",
       noFilters: "There are not filters for this table",

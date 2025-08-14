@@ -77,6 +77,7 @@ export interface LanguageInterface {
       viewDetail: string;
       goFuelReport: string;
       goObdReport: string;
+      noImei: string;
       cleanFilters: string;
       noFilters: string;
       goPage: string;

@@ -74,36 +74,66 @@ export const TableActions = ({
       {idKey && dataObject[idKey] !== null && (
         <>
           {/* Requiere IMEI */}
-          {dataObject[idKey].toString().length > 10 && (
-            <>
-              {/* Reporte individual de combustible */}
-              {showGoFuel && (
-                <Link
-                  className={`${styles.button}`}
-                  title={LANGUAGE.table.actions.goFuelReport}
-                  href={`/fuel/vehicle/${dataObject[idKey]}`}
-                >
-                  <LocalGasStationIcon sx={{ fontSize: "2rem" }} />
-                </Link>
-              )}
 
-              {/* Reporte individual de OBD */}
-              {showGoOBD && (
-                <Link
-                  className={`${styles.button}`}
-                  title={LANGUAGE.table.actions.goObdReport}
-                  href={`/telemetry/vehicle/${dataObject[idKey]}`}
-                >
-                  <Image
-                    src={"/png/car-gps.png"}
-                    width={22}
-                    height={22}
-                    alt="car services"
-                  />
-                </Link>
-              )}
-            </>
-          )}
+          {/* Reporte individual de combustible */}
+          <div
+            className={`${styles.button}  ${
+              dataObject[idKey].toString().length > 10
+                ? ""
+                : `${styles.reportsDisabled}`
+            }`}
+            title={`${
+              dataObject[idKey].toString().length > 10
+                ? ""
+                : LANGUAGE.table.actions.noImei
+            }`}
+          >
+            {showGoFuel && (
+              <Link
+                className={`${
+                  dataObject[idKey].toString().length > 10
+                    ? ""
+                    : styles.reportDisabled
+                }`}
+                title={LANGUAGE.table.actions.goFuelReport}
+                href={`/fuel/vehicle/${dataObject[idKey]}`}
+              >
+                <LocalGasStationIcon sx={{ fontSize: "2rem" }} />
+              </Link>
+            )}
+          </div>
+          <div
+            className={`${styles.button} ${
+              dataObject[idKey].toString().length > 10
+                ? ""
+                : styles.reportsDisabled
+            }`}
+            title={`${
+              dataObject[idKey].toString().length > 10
+                ? ""
+                : LANGUAGE.table.actions.noImei
+            }`}
+          >
+            {/* Reporte individual de OBD */}
+            {showGoOBD && (
+              <Link
+                className={`${
+                  dataObject[idKey].toString().length > 10
+                    ? ""
+                    : styles.reportDisabled
+                }`}
+                title={LANGUAGE.table.actions.goObdReport}
+                href={`/telemetry/vehicle/${dataObject[idKey]}`}
+              >
+                <Image
+                  src={"/png/car-gps.png"}
+                  width={22}
+                  height={22}
+                  alt="car services"
+                />
+              </Link>
+            )}
+          </div>
 
           {/* No requiere imei > 10 */}
           {/* Editar */}

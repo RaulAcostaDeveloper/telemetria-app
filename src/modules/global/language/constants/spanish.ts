@@ -94,6 +94,7 @@ export const SPANISH: LanguageInterface = {
       search: "Buscar",
       searchTitle: "Buscar por la primer columna de la tabla",
       sortItems: "Ordenar elementos por",
+      noImei: "Este vehículo no tiene un dispositivo anclado",
       viewDetail: "Ver detalles",
       goFuelReport: "Ir a reporte de combustible",
       goObdReport: "Ir a reporte de OBD",
