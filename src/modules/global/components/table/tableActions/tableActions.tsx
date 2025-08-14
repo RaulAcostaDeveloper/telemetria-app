@@ -1,7 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 import ArticleIcon from "@mui/icons-material/Article";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -12,9 +11,9 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import styles from "./tableActions.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { MODAL_OPTION, PrimitiveValue } from "../table.model";
-import { TableDeleteModal } from "../tableDeleteModal/tableDeleteModa";
-import { TableModalEditHandler } from "../tableModalEditHandler/tableModalEditHandler";
-import { TableModalViewHandler } from "../tableModalViewHandler/tableModalHandler";
+import { TableActionButton } from "./tableActionButton/tableActionButton";
+import { TableActionLink } from "./tableActionLink/tableActionLink";
+import { TableModals } from "./tableModals/tableModals";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -46,148 +45,96 @@ export const TableActions = ({
   showViewModal,
   viewPath,
 }: Props) => {
+  const [imei, setImei] = useState<string | number>();
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
   const [viewModal, setViewModal] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (
+      idKey &&
+      dataObject[idKey] !== null &&
+      dataObject[idKey].toString().length > 10
+    ) {
+      setImei(dataObject[idKey]);
+    }
+  }, [dataObject, idKey]);
+
   return (
     <div className={`${styles.tableActions}`}>
-      {/* Botón "Ver" */}
-      {showGoPageView && viewPath && (
-        <Link
-          className={`${styles.button}`}
+      {showGoPageView && (
+        <TableActionLink
+          hasCompleteRoute={viewPath ? true : false}
+          noImeiTitle={""}
           title={LANGUAGE.table.actions.goPage + " " + viewPath}
-          href={viewPath}
-        >
-          <ArticleIcon sx={{ fontSize: "2rem" }} />
-        </Link>
+          Icon={ArticleIcon}
+          href={`${viewPath}${dataObject[idKey ?? ""] ?? ""}`}
+        />
       )}
+
       {showViewModal && modalOption && (
-        <button
-          className={`${styles.button}`}
+        <TableActionButton
           title={LANGUAGE.table.actions.viewDetail}
-          onClick={() => setViewModal(true)}
+          callBack={() => setViewModal(true)}
+          Icon={VisibilityIcon}
+        />
+      )}
+
+      {showGoFuel && imei && (
+        <TableActionLink
+          hasCompleteRoute={imei ? true : false}
+          noImeiTitle={LANGUAGE.table.actions.noImei}
+          title={LANGUAGE.table.actions.goFuelReport}
+          Icon={LocalGasStationIcon}
+          href={"/fuel/vehicle/" + imei}
+        />
+      )}
+
+      {showGoOBD && imei && (
+        <TableActionLink
+          hasCompleteRoute={imei ? true : false}
+          noImeiTitle={LANGUAGE.table.actions.noImei}
+          title={LANGUAGE.table.actions.goObdReport}
+          href={"/telemetry/vehicle/" + imei}
         >
-          <VisibilityIcon sx={{ fontSize: "2rem" }} />
-        </button>
+          <Image
+            src={"/png/car-gps.png"}
+            width={22}
+            height={22}
+            alt="car services"
+          />
+        </TableActionLink>
       )}
-      {idKey && dataObject[idKey] !== null && (
-        <>
-          {/* Requiere IMEI */}
 
-          {/* Reporte individual de combustible */}
-          <div
-            className={`${styles.button}  ${
-              dataObject[idKey].toString().length > 10
-                ? ""
-                : `${styles.reportsDisabled}`
-            }`}
-            title={`${
-              dataObject[idKey].toString().length > 10
-                ? ""
-                : LANGUAGE.table.actions.noImei
-            }`}
-          >
-            {showGoFuel && (
-              <Link
-                className={`${
-                  dataObject[idKey].toString().length > 10
-                    ? ""
-                    : styles.reportDisabled
-                }`}
-                title={LANGUAGE.table.actions.goFuelReport}
-                href={`/fuel/vehicle/${dataObject[idKey]}`}
-              >
-                <LocalGasStationIcon sx={{ fontSize: "2rem" }} />
-              </Link>
-            )}
-          </div>
-          <div
-            className={`${styles.button} ${
-              dataObject[idKey].toString().length > 10
-                ? ""
-                : styles.reportsDisabled
-            }`}
-            title={`${
-              dataObject[idKey].toString().length > 10
-                ? ""
-                : LANGUAGE.table.actions.noImei
-            }`}
-          >
-            {/* Reporte individual de OBD */}
-            {showGoOBD && (
-              <Link
-                className={`${
-                  dataObject[idKey].toString().length > 10
-                    ? ""
-                    : styles.reportDisabled
-                }`}
-                title={LANGUAGE.table.actions.goObdReport}
-                href={`/telemetry/vehicle/${dataObject[idKey]}`}
-              >
-                <Image
-                  src={"/png/car-gps.png"}
-                  width={22}
-                  height={22}
-                  alt="car services"
-                />
-              </Link>
-            )}
-          </div>
-
-          {/* No requiere imei > 10 */}
-          {/* Editar */}
-          {showEdit && (
-            <button
-              className={`${styles.button}`}
-              title={LANGUAGE.table.actions.editElement}
-              onClick={() => setShowEditModal(true)}
-            >
-              <ModeEditIcon />
-            </button>
-          )}
-
-          {/* Eliminar */}
-          {showDelete && (
-            <button
-              className={`${styles.button}`}
-              title={LANGUAGE.table.actions.deleteElement}
-              onClick={() => setShowDeleteModal(true)}
-            >
-              <DeleteIcon />
-            </button>
-          )}
-        </>
+      {showEdit && (
+        <TableActionButton
+          title={LANGUAGE.table.actions.editElement}
+          callBack={() => setShowEditModal(true)}
+          Icon={ModeEditIcon}
+        />
       )}
-      <>
-        {/* Modal que contiene el formulario de Editar*/}
-        {showEditModal && modalOption && (
-          <TableModalEditHandler
-            LANGUAGE={LANGUAGE}
-            closeModal={() => setShowEditModal(false)}
-            modalOption={modalOption}
-          />
-        )}
 
-        {/* Modal que contiene el formulario de Eliminar*/}
-        {showDeleteModal && (
-          <TableDeleteModal
-            LANGUAGE={LANGUAGE}
-            closeModal={() => setShowDeleteModal(false)}
-            deleteFunction={deleteFunction}
-            idObject={idKey ? dataObject[idKey] : undefined}
-          />
-        )}
+      {showDelete && (
+        <TableActionButton
+          title={LANGUAGE.table.actions.deleteElement}
+          callBack={() => setShowDeleteModal(true)}
+          Icon={DeleteIcon}
+        />
+      )}
 
-        {viewModal && modalOption && (
-          <TableModalViewHandler
-            LANGUAGE={LANGUAGE}
-            closeModal={() => setViewModal(false)}
-            dataObject={dataObject}
-            modalOption={modalOption}
-          />
-        )}
-      </>
+      <TableModals
+        showDeleteModal={showDeleteModal}
+        LANGUAGE={LANGUAGE}
+        showEditModal={showEditModal}
+        modalOption={modalOption}
+        viewModal={viewModal}
+        dataObject={dataObject}
+        idObject={idKey ? dataObject[idKey] : null}
+        deleteFunction={deleteFunction}
+        closeDeleteModal={() => setShowDeleteModal(false)}
+        closeEditModal={() => setShowEditModal(false)}
+        closeViewModal={() => setViewModal(false)}
+      />
     </div>
   );
 };
