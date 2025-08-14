@@ -29,6 +29,8 @@ interface Props {
   LANGUAGE: LanguageInterface;
 }
 
+// To Do hay que refactorizar este componente porque es bastante ilegible
+// To Do mostrar la lista de elementos disponibles y luego filtrar
 const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
@@ -94,8 +96,18 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
         <ul className={styles.dropdown}>
           {filteredByPivot.map((vehicle, index) => (
             <li key={index} className={styles.dropdownItem}>
-              <div className={styles.vehicleDetails}>
-                <strong>{vehicle.plate}</strong> - <span>{vehicle.brand}</span>
+              <div>
+                <div className={styles.vehicleDetails}>
+                  <strong>{vehicle.plate}</strong> -{" "}
+                  <span>{vehicle.brand}</span>
+                </div>
+                <div>
+                  {vehicle.imeIs.length > 10 && (
+                    <span className={styles.imei}>
+                      &#40; {vehicle.imeIs} &#41;
+                    </span>
+                  )}
+                </div>
               </div>
               <div className={styles.buttonsContainer}>
                 {(
@@ -118,7 +130,6 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
                         key={idx}
                         href={`/${action.routePrefix}/vehicle/${vehicle.imeIs}`}
                         onClick={() => setShowDropdown(false)}
-                        className={styles.linkIcon}
                       >
                         <button
                           className={styles.iconButton}
