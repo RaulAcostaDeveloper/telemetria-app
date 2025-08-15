@@ -75,7 +75,7 @@ export const TableDataContent = ({
               showGoOBD={showGoOBD}
               showGoPageView={showGoPageView}
               showViewModal={showViewModal}
-              viewPath={`${viewPath}${dataObject[idKey ?? ""] ?? ""}`}
+              viewPath={viewPath}
             />
           )}
         </div>
