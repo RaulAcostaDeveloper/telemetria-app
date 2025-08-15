@@ -6,13 +6,13 @@ import { MenuHeader } from "./menuHeader/menuHeader";
 interface Props {
   LANGUAGE: LanguageInterface;
   isMenuOpen: boolean | null;
-  logoutHook: () => Promise<void>;
+  logoutState: () => void;
   setIsMenuOpen: (isOpen: boolean) => void;
 }
 
 export const Menu = ({
   LANGUAGE,
-  logoutHook,
+  logoutState,
   isMenuOpen,
   setIsMenuOpen,
 }: Props) => {
@@ -31,7 +31,7 @@ export const Menu = ({
         <MenuContent
           LANGUAGE={LANGUAGE}
           isOpen={isMenuOpen}
-          logoutHook={logoutHook}
+          logoutState={logoutState}
         />
       </div>
 

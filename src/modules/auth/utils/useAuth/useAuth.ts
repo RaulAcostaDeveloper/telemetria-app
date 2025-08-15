@@ -1,71 +1,54 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
 import {
-  UserData,
+  fetchLogin,
   loginAction,
   logoutAction,
 } from "@/globalConfig/redux/slices/authSlice";
-import { RootState } from "@/globalConfig/redux/store";
+import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 
 export const useAuth = () => {
-  const dispatch = useDispatch();
   const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const { isAuthenticated, userData, sessionToken } = useSelector(
+  // Estados del slice
+  const { isAuthenticated, loginServerData, loginStatus } = useSelector(
     (state: RootState) => state.auth
   );
 
-  const tryLoginHook = async (sessionToken: string, userData: UserData) => {
-    // Pendiente: persistir token en localStorage
-
-    if (sessionToken) {
-      const isTokenValid = true; // <-- pendiente de implementar API
-
-      if (isTokenValid) {
-        await login(sessionToken, userData);
-      } else {
-        await logoutHook();
-      }
-      return;
-    }
-
-    // Si no hay token, intentar login con userData
-    const isUserValid = false; // <-- pendiente de implementar API
-    const newToken = "nuevoToken"; // Este vendría de la API tras validar
-
-    if (isUserValid && newToken) {
-      await login(newToken, userData);
+  useEffect(() => {
+    if (
+      loginServerData?.code === 200 &&
+      loginServerData.value.userId.length > 3
+    ) {
+      loginState();
     } else {
-      await logoutHook();
+      logoutState();
     }
+  }, [loginServerData, loginStatus]);
+
+  const tryLoginHook = (encrypted: string) => {
+    // Llama al servicio
+    dispatch(fetchLogin({ encrypted }));
   };
 
-  const logoutHook = async () => {
+  const loginState = () => {
+    // Actualizar el estado de redux
+    dispatch(loginAction());
+    router.push("/home");
+  };
+
+  const logoutState = () => {
     // Actualizar el estado de redux
     dispatch(logoutAction());
-
-    // Re dirigir
     router.push("/login");
-
-    // Y pendiente borrar el token de localStorage
-  };
-
-  const login = async (sessionToken: string, userData: UserData) => {
-    // Actualizar el estado de redux
-    dispatch(loginAction({ sessionToken, userData }));
-
-    // Re dirigir
-    router.push("/home");
-
-    // Y pendiente actualizar el token de localStorage
   };
 
   return {
     isAuthenticated,
-    logoutHook,
-    sessionToken,
+    logoutState,
     tryLoginHook,
-    userData,
   };
 };

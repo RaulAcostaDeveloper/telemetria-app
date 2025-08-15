@@ -1,41 +1,69 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { postLogin } from "@/modules/auth/services/postLogin";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export interface UserData {
-  // Pendiente de definir
-  email: string;
-  id: string;
-  name: string;
+interface UserData {
+  userId: string;
+  idCliente: string;
+  username: string;
+  accountName: string;
+  expre_at: string;
+}
+
+interface LoginData {
+  code: number;
+  message: string;
+  value: UserData;
 }
 
 interface AuthState {
   isAuthenticated: boolean;
-  sessionToken: string | null;
-  userData: UserData | null;
+  loginServerData: LoginData | null;
+  loginStatus: string;
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
-  sessionToken: null,
-  userData: null,
+  loginServerData: null,
+  loginStatus: "idle",
 };
 
+// Middleware
+export const fetchLogin = createAsyncThunk(
+  "login/fetch",
+  async ({ encrypted }: { encrypted: string }) => {
+    return postLogin(encrypted);
+  }
+);
+
+// Slice
 export const authSlice = createSlice({
   name: "authSlice",
   initialState,
   reducers: {
-    loginAction: (
-      state,
-      action: PayloadAction<{ sessionToken: string; userData: UserData }>
-    ) => {
-      state.sessionToken = action.payload.sessionToken;
-      state.userData = action.payload.userData;
+    loginAction: (state) => {
       state.isAuthenticated = true;
     },
     logoutAction: (state) => {
-      state.sessionToken = null;
-      state.userData = null;
       state.isAuthenticated = false;
+      state.loginServerData = null;
+      state.loginStatus = "idle";
     },
+  },
+  extraReducers: (builder) => {
+    // Tiene que ver con el middleware
+    builder
+      .addCase(fetchLogin.pending, (state) => {
+        state.loginStatus = "loading";
+        state.loginServerData = null;
+      })
+      .addCase(fetchLogin.fulfilled, (state, action) => {
+        state.loginStatus = "succeeded";
+        state.loginServerData = action.payload;
+      })
+      .addCase(fetchLogin.rejected, (state) => {
+        state.loginStatus = "failed";
+        state.loginServerData = null;
+      });
   },
 });
 

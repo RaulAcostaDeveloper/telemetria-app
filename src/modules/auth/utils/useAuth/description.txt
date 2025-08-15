@@ -6,7 +6,7 @@ Traer la interface de: import { UserData } from "@/globalConfig/redux/slices/aut
 
 Ejemplo de uso:
 
-const { isAuthenticated, tryLoginHook, logoutHook } = useAuth();
+const { isAuthenticated, tryLoginHook, logoutState } = useAuth();
 
 const user: UserData = {
     email: "user@test.com",
@@ -17,4 +17,4 @@ const user: UserData = {
 const token = "r21r2143-token";
 tryLoginHook(token, user);
 
-logoutHook();
+logoutState();

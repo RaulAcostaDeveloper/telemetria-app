@@ -1,10 +1,13 @@
 "use client";
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import Image from "next/image";
+
+import encryptUserAndPassword from "../../utils/cryptoReference/cryptoReference";
+import styles from "./authForm.module.css";
 import { ButtonTypes } from "@/modules/global/components/generalButton/generalButton.model";
 import { GeneralButton } from "@/modules/global/components/generalButton/generalButton";
-import styles from "./authForm.module.css";
+import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { useAuth } from "@/modules/auth/utils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -14,15 +17,24 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const { tryLoginHook } = useAuth();
 
   useEffect(() => {
     setIsFormValid(!!name && !!password);
   }, [name, password, LANGUAGE]);
 
+  const onClickGetToken = async () => {
+    const encrypted = await encryptUserAndPassword(`${name}:${password}`);
+    if (encrypted !== undefined) {
+      tryLoginHook(encrypted);
+    } else {
+      console.error("ERROR: No se ha encriptado el usuario y contraseña");
+    }
+  };
+
   return (
     <div className={styles.authForm}>
       <div className={styles.logoContainer}>
-        {" "}
         <Image
           alt={LANGUAGE.menu.titles.logo}
           height={40}
@@ -54,7 +66,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
       </div>
 
       <GeneralButton
-        callback={() => {}}
+        callback={onClickGetToken}
         title={LANGUAGE.auth.authForm.loginButton}
         type={ButtonTypes.CONFIRM}
         disabled={isFormValid ? false : true}
