@@ -128,7 +128,7 @@ export const MainWrapper = ({ children }: Props) => {
         <Menu
           LANGUAGE={LANGUAGE}
           isMenuOpen={isMenuOpen}
-          logoutHook={() => logoutState()}
+          logoutState={logoutState}
           setIsMenuOpen={setIsMenuOpen}
         />
       )}

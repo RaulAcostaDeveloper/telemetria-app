@@ -45,6 +45,8 @@ export const authSlice = createSlice({
     },
     logoutAction: (state) => {
       state.isAuthenticated = false;
+      state.loginServerData = null;
+      state.loginStatus = "idle";
     },
   },
   extraReducers: (builder) => {

@@ -13,12 +13,12 @@ import { MenuRoute } from "../menuRoute/menuRoute";
 import { usePathname } from "next/navigation";
 
 interface Props {
-  logoutHook: () => void;
+  logoutState: () => void;
   LANGUAGE: LanguageInterface;
   isOpen: boolean | null;
 }
 
-export const MenuContent = ({ isOpen, LANGUAGE, logoutHook }: Props) => {
+export const MenuContent = ({ isOpen, LANGUAGE, logoutState }: Props) => {
   const pathname = usePathname();
 
   const menuList = [
@@ -63,7 +63,7 @@ export const MenuContent = ({ isOpen, LANGUAGE, logoutHook }: Props) => {
           <GeneralButton
             Icon={<LogoutIcon />}
             buttonStyle={styles.buttonStyle}
-            callback={logoutHook}
+            callback={logoutState}
             placeholder={LANGUAGE.menu.buttons.logOut}
             title={isOpen ? LANGUAGE.menu.buttons.logOut : ""}
             titleStyle={styles.buttonTitle}
