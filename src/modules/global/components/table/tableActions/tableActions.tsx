@@ -80,7 +80,7 @@ export const TableActions = ({
         />
       )}
 
-      {showGoFuel && imei && (
+      {showGoFuel && (
         <TableActionLink
           hasCompleteRoute={imei ? true : false}
           noImeiTitle={LANGUAGE.table.actions.noImei}
@@ -90,7 +90,7 @@ export const TableActions = ({
         />
       )}
 
-      {showGoOBD && imei && (
+      {showGoOBD && (
         <TableActionLink
           hasCompleteRoute={imei ? true : false}
           noImeiTitle={LANGUAGE.table.actions.noImei}
