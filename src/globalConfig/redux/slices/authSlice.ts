@@ -1,41 +1,52 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface UserData {
-  // Pendiente de definir
-  email: string;
-  id: string;
-  name: string;
-}
+import { postLogin } from "@/modules/auth/services/postLogin";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 interface AuthState {
   isAuthenticated: boolean;
-  sessionToken: string | null;
-  userData: UserData | null;
+  encrypted: string | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  loginData: any;
+  loginStatus: string;
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
-  sessionToken: null,
-  userData: null,
+  encrypted: null,
+  loginData: null,
+  loginStatus: "idle",
 };
+
+export const fetchLogin = createAsyncThunk(
+  "login/fetch",
+  async ({ encrypted }: { encrypted: string }) => {
+    return postLogin(encrypted);
+  }
+);
 
 export const authSlice = createSlice({
   name: "authSlice",
   initialState,
   reducers: {
-    loginAction: (
-      state,
-      action: PayloadAction<{ sessionToken: string; userData: UserData }>
-    ) => {
-      state.sessionToken = action.payload.sessionToken;
-      state.userData = action.payload.userData;
+    loginAction: (state) => {
       state.isAuthenticated = true;
     },
     logoutAction: (state) => {
-      state.sessionToken = null;
-      state.userData = null;
+      state.encrypted = null;
       state.isAuthenticated = false;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchLogin.pending, (state) => {
+        state.loginStatus = "loading";
+      })
+      .addCase(fetchLogin.fulfilled, (state, action) => {
+        state.loginStatus = "succeeded";
+        state.loginData = action.payload;
+      })
+      .addCase(fetchLogin.rejected, (state) => {
+        state.loginStatus = "failed";
+      });
   },
 });
 

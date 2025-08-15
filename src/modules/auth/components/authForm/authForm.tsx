@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { ButtonTypes } from "@/modules/global/components/generalButton/generalButton.model";
 import { GeneralButton } from "@/modules/global/components/generalButton/generalButton";
+//import getTokenCrypto from "./cryptoReference";
+import encryptAesCbc from "./cryptoReference";
+
 import styles from "./authForm.module.css";
+
+import { useAuth } from "@/modules/auth/utils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -14,10 +19,20 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const { tryLoginHook } = useAuth();
 
   useEffect(() => {
     setIsFormValid(!!name && !!password);
   }, [name, password, LANGUAGE]);
+
+  const onClickGetToken = async () => {
+    //const token = await getTokenCrypto(`${name}:${password}`);
+    const encrypted = await encryptAesCbc(`${name}:${password}`);
+    console.log("zzzzz:", encrypted);
+    if (encrypted !== undefined) {
+      tryLoginHook(encrypted);
+    }
+  };
 
   return (
     <div className={styles.authForm}>
@@ -54,7 +69,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
       </div>
 
       <GeneralButton
-        callback={() => {}}
+        callback={onClickGetToken}
         title={LANGUAGE.auth.authForm.loginButton}
         type={ButtonTypes.CONFIRM}
         disabled={isFormValid ? false : true}

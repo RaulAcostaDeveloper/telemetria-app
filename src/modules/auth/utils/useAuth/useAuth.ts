@@ -2,43 +2,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
 import {
-  UserData,
+  fetchLogin,
   loginAction,
   logoutAction,
 } from "@/globalConfig/redux/slices/authSlice";
-import { RootState } from "@/globalConfig/redux/store";
+import { AppDispatch, RootState } from "@/globalConfig/redux/store";
+import { useEffect } from "react";
 
 export const useAuth = () => {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const { isAuthenticated, userData, sessionToken } = useSelector(
+  const { isAuthenticated, encrypted, loginData, loginStatus } = useSelector(
     (state: RootState) => state.auth
   );
 
-  const tryLoginHook = async (sessionToken: string, userData: UserData) => {
-    // Pendiente: persistir token en localStorage
-
-    if (sessionToken) {
-      const isTokenValid = true; // <-- pendiente de implementar API
-
-      if (isTokenValid) {
-        await login(sessionToken, userData);
-      } else {
-        await logoutHook();
-      }
-      return;
+  useEffect(() => {
+    console.log("Ld: ", loginData, "Ls: ", loginStatus);
+    if (loginStatus === "succeeded") {
+      loginState();
     }
+  }, [loginData, loginStatus]);
 
-    // Si no hay token, intentar login con userData
-    const isUserValid = false; // <-- pendiente de implementar API
-    const newToken = "nuevoToken"; // Este vendría de la API tras validar
-
-    if (isUserValid && newToken) {
-      await login(newToken, userData);
-    } else {
-      await logoutHook();
-    }
+  const tryLoginHook = async (encrypted: string) => {
+    console.log("conectando, ejecutando servidor");
+    dispatch(fetchLogin({ encrypted }));
   };
 
   const logoutHook = async () => {
@@ -51,9 +40,9 @@ export const useAuth = () => {
     // Y pendiente borrar el token de localStorage
   };
 
-  const login = async (sessionToken: string, userData: UserData) => {
+  const loginState = async () => {
     // Actualizar el estado de redux
-    dispatch(loginAction({ sessionToken, userData }));
+    dispatch(loginAction());
 
     // Re dirigir
     router.push("/home");
@@ -64,8 +53,7 @@ export const useAuth = () => {
   return {
     isAuthenticated,
     logoutHook,
-    sessionToken,
+    encrypted,
     tryLoginHook,
-    userData,
   };
 };

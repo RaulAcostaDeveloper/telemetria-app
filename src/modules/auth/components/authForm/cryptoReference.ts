@@ -30,7 +30,7 @@ export default async function encryptAesCbc(plainText: string) {
 
     return ivPlusCiphertext.toString("base64"); // equivalente a Convert.ToBase64String(ms.ToArray())
   } else {
-    return "";
+    return undefined;
   }
 }
 

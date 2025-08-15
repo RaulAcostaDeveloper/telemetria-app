@@ -6,21 +6,21 @@ const url =
 
 // Función fetch con enlace a caché
 //export async function getFuelSummary(
-export async function getLoginAction(
-  cypherUser: string,
-  forceRefresh = true // Se le puede indicar que no busque en caché
+export async function postLogin(
+  encrypted: string, //cadena cifrada de usuario y contraseña
+  forceRefresh = true // Se le indica que no busque en caché
 ) {
   // Construcción del key único para caché
-  const key = `cacheLogIn`;
+  const key = `logIn`;
 
-  const options = {
+  const options: RequestInit = {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      credentials: "include",
     },
-    body: cypherUser,
+    credentials: "include", // mover fuera de headers
+    body: JSON.stringify({ encrypted }),
   };
 
   // Retorna DATA del servidor y no debe regresar DATA de caché
@@ -28,7 +28,10 @@ export async function getLoginAction(
     key,
     async () => {
       const res = await fetch(url, options);
-      if (!res.ok) throw new Error("Error al obtener vehículos");
+      if (!res.ok) {
+        throw new Error("Error al obtener login");
+      }
+
       return res.json();
     },
     forceRefresh
