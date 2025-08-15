@@ -38,10 +38,10 @@ export const MainWrapper = ({ children }: Props) => {
     (state: RootState) => state.languageOption.languageSelected
   );
 
-  const { isAuthenticated, logoutHook } = useAuth();
+  const { isAuthenticated, logoutState } = useAuth();
 
   useEffect(() => {
-    logoutHook();
+    logoutState();
   }, []);
 
   // Aquí trae de redux y modifica el LANGUAGE
@@ -128,7 +128,7 @@ export const MainWrapper = ({ children }: Props) => {
         <Menu
           LANGUAGE={LANGUAGE}
           isMenuOpen={isMenuOpen}
-          logoutHook={logoutHook}
+          logoutHook={() => logoutState()}
           setIsMenuOpen={setIsMenuOpen}
         />
       )}

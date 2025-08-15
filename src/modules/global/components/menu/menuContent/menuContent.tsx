@@ -13,7 +13,7 @@ import { MenuRoute } from "../menuRoute/menuRoute";
 import { usePathname } from "next/navigation";
 
 interface Props {
-  logoutHook: () => Promise<void>;
+  logoutHook: () => void;
   LANGUAGE: LanguageInterface;
   isOpen: boolean | null;
 }

@@ -6,7 +6,7 @@ import { MenuHeader } from "./menuHeader/menuHeader";
 interface Props {
   LANGUAGE: LanguageInterface;
   isMenuOpen: boolean | null;
-  logoutHook: () => Promise<void>;
+  logoutHook: () => void;
   setIsMenuOpen: (isOpen: boolean) => void;
 }
 
