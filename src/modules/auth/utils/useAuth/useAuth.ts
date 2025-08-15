@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
@@ -7,10 +8,8 @@ import {
   logoutAction,
 } from "@/globalConfig/redux/slices/authSlice";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
-import { useEffect } from "react";
 
 export const useAuth = () => {
-  //const dispatch = useDispatch();
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -19,14 +18,13 @@ export const useAuth = () => {
   );
 
   useEffect(() => {
-    console.log("Ld: ", loginData, "Ls: ", loginStatus);
     if (loginStatus === "succeeded") {
+      console.log("Usuario autenticado?");
       loginState();
     }
   }, [loginData, loginStatus]);
 
   const tryLoginHook = async (encrypted: string) => {
-    console.log("conectando, ejecutando servidor");
     dispatch(fetchLogin({ encrypted }));
   };
 

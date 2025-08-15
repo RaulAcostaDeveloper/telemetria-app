@@ -40,6 +40,10 @@ export const MainWrapper = ({ children }: Props) => {
 
   const { isAuthenticated, logoutHook } = useAuth();
 
+  useEffect(() => {
+    logoutHook();
+  }, []);
+
   // Aquí trae de redux y modifica el LANGUAGE
   // Actualizar en caso de agregar un nuevo idioma
   useEffect(() => {

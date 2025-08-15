@@ -1,8 +1,6 @@
 // Archivo server action
 "use server";
 import { randomBytes, createCipheriv } from "crypto";
-// funciones adicionales que existen pero no se usarán en este momento:
-// import {createDecipheriv, scryptSync} from "crypto"
 
 /*
 // Cifra un texto en AES-CBC con PKCS7 y devuelve Base64(IV || CIPHERTEXT).
@@ -10,9 +8,7 @@ import { randomBytes, createCipheriv } from "crypto";
 // @param key Clave de 16, 24 o 32 bytes (AES-128/192/256).
 */
 
-export default async function encryptAesCbc(plainText: string) {
-  //process.env.AES_TOKEN está disponible solo para el servidor, en el cliente o navegador no.
-  //se configura creando archivo en raiz .env.local
+export default async function encryptUserAndPassword(userAndPassword: string) {
   if (process.env.AES_TOKEN) {
     const key: Buffer = Buffer.from(process.env.AES_TOKEN, "utf8");
     if (![16, 24, 32].includes(key.length)) {
@@ -23,7 +19,7 @@ export default async function encryptAesCbc(plainText: string) {
     const cipher = createCipheriv(`aes-${key.length * 8}-cbc`, key, iv); // PKCS7 por defecto
 
     const ciphertext = Buffer.concat([
-      cipher.update(plainText, "utf8"),
+      cipher.update(userAndPassword, "utf8"),
       cipher.final(),
     ]);
     const ivPlusCiphertext = Buffer.concat([iv, ciphertext]);
@@ -33,8 +29,3 @@ export default async function encryptAesCbc(plainText: string) {
     return undefined;
   }
 }
-
-// ⚠️ Usa la clave como bytes UTF-8 (igual que en C# si hacías Encoding.UTF8.GetBytes)
-//const key = Buffer.from("lallave", "utf8");
-//const b64 = encryptAesCbc("usuario:contraseña", key);
-//console.log(b64);
