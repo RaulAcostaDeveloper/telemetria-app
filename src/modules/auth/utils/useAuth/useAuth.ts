@@ -13,45 +13,42 @@ export const useAuth = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
-  const { isAuthenticated, encrypted, loginData, loginStatus } = useSelector(
+  // Estados del slice
+  const { isAuthenticated, loginServerData, loginStatus } = useSelector(
     (state: RootState) => state.auth
   );
 
   useEffect(() => {
-    if (loginStatus === "succeeded") {
-      console.log("Usuario autenticado?");
+    if (
+      loginServerData?.code === 200 &&
+      loginServerData.value.userId.length > 3
+    ) {
       loginState();
+    } else {
+      logoutState();
     }
-  }, [loginData, loginStatus]);
+  }, [loginServerData, loginStatus]);
 
-  const tryLoginHook = async (encrypted: string) => {
+  const tryLoginHook = (encrypted: string) => {
+    // Llama al servicio
     dispatch(fetchLogin({ encrypted }));
   };
 
-  const logoutHook = async () => {
-    // Actualizar el estado de redux
-    dispatch(logoutAction());
-
-    // Re dirigir
-    router.push("/login");
-
-    // Y pendiente borrar el token de localStorage
-  };
-
-  const loginState = async () => {
+  const loginState = () => {
     // Actualizar el estado de redux
     dispatch(loginAction());
-
-    // Re dirigir
     router.push("/home");
+  };
 
-    // Y pendiente actualizar el token de localStorage
+  const logoutState = () => {
+    // Actualizar el estado de redux
+    dispatch(logoutAction());
+    router.push("/login");
   };
 
   return {
     isAuthenticated,
-    logoutHook,
-    encrypted,
+    logoutState,
     tryLoginHook,
   };
 };

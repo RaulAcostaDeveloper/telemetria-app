@@ -1,21 +1,33 @@
 import { postLogin } from "@/modules/auth/services/postLogin";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+interface UserData {
+  userId: string;
+  idCliente: string;
+  username: string;
+  accountName: string;
+  expre_at: string;
+}
+
+interface LoginData {
+  code: number;
+  message: string;
+  value: UserData;
+}
+
 interface AuthState {
   isAuthenticated: boolean;
-  encrypted: string | null;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  loginData: any;
+  loginServerData: LoginData | null;
   loginStatus: string;
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
-  encrypted: null,
-  loginData: null,
+  loginServerData: null,
   loginStatus: "idle",
 };
 
+// Middleware
 export const fetchLogin = createAsyncThunk(
   "login/fetch",
   async ({ encrypted }: { encrypted: string }) => {
@@ -23,6 +35,7 @@ export const fetchLogin = createAsyncThunk(
   }
 );
 
+// Slice
 export const authSlice = createSlice({
   name: "authSlice",
   initialState,
@@ -31,21 +44,23 @@ export const authSlice = createSlice({
       state.isAuthenticated = true;
     },
     logoutAction: (state) => {
-      state.encrypted = null;
       state.isAuthenticated = false;
     },
   },
   extraReducers: (builder) => {
+    // Tiene que ver con el middleware
     builder
       .addCase(fetchLogin.pending, (state) => {
         state.loginStatus = "loading";
+        state.loginServerData = null;
       })
       .addCase(fetchLogin.fulfilled, (state, action) => {
         state.loginStatus = "succeeded";
-        state.loginData = action.payload;
+        state.loginServerData = action.payload;
       })
       .addCase(fetchLogin.rejected, (state) => {
         state.loginStatus = "failed";
+        state.loginServerData = null;
       });
   },
 });

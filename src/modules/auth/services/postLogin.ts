@@ -1,16 +1,12 @@
-//import encryptAesCbc from "@/modules/auth/components/authForm/cryptoReference";
 import { getCached } from "@/globalConfig/cache/cache";
 
 const url =
   "https://stage.transtelemetrix.com/api/management/authentication/login";
 
-// Función fetch con enlace a caché
-//export async function getFuelSummary(
 export async function postLogin(
-  encrypted: string, //cadena cifrada de usuario y contraseña
-  forceRefresh = true // Se le indica que no busque en caché
+  encrypted: string, //Cifrado de usuario y contraseña
+  forceRefresh = true // No busque en caché
 ) {
-  // Construcción del key único para caché
   const key = `logIn`;
 
   const options: RequestInit = {
@@ -19,8 +15,8 @@ export async function postLogin(
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    credentials: "include", // mover fuera de headers
-    body: JSON.stringify({ encrypted }),
+    credentials: "include",
+    body: JSON.stringify({ credentials: encrypted }),
   };
 
   // Retorna DATA del servidor y no debe regresar DATA de caché
