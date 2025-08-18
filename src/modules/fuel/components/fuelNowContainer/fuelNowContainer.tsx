@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import CarCrashIcon from "@mui/icons-material/CarCrash";
@@ -13,19 +14,38 @@ import GeoModal, {
   GeoModalData,
 } from "@/modules/global/components/geoModal/geoModal";
 import styles from "./fuelNowContainer.module.css";
+import { AppDispatch } from "@/globalConfig/redux/store";
 import { ButtonTypes, GeneralButton } from "@/modules/global/components";
 import { FuelDataReport } from "./fuelDataReport/fuelDataReport";
 import { FuelNowVehicleTank } from "./fuelNowVehicleTank/fuelNowVehicleTank";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { fetchLastFuelReport } from "@/globalConfig/redux/slices/lastFuelReportSlice";
 import { rabbitVehicleFuelNow } from "@/modules/global/dataMock/rabbitVehicleFuelNow/rabbitVehicleFuelNow";
 
 interface Props {
   LANGUAGE: LanguageInterface;
+  imei: string;
 }
 
-export const FuelNowContainer = ({ LANGUAGE }: Props) => {
+export const FuelNowContainer = ({ LANGUAGE, imei }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [geoModalData, setGeoModalData] = useState<GeoModalData>();
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    // Tener la data actualizada cada 10 segundos
+    const intervalId = setInterval(() => {
+      dispatch(
+        fetchLastFuelReport({
+          imei: imei.toString(), // imei.toString(),
+        })
+      );
+    }, 10000);
+
+    return () => {
+      clearTimeout(intervalId);
+    };
+  }, []);
 
   useEffect(() => {
     setGeoModalData({
