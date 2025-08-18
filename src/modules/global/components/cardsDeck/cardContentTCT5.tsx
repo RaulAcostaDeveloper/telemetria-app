@@ -11,7 +11,9 @@ interface Props {
   data: dataTable;
   LANGUAGE: LanguageInterface;
 }
+
 interface rangeNVehicles {
+  lastRange: number;
   range: number;
   vehicles: number;
 }
@@ -47,7 +49,12 @@ export default function CardContentTCT5({ data, LANGUAGE }: Props) {
   // Se usa el limite superior como numérico de cada rango.
   const rangesArray: rangeNVehicles[] = [];
   for (let index = 0; index < 10; index++) {
+    let lastRange = 0;
+    if (index !== 0) {
+      lastRange = Math.ceil(rangeSize * index + minDistance) + 1;
+    }
     rangesArray.push({
+      lastRange,
       range: Math.ceil(rangeSize * (index + 1) + minDistance),
       vehicles: 0,
     });
@@ -90,10 +97,10 @@ export default function CardContentTCT5({ data, LANGUAGE }: Props) {
 
   return (
     <div className={styles.distribution}>
-      <h1>{LANGUAGE.teleOBD.charts.titleDistance}</h1>
-      <h2>
-        {titleValueSubtitle.text} <span>{titleValueSubtitle.value}</span> Km
-      </h2>
+      <h3>{LANGUAGE.teleOBD.charts.titleDistance}</h3>
+      <h4>
+        {titleValueSubtitle.text}: <span>{titleValueSubtitle.value}</span> km
+      </h4>
       <ChartColInterval
         langSelection={langSelection}
         rangesArray={rangesArray}

@@ -377,7 +377,7 @@ export const ENGLISH: LanguageInterface = {
       titleDistance: "Drive Distance",
       titleDriven: "Driven Hours",
       titleIdle: "Idle Hours",
-      subtitleDistance: "Average Distance Traveled:",
+      subtitleDistance: "Average Distance Traveled",
       subtitleDriven: "Average Driven Hours",
       subtitleIdle: "Average Idle Hours",
       xAxisDistance: "Distance (Km)",

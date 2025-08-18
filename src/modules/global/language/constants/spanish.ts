@@ -376,7 +376,7 @@ export const SPANISH: LanguageInterface = {
       titleDistance: "Distancia de conducción",
       titleDriven: "Horas conducidas",
       titleIdle: "Tiempo detenido",
-      subtitleDistance: "Distancia media recorrida:",
+      subtitleDistance: "Distancia media recorrida",
       subtitleDriven: "Tiempo medio de conducción",
       subtitleIdle: "Tiempo medio detenido",
       xAxisDistance: "Distancia (Km)",

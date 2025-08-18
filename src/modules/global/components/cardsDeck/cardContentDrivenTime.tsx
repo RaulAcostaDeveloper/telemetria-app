@@ -11,7 +11,9 @@ interface Props {
   data: dataTable;
   LANGUAGE: LanguageInterface;
 }
+
 interface rangeNHours {
+  lastRange: number;
   range: number;
   vehicles: number;
 }
@@ -45,7 +47,12 @@ export default function CardContentDrivenTime({ data, LANGUAGE }: Props) {
   // Se usa el limite superior del bloque como numérico de cada rango.
   const rangesArray: rangeNHours[] = [];
   for (let index = 0; index < 10; index++) {
+    let lastRange = 0;
+    if (index !== 0) {
+      lastRange = Math.ceil(rangeSize * index + minHours) + 1;
+    }
     rangesArray.push({
+      lastRange,
       range: Math.ceil(rangeSize * (index + 1) + minHours),
       vehicles: 0,
     });
@@ -88,10 +95,10 @@ export default function CardContentDrivenTime({ data, LANGUAGE }: Props) {
 
   return (
     <div className={styles.distribution}>
-      <h1>{LANGUAGE.teleOBD.charts.titleDriven}</h1>
-      <h2>
-        {titleValueSubtitle.text} <span>{titleValueSubtitle.value}</span> h.
-      </h2>
+      <h3>{LANGUAGE.teleOBD.charts.titleDriven}</h3>
+      <h4>
+        {titleValueSubtitle.text}: <span>{titleValueSubtitle.value}</span> h
+      </h4>
       <ChartColInterval
         langSelection={langSelection}
         rangesArray={rangesArray}
