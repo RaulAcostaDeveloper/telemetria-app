@@ -3,6 +3,7 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import DonutGraphic from "@/modules/global/components/donutGraphic/DonutGraphic";
+import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
 import styles from "./fuelDataProvider.module.css";
 import {
@@ -14,7 +15,7 @@ import { FuelFilter } from "../fuelFilter/fuelFilter";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Table, TabsContent } from "@/modules/global/components";
 import { fetchFuelSummary } from "@/globalConfig/redux/slices/fuelSummarySlice";
-import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
+import { fetchTopFuelReport } from "@/globalConfig/redux/slices/topFuelReportSlice";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -42,6 +43,14 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
         startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate),
         endDate: "2024-08-21T00:00:00",
         performanceType: "1",
+      })
+    );
+    dispatch(
+      fetchTopFuelReport({
+        accountId: "4992",
+        startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate),
+        endDate: "2024-08-21T00:00:00",
+        numberOfVehicles: 1,
       })
     );
   }, [dispatch]);
