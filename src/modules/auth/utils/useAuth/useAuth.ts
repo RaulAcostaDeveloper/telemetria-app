@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
@@ -13,25 +13,31 @@ export const useAuth = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
+  const [isLoginForm, setIsLoginForm] = useState(false);
+
   // Estados del slice
   const { isAuthenticated, loginServerData, loginStatus } = useSelector(
     (state: RootState) => state.auth
   );
 
   useEffect(() => {
-    if (
-      loginServerData?.code === 200 &&
-      loginServerData.value.userId.length > 3
-    ) {
-      loginState();
-    } else {
-      logoutState();
+    if (isLoginForm) {
+      if (
+        loginStatus === "succeeded" &&
+        loginServerData?.code === 200 &&
+        loginServerData.value.userId.length > 3
+      ) {
+        loginState();
+      } else {
+        logoutState();
+      }
     }
-  }, [loginServerData, loginStatus]);
+  }, [isLoginForm, loginServerData, loginStatus]);
 
   const tryLoginHook = (encrypted: string) => {
     // Llama al servicio
     dispatch(fetchLogin({ encrypted }));
+    setIsLoginForm(true);
   };
 
   const loginState = () => {
