@@ -10,9 +10,10 @@ import fuelPerformanceSlice from "@/globalConfig/redux/slices/fuelPerformanceSli
 import fuelSummaryReducer from "@/globalConfig/redux/slices/fuelSummarySlice";
 import groupsSlice from "@/globalConfig/redux/slices/groupsSlice";
 import languageReducer from "@/globalConfig/redux/slices/languageSlice";
-import vehiclesSlice from "@/globalConfig/redux/slices/vehiclesSlice";
-import vehiclesAllSlice from "@/globalConfig/redux/slices/vehiclesAllSlice";
+import topFuelReportSlice from "@/globalConfig/redux/slices/topFuelReportSlice";
 import vehicleByImeiSlice from "@/globalConfig/redux/slices/vehicleByImeiSlice";
+import vehiclesAllSlice from "@/globalConfig/redux/slices/vehiclesAllSlice";
+import vehiclesSlice from "@/globalConfig/redux/slices/vehiclesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -26,9 +27,10 @@ export const store = configureStore({
     fuelSummary: fuelSummaryReducer,
     groups: groupsSlice,
     languageOption: languageReducer,
+    topFuelReport: topFuelReportSlice,
+    vehicleByImei: vehicleByImeiSlice,
     vehicles: vehiclesSlice,
     vehiclesAll: vehiclesAllSlice,
-    vehicleByImei: vehicleByImeiSlice,
   },
   devTools: true,
 });

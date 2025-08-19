@@ -214,9 +214,9 @@ export const ENGLISH: LanguageInterface = {
       search: "Search",
     },
     tabs: {
-      groups: "Groups",
+      topCharges: "Top charges",
       unitys: "Unitys",
-      zones: "Zones",
+      topDischarges: "Top discharges",
     },
     vehiclesTableColumns: {
       imei: "Imei",

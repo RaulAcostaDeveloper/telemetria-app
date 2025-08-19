@@ -214,9 +214,9 @@ export const SPANISH: LanguageInterface = {
       search: "Buscar",
     },
     tabs: {
-      groups: "Grupos",
+      topCharges: "Top cargas",
       unitys: "Unidades",
-      zones: "Zonas",
+      topDischarges: "Top descargas",
     },
     vehiclesTableColumns: {
       imei: "Imei",
