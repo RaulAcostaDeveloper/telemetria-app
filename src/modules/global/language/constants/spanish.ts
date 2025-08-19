@@ -247,7 +247,7 @@ export const SPANISH: LanguageInterface = {
       noDataMessage: "No hay información disponible",
       metric: "Metrica",
       segments: "Segmentos",
-      inventory: "Inventario",
+      inventory: "Combustible",
       charged: "Cargado",
       discharged: "Descargado",
     },
