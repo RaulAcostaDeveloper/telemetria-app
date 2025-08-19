@@ -26,7 +26,6 @@ interface Props {
 
 const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
   const [isReady, setIsReady] = useState(false);
-  console.log("rangesArray ", rangesArray);
 
   const measureData = useMemo(() => {
     return rangesArray.map((r) => ({
@@ -103,7 +102,7 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
         formatter: function () {
           return `
             <div style="width: 100%; font-size: 18px; display: flex; flex-direction: column; justify-content: space-between;">
-              <strong style="margin-right: 10px;">${langSelection.xAxisTitle}:</strong> <p style="padding-bottom: 1em;">${this.options.custom?.lastRange} - ${this.x}</p>
+              <strong style="margin-right: 10px;">${langSelection.xAxisTitle}:</strong> <p style="padding-bottom: 1em;">${this.options.custom?.lastRange} h - ${this.x} h</p>
               <strong style="margin-right: 10px;">${langSelection.yAxisTitle}:</strong> <p>${this.y}</p>
             </div>
           `;

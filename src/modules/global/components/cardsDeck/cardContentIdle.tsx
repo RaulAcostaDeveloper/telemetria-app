@@ -90,6 +90,7 @@ export default function CardContentIdle({ data, LANGUAGE }: Props) {
     yAxisTitle: LANGUAGE.teleOBD.charts.yAxis,
   };
   const langInTable = {
+    title: LANGUAGE.teleOBD.tableColumns.title,
     col1: LANGUAGE.teleOBD.tableColumns.plate,
     col2: LANGUAGE.teleOBD.tableColumns.name,
     col3: LANGUAGE.teleOBD.tableColumns.totalIdleHours,

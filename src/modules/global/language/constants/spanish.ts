@@ -172,8 +172,8 @@ export const SPANISH: LanguageInterface = {
         timeTraveled: "Horas trabajadas",
       },
       telemetryOBD: {
-        xAxisDistance: "Distancia (Km)",
-        xAxisDriven: "Horas",
+        xAxisDistance: "Distancia recorrida (km)",
+        xAxisDriven: "Tiempo (h)",
         yAxis: "Vehículos",
       },
     },
@@ -359,6 +359,7 @@ export const SPANISH: LanguageInterface = {
   },
   teleOBD: {
     tableColumns: {
+      title: "Top 5",
       plate: "Placas",
       name: "Vehículo",
       kilometerMarker: "Kilometraje",
@@ -374,14 +375,14 @@ export const SPANISH: LanguageInterface = {
     },
     charts: {
       titleDistance: "Distancia de conducción",
-      titleDriven: "Horas conducidas",
+      titleDriven: "Tiempo de conducción",
       titleIdle: "Tiempo detenido",
       subtitleDistance: "Distancia media recorrida",
       subtitleDriven: "Tiempo medio de conducción",
       subtitleIdle: "Tiempo medio detenido",
-      xAxisDistance: "Distancia (Km)",
-      xAxisDriven: "Horas",
-      xAxisIdle: "Horas detenido",
+      xAxisDistance: "Distancia recorrida (km)",
+      xAxisDriven: "Tiempo conducido (h)",
+      xAxisIdle: "Tiempo detenido (h)",
       yAxis: "Vehículos",
     },
   },
