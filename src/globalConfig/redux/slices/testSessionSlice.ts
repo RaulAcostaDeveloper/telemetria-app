@@ -1,14 +1,19 @@
 import { testSession } from "@/modules/auth/services/testSession";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+interface dataRetrieved {
+  texto: string;
+}
+
 interface InitialState {
-  testData: string | null;
-  testStatus: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  testSessionData: dataRetrieved | null;
+  testSessionStatus: string;
 }
 
 const initialState: InitialState = {
-  testData: null,
-  testStatus: "idle",
+  testSessionData: null,
+  testSessionStatus: "idle",
 };
 
 // Middleware
@@ -28,16 +33,16 @@ export const testSessionSlice = createSlice({
     // Tiene que ver con el middleware
     builder
       .addCase(fetchTestSession.pending, (state) => {
-        state.testStatus = "loading";
-        state.testData = null;
+        state.testSessionStatus = "loading";
+        state.testSessionData = null;
       })
       .addCase(fetchTestSession.fulfilled, (state, action) => {
-        state.testStatus = "succeeded";
-        state.testData = action.payload;
+        state.testSessionStatus = "succeeded";
+        state.testSessionData = action.payload;
       })
       .addCase(fetchTestSession.rejected, (state) => {
-        state.testStatus = "failed";
-        state.testData = null;
+        state.testSessionStatus = "failed";
+        state.testSessionData = null;
       });
   },
 });

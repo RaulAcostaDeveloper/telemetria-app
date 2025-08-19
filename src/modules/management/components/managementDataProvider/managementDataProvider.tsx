@@ -41,8 +41,6 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     (state: RootState) => state.groups
   );
 
-  const { testData } = useSelector((state: RootState) => state.testSession);
-
   const fuelTabs = [
     LANGUAGE.management.tabs.vehicles,
     LANGUAGE.management.tabs.devices,
@@ -264,7 +262,6 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   const testSession = () => {
     dispatch(fetchTestSession());
   };
-  console.log("testData is: ", testData);
 
   return (
     <div className={styles.managementDataProvider}>

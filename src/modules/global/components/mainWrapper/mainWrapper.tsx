@@ -38,10 +38,10 @@ export const MainWrapper = ({ children }: Props) => {
     (state: RootState) => state.languageOption.languageSelected
   );
 
-  const { isAuthenticated, logoutState } = useAuth();
+  const { isAuthenticated, logoutState, tryFirstServerSession } = useAuth();
 
   useEffect(() => {
-    logoutState();
+    tryFirstServerSession();
   }, []);
 
   // Aquí trae de redux y modifica el LANGUAGE
