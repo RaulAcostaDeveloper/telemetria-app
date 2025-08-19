@@ -14,7 +14,7 @@ const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
   ssr: false,
 });
 
-type MetricOption = "Inventario" | "Cargado" | "Descargado";
+type MetricOption = "Combustible" | "Cargado" | "Descargado";
 type SegmentOption = 5 | 10 | 15;
 
 interface DonutGraphicProps {
@@ -24,7 +24,7 @@ interface DonutGraphicProps {
 const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
   const LANGUAGE = useLanguage();
   const [selectedMetric, setSelectedMetric] =
-    useState<MetricOption>("Inventario");
+    useState<MetricOption>("Combustible");
   const [segmentsCount, setSegmentsCount] = useState<SegmentOption>(10);
   const [is3DReady, setIs3DReady] = useState(false);
 
@@ -54,7 +54,7 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
     }
 
     let allValues: number[];
-    if (selectedMetric === "Inventario") {
+    if (selectedMetric === "Combustible") {
       allValues = devices.map((d) => d.lastFuelLevel);
     } else if (selectedMetric === "Cargado") {
       allValues = devices.map((d) => d.fuelLoaded);
@@ -202,7 +202,7 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
             value={selectedMetric}
             onChange={(e) => setSelectedMetric(e.target.value as MetricOption)}
           >
-            <option value="Inventario">
+            <option value="Combustible">
               {LANGUAGE.fuel.donutGrpahic.inventory}
             </option>
             <option value="Cargado">

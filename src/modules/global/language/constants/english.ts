@@ -247,7 +247,7 @@ export const ENGLISH: LanguageInterface = {
       noDataMessage: "There is no available data",
       metric: "Metric",
       segments: "Segments",
-      inventory: "Inventory",
+      inventory: "Fuel",
       charged: "Charged",
       discharged: "Discharged",
     },

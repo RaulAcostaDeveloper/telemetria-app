@@ -11,7 +11,7 @@ import {
   dataTable,
 } from "@/modules/global/components/table/table.model";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
-import { FuelFilter } from "../fuelFilter/fuelFilter";
+// import { FuelFilter } from "../fuelFilter/fuelFilter";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Table, TabsContent } from "@/modules/global/components";
 import { fetchFuelSummary } from "@/globalConfig/redux/slices/fuelSummarySlice";
@@ -32,9 +32,9 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
     (state: RootState) => state.fuelSummary
   );
 
-  const { brandsData, brandsStatus } = useSelector(
-    (state: RootState) => state.brands
-  );
+  // const { brandsData, brandsStatus } = useSelector(
+  //   (state: RootState) => state.brands
+  // );
 
   const { topFuelReportData, topFuelReportStatus } = useSelector(
     (state: RootState) => state.topFuelReport
@@ -303,7 +303,8 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
 
   return (
     <div>
-      {brandsStatus === "succeeded" && brandsData ? (
+      {/* Descomentar para mostrar el filtrado de combustible */}
+      {/* {brandsStatus === "succeeded" && brandsData ? (
         <FuelFilter
           LANGUAGE={LANGUAGE}
           callFetchFuelSummary={callFetchFuelSummary}
@@ -313,7 +314,7 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
         <div>
           <LoaderAnimation />
         </div>
-      )}
+      )} */}
 
       <div className={styles.topResumeData}>
         {fuelSummaryStatus === "succeeded" && fuelSummaryData ? (
@@ -327,61 +328,64 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
           </div>
         )}
       </div>
-      <TabsContent
-        tabOptions={tabOptions}
-        tabContents={[
-          <div key={1}>
-            {fuelSummaryStatus === "succeeded" && vehiclesReport ? (
-              <Table
-                LANGUAGE={LANGUAGE}
-                columns={vehiclesColumns}
-                data={vehiclesReport}
-                idKey="imei"
-                showGoFuel
-                showGoOBD
-              />
-            ) : (
-              <div>
-                <LoaderAnimation />
-              </div>
-            )}
-          </div>,
-          <div key={2}>
-            {topFuelReportStatus === "succeeded" && topFuelReportCharges ? (
-              <Table
-                LANGUAGE={LANGUAGE}
-                columns={topFuelReportChargesColumns}
-                data={topFuelReportCharges}
-                idKey="imei"
-                showViewModal
-                showGoFuel
-                showGoOBD
-              />
-            ) : (
-              <div>
-                <LoaderAnimation />
-              </div>
-            )}
-          </div>,
-          <div key={3}>
-            {topFuelReportStatus === "succeeded" && topFuelReportDischarges ? (
-              <Table
-                LANGUAGE={LANGUAGE}
-                columns={topFuelReportDischargesColumns}
-                data={topFuelReportDischarges}
-                idKey="imei"
-                showViewModal
-                showGoFuel
-                showGoOBD
-              />
-            ) : (
-              <div>
-                <LoaderAnimation />
-              </div>
-            )}
-          </div>,
-        ]}
-      />
+      <div className={styles.fuelTabs}>
+        <TabsContent
+          tabOptions={tabOptions}
+          tabContents={[
+            <div key={1}>
+              {fuelSummaryStatus === "succeeded" && vehiclesReport ? (
+                <Table
+                  LANGUAGE={LANGUAGE}
+                  columns={vehiclesColumns}
+                  data={vehiclesReport}
+                  idKey="imei"
+                  showGoFuel
+                  showGoOBD
+                />
+              ) : (
+                <div>
+                  <LoaderAnimation />
+                </div>
+              )}
+            </div>,
+            <div key={2}>
+              {topFuelReportStatus === "succeeded" && topFuelReportCharges ? (
+                <Table
+                  LANGUAGE={LANGUAGE}
+                  columns={topFuelReportChargesColumns}
+                  data={topFuelReportCharges}
+                  idKey="imei"
+                  showViewModal
+                  showGoFuel
+                  showGoOBD
+                />
+              ) : (
+                <div>
+                  <LoaderAnimation />
+                </div>
+              )}
+            </div>,
+            <div key={3}>
+              {topFuelReportStatus === "succeeded" &&
+              topFuelReportDischarges ? (
+                <Table
+                  LANGUAGE={LANGUAGE}
+                  columns={topFuelReportDischargesColumns}
+                  data={topFuelReportDischarges}
+                  idKey="imei"
+                  showViewModal
+                  showGoFuel
+                  showGoOBD
+                />
+              ) : (
+                <div>
+                  <LoaderAnimation />
+                </div>
+              )}
+            </div>,
+          ]}
+        />
+      </div>
     </div>
   );
 };
