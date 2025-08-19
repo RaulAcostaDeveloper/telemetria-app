@@ -339,6 +339,7 @@ export interface LanguageInterface {
   };
   teleOBD: {
     tableColumns: {
+      title: string;
       plate: string;
       name: string;
       kilometerMarker: string;
