@@ -1,8 +1,9 @@
 "use client";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTestSession } from "@/globalConfig/redux/slices/testSessionSlice";
 
 import styles from "./managementDataProvider.module.css";
-import { RootState } from "@/globalConfig/redux/store";
+import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 import { formatDateTime } from "@/modules/global/utils/utils";
 
 //Tipado
@@ -22,6 +23,8 @@ interface Props {
 }
 
 export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const { vehiclesData, vehiclesStatus } = useSelector(
     (state: RootState) => state.vehicles
   );
@@ -37,6 +40,8 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   const { groupsData, groupsStatus } = useSelector(
     (state: RootState) => state.groups
   );
+
+  const { testData } = useSelector((state: RootState) => state.testSession);
 
   const fuelTabs = [
     LANGUAGE.management.tabs.vehicles,
@@ -256,6 +261,11 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       license: value.license,
     }));
 
+  const testSession = () => {
+    dispatch(fetchTestSession());
+  };
+  console.log("testData is: ", testData);
+
   return (
     <div className={styles.managementDataProvider}>
       <TabsContent
@@ -323,6 +333,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
           </div>,
         ]}
       />
+      <button onClick={testSession}>Probar sesion</button>
     </div>
   );
 };
