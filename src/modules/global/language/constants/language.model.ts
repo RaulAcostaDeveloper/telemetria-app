@@ -194,9 +194,9 @@ export interface LanguageInterface {
       search: string;
     };
     tabs: {
-      groups: string;
+      topCharges: string;
       unitys: string;
-      zones: string;
+      topDischarges: string;
     };
     vehiclesTableColumns: {
       imei: string;

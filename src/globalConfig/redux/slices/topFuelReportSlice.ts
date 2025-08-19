@@ -14,8 +14,9 @@ interface ChargesTopReport {
   clientOwnerName: string;
   economicNumber: string;
   serialNumber: string;
-  imies: [string];
-  totalCharges: number;
+  imeis: [string];
+  totalNumberCharges: number;
+  totalLitersCharges: number;
 }
 
 interface DischargesTopReport {
@@ -30,8 +31,9 @@ interface DischargesTopReport {
   clientOwnerName: string;
   economicNumber: string;
   serialNumber: string;
-  imies: [string];
-  totalDischarges: number;
+  imeis: [string];
+  totalNumberDischarges: number;
+  totalLitersDischarges: number;
 }
 
 interface TopFuelReportStatus {
