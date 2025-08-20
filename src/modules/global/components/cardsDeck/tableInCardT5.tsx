@@ -2,6 +2,7 @@ import { dataTable } from "@/modules/global/components/table/table.model";
 import styles from "./tableInCardT5.module.css";
 
 interface langObj {
+  title: string;
   col1: string;
   col2: string;
   col3: string;
@@ -16,6 +17,7 @@ const TableInCardT5 = ({ langSelection, data }: TableDistancesProps) => {
 
   const table = (
     <div className={styles["t-wrapper"]}>
+      <h4>- {langSelection.title} -</h4>
       <table className={styles["t-main"]}>
         <thead>
           <tr>
