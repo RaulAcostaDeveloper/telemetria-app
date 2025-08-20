@@ -1,9 +1,7 @@
-"use client";
-
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
-//import { AuthForm } from "@/modules/auth/components";
+
 import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
-import styles from "./CheckLogin.module.css";
+import styles from "./checkLogin.module.css";
 
 export default function CheckLogin() {
   const LANGUAGE = useLanguage();

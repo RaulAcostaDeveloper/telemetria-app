@@ -23,6 +23,7 @@ import { fetchDrivers } from "@/globalConfig/redux/slices/driversSlice";
 import { fetchGroups } from "@/globalConfig/redux/slices/groupsSlice";
 import { fetchVehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
 import { useAuth } from "../../../auth/utils";
+import CheckLogin from "@/modules/login/checkLogin/checkLogin";
 
 interface Props {
   children: React.ReactNode;
@@ -39,6 +40,10 @@ export const MainWrapper = ({ children }: Props) => {
   );
 
   const { isAuthenticated, logoutState, tryFirstServerSession } = useAuth();
+
+  const { testSessionStatus } = useSelector(
+    (state: RootState) => state.testSession
+  );
 
   useEffect(() => {
     tryFirstServerSession();
@@ -122,7 +127,11 @@ export const MainWrapper = ({ children }: Props) => {
     }
   }, [dispatch, isAuthenticated]);
 
-  return (
+  return testSessionStatus === "loading" ? (
+    <div>
+      <CheckLogin />
+    </div>
+  ) : (
     <div className={`${styles.mainWrapper}`}>
       {isAuthenticated && (
         <Menu

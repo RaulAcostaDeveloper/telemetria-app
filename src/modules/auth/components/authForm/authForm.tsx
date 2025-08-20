@@ -9,7 +9,7 @@ import { ButtonTypes } from "@/modules/global/components/generalButton/generalBu
 import { GeneralButton } from "@/modules/global/components/generalButton/generalButton";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { useAuth } from "@/modules/auth/utils";
-import CheckLogin from "@/app/(pages)/checkLogin/page";
+import CheckLogin from "@/modules/login/checkLogin/checkLogin";
 
 interface Props {
   LANGUAGE: LanguageInterface;

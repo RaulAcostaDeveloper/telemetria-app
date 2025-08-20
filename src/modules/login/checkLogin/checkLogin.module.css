@@ -6,6 +6,8 @@
   align-content: center;
   gap: 20px;
   padding: 2rem;
+  width: 95dvw;
+  height: 95dvh;
 }
 
 .checklogin p {

@@ -34,7 +34,7 @@ export const useAuth = () => {
         loginServerData.value.userId.length > 3
       ) {
         loginState();
-      } else if (loginStatus === "failed") {
+      } else if (loginStatus !== "idle" && loginStatus !== "loading") {
         logoutState();
       }
     }
@@ -44,7 +44,10 @@ export const useAuth = () => {
     if (isFromFirstSession) {
       if (testSessionData && testSessionStatus === "succeeded") {
         loginState();
-      } else if (testSessionStatus === "failed") {
+      } else if (
+        testSessionStatus !== "idle" &&
+        testSessionStatus !== "loading"
+      ) {
         logoutState();
       }
     }
