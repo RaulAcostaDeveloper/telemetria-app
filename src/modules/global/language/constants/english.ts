@@ -200,6 +200,9 @@ export const ENGLISH: LanguageInterface = {
     },
     linkToHome: "Go to home",
     linkToRegister: "Go to Register",
+    checklogin: {
+      maintitle: "Verifying session",
+    },
   },
   fuel: {
     filter: {

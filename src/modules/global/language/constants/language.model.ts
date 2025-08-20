@@ -180,6 +180,9 @@ export interface LanguageInterface {
     };
     linkToHome: string;
     linkToRegister: string;
+    checklogin: {
+      maintitle: string;
+    };
   };
   fuel: {
     filter: {

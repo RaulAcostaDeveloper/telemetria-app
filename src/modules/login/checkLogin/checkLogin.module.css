@@ -1,0 +1,15 @@
+.checklogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 20px;
+  padding: 2rem;
+  width: 95dvw;
+  height: 95dvh;
+}
+
+.checklogin p {
+  font-size: 2rem;
+}

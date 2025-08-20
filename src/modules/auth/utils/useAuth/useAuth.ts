@@ -8,16 +8,22 @@ import {
   logoutAction,
 } from "@/globalConfig/redux/slices/authSlice";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
+import { fetchTestSession } from "@/globalConfig/redux/slices/testSessionSlice";
 
 export const useAuth = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
   const [isLoginForm, setIsLoginForm] = useState(false);
+  const [isFromFirstSession, setIsFromFirstSession] = useState(false);
 
   // Estados del slice
   const { isAuthenticated, loginServerData, loginStatus } = useSelector(
     (state: RootState) => state.auth
+  );
+
+  const { testSessionData, testSessionStatus } = useSelector(
+    (state: RootState) => state.testSession
   );
 
   useEffect(() => {
@@ -28,16 +34,35 @@ export const useAuth = () => {
         loginServerData.value.userId.length > 3
       ) {
         loginState();
-      } else {
+      } else if (loginStatus !== "idle" && loginStatus !== "loading") {
         logoutState();
       }
     }
   }, [isLoginForm, loginServerData, loginStatus]);
 
+  useEffect(() => {
+    if (isFromFirstSession) {
+      if (testSessionData && testSessionStatus === "succeeded") {
+        loginState();
+      } else if (
+        testSessionStatus !== "idle" &&
+        testSessionStatus !== "loading"
+      ) {
+        logoutState();
+      }
+    }
+  }, [isFromFirstSession, testSessionData, testSessionStatus]);
+
   const tryLoginHook = (encrypted: string) => {
     // Llama al servicio
     dispatch(fetchLogin({ encrypted }));
     setIsLoginForm(true);
+  };
+
+  // Prueba si trae la cookie, desde el primer render
+  const tryFirstServerSession = () => {
+    dispatch(fetchTestSession());
+    setIsFromFirstSession(true);
   };
 
   const loginState = () => {
@@ -56,5 +81,6 @@ export const useAuth = () => {
     isAuthenticated,
     logoutState,
     tryLoginHook,
+    tryFirstServerSession,
   };
 };
