@@ -323,7 +323,6 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
           </div>,
         ]}
       />
-      <button onClick={testSession}>Probar sesion</button>
     </div>
   );
 };
