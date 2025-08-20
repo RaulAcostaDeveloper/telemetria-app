@@ -197,9 +197,9 @@ export interface LanguageInterface {
       search: string;
     };
     tabs: {
-      groups: string;
+      topCharges: string;
       unitys: string;
-      zones: string;
+      topDischarges: string;
     };
     vehiclesTableColumns: {
       imei: string;
@@ -342,6 +342,7 @@ export interface LanguageInterface {
   };
   teleOBD: {
     tableColumns: {
+      title: string;
       plate: string;
       name: string;
       kilometerMarker: string;

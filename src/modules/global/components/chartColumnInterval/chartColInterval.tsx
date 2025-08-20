@@ -8,14 +8,17 @@ const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
 });
 
 interface rangeNVehicles {
+  lastRange: number;
   range: number;
   vehicles: number;
 }
+
 interface langObj {
   title: string;
   xAxisTitle: string;
   yAxisTitle: string;
 }
+
 interface Props {
   langSelection: langObj;
   rangesArray: rangeNVehicles[];
@@ -28,6 +31,9 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
     return rangesArray.map((r) => ({
       x: r.range,
       y: r.vehicles,
+      custom: {
+        lastRange: r.lastRange,
+      },
     }));
   }, [rangesArray]);
 
@@ -62,7 +68,7 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
         title: {
           text: langSelection.xAxisTitle,
           style: {
-            fontSize: "12px",
+            fontSize: "1.5rem",
             fontWeight: "bold",
           },
         },
@@ -70,25 +76,33 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
       yAxis: {
         labels: {
           style: {
-            fontSize: "12px",
+            fontSize: "1rem",
             fontWeight: "bold",
           },
         },
         title: {
           text: langSelection.yAxisTitle,
           style: {
-            fontSize: "12px",
+            fontSize: "1.5rem",
             fontWeight: "bold",
           },
         },
         opposite: false,
       },
       tooltip: {
+        split: false,
         useHTML: true,
+        shared: false,
+        borderRadius: 6,
+        padding: 10,
+        shadow: true,
+        style: {
+          pointerEvents: "none",
+        },
         formatter: function () {
           return `
             <div style="width: 100%; font-size: 18px; display: flex; flex-direction: column; justify-content: space-between;">
-              <strong style="margin-right: 10px;">${langSelection.xAxisTitle}:</strong> <p style="padding-bottom: 1em;">${this.x}</p>
+              <strong style="margin-right: 10px;">${langSelection.xAxisTitle}:</strong> <p style="padding-bottom: 1em;">${this.options.custom?.lastRange} h - ${this.x} h</p>
               <strong style="margin-right: 10px;">${langSelection.yAxisTitle}:</strong> <p>${this.y}</p>
             </div>
           `;

@@ -11,7 +11,9 @@ interface Props {
   data: dataTable;
   LANGUAGE: LanguageInterface;
 }
+
 interface rangeNVehicles {
+  lastRange: number;
   range: number;
   vehicles: number;
 }
@@ -47,7 +49,12 @@ export default function CardContentIdle({ data, LANGUAGE }: Props) {
   // Se usa el limite superior como numérico de cada rango.
   const rangesArray: rangeNVehicles[] = [];
   for (let index = 0; index < 10; index++) {
+    let lastRange = 0;
+    if (index !== 0) {
+      lastRange = Math.ceil(rangeSize * index + minIdle) + 1;
+    }
     rangesArray.push({
+      lastRange,
       range: Math.ceil(rangeSize * (index + 1) + minIdle),
       vehicles: 0,
     });
@@ -83,6 +90,7 @@ export default function CardContentIdle({ data, LANGUAGE }: Props) {
     yAxisTitle: LANGUAGE.teleOBD.charts.yAxis,
   };
   const langInTable = {
+    title: LANGUAGE.teleOBD.tableColumns.title,
     col1: LANGUAGE.teleOBD.tableColumns.plate,
     col2: LANGUAGE.teleOBD.tableColumns.name,
     col3: LANGUAGE.teleOBD.tableColumns.totalIdleHours,
@@ -90,10 +98,10 @@ export default function CardContentIdle({ data, LANGUAGE }: Props) {
 
   return (
     <div className={styles.distribution}>
-      <h1>{LANGUAGE.teleOBD.charts.titleIdle}</h1>
-      <h2>
-        {titleValueSubtitle.text} <span>{titleValueSubtitle.value}</span> h.
-      </h2>
+      <h3>{LANGUAGE.teleOBD.charts.titleIdle}</h3>
+      <h4>
+        {titleValueSubtitle.text}: <span>{titleValueSubtitle.value}</span> h
+      </h4>
       <ChartColInterval
         langSelection={langSelection}
         rangesArray={rangesArray}
