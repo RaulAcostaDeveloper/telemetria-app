@@ -341,6 +341,11 @@ export interface LanguageInterface {
     };
   };
   teleOBD: {
+    resumes: {
+      distance: string;
+      timeDriven: string;
+      timeIdle: string;
+    };
     tableColumns: {
       title: string;
       plate: string;

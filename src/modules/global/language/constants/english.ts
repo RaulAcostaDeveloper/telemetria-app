@@ -362,6 +362,11 @@ export const ENGLISH: LanguageInterface = {
     },
   },
   teleOBD: {
+    resumes: {
+      distance: "Total distance traveled",
+      timeDriven: "Total driven time",
+      timeIdle: "Total idle time",
+    },
     tableColumns: {
       title: "Top 5",
       plate: "Plate",
