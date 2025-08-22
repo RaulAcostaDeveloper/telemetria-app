@@ -1,35 +1,49 @@
-import { getCached } from "@/globalConfig/cache/cache";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
+interface UserData {
+  userId: string;
+  idCliente: string;
+  username: string;
+  accountName: string;
+  expre_at: string;
+}
+
+interface LoginData {
+  code: number;
+  message: string;
+  value: UserData | null;
+}
 
 const url =
   "https://stage.transtelemetrix.com/api/management/authentication/login";
 
-export async function postLogin(
-  encrypted: string, //Cifrado de usuario y contraseña
-  forceRefresh = true // No busque en caché
-) {
-  const key = `logIn`;
+// Se integra el middleware de\slices\authSlice.ts aquí para obtener el rejectWithValue(0)
+export const fetchLogin = createAsyncThunk(
+  "login/fetch",
+  async ({ encrypted }: { encrypted: string }, { rejectWithValue }) => {
+    const options: RequestInit = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ credentials: encrypted }),
+    };
 
-  const options: RequestInit = {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify({ credentials: encrypted }),
-  };
-
-  // Retorna DATA del servidor y no debe regresar DATA de caché
-  return getCached(
-    key,
-    async () => {
+    try {
       const res = await fetch(url, options);
-      if (!res.ok) {
-        throw new Error("Error al obtener login");
-      }
-
-      return res.json();
-    },
-    forceRefresh
-  );
-}
+      const result: LoginData =
+        res.status == 200
+          ? await res.json()
+          : ({
+              code: res.status,
+              message: res.statusText,
+              value: null,
+            } as LoginData);
+      return result;
+    } catch {
+      return rejectWithValue(0); //Sin conexión / timeout / DNS => no hay respuesta HTTP
+    }
+  }
+);

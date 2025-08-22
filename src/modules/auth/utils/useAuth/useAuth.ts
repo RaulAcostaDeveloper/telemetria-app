@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
 import {
-  fetchLogin,
   loginAction,
   logoutAction,
 } from "@/globalConfig/redux/slices/authSlice";
+import { fetchLogin } from "../../services/postLogin";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 import { fetchTestSession } from "@/globalConfig/redux/slices/testSessionSlice";
 
@@ -29,13 +29,16 @@ export const useAuth = () => {
   useEffect(() => {
     if (isLoginForm) {
       if (
+        loginServerData &&
+        loginServerData.value &&
         loginStatus === "succeeded" &&
         loginServerData?.code === 200 &&
         loginServerData.value.userId.length > 3
       ) {
         loginState();
       } else if (loginStatus !== "idle" && loginStatus !== "loading") {
-        logoutState();
+        const isPushedLogin = false;
+        logoutState(isPushedLogin);
       }
     }
   }, [isLoginForm, loginServerData, loginStatus]);
@@ -71,10 +74,12 @@ export const useAuth = () => {
     router.push("/home");
   };
 
-  const logoutState = () => {
+  const logoutState = (isPushedLogin = true) => {
     // Actualizar el estado de redux
     dispatch(logoutAction());
-    router.push("/login");
+    if (isPushedLogin) {
+      router.push("/login");
+    }
   };
 
   return {

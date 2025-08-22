@@ -19,13 +19,40 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [memoryIfStatus, setMemoryIfStatus] = useState(false);
+  const [memoryCodeStatus, setMemoryCodeStatus] = useState(-1);
   const { tryLoginHook } = useAuth();
 
-  const { loginStatus } = useSelector((state: RootState) => state.auth);
+  const { loginStatus, loginServerData } = useSelector(
+    (state: RootState) => state.auth
+  );
 
   useEffect(() => {
     setIsFormValid(!!name && !!password);
   }, [name, password, LANGUAGE]);
+
+  useEffect(() => {
+    if ("loading" === loginStatus) {
+      setMemoryCodeStatus(-1);
+      setMemoryIfStatus(false);
+    }
+
+    if (loginServerData && null !== loginServerData) {
+      setMemoryIfStatus(!!loginServerData);
+      setMemoryCodeStatus(loginServerData.code);
+    } else if (
+      "succeeded" === loginStatus &&
+      loginServerData &&
+      200 === loginServerData
+    ) {
+      //Limpio si ya inició satisfactoriamente sesión
+      setMemoryIfStatus(false);
+      setMemoryCodeStatus(-1);
+    } else if ("failed" === loginStatus && undefined === loginServerData) {
+      setMemoryIfStatus(true);
+      setMemoryCodeStatus(0);
+    }
+  }, [loginServerData, loginStatus]);
 
   const onClickGetToken = async () => {
     const encrypted = await encryptUserAndPassword(`${name}:${password}`);
@@ -35,6 +62,40 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
       console.error("ERROR: No se ha encriptado el usuario y contraseña");
     }
   };
+
+  function errorSelector() {
+    if (200 === memoryCodeStatus || -1 === memoryCodeStatus) {
+      //Login exitoso
+      return;
+    } else if (
+      (memoryIfStatus && 401 === memoryCodeStatus) ||
+      204 === memoryCodeStatus
+    ) {
+      //Error por usuario o contraseña
+      return (
+        <div className={styles.errorMessageContainer}>
+          <span>{LANGUAGE.auth.authFormNote.nameOrPasswordError}</span>
+        </div>
+      );
+    } else if (memoryIfStatus && 500 === memoryCodeStatus) {
+      //Error inesperado
+      return (
+        <div className={styles.errorMessageContainer}>
+          <span>{LANGUAGE.auth.authFormNote.unexpectedError}</span>
+        </div>
+      );
+    } else if (
+      (memoryIfStatus && 0 === memoryCodeStatus) ||
+      499 === memoryCodeStatus
+    ) {
+      //Error de red
+      return (
+        <div className={styles.errorMessageContainer}>
+          <span>{LANGUAGE.auth.authFormNote.networkError}</span>
+        </div>
+      );
+    }
+  }
 
   return loginStatus === "loading" || loginStatus === "succeeded" ? (
     <div>
@@ -79,11 +140,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
         type={ButtonTypes.CONFIRM}
         disabled={isFormValid ? false : true}
       />
-      {true && (
-        <div className={styles.errorMessageContainer}>
-          <span>{LANGUAGE.auth.authForm.nameOrPasswordError}</span>
-        </div>
-      )}
+      {errorSelector()}
     </div>
   );
 };

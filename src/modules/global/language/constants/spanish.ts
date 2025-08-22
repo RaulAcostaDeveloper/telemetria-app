@@ -195,8 +195,12 @@ export const SPANISH: LanguageInterface = {
       name: "Nombre",
       password: "Contraseña",
       title: "Autenticación",
-      nameOrPasswordError: "Usuario o contraseña invalido",
       loginButton: "Iniciar sesión",
+    },
+    authFormNote: {
+      nameOrPasswordError: "Usuario o contraseña invalido",
+      networkError: "Error de red",
+      unexpectedError: "Error interno inesperado",
     },
     linkToHome: "Ir al home",
     linkToRegister: "Ir a registro",
