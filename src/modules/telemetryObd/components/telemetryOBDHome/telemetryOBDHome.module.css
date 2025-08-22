@@ -9,3 +9,8 @@
 .telemetryObd {
   margin-bottom: 20px;
 }
+
+.resumeContainer {
+  display: flex;
+  justify-content: center;
+}

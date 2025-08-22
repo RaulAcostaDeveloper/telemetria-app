@@ -1,5 +1,5 @@
 .singleReportContainer {
-  width: clamp(180px, 33%, 400px);
+  min-width: clamp(180px, 33%, 400px);
   height: 6rem;
   display: flex;
   margin-right: 20px;
