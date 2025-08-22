@@ -2,6 +2,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+// import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
+import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
+import styles from "./fuelReportDataProvider.module.css";
 import {
   FuelNowContainer,
   FuelPerformanceMetrics,
@@ -11,12 +14,10 @@ import { FuelBehaviorTab } from "@/modules/fuel/components/fuelBehaviorTab/fuelB
 import { TabsContent } from "@/modules/global/components";
 import { fetchFuelData } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { fetchFuelPerformance } from "@/globalConfig/redux/slices/fuelPerformanceSlice";
+import { fetchLastFuelReport } from "@/globalConfig/redux/slices/lastFuelReportSlice";
 import { fetchVehicleByImei } from "@/globalConfig/redux/slices/vehicleByImeiSlice";
 import { useAuth } from "@/modules/auth/utils";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
-// import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
-import styles from "./fuelReportDataProvider.module.css";
-import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 
 export interface OBValue {
   startDate: string;
@@ -49,6 +50,10 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
 
   const { fuelPerformanceData, fuelPerformanceStatus } = useSelector(
     (state: RootState) => state.fuelPerformance
+  );
+
+  const { lastFuelReportData, lastFuelReportStatus } = useSelector(
+    (state: RootState) => state.lastFuelReport
   );
 
   useEffect(() => {
@@ -108,7 +113,7 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
     if (isAuthenticated && startDate && endDate) {
       dispatch(
         fetchFuelData({
-          imei: "862524060822760", // imei.toString(),
+          imei: imei, // imei.toString(),
           startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate), "2024-08-05T00:00:00"
           endDate: "2024-08-21T00:00:00", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
         })
@@ -116,13 +121,19 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
 
       dispatch(
         fetchFuelPerformance({
-          imei: "862524060822760", // imei.toString(),
+          imei: imei, // imei.toString(),
           startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate), "2024-08-05T00:00:00"
           endDate: "2024-08-21T00:00:00", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
         })
       );
+
+      dispatch(
+        fetchLastFuelReport({
+          imei: "862524060822760", // imei.toString(),
+        })
+      );
     }
-  }, [dispatch, isAuthenticated, startDate, endDate]);
+  }, [dispatch, isAuthenticated, startDate, endDate, imei]);
 
   // Actualiza datos del vehiculo cuando el imei no es ND ni indefinido.
   useEffect(() => {
@@ -169,7 +180,19 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
             )}
           </div>,
           <div key={2}>
-            <FuelNowContainer LANGUAGE={LANGUAGE} />
+            {lastFuelReportStatus === "succeeded" && lastFuelReportData ? (
+              <>
+                <FuelNowContainer
+                  LANGUAGE={LANGUAGE}
+                  imei={imei}
+                  lastFuelReportData={lastFuelReportData.value}
+                />
+              </>
+            ) : (
+              <div>
+                <LoaderAnimation />
+              </div>
+            )}
           </div>,
         ]}
       />
