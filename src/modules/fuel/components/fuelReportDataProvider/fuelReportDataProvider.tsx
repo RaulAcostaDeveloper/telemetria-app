@@ -52,6 +52,10 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
     (state: RootState) => state.fuelPerformance
   );
 
+  const { lastFuelReportData, lastFuelReportStatus } = useSelector(
+    (state: RootState) => state.lastFuelReport
+  );
+
   useEffect(() => {
     const engineOff: OBValue[] = [];
     const engineOffCoasting: OBValue[] = [];
@@ -125,7 +129,7 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
 
       dispatch(
         fetchLastFuelReport({
-          imei: imei, // imei.toString(),
+          imei: "862524060822760", // imei.toString(),
         })
       );
     }
@@ -176,7 +180,19 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
             )}
           </div>,
           <div key={2}>
-            <FuelNowContainer LANGUAGE={LANGUAGE} imei={imei} />
+            {lastFuelReportStatus === "succeeded" && lastFuelReportData ? (
+              <>
+                <FuelNowContainer
+                  LANGUAGE={LANGUAGE}
+                  imei={imei}
+                  lastFuelReportData={lastFuelReportData.value}
+                />
+              </>
+            ) : (
+              <div>
+                <LoaderAnimation />
+              </div>
+            )}
           </div>,
         ]}
       />

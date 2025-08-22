@@ -9,7 +9,7 @@ export const fetchLastFuelReport = createAsyncThunk(
   }
 );
 
-interface LastFuelReportStatus {
+export interface LastFuelReportData {
   id: string;
   lmId: string;
   accountId: number;
@@ -24,19 +24,19 @@ interface LastFuelReportStatus {
   course: number;
   height: number;
   odometer: number;
-  hourmeter: number;
+  hourmeter: number | null;
   externalPower: number;
   bckBatPercentaje: number;
-  ignition: number;
-  currentLevel: number;
-  tanksLevels: string;
-  adcVoltages: string;
+  ignition: boolean;
+  currentLevel: number | null;
+  tanksLevels: string | null;
+  adcVoltages: string | null;
 }
 
 interface Data {
   statusCode: number;
   message: string;
-  value: LastFuelReportStatus;
+  value: LastFuelReportData;
 }
 
 interface InitialState {
