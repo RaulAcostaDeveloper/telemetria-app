@@ -28,9 +28,11 @@ export interface LastFuelReportData {
   externalPower: number;
   bckBatPercentaje: number;
   ignition: boolean;
-  currentLevel: number | null;
   tanksLevels: string | null;
   adcVoltages: string | null;
+  canCurrentLevel: number;
+  dateAvl: string;
+  sensorCurrentLevel: number | null;
 }
 
 interface Data {
