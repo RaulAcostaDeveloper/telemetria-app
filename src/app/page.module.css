@@ -1,0 +1,8 @@
+.startview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 95dvw;
+  height: 95dvh;
+}

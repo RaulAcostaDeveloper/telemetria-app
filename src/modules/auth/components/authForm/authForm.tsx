@@ -1,13 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-
+import { useSelector } from "react-redux";
+import { RootState } from "@/globalConfig/redux/store";
 import encryptUserAndPassword from "../../utils/cryptoReference/cryptoReference";
 import styles from "./authForm.module.css";
 import { ButtonTypes } from "@/modules/global/components/generalButton/generalButton.model";
 import { GeneralButton } from "@/modules/global/components/generalButton/generalButton";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { useAuth } from "@/modules/auth/utils";
+import CheckLogin from "@/modules/login/checkLogin/checkLogin";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -18,6 +20,8 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
   const [password, setPassword] = useState<string>("");
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const { tryLoginHook } = useAuth();
+
+  const { loginStatus } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     setIsFormValid(!!name && !!password);
@@ -32,7 +36,11 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
     }
   };
 
-  return (
+  return loginStatus === "loading" || loginStatus === "succeeded" ? (
+    <div>
+      <CheckLogin />
+    </div>
+  ) : (
     <div className={styles.authForm}>
       <div className={styles.logoContainer}>
         <Image

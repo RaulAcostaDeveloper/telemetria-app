@@ -180,6 +180,9 @@ export interface LanguageInterface {
     };
     linkToHome: string;
     linkToRegister: string;
+    checklogin: {
+      maintitle: string;
+    };
   };
   fuel: {
     filter: {
@@ -338,6 +341,11 @@ export interface LanguageInterface {
     };
   };
   teleOBD: {
+    resumes: {
+      distance: string;
+      timeDriven: string;
+      timeIdle: string;
+    };
     tableColumns: {
       title: string;
       plate: string;

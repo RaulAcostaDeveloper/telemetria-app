@@ -11,6 +11,7 @@ import fuelSummaryReducer from "@/globalConfig/redux/slices/fuelSummarySlice";
 import groupsSlice from "@/globalConfig/redux/slices/groupsSlice";
 import languageReducer from "@/globalConfig/redux/slices/languageSlice";
 import lastFuelReportSlice from "@/globalConfig/redux/slices/lastFuelReportSlice";
+import testSessionSlice from "@/globalConfig/redux/slices/testSessionSlice";
 import topFuelReportSlice from "@/globalConfig/redux/slices/topFuelReportSlice";
 import vehicleByImeiSlice from "@/globalConfig/redux/slices/vehicleByImeiSlice";
 import vehiclesAllSlice from "@/globalConfig/redux/slices/vehiclesAllSlice";
@@ -29,6 +30,7 @@ export const store = configureStore({
     groups: groupsSlice,
     languageOption: languageReducer,
     lastFuelReport: lastFuelReportSlice,
+    testSession: testSessionSlice,
     topFuelReport: topFuelReportSlice,
     vehicleByImei: vehicleByImeiSlice,
     vehicles: vehiclesSlice,
