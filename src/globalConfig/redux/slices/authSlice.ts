@@ -17,7 +17,6 @@ interface LoginData {
 
 interface AuthState {
   isAuthenticated: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   loginServerData: LoginData | null;
   loginStatus: string;
 }
@@ -28,7 +27,7 @@ const initialState: AuthState = {
   loginStatus: "idle",
 };
 
-// Middleware
+// Middleware. Se está moviendo a /modules/auth/services/postLogin
 /* export const fetchLogin = createAsyncThunk(
   "login/fetch",
   async ({ encrypted }: { encrypted: string }, {rejectWithValue}) => {

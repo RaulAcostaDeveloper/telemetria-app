@@ -17,6 +17,7 @@ interface LoginData {
 const url =
   "https://stage.transtelemetrix.com/api/management/authentication/login";
 
+// Se integra el middleware de\slices\authSlice.ts aquí para obtener el rejectWithValue(0)
 export const fetchLogin = createAsyncThunk(
   "login/fetch",
   async ({ encrypted }: { encrypted: string }, { rejectWithValue }) => {
