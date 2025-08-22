@@ -1,5 +1,5 @@
-import { postLogin } from "@/modules/auth/services/postLogin";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { fetchLogin } from "@/modules/auth/services/postLogin";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface UserData {
   userId: string;
@@ -12,11 +12,12 @@ interface UserData {
 interface LoginData {
   code: number;
   message: string;
-  value: UserData;
+  value: UserData | null;
 }
 
 interface AuthState {
   isAuthenticated: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   loginServerData: LoginData | null;
   loginStatus: string;
 }
@@ -28,12 +29,12 @@ const initialState: AuthState = {
 };
 
 // Middleware
-export const fetchLogin = createAsyncThunk(
+/* export const fetchLogin = createAsyncThunk(
   "login/fetch",
-  async ({ encrypted }: { encrypted: string }) => {
-    return postLogin(encrypted);
+  async ({ encrypted }: { encrypted: string }, {rejectWithValue}) => {
+    return postLogin(encrypted, {rejectWithValue});
   }
-);
+); */
 
 // Slice
 export const authSlice = createSlice({

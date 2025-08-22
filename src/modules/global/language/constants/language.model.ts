@@ -175,8 +175,12 @@ export interface LanguageInterface {
       name: string;
       password: string;
       title: string;
-      nameOrPasswordError: string;
       loginButton: string;
+    };
+    authFormNote: {
+      nameOrPasswordError: string;
+      networkError: string;
+      unexpectedError: string;
     };
     linkToHome: string;
     linkToRegister: string;
