@@ -361,6 +361,11 @@ export const SPANISH: LanguageInterface = {
     },
   },
   teleOBD: {
+    resumes: {
+      distance: "Total distancia recorrida",
+      timeDriven: "Total del tiempo de conducción",
+      timeIdle: "Total del tiempo estacionado",
+    },
     tableColumns: {
       title: "Top 5",
       plate: "Placas",
