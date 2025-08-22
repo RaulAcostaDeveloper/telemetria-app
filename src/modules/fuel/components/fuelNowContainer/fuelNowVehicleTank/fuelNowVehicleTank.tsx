@@ -18,7 +18,7 @@ export const FuelNowVehicleTank = ({ tankValues, title }: Props) => {
                 <GaugeGraphic
                   value={value}
                   metric="L"
-                  max={70}
+                  max={45}
                   title={title + " " + (index + 1)}
                 />
               </div>

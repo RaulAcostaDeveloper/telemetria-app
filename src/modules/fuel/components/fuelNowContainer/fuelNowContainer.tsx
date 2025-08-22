@@ -59,7 +59,7 @@ export const FuelNowContainer = ({ LANGUAGE, lastFuelReportData }: Props) => {
     });
   }, []);
 
-  const dateGps = new Date(lastFuelReportData.dateGps);
+  const dateGps = new Date(lastFuelReportData.dateGps + "Z");
 
   const dateOptions: Intl.DateTimeFormatOptions = {
     weekday: "long",
@@ -83,7 +83,7 @@ export const FuelNowContainer = ({ LANGUAGE, lastFuelReportData }: Props) => {
 
   const numberOfTanks = tankValues?.length;
   const fuelNow = (tankValues ?? []).reduce((acc, val) => acc + val, 0);
-  const totalCapacity = 70 * (numberOfTanks ?? 0);
+  const totalCapacity = 45 * (numberOfTanks ?? 0);
 
   return (
     <div>
