@@ -5,14 +5,17 @@ interface LevelMessages {
   eventId: number;
   dateGps: string;
   dateServer: string;
+  dateAvl: string;
+
   lat: number;
   lon: number;
   odometer: number;
   speed: number;
-  ignition: number;
+  ignition: boolean;
   deviceBattery: number;
-  mainPower: number;
-  currentFuel: number;
+  externalPower: number;
+  canCurrentLevel: number;
+  sensorCurrentLevel: number;
   tanks: string;
 }
 
@@ -23,7 +26,8 @@ interface Charges {
   endDate: string;
   eventId: number;
   finalFuel: number;
-  ignition: number;
+  ignition: boolean;
+  imei: string;
   initialFuel: number;
   lat: number;
   lon: number;
@@ -42,7 +46,8 @@ interface Discharges {
   endDate: string;
   eventId: number;
   finalFuel: number;
-  ignition: number;
+  ignition: boolean;
+  imei: string;
   initialFuel: number;
   lat: number;
   lon: number;
@@ -86,7 +91,7 @@ interface PerformancesBetweenCharges {
 // }
 
 export interface FuelDataValues {
-  imei: number;
+  deviceId: string;
   levelMessages: LevelMessages[];
   charges: Charges[];
   discharges: Discharges[];
