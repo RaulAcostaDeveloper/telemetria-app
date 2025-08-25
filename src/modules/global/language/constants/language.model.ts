@@ -266,7 +266,7 @@ export interface LanguageInterface {
       fuelNow: string;
       capacity: string;
       velocity: string;
-      performance: string;
+      odometer: string;
       ignition: string;
       on: string;
       off: string;

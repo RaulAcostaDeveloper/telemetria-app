@@ -87,8 +87,13 @@ export const TableModalViewGroup = ({
       name: value.name,
       brand: value.brand,
       model: value.model,
+      groupName: value.group[0].name,
+      groupId: value.group[0].id,
       imeIs: value.imeIs,
       id: value.id,
+      serialNumber: value.serialNumber,
+      vehicleType: value.vehicleType,
+      driver: value.driver,
     })
   );
 

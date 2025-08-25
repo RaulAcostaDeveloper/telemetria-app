@@ -145,7 +145,7 @@ export const ENGLISH: LanguageInterface = {
       lon: "Longitude",
       fuel: {
         address: "Address",
-        odometer: "Odometer",
+        odometer: "Kilometers",
         speed: "Speed",
         ignition: "Ignition",
         on: "On",
@@ -286,7 +286,7 @@ export const ENGLISH: LanguageInterface = {
       fuelNow: "Fuel now",
       capacity: "Capacity",
       velocity: "Velocity",
-      performance: "Performance",
+      odometer: "Kilometers",
       ignition: "Ignition",
       on: "On",
       off: "Off",

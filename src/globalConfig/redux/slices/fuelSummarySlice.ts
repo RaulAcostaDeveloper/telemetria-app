@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // Tipado de los datos
 export interface Devices {
   imei: string;
-  lastFuelLevel: number;
+  lastFuelLevel: number | null;
   lastReportDate: string;
   name: string;
   plate: string;

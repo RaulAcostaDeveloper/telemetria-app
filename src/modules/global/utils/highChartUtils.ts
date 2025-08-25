@@ -49,25 +49,25 @@ export function getChargesTooltipFields(
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
-      value: (data) => `${data.initialFuel} L`,
+      value: (data) => `${data.initialFuel ?? "ND"} L`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.finalFuel,
-      value: (data) => `${data.finalFuel} L`,
+      value: (data) => `${data.finalFuel ?? "ND"} L`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.totalCharges,
-      value: (data) => `${data.magnitude} L`,
+      value: (data) => `${data.magnitude ?? "ND"} L`,
     },
     { label: LANGUAGE.highCharts.tooltips.lat, value: (data) => data.lat },
     { label: LANGUAGE.highCharts.tooltips.lon, value: (data) => data.lon },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.odometer,
-      value: (data) => `${data.odometer} Km`,
+      value: (data) => `${data.odometer ?? "ND"} Km`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.speed,
-      value: (data) => `${data.speed}  Km/h`,
+      value: (data) => `${data.speed ?? "ND"}  Km/h`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
@@ -80,15 +80,15 @@ export function getChargesTooltipFields(
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.deviceBattery,
-      value: (data) => `${data.deviceBattery} (%)`,
+      value: (data) => `${data.deviceBattery ?? "ND"} (%)`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.mainPower,
-      value: (data) => `${data.mainPower} (V)`,
+      value: (data) => `${data.mainPower ?? "ND"} (V)`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.address,
-      value: (data) => data.address,
+      value: (data) => data.address ?? "ND",
     },
   ];
 }
@@ -105,23 +105,23 @@ export function getDisChargesTooltipFields(
     { label: LANGUAGE.highCharts.tooltips.lon, value: (data) => data.lon },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
-      value: (data) => `${data.initialFuel} L`,
+      value: (data) => `${data.initialFuel ?? "ND"} L`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.finalFuel,
-      value: (data) => `${data.finalFuel} L`,
+      value: (data) => `${data.finalFuel ?? "ND"} L`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.totalDischarges,
-      value: (data) => `${data.magnitude} L`,
+      value: (data) => `${data.magnitude ?? "ND"} L`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.odometer,
-      value: (data) => `${data.odometer} Km`,
+      value: (data) => `${data.odometer ?? "ND"} Km`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.speed,
-      value: (data) => `${data.speed}  km/h`,
+      value: (data) => `${data.speed ?? "ND"}  km/h`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
@@ -134,15 +134,15 @@ export function getDisChargesTooltipFields(
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.deviceBattery,
-      value: (data) => `${data.deviceBattery} (%)`,
+      value: (data) => `${data.deviceBattery ?? "ND"} (%)`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.mainPower,
-      value: (data) => `${data.mainPower} (V)`,
+      value: (data) => `${data.mainPower ?? "ND"} (V)`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.address,
-      value: (data) => data.address,
+      value: (data) => data.address ?? "ND",
     },
   ];
 }
@@ -159,11 +159,11 @@ export function getLevelMessagesTooltipFields(
     { label: LANGUAGE.highCharts.tooltips.lon, value: (data) => data.lon },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.odometer,
-      value: (data) => `${data.odometer} Km`,
+      value: (data) => `${data.odometer ?? "ND"} Km`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.speed,
-      value: (data) => `${data.speed}  km/h`,
+      value: (data) => `${data.speed ?? "ND"}  km/h`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
@@ -176,15 +176,15 @@ export function getLevelMessagesTooltipFields(
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.deviceBattery,
-      value: (data) => `${data.deviceBattery} (%)`,
+      value: (data) => `${data.deviceBattery ?? "ND"} (%)`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.mainPower,
-      value: (data) => `${data.mainPower} (V)`,
+      value: (data) => `${data.mainPower ?? "ND"} (V)`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.tanks,
-      value: (data) => `${data.tanks} (L)`,
+      value: (data) => `${data.tanks ?? "ND"} (L)`,
     },
   ];
 }
@@ -199,27 +199,27 @@ export function getPerformancesBetweenChargesTooltipFields(
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.averagePerformance,
-      value: (data) => `${data.averagePerformance}  Km/h`,
+      value: (data) => `${data.averagePerformance ?? "ND"}  Km/h`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.fuelConsumed,
-      value: (data) => `${data.fuelConsumed} L`,
+      value: (data) => `${data.fuelConsumed ?? "ND"} L`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.initialLevel,
-      value: (data) => `${data.initialLevel} L`,
+      value: (data) => `${data.initialLevel ?? "ND"} L`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.finalLevel,
-      value: (data) => `${data.finalLevel}  L`,
+      value: (data) => `${data.finalLevel ?? "ND"}  L`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.initialOdometer,
-      value: (data) => `${data.initialOdometer}  Km`,
+      value: (data) => `${data.initialOdometer ?? "ND"}  Km`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.finalOdometer,
-      value: (data) => `${data.finalOdometer} Km`,
+      value: (data) => `${data.finalOdometer ?? "ND"} Km`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.distanceTravelled,
@@ -241,7 +241,7 @@ export function getRPMTooltipFields(
     { label: LANGUAGE.highCharts.tooltips.lon, value: (data) => data.lon },
     {
       label: LANGUAGE.highCharts.tooltips.rpm.rpm,
-      value: (data) => `${data.value}`,
+      value: (data) => `${data.value ?? "ND"}`,
     },
   ];
 }
@@ -258,7 +258,7 @@ export function getDistanceTooltipFields(
     { label: LANGUAGE.highCharts.tooltips.lon, value: (data) => data.lon },
     {
       label: LANGUAGE.highCharts.tooltips.distance.distanceTraveled,
-      value: (data) => `${data.value} Km`,
+      value: (data) => `${data.value ?? "ND"} Km`,
     },
   ];
 }
@@ -275,7 +275,7 @@ export function getTimeTraveledTooltipFields(
     { label: LANGUAGE.highCharts.tooltips.lon, value: (data) => data.lon },
     {
       label: LANGUAGE.highCharts.tooltips.timeTraveled.timeTraveled,
-      value: (data) => `${data.value} H`,
+      value: (data) => `${data.value ?? "ND"} H`,
     },
   ];
 }

@@ -140,7 +140,7 @@ export const FuelNowContainer = ({ LANGUAGE, lastFuelReportData }: Props) => {
             Icon={NoCrashIcon}
             LANGUAGE={LANGUAGE}
             data={lastFuelReportData.odometer + " Km"}
-            title={LANGUAGE.fuelVehicle.fuelNow.performance}
+            title={LANGUAGE.fuelVehicle.fuelNow.odometer}
           />
           <FuelDataReport
             Icon={ElectricCarIcon}

@@ -27,7 +27,10 @@ export const FuelPerformanceMetrics = ({
           LANGUAGE={LANGUAGE}
           metric="Km"
           name={LANGUAGE.fuelVehicle.vehicleReports.distanceTravelled}
-          value={fuelPerformanceData.distanceTraveled.toLocaleString("en-US")}
+          value={
+            fuelPerformanceData.distanceTraveled?.toLocaleString("en-US") ??
+            "ND"
+          }
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
@@ -48,26 +51,32 @@ export const FuelPerformanceMetrics = ({
           LANGUAGE={LANGUAGE}
           metric="L"
           name={LANGUAGE.fuelVehicle.vehicleReports.fuelConsumed}
-          value={fuelPerformanceData.fuelConsumed.toLocaleString("en-US")}
+          value={
+            fuelPerformanceData.fuelConsumed?.toLocaleString("en-US") ?? "ND"
+          }
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric="L"
           name={LANGUAGE.fuelVehicle.vehicleReports.fuelStart}
-          value={fuelPerformanceData.initialFuel.toLocaleString("en-US")}
+          value={
+            fuelPerformanceData.initialFuel?.toLocaleString("en-US") ?? "ND"
+          }
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric="L"
           name={LANGUAGE.fuelVehicle.vehicleReports.fuelEnd}
-          value={fuelPerformanceData.finalFuel.toLocaleString("en-US")}
+          value={fuelPerformanceData.finalFuel?.toLocaleString("en-US") ?? "ND"}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           isLast
           metric="L"
           name={LANGUAGE.fuelVehicle.vehicleReports.fuelLoaded}
-          value={fuelPerformanceData.fuelCharged.toLocaleString("en-US")}
+          value={
+            fuelPerformanceData.fuelCharged?.toLocaleString("en-US") ?? "ND"
+          }
         />
       </div>
     </div>

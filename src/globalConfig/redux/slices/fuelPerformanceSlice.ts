@@ -3,11 +3,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export interface FuelPerformanceValues {
   deviceId: string;
-  distanceTraveled: number;
-  finalFuel: number;
-  fuelCharged: number;
-  fuelConsumed: number;
-  initialFuel: number;
+  distanceTraveled: number | null;
+  finalFuel: number | null;
+  fuelCharged: number | null;
+  fuelConsumed: number | null;
+  initialFuel: number | null;
   operationTime: number;
   performanceByDistance: number;
   performanceByTime: number;

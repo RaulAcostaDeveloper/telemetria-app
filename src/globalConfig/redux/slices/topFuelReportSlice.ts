@@ -16,7 +16,7 @@ interface ChargesTopReport {
   serialNumber: string;
   imeis: [string];
   totalNumberCharges: number;
-  totalLitersCharges: number;
+  totalLitersCharges: number | null;
 }
 
 interface DischargesTopReport {
@@ -33,7 +33,7 @@ interface DischargesTopReport {
   serialNumber: string;
   imeis: [string];
   totalNumberDischarges: number;
-  totalLitersDischarges: number;
+  totalLitersDischarges: number | null;
 }
 
 interface TopFuelReportStatus {
