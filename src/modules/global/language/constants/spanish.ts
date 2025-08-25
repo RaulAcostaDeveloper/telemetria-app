@@ -195,8 +195,12 @@ export const SPANISH: LanguageInterface = {
       name: "Nombre",
       password: "Contraseña",
       title: "Autenticación",
-      nameOrPasswordError: "Usuario o contraseña invalido",
       loginButton: "Iniciar sesión",
+    },
+    authFormNote: {
+      nameOrPasswordError: "Usuario o contraseña invalido",
+      networkError: "Error de red",
+      unexpectedError: "Error interno inesperado",
     },
     linkToHome: "Ir al home",
     linkToRegister: "Ir a registro",
@@ -361,6 +365,11 @@ export const SPANISH: LanguageInterface = {
     },
   },
   teleOBD: {
+    resumes: {
+      distance: "Total distancia recorrida",
+      timeDriven: "Total del tiempo de conducción",
+      timeIdle: "Total del tiempo estacionado",
+    },
     tableColumns: {
       title: "Top 5",
       plate: "Placas",

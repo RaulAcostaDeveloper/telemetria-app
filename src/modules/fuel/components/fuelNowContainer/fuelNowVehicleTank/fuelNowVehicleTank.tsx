@@ -1,24 +1,35 @@
+import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 import styles from "./fuelNowVehicleTank.module.css";
 import { GaugeGraphic } from "@/modules/global/components";
 
 interface Props {
-  tankValues: number[];
+  tankValues: number[] | undefined;
   title: string;
 }
 
 export const FuelNowVehicleTank = ({ tankValues, title }: Props) => {
   return (
     <>
-      {tankValues.map((value, index) => (
-        <div key={index} className={styles.graphic}>
-          <GaugeGraphic
-            value={value}
-            metric="L"
-            max={70}
-            title={title + " " + (index + 1)}
-          />
-        </div>
-      ))}
+      <>
+        {tankValues ? (
+          <>
+            {tankValues.map((value, index) => (
+              <div key={index} className={styles.graphic}>
+                <GaugeGraphic
+                  value={value}
+                  metric="L"
+                  max={45}
+                  title={title + " " + (index + 1)}
+                />
+              </div>
+            ))}
+          </>
+        ) : (
+          <div>
+            <LoaderAnimation />
+          </div>
+        )}
+      </>
     </>
   );
 };

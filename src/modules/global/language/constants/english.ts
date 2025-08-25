@@ -195,8 +195,12 @@ export const ENGLISH: LanguageInterface = {
       name: "Name",
       password: "Password",
       title: "Authentication",
-      nameOrPasswordError: "Name or password is incorrect",
       loginButton: "Log In",
+    },
+    authFormNote: {
+      nameOrPasswordError: "Name or password is incorrect",
+      networkError: "Network error",
+      unexpectedError: "Unexpected internal error",
     },
     linkToHome: "Go to home",
     linkToRegister: "Go to Register",
@@ -362,6 +366,11 @@ export const ENGLISH: LanguageInterface = {
     },
   },
   teleOBD: {
+    resumes: {
+      distance: "Total distance traveled",
+      timeDriven: "Total driven time",
+      timeIdle: "Total idle time",
+    },
     tableColumns: {
       title: "Top 5",
       plate: "Plate",

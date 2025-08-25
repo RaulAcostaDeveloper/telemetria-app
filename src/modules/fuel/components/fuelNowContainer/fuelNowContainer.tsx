@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import CarCrashIcon from "@mui/icons-material/CarCrash";
@@ -13,30 +14,52 @@ import GeoModal, {
   GeoModalData,
 } from "@/modules/global/components/geoModal/geoModal";
 import styles from "./fuelNowContainer.module.css";
+import {
+  fetchLastFuelReport,
+  LastFuelReportData,
+} from "@/globalConfig/redux/slices/lastFuelReportSlice";
+import { AppDispatch } from "@/globalConfig/redux/store";
 import { ButtonTypes, GeneralButton } from "@/modules/global/components";
 import { FuelDataReport } from "./fuelDataReport/fuelDataReport";
 import { FuelNowVehicleTank } from "./fuelNowVehicleTank/fuelNowVehicleTank";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { rabbitVehicleFuelNow } from "@/modules/global/dataMock/rabbitVehicleFuelNow/rabbitVehicleFuelNow";
 
 interface Props {
   LANGUAGE: LanguageInterface;
+  imei: string;
+  lastFuelReportData: LastFuelReportData;
 }
 
-export const FuelNowContainer = ({ LANGUAGE }: Props) => {
+export const FuelNowContainer = ({ LANGUAGE, lastFuelReportData }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [geoModalData, setGeoModalData] = useState<GeoModalData>();
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    // Tener la data actualizada cada 10 segundos
+    const intervalId = setInterval(() => {
+      dispatch(
+        fetchLastFuelReport({
+          imei: "862524060822760", // imei.toString(),
+        })
+      );
+    }, 20000);
+
+    return () => {
+      clearTimeout(intervalId);
+    };
+  }, []);
 
   useEffect(() => {
     setGeoModalData({
-      lat: parseFloat(rabbitVehicleFuelNow.Lat),
-      lon: parseFloat(rabbitVehicleFuelNow.Lon),
+      lat: parseFloat(lastFuelReportData.lat.toString()),
+      lon: parseFloat(lastFuelReportData.lon.toString()),
       title: LANGUAGE.geoModalTitles.fuelNowTitle,
       rows: [],
     });
   }, []);
 
-  const dateGps = new Date(rabbitVehicleFuelNow.DateGps);
+  const dateGps = new Date(lastFuelReportData.dateGps + "Z");
 
   const dateOptions: Intl.DateTimeFormatOptions = {
     weekday: "long",
@@ -53,13 +76,14 @@ export const FuelNowContainer = ({ LANGUAGE }: Props) => {
     dateOptions
   );
 
-  const tankValues = rabbitVehicleFuelNow.TanksLevels.split(",")
+  const tankValues = lastFuelReportData.tanksLevels
+    ?.split(",")
     .map(Number)
     .filter((n) => !isNaN(n));
 
-  const numberOfTanks = tankValues.length;
-  const fuelNow = tankValues.reduce((acc, val) => acc + val, 0);
-  const totalCapacity = 70 * numberOfTanks;
+  const numberOfTanks = tankValues?.length;
+  const fuelNow = (tankValues ?? []).reduce((acc, val) => acc + val, 0);
+  const totalCapacity = 45 * (numberOfTanks ?? 0);
 
   return (
     <div>
@@ -109,20 +133,20 @@ export const FuelNowContainer = ({ LANGUAGE }: Props) => {
           <FuelDataReport
             Icon={SpeedRounded}
             LANGUAGE={LANGUAGE}
-            data={rabbitVehicleFuelNow.Speed + " Km/h"}
+            data={lastFuelReportData.speed + " Km/h"}
             title={LANGUAGE.fuelVehicle.fuelNow.velocity}
           />
           <FuelDataReport
             Icon={NoCrashIcon}
             LANGUAGE={LANGUAGE}
-            data={rabbitVehicleFuelNow.Odometer + " Km"}
+            data={lastFuelReportData.odometer + " Km"}
             title={LANGUAGE.fuelVehicle.fuelNow.performance}
           />
           <FuelDataReport
             Icon={ElectricCarIcon}
             LANGUAGE={LANGUAGE}
             data={
-              rabbitVehicleFuelNow.Ignition === 1
+              lastFuelReportData.ignition
                 ? LANGUAGE.fuelVehicle.fuelNow.on
                 : LANGUAGE.fuelVehicle.fuelNow.off
             }

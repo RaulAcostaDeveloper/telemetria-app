@@ -175,8 +175,12 @@ export interface LanguageInterface {
       name: string;
       password: string;
       title: string;
-      nameOrPasswordError: string;
       loginButton: string;
+    };
+    authFormNote: {
+      nameOrPasswordError: string;
+      networkError: string;
+      unexpectedError: string;
     };
     linkToHome: string;
     linkToRegister: string;
@@ -341,6 +345,11 @@ export interface LanguageInterface {
     };
   };
   teleOBD: {
+    resumes: {
+      distance: string;
+      timeDriven: string;
+      timeIdle: string;
+    };
     tableColumns: {
       title: string;
       plate: string;

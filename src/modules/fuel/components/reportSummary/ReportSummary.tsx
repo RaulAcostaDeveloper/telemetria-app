@@ -26,7 +26,7 @@ const ReportSummary = ({ summaryValues }: Props) => {
           <LocalGasStationRounded className={styles.inventory} />
         </div>
         <div className={styles.summaryContainer}>
-          <h1>{LANGUAGE.fuel.summaryReports.labels.inventory}</h1>
+          <h4>{LANGUAGE.fuel.summaryReports.labels.inventory}</h4>
           <span>
             {summaryValues.inventory
               ? `${formatNumberWithCommas(summaryValues.inventory)}  L`
@@ -39,7 +39,7 @@ const ReportSummary = ({ summaryValues }: Props) => {
           <SpeedRounded className={styles.performance} />
         </div>
         <div className={styles.summaryContainer}>
-          <h1>{LANGUAGE.fuel.summaryReports.labels.performance}</h1>
+          <h4>{LANGUAGE.fuel.summaryReports.labels.performance}</h4>
           <span>
             {summaryValues.performanceOdometer
               ? `${formatNumberWithCommas(
@@ -54,7 +54,7 @@ const ReportSummary = ({ summaryValues }: Props) => {
           <TrendingUp className={styles.fuelCharged} />
         </div>
         <div className={styles.summaryContainer}>
-          <h1>{LANGUAGE.fuel.summaryReports.labels.fuelCharged}</h1>
+          <h4>{LANGUAGE.fuel.summaryReports.labels.fuelCharged}</h4>
           <span>
             {summaryValues.fuelCharged
               ? `${formatNumberWithCommas(summaryValues.fuelCharged)}  L`
@@ -67,7 +67,7 @@ const ReportSummary = ({ summaryValues }: Props) => {
           <TrendingDown className={styles.fuelDischarged} />
         </div>
         <div className={styles.summaryContainer}>
-          <h1>{LANGUAGE.fuel.summaryReports.labels.fuelDischarged}</h1>
+          <h4>{LANGUAGE.fuel.summaryReports.labels.fuelDischarged}</h4>
           <span>
             {summaryValues.fuelDischarged
               ? `${formatNumberWithCommas(summaryValues.fuelDischarged)}  L`
@@ -80,7 +80,7 @@ const ReportSummary = ({ summaryValues }: Props) => {
           <Troubleshoot className={styles.unitsAnalyzed} />
         </div>
         <div className={styles.summaryContainer}>
-          <h1>{LANGUAGE.fuel.summaryReports.labels.unitsAnalyzed}</h1>
+          <h4>{LANGUAGE.fuel.summaryReports.labels.unitsAnalyzed}</h4>
           <span>
             {summaryValues.unitsAnalyzed
               ? `${formatNumberWithCommas(summaryValues.unitsAnalyzed)}`
@@ -93,7 +93,7 @@ const ReportSummary = ({ summaryValues }: Props) => {
           <DataThresholding className={styles.totalDistanceTraveled} />
         </div>
         <div className={styles.summaryContainer}>
-          <h1>{LANGUAGE.fuel.summaryReports.labels.totalDistanceTraveled}</h1>
+          <h4>{LANGUAGE.fuel.summaryReports.labels.totalDistanceTraveled}</h4>
           <span>
             {summaryValues.totalDistanceTraveled
               ? `${formatNumberWithCommas(

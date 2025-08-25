@@ -1,11 +1,16 @@
-import { Table } from "@/modules/global/components";
-import { telemetryVehiclesOBD } from "@/modules/global/dataMock/telemetryVehiclesOBD/telemetryVehiclesOBD";
-import CardContentTCT5 from "@/modules/global/components/cardsDeck/cardContentTCT5";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import HourglassDisabledIcon from "@mui/icons-material/HourglassDisabled";
+import NorthEastIcon from "@mui/icons-material/NorthEast";
+
 import CardContentDrivenTime from "@/modules/global/components/cardsDeck/cardContentDrivenTime";
 import CardContentIdle from "@/modules/global/components/cardsDeck/cardContentIdle";
+import CardContentTCT5 from "@/modules/global/components/cardsDeck/cardContentTCT5";
 import CardGenThird from "@/modules/global/components/cardsDeck/cardGenThird";
-
 import styles from "./telemetryOBDHome.module.css";
+import { FuelDataReport } from "@/modules/fuel/components/fuelNowContainer/fuelDataReport/fuelDataReport";
+import { Table } from "@/modules/global/components";
+import { formatNumberWithCommas } from "@/modules/global/utils/utils";
+import { telemetryVehiclesOBD } from "@/modules/global/dataMock/telemetryVehiclesOBD/telemetryVehiclesOBD";
 
 //Tipado
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
@@ -99,23 +104,74 @@ export const TelemetryHome = ({ LANGUAGE, showTable }: Props) => {
       showTotal: true,
     },
   ];
+
+  const totalDistance = teleVehiclesOBDData.reduce(
+    (suma, data) => suma + Number(data.totalDistance ?? 0),
+    0
+  );
+
+  const totalEngineHours = teleVehiclesOBDData.reduce(
+    (suma, data) => suma + Number(data.totalEngineHours ?? 0),
+    0
+  );
+
+  const totalIdleHours = teleVehiclesOBDData.reduce(
+    (suma, data) => suma + Number(data.totalIdleHours ?? 0),
+    0
+  );
   return (
     <div className={styles.telemetryObd}>
       {teleVehiclesOBDStatus === "succeeded" && teleVehiclesOBDData ? (
         <>
           <section className={styles.cardssection}>
-            <CardGenThird>
-              <CardContentTCT5 data={teleVehiclesOBDData} LANGUAGE={LANGUAGE} />
-            </CardGenThird>
-            <CardGenThird>
-              <CardContentDrivenTime
-                data={teleVehiclesOBDData}
-                LANGUAGE={LANGUAGE}
-              />
-            </CardGenThird>
-            <CardGenThird>
-              <CardContentIdle data={teleVehiclesOBDData} LANGUAGE={LANGUAGE} />
-            </CardGenThird>
+            <div>
+              <div className={styles.resumeContainer}>
+                <FuelDataReport
+                  Icon={NorthEastIcon}
+                  LANGUAGE={LANGUAGE}
+                  data={formatNumberWithCommas(totalDistance) + " km"}
+                  title={LANGUAGE.teleOBD.resumes.distance}
+                />
+              </div>
+              <CardGenThird>
+                <CardContentTCT5
+                  data={teleVehiclesOBDData}
+                  LANGUAGE={LANGUAGE}
+                />
+              </CardGenThird>
+            </div>
+            <div>
+              <div className={styles.resumeContainer}>
+                <FuelDataReport
+                  Icon={AccessTimeIcon}
+                  LANGUAGE={LANGUAGE}
+                  data={formatNumberWithCommas(totalEngineHours) + " h"}
+                  title={LANGUAGE.teleOBD.resumes.timeDriven}
+                />
+              </div>
+              <CardGenThird>
+                <CardContentDrivenTime
+                  data={teleVehiclesOBDData}
+                  LANGUAGE={LANGUAGE}
+                />
+              </CardGenThird>
+            </div>
+            <div>
+              <div className={styles.resumeContainer}>
+                <FuelDataReport
+                  Icon={HourglassDisabledIcon}
+                  LANGUAGE={LANGUAGE}
+                  data={formatNumberWithCommas(totalIdleHours) + " h"}
+                  title={LANGUAGE.teleOBD.resumes.timeDriven}
+                />
+              </div>
+              <CardGenThird>
+                <CardContentIdle
+                  data={teleVehiclesOBDData}
+                  LANGUAGE={LANGUAGE}
+                />
+              </CardGenThird>
+            </div>
           </section>
           {showTable && (
             <Table
