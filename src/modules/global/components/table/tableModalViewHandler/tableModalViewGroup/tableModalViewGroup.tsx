@@ -1,5 +1,6 @@
 // Ver los vehículos que pertenecen a este grupo
 "use client";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import LoaderAnimation from "../../../loaderAnimation/loaderAnimation";
@@ -10,11 +11,11 @@ import {
   columnsTable,
   dataTable,
 } from "../../table.model";
+import { ErrorMessage } from "../../../errorMessage/errorMessage";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Modal } from "../../../modal/modal";
 import { RootState } from "@/globalConfig/redux/store";
 import { Table } from "../../table";
-import { useEffect, useState } from "react";
 import { Vehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
 
 interface Props {
@@ -100,7 +101,7 @@ export const TableModalViewGroup = ({
       }
     >
       <div className={styles.container}>
-        {vehiclesStatus === "succeeded" && vehiclesTableData ? (
+        {vehiclesStatus === "succeeded" && vehiclesTableData && (
           <Table
             LANGUAGE={LANGUAGE}
             columns={vehicleColumns}
@@ -111,11 +112,15 @@ export const TableModalViewGroup = ({
             showGoOBD
             showViewModal
           />
-        ) : (
+        )}
+
+        {vehiclesStatus === "loading" && (
           <div>
             <LoaderAnimation />
           </div>
         )}
+
+        {vehiclesStatus === "failed" && <ErrorMessage LANGUAGE={LANGUAGE} />}
       </div>
     </Modal>
   );

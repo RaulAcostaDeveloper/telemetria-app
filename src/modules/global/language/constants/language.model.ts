@@ -8,6 +8,10 @@ export interface LanguageInterface {
     fuel: string;
     telemetryobd: string;
   };
+  notifications: {
+    unexpectedError: string;
+    genericServiceError: string;
+  };
   header: {
     backButton: {
       hover: string;

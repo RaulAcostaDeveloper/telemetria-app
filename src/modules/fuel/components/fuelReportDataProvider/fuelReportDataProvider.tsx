@@ -10,6 +10,7 @@ import {
   FuelPerformanceMetrics,
 } from "@/modules/fuel/components";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
+import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
 import { FuelBehaviorTab } from "@/modules/fuel/components/fuelBehaviorTab/fuelBehaviorTab";
 import { TabsContent } from "@/modules/global/components";
 import { fetchFuelData } from "@/globalConfig/redux/slices/fuelDataSlice";
@@ -148,7 +149,7 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
         tabOptions={vehicleTabs}
         tabContents={[
           <div key={0}>
-            {fuelDataStatus === "succeeded" && fuelDataData ? (
+            {fuelDataStatus === "succeeded" && fuelDataData && (
               <>
                 <FuelBehaviorTab
                   LANGUAGE={LANGUAGE}
@@ -159,28 +160,40 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
                   opBEngineOnMoving={opBEngineOnMoving}
                 />
               </>
-            ) : (
+            )}
+
+            {fuelDataStatus === "loading" && (
               <div>
                 <LoaderAnimation />
               </div>
             )}
+
+            {fuelDataStatus === "failed" && (
+              <ErrorMessage LANGUAGE={LANGUAGE} />
+            )}
           </div>,
           <div key={1}>
-            {fuelPerformanceStatus === "succeeded" && fuelPerformanceData ? (
+            {fuelPerformanceStatus === "succeeded" && fuelPerformanceData && (
               <>
                 <FuelPerformanceMetrics
                   LANGUAGE={LANGUAGE}
                   fuelPerformanceData={fuelPerformanceData.value}
                 />
               </>
-            ) : (
+            )}
+
+            {fuelPerformanceStatus === "loading" && (
               <div>
                 <LoaderAnimation />
               </div>
             )}
+
+            {fuelPerformanceStatus === "failed" && (
+              <ErrorMessage LANGUAGE={LANGUAGE} />
+            )}
           </div>,
           <div key={2}>
-            {lastFuelReportStatus === "succeeded" && lastFuelReportData ? (
+            {lastFuelReportStatus === "succeeded" && lastFuelReportData && (
               <>
                 <FuelNowContainer
                   LANGUAGE={LANGUAGE}
@@ -188,10 +201,16 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
                   lastFuelReportData={lastFuelReportData.value}
                 />
               </>
-            ) : (
+            )}
+
+            {lastFuelReportStatus === "loading" && (
               <div>
                 <LoaderAnimation />
               </div>
+            )}
+
+            {lastFuelReportStatus === "failed" && (
+              <ErrorMessage LANGUAGE={LANGUAGE} />
             )}
           </div>,
         ]}

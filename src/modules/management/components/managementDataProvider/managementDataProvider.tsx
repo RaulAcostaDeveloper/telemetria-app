@@ -1,21 +1,18 @@
 "use client";
 import { useSelector } from "react-redux";
 
+import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 import styles from "./managementDataProvider.module.css";
-import { RootState } from "@/globalConfig/redux/store";
-import { formatDateTime } from "@/modules/global/utils/utils";
-
-//Tipado
 import {
   MODAL_OPTION,
   columnsTable,
   dataTable,
 } from "@/modules/global/components/table/table.model";
+import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-
-//Módulos
+import { RootState } from "@/globalConfig/redux/store";
 import { Table, TabsContent } from "@/modules/global/components";
-import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
+import { formatDateTime } from "@/modules/global/utils/utils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -262,7 +259,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
         tabOptions={fuelTabs}
         tabContents={[
           <div key={1}>
-            {vehiclesStatus === "succeeded" && vehiclesTableData ? (
+            {vehiclesStatus === "succeeded" && vehiclesTableData && (
               <Table
                 LANGUAGE={LANGUAGE}
                 columns={vehicleColumns}
@@ -273,24 +270,34 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
                 showGoOBD
                 showViewModal
               />
-            ) : (
+            )}
+
+            {vehiclesStatus === "loading" && (
               <div>
                 <LoaderAnimation />
               </div>
             )}
+
+            {vehiclesStatus === "failed" && (
+              <ErrorMessage LANGUAGE={LANGUAGE} />
+            )}
           </div>,
           <div key={2}>
-            {devicesStatus === "succeeded" && devicesTableData ? (
+            {devicesStatus === "succeeded" && devicesTableData && (
               <Table
                 LANGUAGE={LANGUAGE}
                 columns={devicesColumns}
                 data={devicesTableData}
               />
-            ) : (
+            )}
+
+            {devicesStatus === "loading" && (
               <div>
                 <LoaderAnimation />
               </div>
             )}
+
+            {devicesStatus === "failed" && <ErrorMessage LANGUAGE={LANGUAGE} />}
           </div>,
           <div key={3}>
             {driversStatus === "succeeded" && driversTableData ? (
@@ -304,9 +311,17 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
                 <LoaderAnimation />
               </div>
             )}
+
+            {driversStatus === "loading" && (
+              <div>
+                <LoaderAnimation />
+              </div>
+            )}
+
+            {driversStatus === "failed" && <ErrorMessage LANGUAGE={LANGUAGE} />}
           </div>,
           <div key={4}>
-            {groupsStatus === "succeeded" && groupsTableData ? (
+            {groupsStatus === "succeeded" && groupsTableData && (
               <Table
                 LANGUAGE={LANGUAGE}
                 columns={groupsColumns}
@@ -315,11 +330,15 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
                 modalOption={MODAL_OPTION.GROUPS}
                 showViewModal
               />
-            ) : (
+            )}
+
+            {groupsStatus === "loading" && (
               <div>
                 <LoaderAnimation />
               </div>
             )}
+
+            {groupsStatus === "failed" && <ErrorMessage LANGUAGE={LANGUAGE} />}
           </div>,
         ]}
       />
