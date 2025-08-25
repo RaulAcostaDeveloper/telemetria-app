@@ -162,7 +162,7 @@ export const TelemetryHome = ({ LANGUAGE, showTable }: Props) => {
                   Icon={HourglassDisabledIcon}
                   LANGUAGE={LANGUAGE}
                   data={formatNumberWithCommas(totalIdleHours) + " h"}
-                  title={LANGUAGE.teleOBD.resumes.timeDriven}
+                  title={LANGUAGE.teleOBD.resumes.timeIdle}
                 />
               </div>
               <CardGenThird>

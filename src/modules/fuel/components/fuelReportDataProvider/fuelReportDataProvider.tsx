@@ -69,25 +69,25 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
       const nextDateGps = levelMessages[i + 1];
       const endDate = nextDateGps?.dateGps ?? el.dateServer; // fallback por si es el último
 
-      if (el.ignition === 0 && el.speed === 0) {
+      if (el.ignition === false && el.speed === 0) {
         engineOff.push({
           startDate: el.dateGps,
           endDate,
           speed: el.speed,
         });
-      } else if (el.ignition === 0 && el.speed >= 1) {
+      } else if (el.ignition === false && el.speed >= 1) {
         engineOffCoasting.push({
           startDate: el.dateGps,
           endDate,
           speed: el.speed,
         });
-      } else if (el.ignition === 1 && el.speed === 0) {
+      } else if (el.ignition === true && el.speed === 0) {
         engineOnIdle.push({
           startDate: el.dateGps,
           endDate,
           speed: el.speed,
         });
-      } else if (el.ignition === 1 && el.speed >= 1) {
+      } else if (el.ignition === true && el.speed >= 1) {
         engineOnMoving.push({
           startDate: el.dateGps,
           endDate,

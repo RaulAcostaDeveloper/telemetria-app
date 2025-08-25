@@ -6,35 +6,34 @@ interface LevelMessages {
   dateGps: string;
   dateServer: string;
   dateAvl: string;
-
   lat: number;
   lon: number;
   odometer: number;
   speed: number;
   ignition: boolean;
-  deviceBattery: number;
-  externalPower: number;
-  canCurrentLevel: number;
-  sensorCurrentLevel: number;
+  deviceBattery: number | null;
+  externalPower: number | null;
+  canCurrentLevel: number | null;
+  sensorCurrentLevel: number | null;
   tanks: string;
 }
 
 interface Charges {
   address: string;
   dateGps: string;
-  deviceBattery: number;
+  deviceBattery: number | null;
   endDate: string;
   eventId: number;
-  finalFuel: number;
+  finalFuel: number | null;
   ignition: boolean;
   imei: string;
-  initialFuel: number;
+  initialFuel: number | null;
   lat: number;
   lon: number;
-  magnitude: number;
-  mainPower: number;
-  odometer: number;
-  origin: number;
+  magnitude: number | null;
+  mainPower: number | null;
+  odometer: number | null;
+  origin: number | null;
   speed: number;
   startDate: string;
 }
@@ -42,19 +41,19 @@ interface Charges {
 interface Discharges {
   address: string;
   dateGps: string;
-  deviceBattery: number;
+  deviceBattery: number | null;
   endDate: string;
   eventId: number;
-  finalFuel: number;
+  finalFuel: number | null;
   ignition: boolean;
   imei: string;
-  initialFuel: number;
+  initialFuel: number | null;
   lat: number;
   lon: number;
-  magnitude: number;
-  mainPower: number;
+  magnitude: number | null;
+  mainPower: number | null;
   odometer: number;
-  origin: number;
+  origin: number | null;
   speed: number;
   startDate: string;
 }
@@ -62,12 +61,12 @@ interface Discharges {
 interface DailyPerformances {
   startDate: string;
   endDate: string;
-  averagePerformance: number;
+  averagePerformance: number | null;
   createdAt: string;
   updateAt: string;
-  fuelConsumed: number;
-  initialLevel: number;
-  finalLevel: number;
+  fuelConsumed: number | null;
+  initialLevel: number | null;
+  finalLevel: number | null;
   initialOdometer: number;
   finalOdometer: number;
 }
@@ -75,9 +74,9 @@ interface DailyPerformances {
 interface PerformancesBetweenCharges {
   endDatePerformance: string;
   startDatePerformace: string;
-  fuelConsumed: number;
-  initialLevel: number;
-  finalLevel: number;
+  fuelConsumed: number | null;
+  initialLevel: number | null;
+  finalLevel: number | null;
   averagePerformance: number;
   initialOdometer: number;
   finalOdometer: number;
