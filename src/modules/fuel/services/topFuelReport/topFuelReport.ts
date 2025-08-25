@@ -11,7 +11,7 @@ export async function getTopFuelReport(
   forceRefresh = true // Se le puede indicar que no busque en caché
 ) {
   // Construcción de la url con parámetros
-  const fullUrl = `${url}/${accountId}/Top/${numberOfVehicles}?startDate=${startDate}&endDate=${endDate}`;
+  const fullUrl = `${url}/${accountId}/top/${numberOfVehicles}?startDate=${startDate}&endDate=${endDate}`;
 
   // Construcción del key único para caché
   const key = `topFuelReport-${accountId}-${numberOfVehicles}-${startDate}-${endDate}`;

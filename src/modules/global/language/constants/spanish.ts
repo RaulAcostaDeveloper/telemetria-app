@@ -140,7 +140,7 @@ export const SPANISH: LanguageInterface = {
       lat: "Latitud",
       lon: "Longitud",
       fuel: {
-        odometer: "Odómetro",
+        odometer: "Kilometraje",
         address: "Dirección",
         speed: "Velocidad",
         ignition: "Ignición",
@@ -282,7 +282,7 @@ export const SPANISH: LanguageInterface = {
       fuelNow: "Combustible actual",
       capacity: "Capacidad",
       velocity: "Velocidad",
-      performance: "Rendimiento",
+      odometer: "Kilometraje",
       ignition: "Ignición",
       on: "Encendido",
       off: "Apagado",
