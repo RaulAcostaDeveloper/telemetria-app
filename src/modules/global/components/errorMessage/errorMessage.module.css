@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 20px;
+}
+
+.element {
+  background-color: #fce8db;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 300px;
+  display: flex;
+  box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.icon {
+  color: var(--button-color-3);
+  height: 100%;
+  padding-right: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.errorMessage {
+  color: #71192f;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+}

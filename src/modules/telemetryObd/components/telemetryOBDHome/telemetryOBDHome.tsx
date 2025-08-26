@@ -6,7 +6,9 @@ import CardContentDrivenTime from "@/modules/global/components/cardsDeck/cardCon
 import CardContentIdle from "@/modules/global/components/cardsDeck/cardContentIdle";
 import CardContentTCT5 from "@/modules/global/components/cardsDeck/cardContentTCT5";
 import CardGenThird from "@/modules/global/components/cardsDeck/cardGenThird";
+import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 import styles from "./telemetryOBDHome.module.css";
+import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
 import { FuelDataReport } from "@/modules/fuel/components/fuelNowContainer/fuelDataReport/fuelDataReport";
 import { Table } from "@/modules/global/components";
 import { formatNumberWithCommas } from "@/modules/global/utils/utils";
@@ -121,7 +123,7 @@ export const TelemetryHome = ({ LANGUAGE, showTable }: Props) => {
   );
   return (
     <div className={styles.telemetryObd}>
-      {teleVehiclesOBDStatus === "succeeded" && teleVehiclesOBDData ? (
+      {teleVehiclesOBDStatus === "succeeded" && teleVehiclesOBDData && (
         <>
           <section className={styles.cardssection}>
             <div>
@@ -185,8 +187,16 @@ export const TelemetryHome = ({ LANGUAGE, showTable }: Props) => {
             />
           )}
         </>
-      ) : (
-        <div>...</div>
+      )}
+
+      {teleVehiclesOBDStatus === "loading" && (
+        <div>
+          <LoaderAnimation />
+        </div>
+      )}
+
+      {teleVehiclesOBDStatus === "failed" && (
+        <ErrorMessage LANGUAGE={LANGUAGE} />
       )}
     </div>
   );

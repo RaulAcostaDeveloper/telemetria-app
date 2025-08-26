@@ -2,14 +2,16 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSelector } from "react-redux";
-import { RootState } from "@/globalConfig/redux/store";
+
+import CheckLogin from "@/modules/login/checkLogin/checkLogin";
 import encryptUserAndPassword from "../../utils/cryptoReference/cryptoReference";
 import styles from "./authForm.module.css";
 import { ButtonTypes } from "@/modules/global/components/generalButton/generalButton.model";
+import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
 import { GeneralButton } from "@/modules/global/components/generalButton/generalButton";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { RootState } from "@/globalConfig/redux/store";
 import { useAuth } from "@/modules/auth/utils";
-import CheckLogin from "@/modules/login/checkLogin/checkLogin";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -96,8 +98,9 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
       );
     }
   }
-
-  return loginStatus === "loading" || loginStatus === "succeeded" ? (
+  return loginStatus === "failed" ? (
+    <ErrorMessage LANGUAGE={LANGUAGE} />
+  ) : loginStatus === "loading" || loginStatus === "succeeded" ? (
     <div>
       <CheckLogin />
     </div>

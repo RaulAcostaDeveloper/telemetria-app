@@ -8,6 +8,10 @@ export const ENGLISH: LanguageInterface = {
     fuel: "Fuel",
     telemetryobd: "Diagnostics",
   },
+  notifications: {
+    unexpectedError: "Unexpected error",
+    genericServiceError: "Data communication error",
+  },
   header: {
     backButton: {
       hover: "Go back",

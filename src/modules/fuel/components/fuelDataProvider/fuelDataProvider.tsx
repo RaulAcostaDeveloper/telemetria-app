@@ -2,6 +2,7 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+// import { FuelFilter } from "../fuelFilter/fuelFilter";
 import DonutGraphic from "@/modules/global/components/donutGraphic/DonutGraphic";
 import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
@@ -11,7 +12,7 @@ import {
   dataTable,
 } from "@/modules/global/components/table/table.model";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
-// import { FuelFilter } from "../fuelFilter/fuelFilter";
+import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Table, TabsContent } from "@/modules/global/components";
 import { fetchFuelSummary } from "@/globalConfig/redux/slices/fuelSummarySlice";
@@ -317,23 +318,27 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
       )} */}
 
       <div className={styles.topResumeData}>
-        {fuelSummaryStatus === "succeeded" && fuelSummaryData ? (
+        {fuelSummaryStatus === "succeeded" && fuelSummaryData && (
           <>
             <ReportSummary summaryValues={fuelSummaryData.value} />
             <DonutGraphic devices={fuelSummaryData.value.devices} />
           </>
-        ) : (
+        )}
+
+        {fuelSummaryStatus === "loading" && (
           <div>
             <LoaderAnimation />
           </div>
         )}
+
+        {fuelSummaryStatus === "failed" && <ErrorMessage LANGUAGE={LANGUAGE} />}
       </div>
       <div className={styles.fuelTabs}>
         <TabsContent
           tabOptions={tabOptions}
           tabContents={[
             <div key={1}>
-              {fuelSummaryStatus === "succeeded" && vehiclesReport ? (
+              {fuelSummaryStatus === "succeeded" && vehiclesReport && (
                 <Table
                   LANGUAGE={LANGUAGE}
                   columns={vehiclesColumns}
@@ -342,14 +347,20 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
                   showGoFuel
                   showGoOBD
                 />
-              ) : (
+              )}
+
+              {fuelSummaryStatus === "loading" && (
                 <div>
                   <LoaderAnimation />
                 </div>
               )}
+
+              {fuelSummaryStatus === "failed" && (
+                <ErrorMessage LANGUAGE={LANGUAGE} />
+              )}
             </div>,
             <div key={2}>
-              {topFuelReportStatus === "succeeded" && topFuelReportCharges ? (
+              {topFuelReportStatus === "succeeded" && topFuelReportCharges && (
                 <Table
                   LANGUAGE={LANGUAGE}
                   columns={topFuelReportChargesColumns}
@@ -359,28 +370,40 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
                   showGoFuel
                   showGoOBD
                 />
-              ) : (
+              )}
+
+              {topFuelReportStatus === "loading" && (
                 <div>
                   <LoaderAnimation />
                 </div>
               )}
+
+              {topFuelReportStatus === "failed" && (
+                <ErrorMessage LANGUAGE={LANGUAGE} />
+              )}
             </div>,
             <div key={3}>
               {topFuelReportStatus === "succeeded" &&
-              topFuelReportDischarges ? (
-                <Table
-                  LANGUAGE={LANGUAGE}
-                  columns={topFuelReportDischargesColumns}
-                  data={topFuelReportDischarges}
-                  idKey="imei"
-                  showViewModal
-                  showGoFuel
-                  showGoOBD
-                />
-              ) : (
+                topFuelReportDischarges && (
+                  <Table
+                    LANGUAGE={LANGUAGE}
+                    columns={topFuelReportDischargesColumns}
+                    data={topFuelReportDischarges}
+                    idKey="imei"
+                    showViewModal
+                    showGoFuel
+                    showGoOBD
+                  />
+                )}
+
+              {topFuelReportStatus === "loading" && (
                 <div>
                   <LoaderAnimation />
                 </div>
+              )}
+
+              {topFuelReportStatus === "failed" && (
+                <ErrorMessage LANGUAGE={LANGUAGE} />
               )}
             </div>,
           ]}

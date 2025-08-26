@@ -1,7 +1,7 @@
 "use client";
 import { HomeBriefFuelDataProvider } from "@/modules/home/components";
-import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 import { TelemetryHome } from "@/modules/telemetryObd/components";
+import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
 export default function Home() {
   const LANGUAGE = useLanguage();
@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div>
       {/* <section> */}
-      <HomeBriefFuelDataProvider />
+      <HomeBriefFuelDataProvider LANGUAGE={LANGUAGE} />
       {/* </section> */}
       <TelemetryHome LANGUAGE={LANGUAGE} />
     </div>
