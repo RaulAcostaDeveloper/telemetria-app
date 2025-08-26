@@ -114,7 +114,7 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
     if (isAuthenticated && startDate && endDate) {
       dispatch(
         fetchFuelData({
-          imei: imei, // imei.toString(),
+          imei: "862524060822760", // imei.toString(),
           startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate), "2024-08-05T00:00:00"
           endDate: "2024-08-21T00:00:00", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
         })
@@ -122,7 +122,7 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
 
       dispatch(
         fetchFuelPerformance({
-          imei: imei, // imei.toString(),
+          imei: "862524060822760", // imei.toString(),
           startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate), "2024-08-05T00:00:00"
           endDate: "2024-08-21T00:00:00", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
         })
