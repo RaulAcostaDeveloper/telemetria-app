@@ -70,6 +70,12 @@ export const SPANISH: LanguageInterface = {
     buttons: {
       logOut: "Salir",
     },
+    modal: {
+      titleLogout: "Confirmación",
+      messageLogout: "¿Desea cerrar la sesión?",
+      buttonCancel: "Cancelar",
+      buttonAccept: "Aceptar",
+    },
   },
   table: {
     buttons: {

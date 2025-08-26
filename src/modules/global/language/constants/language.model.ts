@@ -50,6 +50,12 @@ export interface LanguageInterface {
     buttons: {
       logOut: string;
     };
+    modal: {
+      titleLogout: string;
+      messageLogout: string;
+      buttonCancel: string;
+      buttonAccept: string;
+    };
   };
   table: {
     buttons: {

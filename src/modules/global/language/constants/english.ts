@@ -70,6 +70,12 @@ export const ENGLISH: LanguageInterface = {
     buttons: {
       logOut: "Log out",
     },
+    modal: {
+      titleLogout: "Confirmation",
+      messageLogout: "Do you want to logout?",
+      buttonCancel: "Cancel",
+      buttonAccept: "Yes",
+    },
   },
   table: {
     buttons: {

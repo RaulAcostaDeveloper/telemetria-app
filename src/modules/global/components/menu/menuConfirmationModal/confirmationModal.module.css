@@ -1,0 +1,20 @@
+.title {
+  margin: 20px 0;
+  font-size: 3rem;
+  padding: 0 20px;
+  text-align: center;
+}
+.message {
+  font-size: 2rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.buttons button {
+  font-size: 2rem;
+  padding: 6px 10px;
+  border-width: 0px;
+}
