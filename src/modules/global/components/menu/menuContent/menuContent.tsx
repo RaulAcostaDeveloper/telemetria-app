@@ -11,6 +11,8 @@ import { GeneralButton } from "../../generalButton/generalButton";
 import { LanguageInterface } from "../../../language/constants/language.model";
 import { MenuRoute } from "../menuRoute/menuRoute";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { ConfirmationModal } from "../menuConfirmationModal/confirmationModal";
 
 interface Props {
   logoutState: () => void;
@@ -20,6 +22,7 @@ interface Props {
 
 export const MenuContent = ({ isOpen, LANGUAGE, logoutState }: Props) => {
   const pathname = usePathname();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const menuList = [
     {
@@ -63,7 +66,7 @@ export const MenuContent = ({ isOpen, LANGUAGE, logoutState }: Props) => {
           <GeneralButton
             Icon={<LogoutIcon />}
             buttonStyle={styles.buttonStyle}
-            callback={logoutState}
+            callback={() => setShowLogoutModal(true)}
             placeholder={LANGUAGE.menu.buttons.logOut}
             title={isOpen ? LANGUAGE.menu.buttons.logOut : ""}
             titleStyle={styles.buttonTitle}
@@ -71,6 +74,13 @@ export const MenuContent = ({ isOpen, LANGUAGE, logoutState }: Props) => {
           />
         </div>
       </div>
+      {showLogoutModal && (
+        <ConfirmationModal
+          LANGUAGE={LANGUAGE}
+          closeModal={() => setShowLogoutModal(false)}
+          logoutState={logoutState}
+        ></ConfirmationModal>
+      )}
     </>
   );
 };
