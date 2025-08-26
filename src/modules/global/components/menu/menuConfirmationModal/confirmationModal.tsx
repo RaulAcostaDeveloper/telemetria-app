@@ -1,6 +1,8 @@
 import styles from "./confirmationModal.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Modal } from "../../modal/modal";
+import { ButtonTypes } from "../../generalButton/generalButton.model";
+import { GeneralButton } from "../../generalButton/generalButton";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -22,12 +24,16 @@ export const ConfirmationModal = ({
       <div className={styles.title}>
         <p className={styles.message}>{LANGUAGE.menu.modal.messageLogout}</p>
         <div className={styles.buttons}>
-          <button onClick={closeModal}>
-            {LANGUAGE.menu.modal.buttonCancel}
-          </button>
-          <button onClick={logoutState}>
-            {LANGUAGE.menu.modal.buttonAccept}
-          </button>
+          <GeneralButton
+            type={ButtonTypes.NEUTRAL}
+            title={LANGUAGE.menu.modal.buttonCancel}
+            callback={closeModal}
+          />
+          <GeneralButton
+            type={ButtonTypes.CONFIRM}
+            title={LANGUAGE.menu.modal.buttonAccept}
+            callback={logoutState}
+          />
         </div>
       </div>
     </Modal>
