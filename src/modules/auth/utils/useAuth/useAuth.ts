@@ -9,6 +9,7 @@ import {
 import { fetchLogin } from "../../services/postLogin";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 import { fetchTestSession } from "@/globalConfig/redux/slices/testSessionSlice";
+import { callLogout } from "@/globalConfig/redux/slices/logoutSlice";
 
 export const useAuth = () => {
   const router = useRouter();
@@ -24,6 +25,10 @@ export const useAuth = () => {
 
   const { testSessionData, testSessionStatus } = useSelector(
     (state: RootState) => state.testSession
+  );
+
+  const { logoutData, logoutStatus } = useSelector(
+    (state: RootState) => state.logoutSlice
   );
 
   useEffect(() => {
@@ -78,6 +83,7 @@ export const useAuth = () => {
     // Actualizar el estado de redux
     dispatch(logoutAction());
     if (isPushedLogin) {
+      dispatch(callLogout());
       router.push("/login");
     }
   };
