@@ -13,7 +13,7 @@ interface ObdRollupDetails {
   imei: string;
 }
 
-interface ObdRollupDataValues {
+export interface ObdRollupDataValues {
   accountID: number;
   unitsAnalyzed: number;
   driverTime: number;

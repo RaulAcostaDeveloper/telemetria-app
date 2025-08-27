@@ -1,14 +1,12 @@
 import ChartColInterval from "../chartColumnInterval/chartColInterval";
-import styles from "./cardContentStyle.module.css";
-import { format2DecimalsString } from "../../utils/utils";
 import TableInCardT5 from "./tableInCardT5";
-
-//Tipado
-import { dataTable } from "@/modules/global/components/table/table.model";
+import styles from "./cardContentStyle.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { ObdRollupDataValues } from "@/globalConfig/redux/slices/obdRollupSlice";
+import { format2DecimalsString } from "../../utils/utils";
 
 interface Props {
-  data: dataTable;
+  data: ObdRollupDataValues;
   LANGUAGE: LanguageInterface;
 }
 
@@ -23,19 +21,21 @@ interface rangeNVehicles {
  * como cardGenThird.
  */
 export default function CardContentIdle({ data, LANGUAGE }: Props) {
-  const magnitudes: number[] = data.map(
-    (value) => value.totalIdleHours as number
+  const magnitudes: number[] = data.details.map(
+    (value) => value.driverIdleTime as number
   );
+
   const compareNumbers = (a: number, b: number) => {
     return a - b;
   };
+
   const ascendingIdle = magnitudes.toSorted(compareNumbers);
   const descendingIdle = ascendingIdle.toReversed();
   const top5Idle = descendingIdle.slice(0, 5);
   const average =
     magnitudes.reduce((a, b) => {
       return a + b;
-    }) / data.length;
+    }) / magnitudes.length;
   const titleValueSubtitle = {
     text: LANGUAGE.teleOBD.charts.subtitleIdle,
     value: Math.trunc(average),
@@ -73,13 +73,13 @@ export default function CardContentIdle({ data, LANGUAGE }: Props) {
 
   const top5IdleData = [];
   for (let index = 0; index < top5Idle.length; index++) {
-    const pivot = data.filter(
-      (value) => top5Idle[index] === value.totalIdleHours
+    const pivot = data.details.filter(
+      (value) => top5Idle[index] === value.driverIdleTime
     )[0];
     const pivotClean = {
       plate: pivot.plate as string,
       name: pivot.name as string,
-      totalIdleHours: format2DecimalsString(pivot.totalIdleHours as number),
+      totalIdleHours: format2DecimalsString(pivot.driverIdleTime as number),
     };
     top5IdleData.push(pivotClean);
   }
@@ -89,6 +89,7 @@ export default function CardContentIdle({ data, LANGUAGE }: Props) {
     xAxisTitle: LANGUAGE.teleOBD.charts.xAxisIdle,
     yAxisTitle: LANGUAGE.teleOBD.charts.yAxis,
   };
+
   const langInTable = {
     title: LANGUAGE.teleOBD.tableColumns.title,
     col1: LANGUAGE.teleOBD.tableColumns.plate,

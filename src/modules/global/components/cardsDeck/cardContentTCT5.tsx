@@ -1,14 +1,12 @@
 import ChartColInterval from "../chartColumnInterval/chartColInterval";
-import styles from "./cardContentStyle.module.css";
-import { format2DecimalsString } from "../../utils/utils";
 import TableInCardT5 from "./tableInCardT5";
-
-//Tipado
-import { dataTable } from "@/modules/global/components/table/table.model";
+import styles from "./cardContentStyle.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { ObdRollupDataValues } from "@/globalConfig/redux/slices/obdRollupSlice";
+import { format2DecimalsString } from "../../utils/utils";
 
 interface Props {
-  data: dataTable;
+  data: ObdRollupDataValues;
   LANGUAGE: LanguageInterface;
 }
 
@@ -23,19 +21,20 @@ interface rangeNVehicles {
  * como cardGenThird.
  */
 export default function CardContentTCT5({ data, LANGUAGE }: Props) {
-  const magnitudes: number[] = data.map(
-    (value) => value.totalDistance as number
+  const magnitudes: number[] = data.details.map(
+    (value) => Number(value.driverDistance) as number
   );
   const compareNumbers = (a: number, b: number) => {
     return a - b;
   };
+
   const ascendingDistance = magnitudes.toSorted(compareNumbers);
   const descendingDistance = ascendingDistance.toReversed();
   const top5Distance = descendingDistance.slice(0, 5);
   const average =
     magnitudes.reduce((a, b) => {
       return a + b;
-    }) / data.length;
+    }) / magnitudes.length;
   const titleValueSubtitle = {
     text: LANGUAGE.teleOBD.charts.subtitleDistance,
     value: Math.trunc(average),
@@ -73,13 +72,16 @@ export default function CardContentTCT5({ data, LANGUAGE }: Props) {
 
   const top5DistanceData = [];
   for (let index = 0; index < top5Distance.length; index++) {
-    const pivot = data.filter(
-      (value) => top5Distance[index] === value.totalDistance
+    const pivot = data.details.filter(
+      (value) =>
+        top5Distance[index] === (Number(value.driverDistance) as number)
     )[0];
     const pivotClean = {
       plate: pivot.plate as string,
       name: pivot.name as string,
-      totalDistance: format2DecimalsString(pivot.totalDistance as number),
+      totalDistance: format2DecimalsString(
+        Number(pivot.driverDistance) as number
+      ),
     };
     top5DistanceData.push(pivotClean);
   }
@@ -89,6 +91,7 @@ export default function CardContentTCT5({ data, LANGUAGE }: Props) {
     xAxisTitle: LANGUAGE.teleOBD.charts.xAxisDistance,
     yAxisTitle: LANGUAGE.teleOBD.charts.yAxis,
   };
+
   const langInTable = {
     title: LANGUAGE.teleOBD.tableColumns.title,
     col1: LANGUAGE.teleOBD.tableColumns.plate,

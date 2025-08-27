@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
 import HourglassDisabledIcon from "@mui/icons-material/HourglassDisabled";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 
@@ -135,7 +136,7 @@ export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
             <section>
               <div className={styles.resumeContainer}>
                 <FuelDataReport
-                  Icon={NorthEastIcon}
+                  Icon={DirectionsCarFilledIcon}
                   LANGUAGE={LANGUAGE}
                   data={formatNumberWithCommas(
                     obdRollupData.value.unitsAnalyzed
@@ -175,19 +176,19 @@ export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
             <section className={styles.cardssection}>
               <CardGenThird>
                 <CardContentTCT5
-                  data={teleVehiclesOBDData}
+                  data={obdRollupData.value}
                   LANGUAGE={LANGUAGE}
                 />
               </CardGenThird>
               <CardGenThird>
                 <CardContentDrivenTime
-                  data={teleVehiclesOBDData}
+                  data={obdRollupData.value}
                   LANGUAGE={LANGUAGE}
                 />
               </CardGenThird>
               <CardGenThird>
                 <CardContentIdle
-                  data={teleVehiclesOBDData}
+                  data={obdRollupData.value}
                   LANGUAGE={LANGUAGE}
                 />
               </CardGenThird>
