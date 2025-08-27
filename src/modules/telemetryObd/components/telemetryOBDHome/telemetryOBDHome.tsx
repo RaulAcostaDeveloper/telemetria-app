@@ -1,3 +1,7 @@
+"use client";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import HourglassDisabledIcon from "@mui/icons-material/HourglassDisabled";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
@@ -8,18 +12,18 @@ import CardContentTCT5 from "@/modules/global/components/cardsDeck/cardContentTC
 import CardGenThird from "@/modules/global/components/cardsDeck/cardGenThird";
 import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 import styles from "./telemetryOBDHome.module.css";
-import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
-import { FuelDataReport } from "@/modules/fuel/components/fuelNowContainer/fuelDataReport/fuelDataReport";
-import { Table } from "@/modules/global/components";
-import { formatNumberWithCommas } from "@/modules/global/utils/utils";
-import { telemetryVehiclesOBD } from "@/modules/global/dataMock/telemetryVehiclesOBD/telemetryVehiclesOBD";
-
-//Tipado
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import {
   columnsTable,
   dataTable,
 } from "@/modules/global/components/table/table.model";
+import { AppDispatch, RootState } from "@/globalConfig/redux/store";
+import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
+import { FuelDataReport } from "@/modules/fuel/components/fuelNowContainer/fuelDataReport/fuelDataReport";
+import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { Table } from "@/modules/global/components";
+import { fetchObdRollup } from "@/globalConfig/redux/slices/obdRollupSlice";
+import { formatNumberWithCommas } from "@/modules/global/utils/utils";
+import { telemetryVehiclesOBD } from "@/modules/global/dataMock/telemetryVehiclesOBD/telemetryVehiclesOBD";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -27,10 +31,26 @@ interface Props {
 }
 
 export const TelemetryHome = ({ LANGUAGE, showTable }: Props) => {
-  // Llamado a slice para cuando haya endpoint disponible:
-  /* const { teleVehiclesOBDData, teleVehiclesOBDStatus } = useSelector(
-    (state: RootState ) => state.teleVehiclesOBD
-  ); */
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { startDate, endDate } = useSelector(
+    (state: RootState) => state.calendar
+  );
+
+  // const { obdRollupData, obdRollupStatus } = useSelector(
+  //   (state: RootState) => state.obdRollup
+  // );
+
+  useEffect(() => {
+    dispatch(
+      fetchObdRollup({
+        accountId: "4992",
+        startDate: "2025-06-17T00:00:00", // formatToLocalIso8601(startDate),
+        endDate: "2025-09-21T00:00:00",
+      })
+    );
+  }, [startDate, endDate, dispatch]);
+
   const teleVehiclesOBDStatus = "succeeded";
   const teleVehiclesOBDData: dataTable | undefined =
     telemetryVehiclesOBD?.value.vehicles.map((value) => ({
