@@ -5,12 +5,12 @@ import { getObdRollup } from "@/modules/telemetryObd/services/rollup/rollup";
 interface ObdRollupDetails {
   averageSpeed: number;
   driverTime: number; // totalEngineHours
-  // totalDistance
-  // totalIdleHours (estacionado)
-  imei: string;
+  driverDistance: null | string; // totalDistance
+  driverIdleTime: number; // totalIdleHours (estacionado)
   maxSpeed: number;
   name: string;
   plate: string;
+  imei: string;
 }
 
 interface ObdRollupDataValues {
@@ -18,6 +18,7 @@ interface ObdRollupDataValues {
   unitsAnalyzed: number;
   driverTime: number;
   driverDistance: number;
+  driverIdleTime: null | number;
   details: ObdRollupDetails[];
 }
 

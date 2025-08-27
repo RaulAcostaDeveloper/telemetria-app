@@ -11,7 +11,7 @@ import CardContentIdle from "@/modules/global/components/cardsDeck/cardContentId
 import CardContentTCT5 from "@/modules/global/components/cardsDeck/cardContentTCT5";
 import CardGenThird from "@/modules/global/components/cardsDeck/cardGenThird";
 import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
-import styles from "./telemetryOBDHome.module.css";
+import styles from "./OBDDataProvider.module.css";
 import {
   columnsTable,
   dataTable,
@@ -30,28 +30,27 @@ interface Props {
   showTable?: boolean; //Esconde la tabla si el módulo es usado en Home.
 }
 
-export const TelemetryHome = ({ LANGUAGE, showTable }: Props) => {
+export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { startDate, endDate } = useSelector(
     (state: RootState) => state.calendar
   );
 
-  // const { obdRollupData, obdRollupStatus } = useSelector(
-  //   (state: RootState) => state.obdRollup
-  // );
+  const { obdRollupData, obdRollupStatus } = useSelector(
+    (state: RootState) => state.obdRollup
+  );
 
   useEffect(() => {
     dispatch(
       fetchObdRollup({
-        accountId: "4992",
-        startDate: "2025-06-17T00:00:00", // formatToLocalIso8601(startDate),
-        endDate: "2025-09-21T00:00:00",
+        accountId: "90926",
+        startDate: "2025-07-17T00:00:00", // formatToLocalIso8601(startDate),
+        endDate: "2025-10-21T00:00:00",
       })
     );
   }, [startDate, endDate, dispatch]);
 
-  const teleVehiclesOBDStatus = "succeeded";
   const teleVehiclesOBDData: dataTable | undefined =
     telemetryVehiclesOBD?.value.vehicles.map((value) => ({
       name: value.name,
@@ -127,97 +126,93 @@ export const TelemetryHome = ({ LANGUAGE, showTable }: Props) => {
     },
   ];
 
-  const totalDistance = teleVehiclesOBDData.reduce(
-    (suma, data) => suma + Number(data.totalDistance ?? 0),
-    0
-  );
-
-  const totalEngineHours = teleVehiclesOBDData.reduce(
-    (suma, data) => suma + Number(data.totalEngineHours ?? 0),
-    0
-  );
-
-  const totalIdleHours = teleVehiclesOBDData.reduce(
-    (suma, data) => suma + Number(data.totalIdleHours ?? 0),
-    0
-  );
   return (
     <div className={styles.telemetryObd}>
-      {teleVehiclesOBDStatus === "succeeded" && teleVehiclesOBDData && (
-        <>
-          <section className={styles.cardssection}>
-            <div>
+      {obdRollupStatus === "succeeded" &&
+        obdRollupData &&
+        teleVehiclesOBDData && (
+          <>
+            <section>
               <div className={styles.resumeContainer}>
                 <FuelDataReport
                   Icon={NorthEastIcon}
                   LANGUAGE={LANGUAGE}
-                  data={formatNumberWithCommas(totalDistance) + " km"}
+                  data={formatNumberWithCommas(
+                    obdRollupData.value.unitsAnalyzed
+                  )}
+                  title={LANGUAGE.fuel.summaryReports.labels.unitsAnalyzed}
+                />
+                <FuelDataReport
+                  Icon={NorthEastIcon}
+                  LANGUAGE={LANGUAGE}
+                  data={
+                    formatNumberWithCommas(obdRollupData.value.driverDistance) +
+                    " km"
+                  }
                   title={LANGUAGE.teleOBD.resumes.distance}
                 />
+                <FuelDataReport
+                  Icon={AccessTimeIcon}
+                  LANGUAGE={LANGUAGE}
+                  data={
+                    formatNumberWithCommas(obdRollupData.value.driverTime) +
+                    " h"
+                  }
+                  title={LANGUAGE.teleOBD.resumes.timeDriven}
+                />
+                <FuelDataReport
+                  Icon={HourglassDisabledIcon}
+                  LANGUAGE={LANGUAGE}
+                  data={
+                    formatNumberWithCommas(
+                      obdRollupData.value.driverIdleTime ?? 0
+                    ) + " h"
+                  }
+                  title={LANGUAGE.teleOBD.resumes.timeIdle}
+                />
               </div>
+            </section>
+            <section className={styles.cardssection}>
               <CardGenThird>
                 <CardContentTCT5
                   data={teleVehiclesOBDData}
                   LANGUAGE={LANGUAGE}
                 />
               </CardGenThird>
-            </div>
-            <div>
-              <div className={styles.resumeContainer}>
-                <FuelDataReport
-                  Icon={AccessTimeIcon}
-                  LANGUAGE={LANGUAGE}
-                  data={formatNumberWithCommas(totalEngineHours) + " h"}
-                  title={LANGUAGE.teleOBD.resumes.timeDriven}
-                />
-              </div>
               <CardGenThird>
                 <CardContentDrivenTime
                   data={teleVehiclesOBDData}
                   LANGUAGE={LANGUAGE}
                 />
               </CardGenThird>
-            </div>
-            <div>
-              <div className={styles.resumeContainer}>
-                <FuelDataReport
-                  Icon={HourglassDisabledIcon}
-                  LANGUAGE={LANGUAGE}
-                  data={formatNumberWithCommas(totalIdleHours) + " h"}
-                  title={LANGUAGE.teleOBD.resumes.timeIdle}
-                />
-              </div>
               <CardGenThird>
                 <CardContentIdle
                   data={teleVehiclesOBDData}
                   LANGUAGE={LANGUAGE}
                 />
               </CardGenThird>
-            </div>
-          </section>
-          {showTable && (
-            <Table
-              title={LANGUAGE.teleOBD.tableTitle.registerTeleOBD}
-              LANGUAGE={LANGUAGE}
-              columns={teleVehiclesOBDColumns}
-              data={teleVehiclesOBDData}
-              showGoFuel
-              showGoOBD
-              idKey="imeIs"
-            />
-          )}
-        </>
-      )}
+            </section>
+            {showTable && (
+              <Table
+                title={LANGUAGE.teleOBD.tableTitle.registerTeleOBD}
+                LANGUAGE={LANGUAGE}
+                columns={teleVehiclesOBDColumns}
+                data={teleVehiclesOBDData}
+                showGoFuel
+                showGoOBD
+                idKey="imeIs"
+              />
+            )}
+          </>
+        )}
 
-      {teleVehiclesOBDStatus === "loading" && (
+      {obdRollupStatus === "loading" && (
         <div>
           <LoaderAnimation />
         </div>
       )}
 
-      {teleVehiclesOBDStatus === "failed" && (
-        <ErrorMessage LANGUAGE={LANGUAGE} />
-      )}
+      {obdRollupStatus === "failed" && <ErrorMessage LANGUAGE={LANGUAGE} />}
     </div>
   );
 };
