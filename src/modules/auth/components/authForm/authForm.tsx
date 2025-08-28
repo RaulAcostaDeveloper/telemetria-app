@@ -98,6 +98,12 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
       );
     }
   }
+  function handlePassKeyDown(event: { key: string }) {
+    if ("Enter" === event.key && true === isFormValid) {
+      onClickGetToken();
+    }
+  }
+
   return loginStatus === "failed" ? (
     <ErrorMessage LANGUAGE={LANGUAGE} />
   ) : loginStatus === "loading" || loginStatus === "succeeded" ? (
@@ -134,6 +140,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
           placeholder={LANGUAGE.auth.authForm.password}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyDown={handlePassKeyDown}
         />
       </div>
 
