@@ -8,7 +8,13 @@ export async function getGroups(
 ) {
   // Construcción de la url con parámetros
   const fullUrl = `${url}${accountId}/vehicles/groups`;
-
+  const options: RequestInit = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  };
   // Construcción del key único para caché
   const key = `managementGroups-${accountId}`;
 
@@ -16,9 +22,20 @@ export async function getGroups(
   return getCached(
     key,
     async () => {
-      const res = await fetch(fullUrl);
-      if (!res.ok) throw new Error("Error al obtener grupos");
-      return res.json();
+      try {
+        const response = await fetch(fullUrl, options);
+        const result =
+          response.status === 200
+            ? await response.json()
+            : {
+                code: response.status,
+                message: response.statusText,
+                value: null,
+              };
+        return result;
+      } catch {
+        throw new Error("Error al obtener grupos");
+      }
     },
     forceRefresh // poner un forceRefresh en caso de necesitarlo
   );
