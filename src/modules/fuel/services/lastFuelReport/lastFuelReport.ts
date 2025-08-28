@@ -9,7 +9,13 @@ export async function getLastFuelReport(
 ) {
   // Construcción de la url con parámetros
   const fullUrl = `${url}/${imei}/last-report`;
-
+  const options: RequestInit = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  };
   // Construcción del key único para caché
   const key = `last-report-${imei}`;
 
@@ -17,10 +23,20 @@ export async function getLastFuelReport(
   return getCached(
     key,
     async () => {
-      const res = await fetch(fullUrl);
-      if (!res.ok)
+      try {
+        const response = await fetch(fullUrl, options);
+        const result =
+          response.status === 200
+            ? await response.json()
+            : {
+                code: response.status,
+                message: response.statusText,
+                value: null,
+              };
+        return result;
+      } catch {
         throw new Error("Error al obtener último reporte de combustible");
-      return res.json();
+      }
     },
     forceRefresh
   );

@@ -12,7 +12,13 @@ export async function getFuelSummary(
 ) {
   // Construcción de la url con parámetros
   const fullUrl = `${url}/${accountId}/summary?startDate=${startDate}&endDate=${endDate}&performanceType=${performanceType}`;
-
+  const options: RequestInit = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  };
   // Construcción del key único para caché
   const key = `fuelSummary-${accountId}-${startDate}-${endDate}-${performanceType}`;
 
@@ -20,9 +26,20 @@ export async function getFuelSummary(
   return getCached(
     key,
     async () => {
-      const res = await fetch(fullUrl);
-      if (!res.ok) throw new Error("Error al obtener vehículos");
-      return res.json();
+      try {
+        const response = await fetch(fullUrl, options);
+        const result =
+          response.status === 200
+            ? await response.json()
+            : {
+                code: response.status,
+                message: response.statusText,
+                value: null,
+              };
+        return result;
+      } catch {
+        throw new Error("Error al obtener vehículos");
+      }
     }
     // forceRefresh
   );
