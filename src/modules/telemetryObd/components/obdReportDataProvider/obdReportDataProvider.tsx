@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import GeoModal, {
   GeoModalData,
@@ -13,8 +13,9 @@ import {
   SINGLE_CHART_TYPES,
   SingleLineHighChart,
 } from "@/modules/telemetryObd/components";
-import { AppDispatch } from "@/globalConfig/redux/store";
+import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 import { TabsContent } from "@/modules/global/components";
+import { fetchObdTravelMetrics } from "@/globalConfig/redux/slices/obdTravelMetrics";
 import { fetchVehicleByImei } from "@/globalConfig/redux/slices/vehicleByImeiSlice";
 import { fuelVehicleOBDDataMock } from "@/modules/global/dataMock/fuelVehicleOBD/fuelVehicleOBD";
 import { obdAnalyticsDataMock } from "@/modules/global/dataMock/obdAnalysis/obdAnalysis";
@@ -27,10 +28,20 @@ interface Props {
 
 export const ObdReportDataProvider = ({ imei }: Props) => {
   const LANGUAGE = useLanguage();
+
+  const dispatch = useDispatch<AppDispatch>();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [geoModalData, setGeoModalData] = useState<GeoModalData>();
   const { isAuthenticated } = useAuth();
-  const dispatch = useDispatch<AppDispatch>();
+
+  const { startDate, endDate } = useSelector(
+    (state: RootState) => state.calendar
+  );
+
+  // const { obdTravelMetricsData, obdTravelMetricsStatus } = useSelector(
+  //   (state: RootState) => state.obdTravelMetrics
+  // );
 
   const tabOptions = [
     LANGUAGE.onBoardDiagnosticsVehicle.tabs.averageRpm,
@@ -68,6 +79,18 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
       dispatch(fetchVehicleByImei({ imei: imei }));
     }
   }, [dispatch, isAuthenticated, imei]);
+
+  useEffect(() => {
+    if (isAuthenticated && startDate && endDate) {
+      dispatch(
+        fetchObdTravelMetrics({
+          deviceId: "862524060822760", // imei.toString(),
+          startDate: "2025-07-17T00:00:00", // formatToLocalIso8601(startDate),
+          endDate: "2025-10-21T00:00:00", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
+        })
+      );
+    }
+  }, [dispatch, isAuthenticated, startDate, endDate, imei]);
 
   return (
     <div className={styles.container}>
