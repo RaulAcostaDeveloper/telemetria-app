@@ -295,17 +295,14 @@ export interface LanguageInterface {
       totalTimeWorked: string;
     };
     analysisTab: {
+      allowedMaxSpeed: string;
+      maxSpeed: string;
+      averageRpm: string;
       plate: string;
       vehicle: string;
       km: string;
-      workingShift: string;
-      fuelType: string;
-      fuelConsumed: string;
-      averageConsumption: string;
-      litersPerHour: string;
       totalDistance: string;
       totalEngineHours: string;
-      totalFuelConsumed: string;
     };
   };
   management: {
