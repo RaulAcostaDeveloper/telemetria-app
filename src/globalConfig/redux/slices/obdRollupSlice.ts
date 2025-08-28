@@ -3,13 +3,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getObdRollup } from "@/modules/telemetryObd/services/rollup/rollup";
 
 interface ObdRollupDetails {
-  averageSpeed: number;
-  driverTime: number; // totalEngineHours
-  driverDistance: null | string; // totalDistance
-  driverIdleTime: number; // totalIdleHours (estacionado)
-  maxSpeed: number;
   name: string;
   plate: string;
+  driverDistance: null | number; // totalDistance
+  averageSpeed: number;
+  driverTime: number; // totalEngineHours
+  driverIdleTime: number; // totalIdleHours (estacionado)
+  maxSpeed: number;
   imei: string;
 }
 

@@ -24,7 +24,6 @@ import { LanguageInterface } from "@/modules/global/language/constants/language.
 import { Table } from "@/modules/global/components";
 import { fetchObdRollup } from "@/globalConfig/redux/slices/obdRollupSlice";
 import { formatNumberWithCommas } from "@/modules/global/utils/utils";
-import { telemetryVehiclesOBD } from "@/modules/global/dataMock/telemetryVehiclesOBD/telemetryVehiclesOBD";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -53,17 +52,15 @@ export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
   }, [startDate, endDate, dispatch]);
 
   const teleVehiclesOBDData: dataTable | undefined =
-    telemetryVehiclesOBD?.value.vehicles.map((value) => ({
+    obdRollupData?.value.details.map((value) => ({
       name: value.name,
       plate: value.plate,
-      kilometerMarker: value.kilometerMarker,
-      fuelType: value.fuelType,
-      litersPerHour: value.litersPerHour,
-      totalDistance: value.totalDistance,
-      totalEngineHours: value.totalEngineHours,
-      totalConsumed: value.totalConsumed,
-      totalIdleHours: value.totalIdleHours,
-      imeIs: value.imeIs[0],
+      driverDistance: value.driverDistance ?? "ND",
+      averageSpeed: value.averageSpeed,
+      driverTime: value.driverTime,
+      driverIdleTime: value.driverIdleTime,
+      maxSpeed: value.maxSpeed,
+      imei: value.imei,
     }));
 
   const teleVehiclesOBDColumns: columnsTable = [
@@ -78,48 +75,35 @@ export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.teleOBD.tableColumns.kilometerMarker,
+      columnName: LANGUAGE.teleOBD.tableColumns.driverDistance,
+      defaultSpace: 4,
+      orderColumn: true,
+      minMaxFilter: true,
+      showTotal: true,
+    },
+    {
+      columnName: LANGUAGE.teleOBD.tableColumns.averageSpeed,
+      defaultSpace: 5,
+      minMaxFilter: true,
+      orderColumn: true,
+      showTotal: true,
+    },
+    {
+      columnName: LANGUAGE.teleOBD.tableColumns.driverTime,
       defaultSpace: 3,
       orderColumn: true,
       minMaxFilter: true,
       showTotal: true,
     },
     {
-      columnName: LANGUAGE.teleOBD.tableColumns.fuelType,
-      defaultSpace: 3,
-      filterSelector: true,
-      orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.teleOBD.tableColumns.litersPerHour,
+      columnName: LANGUAGE.teleOBD.tableColumns.driverIdleTime,
       defaultSpace: 3,
       orderColumn: true,
       minMaxFilter: true,
       showTotal: true,
     },
     {
-      columnName: LANGUAGE.teleOBD.tableColumns.totalDistance,
-      defaultSpace: 3,
-      orderColumn: true,
-      minMaxFilter: true,
-      showTotal: true,
-    },
-    {
-      columnName: LANGUAGE.teleOBD.tableColumns.totalEngineHours,
-      defaultSpace: 3,
-      orderColumn: true,
-      minMaxFilter: true,
-      showTotal: true,
-    },
-    {
-      columnName: LANGUAGE.teleOBD.tableColumns.totalConsumed,
-      defaultSpace: 3,
-      minMaxFilter: true,
-      showTotal: true,
-      orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.teleOBD.tableColumns.totalIdleHours,
+      columnName: LANGUAGE.teleOBD.tableColumns.maxSpeed,
       defaultSpace: 3,
       orderColumn: true,
       minMaxFilter: true,
@@ -201,7 +185,7 @@ export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
                 data={teleVehiclesOBDData}
                 showGoFuel
                 showGoOBD
-                idKey="imeIs"
+                idKey="imei"
               />
             )}
           </>

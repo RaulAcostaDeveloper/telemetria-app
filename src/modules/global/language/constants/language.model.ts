@@ -362,15 +362,13 @@ export interface LanguageInterface {
     };
     tableColumns: {
       title: string;
-      plate: string;
       name: string;
-      kilometerMarker: string;
-      fuelType: string;
-      litersPerHour: string;
-      totalDistance: string;
-      totalEngineHours: string;
-      totalConsumed: string;
-      totalIdleHours: string;
+      plate: string;
+      driverDistance: string;
+      averageSpeed: string;
+      driverTime: string;
+      driverIdleTime: string;
+      maxSpeed: string;
     };
     tableTitle: {
       registerTeleOBD: string;

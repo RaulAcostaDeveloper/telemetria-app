@@ -98,9 +98,8 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
       );
     }
   }
-  return loginStatus === "failed" ? (
-    <ErrorMessage LANGUAGE={LANGUAGE} />
-  ) : loginStatus === "loading" || loginStatus === "succeeded" ? (
+
+  return loginStatus === "loading" || loginStatus === "succeeded" ? (
     <div>
       <CheckLogin />
     </div>
@@ -144,6 +143,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
         disabled={isFormValid ? false : true}
       />
       {errorSelector()}
+      {loginStatus === "failed" && <ErrorMessage LANGUAGE={LANGUAGE} />}
     </div>
   );
 };
