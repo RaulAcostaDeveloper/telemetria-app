@@ -3,6 +3,7 @@ import { useLanguage } from "@/modules/global/language/components/languageProvid
 import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 import styles from "./checkLogin.module.css";
 
+//Vista presentada cuando la sesion se está cargando (loading)
 export default function CheckLogin() {
   const LANGUAGE = useLanguage();
 

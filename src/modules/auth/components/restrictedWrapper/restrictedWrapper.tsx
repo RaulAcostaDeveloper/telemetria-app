@@ -8,7 +8,7 @@ interface Props {
 
 export const RestrictedWrapper = ({ children }: Props) => {
   const { isAuthenticated } = useAuth();
-  if (isAuthenticated) {
+  if (true === isAuthenticated) {
     return children;
   }
   return <></>;

@@ -1,8 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { logoutSession } from "@/modules/auth/services/logout";
 
+interface LoginData {
+  code: number;
+  message: string;
+  value: null;
+}
+
 interface LogoutState {
-  logoutData: string | null;
+  logoutData: string | LoginData | null;
   logoutStatus: string;
 }
 
