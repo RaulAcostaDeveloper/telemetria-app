@@ -20,11 +20,14 @@ import {
 } from "@/modules/global/utils/geoMapUtils";
 
 export interface ObdChartPoint {
-  eventId: number;
-  dateGps: string;
-  lat: number;
-  lon: number;
-  value: number;
+  x: number;
+  y: number | null;
+  custom: {
+    dateGps: string;
+    lat: number;
+    lon: number;
+    value: number | string;
+  };
 }
 
 export enum SINGLE_CHART_TYPES {
@@ -35,7 +38,7 @@ export enum SINGLE_CHART_TYPES {
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  data: ObdChartPoint[];
+  chartData: ObdChartPoint[];
   handleClicGeoData: (geoModalData: GeoModalData) => void;
   type: SINGLE_CHART_TYPES;
 }
@@ -46,28 +49,13 @@ if (typeof HighstockInit === "function") {
 
 export const SingleLineHighChart = ({
   LANGUAGE,
-  data,
+  chartData,
   handleClicGeoData,
   type,
 }: Props) => {
   const rpmTooltipFields = getRPMTooltipFields(LANGUAGE);
   const distanceTooltipFields = getDistanceTooltipFields(LANGUAGE);
   const timeTraveledTooltipFields = getTimeTraveledTooltipFields(LANGUAGE);
-
-  const chartData = useMemo(() => {
-    return data
-      .map((c) => ({
-        x: new Date(c.dateGps).getTime(),
-        y: c.value,
-        custom: {
-          dateGps: c.dateGps,
-          lat: c.lat,
-          lon: c.lon,
-          value: c.value,
-        },
-      }))
-      .sort((a, b) => a.x - b.x);
-  }, [data]);
 
   const chartOptions = useMemo(() => {
     const yAxisTitle = () => {

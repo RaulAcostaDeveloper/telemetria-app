@@ -1,13 +1,13 @@
 "use client";
+import { OBDDataProvider } from "@/modules/telemetryObd/components";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
-import { TelemetryHome } from "@/modules/telemetryObd/components";
 
 export default function Telemetry() {
   const LANGUAGE = useLanguage();
 
   return (
     <div>
-      <TelemetryHome LANGUAGE={LANGUAGE} showTable />
+      <OBDDataProvider LANGUAGE={LANGUAGE} showTable />
     </div>
   );
 }

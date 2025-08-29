@@ -1,14 +1,12 @@
 import ChartColInterval from "../chartColumnInterval/chartColInterval";
-import styles from "./cardContentStyle.module.css";
-import { format2DecimalsString } from "../../utils/utils";
 import TableInCardT5 from "./tableInCardT5";
-
-//Tipado
-import { dataTable } from "@/modules/global/components/table/table.model";
+import styles from "./cardContentStyle.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { ObdRollupDataValues } from "@/globalConfig/redux/slices/obdRollupSlice";
+import { format2DecimalsString } from "../../utils/utils";
 
 interface Props {
-  data: dataTable;
+  data: ObdRollupDataValues;
   LANGUAGE: LanguageInterface;
 }
 
@@ -19,7 +17,9 @@ interface rangeNHours {
 }
 
 export default function CardContentDrivenTime({ data, LANGUAGE }: Props) {
-  const hours: number[] = data.map((value) => value.totalEngineHours as number);
+  const hours: number[] = data.details.map(
+    (value) => value.driverTime as number
+  );
 
   const average =
     hours.reduce((a, b) => {
@@ -71,13 +71,13 @@ export default function CardContentDrivenTime({ data, LANGUAGE }: Props) {
 
   const top5HoursData = [];
   for (let index = 0; index < top5Hours.length; index++) {
-    const pivot = data.filter(
-      (value) => top5Hours[index] === value.totalEngineHours
+    const pivot = data.details.filter(
+      (value) => top5Hours[index] === value.driverTime
     )[0];
     const pivotClean = {
       plate: pivot.plate as string,
       name: pivot.name as string,
-      totalEngineHours: format2DecimalsString(pivot.totalEngineHours as number),
+      totalEngineHours: format2DecimalsString(pivot.driverTime as number),
     };
     top5HoursData.push(pivotClean);
   }
@@ -87,6 +87,7 @@ export default function CardContentDrivenTime({ data, LANGUAGE }: Props) {
     xAxisTitle: LANGUAGE.teleOBD.charts.xAxisDriven,
     yAxisTitle: LANGUAGE.teleOBD.charts.yAxis,
   };
+
   const langInTable = {
     title: LANGUAGE.teleOBD.tableColumns.title,
     col1: LANGUAGE.teleOBD.tableColumns.plate,

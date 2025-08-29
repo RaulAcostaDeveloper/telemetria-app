@@ -1,11 +1,11 @@
 import styles from "./obdAnalisisTab.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { MetricItem } from "@/modules/fuel/components/fuelPerformanceMetrics/metricItem/metricItem";
-import { ObdAnalyticsData } from "@/modules/global/dataMock/obdAnalysis/obdAnalysis";
+import { ObdTravelMetricsDataValues } from "@/globalConfig/redux/slices/obdTravelMetricsSlice";
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  obdAnalyticsData: ObdAnalyticsData;
+  obdAnalyticsData: ObdTravelMetricsDataValues;
 }
 
 export const ObdAnalysisTab = ({ LANGUAGE, obdAnalyticsData }: Props) => {
@@ -16,74 +16,53 @@ export const ObdAnalysisTab = ({ LANGUAGE, obdAnalyticsData }: Props) => {
           LANGUAGE={LANGUAGE}
           metric=""
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.plate}
-          value={obdAnalyticsData.plate}
+          value={"vehicle.plate"} // pendiente
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric=""
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.vehicle}
-          value={obdAnalyticsData.vehicle}
+          value={"vehicle.name"} // pendiente
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
-          metric="Km"
+          metric="km"
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.km}
-          value={obdAnalyticsData.km}
-        />
-        <MetricItem
-          LANGUAGE={LANGUAGE}
-          metric="H"
-          name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.workingShift}
-          value={obdAnalyticsData.workingShift}
+          value={"value.driverDistance"} // pendiente
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric=""
-          name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.fuelType}
-          value={obdAnalyticsData.fuelType}
-        />
-        <MetricItem
-          LANGUAGE={LANGUAGE}
-          metric="L"
-          name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.fuelConsumed}
-          value={obdAnalyticsData.fuelConsumed}
+          name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.averageRpm}
+          value={obdAnalyticsData.rpmAverage?.toString() ?? "NA"}
           isLast
         />
       </div>
       <div className={styles.cuadricula}>
         <MetricItem
           LANGUAGE={LANGUAGE}
-          metric="Km/L"
-          name={
-            LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.averageConsumption
-          }
-          value={obdAnalyticsData.averageConsumption}
-        />
-        <MetricItem
-          LANGUAGE={LANGUAGE}
-          metric="L/H"
-          name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.litersPerHour}
-          value={obdAnalyticsData.litersPerHour}
-        />
-        <MetricItem
-          LANGUAGE={LANGUAGE}
-          metric="Km"
+          metric="km"
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.totalDistance}
-          value={obdAnalyticsData.totalDistance}
+          value={obdAnalyticsData.totalTimeTraveled?.toString() ?? "NA"}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
-          metric="H"
+          metric="h"
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.totalEngineHours}
-          value={obdAnalyticsData.totalEngineHours}
+          value={"value.totalEngineHours"} // pendiente
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
-          metric="L"
-          name={
-            LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.totalFuelConsumed
-          }
-          value={obdAnalyticsData.totalFuelConsumed}
+          metric="km/h"
+          name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.allowedMaxSpeed}
+          value={"value.allowedMaxSpeed"} // pendiente
+        />
+        <MetricItem
+          LANGUAGE={LANGUAGE}
+          metric="km/h"
+          name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.maxSpeed}
+          value={"value.maxSpeed"} // pendiente
+          isLast
         />
       </div>
     </div>
