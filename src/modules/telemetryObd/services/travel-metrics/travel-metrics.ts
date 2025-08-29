@@ -19,20 +19,29 @@ export async function getObdTravelMetrics(
     headers: {
       "Content-Type": "application/json",
     },
-    // credentials: "include",
+    credentials: "include",
   };
 
   // Retorna DATA del servidor o DATA de caché
   return getCached(
     key,
     async () => {
-      const res = await fetch(fullUrl, options);
-      if (!res.ok) {
+      try {
+        const response = await fetch(fullUrl, options);
+        const result =
+          response.status === 200
+            ? await response.json()
+            : {
+                code: response.status,
+                message: response.statusText,
+                value: null,
+              };
+        return result;
+      } catch {
         throw new Error(
           "Error al obtener servicio de obd device travel metrics"
         );
       }
-      return res.json();
     },
     forceRefresh
   );

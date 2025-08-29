@@ -206,7 +206,7 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
   ];
 
   const topFuelReportCharges: dataTable | undefined =
-    topFuelReportData?.value.charges.map((value) => ({
+    topFuelReportData?.value?.charges.map((value) => ({
       name: value.name,
       plate: value.plate,
       brand: value.brand,
@@ -285,7 +285,7 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
   ];
 
   const topFuelReportDischarges: dataTable | undefined =
-    topFuelReportData?.value.discharges.map((value) => ({
+    topFuelReportData?.value?.discharges.map((value) => ({
       name: value.name,
       plate: value.plate,
       brand: value.brand,
