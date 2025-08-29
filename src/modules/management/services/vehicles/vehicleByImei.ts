@@ -8,7 +8,13 @@ export async function getVehicleByImei(
 ) {
   // Construcción de la url con parámetros
   const fullUrl = `${url}${imei}/vehicle`;
-
+  const options: RequestInit = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  };
   // Construcción del key único para caché
   const key = `managementVehicleByImei-${imei}`;
 
@@ -16,10 +22,20 @@ export async function getVehicleByImei(
   return getCached(
     key,
     async () => {
-      const res = await fetch(fullUrl);
-      if (!res.ok)
+      try {
+        const response = await fetch(fullUrl, options);
+        const result =
+          response.status === 200
+            ? await response.json()
+            : {
+                code: response.status,
+                message: response.statusText,
+                value: null,
+              };
+        return result;
+      } catch {
         throw new Error("Error al obtener detalle del vehículo por imei");
-      return res.json();
+      }
     },
     forceRefresh // poner un forceRefresh en caso de necesitarlo
   );
