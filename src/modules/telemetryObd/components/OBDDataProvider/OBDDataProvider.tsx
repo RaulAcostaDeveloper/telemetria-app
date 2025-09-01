@@ -1,6 +1,5 @@
 "use client";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
@@ -17,12 +16,11 @@ import {
   columnsTable,
   dataTable,
 } from "@/modules/global/components/table/table.model";
-import { AppDispatch, RootState } from "@/globalConfig/redux/store";
+import { RootState } from "@/globalConfig/redux/store";
 import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
 import { FuelDataReport } from "@/modules/fuel/components/fuelNowContainer/fuelDataReport/fuelDataReport";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Table } from "@/modules/global/components";
-import { fetchObdRollup } from "@/globalConfig/redux/slices/obdRollupSlice";
 import { formatNumberWithCommas } from "@/modules/global/utils/utils";
 
 interface Props {
@@ -31,25 +29,9 @@ interface Props {
 }
 
 export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
-  const dispatch = useDispatch<AppDispatch>();
-
-  const { startDate, endDate } = useSelector(
-    (state: RootState) => state.calendar
-  );
-
   const { obdRollupData, obdRollupStatus } = useSelector(
     (state: RootState) => state.obdRollup
   );
-
-  useEffect(() => {
-    dispatch(
-      fetchObdRollup({
-        accountId: "90926",
-        startDate: "2025-07-17T00:00:00", // formatToLocalIso8601(startDate),
-        endDate: "2025-10-21T00:00:00",
-      })
-    );
-  }, [startDate, endDate, dispatch]);
 
   const teleVehiclesOBDData: dataTable | undefined =
     obdRollupData?.value.details.map((value) => ({
