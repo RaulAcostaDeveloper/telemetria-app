@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 
+import CheckLogin from "@/modules/login/checkLogin/checkLogin";
 import styles from "./mainWrapper.module.css";
 import {
   localStorageGetItem,
@@ -17,13 +18,14 @@ import { Menu } from "../menu/menu";
 import { PageContainer } from "../pageContainer/pageContainer";
 import { SPANISH } from "../../language/constants/spanish";
 import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
-import { fetchBrands } from "@/globalConfig/redux/slices/brandsSlice";
 import { fetchDevices } from "@/globalConfig/redux/slices/devicesSlice";
 import { fetchDrivers } from "@/globalConfig/redux/slices/driversSlice";
+import { fetchFuelSummary } from "@/globalConfig/redux/slices/fuelSummarySlice";
 import { fetchGroups } from "@/globalConfig/redux/slices/groupsSlice";
+import { fetchObdRollup } from "@/globalConfig/redux/slices/obdRollupSlice";
+import { fetchTopFuelReport } from "@/globalConfig/redux/slices/topFuelReportSlice";
 import { fetchVehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
 import { useAuth } from "../../../auth/utils";
-import CheckLogin from "@/modules/login/checkLogin/checkLogin";
 
 interface Props {
   children: React.ReactNode;
@@ -43,6 +45,10 @@ export const MainWrapper = ({ children }: Props) => {
 
   const { testSessionStatus } = useSelector(
     (state: RootState) => state.testSession
+  );
+
+  const { startDate, endDate } = useSelector(
+    (state: RootState) => state.calendar
   );
 
   useEffect(() => {
@@ -123,9 +129,34 @@ export const MainWrapper = ({ children }: Props) => {
           accountId: "90926",
         })
       );
-      dispatch(fetchBrands());
     }
-  }, [dispatch, isAuthenticated]);
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    dispatch(
+      fetchFuelSummary({
+        accountId: "4992",
+        startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate),
+        endDate: "2024-08-21T00:00:00",
+        performanceType: "1",
+      })
+    );
+    dispatch(
+      fetchTopFuelReport({
+        accountId: "90926",
+        startDate: "2024-09-01T00:00:00", // formatToLocalIso8601(startDate),
+        endDate: "2024-09-30T00:00:00",
+        numberOfVehicles: 10,
+      })
+    );
+    dispatch(
+      fetchObdRollup({
+        accountId: "90926",
+        startDate: "2025-07-17T00:00:00", // formatToLocalIso8601(startDate),
+        endDate: "2025-10-21T00:00:00",
+      })
+    );
+  }, [startDate, endDate]);
 
   return testSessionStatus === "loading" ? (
     <div>

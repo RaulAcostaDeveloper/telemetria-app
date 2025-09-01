@@ -15,7 +15,6 @@ import { vehidlesDataMock } from "@/modules/global/dataMock/vehicles/vehicles";
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  brandsData: string[];
   callFetchFuelSummary: () => void;
 }
 
@@ -31,7 +30,6 @@ const vehiclesOptions = vehidlesDataMock.value.vehicles.map(
 
 export const FuelFilterContent = ({
   LANGUAGE,
-  brandsData,
   callFetchFuelSummary,
 }: Props) => {
   const [account, setAccount] = useState<string | null>(null);
@@ -101,7 +99,7 @@ export const FuelFilterContent = ({
         />
         <FuelFilterCustomSearch
           LANGUAGE={LANGUAGE}
-          options={brandsData}
+          options={[]}
           setValue={setBrand}
           title={LANGUAGE.fuel.filter.brand}
           valueSelected={brand}

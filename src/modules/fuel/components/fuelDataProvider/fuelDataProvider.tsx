@@ -1,6 +1,5 @@
 "use client";
-import { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 // import { FuelFilter } from "../fuelFilter/fuelFilter";
 import DonutGraphic from "@/modules/global/components/donutGraphic/DonutGraphic";
@@ -11,58 +10,23 @@ import {
   columnsTable,
   dataTable,
 } from "@/modules/global/components/table/table.model";
-import { AppDispatch, RootState } from "@/globalConfig/redux/store";
+import { RootState } from "@/globalConfig/redux/store";
 import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Table, TabsContent } from "@/modules/global/components";
-import { fetchFuelSummary } from "@/globalConfig/redux/slices/fuelSummarySlice";
-import { fetchTopFuelReport } from "@/globalConfig/redux/slices/topFuelReportSlice";
 
 interface Props {
   LANGUAGE: LanguageInterface;
 }
 
 export const FuelDataProvider = ({ LANGUAGE }: Props) => {
-  const dispatch = useDispatch<AppDispatch>();
-
-  const { startDate, endDate } = useSelector(
-    (state: RootState) => state.calendar
-  );
-
   const { fuelSummaryData, fuelSummaryStatus } = useSelector(
     (state: RootState) => state.fuelSummary
   );
 
-  // const { brandsData, brandsStatus } = useSelector(
-  //   (state: RootState) => state.brands
-  // );
-
   const { topFuelReportData, topFuelReportStatus } = useSelector(
     (state: RootState) => state.topFuelReport
   );
-
-  const callFetchFuelSummary = useCallback(() => {
-    dispatch(
-      fetchFuelSummary({
-        accountId: "4992",
-        startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate),
-        endDate: "2024-08-21T00:00:00",
-        performanceType: "1",
-      })
-    );
-    dispatch(
-      fetchTopFuelReport({
-        accountId: "90926",
-        startDate: "2024-09-01T00:00:00", // formatToLocalIso8601(startDate),
-        endDate: "2024-09-30T00:00:00",
-        numberOfVehicles: 10,
-      })
-    );
-  }, [dispatch]);
-
-  useEffect(() => {
-    callFetchFuelSummary();
-  }, [callFetchFuelSummary, startDate, endDate]);
 
   const tabOptions = [
     LANGUAGE.fuel.tabs.unitys,
@@ -305,17 +269,10 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
   return (
     <div>
       {/* Descomentar para mostrar el filtrado de combustible */}
-      {/* {brandsStatus === "succeeded" && brandsData ? (
-        <FuelFilter
+      {/* <FuelFilter
           LANGUAGE={LANGUAGE}
           callFetchFuelSummary={callFetchFuelSummary}
-          brandsData={brandsData.value.brands.map((item) => item.name)}
-        />
-      ) : (
-        <div>
-          <LoaderAnimation />
-        </div>
-      )} */}
+        /> */}
 
       <div className={styles.topResumeData}>
         {fuelSummaryStatus === "succeeded" && fuelSummaryData && (
