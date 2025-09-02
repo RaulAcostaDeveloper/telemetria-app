@@ -1,9 +1,15 @@
-import ChartColInterval from "../chartColumnInterval/chartColInterval";
+import dynamic from "next/dynamic";
+
 import TableInCardT5 from "./tableInCardT5";
 import styles from "./cardContentStyle.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { ObdRollupDataValues } from "@/globalConfig/redux/slices/obdRollupSlice";
 import { format2DecimalsString } from "../../utils/utils";
+
+const ChartColInterval = dynamic(
+  () => import("../chartColumnInterval/chartColInterval"),
+  { ssr: false }
+);
 
 interface Props {
   data: ObdRollupDataValues;
@@ -94,7 +100,7 @@ export default function CardContentIdle({ data, LANGUAGE }: Props) {
     title: LANGUAGE.teleOBD.tableColumns.title,
     col1: LANGUAGE.teleOBD.tableColumns.plate,
     col2: LANGUAGE.teleOBD.tableColumns.name,
-    col3: LANGUAGE.teleOBD.tableColumns.totalIdleHours,
+    col3: LANGUAGE.teleOBD.tableColumns.driverIdleTime,
   };
 
   return (

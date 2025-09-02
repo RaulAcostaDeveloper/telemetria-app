@@ -1,8 +1,13 @@
 "use client";
+
 import { useMemo } from "react";
-import * as Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
-import HighstockInit from "highcharts/modules/stock";
+import dynamic from "next/dynamic";
+import Highcharts from "highcharts/highstock";
+import type { PointClickEventObject } from "highcharts";
+
+const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
+  ssr: false,
+});
 
 import {
   createTooltipFormatter,
@@ -41,10 +46,6 @@ interface Props {
   chartData: ObdChartPoint[];
   handleClicGeoData: (geoModalData: GeoModalData) => void;
   type: SINGLE_CHART_TYPES;
-}
-
-if (typeof HighstockInit === "function") {
-  (HighstockInit as (hc: typeof Highcharts) => void)(Highcharts);
 }
 
 export const SingleLineHighChart = ({
@@ -109,36 +110,22 @@ export const SingleLineHighChart = ({
           return LANGUAGE.geoModalTitles.timeTraveledTitle;
       }
     };
+
     return {
       xAxis: {
         type: "datetime",
-        labels: {
-          style: {
-            fontSize: "12px",
-          },
-        },
+        labels: { style: { fontSize: "12px" } },
         title: {
           text: LANGUAGE.highCharts.axisTitles.time,
-          style: {
-            fontSize: "14px",
-            fontWeight: "bold",
-          },
+          style: { fontSize: "14px", fontWeight: "bold" },
         },
       },
       yAxis: [
         {
-          labels: {
-            style: {
-              fontSize: "14px",
-              fontWeight: "bold",
-            },
-          },
+          labels: { style: { fontSize: "14px", fontWeight: "bold" } },
           title: {
             text: yAxisTitle(),
-            style: {
-              fontSize: "13px",
-              fontWeight: "bold",
-            },
+            style: { fontSize: "13px", fontWeight: "bold" },
           },
           opposite: false,
         },
@@ -149,12 +136,10 @@ export const SingleLineHighChart = ({
           data: chartData,
           color: "#006af5",
           lineWidth: 2,
-          tooltip: {
-            pointFormatter: createTooltipFormatter(tooltipFields()),
-          },
+          tooltip: { pointFormatter: createTooltipFormatter(tooltipFields()) },
           point: {
             events: {
-              click: (e: Highcharts.PointClickEventObject) => {
+              click: (e: PointClickEventObject) => {
                 const message = (
                   e.point.options as { custom: { lat: number; lon: number } }
                 ).custom;
@@ -176,24 +161,14 @@ export const SingleLineHighChart = ({
         borderRadius: 6,
         padding: 10,
         shadow: true,
-        style: {
-          pointerEvents: "none",
-        },
+        style: { pointerEvents: "none" },
       },
-      chart: {
-        height: 600,
-        panning: true,
-      },
-      credits: {
-        enabled: false,
-      },
+      chart: { height: 600, panning: true },
+      credits: { enabled: false },
       rangeSelector: {
         selected: 0,
         buttons: [
-          {
-            type: "all",
-            text: "",
-          },
+          { type: "all", text: "" },
           {
             type: "all",
             text: LANGUAGE.highCharts.options.rangeSelectorShowAll,
@@ -204,42 +179,19 @@ export const SingleLineHighChart = ({
             fontSize: "18px",
             color: "#254E70",
             border: "solid",
-            backgroundColor: "blue !important",
+            backgroundColor: "blue",
           },
           states: {
-            hover: {
-              style: {
-                fontSize: "18px",
-                color: "#8ED2EF",
-              },
-            },
-            select: {
-              style: {
-                fontSize: "18px",
-              },
-            },
+            hover: { style: { fontSize: "18px", color: "#8ED2EF" } },
+            select: { style: { fontSize: "18px" } },
           },
         },
-        inputStyle: {
-          fontSize: "18px",
-        },
-        labelStyle: {
-          fontSize: "18px",
-          marginRight: "20px",
-          color: "#254E70",
-        },
+        inputStyle: { fontSize: "18px" },
+        labelStyle: { fontSize: "18px", marginRight: "20px", color: "#254E70" },
       },
-      navigator: {
-        enabled: true,
-      },
-      scrollbar: {
-        enabled: true,
-      },
-      plotOptions: {
-        series: {
-          turboThreshold: 50000,
-        },
-      },
+      navigator: { enabled: true },
+      scrollbar: { enabled: true },
+      plotOptions: { series: { turboThreshold: 50000 } },
     };
   }, [
     LANGUAGE,
