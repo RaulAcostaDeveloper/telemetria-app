@@ -50,10 +50,10 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
   );
 
   const tabOptions = [
-    LANGUAGE.onBoardDiagnosticsVehicle.tabs.averageRpm,
-    LANGUAGE.onBoardDiagnosticsVehicle.tabs.analysis,
-    LANGUAGE.onBoardDiagnosticsVehicle.tabs.totalDistance,
-    LANGUAGE.onBoardDiagnosticsVehicle.tabs.totalTimeWorked,
+    { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.averageRpm },
+    { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.analysis },
+    { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.totalDistance },
+    { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.totalTimeWorked },
   ];
 
   const handleClicGeoData = (geoModalData: GeoModalData) => {

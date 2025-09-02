@@ -15,6 +15,8 @@ import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMess
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Table, TabsContent } from "@/modules/global/components";
 
+import { LocalShipping } from "@mui/icons-material";
+
 interface Props {
   LANGUAGE: LanguageInterface;
 }
@@ -29,9 +31,16 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
   );
 
   const tabOptions = [
-    LANGUAGE.fuel.tabs.unitys,
-    LANGUAGE.fuel.tabs.topCharges,
-    LANGUAGE.fuel.tabs.topDischarges,
+    {
+      text: LANGUAGE.fuel.tabs.unitys,
+      icon: LocalShipping,
+    },
+    {
+      text: LANGUAGE.fuel.tabs.topCharges,
+    },
+    {
+      text: LANGUAGE.fuel.tabs.topDischarges,
+    },
   ];
 
   const vehiclesColumns: columnsTable = [

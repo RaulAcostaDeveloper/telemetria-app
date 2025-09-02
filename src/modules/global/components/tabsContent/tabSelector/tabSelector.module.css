@@ -29,6 +29,12 @@
   border: none;
   border-radius: 8px 8px 0 0;
   border-bottom: 1px solid rgb(200, 200, 200);
+  && svg {
+    vertical-align: sub;
+    color: black;
+    margin-right: 0.5rem;
+    margin-bottom: 2px;
+  }
 }
 
 .tabElement:hover {

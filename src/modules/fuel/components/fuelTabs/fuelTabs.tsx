@@ -7,9 +7,9 @@ interface Props {
 
 export const FuelTabs = ({ LANGUAGE }: Props) => {
   const tabOptions = [
-    LANGUAGE.fuel.tabs.groups,
-    LANGUAGE.fuel.tabs.unitys,
-    LANGUAGE.fuel.tabs.zones,
+    { text: LANGUAGE.fuel.tabs.topCharges }, //.fuel.tabs.groups
+    { text: LANGUAGE.fuel.tabs.unitys },
+    { text: LANGUAGE.fuel.tabs.topDischarges }, //.fuel.tabs.zones
   ];
   return (
     <TabsContent

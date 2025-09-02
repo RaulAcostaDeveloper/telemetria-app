@@ -105,9 +105,9 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
 
   const LANGUAGE = useLanguage();
   const vehicleTabs = [
-    LANGUAGE.fuelVehicle.tabs.behavior,
-    LANGUAGE.fuelVehicle.tabs.reports,
-    LANGUAGE.fuelVehicle.tabs.fuelNow,
+    { text: LANGUAGE.fuelVehicle.tabs.behavior },
+    { text: LANGUAGE.fuelVehicle.tabs.reports },
+    { text: LANGUAGE.fuelVehicle.tabs.fuelNow },
   ];
 
   useEffect(() => {
