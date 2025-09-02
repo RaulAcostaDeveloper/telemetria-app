@@ -3,14 +3,22 @@ import { useState } from "react";
 
 import styles from "./tabsContent.module.css";
 import { TabSelector } from "./tabSelector/tabSelector";
+import { SvgIconProps } from "@mui/material/SvgIcon";
+
+type IconComponent = React.ComponentType<SvgIconProps>;
+
+type TabOption = {
+  text: string;
+  icon?: IconComponent;
+};
 
 interface Props {
   tabContents: React.ReactNode[];
-  tabOptions: string[];
+  tabOptions: TabOption[];
 }
 
 export const TabsContent = ({ tabContents, tabOptions }: Props) => {
-  const [selectedTab, setSelectedTab] = useState<string>(tabOptions[0]);
+  const [selectedTab, setSelectedTab] = useState<string>(tabOptions[0].text);
 
   return (
     <div className={`${styles.tabsContent}`}>
@@ -21,8 +29,8 @@ export const TabsContent = ({ tabContents, tabOptions }: Props) => {
       />
       <div className={`${styles.tabContent}`}>
         {tabOptions?.map((tabOption, index) => (
-          <div key={tabOption}>
-            {selectedTab === tabOption && tabContents[index]}
+          <div key={tabOption.text}>
+            {selectedTab === tabOption.text && tabContents[index]}
           </div>
         ))}
       </div>

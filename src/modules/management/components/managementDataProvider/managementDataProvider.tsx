@@ -36,10 +36,10 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   );
 
   const fuelTabs = [
-    LANGUAGE.management.tabs.vehicles,
-    LANGUAGE.management.tabs.devices,
-    LANGUAGE.management.tabs.drivers,
-    LANGUAGE.management.tabs.groups,
+    { text: LANGUAGE.management.tabs.vehicles },
+    { text: LANGUAGE.management.tabs.devices },
+    { text: LANGUAGE.management.tabs.drivers },
+    { text: LANGUAGE.management.tabs.groups },
   ];
 
   // falta modelo, año, grupo, serial number (bin o mac address)
