@@ -1,5 +1,5 @@
 "use client";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Highcharts from "highcharts";
 import dynamic from "next/dynamic";
 
@@ -12,35 +12,39 @@ interface rangeNVehicles {
   range: number;
   vehicles: number;
 }
+
 interface langObj {
   title: string;
   xAxisTitle: string;
   yAxisTitle: string;
 }
+
 interface Props {
   langSelection: langObj;
   rangesArray: rangeNVehicles[];
 }
 
 const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
-  const measureData = useMemo(
-    () =>
-      rangesArray.map((r) => ({
-        x: r.range,
-        y: r.vehicles,
-        custom: { lastRange: r.lastRange },
-      })),
-    [rangesArray]
-  );
+  const [isReady, setIsReady] = useState(false);
 
-  const chartOptions: Highcharts.Options = useMemo(
-    () => ({
+  const measureData = useMemo(() => {
+    return rangesArray.map((r) => ({
+      x: r.range,
+      y: r.vehicles,
+      custom: {
+        lastRange: r.lastRange,
+      },
+    }));
+  }, [rangesArray]);
+
+  const chartOptions: Highcharts.Options = useMemo(() => {
+    return {
       chart: {
         type: "column",
         height: 300,
         width: 340,
         spacingLeft: 0,
-        spacingRight: 30,
+        spacingRight: 30, //espacio adicional para centrar gráfica. 10 es el default.
       },
       series: [
         {
@@ -53,18 +57,35 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
       ],
       xAxis: {
         type: "linear",
-        labels: { style: { fontSize: "12px" } },
-        formatter: undefined, // elimina esta línea si no la necesitas
+        labels: {
+          style: {
+            fontSize: "12px",
+          },
+          formatter: function () {
+            return this.value.toString();
+          }, // Evita que malinterprete la gráfica que es un valor de fecha.
+        },
         title: {
           text: langSelection.xAxisTitle,
-          style: { fontSize: "1.5rem", fontWeight: "bold" },
+          style: {
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+          },
         },
       },
       yAxis: {
-        labels: { style: { fontSize: "1rem", fontWeight: "bold" } },
+        labels: {
+          style: {
+            fontSize: "1rem",
+            fontWeight: "bold",
+          },
+        },
         title: {
           text: langSelection.yAxisTitle,
-          style: { fontSize: "1.5rem", fontWeight: "bold" },
+          style: {
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+          },
         },
         opposite: false,
       },
@@ -75,16 +96,14 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
         borderRadius: 6,
         padding: 10,
         shadow: true,
-        style: { pointerEvents: "none" },
+        style: {
+          pointerEvents: "none",
+        },
         formatter: function () {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const lastRange = (this as any).point?.custom?.lastRange;
           return `
-            <div style="width:100%;font-size:18px;display:flex;flex-direction:column;justify-content:space-between;">
-              <strong style="margin-right:10px;">${langSelection.xAxisTitle}:</strong>
-              <p style="padding-bottom:1em;">${lastRange} h - ${this.x} h</p>
-              <strong style="margin-right:10px;">${langSelection.yAxisTitle}:</strong>
-              <p>${this.y}</p>
+            <div style="width: 100%; font-size: 18px; display: flex; flex-direction: column; justify-content: space-between;">
+              <strong style="margin-right: 10px;">${langSelection.xAxisTitle}:</strong> <p style="padding-bottom: 1em;">${this.options.custom?.lastRange} h - ${this.x} h</p>
+              <strong style="margin-right: 10px;">${langSelection.yAxisTitle}:</strong> <p>${this.y}</p>
             </div>
           `;
         },
@@ -97,13 +116,43 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
           borderWidth: 0,
         },
       },
-      credits: { enabled: false },
+      rangeSelector: {
+        enabled: false,
+      },
+      /* rangeSelector: { selected: 1 }, */
+      navigator: { enabled: false },
+      scrollbar: { enabled: false },
+      credits: {
+        enabled: false,
+      },
       accessibility: { enabled: false },
-    }),
-    [langSelection, measureData]
-  );
+    };
+  }, [langSelection, measureData]);
 
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
+  useEffect(() => {
+    (async () => {
+      try {
+        await import("highcharts/highcharts-more");
+        await import("highcharts/modules/solid-gauge");
+        setIsReady(true);
+      } catch (err) {
+        console.warn(err);
+        setIsReady(false);
+      }
+    })();
+  }, []);
+
+  return (
+    <>
+      {isReady && (
+        <HighchartsReact
+          highcharts={Highcharts}
+          constructorType="stockChart"
+          options={chartOptions}
+        />
+      )}
+    </>
+  );
 };
 
 export default ChartColInterval;
