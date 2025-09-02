@@ -42,7 +42,6 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
         spacingLeft: 0,
         spacingRight: 30,
       },
-      title: { text: undefined },
       series: [
         {
           type: "column",
@@ -55,9 +54,7 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
       xAxis: {
         type: "linear",
         labels: { style: { fontSize: "12px" } },
-        formatter: function () {
-          return this.value.toString();
-        }, // Evita que malinterprete la gráfica como un valor de fecha.
+        formatter: undefined, // elimina esta línea si no la necesitas
         title: {
           text: langSelection.xAxisTitle,
           style: { fontSize: "1.5rem", fontWeight: "bold" },
