@@ -18,7 +18,7 @@ import { Table, TabsContent } from "@/modules/global/components";
 import { fetchFuelSummary } from "@/globalConfig/redux/slices/fuelSummarySlice";
 import { fetchTopFuelReport } from "@/globalConfig/redux/slices/topFuelReportSlice";
 
-import { Garage } from "@mui/icons-material";
+import { LocalShipping } from "@mui/icons-material";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -69,7 +69,7 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
   const tabOptions = [
     {
       text: LANGUAGE.fuel.tabs.unitys,
-      icon: Garage,
+      icon: LocalShipping,
     },
     {
       text: LANGUAGE.fuel.tabs.topCharges,
