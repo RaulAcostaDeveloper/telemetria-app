@@ -205,7 +205,7 @@ export const ENGLISH: LanguageInterface = {
       name: "Username",
       password: "Password",
       title: "Authentication",
-      loginButton: "Sign in",
+      loginButton: "Log in",
     },
     authFormNote: {
       nameOrPasswordError: "Invalid username or password",
@@ -213,7 +213,7 @@ export const ENGLISH: LanguageInterface = {
       unexpectedError: "Unexpected internal error",
     },
     linkToHome: "Go to home",
-    linkToRegister: "Go to sign up",
+    linkToRegister: "Go to register",
     checklogin: {
       maintitle: "Verifying session",
     },
@@ -336,7 +336,7 @@ export const ENGLISH: LanguageInterface = {
       drivers: "Drivers",
     },
     tableColumns: {
-      groupVehicles: "Group vehicles",
+      groupVehicles: "Group's vehicles",
       vehicleInformation: "Vehicle information",
       address: "Address",
       alias: "Alias",
@@ -381,7 +381,7 @@ export const ENGLISH: LanguageInterface = {
       title: "Top 5",
       name: "Name",
       plate: "License plate",
-      driverDistance: "Mileage (Km)",
+      driverDistance: "Kilometers (Km)",
       averageSpeed: "Average speed (km/h)",
       driverTime: "Driving (h)",
       driverIdleTime: "Idling (h)",
