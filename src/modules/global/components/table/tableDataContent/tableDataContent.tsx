@@ -119,8 +119,10 @@ export const TableDataContent = ({
   }, [filteredData, reducedData]);
 
   return (
-    <>
-      {canScrollUp && <div className={styles.scrollDown}>...</div>}
+    <div className={styles.container}>
+      {canScrollUp && (
+        <div className={styles.scrollUp}>&uarr;&#8593;&#8593;</div>
+      )}
 
       <div className={styles.dataContent} ref={insideDataTable}>
         {reducedData.map((dataObject, dataIndex) => (
@@ -166,7 +168,9 @@ export const TableDataContent = ({
         ))}
       </div>
 
-      {canScrollDown && <div className={styles.scrollDown}>...</div>}
-    </>
+      {canScrollDown && (
+        <div className={styles.scrollDown}>&#8595;&#8595;&#8595;</div>
+      )}
+    </div>
   );
 };
