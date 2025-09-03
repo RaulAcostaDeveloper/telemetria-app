@@ -168,6 +168,7 @@ export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
                 showGoFuel
                 showGoOBD
                 idKey="imei"
+                windowMaxSize={50}
               />
             )}
           </>

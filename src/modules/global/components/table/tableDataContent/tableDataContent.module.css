@@ -13,3 +13,10 @@
 .dataObject:hover {
   background-color: var(--company-color-1);
 }
+
+.scrollDown {
+  position: absolute;
+  background-color: red;
+  width: 100%;
+  height: 50px;
+}
