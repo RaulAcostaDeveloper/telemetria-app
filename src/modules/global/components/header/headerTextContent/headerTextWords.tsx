@@ -32,48 +32,31 @@ export const HeaderTextWords = ({ LANGUAGE, section, url }: Props) => {
     }
   }, [dispatch, isAuthenticated, lastSegmentURL]);
 
-  function jsxOption(): JSX.Element {
-    if ("succeeded" === vehicleByImeiStatus && vehicleByImeiData) {
-      const resultantHTML = [];
-      vehicleByImeiData.value.plate &&
-        resultantHTML.push(
-          <span key={1} className={styles.plate}>
-            {vehicleByImeiData.value.plate} ·{" "}
-          </span>
-        );
-      vehicleByImeiData.value.brand &&
-        resultantHTML.push(
-          <span key={2}>{vehicleByImeiData.value.brand}</span>
-        );
-      vehicleByImeiData.value.imeIs &&
-        resultantHTML.push(
-          <span key={3}> · ({vehicleByImeiData.value.imeIs[0]})</span>
-        );
-      return <>{resultantHTML}</>;
-    } else {
-      if ("single-fuel" === section) {
-        return (
-          <>
-            <span key={4}>{LANGUAGE.sectionName.fuel}</span>
-          </>
-        );
-      } else if ("single-telemetry" === section) {
-        return (
-          <>
-            <span key={5}>{LANGUAGE.sectionName.telemetryobd}</span>
-          </>
-        );
-      } else {
-        return (
-          <>
-            <span key={6}></span>
-          </>
-        );
-      }
-    }
-  }
-
-  return <>{jsxOption()}</>;
+  return (
+    <>
+      {vehicleByImeiStatus === "succeeded" && vehicleByImeiData ? (
+        <>
+          {vehicleByImeiData.value.plate && (
+            <span className={styles.plate}>
+              {vehicleByImeiData.value.plate} ·{" "}
+            </span>
+          )}
+          {vehicleByImeiData.value.brand && (
+            <span>{vehicleByImeiData.value.brand}</span>
+          )}
+          {vehicleByImeiData.value.imeIs && (
+            <span> · ({vehicleByImeiData.value.imeIs[0]})</span>
+          )}
+        </>
+      ) : section === "single-fuel" ? (
+        <span>{LANGUAGE.sectionName.fuel}</span>
+      ) : section === "single-telemetry" ? (
+        <span>{LANGUAGE.sectionName.telemetryobd}</span>
+      ) : (
+        <span></span>
+      )}
+    </>
+  );
 };
 
 export default HeaderTextWords;
