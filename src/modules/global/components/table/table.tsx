@@ -29,6 +29,7 @@ interface Props {
   showViewModal?: boolean;
   title?: string;
   viewPath?: string;
+  windowMaxSize?: number;
 }
 
 export const Table = ({
@@ -47,6 +48,7 @@ export const Table = ({
   showViewModal,
   title,
   viewPath,
+  windowMaxSize,
 }: Props) => {
   const [columnOrdered, setColumnOrdered] = useState<SelectorOrdered>({
     colIndex: 0,
@@ -243,6 +245,7 @@ export const Table = ({
         showViewModal={showViewModal}
         title={title}
         viewPath={viewPath}
+        windowMaxSize={windowMaxSize}
       />
     </div>
   );
