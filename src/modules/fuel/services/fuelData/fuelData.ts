@@ -19,7 +19,8 @@ export async function getFuelData(
     credentials: "include",
   };
   // Construcción del key único para caché
-  const key = `fuelData-${imei}-${startDate}-${endDate}`;
+  const key =
+    process.env.API_VERSION + `fuelData-${imei}-${startDate}-${endDate}`;
 
   // Retorna DATA del servidor o DATA de caché
   return getCached(

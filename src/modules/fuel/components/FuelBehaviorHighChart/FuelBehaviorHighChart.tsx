@@ -127,6 +127,26 @@ export const FuelBehaviorHighChart = ({
       .sort((a, b) => a.x - b.x);
   }, [fuelDataData]);
 
+  const levelMessages2Data = useMemo(() => {
+    return fuelDataData.levelMessages
+      .map((c) => ({
+        x: new Date(c.dateGps).getTime(),
+        y: c.canCurrentLevel,
+        custom: {
+          dateGps: c.dateGps,
+          lat: c.lat,
+          lon: c.lon,
+          odometer: c.odometer,
+          speed: c.speed,
+          ignition: Boolean(c.ignition),
+          deviceBattery: c.deviceBattery,
+          mainPower: c.externalPower,
+          tanks: c.tanks,
+        },
+      }))
+      .sort((a, b) => a.x - b.x);
+  }, [fuelDataData]);
+
   // Performance es km/L
   const performancesBetweenChargesData = useMemo(() => {
     return fuelDataData.performancesBetweenCharges
@@ -169,7 +189,7 @@ export const FuelBehaviorHighChart = ({
       ...opBEngineOff.map((c) => ({
         from: new Date(c.startDate).getTime(),
         to: new Date(c.endDate).getTime(),
-        color: "#52ce0041",
+        color: "#fbccf1",
         zIndex: 0,
         custom: {
           speed: c.speed,
@@ -189,7 +209,7 @@ export const FuelBehaviorHighChart = ({
       ...opBEngineOnMoving.map((c) => ({
         from: new Date(c.startDate).getTime(),
         to: new Date(c.endDate).getTime(),
-        color: "#006eff44",
+        color: "#f1fbcc",
         zIndex: 0,
         custom: {
           speed: c.speed,
@@ -199,7 +219,7 @@ export const FuelBehaviorHighChart = ({
       ...opBEngineOnIdle.map((c) => ({
         from: new Date(c.startDate).getTime(),
         to: new Date(c.endDate).getTime(),
-        color: "#fffb0033",
+        color: "#ccf1fb",
         zIndex: 0,
         custom: {
           speed: c.speed,
@@ -292,7 +312,7 @@ export const FuelBehaviorHighChart = ({
           pointWidth: 20,
           name: LANGUAGE.highCharts.titles.disCharges,
           data: disChargesData,
-          color: "#ca5252",
+          color: "#ff2033",
           point: {
             events: {
               click: (e: Highcharts.PointClickEventObject) => {
@@ -311,6 +331,32 @@ export const FuelBehaviorHighChart = ({
           tooltip: {
             pointFormatter: createTooltipFormatter(dischargesTooltipFields),
           },
+        },
+        {
+          yAxis: 0,
+          name: LANGUAGE.highCharts.titles.fuelVariationCAN,
+          data: levelMessages2Data,
+          color: "#f77f00",
+          lineWidth: 2,
+          tooltip: {
+            pointFormatter: createTooltipFormatter(levelMessagesTooltipFields),
+          },
+          point: {
+            events: {
+              click: (e: Highcharts.PointClickEventObject) => {
+                const message = (
+                  e.point.options as { custom: { lat: number; lon: number } }
+                ).custom;
+                handleClicGeoData({
+                  title: LANGUAGE.geoModalTitles.levelMessageTitle,
+                  lat: message.lat,
+                  lon: message.lon,
+                  rows: getLabelsForLevelMessagesGeoMap(LANGUAGE, message),
+                });
+              },
+            },
+          },
+          visible: false, //atributo que deselecciona esta gráfica por default
         },
         {
           yAxis: 0,
@@ -354,7 +400,7 @@ export const FuelBehaviorHighChart = ({
           name: LANGUAGE.highCharts.titles.dailyPerformance,
           data: dailyPerformancesData,
           marker: { enabled: true, radius: 4, symbol: "circle" },
-          color: "#07b9ff",
+          color: "#8f07ff",
           tooltip: {
             pointFormatter: createTooltipFormatter(
               performancesBetweenChargesTooltipFields
@@ -444,6 +490,7 @@ export const FuelBehaviorHighChart = ({
           borderWidth: 0,
         },
       },
+      accessibility: { enabled: false },
     };
   }, [
     LANGUAGE,
@@ -454,6 +501,7 @@ export const FuelBehaviorHighChart = ({
     dischargesTooltipFields,
     handleClicGeoData,
     levelMessagesData,
+    levelMessages2Data,
     levelMessagesTooltipFields,
     opBEngineOff,
     opBEngineOnIdle,

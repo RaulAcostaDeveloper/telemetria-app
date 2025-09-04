@@ -94,7 +94,7 @@ export default function CardContentIdle({ data, LANGUAGE }: Props) {
     title: LANGUAGE.teleOBD.tableColumns.title,
     col1: LANGUAGE.teleOBD.tableColumns.plate,
     col2: LANGUAGE.teleOBD.tableColumns.name,
-    col3: LANGUAGE.teleOBD.tableColumns.totalIdleHours,
+    col3: LANGUAGE.teleOBD.tableColumns.driverIdleTime,
   };
 
   return (

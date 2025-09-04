@@ -16,11 +16,11 @@ export async function getGroups(
     credentials: "include",
   };
   // Construcción del key único para caché
-  const key = `managementGroups-${accountId}`;
+  const cacheKey = process.env.API_VERSION + `managementGroups-${accountId}`;
 
   // Retorna DATA del servidor o DATA de caché
   return getCached(
-    key,
+    cacheKey,
     async () => {
       try {
         const response = await fetch(fullUrl, options);

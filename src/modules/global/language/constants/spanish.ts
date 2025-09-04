@@ -130,6 +130,7 @@ export const SPANISH: LanguageInterface = {
     },
     axisTitles: {
       fuelVariation: "Variación de combustible (L)",
+      fuelVariationCAN: "Variación de combustible (CAN)",
       time: "Tiempo",
       performance: "Rendimiento (L)",
       distance: "Distancia (Km)",
@@ -139,6 +140,7 @@ export const SPANISH: LanguageInterface = {
       charges: "Cargas",
       disCharges: "Descargas",
       fuelVariation: "Variación de combustible",
+      fuelVariationCAN: "Variación de combustible (CAN)",
       performancesBetweenCharges: "Rendimiento entre cargas",
       dailyPerformance: "Rendimiento diario",
       engineOff: "Motor apagado",

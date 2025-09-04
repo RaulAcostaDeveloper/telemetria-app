@@ -1,4 +1,5 @@
 "use client";
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -12,10 +13,7 @@ import CardContentTCT5 from "@/modules/global/components/cardsDeck/cardContentTC
 import CardGenThird from "@/modules/global/components/cardsDeck/cardGenThird";
 import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 import styles from "./OBDDataProvider.module.css";
-import {
-  columnsTable,
-  dataTable,
-} from "@/modules/global/components/table/table.model";
+import { columnsTable } from "@/modules/global/components/table/table.model";
 import { RootState } from "@/globalConfig/redux/store";
 import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
 import { FuelDataReport } from "@/modules/fuel/components/fuelNowContainer/fuelDataReport/fuelDataReport";
@@ -33,8 +31,8 @@ export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
     (state: RootState) => state.obdRollup
   );
 
-  const teleVehiclesOBDData: dataTable | undefined =
-    obdRollupData?.value.details.map((value) => ({
+  const teleVehiclesOBDData = useMemo(() => {
+    return obdRollupData?.value?.details.map((value) => ({
       name: value.name,
       plate: value.plate,
       driverDistance: value.driverDistance ?? "ND",
@@ -44,6 +42,7 @@ export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
       maxSpeed: value.maxSpeed,
       imei: value.imei,
     }));
+  }, [obdRollupData]);
 
   const teleVehiclesOBDColumns: columnsTable = [
     {

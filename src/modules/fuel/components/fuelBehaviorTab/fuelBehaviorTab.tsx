@@ -103,7 +103,7 @@ export const FuelBehaviorTab = ({
           action={() => toggleInsideOpBEngineOff()}
           title={LANGUAGE.highCharts.titles.engineOff}
           isOn={insideOpBEngineOff.length > 0}
-          activeColor="#52ce009a"
+          activeColor="#fb99e6"
         />
         {/* <ToggleButton
           action={() => toggleInsideOpBEngineOffCoast()}
@@ -115,13 +115,13 @@ export const FuelBehaviorTab = ({
           action={() => toggleInsideOpBEngineOnIdle()}
           title={LANGUAGE.highCharts.titles.engineOnIdle}
           isOn={insideOpBEngineOnIdle.length > 0}
-          activeColor="#ffd900ff"
+          activeColor="#99e6fb"
         />
         <ToggleButton
           action={() => toggleInsideOpBEngineOnMoving()}
           title={LANGUAGE.highCharts.titles.engineOnMoving}
           isOn={insideOpBEngineOnMoving.length > 0}
-          activeColor="#006eff80"
+          activeColor="#e6fb99"
         />
       </div>
       {isModalOpen && geoModalData && (

@@ -1,4 +1,5 @@
 "use client";
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
 import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
@@ -6,7 +7,6 @@ import styles from "./managementDataProvider.module.css";
 import {
   MODAL_OPTION,
   columnsTable,
-  dataTable,
 } from "@/modules/global/components/table/table.model";
 import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
@@ -98,8 +98,8 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   ];
 
   // Ejemplo de como añadir o quitar elementos en la tabla
-  const vehiclesTableData: dataTable | undefined =
-    vehiclesData?.value.vehicles.map((value) => ({
+  const vehiclesTableData = useMemo(() => {
+    return vehiclesData?.value?.vehicles.map((value) => ({
       serialNumber: value.serialNumber,
       plate: value.plate,
       name: value.name,
@@ -113,6 +113,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       imeIs: value.imeIs, ///aqui name, no mostrar imeis pero si que exista.
       id: value.id,
     }));
+  }, [vehiclesData]);
 
   // falta numero de teléfono, fecha de registro, poner tarjeta SIM
   const devicesColumns: columnsTable = [
@@ -163,8 +164,8 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     },
   ];
 
-  const devicesTableData: dataTable | undefined =
-    devicesData?.value.devices.map((value) => ({
+  const devicesTableData = useMemo(() => {
+    return devicesData?.value?.devices.map((value) => ({
       imei: value.imei,
       model: value.model,
       brand: value.brand,
@@ -175,6 +176,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       phoneNumber: value.phoneNumber,
       registrationDate: formatDateTime(value.registrationDate),
     }));
+  }, [devicesData]);
 
   const groupsColumns: columnsTable = [
     {
@@ -187,12 +189,13 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       orderColumn: true,
     },
   ];
-  const groupsTableData: dataTable | undefined = groupsData?.value.groups.map(
-    (value) => ({
+
+  const groupsTableData = useMemo(() => {
+    return groupsData?.value?.groups.map((value) => ({
       id: value.id,
       group: value.name,
-    })
-  );
+    }));
+  }, [groupsData]);
 
   // poner licencia (número), vehículo (quizá placa), ver vehículos del grupo
   // mostrar el modal del vehículo
@@ -241,8 +244,8 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     },
   ];
 
-  const driversTableData: dataTable | undefined =
-    driversData?.value.drivers.map((value) => ({
+  const driversTableData = useMemo(() => {
+    return driversData?.value?.drivers.map((value) => ({
       name: value.name,
       lastName: value.lastName,
       email: value.email,
@@ -252,6 +255,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       groupName: value.groupName,
       license: value.license,
     }));
+  }, [driversData]);
 
   return (
     <div className={styles.managementDataProvider}>

@@ -16,11 +16,11 @@ export async function getDevices(
     credentials: "include",
   };
   // Construcción del key único para caché
-  const key = `managementDevices-${accountId}`;
+  const cacheKey = process.env.API_VERSION + `managementDevices-${accountId}`;
 
   // Retorna DATA del servidor o DATA de caché
   return getCached(
-    key,
+    cacheKey,
     async () => {
       try {
         const response = await fetch(fullUrl, options);
