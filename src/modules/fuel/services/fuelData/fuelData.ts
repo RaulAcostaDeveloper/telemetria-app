@@ -20,7 +20,8 @@ export async function getFuelData(
   };
   // Construcción del key único para caché
   const key =
-    process.env.API_VERSION + `fuelData-${imei}-${startDate}-${endDate}`;
+    process.env.NEXT_PUBLIC_API_VERSION +
+    `fuelData-${imei}-${startDate}-${endDate}`;
 
   // Retorna DATA del servidor o DATA de caché
   return getCached(

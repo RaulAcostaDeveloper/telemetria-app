@@ -21,7 +21,7 @@ export async function getFuelSummary(
   };
   // Construcción del key único para caché
   const key =
-    process.env.API_VERSION +
+    process.env.NEXT_PUBLIC_API_VERSION +
     `fuelSummary-${accountId}-${startDate}-${endDate}-${performanceType}`;
 
   // Retorna DATA del servidor o DATA de caché

@@ -14,7 +14,8 @@ export async function getVehiclesAll(
     credentials: "include",
   };
   // Construcción del key único para caché
-  const cacheKey = process.env.API_VERSION + `managementVehiclesAll`;
+  const cacheKey =
+    process.env.NEXT_PUBLIC_API_VERSION + `managementVehiclesAll`;
 
   // Retorna DATA del servidor o DATA de caché
   return getCached(

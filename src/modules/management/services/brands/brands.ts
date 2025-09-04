@@ -15,7 +15,7 @@ export async function getBrands(
     credentials: "include",
   };
   // Construcción del key único para caché
-  const cacheKey = process.env.API_VERSION + `managementBrands`;
+  const cacheKey = process.env.NEXT_PUBLIC_API_VERSION + `managementBrands`;
 
   // Retorna DATA del servidor o DATA de caché
   return getCached(

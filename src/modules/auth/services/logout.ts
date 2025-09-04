@@ -6,7 +6,7 @@ const url =
 export async function logoutSession(
   forceRefresh = true //hace que no busque en caché
 ) {
-  const cacheKey = process.env.API_VERSION + `logout`;
+  const cacheKey = process.env.NEXT_PUBLIC_API_VERSION + `logout`;
 
   return getCached(
     cacheKey,
