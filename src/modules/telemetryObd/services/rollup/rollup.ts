@@ -12,7 +12,8 @@ export async function getObdRollup(
   const fullUrl = `${url}${accountId}/rollup?startDate=${startDate}&endDate=${endDate}`;
 
   // Construcción del key único para caché
-  const key = `obdRollup-${accountId}-${startDate}-${endDate}`;
+  const key =
+    process.env.API_VERSION + `obdRollup-${accountId}-${startDate}-${endDate}`;
 
   const options: RequestInit = {
     method: "GET",
