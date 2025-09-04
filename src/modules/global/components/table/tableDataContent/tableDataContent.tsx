@@ -57,6 +57,20 @@ export const TableDataContent = ({
     if (!dataTableInside) return;
 
     const handleMouseWheel = (event: WheelEvent) => {
+      // Evitar el scroll de la página
+      const target = event.currentTarget as HTMLElement;
+
+      const atTop = target.scrollTop === 0;
+      const atBottom =
+        target.scrollHeight - target.scrollTop === target.clientHeight;
+
+      if (
+        (event.deltaY < 0 && atTop) || // intenta subir pero ya está en el tope superior
+        (event.deltaY > 0 && atBottom) // intenta bajar pero ya está en el tope inferior
+      ) {
+        event.preventDefault(); // bloquea el scroll de la página
+      }
+
       // Scroll hacia abajo
       // Quitar el primer elemento de reducedData y añadir el siguiente elemento correspondiente
       if (event.deltaY > 0) {
