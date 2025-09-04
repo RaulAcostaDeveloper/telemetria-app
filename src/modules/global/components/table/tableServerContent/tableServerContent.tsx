@@ -42,6 +42,7 @@ interface Props {
   showViewModal?: boolean;
   title?: string;
   viewPath?: string;
+  windowMaxSize?: number;
 }
 
 export const TableServerContent = ({
@@ -70,6 +71,7 @@ export const TableServerContent = ({
   showViewModal,
   title,
   viewPath,
+  windowMaxSize,
 }: Props) => {
   return (
     <>
@@ -129,8 +131,8 @@ export const TableServerContent = ({
             <TableDataContent
               LANGUAGE={LANGUAGE}
               columns={columns}
-              data={filteredData}
               deleteFunction={deleteFunction}
+              filteredData={filteredData}
               idKey={idKey}
               modalOption={modalOption}
               showActions={
@@ -148,6 +150,7 @@ export const TableServerContent = ({
               showGoPageView={showGoPageView}
               showViewModal={showViewModal}
               viewPath={viewPath}
+              windowMaxSize={windowMaxSize}
             />
           </div>
         </div>

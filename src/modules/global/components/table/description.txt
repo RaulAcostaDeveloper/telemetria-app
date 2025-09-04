@@ -5,6 +5,7 @@ Cualquier duda de uso consultarla con el equipo de desarrollo.
 Recomendable guiarse por las interfaces de TypeScript
 De todos modos comparto las instrucciones de uso del componente:
 •	title: Opcional: Se va a mostrar arriba del elemento como título
+•	windowMaxSize: Opcional. Por defecto 15, la cantidad de elementos en la tabla que se puede ver al mismo tiempo (cantidad de renderizados)
 •	columns: Requerido: Arreglo de objetos de tipo columna:
     o	Usar el modelo "columnsTable" exportado en "@/modules/global/components/table/table.model"
     o	columnName: Requerido: Nombre a mostrar de la columna
