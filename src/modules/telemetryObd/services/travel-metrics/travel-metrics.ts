@@ -13,7 +13,7 @@ export async function getObdTravelMetrics(
 
   // Construcción del key único para caché
   const key =
-    process.env.API_VERSION +
+    process.env.NEXT_PUBLIC_API_VERSION +
     `obdTravelMetrics-${deviceId}-${startDate}-${endDate}`;
 
   const options: RequestInit = {

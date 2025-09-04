@@ -16,7 +16,8 @@ export async function getVehicleByImei(
     credentials: "include",
   };
   // Construcción del key único para caché
-  const cacheKey = process.env.API_VERSION + `managementVehicleByImei-${imei}`;
+  const cacheKey =
+    process.env.NEXT_PUBLIC_API_VERSION + `managementVehicleByImei-${imei}`;
 
   // Retorna DATA del servidor o DATA de caché
   return getCached(

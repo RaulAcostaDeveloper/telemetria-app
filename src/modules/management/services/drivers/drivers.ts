@@ -16,7 +16,8 @@ export async function getDrivers(
     credentials: "include",
   };
   // Construcción del key único para caché
-  const cacheKey = process.env.API_VERSION + `managementDrivers-${accountId}`;
+  const cacheKey =
+    process.env.NEXT_PUBLIC_API_VERSION + `managementDrivers-${accountId}`;
 
   // Retorna DATA del servidor o DATA de caché
   return getCached(
