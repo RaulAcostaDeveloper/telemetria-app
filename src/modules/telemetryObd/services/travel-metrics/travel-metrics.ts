@@ -5,8 +5,8 @@ const url = "https://stage.transtelemetrix.com/api/analytics/obd/device/";
 export async function getObdTravelMetrics(
   deviceId: string,
   startDate: string,
-  endDate: string,
-  forceRefresh = true // Se le puede indicar que no busque en caché
+  endDate: string
+  // forceRefresh = true // Se le puede indicar que no busque en caché
 ) {
   // Construcción de la url con parámetros
   const fullUrl = `${url}${deviceId}/travel-metrics?startDate=${startDate}&endDate=${endDate}`;
@@ -44,7 +44,7 @@ export async function getObdTravelMetrics(
           "Error al obtener servicio de obd device travel metrics"
         );
       }
-    },
-    forceRefresh
+    }
+    // forceRefresh
   );
 }

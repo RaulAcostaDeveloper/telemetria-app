@@ -2,13 +2,29 @@ import styles from "./obdAnalisisTab.module.css";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { MetricItem } from "@/modules/fuel/components/fuelPerformanceMetrics/metricItem/metricItem";
 import { ObdTravelMetricsDataValues } from "@/globalConfig/redux/slices/obdTravelMetricsSlice";
+import { VehicleByImei } from "@/globalConfig/redux/slices/vehicleByImeiSlice";
 
 interface Props {
   LANGUAGE: LanguageInterface;
+  averageSpeed: number | string;
+  driverDistance: number | string;
+  engineHours: number | string;
+  idleTime: number | string;
+  maxSpeed: number | string;
   obdAnalyticsData: ObdTravelMetricsDataValues;
+  vehicleByImeiData: VehicleByImei;
 }
 
-export const ObdAnalysisTab = ({ LANGUAGE, obdAnalyticsData }: Props) => {
+export const ObdAnalysisTab = ({
+  LANGUAGE,
+  averageSpeed,
+  driverDistance,
+  engineHours,
+  idleTime,
+  maxSpeed,
+  obdAnalyticsData,
+  vehicleByImeiData,
+}: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.cuadricula}>
@@ -16,25 +32,37 @@ export const ObdAnalysisTab = ({ LANGUAGE, obdAnalyticsData }: Props) => {
           LANGUAGE={LANGUAGE}
           metric=""
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.plate}
-          value={"vehicle.plate"} // pendiente
+          value={vehicleByImeiData.plate}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric=""
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.vehicle}
-          value={"vehicle.name"} // pendiente
+          value={vehicleByImeiData.name}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
-          metric="km"
-          name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.km}
-          value={"value.driverDistance"} // pendiente
+          metric=""
+          name={LANGUAGE.management.tableColumns.year}
+          value={vehicleByImeiData.year}
+        />
+        <MetricItem
+          LANGUAGE={LANGUAGE}
+          metric=""
+          name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.totalEventNumber}
+          value={obdAnalyticsData.timeTraveledDetails.length}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric=""
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.averageRpm}
           value={obdAnalyticsData.rpmAverage?.toString() ?? "NA"}
+        />
+        <MetricItem
+          LANGUAGE={LANGUAGE}
+          metric="km/h"
+          name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.maxSpeed}
+          value={maxSpeed}
           isLast
         />
       </div>
@@ -42,26 +70,40 @@ export const ObdAnalysisTab = ({ LANGUAGE, obdAnalyticsData }: Props) => {
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric="km"
-          name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.totalDistance}
+          name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.km}
+          value={driverDistance}
+        />
+        <MetricItem
+          LANGUAGE={LANGUAGE}
+          metric="h"
+          name={
+            LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.totalTimeTraveled
+          }
           value={obdAnalyticsData.totalTimeTraveled?.toString() ?? "NA"}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric="h"
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.totalEngineHours}
-          value={"value.totalEngineHours"} // pendiente
+          value={engineHours}
+        />
+        <MetricItem
+          LANGUAGE={LANGUAGE}
+          metric="h"
+          name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.totalIdleTime}
+          value={idleTime}
+        />
+        <MetricItem
+          LANGUAGE={LANGUAGE}
+          metric="km/h"
+          name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.averageSpeed}
+          value={averageSpeed}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric="km/h"
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.allowedMaxSpeed}
-          value={"value.allowedMaxSpeed"} // pendiente
-        />
-        <MetricItem
-          LANGUAGE={LANGUAGE}
-          metric="km/h"
-          name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.maxSpeed}
-          value={"value.maxSpeed"} // pendiente
+          value={"NA"} // pendiente
           isLast
         />
       </div>

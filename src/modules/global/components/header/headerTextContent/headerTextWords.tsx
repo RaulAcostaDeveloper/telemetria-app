@@ -36,16 +36,16 @@ export const HeaderTextWords = ({ LANGUAGE, section, url }: Props) => {
     <>
       {vehicleByImeiStatus === "succeeded" && vehicleByImeiData ? (
         <>
-          {vehicleByImeiData.value.plate && (
+          {vehicleByImeiData.value?.plate && (
             <span className={styles.plate}>
               {vehicleByImeiData.value.plate} ·{" "}
             </span>
           )}
-          {vehicleByImeiData.value.brand && (
+          {vehicleByImeiData.value?.brand && (
             <span>{vehicleByImeiData.value.brand}</span>
           )}
-          {vehicleByImeiData.value.imeIs && (
-            <span> · ({vehicleByImeiData.value.imeIs[0]})</span>
+          {vehicleByImeiData.value?.imeIs && (
+            <span> · ({vehicleByImeiData.value?.imeIs[0]})</span>
           )}
         </>
       ) : section === "single-fuel" ? (
