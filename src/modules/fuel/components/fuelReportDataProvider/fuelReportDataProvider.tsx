@@ -63,7 +63,7 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
     const engineOnIdle: OBValue[] = [];
     const engineOnMoving: OBValue[] = [];
 
-    const levelMessages = fuelDataData?.value.levelMessages;
+    const levelMessages = fuelDataData?.value?.levelMessages;
     if (!levelMessages) return;
 
     levelMessages.forEach((el, i) => {
@@ -114,23 +114,23 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
     if (isAuthenticated && startDate && endDate) {
       dispatch(
         fetchFuelData({
-          imei: "862524060822760", // imei.toString(),
-          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+          imei,
+          startDate: formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
         })
       );
 
       dispatch(
         fetchFuelPerformance({
-          imei: "862524060822760", // imei.toString(),
-          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+          imei,
+          startDate: formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
         })
       );
 
       dispatch(
         fetchLastFuelReport({
-          imei: "862524060822760", // imei.toString(),
+          imei,
         })
       );
     }
@@ -139,7 +139,7 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
   // Actualiza datos del vehiculo cuando el imei no es ND ni indefinido.
   useEffect(() => {
     if (isAuthenticated && imei && imei.length > 3) {
-      dispatch(fetchVehicleByImei({ imei: imei }));
+      dispatch(fetchVehicleByImei({ imei }));
     }
   }, [isAuthenticated, imei]);
 
@@ -149,7 +149,7 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
         tabOptions={vehicleTabs}
         tabContents={[
           <div key={0}>
-            {fuelDataStatus === "succeeded" && fuelDataData && (
+            {fuelDataStatus === "succeeded" && fuelDataData?.value && (
               <>
                 <FuelBehaviorTab
                   LANGUAGE={LANGUAGE}
@@ -173,14 +173,15 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
             )}
           </div>,
           <div key={1}>
-            {fuelPerformanceStatus === "succeeded" && fuelPerformanceData && (
-              <>
-                <FuelPerformanceMetrics
-                  LANGUAGE={LANGUAGE}
-                  fuelPerformanceData={fuelPerformanceData.value}
-                />
-              </>
-            )}
+            {fuelPerformanceStatus === "succeeded" &&
+              fuelPerformanceData?.value && (
+                <>
+                  <FuelPerformanceMetrics
+                    LANGUAGE={LANGUAGE}
+                    fuelPerformanceData={fuelPerformanceData.value}
+                  />
+                </>
+              )}
 
             {fuelPerformanceStatus === "loading" && (
               <div>
@@ -193,15 +194,16 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
             )}
           </div>,
           <div key={2}>
-            {lastFuelReportStatus === "succeeded" && lastFuelReportData && (
-              <>
-                <FuelNowContainer
-                  LANGUAGE={LANGUAGE}
-                  imei={imei}
-                  lastFuelReportData={lastFuelReportData.value}
-                />
-              </>
-            )}
+            {lastFuelReportStatus === "succeeded" &&
+              lastFuelReportData?.value && (
+                <>
+                  <FuelNowContainer
+                    LANGUAGE={LANGUAGE}
+                    imei={imei}
+                    lastFuelReportData={lastFuelReportData.value}
+                  />
+                </>
+              )}
 
             {lastFuelReportStatus === "loading" && (
               <div>

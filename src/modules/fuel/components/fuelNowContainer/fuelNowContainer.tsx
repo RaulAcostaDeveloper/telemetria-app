@@ -31,7 +31,11 @@ interface Props {
   lastFuelReportData: LastFuelReportData;
 }
 
-export const FuelNowContainer = ({ LANGUAGE, lastFuelReportData }: Props) => {
+export const FuelNowContainer = ({
+  LANGUAGE,
+  lastFuelReportData,
+  imei,
+}: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [geoModalData, setGeoModalData] = useState<GeoModalData>();
   const dispatch = useDispatch<AppDispatch>();
@@ -43,7 +47,7 @@ export const FuelNowContainer = ({ LANGUAGE, lastFuelReportData }: Props) => {
       if (isAuthenticated) {
         dispatch(
           fetchLastFuelReport({
-            imei: "862524060822760", // imei.toString(),
+            imei,
           })
         );
       }
@@ -61,7 +65,7 @@ export const FuelNowContainer = ({ LANGUAGE, lastFuelReportData }: Props) => {
       title: LANGUAGE.geoModalTitles.fuelNowTitle,
       rows: [],
     });
-  }, []);
+  }, [lastFuelReportData]);
 
   const dateGps = new Date(lastFuelReportData.dateGps + "Z");
 

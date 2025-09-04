@@ -73,21 +73,21 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
 
   useEffect(() => {
     if (isAuthenticated && imei && imei.length > 3) {
-      dispatch(fetchVehicleByImei({ imei: imei }));
+      dispatch(fetchVehicleByImei({ imei }));
     }
-  }, [dispatch, isAuthenticated, imei]);
+  }, [isAuthenticated, imei]);
 
   useEffect(() => {
     if (isAuthenticated && startDate && endDate) {
       dispatch(
         fetchObdTravelMetrics({
-          deviceId: "862524060822760", // imei.toString(),
-          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+          deviceId: imei,
+          startDate: formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
         })
       );
     }
-  }, [dispatch, isAuthenticated, startDate, endDate, imei]);
+  }, [isAuthenticated, startDate, endDate, imei]);
 
   useEffect(() => {
     if (obdTravelMetricsData?.value) {
