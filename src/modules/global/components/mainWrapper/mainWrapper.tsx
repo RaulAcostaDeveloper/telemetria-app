@@ -26,6 +26,7 @@ import { fetchObdRollup } from "@/globalConfig/redux/slices/obdRollupSlice";
 import { fetchTopFuelReport } from "@/globalConfig/redux/slices/topFuelReportSlice";
 import { fetchVehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
 import { useAuth } from "../../../auth/utils";
+import { formatToLocalIso8601 } from "../../utils/utils";
 
 interface Props {
   children: React.ReactNode;
@@ -133,30 +134,32 @@ export const MainWrapper = ({ children }: Props) => {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    dispatch(
-      fetchFuelSummary({
-        accountId: "4992",
-        startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate),
-        endDate: "2024-08-21T00:00:00",
-        performanceType: "1",
-      })
-    );
-    dispatch(
-      fetchTopFuelReport({
-        accountId: "90926",
-        startDate: "2024-09-01T00:00:00", // formatToLocalIso8601(startDate),
-        endDate: "2024-09-30T00:00:00",
-        numberOfVehicles: 10,
-      })
-    );
-    dispatch(
-      fetchObdRollup({
-        accountId: "90926",
-        startDate: "2025-07-17T00:00:00", // formatToLocalIso8601(startDate),
-        endDate: "2025-10-21T00:00:00",
-      })
-    );
-  }, [startDate, endDate]);
+    if (isAuthenticated && startDate && endDate) {
+      dispatch(
+        fetchFuelSummary({
+          accountId: "4992",
+          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+          endDate: formatToLocalIso8601(endDate),
+          performanceType: "1",
+        })
+      );
+      dispatch(
+        fetchTopFuelReport({
+          accountId: "90926",
+          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+          endDate: formatToLocalIso8601(endDate),
+          numberOfVehicles: 10,
+        })
+      );
+      dispatch(
+        fetchObdRollup({
+          accountId: "90926",
+          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+          endDate: formatToLocalIso8601(endDate),
+        })
+      );
+    }
+  }, [isAuthenticated, startDate, endDate]);
 
   return testSessionStatus === "loading" ? (
     <div>

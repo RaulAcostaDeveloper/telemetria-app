@@ -285,7 +285,7 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
         /> */}
 
       <div className={styles.topResumeData}>
-        {fuelSummaryStatus === "succeeded" && fuelSummaryData && (
+        {fuelSummaryStatus === "succeeded" && fuelSummaryData?.value && (
           <>
             <ReportSummary summaryValues={fuelSummaryData.value} />
             <DonutGraphic devices={fuelSummaryData.value.devices} />

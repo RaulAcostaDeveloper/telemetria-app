@@ -23,6 +23,7 @@ import { ButtonTypes, GeneralButton } from "@/modules/global/components";
 import { FuelDataReport } from "./fuelDataReport/fuelDataReport";
 import { FuelNowVehicleTank } from "./fuelNowVehicleTank/fuelNowVehicleTank";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { useAuth } from "@/modules/auth/utils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -34,21 +35,24 @@ export const FuelNowContainer = ({ LANGUAGE, lastFuelReportData }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [geoModalData, setGeoModalData] = useState<GeoModalData>();
   const dispatch = useDispatch<AppDispatch>();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     // Tener la data actualizada cada 10 segundos
     const intervalId = setInterval(() => {
-      dispatch(
-        fetchLastFuelReport({
-          imei: "862524060822760", // imei.toString(),
-        })
-      );
+      if (isAuthenticated) {
+        dispatch(
+          fetchLastFuelReport({
+            imei: "862524060822760", // imei.toString(),
+          })
+        );
+      }
     }, 20000);
 
     return () => {
       clearTimeout(intervalId);
     };
-  }, []);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     setGeoModalData({

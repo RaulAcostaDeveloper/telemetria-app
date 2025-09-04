@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
+import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
 import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 import styles from "./fuelReportDataProvider.module.css";
 import {
@@ -115,16 +115,16 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
       dispatch(
         fetchFuelData({
           imei: "862524060822760", // imei.toString(),
-          startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate), "2024-08-05T00:00:00"
-          endDate: "2024-08-21T00:00:00", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
+          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+          endDate: formatToLocalIso8601(endDate),
         })
       );
 
       dispatch(
         fetchFuelPerformance({
           imei: "862524060822760", // imei.toString(),
-          startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate), "2024-08-05T00:00:00"
-          endDate: "2024-08-21T00:00:00", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
+          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+          endDate: formatToLocalIso8601(endDate),
         })
       );
 
@@ -141,7 +141,7 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
     if (isAuthenticated && imei && imei.length > 3) {
       dispatch(fetchVehicleByImei({ imei: imei }));
     }
-  }, [dispatch, isAuthenticated, imei]);
+  }, [isAuthenticated, imei]);
 
   return (
     <div className={styles.fuelReportDataProvider}>

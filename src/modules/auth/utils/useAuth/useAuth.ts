@@ -27,10 +27,6 @@ export const useAuth = () => {
     (state: RootState) => state.testSession
   );
 
-  const { logoutData, logoutStatus } = useSelector(
-    (state: RootState) => state.logoutSlice
-  );
-
   useEffect(() => {
     if (isLoginForm) {
       if (
