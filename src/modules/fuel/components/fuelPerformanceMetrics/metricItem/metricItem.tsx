@@ -29,7 +29,7 @@ export const MetricItem = ({
     <button
       className={`${styles.metricItem} ${isLast ? "" : styles.border}`}
       onClick={() =>
-        copyToClipboard(name + " " + value + " " + metric && metric)
+        copyToClipboard(name + " " + value + (metric && " " + metric))
       }
       title={`${LANGUAGE.table.actions.copy}  \"${
         name + " " + value + (metric && " " + metric)
