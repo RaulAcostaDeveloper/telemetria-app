@@ -111,6 +111,7 @@ export interface LanguageInterface {
     axisTitles: {
       time: string;
       fuelVariation: string;
+      fuelVariationCAN: string;
       performance: string;
       distance: string;
       timeTraveled: string;
@@ -119,6 +120,7 @@ export interface LanguageInterface {
       charges: string;
       disCharges: string;
       fuelVariation: string;
+      fuelVariationCAN: string;
       performancesBetweenCharges: string;
       dailyPerformance: string;
       engineOff: string;
