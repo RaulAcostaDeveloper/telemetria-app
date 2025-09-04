@@ -108,10 +108,6 @@ export const FuelBehaviorHighChart = ({
   }, [fuelDataData]);
 
   const levelMessagesData = useMemo(() => {
-    console.log(
-      "--a--: ",
-      fuelDataData.levelMessages.map((c) => c.canCurrentLevel)
-    );
     return fuelDataData.levelMessages
       .map((c) => ({
         x: new Date(c.dateGps).getTime(),
@@ -340,7 +336,7 @@ export const FuelBehaviorHighChart = ({
           yAxis: 0,
           name: LANGUAGE.highCharts.titles.fuelVariationCAN,
           data: levelMessages2Data,
-          color: "#006af5",
+          color: "#f77f00",
           lineWidth: 2,
           tooltip: {
             pointFormatter: createTooltipFormatter(levelMessagesTooltipFields),
@@ -366,7 +362,7 @@ export const FuelBehaviorHighChart = ({
           yAxis: 0,
           name: LANGUAGE.highCharts.titles.fuelVariation,
           data: levelMessagesData,
-          color: "#f77f00",
+          color: "#006af5",
           lineWidth: 2,
           tooltip: {
             pointFormatter: createTooltipFormatter(levelMessagesTooltipFields),
@@ -404,7 +400,7 @@ export const FuelBehaviorHighChart = ({
           name: LANGUAGE.highCharts.titles.dailyPerformance,
           data: dailyPerformancesData,
           marker: { enabled: true, radius: 4, symbol: "circle" },
-          color: "#07b9ff",
+          color: "#8f07ff",
           tooltip: {
             pointFormatter: createTooltipFormatter(
               performancesBetweenChargesTooltipFields
