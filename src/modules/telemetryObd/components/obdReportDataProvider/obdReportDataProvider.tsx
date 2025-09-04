@@ -38,6 +38,11 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
     []
   );
   const [driverTime, setDriverTimeData] = useState<ObdChartPoint[]>([]);
+  const [averageSpeed, setAverageSpeed] = useState<number | string>("NA");
+  const [driverDistance, setDriverDistance] = useState<number | string>("NA");
+  const [engineHours, setEngineHours] = useState<number | string>("NA");
+  const [idleTime, setIdleTime] = useState<number | string>("NA");
+  const [maxSpeed, setMaxSpeed] = useState<number | string>("NA");
 
   const { isAuthenticated } = useAuth();
 
@@ -47,6 +52,10 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
 
   const { obdTravelMetricsData, obdTravelMetricsStatus } = useSelector(
     (state: RootState) => state.obdTravelMetrics
+  );
+
+  const { vehicleByImeiData, vehicleByImeiStatus } = useSelector(
+    (state: RootState) => state.vehicleByImei
   );
 
   const tabOptions = [
@@ -80,7 +89,7 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
   }, [dispatch, isAuthenticated, startDate, endDate, imei]);
 
   useEffect(() => {
-    if (obdTravelMetricsData) {
+    if (obdTravelMetricsData?.value) {
       const dataRpm: ObdChartPoint[] =
         obdTravelMetricsData.value.timeTraveledDetails
           .map((c) => ({
@@ -125,6 +134,51 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
           }))
           .sort((a, b) => a.x - b.x);
       setDriverTimeData(dataDriverTime);
+
+      // driverDistance
+      const driverDistance =
+        obdTravelMetricsData.value.timeTraveledDetails.reduce(
+          (acc, curr) =>
+            acc +
+            (typeof curr.driverDistance === "number" ? curr.driverDistance : 0),
+          0
+        );
+      setDriverDistance(Math.round(driverDistance * 100) / 100);
+
+      // engineHours
+      const engineHours = obdTravelMetricsData.value.timeTraveledDetails.reduce(
+        (acc, curr) =>
+          acc +
+          (typeof curr.totalEngineHours === "number"
+            ? curr.totalEngineHours
+            : 0),
+        0
+      );
+      setEngineHours(Math.round(engineHours * 100) / 100);
+
+      // idleTime
+      const idleTime = obdTravelMetricsData.value.timeTraveledDetails.reduce(
+        (acc, curr) =>
+          acc +
+          (typeof curr.driverIdleTime === "number" ? curr.driverIdleTime : 0),
+        0
+      );
+      setIdleTime(Math.round(idleTime * 100) / 100);
+
+      const speeds = obdTravelMetricsData.value.timeTraveledDetails
+        .map((item) => (typeof item.speed === "number" ? item.speed : null))
+        .filter((val): val is number => val !== null && val > 0);
+
+      // maxSpeed
+      const maxSpeed = speeds.length > 0 ? Math.max(...speeds) : 0;
+      setMaxSpeed(maxSpeed);
+
+      // averageSpeed
+      const averageSpeed =
+        speeds.length > 0
+          ? speeds.reduce((acc, val) => acc + val, 0) / speeds.length
+          : 0;
+      setAverageSpeed(Math.round(averageSpeed * 100) / 100);
     }
   }, [obdTravelMetricsData]);
 
@@ -154,12 +208,21 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
             )}
           </div>,
           <div key={2}>
-            {obdTravelMetricsStatus === "succeeded" && obdTravelMetricsData && (
-              <ObdAnalysisTab
-                LANGUAGE={LANGUAGE}
-                obdAnalyticsData={obdTravelMetricsData.value}
-              />
-            )}
+            {obdTravelMetricsStatus === "succeeded" &&
+              obdTravelMetricsData?.value &&
+              vehicleByImeiStatus === "succeeded" &&
+              vehicleByImeiData?.value && (
+                <ObdAnalysisTab
+                  LANGUAGE={LANGUAGE}
+                  averageSpeed={averageSpeed}
+                  driverDistance={driverDistance}
+                  engineHours={engineHours}
+                  idleTime={idleTime}
+                  maxSpeed={maxSpeed}
+                  obdAnalyticsData={obdTravelMetricsData.value}
+                  vehicleByImeiData={vehicleByImeiData.value}
+                />
+              )}
 
             {obdTravelMetricsStatus === "loading" && (
               <div>

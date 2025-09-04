@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getVehicleByImei } from "@/modules/management/services/vehicles/vehicleByImei";
 
-export interface Vehicle {
+export interface VehicleByImei {
   id: string;
   name: string;
   clientOwnerName: string;
@@ -22,7 +22,7 @@ export interface Vehicle {
 interface Data {
   code: number;
   message: string;
-  value: Vehicle;
+  value: VehicleByImei;
 }
 
 interface InitialState {

@@ -295,13 +295,16 @@ export interface LanguageInterface {
       totalTimeWorked: string;
     };
     analysisTab: {
+      totalIdleTime: string;
       allowedMaxSpeed: string;
       maxSpeed: string;
       averageRpm: string;
       plate: string;
       vehicle: string;
       km: string;
-      totalDistance: string;
+      totalEventNumber: string;
+      averageSpeed: string;
+      totalTimeTraveled: string;
       totalEngineHours: string;
     };
   };
