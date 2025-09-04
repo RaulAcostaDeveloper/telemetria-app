@@ -10,6 +10,8 @@ import { fetchLogin } from "../../services/postLogin";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 import { fetchTestSession } from "@/globalConfig/redux/slices/testSessionSlice";
 import { callLogout } from "@/globalConfig/redux/slices/logoutSlice";
+import { localStorageSetItem } from "@/modules/global/localStorage/utils/storageService";
+import { STORAGE_KEYS } from "@/modules/global/localStorage/constants/storageKeys";
 
 export const useAuth = () => {
   const router = useRouter();
@@ -26,6 +28,12 @@ export const useAuth = () => {
   const { testSessionData, testSessionStatus } = useSelector(
     (state: RootState) => state.testSession
   );
+
+  useEffect(() => {
+    if (loginServerData && loginServerData.value?.userId) {
+      localStorageSetItem(STORAGE_KEYS.USER_ID, loginServerData.value.userId);
+    }
+  }, [loginServerData]);
 
   useEffect(() => {
     if (isLoginForm) {

@@ -63,12 +63,12 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
   }, [pathname]);
 
   /** Filtra todos los resultados que coincidan por "plate" */
-  const filteredByPlate = vehiclesData?.value.vehicles?.filter((vehicle) =>
+  const filteredByPlate = vehiclesData?.value?.vehicles?.filter((vehicle) =>
     vehicle.plate.toLowerCase().includes(query.toLowerCase())
   );
   /** Filtra todos los resultados que coincidan por el primer "imeIs" en el array.
    *   Ejemplo imei con proposito de saber que teclear en input: 868689060250000 */
-  const filteredByImei = vehiclesData?.value.vehicles?.filter((vehicle) =>
+  const filteredByImei = vehiclesData?.value?.vehicles?.filter((vehicle) =>
     vehicle.imeIs.toLowerCase().includes(query.toLowerCase())
   );
 

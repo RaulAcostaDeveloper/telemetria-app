@@ -35,6 +35,7 @@ interface Props {
 export const MainWrapper = ({ children }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | null>(null);
   const [LANGUAGE, setLanguageObject] = useState<LanguageInterface>(SPANISH);
+  const [userId, setUserId] = useState<string>();
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -55,6 +56,13 @@ export const MainWrapper = ({ children }: Props) => {
   useEffect(() => {
     tryFirstServerSession();
   }, []);
+
+  useEffect(() => {
+    const userID: string | null = localStorageGetItem(STORAGE_KEYS.USER_ID);
+    if (userID) {
+      setUserId(userID);
+    }
+  }, [isAuthenticated]);
 
   // Aquí trae de redux y modifica el LANGUAGE
   // Actualizar en caso de agregar un nuevo idioma
@@ -109,35 +117,35 @@ export const MainWrapper = ({ children }: Props) => {
 
   // Servicios al inicio de la sesión del usuario
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && userId) {
       dispatch(
         fetchVehicles({
-          accountId: "90926",
+          accountId: userId,
         })
       );
       dispatch(
         fetchDevices({
-          accountId: "90926",
+          accountId: userId,
         })
       );
       dispatch(
         fetchDrivers({
-          accountId: "90926",
+          accountId: userId,
         })
       );
       dispatch(
         fetchGroups({
-          accountId: "90926",
+          accountId: userId,
         })
       );
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, userId]);
 
   useEffect(() => {
-    if (isAuthenticated && startDate && endDate) {
+    if (isAuthenticated && startDate && endDate && userId) {
       dispatch(
         fetchFuelSummary({
-          accountId: "4992",
+          accountId: userId,
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
           performanceType: "1",
@@ -145,7 +153,7 @@ export const MainWrapper = ({ children }: Props) => {
       );
       dispatch(
         fetchTopFuelReport({
-          accountId: "90926",
+          accountId: userId,
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
           numberOfVehicles: 10,
@@ -153,13 +161,13 @@ export const MainWrapper = ({ children }: Props) => {
       );
       dispatch(
         fetchObdRollup({
-          accountId: "90926",
+          accountId: userId,
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
         })
       );
     }
-  }, [isAuthenticated, startDate, endDate]);
+  }, [isAuthenticated, startDate, endDate, userId]);
 
   return testSessionStatus === "loading" ? (
     <div>
