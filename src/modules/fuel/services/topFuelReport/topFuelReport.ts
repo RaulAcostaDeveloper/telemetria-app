@@ -20,7 +20,9 @@ export async function getTopFuelReport(
     credentials: "include",
   };
   // Construcción del key único para caché
-  const key = `topFuelReport-${accountId}-${numberOfVehicles}-${startDate}-${endDate}`;
+  const key =
+    process.env.API_VERSION +
+    `topFuelReport-${accountId}-${numberOfVehicles}-${startDate}-${endDate}`;
 
   // Retorna DATA del servidor o DATA de caché
   return getCached(

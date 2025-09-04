@@ -17,11 +17,11 @@ export async function getLastFuelReport(
     credentials: "include",
   };
   // Construcción del key único para caché
-  const key = `last-report-${imei}`;
+  const cacheKey = process.env.API_VERSION + `last-report-${imei}`;
 
   // Retorna DATA del servidor o DATA de caché
   return getCached(
-    key,
+    cacheKey,
     async () => {
       try {
         const response = await fetch(fullUrl, options);

@@ -12,7 +12,9 @@ export async function getObdTravelMetrics(
   const fullUrl = `${url}${deviceId}/travel-metrics?startDate=${startDate}&endDate=${endDate}`;
 
   // Construcción del key único para caché
-  const key = `obdTravelMetrics-${deviceId}-${startDate}-${endDate}`;
+  const key =
+    process.env.API_VERSION +
+    `obdTravelMetrics-${deviceId}-${startDate}-${endDate}`;
 
   const options: RequestInit = {
     method: "GET",

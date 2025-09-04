@@ -6,10 +6,10 @@ const url =
 export async function logoutSession(
   forceRefresh = true //hace que no busque en caché
 ) {
-  const key = `logout`;
+  const cacheKey = process.env.API_VERSION + `logout`;
 
   return getCached(
-    key,
+    cacheKey,
     async () => {
       const options: RequestInit = {
         method: "POST",

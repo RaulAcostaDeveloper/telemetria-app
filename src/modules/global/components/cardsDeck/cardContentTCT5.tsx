@@ -96,7 +96,7 @@ export default function CardContentTCT5({ data, LANGUAGE }: Props) {
     title: LANGUAGE.teleOBD.tableColumns.title,
     col1: LANGUAGE.teleOBD.tableColumns.plate,
     col2: LANGUAGE.teleOBD.tableColumns.name,
-    col3: LANGUAGE.teleOBD.tableColumns.totalDistance,
+    col3: LANGUAGE.teleOBD.tableColumns.driverDistance,
   };
 
   return (

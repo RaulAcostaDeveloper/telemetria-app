@@ -1,21 +1,19 @@
 "use client";
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
+
+import { LocalShipping } from "@mui/icons-material";
 
 // import { FuelFilter } from "../fuelFilter/fuelFilter";
 import DonutGraphic from "@/modules/global/components/donutGraphic/DonutGraphic";
 import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
 import styles from "./fuelDataProvider.module.css";
-import {
-  columnsTable,
-  dataTable,
-} from "@/modules/global/components/table/table.model";
+import { columnsTable } from "@/modules/global/components/table/table.model";
 import { RootState } from "@/globalConfig/redux/store";
 import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Table, TabsContent } from "@/modules/global/components";
-
-import { LocalShipping } from "@mui/icons-material";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -103,8 +101,8 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
     },
   ];
 
-  const vehiclesReport: dataTable | undefined =
-    fuelSummaryData?.value.devices.map((value) => ({
+  const vehiclesReport = useMemo(() => {
+    return fuelSummaryData?.value?.devices.map((value) => ({
       name: value.name,
       lastFuelLevel: value.lastFuelLevel,
       performanceOdometer: value.performanceOdometer,
@@ -116,6 +114,7 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
       lastReportDate: value.lastReportDate,
       imei: value.imei,
     }));
+  }, [fuelSummaryData]);
 
   const topFuelReportChargesColumns: columnsTable = [
     {
@@ -178,8 +177,8 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
     },
   ];
 
-  const topFuelReportCharges: dataTable | undefined =
-    topFuelReportData?.value?.charges.map((value) => ({
+  const topFuelReportCharges = useMemo(() => {
+    return topFuelReportData?.value?.charges.map((value) => ({
       name: value.name,
       plate: value.plate,
       brand: value.brand,
@@ -195,6 +194,7 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
       clientOwnerName: value.clientOwnerName,
       economicNumber: value.economicNumber,
     }));
+  }, [topFuelReportData]);
 
   const topFuelReportDischargesColumns: columnsTable = [
     {
@@ -257,8 +257,8 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
     },
   ];
 
-  const topFuelReportDischarges: dataTable | undefined =
-    topFuelReportData?.value?.discharges.map((value) => ({
+  const topFuelReportDischarges = useMemo(() => {
+    return topFuelReportData?.value?.discharges.map((value) => ({
       name: value.name,
       plate: value.plate,
       brand: value.brand,
@@ -274,6 +274,7 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
       clientOwnerName: value.clientOwnerName,
       economicNumber: value.economicNumber,
     }));
+  }, [topFuelReportData]);
 
   return (
     <div>
