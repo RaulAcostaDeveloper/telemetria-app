@@ -47,7 +47,7 @@ export const FuelNowContainer = ({
       if (isAuthenticated) {
         dispatch(
           fetchLastFuelReport({
-            imei,
+            imei: "862524060822760", // imei.toString(),
           })
         );
       }

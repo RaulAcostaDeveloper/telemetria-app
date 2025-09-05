@@ -120,22 +120,22 @@ export const MainWrapper = ({ children }: Props) => {
     if (isAuthenticated && userId) {
       dispatch(
         fetchVehicles({
-          accountId: userId,
+          accountId: "90926",
         })
       );
       dispatch(
         fetchDevices({
-          accountId: userId,
+          accountId: "90926",
         })
       );
       dispatch(
         fetchDrivers({
-          accountId: userId,
+          accountId: "90926",
         })
       );
       dispatch(
         fetchGroups({
-          accountId: userId,
+          accountId: "90926",
         })
       );
     }
@@ -145,25 +145,25 @@ export const MainWrapper = ({ children }: Props) => {
     if (isAuthenticated && startDate && endDate && userId) {
       dispatch(
         fetchFuelSummary({
-          accountId: userId,
-          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
-          endDate: formatToLocalIso8601(endDate),
+          accountId: "4992",
+          startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate),
+          endDate: "2024-08-21T00:00:00",
           performanceType: "1",
         })
       );
       dispatch(
         fetchTopFuelReport({
-          accountId: userId,
-          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
-          endDate: formatToLocalIso8601(endDate),
+          accountId: "90926",
+          startDate: "2024-09-01T00:00:00", // formatToLocalIso8601(startDate),
+          endDate: "2024-09-30T00:00:00",
           numberOfVehicles: 10,
         })
       );
       dispatch(
         fetchObdRollup({
-          accountId: userId,
-          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
-          endDate: formatToLocalIso8601(endDate),
+          accountId: "90926",
+          startDate: "2025-07-17T00:00:00", // formatToLocalIso8601(startDate),
+          endDate: "2025-10-21T00:00:00",
         })
       );
     }
