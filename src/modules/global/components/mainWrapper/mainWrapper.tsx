@@ -26,6 +26,7 @@ import { fetchObdRollup } from "@/globalConfig/redux/slices/obdRollupSlice";
 import { fetchTopFuelReport } from "@/globalConfig/redux/slices/topFuelReportSlice";
 import { fetchVehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
 import { useAuth } from "../../../auth/utils";
+import { formatToLocalIso8601 } from "../../utils/utils";
 
 interface Props {
   children: React.ReactNode;
@@ -34,6 +35,7 @@ interface Props {
 export const MainWrapper = ({ children }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | null>(null);
   const [LANGUAGE, setLanguageObject] = useState<LanguageInterface>(SPANISH);
+  const [userId, setUserId] = useState<string>();
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -54,6 +56,13 @@ export const MainWrapper = ({ children }: Props) => {
   useEffect(() => {
     tryFirstServerSession();
   }, []);
+
+  useEffect(() => {
+    const userID: string | null = localStorageGetItem(STORAGE_KEYS.USER_ID);
+    if (userID) {
+      setUserId(userID);
+    }
+  }, [isAuthenticated]);
 
   // Aquí trae de redux y modifica el LANGUAGE
   // Actualizar en caso de agregar un nuevo idioma
@@ -108,7 +117,7 @@ export const MainWrapper = ({ children }: Props) => {
 
   // Servicios al inicio de la sesión del usuario
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && userId) {
       dispatch(
         fetchVehicles({
           accountId: "90926",
@@ -130,33 +139,35 @@ export const MainWrapper = ({ children }: Props) => {
         })
       );
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, userId]);
 
   useEffect(() => {
-    dispatch(
-      fetchFuelSummary({
-        accountId: "4992",
-        startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate),
-        endDate: "2024-08-21T00:00:00",
-        performanceType: "1",
-      })
-    );
-    dispatch(
-      fetchTopFuelReport({
-        accountId: "90926",
-        startDate: "2024-09-01T00:00:00", // formatToLocalIso8601(startDate),
-        endDate: "2024-09-30T00:00:00",
-        numberOfVehicles: 10,
-      })
-    );
-    dispatch(
-      fetchObdRollup({
-        accountId: "90926",
-        startDate: "2025-07-17T00:00:00", // formatToLocalIso8601(startDate),
-        endDate: "2025-10-21T00:00:00",
-      })
-    );
-  }, [startDate, endDate]);
+    if (isAuthenticated && startDate && endDate && userId) {
+      dispatch(
+        fetchFuelSummary({
+          accountId: "4992",
+          startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate),
+          endDate: "2024-08-21T00:00:00",
+          performanceType: "1",
+        })
+      );
+      dispatch(
+        fetchTopFuelReport({
+          accountId: "90926",
+          startDate: "2024-09-01T00:00:00", // formatToLocalIso8601(startDate),
+          endDate: "2024-09-30T00:00:00",
+          numberOfVehicles: 10,
+        })
+      );
+      dispatch(
+        fetchObdRollup({
+          accountId: "90926",
+          startDate: "2025-07-17T00:00:00", // formatToLocalIso8601(startDate),
+          endDate: "2025-10-21T00:00:00",
+        })
+      );
+    }
+  }, [isAuthenticated, startDate, endDate, userId]);
 
   return testSessionStatus === "loading" ? (
     <div>

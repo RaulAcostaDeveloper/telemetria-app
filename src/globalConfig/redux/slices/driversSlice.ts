@@ -14,7 +14,6 @@ interface Drivers {
   license: string;
 }
 
-
 interface ArrayDrivers {
   drivers: Drivers[];
 }
@@ -43,8 +42,8 @@ const initialState: InitialState = {
 };
 
 /** Asigna "ND" a valores null, undefined y cadenas vacias.*/
-function setObjNDIfEmpty(payload: Data){
-  const revisedArr = payload.value.drivers.map( (driver) => {
+function setObjNDIfEmpty(payload: Data) {
+  const revisedArr = payload.value?.drivers.map((driver) => {
     //No altera a driver.id
     driver.name = ndIfEmpty(driver.name).toString();
     driver.email = ndIfEmpty(driver.email).toString();
@@ -54,8 +53,8 @@ function setObjNDIfEmpty(payload: Data){
     driver.alias = ndIfEmpty(driver.alias).toString();
     driver.groupName = ndIfEmpty(driver.groupName).toString();
     driver.license = ndIfEmpty(driver.license).toString();
-    return driver
-  })
+    return driver;
+  });
   payload.value.drivers = revisedArr;
   return payload;
 }

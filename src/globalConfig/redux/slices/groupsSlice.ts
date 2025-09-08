@@ -34,12 +34,14 @@ const initialState: InitialState = {
   groupsStatus: "idle",
 };
 
-function setObjNDIfEmpty(payload: Data){
-    const revisedArr = payload.value.groups.map( (group) => {
-    //No altera a group.id
+function setObjNDIfEmpty(payload: Data) {
+  if (!payload.value) return payload; // No hay nada que procesar
+
+  const revisedArr = payload.value.groups.map((group) => {
     group.name = ndIfEmpty(group.name).toString();
-    return group
-  })
+    return group;
+  });
+
   payload.value.groups = revisedArr;
   return payload;
 }

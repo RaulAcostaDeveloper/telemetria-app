@@ -19,6 +19,7 @@ import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMess
 import { TabsContent } from "@/modules/global/components";
 import { fetchObdTravelMetrics } from "@/globalConfig/redux/slices/obdTravelMetricsSlice";
 import { fetchVehicleByImei } from "@/globalConfig/redux/slices/vehicleByImeiSlice";
+import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
 import { useAuth } from "@/modules/auth/utils";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
@@ -72,9 +73,9 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
 
   useEffect(() => {
     if (isAuthenticated && imei && imei.length > 3) {
-      dispatch(fetchVehicleByImei({ imei: imei }));
+      dispatch(fetchVehicleByImei({ imei }));
     }
-  }, [dispatch, isAuthenticated, imei]);
+  }, [isAuthenticated, imei]);
 
   useEffect(() => {
     if (isAuthenticated && startDate && endDate) {
@@ -86,7 +87,7 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
         })
       );
     }
-  }, [dispatch, isAuthenticated, startDate, endDate, imei]);
+  }, [isAuthenticated, startDate, endDate, imei]);
 
   useEffect(() => {
     if (obdTravelMetricsData?.value) {

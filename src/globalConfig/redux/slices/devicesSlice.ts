@@ -2,17 +2,17 @@ import { getDevices } from "@/modules/management/services/devices/devices";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ndIfEmpty } from "@/globalConfig/utils/utils";
 
-interface Devices { 
-  id: number,
-  name: string,
-  type: string,
-  brand: string,
-  createdAt: string,
-  model: string,
-  imei: string,
-  phoneNumber: string,
-  status: string,
-  registrationDate: string,
+interface Devices {
+  id: number;
+  name: string;
+  type: string;
+  brand: string;
+  createdAt: string;
+  model: string;
+  imei: string;
+  phoneNumber: string;
+  status: string;
+  registrationDate: string;
 }
 
 interface ArrayDevices {
@@ -43,24 +43,33 @@ const initialState: InitialState = {
 };
 
 /** Asigna "ND" a valores null, undefined y cadenas vacias.*/
-function setObjNDIfEmpty(payload: Data){
-  const revisedArr = payload.value.devices.map( (device) => {
-    //No altera a device.id
-    device.name = ndIfEmpty(device.name).toString();
-    device.type = ndIfEmpty(device.type).toString();
-    device.brand = ndIfEmpty(device.brand).toString();
-    device.createdAt = ndIfEmpty(device.createdAt).toString();
-    device.model = ndIfEmpty(device.model).toString();
-    device.imei = ndIfEmpty(device.imei).toString();
-    device.phoneNumber = ndIfEmpty(device.phoneNumber).toString();
-    device.status = ndIfEmpty(device.status).toString();
-    device.registrationDate = ndIfEmpty(device.registrationDate).toString();
-    return device
-  })
-  payload.value.devices = revisedArr;
-  return payload;
-}
+function setObjNDIfEmpty(payload: Data): Data {
+  if (!payload?.value) return payload;
 
+  const normalize = (v: unknown) => ndIfEmpty(v as never).toString();
+
+  const devicesIn = payload.value.devices ?? [];
+  const devices = devicesIn.map((device) => ({
+    ...device, // preserva device.id y demás campos
+    name: normalize(device.name),
+    type: normalize(device.type),
+    brand: normalize(device.brand),
+    createdAt: normalize(device.createdAt),
+    model: normalize(device.model),
+    imei: normalize(device.imei),
+    phoneNumber: normalize(device.phoneNumber),
+    status: normalize(device.status),
+    registrationDate: normalize(device.registrationDate),
+  }));
+
+  return {
+    ...payload,
+    value: {
+      ...payload.value,
+      devices,
+    },
+  };
+}
 
 // Slice del servicio
 const devicesSlice = createSlice({

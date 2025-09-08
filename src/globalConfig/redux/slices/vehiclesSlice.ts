@@ -52,21 +52,29 @@ const initialState: InitialState = {
 
 /** Asigna "ND" a valores null, undefined y cadenas vacias.*/
 function setObjNDIfEmpty(payload: Data) {
-  const revisedArr = payload.value.vehicles.map((vehicle) => {
-    //No altera a vehicle.id
-    vehicle.plate = ndIfEmpty(vehicle.plate).toString();
-    vehicle.name = ndIfEmpty(vehicle.name).toString();
-    vehicle.brand = ndIfEmpty(vehicle.brand).toString();
-    vehicle.model = ndIfEmpty(vehicle.model).toString();
-    vehicle.vehicleType = ndIfEmpty(vehicle.vehicleType).toString();
-    vehicle.year = ndIfEmpty(vehicle.year).toString();
-    vehicle.driver = ndIfEmpty(vehicle.driver).toString();
-    // vehicle.group = ndIfEmpty(vehicle.group[0].name).toString();
-    vehicle.serialNumber = ndIfEmpty(vehicle.serialNumber).toString();
-    vehicle.imeIs = ndIfEmpty(vehicle.imeIs[0]).toString();
-    return vehicle;
-  });
-  payload.value.vehicles = revisedArr;
+  if (!payload?.value) return payload;
+
+  const S = (v: unknown) => ndIfEmpty(v as any).toString();
+  const toImeiString = (v: unknown): string => {
+    if (Array.isArray(v)) return S(v[0]); // usa el primero si viene como array
+    return S(v); // si ya es string, normaliza
+  };
+
+  const revised =
+    payload.value.vehicles?.map((vehicle) => ({
+      ...vehicle, // preserva id, group, etc.
+      plate: S(vehicle.plate),
+      name: S(vehicle.name),
+      brand: S(vehicle.brand),
+      model: S(vehicle.model),
+      vehicleType: S(vehicle.vehicleType),
+      year: S(vehicle.year),
+      driver: S(vehicle.driver),
+      serialNumber: S(vehicle.serialNumber),
+      imeIs: toImeiString(vehicle.imeIs), // <- string, no array
+    })) ?? [];
+
+  payload.value.vehicles = revised;
   return payload;
 }
 
