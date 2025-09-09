@@ -1,5 +1,14 @@
 import { getCacheTable } from "./dexie";
 
+function dataHasCodeOrStatusCode(
+  data: unknown
+): data is { code: number; statusCode: number } {
+  return (
+    typeof (data as any).code === "number" ||
+    typeof (data as any).statusCode === "number" // por eso es importante homologar
+  );
+}
+
 // Función genérica de manejo de caché con dexie.js
 export async function getCached<T>(
   key: string,
@@ -18,8 +27,16 @@ export async function getCached<T>(
 
   // Ejecuta la función fetch proporcionada
   const data = await fetcher();
+
+  // Guarda en caché sólo si el código es 200
+  if (
+    dataHasCodeOrStatusCode(data) &&
+    (data.code === 200 || data.statusCode === 200) && // por eso es importante homologar
+    forceRefresh !== true
+  ) {
+    await table.put({ key, timestamp: now, data });
+  }
   // Reemplaza los datos en caché
-  await table.put({ key, timestamp: now, data });
   return data;
 }
 
