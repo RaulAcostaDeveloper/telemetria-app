@@ -26,7 +26,6 @@ import { fetchObdRollup } from "@/globalConfig/redux/slices/obdRollupSlice";
 import { fetchTopFuelReport } from "@/globalConfig/redux/slices/topFuelReportSlice";
 import { fetchVehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
 import { useAuth } from "../../../auth/utils";
-import { formatToLocalIso8601 } from "../../utils/utils";
 
 interface Props {
   children: React.ReactNode;
@@ -35,7 +34,6 @@ interface Props {
 export const MainWrapper = ({ children }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | null>(null);
   const [LANGUAGE, setLanguageObject] = useState<LanguageInterface>(SPANISH);
-  const [userId, setUserId] = useState<string>();
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -56,13 +54,6 @@ export const MainWrapper = ({ children }: Props) => {
   useEffect(() => {
     tryFirstServerSession();
   }, []);
-
-  useEffect(() => {
-    const userID: string | null = localStorageGetItem(STORAGE_KEYS.USER_ID);
-    if (userID) {
-      setUserId(userID);
-    }
-  }, [isAuthenticated]);
 
   // Aquí trae de redux y modifica el LANGUAGE
   // Actualizar en caso de agregar un nuevo idioma
@@ -90,7 +81,13 @@ export const MainWrapper = ({ children }: Props) => {
     const storedValue: boolean | null = localStorageGetItem(
       STORAGE_KEYS.MENU_OPEN
     );
-    setIsMenuOpen(storedValue !== null ? storedValue : defaultValue);
+
+    if (storedValue) {
+      setIsMenuOpen(storedValue);
+    } else {
+      setIsMenuOpen(defaultValue);
+      localStorageSetItem(STORAGE_KEYS.MENU_OPEN, defaultValue);
+    }
   }, []);
 
   useEffect(() => {
@@ -117,7 +114,7 @@ export const MainWrapper = ({ children }: Props) => {
 
   // Servicios al inicio de la sesión del usuario
   useEffect(() => {
-    if (isAuthenticated && userId) {
+    if (isAuthenticated) {
       dispatch(
         fetchVehicles({
           accountId: "90926",
@@ -139,10 +136,10 @@ export const MainWrapper = ({ children }: Props) => {
         })
       );
     }
-  }, [isAuthenticated, userId]);
+  }, [isAuthenticated]);
 
   useEffect(() => {
-    if (isAuthenticated && startDate && endDate && userId) {
+    if (isAuthenticated && startDate && endDate) {
       dispatch(
         fetchFuelSummary({
           accountId: "4992",
@@ -167,7 +164,7 @@ export const MainWrapper = ({ children }: Props) => {
         })
       );
     }
-  }, [isAuthenticated, startDate, endDate, userId]);
+  }, [isAuthenticated, startDate, endDate]);
 
   return testSessionStatus === "loading" ? (
     <div>
