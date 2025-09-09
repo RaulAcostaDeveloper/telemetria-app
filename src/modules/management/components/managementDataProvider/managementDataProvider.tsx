@@ -312,7 +312,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
               />
             ) : (
               <div>
-                <LoaderAnimation />
+                <ErrorMessage LANGUAGE={LANGUAGE} />
               </div>
             )}
 
