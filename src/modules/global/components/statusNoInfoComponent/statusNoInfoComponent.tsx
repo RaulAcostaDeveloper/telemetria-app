@@ -9,6 +9,34 @@ interface Props {
   messageIfEmpty?: string;
 }
 
+const decideFeedback = ({
+  LANGUAGE,
+  hasData,
+  infoStatus,
+  messageIfEmpty,
+}: Props) => {
+  switch (infoStatus) {
+    case "loading":
+      return (
+        <div>
+          <LoaderAnimation />
+        </div>
+      );
+      break;
+    case "succeeded":
+      return (
+        hasData === false && (
+          <ErrorMessage message={messageIfEmpty} LANGUAGE={LANGUAGE} />
+        )
+      );
+      break;
+    case "failed":
+      return <ErrorMessage LANGUAGE={LANGUAGE} />;
+    default:
+      break;
+  }
+};
+
 export const StatusNoInfoComponent = ({
   LANGUAGE,
   hasData,
@@ -17,17 +45,7 @@ export const StatusNoInfoComponent = ({
 }: Props): JSX.Element => {
   return (
     <div>
-      {hasData === false && (
-        <ErrorMessage message={messageIfEmpty} LANGUAGE={LANGUAGE} />
-      )}
-
-      {infoStatus === "loading" && (
-        <div>
-          <LoaderAnimation />
-        </div>
-      )}
-
-      {infoStatus === "failed" && <ErrorMessage LANGUAGE={LANGUAGE} />}
+      {decideFeedback({ LANGUAGE, hasData, infoStatus, messageIfEmpty })}
     </div>
   );
 };
