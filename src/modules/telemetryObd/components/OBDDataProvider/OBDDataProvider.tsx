@@ -11,15 +11,14 @@ import CardContentDrivenTime from "@/modules/global/components/cardsDeck/cardCon
 import CardContentIdle from "@/modules/global/components/cardsDeck/cardContentIdle";
 import CardContentTCT5 from "@/modules/global/components/cardsDeck/cardContentTCT5";
 import CardGenThird from "@/modules/global/components/cardsDeck/cardGenThird";
-import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 import styles from "./OBDDataProvider.module.css";
 import { columnsTable } from "@/modules/global/components/table/table.model";
 import { RootState } from "@/globalConfig/redux/store";
-import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
 import { FuelDataReport } from "@/modules/fuel/components/fuelNowContainer/fuelDataReport/fuelDataReport";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Table } from "@/modules/global/components";
 import { formatNumberWithCommas } from "@/modules/global/utils/utils";
+import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -173,13 +172,12 @@ export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
           </>
         )}
 
-      {obdRollupStatus === "loading" && (
-        <div>
-          <LoaderAnimation />
-        </div>
-      )}
-
-      {obdRollupStatus === "failed" && <ErrorMessage LANGUAGE={LANGUAGE} />}
+      <StatusNoInfoComponent
+        LANGUAGE={LANGUAGE}
+        hasData={!!obdRollupData}
+        infoStatus={obdRollupStatus}
+        messageIfEmpty={LANGUAGE.notifications.nullValue}
+      />
     </div>
   );
 };

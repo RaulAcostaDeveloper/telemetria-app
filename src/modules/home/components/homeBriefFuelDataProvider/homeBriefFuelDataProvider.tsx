@@ -8,6 +8,7 @@ import stylesHome from "./homeBriefFuelDataProvider.module.css";
 import { RootState } from "@/globalConfig/redux/store";
 import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -27,14 +28,12 @@ export const HomeBriefFuelDataProvider = ({ LANGUAGE }: Props) => {
             <DonutGraphic devices={fuelSummaryData.value.devices} />
           </>
         )}
-
-        {fuelSummaryStatus === "loading" && (
-          <div>
-            <LoaderAnimation />
-          </div>
-        )}
-
-        {fuelSummaryStatus === "failed" && <ErrorMessage LANGUAGE={LANGUAGE} />}
+        <StatusNoInfoComponent
+          LANGUAGE={LANGUAGE}
+          hasData={!!fuelSummaryData?.value}
+          infoStatus={fuelSummaryStatus}
+          messageIfEmpty={LANGUAGE.notifications.nullValue}
+        />
       </div>
     </div>
   );

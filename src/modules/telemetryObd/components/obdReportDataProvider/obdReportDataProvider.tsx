@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import GeoModal, {
   GeoModalData,
 } from "@/modules/global/components/geoModal/geoModal";
-import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 import styles from "./obdReportDataProvider.module.css";
 import {
   ObdAnalysisTab,
@@ -15,13 +14,13 @@ import {
   SingleLineHighChart,
 } from "@/modules/telemetryObd/components";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
-import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
 import { TabsContent } from "@/modules/global/components";
 import { fetchObdTravelMetrics } from "@/globalConfig/redux/slices/obdTravelMetricsSlice";
 import { fetchVehicleByImei } from "@/globalConfig/redux/slices/vehicleByImeiSlice";
 import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
 import { useAuth } from "@/modules/auth/utils";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
+import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
 
 interface Props {
   imei: string;
@@ -198,15 +197,12 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
               />
             )}
 
-            {obdTravelMetricsStatus === "loading" && (
-              <div>
-                <LoaderAnimation />
-              </div>
-            )}
-
-            {obdTravelMetricsStatus === "failed" && (
-              <ErrorMessage LANGUAGE={LANGUAGE} />
-            )}
+            <StatusNoInfoComponent
+              LANGUAGE={LANGUAGE}
+              hasData={!!rpmData}
+              infoStatus={obdTravelMetricsStatus}
+              messageIfEmpty={LANGUAGE.notifications.nullValue}
+            />
           </div>,
           <div key={2}>
             {obdTravelMetricsStatus === "succeeded" &&
@@ -225,15 +221,12 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
                 />
               )}
 
-            {obdTravelMetricsStatus === "loading" && (
-              <div>
-                <LoaderAnimation />
-              </div>
-            )}
-
-            {obdTravelMetricsStatus === "failed" && (
-              <ErrorMessage LANGUAGE={LANGUAGE} />
-            )}
+            <StatusNoInfoComponent
+              LANGUAGE={LANGUAGE}
+              hasData={!!obdTravelMetricsData?.value}
+              infoStatus={obdTravelMetricsStatus}
+              messageIfEmpty={LANGUAGE.notifications.nullValue}
+            />
           </div>,
           <div key={3}>
             {obdTravelMetricsStatus === "succeeded" && driverDistanceData && (
@@ -244,16 +237,12 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
                 handleClicGeoData={handleClicGeoData}
               />
             )}
-
-            {obdTravelMetricsStatus === "loading" && (
-              <div>
-                <LoaderAnimation />
-              </div>
-            )}
-
-            {obdTravelMetricsStatus === "failed" && (
-              <ErrorMessage LANGUAGE={LANGUAGE} />
-            )}
+            <StatusNoInfoComponent
+              LANGUAGE={LANGUAGE}
+              hasData={!!driverDistanceData}
+              infoStatus={obdTravelMetricsStatus}
+              messageIfEmpty={LANGUAGE.notifications.nullValue}
+            />
           </div>,
           <div key={4}>
             {obdTravelMetricsStatus === "succeeded" && driverTime && (
@@ -264,16 +253,12 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
                 handleClicGeoData={handleClicGeoData}
               />
             )}
-
-            {obdTravelMetricsStatus === "loading" && (
-              <div>
-                <LoaderAnimation />
-              </div>
-            )}
-
-            {obdTravelMetricsStatus === "failed" && (
-              <ErrorMessage LANGUAGE={LANGUAGE} />
-            )}
+            <StatusNoInfoComponent
+              LANGUAGE={LANGUAGE}
+              hasData={!!driverTime}
+              infoStatus={obdTravelMetricsStatus}
+              messageIfEmpty={LANGUAGE.notifications.nullValue}
+            />
           </div>,
         ]}
       />

@@ -2,17 +2,16 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
-import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 import styles from "./managementDataProvider.module.css";
 import {
   MODAL_OPTION,
   columnsTable,
 } from "@/modules/global/components/table/table.model";
-import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { RootState } from "@/globalConfig/redux/store";
 import { Table, TabsContent } from "@/modules/global/components";
 import { formatDateTime } from "@/modules/global/utils/utils";
+import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -276,15 +275,12 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
               />
             )}
 
-            {vehiclesStatus === "loading" && (
-              <div>
-                <LoaderAnimation />
-              </div>
-            )}
-
-            {vehiclesStatus === "failed" && (
-              <ErrorMessage LANGUAGE={LANGUAGE} />
-            )}
+            <StatusNoInfoComponent
+              LANGUAGE={LANGUAGE}
+              hasData={!!vehiclesTableData}
+              infoStatus={vehiclesStatus}
+              messageIfEmpty={LANGUAGE.notifications.nullValue}
+            />
           </div>,
           <div key={2}>
             {devicesStatus === "succeeded" && devicesTableData && (
@@ -295,34 +291,28 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
               />
             )}
 
-            {devicesStatus === "loading" && (
-              <div>
-                <LoaderAnimation />
-              </div>
-            )}
-
-            {devicesStatus === "failed" && <ErrorMessage LANGUAGE={LANGUAGE} />}
+            <StatusNoInfoComponent
+              LANGUAGE={LANGUAGE}
+              hasData={!!devicesTableData}
+              infoStatus={devicesStatus}
+              messageIfEmpty={LANGUAGE.notifications.nullValue}
+            />
           </div>,
           <div key={3}>
-            {driversStatus === "succeeded" && driversTableData ? (
+            {driversStatus === "succeeded" && driversTableData && (
               <Table
                 LANGUAGE={LANGUAGE}
                 columns={driversColumns}
                 data={driversTableData}
               />
-            ) : (
-              <div>
-                <LoaderAnimation />
-              </div>
             )}
 
-            {driversStatus === "loading" && (
-              <div>
-                <LoaderAnimation />
-              </div>
-            )}
-
-            {driversStatus === "failed" && <ErrorMessage LANGUAGE={LANGUAGE} />}
+            <StatusNoInfoComponent
+              LANGUAGE={LANGUAGE}
+              hasData={!!driversTableData}
+              infoStatus={driversStatus}
+              messageIfEmpty={LANGUAGE.notifications.nullValue}
+            />
           </div>,
           <div key={4}>
             {groupsStatus === "succeeded" && groupsTableData && (
@@ -336,13 +326,12 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
               />
             )}
 
-            {groupsStatus === "loading" && (
-              <div>
-                <LoaderAnimation />
-              </div>
-            )}
-
-            {groupsStatus === "failed" && <ErrorMessage LANGUAGE={LANGUAGE} />}
+            <StatusNoInfoComponent
+              LANGUAGE={LANGUAGE}
+              hasData={!!groupsTableData}
+              infoStatus={groupsStatus}
+              messageIfEmpty={LANGUAGE.notifications.nullValue}
+            />
           </div>,
         ]}
       />

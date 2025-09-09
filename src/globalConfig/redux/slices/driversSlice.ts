@@ -21,7 +21,7 @@ interface ArrayDrivers {
 interface Data {
   statusCode: number;
   message: string;
-  value: ArrayDrivers;
+  value: ArrayDrivers | null;
 }
 
 interface InitialState {

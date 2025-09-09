@@ -22,7 +22,7 @@ interface ArrayDevices {
 interface Data {
   statusCode: number;
   message: string;
-  value: ArrayDevices;
+  value: ArrayDevices | null;
 }
 
 interface InitialState {
