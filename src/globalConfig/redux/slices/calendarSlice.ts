@@ -1,71 +1,104 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import {
   localStorageGetItem,
   localStorageSetItem,
 } from "@/modules/global/localStorage/utils/storageService";
+import { STORAGE_KEYS } from "@/modules/global/localStorage/constants/storageKeys";
 import { toLocalISOString } from "@/modules/global/utils/utils";
+
+// NOTA: startDate (desde) es la fecha más lejana. endDate (hasta) es la fecha más cercana.
 
 // Interfaz del estado
 export interface CalendarState {
-  startDate: string | null;
-  endDate: string | null;
+  startDate: string;
+  endDate: string;
   fixedFilter: string;
 }
 
-// Carga desde localStorage (si existe)
-const storedCalendar: CalendarState | null =
-  typeof window !== "undefined"
-    ? localStorageGetItem<CalendarState>("CALENDAR")
-    : null;
-
-// Aplica el clamp de 90 días al estado inicial si viene de localStorage
 const initialState: CalendarState = (() => {
-  // Base del estado (o lo guardado, o valores por defecto)
-  const base: CalendarState = storedCalendar
-    ? { ...storedCalendar, fixedFilter: storedCalendar.fixedFilter || "" }
-    : { startDate: null, endDate: null, fixedFilter: "" };
+  const dateNow = new Date();
+  const lastDayAllowed = new Date(dateNow);
+  lastDayAllowed.setDate(dateNow.getDate() - 90);
 
-  // Si hay startDate guardado, comprueba si debe recortarse
-  if (base.startDate) {
-    const now = new Date();
-    const cutoff = new Date(now);
-    cutoff.setDate(now.getDate() - 90);
-
-    const saved = new Date(base.startDate);
-    if (saved < cutoff) {
-      base.startDate = toLocalISOString(cutoff);
-    }
+  const storageCalendar = localStorageGetItem<CalendarState>(
+    STORAGE_KEYS.CALENDAR
+  );
+  // Caso 1: storageCalendar no existe o trae fechas nulas
+  if (
+    !storageCalendar ||
+    !storageCalendar.startDate ||
+    !storageCalendar.endDate
+  ) {
+    localStorageSetItem(STORAGE_KEYS.CALENDAR, {
+      startDate: toLocalISOString(lastDayAllowed),
+      endDate: toLocalISOString(dateNow),
+      fixedFilter: "",
+    });
+    return {
+      startDate: toLocalISOString(lastDayAllowed),
+      endDate: toLocalISOString(dateNow),
+      fixedFilter: "",
+    };
   }
 
-  return base;
+  const calendarStart = new Date(storageCalendar.startDate);
+  const calendarEnd = new Date(storageCalendar.endDate);
+
+  // Caso 2: storageCalendar tiene fechas no permitidas (mayor a 90 días)
+  if (calendarStart < lastDayAllowed || calendarEnd < lastDayAllowed) {
+    localStorageSetItem(STORAGE_KEYS.CALENDAR, {
+      startDate: toLocalISOString(lastDayAllowed),
+      endDate: toLocalISOString(dateNow),
+      fixedFilter: "",
+    });
+    return {
+      startDate: toLocalISOString(lastDayAllowed),
+      endDate: toLocalISOString(dateNow),
+      fixedFilter: "",
+    };
+  }
+
+  // Caso 3: storageCalendar es válido
+  return {
+    ...storageCalendar,
+    fixedFilter: storageCalendar.fixedFilter || "", // Lo que tenga en fixedFilter o simplemente ""
+  };
 })();
 
 const calendarSlice = createSlice({
   name: "calendar",
   initialState,
   reducers: {
-    // Guarda el rango y recorta el startDate a hoy–90 días si viene anterior al umbral
     setDateRange(
       state,
       action: PayloadAction<{ startDate: string; endDate: string }>
     ) {
-      const now = new Date();
-      const cutoff = new Date(now);
-      cutoff.setDate(now.getDate() - 90);
+      const dateNow = new Date();
+      const lastDayAllowed = new Date(dateNow);
+      lastDayAllowed.setDate(dateNow.getDate() - 90);
 
-      const incoming = new Date(action.payload.startDate);
+      const incomingStartDate = new Date(action.payload.startDate);
+      const incomingEndDate = new Date(action.payload.endDate);
+
+      // Verifica que las fechas que vengan no sean mayor a 90 días
       state.startDate =
-        incoming < cutoff ? toLocalISOString(cutoff) : action.payload.startDate;
+        incomingStartDate < lastDayAllowed
+          ? toLocalISOString(lastDayAllowed)
+          : action.payload.startDate;
 
-      state.endDate = action.payload.endDate;
+      state.endDate =
+        incomingEndDate < lastDayAllowed
+          ? toLocalISOString(dateNow)
+          : action.payload.endDate;
 
-      localStorageSetItem("CALENDAR", { ...state });
+      localStorageSetItem(STORAGE_KEYS.CALENDAR, { ...state });
     },
 
-    // Actualiza solo el filtro fijo
+    // Actualiza solo el filtro
     setFixedFilter(state, action: PayloadAction<string>) {
       state.fixedFilter = action.payload;
-      localStorageSetItem("CALENDAR", { ...state });
+      localStorageSetItem(STORAGE_KEYS.CALENDAR, { ...state });
     },
   },
 });
