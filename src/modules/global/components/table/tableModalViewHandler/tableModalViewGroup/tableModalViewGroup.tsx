@@ -42,7 +42,8 @@ export const TableModalViewGroup = ({
   );
 
   useEffect(() => {
-    if (!vehiclesData || !dataObject?.id) return;
+    if (!vehiclesData || null === vehiclesData?.value || !dataObject?.id)
+      return;
     const filtered: Vehicles[] = vehiclesData.value.vehicles.filter(
       (vehicle) => vehicle.group[0].id === dataObject.id
     );
