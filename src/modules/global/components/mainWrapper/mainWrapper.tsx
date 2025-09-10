@@ -43,9 +43,8 @@ export const MainWrapper = ({ children }: Props) => {
 
   const { isAuthenticated, logoutState, tryFirstServerSession } = useAuth();
 
-  const { testSessionStatus } = useSelector(
-    (state: RootState) => state.testSession
-  );
+  // Usado para probar la sesion activa
+  const { brandsStatus } = useSelector((state: RootState) => state.brands);
 
   const { startDate, endDate } = useSelector(
     (state: RootState) => state.calendar
@@ -166,7 +165,8 @@ export const MainWrapper = ({ children }: Props) => {
     }
   }, [isAuthenticated, startDate, endDate]);
 
-  return testSessionStatus === "loading" ? (
+  // Se usa brandsStatus para economizar tener un endpoint especifico que verifique sesión
+  return brandsStatus === "loading" ? (
     <div>
       <CheckLogin />
     </div>

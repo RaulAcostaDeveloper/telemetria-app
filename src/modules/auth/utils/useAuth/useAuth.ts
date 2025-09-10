@@ -23,8 +23,9 @@ export const useAuth = () => {
     (state: RootState) => state.auth
   );
 
-  const { testSessionData, testSessionStatus } = useSelector(
-    (state: RootState) => state.testSession
+  //Usado para comprobar sesión activa economizando endpoint.
+  const { brandsData, brandsStatus } = useSelector(
+    (state: RootState) => state.brands
   );
 
   useEffect(() => {
@@ -46,16 +47,13 @@ export const useAuth = () => {
 
   useEffect(() => {
     if (isFromFirstSession) {
-      if (testSessionData && testSessionStatus === "succeeded") {
+      if (200 === brandsData?.statusCode && brandsStatus === "succeeded") {
         loginState();
-      } else if (
-        testSessionStatus !== "idle" &&
-        testSessionStatus !== "loading"
-      ) {
+      } else if (brandsStatus !== "idle" && brandsStatus !== "loading") {
         logoutState();
       }
     }
-  }, [isFromFirstSession, testSessionData, testSessionStatus]);
+  }, [isFromFirstSession, brandsData, brandsStatus]);
 
   const tryLoginHook = (encrypted: string) => {
     // Llama al servicio
