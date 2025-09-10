@@ -14,7 +14,6 @@ import lastFuelReportSlice from "@/globalConfig/redux/slices/lastFuelReportSlice
 import logoutSlice from "@/globalConfig/redux/slices/logoutSlice";
 import obdRollupSlice from "@/globalConfig/redux/slices/obdRollupSlice";
 import obdTravelMetricsSlice from "@/globalConfig/redux/slices/obdTravelMetricsSlice";
-import testSessionSlice from "@/globalConfig/redux/slices/testSessionSlice";
 import topFuelReportSlice from "@/globalConfig/redux/slices/topFuelReportSlice";
 import vehicleByImeiSlice from "@/globalConfig/redux/slices/vehicleByImeiSlice";
 import vehiclesAllSlice from "@/globalConfig/redux/slices/vehiclesAllSlice";
@@ -36,7 +35,6 @@ export const store = configureStore({
     logoutSlice: logoutSlice,
     obdRollup: obdRollupSlice,
     obdTravelMetrics: obdTravelMetricsSlice,
-    testSession: testSessionSlice,
     topFuelReport: topFuelReportSlice,
     vehicleByImei: vehicleByImeiSlice,
     vehicles: vehiclesSlice,

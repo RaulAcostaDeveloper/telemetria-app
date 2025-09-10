@@ -8,7 +8,7 @@ import {
 } from "@/globalConfig/redux/slices/authSlice";
 import { fetchLogin } from "../../services/postLogin";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
-import { fetchTestSession } from "@/globalConfig/redux/slices/testSessionSlice";
+import { fetchBrands } from "@/globalConfig/redux/slices/brandsSlice";
 import { callLogout } from "@/globalConfig/redux/slices/logoutSlice";
 
 export const useAuth = () => {
@@ -63,7 +63,7 @@ export const useAuth = () => {
 
   // Prueba si trae la cookie, desde el primer render
   const tryFirstServerSession = () => {
-    dispatch(fetchTestSession());
+    dispatch(fetchBrands());
     setIsFromFirstSession(true);
   };
 
