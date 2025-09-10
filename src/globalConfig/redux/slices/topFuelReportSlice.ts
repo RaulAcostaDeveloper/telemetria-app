@@ -44,7 +44,7 @@ interface TopFuelReportStatus {
 interface Data {
   statusCode: number;
   message: string;
-  value: TopFuelReportStatus;
+  value: TopFuelReportStatus | null;
 }
 
 interface InitialState {

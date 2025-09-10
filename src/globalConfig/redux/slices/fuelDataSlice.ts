@@ -102,7 +102,7 @@ export interface FuelDataValues {
 interface Data {
   statusCode: number;
   message: string;
-  value: FuelDataValues;
+  value: FuelDataValues | null;
 }
 
 interface InitialState {

@@ -31,7 +31,7 @@ export interface SummaryFuelValues {
 interface Data {
   statusCode: number;
   message: string;
-  value: SummaryFuelValues;
+  value: SummaryFuelValues | null;
 }
 
 interface InitialState {

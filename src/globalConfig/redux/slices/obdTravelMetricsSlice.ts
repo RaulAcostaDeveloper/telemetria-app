@@ -26,7 +26,7 @@ export interface ObdTravelMetricsDataValues {
 interface Data {
   statusCode: number;
   message: string;
-  value: ObdTravelMetricsDataValues;
+  value: ObdTravelMetricsDataValues | null;
 }
 
 interface InitialState {

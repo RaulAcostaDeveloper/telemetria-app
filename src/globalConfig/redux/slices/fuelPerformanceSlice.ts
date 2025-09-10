@@ -16,7 +16,7 @@ export interface FuelPerformanceValues {
 interface Data {
   statusCode: number;
   message: string;
-  value: FuelPerformanceValues;
+  value: FuelPerformanceValues | null;
 }
 
 interface InitialState {

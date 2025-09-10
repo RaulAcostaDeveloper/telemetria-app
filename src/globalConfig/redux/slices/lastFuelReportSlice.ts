@@ -38,7 +38,7 @@ export interface LastFuelReportData {
 interface Data {
   statusCode: number;
   message: string;
-  value: LastFuelReportData;
+  value: LastFuelReportData | null;
 }
 
 interface InitialState {

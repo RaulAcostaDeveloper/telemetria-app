@@ -11,6 +11,7 @@ export const ENGLISH: LanguageInterface = {
   notifications: {
     unexpectedError: "Unexpected error",
     genericServiceError: "Failed to fetch data",
+    nullValue: "No information",
   },
   header: {
     backButton: {

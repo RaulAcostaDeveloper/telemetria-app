@@ -25,7 +25,7 @@ export interface ObdRollupDataValues {
 interface Data {
   statusCode: number;
   message: string;
-  value: ObdRollupDataValues;
+  value: ObdRollupDataValues | null;
 }
 
 interface InitialState {

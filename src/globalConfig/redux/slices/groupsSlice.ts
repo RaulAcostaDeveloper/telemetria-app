@@ -14,7 +14,7 @@ interface ArrayGroups {
 interface Data {
   statusCode: number;
   message: string;
-  value: ArrayGroups;
+  value: ArrayGroups | null;
 }
 
 interface InitialState {

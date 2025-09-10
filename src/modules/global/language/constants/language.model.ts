@@ -11,6 +11,7 @@ export interface LanguageInterface {
   notifications: {
     unexpectedError: string;
     genericServiceError: string;
+    nullValue: string;
   };
   header: {
     backButton: {

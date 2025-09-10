@@ -26,7 +26,7 @@ interface ArrayVehicles {
 interface Data {
   code: number;
   message: string;
-  value: ArrayVehicles;
+  value: ArrayVehicles | null;
 }
 
 interface InitialState {

@@ -22,7 +22,7 @@ export interface VehicleByImei {
 interface Data {
   code: number;
   message: string;
-  value: VehicleByImei;
+  value: VehicleByImei | null;
 }
 
 interface InitialState {

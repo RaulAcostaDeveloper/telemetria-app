@@ -30,7 +30,7 @@ interface ArrayVehicles {
 interface Data {
   statusCode: number;
   message: string;
-  value: ArrayVehicles;
+  value: ArrayVehicles | null;
 }
 
 interface InitialState {
