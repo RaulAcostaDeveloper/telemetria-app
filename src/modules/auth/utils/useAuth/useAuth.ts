@@ -8,7 +8,7 @@ import {
 } from "@/globalConfig/redux/slices/authSlice";
 import { fetchLogin } from "../../services/postLogin";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
-import { fetchTestSession } from "@/globalConfig/redux/slices/testSessionSlice";
+import { fetchBrands } from "@/globalConfig/redux/slices/brandsSlice";
 import { callLogout } from "@/globalConfig/redux/slices/logoutSlice";
 
 export const useAuth = () => {
@@ -23,8 +23,9 @@ export const useAuth = () => {
     (state: RootState) => state.auth
   );
 
-  const { testSessionData, testSessionStatus } = useSelector(
-    (state: RootState) => state.testSession
+  //Usado para comprobar sesión activa economizando endpoint.
+  const { brandsData, brandsStatus } = useSelector(
+    (state: RootState) => state.brands
   );
 
   useEffect(() => {
@@ -46,16 +47,13 @@ export const useAuth = () => {
 
   useEffect(() => {
     if (isFromFirstSession) {
-      if (testSessionData && testSessionStatus === "succeeded") {
+      if (200 === brandsData?.statusCode && brandsStatus === "succeeded") {
         loginState();
-      } else if (
-        testSessionStatus !== "idle" &&
-        testSessionStatus !== "loading"
-      ) {
+      } else if (brandsStatus !== "idle" && brandsStatus !== "loading") {
         logoutState();
       }
     }
-  }, [isFromFirstSession, testSessionData, testSessionStatus]);
+  }, [isFromFirstSession, brandsData, brandsStatus]);
 
   const tryLoginHook = (encrypted: string) => {
     // Llama al servicio
@@ -65,7 +63,7 @@ export const useAuth = () => {
 
   // Prueba si trae la cookie, desde el primer render
   const tryFirstServerSession = () => {
-    dispatch(fetchTestSession());
+    dispatch(fetchBrands());
     setIsFromFirstSession(true);
   };
 
