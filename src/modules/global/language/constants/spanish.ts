@@ -324,7 +324,7 @@ export const SPANISH: LanguageInterface = {
       averageRpm: "Promedio RPM",
       plate: "Matrícula",
       vehicle: "Vehículo",
-      km: "Kilometraje",
+      km: "Distancia recorrida",
       averageSpeed: "Velocidad promedio",
       totalEventNumber: "Número de eventos",
       totalTimeTraveled: "Tiempo de conducción",

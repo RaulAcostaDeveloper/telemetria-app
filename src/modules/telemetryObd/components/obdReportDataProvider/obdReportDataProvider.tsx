@@ -82,6 +82,12 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
 
   useEffect(() => {
     if (obdTravelMetricsData?.value) {
+      const totalEventNumber =
+        obdTravelMetricsData.value.timeTraveledDetails.length;
+      const lastObject =
+        obdTravelMetricsData.value.timeTraveledDetails[totalEventNumber - 1];
+      const firstObject = obdTravelMetricsData.value.timeTraveledDetails[0];
+
       const dataRpm: ObdChartPoint[] =
         obdTravelMetricsData.value.timeTraveledDetails
           .map((c) => ({
@@ -128,34 +134,25 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
       setDriverTimeData(dataDriverTime);
 
       // driverDistance
-      const driverDistance =
-        obdTravelMetricsData.value.timeTraveledDetails.reduce(
-          (acc, curr) =>
-            acc +
-            (typeof curr.driverDistance === "number" ? curr.driverDistance : 0),
-          0
-        );
-      setDriverDistance(Math.round(driverDistance * 100) / 100);
+      if (lastObject.driverDistance && firstObject.driverDistance) {
+        const driverDistance =
+          lastObject.driverDistance - firstObject.driverDistance;
+        setDriverDistance(Math.round(driverDistance * 100) / 100);
+      }
 
       // engineHours
-      const engineHours = obdTravelMetricsData.value.timeTraveledDetails.reduce(
-        (acc, curr) =>
-          acc +
-          (typeof curr.totalEngineHours === "number"
-            ? curr.totalEngineHours
-            : 0),
-        0
-      );
-      setEngineHours(Math.round(engineHours * 100) / 100);
+      if (lastObject.totalEngineHours && firstObject.totalEngineHours) {
+        const engineHours =
+          lastObject.totalEngineHours - firstObject.totalEngineHours;
+        setEngineHours(Math.round(engineHours * 100) / 100);
+      }
 
       // idleTime
-      const idleTime = obdTravelMetricsData.value.timeTraveledDetails.reduce(
-        (acc, curr) =>
-          acc +
-          (typeof curr.driverIdleTime === "number" ? curr.driverIdleTime : 0),
-        0
-      );
-      setIdleTime(Math.round(idleTime * 100) / 100);
+
+      if (lastObject.driverIdleTime && firstObject.driverIdleTime) {
+        const idleTime = lastObject.driverIdleTime - firstObject.driverIdleTime;
+        setIdleTime(Math.round(idleTime * 100) / 100);
+      }
 
       const speeds = obdTravelMetricsData.value.timeTraveledDetails
         .map((item) => (typeof item.speed === "number" ? item.speed : null))

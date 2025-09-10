@@ -324,7 +324,7 @@ export const ENGLISH: LanguageInterface = {
       averageRpm: "Average RPM",
       plate: "License plate",
       vehicle: "Vehicle",
-      km: "Odometer",
+      km: "Distance",
       averageSpeed: "Average speed",
       totalEventNumber: "Event counter",
       totalTimeTraveled: "Total time traveled",
