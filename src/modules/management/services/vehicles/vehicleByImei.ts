@@ -3,8 +3,8 @@ const url = "https://stage.transtelemetrix.com/api/management/device/";
 
 // Función fetch con enlace a caché
 export async function getVehicleByImei(
-  imei: string,
-  forceRefresh = true // Se le puede indicar que no busque en caché
+  imei: string
+  // forceRefresh = true // Se le puede indicar que no busque en caché
 ) {
   // Construcción de la url con parámetros
   const fullUrl = `${url}${imei}/vehicle`;
@@ -37,7 +37,7 @@ export async function getVehicleByImei(
       } catch {
         throw new Error("Error al obtener detalle del vehículo por imei");
       }
-    },
-    forceRefresh // poner un forceRefresh en caso de necesitarlo
+    }
+    // forceRefresh // poner un forceRefresh en caso de necesitarlo
   );
 }

@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
+import GeoModal, {
+  GeoModalData,
+} from "@/modules/global/components/geoModal/geoModal";
 import styles from "./fuelReportDataProvider.module.css";
 import {
   FuelNowContainer,
@@ -10,14 +13,13 @@ import {
 } from "@/modules/fuel/components";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 import { FuelBehaviorTab } from "@/modules/fuel/components/fuelBehaviorTab/fuelBehaviorTab";
+import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
 import { TabsContent } from "@/modules/global/components";
 import { fetchFuelData } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { fetchFuelPerformance } from "@/globalConfig/redux/slices/fuelPerformanceSlice";
 import { fetchLastFuelReport } from "@/globalConfig/redux/slices/lastFuelReportSlice";
-import { fetchVehicleByImei } from "@/globalConfig/redux/slices/vehicleByImeiSlice";
 import { useAuth } from "@/modules/auth/utils";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
-import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
 
 export interface OBValue {
   startDate: string;
@@ -30,7 +32,11 @@ interface Props {
 }
 
 export const FuelReportDataProvider = ({ imei }: Props) => {
+  const LANGUAGE = useLanguage();
+
   // Operational Behavior (Estacionado, apagado, Avanzando, apagado y avanzando)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [geoModalData, setGeoModalData] = useState<GeoModalData>();
   const [opBEngineOff, setOpBEngineOff] = useState<OBValue[]>([]);
   const [opBEngineOffCoast, setOpBEngineOffCoast] = useState<OBValue[]>([]);
   const [opBEngineOnIdle, setOpBEngineOnIdle] = useState<OBValue[]>([]);
@@ -55,6 +61,12 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
   const { lastFuelReportData, lastFuelReportStatus } = useSelector(
     (state: RootState) => state.lastFuelReport
   );
+
+  const vehicleTabs = [
+    { text: LANGUAGE.fuelVehicle.tabs.behavior },
+    { text: LANGUAGE.fuelVehicle.tabs.reports },
+    { text: LANGUAGE.fuelVehicle.tabs.fuelNow },
+  ];
 
   useEffect(() => {
     const engineOff: OBValue[] = [];
@@ -102,13 +114,6 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
     setOpBEngineOnMoving(engineOnMoving);
   }, [fuelDataData]);
 
-  const LANGUAGE = useLanguage();
-  const vehicleTabs = [
-    { text: LANGUAGE.fuelVehicle.tabs.behavior },
-    { text: LANGUAGE.fuelVehicle.tabs.reports },
-    { text: LANGUAGE.fuelVehicle.tabs.fuelNow },
-  ];
-
   useEffect(() => {
     if (isAuthenticated && startDate && endDate) {
       dispatch(
@@ -137,10 +142,32 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
 
   // Actualiza datos del vehiculo cuando el imei no es ND ni indefinido.
   useEffect(() => {
-    if (isAuthenticated && imei && imei.length > 3) {
-      dispatch(fetchVehicleByImei({ imei }));
+    // Tener la data actualizada cada 10 segundos
+    const intervalId = setInterval(() => {
+      if (isAuthenticated) {
+        dispatch(
+          fetchLastFuelReport({
+            imei: "862524060822760", // imei.toString(),
+          })
+        );
+      }
+    }, 20000);
+
+    return () => {
+      clearTimeout(intervalId);
+    };
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    if (lastFuelReportData?.value) {
+      setGeoModalData({
+        lat: parseFloat(lastFuelReportData?.value.lat.toString()),
+        lon: parseFloat(lastFuelReportData?.value.lon.toString()),
+        title: LANGUAGE.geoModalTitles.fuelNowTitle,
+        rows: [],
+      });
     }
-  }, [isAuthenticated, imei]);
+  }, [lastFuelReportData]);
 
   return (
     <div className={styles.fuelReportDataProvider}>
@@ -193,7 +220,9 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
                   <FuelNowContainer
                     LANGUAGE={LANGUAGE}
                     imei={imei}
+                    isModalOpen={isModalOpen}
                     lastFuelReportData={lastFuelReportData.value}
+                    setIsModalOpen={setIsModalOpen}
                   />
                 </>
               )}
@@ -207,6 +236,15 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
           </div>,
         ]}
       />
+      {isModalOpen && geoModalData && (
+        <GeoModal
+          LANGUAGE={LANGUAGE}
+          closeModal={() => setIsModalOpen(false)}
+          geoModalData={geoModalData}
+          height={600}
+          width={600}
+        />
+      )}
     </div>
   );
 };

@@ -16,8 +16,6 @@ import {
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 import { TabsContent } from "@/modules/global/components";
 import { fetchObdTravelMetrics } from "@/globalConfig/redux/slices/obdTravelMetricsSlice";
-import { fetchVehicleByImei } from "@/globalConfig/redux/slices/vehicleByImeiSlice";
-import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
 import { useAuth } from "@/modules/auth/utils";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
@@ -69,12 +67,6 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
     setGeoModalData(geoModalData);
     setIsModalOpen(true);
   };
-
-  useEffect(() => {
-    if (isAuthenticated && imei && imei.length > 3) {
-      dispatch(fetchVehicleByImei({ imei }));
-    }
-  }, [isAuthenticated, imei]);
 
   useEffect(() => {
     if (isAuthenticated && startDate && endDate) {
