@@ -1,7 +1,3 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import CarCrashIcon from "@mui/icons-material/CarCrash";
 import ElectricCarIcon from "@mui/icons-material/ElectricCar";
@@ -10,63 +6,28 @@ import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import NoCrashIcon from "@mui/icons-material/NoCrash";
 import { SpeedRounded } from "@mui/icons-material";
 
-import GeoModal, {
-  GeoModalData,
-} from "@/modules/global/components/geoModal/geoModal";
 import styles from "./fuelNowContainer.module.css";
-import {
-  fetchLastFuelReport,
-  LastFuelReportData,
-} from "@/globalConfig/redux/slices/lastFuelReportSlice";
-import { AppDispatch } from "@/globalConfig/redux/store";
+import { LastFuelReportData } from "@/globalConfig/redux/slices/lastFuelReportSlice";
 import { ButtonTypes, GeneralButton } from "@/modules/global/components";
 import { FuelDataReport } from "./fuelDataReport/fuelDataReport";
 import { FuelNowVehicleTank } from "./fuelNowVehicleTank/fuelNowVehicleTank";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { useAuth } from "@/modules/auth/utils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   imei: string;
+  isModalOpen: boolean;
   lastFuelReportData: LastFuelReportData;
+  setIsModalOpen: (toggle: boolean) => void;
 }
 
 export const FuelNowContainer = ({
   LANGUAGE,
+  // imei,
+  isModalOpen,
   lastFuelReportData,
-  imei,
+  setIsModalOpen,
 }: Props) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [geoModalData, setGeoModalData] = useState<GeoModalData>();
-  const dispatch = useDispatch<AppDispatch>();
-  const { isAuthenticated } = useAuth();
-
-  useEffect(() => {
-    // Tener la data actualizada cada 10 segundos
-    const intervalId = setInterval(() => {
-      if (isAuthenticated) {
-        dispatch(
-          fetchLastFuelReport({
-            imei: "862524060822760", // imei.toString(),
-          })
-        );
-      }
-    }, 20000);
-
-    return () => {
-      clearTimeout(intervalId);
-    };
-  }, [isAuthenticated]);
-
-  useEffect(() => {
-    setGeoModalData({
-      lat: parseFloat(lastFuelReportData.lat.toString()),
-      lon: parseFloat(lastFuelReportData.lon.toString()),
-      title: LANGUAGE.geoModalTitles.fuelNowTitle,
-      rows: [],
-    });
-  }, [lastFuelReportData]);
-
   const dateGps = new Date(lastFuelReportData.dateGps + "Z");
 
   const dateOptions: Intl.DateTimeFormatOptions = {
@@ -107,16 +68,6 @@ export const FuelNowContainer = ({
           Icon={<AddLocationAltIcon />}
         />
       </div>
-
-      {isModalOpen && geoModalData && (
-        <GeoModal
-          LANGUAGE={LANGUAGE}
-          closeModal={() => setIsModalOpen(false)}
-          geoModalData={geoModalData}
-          height={600}
-          width={600}
-        />
-      )}
 
       <div className={styles.fuelNowContainer}>
         <div className={styles.fuelDataReportContainer}>
