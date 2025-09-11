@@ -70,7 +70,7 @@ export const LanguageButton = ({ LANGUAGE }: Props) => {
   }, [languageOptions]);
 
   const toggleSelector = () => {
-    setIsSelectorOpen((prev) => !prev);
+    setIsSelectorOpen(!isSelectorOpen);
   };
 
   const selectLanguage = (languageOption: LanguageSelectorOption) => {
@@ -110,14 +110,20 @@ export const LanguageButton = ({ LANGUAGE }: Props) => {
         </div>
       </button>
 
-      {isSelectorOpen && (
-        <LanguageSelector
-          languageOptions={languageOptions}
-          selectLanguage={selectLanguage}
-          toggleSelector={toggleSelector}
-          LANGUAGE={LANGUAGE}
-        />
-      )}
+      <div
+        className={`${
+          isSelectorOpen ? `${styles.selectorOpen}` : `${styles.selectorClosed}`
+        }`}
+      >
+        {isSelectorOpen && (
+          <LanguageSelector
+            languageOptions={languageOptions}
+            selectLanguage={selectLanguage}
+            toggleSelector={toggleSelector}
+            LANGUAGE={LANGUAGE}
+          />
+        )}
+      </div>
     </div>
   );
 };

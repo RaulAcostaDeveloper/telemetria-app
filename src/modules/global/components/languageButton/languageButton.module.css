@@ -138,3 +138,20 @@
   filter: drop-shadow(0 0 10px #fffdef);
   z-index: 2;
 }
+
+.selectorClosed {
+  position: fixed;
+  top: 70px;
+  right: 50px;
+  transition: 1s;
+  width: 0px;
+  /* display: none; */
+}
+
+.selectorOpen {
+  position: fixed;
+  top: 70px;
+  right: 35px;
+  transition: 1s;
+  width: 140px;
+}
