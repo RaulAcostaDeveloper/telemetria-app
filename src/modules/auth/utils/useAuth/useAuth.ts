@@ -47,9 +47,13 @@ export const useAuth = () => {
 
   useEffect(() => {
     if (isFromFirstSession) {
-      if (200 === brandsData?.statusCode && brandsStatus === "succeeded") {
+      if (200 === brandsData?.code && brandsStatus === "succeeded") {
         loginState();
-      } else if (brandsStatus !== "idle" && brandsStatus !== "loading") {
+      } else if (
+        brandsStatus !== "idle" &&
+        brandsStatus !== "loading" &&
+        200 !== brandsData?.code
+      ) {
         logoutState();
       }
     }
