@@ -3,10 +3,15 @@ import { ReactNode, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 
 import styles from "./languageButton.module.css";
-import { StarIcon } from "./starIcon/starIcon";
-import { LanguageSelector } from "./languageSelector/languageSelector";
-import { LanguageInterface } from "../../language/constants/language.model";
 import { LANGUAGE_OPTIONS } from "../../language/utils/languageSelector.model";
+import { LanguageInterface } from "../../language/constants/language.model";
+import { LanguageSelector } from "./languageSelector/languageSelector";
+import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
+import { StarIcon } from "./starIcon/starIcon";
+import {
+  localStorageGetItem,
+  localStorageSetItem,
+} from "../../localStorage/utils/storageService";
 
 export type LanguageSelectorOption = {
   flagIcon: ReactNode;
@@ -44,18 +49,36 @@ export const LanguageButton = ({ LANGUAGE }: Props) => {
 
   useEffect(() => {
     // Primer render
-    setLanguageSelected(languageOptions[0]);
+    const storedLanguage = localStorageGetItem(STORAGE_KEYS.LANGUAGE_SELECTED);
+    if (storedLanguage) {
+      const selectedLanguage = languageOptions.find(
+        (item) => item.option === storedLanguage
+      );
+      setLanguageSelected(selectedLanguage);
+    } else {
+      setLanguageSelected(languageOptions[0]);
+      localStorageSetItem(
+        STORAGE_KEYS.LANGUAGE_SELECTED,
+        languageOptions[0].option
+      );
+    }
   }, [languageOptions]);
+
+  const toggleSelector = () => {
+    setIsSelectorOpen((prev) => !prev);
+  };
 
   const selectLanguage = (languageOption: LanguageSelectorOption) => {
     setLanguageSelected(languageOption);
+    localStorageSetItem(STORAGE_KEYS.LANGUAGE_SELECTED, languageOption.option);
   };
 
   return (
     <div>
       <button
         className={styles.languageButton}
-        onClick={() => setIsSelectorOpen(!isSelectorOpen)}
+        onClick={toggleSelector}
+        id="languageButton"
       >
         <div className={styles.insideButton}>
           {languageSelected?.flagIcon}
@@ -83,7 +106,7 @@ export const LanguageButton = ({ LANGUAGE }: Props) => {
         <LanguageSelector
           languageOptions={languageOptions}
           selectLanguage={selectLanguage}
-          setIsSelectorOpen={setIsSelectorOpen}
+          toggleSelector={toggleSelector}
         />
       )}
     </div>

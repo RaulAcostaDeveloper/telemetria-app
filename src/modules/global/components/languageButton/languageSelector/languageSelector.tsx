@@ -7,13 +7,13 @@ import { LanguageSelectorOption } from "../languageButton";
 interface Props {
   languageOptions: LanguageSelectorOption[];
   selectLanguage: (languageOption: LanguageSelectorOption) => void;
-  setIsSelectorOpen: (toggle: boolean) => void;
+  toggleSelector: () => void;
 }
 
 export const LanguageSelector = ({
   languageOptions,
   selectLanguage,
-  setIsSelectorOpen,
+  toggleSelector,
 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -21,9 +21,10 @@ export const LanguageSelector = ({
     const onClickOutside = (e: MouseEvent) => {
       if (
         containerRef.current &&
-        !containerRef.current.contains(e.target as Node)
+        !containerRef.current.contains(e.target as Node) &&
+        !(e.target as HTMLElement).closest("#languageButton")
       ) {
-        setIsSelectorOpen(false);
+        toggleSelector();
       }
     };
 
@@ -34,19 +35,17 @@ export const LanguageSelector = ({
   }, []);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.inside} ref={containerRef}>
-        {languageOptions.map((languageOption, index) => (
-          <button
-            className={styles.languageElement}
-            key={index}
-            onClick={() => selectLanguage(languageOption)}
-          >
-            {languageOption.flagIcon}
-            <p>{languageOption.title}</p>
-          </button>
-        ))}
-      </div>
+    <div className={styles.inside} ref={containerRef}>
+      {languageOptions.map((languageOption, index) => (
+        <button
+          className={styles.languageElement}
+          key={index}
+          onClick={() => selectLanguage(languageOption)}
+        >
+          {languageOption.flagIcon}
+          <p>{languageOption.title}</p>
+        </button>
+      ))}
     </div>
   );
 };

@@ -14,6 +14,7 @@
 
 .languageButton:hover {
   box-shadow: 0 0 25px #fec1958c;
+  background-color: var(--company-color-1);
 }
 
 .insideButton {
