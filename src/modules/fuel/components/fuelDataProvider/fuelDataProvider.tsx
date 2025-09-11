@@ -35,12 +35,12 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
     {
       text: LANGUAGE.fuel.tabs.topCharges,
       icon: LocalGasStation,
-      style: { color: "var(--container-performance-2)" },
+      iconStyle: { color: "var(--container-performance-2)" },
     },
     {
       text: LANGUAGE.fuel.tabs.topDischarges,
       icon: LocalGasStation,
-      style: { color: "var(--container-performance-3)" },
+      iconStyle: { color: "var(--container-performance-3)" },
     },
   ];
 
