@@ -1,17 +1,20 @@
 "use client";
 import { ReactNode, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
 
 import styles from "./languageButton.module.css";
+import {
+  localStorageGetItem,
+  localStorageSetItem,
+} from "../../localStorage/utils/storageService";
+import { AppDispatch } from "@/globalConfig/redux/store";
 import { LANGUAGE_OPTIONS } from "../../language/utils/languageSelector.model";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { LanguageSelector } from "./languageSelector/languageSelector";
 import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
 import { StarIcon } from "./starIcon/starIcon";
-import {
-  localStorageGetItem,
-  localStorageSetItem,
-} from "../../localStorage/utils/storageService";
+import { setLanguageReducer } from "@/globalConfig/redux/slices/languageSlice";
 
 export type LanguageSelectorOption = {
   flagIcon: ReactNode;
@@ -24,6 +27,8 @@ interface Props {
 }
 
 export const LanguageButton = ({ LANGUAGE }: Props) => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const [isSelectorOpen, setIsSelectorOpen] = useState(false);
   const [languageSelected, setLanguageSelected] =
     useState<LanguageSelectorOption>();
@@ -71,6 +76,7 @@ export const LanguageButton = ({ LANGUAGE }: Props) => {
   const selectLanguage = (languageOption: LanguageSelectorOption) => {
     setLanguageSelected(languageOption);
     localStorageSetItem(STORAGE_KEYS.LANGUAGE_SELECTED, languageOption.option);
+    dispatch(setLanguageReducer(languageOption.option));
   };
 
   return (
@@ -84,6 +90,7 @@ export const LanguageButton = ({ LANGUAGE }: Props) => {
           {languageSelected?.flagIcon}
           <h3>{languageSelected?.title}</h3>
         </div>
+
         <div className={styles.stars}>
           <div className={styles.star2}>
             <StarIcon />
@@ -102,11 +109,13 @@ export const LanguageButton = ({ LANGUAGE }: Props) => {
           </div>
         </div>
       </button>
+
       {isSelectorOpen && (
         <LanguageSelector
           languageOptions={languageOptions}
           selectLanguage={selectLanguage}
           toggleSelector={toggleSelector}
+          LANGUAGE={LANGUAGE}
         />
       )}
     </div>

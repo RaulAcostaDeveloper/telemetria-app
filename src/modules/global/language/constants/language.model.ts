@@ -6,6 +6,9 @@ export interface LanguageInterface {
     spanish: string;
     english: string;
   };
+  languageButton: {
+    selectLanguage: string;
+  };
   sectionName: {
     home: string;
     management: string;

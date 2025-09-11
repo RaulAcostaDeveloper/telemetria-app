@@ -6,6 +6,9 @@ export const SPANISH: LanguageInterface = {
     english: "Inglés",
     spanish: "Español",
   },
+  languageButton: {
+    selectLanguage: "Seleccionar idioma",
+  },
   sectionName: {
     home: "Inicio",
     management: "Recursos",

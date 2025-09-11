@@ -2,15 +2,18 @@
 import { useEffect, useRef } from "react";
 
 import styles from "./languageSelector.module.css";
+import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { LanguageSelectorOption } from "../languageButton";
 
 interface Props {
+  LANGUAGE: LanguageInterface;
   languageOptions: LanguageSelectorOption[];
   selectLanguage: (languageOption: LanguageSelectorOption) => void;
   toggleSelector: () => void;
 }
 
 export const LanguageSelector = ({
+  LANGUAGE,
   languageOptions,
   selectLanguage,
   toggleSelector,
@@ -32,7 +35,7 @@ export const LanguageSelector = ({
       document.addEventListener("mousedown", onClickOutside);
       return () => document.removeEventListener("mousedown", onClickOutside);
     }
-  }, []);
+  }, [toggleSelector]);
 
   return (
     <div className={styles.inside} ref={containerRef}>
@@ -41,6 +44,7 @@ export const LanguageSelector = ({
           className={styles.languageElement}
           key={index}
           onClick={() => selectLanguage(languageOption)}
+          title={LANGUAGE.languageButton.selectLanguage}
         >
           {languageOption.flagIcon}
           <p>{languageOption.title}</p>
