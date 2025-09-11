@@ -11,7 +11,7 @@ interface BrandsValues {
 }
 
 interface Data {
-  statusCode: number;
+  code: number;
   message: string;
   value: BrandsValues | null;
 }
