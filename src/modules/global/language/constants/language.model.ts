@@ -2,6 +2,10 @@
 
 export interface LanguageInterface {
   localeLanguage: string;
+  languages: {
+    spanish: string;
+    english: string;
+  };
   sectionName: {
     home: string;
     management: string;

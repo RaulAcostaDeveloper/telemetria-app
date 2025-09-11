@@ -10,6 +10,7 @@ import styles from "./header.module.css";
 import { CalendarToday } from "@mui/icons-material";
 import { HeaderBackButton } from "./headerBackButton/headerBackButton";
 import { HeaderTextContent } from "./headerTextContent/headerTextContent";
+import { LanguageButton } from "../languageButton/languageButton";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { formatDateTime } from "@/modules/global/utils/utils";
 
@@ -84,6 +85,7 @@ export const Header = ({ isMenuOpen, LANGUAGE }: Props) => {
                     <span className={styles.endDate}>{end}</span>
                   </div>
                 </button>
+                <LanguageButton LANGUAGE={LANGUAGE} />
               </div>
             </nav>
             {showCalendar && (
