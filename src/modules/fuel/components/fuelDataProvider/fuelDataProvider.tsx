@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
-import { LocalShipping } from "@mui/icons-material";
+import { LocalShipping, LocalGasStation } from "@mui/icons-material";
 
 // import { FuelFilter } from "../fuelFilter/fuelFilter";
 import DonutGraphic from "@/modules/global/components/donutGraphic/DonutGraphic";
@@ -34,9 +34,13 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
     },
     {
       text: LANGUAGE.fuel.tabs.topCharges,
+      icon: LocalGasStation,
+      style: { color: "var(--container-performance-2)" },
     },
     {
       text: LANGUAGE.fuel.tabs.topDischarges,
+      icon: LocalGasStation,
+      style: { color: "var(--container-performance-3)" },
     },
   ];
 

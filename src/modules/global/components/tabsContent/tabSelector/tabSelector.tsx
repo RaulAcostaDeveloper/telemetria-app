@@ -5,6 +5,7 @@ type IconComponent = React.ComponentType<SvgIconProps>;
 type TabOption = {
   text: string;
   icon?: IconComponent;
+  style?: object;
 };
 interface Props {
   selectedTab: string;
@@ -27,7 +28,12 @@ export const TabSelector = ({
           onClick={() => setSelectedTab(option.text)}
           key={option.text}
         >
-          {option.icon && <option.icon fontSize="inherit" color="action" />}
+          {option.icon && (
+            <option.icon
+              fontSize="inherit"
+              style={option.style && option.style}
+            />
+          )}
           {option.text}
         </button>
       ))}
