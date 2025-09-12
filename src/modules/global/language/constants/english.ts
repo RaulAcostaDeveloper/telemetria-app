@@ -396,8 +396,8 @@ export const ENGLISH: LanguageInterface = {
       plate: "License plate",
       driverDistance: "Kilometers (Km)",
       averageSpeed: "Average speed (km/h)",
-      driverTime: "Driving (h)",
-      driverIdleTime: "Idling (h)",
+      driverTime: "Driving time (h)",
+      driverIdleTime: "Idling time (h)",
       maxSpeed: "Max speed (km/h)",
     },
     tableTitle: {
