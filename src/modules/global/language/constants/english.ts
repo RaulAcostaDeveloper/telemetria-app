@@ -137,8 +137,8 @@ export const ENGLISH: LanguageInterface = {
       rangeSelectorShowAll: "Show all",
     },
     axisTitles: {
-      fuelVariation: "Fuel level (L)",
-      fuelVariationCAN: "Fuel level (CAN)",
+      fuelVariation: "Fuel level (L) (Sensor)",
+      fuelVariationCAN: "Fuel level (L) (CAN)",
       time: "Time",
       performance: "Performance (L)",
       distance: "Distance (Km)",
@@ -147,7 +147,7 @@ export const ENGLISH: LanguageInterface = {
     titles: {
       charges: "Refuels",
       disCharges: "Discharges",
-      fuelVariation: "Fuel level",
+      fuelVariation: "Fuel level (Sensor)",
       fuelVariationCAN: "Fuel level (CAN)",
       performancesBetweenCharges: "Performance between charges",
       dailyPerformance: "Daily performance",
