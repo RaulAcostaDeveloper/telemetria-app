@@ -1,5 +1,6 @@
 // Dar de alta nuevos elementos de LocalStorage
 export const STORAGE_KEYS = {
+  LANGUAGE_SELECTED: "language_selected",
   CALENDAR: "calendar_date_range",
   MENU_OPEN: "is_menu_open",
   FUEL_FILTER_ACCOUNT: "fuel_filter_account",

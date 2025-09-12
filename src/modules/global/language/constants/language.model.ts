@@ -2,6 +2,13 @@
 
 export interface LanguageInterface {
   localeLanguage: string;
+  languages: {
+    spanish: string;
+    english: string;
+  };
+  languageButton: {
+    selectLanguage: string;
+  };
   sectionName: {
     home: string;
     management: string;

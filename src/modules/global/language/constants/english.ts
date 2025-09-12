@@ -2,6 +2,13 @@ import { LanguageInterface } from "./language.model";
 
 export const ENGLISH: LanguageInterface = {
   localeLanguage: "en-US",
+  languages: {
+    english: "English",
+    spanish: "Spanish",
+  },
+  languageButton: {
+    selectLanguage: "Select language",
+  },
   sectionName: {
     home: "Home",
     management: "Resources",
@@ -130,8 +137,8 @@ export const ENGLISH: LanguageInterface = {
       rangeSelectorShowAll: "Show all",
     },
     axisTitles: {
-      fuelVariation: "Fuel Variation (L)",
-      fuelVariationCAN: "Fuel Variation (CAN)",
+      fuelVariation: "Fuel variation (L)",
+      fuelVariationCAN: "Fuel variation (CAN)",
       time: "Time",
       performance: "Performance (L)",
       distance: "Distance (Km)",

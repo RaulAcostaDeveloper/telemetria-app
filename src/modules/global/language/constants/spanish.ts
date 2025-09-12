@@ -2,6 +2,13 @@ import { LanguageInterface } from "./language.model";
 
 export const SPANISH: LanguageInterface = {
   localeLanguage: "ex-MX",
+  languages: {
+    english: "Inglés",
+    spanish: "Español",
+  },
+  languageButton: {
+    selectLanguage: "Seleccionar idioma",
+  },
   sectionName: {
     home: "Inicio",
     management: "Recursos",

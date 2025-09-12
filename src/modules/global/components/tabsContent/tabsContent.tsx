@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const TabsContent = ({ tabContents, tabOptions }: Props) => {
-  const [selectedTab, setSelectedTab] = useState<string>(tabOptions[0].text);
+  const [selectedTab, setSelectedTab] = useState<number>(0);
 
   return (
     <div className={`${styles.tabsContent}`}>
@@ -31,7 +31,7 @@ export const TabsContent = ({ tabContents, tabOptions }: Props) => {
       <div className={`${styles.tabContent}`}>
         {tabOptions?.map((tabOption, index) => (
           <div key={tabOption.text}>
-            {selectedTab === tabOption.text && tabContents[index]}
+            {selectedTab === index && tabContents[index]}
           </div>
         ))}
       </div>
