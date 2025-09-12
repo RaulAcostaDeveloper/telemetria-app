@@ -111,7 +111,7 @@ export const FuelBehaviorHighChart = ({
     return fuelDataData.levelMessages
       .map((c) => ({
         x: new Date(c.dateGps).getTime(),
-        y: c.sensorCurrentLevel,
+        y: c.sensorCurrentLevelSmoothly,
         custom: {
           dateGps: c.dateGps,
           lat: c.lat,
@@ -131,7 +131,7 @@ export const FuelBehaviorHighChart = ({
     return fuelDataData.levelMessages
       .map((c) => ({
         x: new Date(c.dateGps).getTime(),
-        y: c.canCurrentLevel,
+        y: c.canCurrentLevelSmoothly,
         custom: {
           dateGps: c.dateGps,
           lat: c.lat,
