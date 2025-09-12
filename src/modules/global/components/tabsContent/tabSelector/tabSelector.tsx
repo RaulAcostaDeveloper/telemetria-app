@@ -7,8 +7,8 @@ type TabOption = {
   icon?: IconComponent;
 };
 interface Props {
-  selectedTab: string;
-  setSelectedTab: (option: string) => void;
+  selectedTab: number;
+  setSelectedTab: (option: number) => void;
   tabOptions: TabOption[];
 }
 
@@ -19,12 +19,12 @@ export const TabSelector = ({
 }: Props) => {
   return (
     <div className={`${styles.tabSelector}`}>
-      {tabOptions.map((option) => (
+      {tabOptions.map((option, index) => (
         <button
           className={`${styles.tabElement} ${
-            selectedTab === option.text ? styles.tabSelected : ""
+            selectedTab === index ? styles.tabSelected : ""
           }`}
-          onClick={() => setSelectedTab(option.text)}
+          onClick={() => setSelectedTab(index)}
           key={option.text}
         >
           {option.icon && <option.icon fontSize="inherit" color="action" />}
