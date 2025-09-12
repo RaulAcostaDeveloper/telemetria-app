@@ -396,8 +396,8 @@ export const SPANISH: LanguageInterface = {
       plate: "Placas",
       driverDistance: "Kilometraje (Km)",
       averageSpeed: "Velocidad promedio (km/h)",
-      driverTime: "Conducción (h)",
-      driverIdleTime: "Estacionado (h)",
+      driverTime: "Tiempo de conducción (h)",
+      driverIdleTime: "Tiempo de estacionado (h)",
       maxSpeed: "Velocidad máxima (km/h)",
     },
     tableTitle: {
