@@ -95,6 +95,7 @@ export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
     <div className={styles.telemetryObd}>
       {obdRollupStatus === "succeeded" &&
         obdRollupData &&
+        obdRollupData.value &&
         teleVehiclesOBDData && (
           <>
             <section>

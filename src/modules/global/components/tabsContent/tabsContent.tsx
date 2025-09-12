@@ -10,6 +10,7 @@ type IconComponent = React.ComponentType<SvgIconProps>;
 type TabOption = {
   text: string;
   icon?: IconComponent;
+  iconStyle?: object;
 };
 
 interface Props {
