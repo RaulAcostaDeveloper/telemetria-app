@@ -80,7 +80,7 @@ export const LanguageButton = ({ LANGUAGE }: Props) => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <button
         className={styles.languageButton}
         onClick={toggleSelector}
