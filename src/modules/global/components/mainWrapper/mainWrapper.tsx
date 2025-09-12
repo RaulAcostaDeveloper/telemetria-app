@@ -33,19 +33,23 @@ interface Props {
 
 export const MainWrapper = ({ children }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | null>(null);
+  // LANGUAGE objeto que se utiliza en la interfaz
   const [LANGUAGE, setLanguageObject] = useState<LanguageInterface>(SPANISH);
 
   const dispatch = useDispatch<AppDispatch>();
 
+  // Opción del lenguaje (ejemplo inglés, español, etc.)
   const languageSelected = useSelector(
     (state: RootState) => state.languageOption.languageSelected
   );
 
+  // Usuario autenticado a nivel estado de la aplicación
   const { isAuthenticated, logoutState, tryFirstServerSession } = useAuth();
 
-  // Usado para probar la sesion activa
+  // Servicio para probar la sesion activa
   const { brandsStatus } = useSelector((state: RootState) => state.brands);
 
+  // Datos del calendario
   const { startDate, endDate } = useSelector(
     (state: RootState) => state.calendar
   );
@@ -54,7 +58,7 @@ export const MainWrapper = ({ children }: Props) => {
     tryFirstServerSession();
   }, []);
 
-  // Aquí trae de redux y modifica el LANGUAGE
+  // Actualiza el objeto LANGUAGE según la opción del estado de la aplicación
   // Actualizar en caso de agregar un nuevo idioma
   useEffect(() => {
     switch (languageSelected) {
@@ -70,11 +74,7 @@ export const MainWrapper = ({ children }: Props) => {
     }
   }, [languageSelected]);
 
-  // Ejemplo de como cambiar el idioma
-  // setTimeout(() => {
-  //   dispatch(setLanguageReducer(LANGUAGE_OPTIONS.ENGLISH));
-  // }, 5000);
-
+  // Menu abierto o cerrado
   useEffect(() => {
     const defaultValue: boolean = false;
     const storedValue: boolean | null = localStorageGetItem(
@@ -89,13 +89,14 @@ export const MainWrapper = ({ children }: Props) => {
     }
   }, []);
 
+  // Actualiza local storage con menú abierto o cerrado
   useEffect(() => {
     if (isMenuOpen !== null) {
       localStorageSetItem(STORAGE_KEYS.MENU_OPEN, isMenuOpen);
     }
   }, [isMenuOpen]);
 
-  // Cerrar el menú en resolución movile
+  // Forzar el cerrado del menú en resolución movile
   useEffect(() => {
     if (typeof window !== "undefined") {
       const handleResize = () => {
@@ -111,7 +112,7 @@ export const MainWrapper = ({ children }: Props) => {
     }
   }, []);
 
-  // Servicios al inicio de la sesión del usuario
+  // Llamado de servicios al inicio de la sesión del usuario
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(
@@ -137,6 +138,7 @@ export const MainWrapper = ({ children }: Props) => {
     }
   }, [isAuthenticated]);
 
+  // Llamado de servicios al inicio de la sesión del usuario
   useEffect(() => {
     if (isAuthenticated && startDate && endDate) {
       dispatch(
@@ -165,7 +167,7 @@ export const MainWrapper = ({ children }: Props) => {
     }
   }, [isAuthenticated, startDate, endDate]);
 
-  // Se usa brandsStatus para economizar tener un endpoint especifico que verifique sesión
+  // BrandsStatus es el servicio que usamos para la verificación de la sesión
   return brandsStatus === "loading" ? (
     <div>
       <CheckLogin />

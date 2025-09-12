@@ -43,6 +43,7 @@ export const LanguageSelector = ({
         <button
           className={styles.languageElement}
           key={index}
+          // Envía el objeto completo a la función
           onClick={() => selectLanguage(languageOption)}
           title={LANGUAGE.languageButton.selectLanguage}
         >

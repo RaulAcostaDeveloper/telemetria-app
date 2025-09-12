@@ -29,10 +29,13 @@ interface Props {
 export const LanguageButton = ({ LANGUAGE }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const [isSelectorOpen, setIsSelectorOpen] = useState(false);
-  const [languageSelected, setLanguageSelected] =
+  // Datos del lenguaje para este componente
+  const [languageSelectedForButton, setLanguageSelectedForButton] =
     useState<LanguageSelectorOption>();
 
+  const [isLanguageSelectorOpen, setIsLanguageSelectorOpen] = useState(false);
+
+  // Actualizar este arreglo si se agrega un nuevo idioma
   const languageOptions = useMemo<LanguageSelectorOption[]>(() => {
     return [
       {
@@ -52,22 +55,25 @@ export const LanguageButton = ({ LANGUAGE }: Props) => {
     ];
   }, [LANGUAGE]);
 
+  // Primer render, valor por default es languageOptions[0].option
   useEffect(() => {
-    // Primer render
     const storedLanguage = localStorageGetItem(STORAGE_KEYS.LANGUAGE_SELECTED);
 
     if (storedLanguage) {
-      const selectedLanguage = languageOptions.find(
-        (item) => item.option === storedLanguage
-      );
-      setLanguageSelected(selectedLanguage);
-      if (selectedLanguage) {
-        dispatch(setLanguageReducer(selectedLanguage.option));
+      const selectedOption: LanguageSelectorOption | undefined =
+        languageOptions.find((item) => item.option === storedLanguage);
+
+      setLanguageSelectedForButton(selectedOption);
+
+      // Si se encontró en el arreglo
+      if (selectedOption) {
+        dispatch(setLanguageReducer(selectedOption.option));
       } else {
         dispatch(setLanguageReducer(languageOptions[0].option));
       }
     } else {
-      setLanguageSelected(languageOptions[0]);
+      // Si no había nada en localStorage
+      setLanguageSelectedForButton(languageOptions[0]);
       localStorageSetItem(
         STORAGE_KEYS.LANGUAGE_SELECTED,
         languageOptions[0].option
@@ -77,11 +83,11 @@ export const LanguageButton = ({ LANGUAGE }: Props) => {
   }, [languageOptions]);
 
   const toggleSelector = () => {
-    setIsSelectorOpen(!isSelectorOpen);
+    setIsLanguageSelectorOpen(!isLanguageSelectorOpen);
   };
 
   const selectLanguage = (languageOption: LanguageSelectorOption) => {
-    setLanguageSelected(languageOption);
+    setLanguageSelectedForButton(languageOption);
     localStorageSetItem(STORAGE_KEYS.LANGUAGE_SELECTED, languageOption.option);
     dispatch(setLanguageReducer(languageOption.option));
   };
@@ -94,8 +100,8 @@ export const LanguageButton = ({ LANGUAGE }: Props) => {
         id="languageButton"
       >
         <div className={styles.insideButton}>
-          {languageSelected?.flagIcon}
-          <h3>{languageSelected?.title}</h3>
+          {languageSelectedForButton?.flagIcon}
+          <h3>{languageSelectedForButton?.title}</h3>
         </div>
 
         <div className={styles.stars}>
@@ -119,10 +125,12 @@ export const LanguageButton = ({ LANGUAGE }: Props) => {
 
       <div
         className={`${
-          isSelectorOpen ? `${styles.selectorOpen}` : `${styles.selectorClosed}`
+          isLanguageSelectorOpen
+            ? `${styles.selectorOpen}`
+            : `${styles.selectorClosed}`
         }`}
       >
-        {isSelectorOpen && (
+        {isLanguageSelectorOpen && (
           <LanguageSelector
             languageOptions={languageOptions}
             selectLanguage={selectLanguage}
