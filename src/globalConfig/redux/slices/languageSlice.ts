@@ -2,11 +2,11 @@ import { LANGUAGE_OPTIONS } from "@/modules/global/language/utils/languageSelect
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface InitialState {
-  languageSelected: LANGUAGE_OPTIONS;
+  languageSelected: LANGUAGE_OPTIONS | null;
 }
 
 const initialState: InitialState = {
-  languageSelected: LANGUAGE_OPTIONS.SPANISH,
+  languageSelected: null,
 };
 
 // Obtener la opción del lenguaje

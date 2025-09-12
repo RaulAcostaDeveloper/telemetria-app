@@ -55,17 +55,24 @@ export const LanguageButton = ({ LANGUAGE }: Props) => {
   useEffect(() => {
     // Primer render
     const storedLanguage = localStorageGetItem(STORAGE_KEYS.LANGUAGE_SELECTED);
+
     if (storedLanguage) {
       const selectedLanguage = languageOptions.find(
         (item) => item.option === storedLanguage
       );
       setLanguageSelected(selectedLanguage);
+      if (selectedLanguage) {
+        dispatch(setLanguageReducer(selectedLanguage.option));
+      } else {
+        dispatch(setLanguageReducer(languageOptions[0].option));
+      }
     } else {
       setLanguageSelected(languageOptions[0]);
       localStorageSetItem(
         STORAGE_KEYS.LANGUAGE_SELECTED,
         languageOptions[0].option
       );
+      dispatch(setLanguageReducer(languageOptions[0].option));
     }
   }, [languageOptions]);
 
