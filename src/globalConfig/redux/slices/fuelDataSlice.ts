@@ -15,6 +15,8 @@ interface LevelMessages {
   externalPower: number | null;
   canCurrentLevel: number | null;
   sensorCurrentLevel: number | null;
+  canCurrentLevelSmoothly: number | null;
+  sensorCurrentLevelSmoothly: number | null;
   tanks: string;
 }
 
