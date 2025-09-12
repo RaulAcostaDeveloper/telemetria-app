@@ -188,7 +188,7 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
       },
       accessibility: { enabled: false },
     };
-  }, [devices, selectedMetric, segmentsCount, is3DReady]);
+  }, [is3DReady, selectedMetric, segmentsCount, LANGUAGE, devices]);
 
   return (
     <div className={styles.container}>
