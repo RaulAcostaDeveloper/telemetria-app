@@ -23,6 +23,8 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [memoryIfStatus, setMemoryIfStatus] = useState(false);
   const [memoryCodeStatus, setMemoryCodeStatus] = useState(-1);
+  const [capsLock, setCapsLock] = useState(false);
+
   const { tryLoginHook } = useAuth();
 
   const { loginStatus, loginServerData } = useSelector(
@@ -105,6 +107,11 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
     }
   }
 
+  const handleKeyEvent = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const isCaps = event.getModifierState("CapsLock");
+    setCapsLock(isCaps);
+  };
+
   return loginStatus === "loading" || loginStatus === "succeeded" ? (
     <div>
       <CheckLogin />
@@ -128,6 +135,11 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
           placeholder={LANGUAGE.auth.authForm.name}
           value={name}
           onChange={(e) => setName(e.target.value)}
+          onKeyDown={(e) => {
+            handlePassKeyDown(e);
+            handleKeyEvent(e);
+          }}
+          onKeyUp={handleKeyEvent}
         />
       </div>
 
@@ -139,9 +151,25 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
           placeholder={LANGUAGE.auth.authForm.password}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={handlePassKeyDown}
+          onKeyDown={(e) => {
+            handlePassKeyDown(e);
+            handleKeyEvent(e);
+          }}
+          onKeyUp={handleKeyEvent}
         />
       </div>
+
+      {capsLock && (
+        <div className={styles.mayusActivated}>
+          <Image
+            src={"/png/bloq-mayus.png"}
+            width={20}
+            height={20}
+            alt="bloq mayus"
+          />
+          <span>{LANGUAGE.auth.authForm.mayusActivated}</span>
+        </div>
+      )}
 
       <GeneralButton
         callback={onClickGetToken}

@@ -216,6 +216,7 @@ export const ENGLISH: LanguageInterface = {
       password: "Password",
       title: "Authentication",
       loginButton: "Log in",
+      mayusActivated: "Caps lock is on",
     },
     authFormNote: {
       nameOrPasswordError: "Invalid username or password",
