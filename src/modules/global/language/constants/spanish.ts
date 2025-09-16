@@ -216,6 +216,7 @@ export const SPANISH: LanguageInterface = {
       password: "Contraseña",
       title: "Autenticación",
       loginButton: "Iniciar sesión",
+      mayusActivated: "Mayúsculas activadas",
     },
     authFormNote: {
       nameOrPasswordError: "Usuario o contraseña invalido",

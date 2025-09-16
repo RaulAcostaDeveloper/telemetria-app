@@ -143,6 +143,16 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
         />
       </div>
 
+      <div className={styles.mayusActivated}>
+        <Image
+          src={"/png/bloq-mayus.png"}
+          width={20}
+          height={20}
+          alt="bloq mayus"
+        />
+        <span>{LANGUAGE.auth.authForm.mayusActivated}</span>
+      </div>
+
       <GeneralButton
         callback={onClickGetToken}
         title={LANGUAGE.auth.authForm.loginButton}

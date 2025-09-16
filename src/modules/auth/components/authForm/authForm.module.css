@@ -7,13 +7,13 @@
   justify-content: space-around;
   padding: 1rem;
 }
+
 .logoContainer {
   display: flex;
   justify-content: center;
 }
 
 .inputsContainers {
-  height: 50px;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
@@ -26,6 +26,7 @@
   border-radius: 0.35rem;
   padding: 0.3rem;
 }
+
 .errorMessageContainer {
   height: 30px;
   display: flex;
@@ -35,11 +36,13 @@
   margin: 0 2rem;
   width: calc(100% - 4rem);
 }
+
 .errorMessageContainer span {
   color: var(--button-color-3);
   font-weight: bold;
   font-size: 1.3rem;
 }
+
 .authForm button {
   padding: 1rem;
   margin: 0 2rem;
@@ -48,4 +51,16 @@
   font-size: 2rem;
   border: none;
   font-weight: bold;
+}
+
+.mayusActivated {
+  padding: 0 2rem;
+  color: red;
+  display: flex;
+  align-items: center;
+}
+
+.mayusActivated span {
+  margin-left: 5px;
+  padding-top: 2px;
 }
