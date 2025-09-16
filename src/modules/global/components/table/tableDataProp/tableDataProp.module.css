@@ -10,6 +10,6 @@
 }
 
 .dataProp:hover {
-  cursor: pointer;
+  cursor: copy;
   text-decoration: underline;
 }
