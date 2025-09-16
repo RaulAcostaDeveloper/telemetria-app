@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
 import GeoModal, {
   GeoModalData,
 } from "@/modules/global/components/geoModal/geoModal";
@@ -18,6 +17,7 @@ import { TabsContent } from "@/modules/global/components";
 import { fetchFuelData } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { fetchFuelPerformance } from "@/globalConfig/redux/slices/fuelPerformanceSlice";
 import { fetchLastFuelReport } from "@/globalConfig/redux/slices/lastFuelReportSlice";
+import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
 import { useAuth } from "@/modules/auth/utils";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
@@ -119,16 +119,16 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
       dispatch(
         fetchFuelData({
           imei: "862524060822760", // imei.toString(),
-          startDate: "2025-08-17T00:00:00", // formatToLocalIso8601(startDate), "2024-08-05T00:00:00"
-          endDate: "2025-10-21T00:00:00", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
+          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+          endDate: formatToLocalIso8601(endDate),
         })
       );
 
       dispatch(
         fetchFuelPerformance({
           imei: "862524060822760", // imei.toString(),
-          startDate: "2025-08-17T00:00:00", // formatToLocalIso8601(startDate), "2024-08-05T00:00:00"
-          endDate: "2025-10-21T00:00:00", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
+          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+          endDate: formatToLocalIso8601(endDate),
         })
       );
 

@@ -75,36 +75,36 @@ export const toLocalISOString = (date: Date): string => {
  * const { startDate, endDate } = calculatePredefinedDateRange("Últimos 7 días", new Date());
  */
 export const calculatePredefinedDateRange = (
-  option: string,
+  indexOption: number,
   today: Date
 ): { startDate: Date; endDate: Date } => {
   let startDate: Date, endDate: Date;
-  switch (option) {
-    case "Últimos 7 días":
+  switch (indexOption) {
+    case 0: // Últimos 7 días
       startDate = new Date(today);
       startDate.setDate(today.getDate() - 7);
       endDate = today;
       break;
-    case "Últimos 15 días":
+    case 1: // Últimos 15 días
       startDate = new Date(today);
       startDate.setDate(today.getDate() - 15);
       endDate = today;
       break;
-    case "Últimos 30 días":
+    case 2: // Últimos 30 días
       startDate = new Date(today);
       startDate.setDate(today.getDate() - 30);
       endDate = today;
       break;
-    case "Últimos 90 días":
+    case 3: // Últimos 90 días
       startDate = new Date(today);
       startDate.setDate(today.getDate() - 90);
       endDate = today;
       break;
-    case "Este mes":
+    case 4: // Este mes
       startDate = new Date(today.getFullYear(), today.getMonth(), 1);
       endDate = today;
       break;
-    case "El mes pasado":
+    case 5: // El mes pasado
       const firstDayCurrentMonth = new Date(
         today.getFullYear(),
         today.getMonth(),
