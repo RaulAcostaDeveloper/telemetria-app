@@ -14,11 +14,12 @@ import {
   SingleLineHighChart,
 } from "@/modules/telemetryObd/components";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
+import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
 import { TabsContent } from "@/modules/global/components";
 import { fetchObdTravelMetrics } from "@/globalConfig/redux/slices/obdTravelMetricsSlice";
+import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
 import { useAuth } from "@/modules/auth/utils";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
-import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
 
 interface Props {
   imei: string;
@@ -73,8 +74,8 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
       dispatch(
         fetchObdTravelMetrics({
           deviceId: "862524060822760", // imei.toString(),
-          startDate: "2025-07-17T00:00:00", // formatToLocalIso8601(startDate),
-          endDate: "2025-10-21T00:00:00", // formatToLocalIso8601(endDate), "2024-09-07T00:00:00"
+          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+          endDate: formatToLocalIso8601(endDate),
         })
       );
     }

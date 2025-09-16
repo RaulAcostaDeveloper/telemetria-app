@@ -25,6 +25,7 @@ import { fetchGroups } from "@/globalConfig/redux/slices/groupsSlice";
 import { fetchObdRollup } from "@/globalConfig/redux/slices/obdRollupSlice";
 import { fetchTopFuelReport } from "@/globalConfig/redux/slices/topFuelReportSlice";
 import { fetchVehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
+import { formatToLocalIso8601 } from "../../utils/utils";
 import { useAuth } from "../../../auth/utils";
 
 interface Props {
@@ -144,24 +145,24 @@ export const MainWrapper = ({ children }: Props) => {
       dispatch(
         fetchFuelSummary({
           accountId: "90926", //"4992"
-          startDate: "2024-08-17T00:00:00", // formatToLocalIso8601(startDate),
-          endDate: "2024-08-21T00:00:00",
+          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+          endDate: formatToLocalIso8601(endDate),
           performanceType: "1",
         })
       );
       dispatch(
         fetchTopFuelReport({
           accountId: "90926",
-          startDate: "2024-09-01T00:00:00", // formatToLocalIso8601(startDate),
-          endDate: "2024-09-30T00:00:00",
+          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+          endDate: formatToLocalIso8601(endDate),
           numberOfVehicles: 10,
         })
       );
       dispatch(
         fetchObdRollup({
           accountId: "90926",
-          startDate: "2025-07-17T00:00:00", // formatToLocalIso8601(startDate),
-          endDate: "2025-10-21T00:00:00",
+          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+          endDate: formatToLocalIso8601(endDate),
         })
       );
     }
