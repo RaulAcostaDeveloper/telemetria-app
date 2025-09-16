@@ -123,6 +123,10 @@ export const GaugeGraphic = ({ title, max, metric, value }: Props) => {
           },
         },
       ],
+      tooltip: {
+        enabled: false,
+        split: false,
+      },
     };
   }, []);
 
