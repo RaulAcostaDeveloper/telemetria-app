@@ -33,7 +33,7 @@ const FixedDateSection: React.FC<FixedDateSectionProps> = ({
    *
    * @param option - Opción predefinida seleccionada.
    */
-  const handlePredefinedDate = (option: string) => {
+  const handlePredefinedDate = (option: string, indexOption: number) => {
     if (selectedOption === option) {
       // Si el filtro ya está activo, límpialo.
       setSelectedOption("");
@@ -41,8 +41,10 @@ const FixedDateSection: React.FC<FixedDateSectionProps> = ({
     }
 
     setSelectedOption(option);
-    const { startDate, endDate } = calculatePredefinedDateRange(option, today);
-
+    const { startDate, endDate } = calculatePredefinedDateRange(
+      indexOption,
+      today
+    );
     dispatch(
       setDateRange({
         startDate: toLocalISOString(startDate),
@@ -55,14 +57,14 @@ const FixedDateSection: React.FC<FixedDateSectionProps> = ({
     <div className={styles.fixedDatesContainer}>
       <div className={styles.selectPeriodContainer}>
         <ul className={styles.fixedDateOptions}>
-          {options.map((option) => (
+          {options.map((option, index) => (
             <li
               key={option}
               className={selectedOption === option ? styles.selectedFilter : ""}
             >
               <button
                 className={styles.invisibleButton}
-                onClick={() => handlePredefinedDate(option)}
+                onClick={() => handlePredefinedDate(option, index)}
                 title={option}
               >
                 {option}
