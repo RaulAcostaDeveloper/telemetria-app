@@ -159,7 +159,7 @@ export const TableServerContent = ({
         <TableDataSummatory
           LANGUAGE={LANGUAGE}
           columns={columns}
-          data={filteredData}
+          filteredData={filteredData}
         />
       </div>
     </>

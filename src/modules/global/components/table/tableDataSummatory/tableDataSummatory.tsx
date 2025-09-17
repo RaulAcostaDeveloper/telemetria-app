@@ -5,15 +5,19 @@ import { columnsTable, dataTable } from "../table.model";
 interface Props {
   LANGUAGE: LanguageInterface;
   columns: columnsTable;
-  data: dataTable;
+  filteredData: dataTable;
 }
 
-export const TableDataSummatory = ({ columns, data, LANGUAGE }: Props) => {
+export const TableDataSummatory = ({
+  columns,
+  filteredData,
+  LANGUAGE,
+}: Props) => {
   // Calcula la suma de todos los valores de ese parámetro
   const calcSumm = (index: number): number => {
     let total = 0;
 
-    for (const item of data) {
+    for (const item of filteredData) {
       const key = Object.keys(item)[index];
 
       if (key) {
