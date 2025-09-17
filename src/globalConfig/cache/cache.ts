@@ -1,13 +1,7 @@
 import { getCacheTable } from "./dexie";
 
-function dataHasCodeOrStatusCode(
-  data: unknown
-): data is { code: number; statusCode: number } {
-  return (
-    typeof (data as any).code === "number" ||
-    typeof (data as any).statusCode === "number" // por eso es importante homologar
-  );
-}
+const LIFE_TIME_CACHE = 1000 * 60 * 60 * 10;
+export const ONE_HOUR = 1000 * 60 * 60;
 
 // Función genérica de manejo de caché con dexie.js
 export async function getCached<T>(
@@ -41,11 +35,38 @@ export async function getCached<T>(
 }
 
 // Función para eliminar un elemento de caché manualmente
-export async function clearCache(key?: string) {
+export async function clearCacheByKey(key?: string) {
   const table = getCacheTable();
   if (key) {
     await table.delete(key);
   } else {
-    await table.clear();
+    console.error("No se encontró el Key del Caché ", key);
   }
+}
+
+// Limpiar elementos en caché que tengan más de 10 horas de vida
+export async function cleanExpiredCache(): Promise<void> {
+  const now = Date.now();
+  const table = getCacheTable();
+
+  try {
+    const deletedCount = await table
+      .where("timestamp")
+      .below(now - LIFE_TIME_CACHE)
+      .delete();
+    console.log(
+      `[CACHE CLEANUP] Eliminadas ${deletedCount} entradas expiradas.`
+    );
+  } catch (error) {
+    console.error("[CACHE CLEANUP ERROR]", error);
+  }
+}
+
+function dataHasCodeOrStatusCode(
+  data: unknown
+): data is { code: number; statusCode: number } {
+  return (
+    typeof (data as any).code === "number" ||
+    typeof (data as any).statusCode === "number" // por eso es importante homologar
+  );
 }

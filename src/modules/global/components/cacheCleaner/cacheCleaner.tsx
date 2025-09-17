@@ -1,12 +1,20 @@
 "use client";
 import { useEffect } from "react";
-import { cleanExpiredCache } from "../../utils/utils";
+import { cleanExpiredCache, ONE_HOUR } from "@/globalConfig/cache/cache";
 
-// Componente que ejecuta la función para limpiar caché de más de 7 días de vida
+// Componente que ejecuta la función para limpiar caché expirado
 // Se ejecuta al iniciar la aplicación
 export const CacheCleaner = () => {
   useEffect(() => {
-    cleanExpiredCache();
+    // Revisa cada hora
+    const intervalId = setInterval(() => {
+      cleanExpiredCache();
+    }, ONE_HOUR);
+
+    return () => {
+      clearTimeout(intervalId);
+    };
   }, []);
+
   return null;
 };
