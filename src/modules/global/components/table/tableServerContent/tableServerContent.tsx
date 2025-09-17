@@ -40,6 +40,7 @@ interface Props {
   showGoOBD?: boolean;
   showGoPageView?: boolean;
   showViewModal?: boolean;
+  tableHasFilters: boolean;
   title?: string;
   viewPath?: string;
   windowMaxSize?: number;
@@ -69,6 +70,7 @@ export const TableServerContent = ({
   showGoOBD,
   showGoPageView,
   showViewModal,
+  tableHasFilters,
   title,
   viewPath,
   windowMaxSize,
@@ -95,17 +97,19 @@ export const TableServerContent = ({
             tableData={data}
             title={title}
           />
-          <TableFiltersButton
-            LANGUAGE={LANGUAGE}
-            columns={columns}
-            data={data}
-            filterSelectors={filterSelectors}
-            handleMinMaxFilter={handleMinMaxFilter}
-            handleSelectorFilter={handleSelectorFilter}
-            minMaxFilters={minMaxFilters}
-            resetFilters={resetFilters}
-            setMinHeight={setMinHeight}
-          />
+          {tableHasFilters && (
+            <TableFiltersButton
+              LANGUAGE={LANGUAGE}
+              columns={columns}
+              data={data}
+              filterSelectors={filterSelectors}
+              handleMinMaxFilter={handleMinMaxFilter}
+              handleSelectorFilter={handleSelectorFilter}
+              minMaxFilters={minMaxFilters}
+              resetFilters={resetFilters}
+              setMinHeight={setMinHeight}
+            />
+          )}
         </div>
 
         {/* Tabla */}

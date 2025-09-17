@@ -60,10 +60,22 @@ export const Table = ({
   const [filteredData, setFilteredData] = useState<dataTable>(data);
   const [inputFilterValue, setInputFilterValue] = useState<string>("");
   const [minHeight, setMinHeight] = useState(0);
+  const [tableHasFilters, setTableHasFilters] = useState<boolean>(false);
 
   useEffect(() => {
     initFilters();
   }, []);
+
+  useEffect(() => {
+    // Actualizar esto por si se añaden más filtros
+    const hasFilters = columns.some(
+      (column) =>
+        column.filterSelector === true ||
+        column.minMaxFilter === true ||
+        column.textFilter === true
+    );
+    setTableHasFilters(hasFilters);
+  }, [columns]);
 
   // Ordenamiento ascendente y descendente
   useEffect(() => {
@@ -243,6 +255,7 @@ export const Table = ({
         showGoOBD={showGoOBD}
         showGoPageView={showGoPageView}
         showViewModal={showViewModal}
+        tableHasFilters={tableHasFilters}
         title={title}
         viewPath={viewPath}
         windowMaxSize={windowMaxSize}
