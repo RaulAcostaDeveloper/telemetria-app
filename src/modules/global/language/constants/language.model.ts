@@ -196,6 +196,7 @@ export interface LanguageInterface {
       password: string;
       title: string;
       loginButton: string;
+      mayusActivated: string;
     };
     authFormNote: {
       nameOrPasswordError: string;
