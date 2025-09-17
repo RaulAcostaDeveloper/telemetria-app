@@ -3,6 +3,7 @@ interface column {
   defaultSpace: number;
   filterSelector?: boolean;
   minMaxFilter?: boolean;
+  textFilter?: boolean; // aún no implementado pero mapeado para mostrar el botón
   orderColumn?: boolean;
   showTotal?: boolean;
 }
