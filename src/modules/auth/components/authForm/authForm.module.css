@@ -1,3 +1,11 @@
+.formContainer {
+  height: 320px;
+  width: 500px;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .authForm {
   min-height: 320px;
   width: 100%;

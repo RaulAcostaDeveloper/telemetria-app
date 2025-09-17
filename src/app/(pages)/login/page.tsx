@@ -9,9 +9,7 @@ export default function LoginPage() {
 
   return (
     <div className={styles.loginPage}>
-      <div className={styles.formContainer}>
-        <AuthForm LANGUAGE={LANGUAGE} />
-      </div>
+      <AuthForm LANGUAGE={LANGUAGE} />
     </div>
   );
 }
