@@ -1,5 +1,7 @@
-import { getFuelData } from "@/modules/fuel/services/fuelData/fuelData";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { SERVICE_STATUS } from "../types/serviceTypes";
+import { getFuelData } from "@/modules/fuel/services/fuelData/fuelData";
 
 interface LevelMessages {
   eventId: number;
@@ -109,7 +111,7 @@ interface Data {
 
 interface InitialState {
   fuelDataData: Data | null;
-  fuelDataStatus: string;
+  fuelDataStatus: SERVICE_STATUS;
 }
 
 export const fetchFuelData = createAsyncThunk(
@@ -129,7 +131,7 @@ export const fetchFuelData = createAsyncThunk(
 
 const initialState: InitialState = {
   fuelDataData: null,
-  fuelDataStatus: "idle",
+  fuelDataStatus: SERVICE_STATUS.idle,
 };
 
 // Slice del servicio
@@ -140,14 +142,14 @@ const fuelDataSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchFuelData.pending, (state) => {
-        state.fuelDataStatus = "loading";
+        state.fuelDataStatus = SERVICE_STATUS.loading;
       })
       .addCase(fetchFuelData.fulfilled, (state, action) => {
-        state.fuelDataStatus = "succeeded";
+        state.fuelDataStatus = SERVICE_STATUS.succeeded;
         state.fuelDataData = action.payload;
       })
       .addCase(fetchFuelData.rejected, (state) => {
-        state.fuelDataStatus = "failed";
+        state.fuelDataStatus = SERVICE_STATUS.failed;
       });
   },
 });

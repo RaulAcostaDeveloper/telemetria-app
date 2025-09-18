@@ -16,6 +16,7 @@ import { LanguageContext } from "../../language/components/languageProvider/lang
 import { LanguageInterface } from "../../language/constants/language.model";
 import { Menu } from "../menu/menu";
 import { PageContainer } from "../pageContainer/pageContainer";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { SPANISH } from "../../language/constants/spanish";
 import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
 import { useAuth } from "../../../auth/utils";
@@ -100,7 +101,7 @@ export const MainWrapper = ({ children }: Props) => {
   }, []);
 
   // BrandsStatus es el servicio que usamos para la verificación de la sesión
-  return brandsStatus === "loading" ? (
+  return brandsStatus === SERVICE_STATUS.loading ? (
     <div>
       <CheckLogin />
     </div>

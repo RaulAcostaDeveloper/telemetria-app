@@ -1,5 +1,6 @@
-import { getBrands } from "@/modules/management/services/brands/brands";
+import { SERVICE_STATUS } from "../types/serviceTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getBrands } from "@/modules/management/services/brands/brands";
 
 export interface Brand {
   id: number;
@@ -18,7 +19,7 @@ interface Data {
 
 interface InitialState {
   brandsData: Data | null;
-  brandsStatus: string;
+  brandsStatus: SERVICE_STATUS;
 }
 
 export const fetchBrands = createAsyncThunk("brands/fetch", async () => {
@@ -27,7 +28,7 @@ export const fetchBrands = createAsyncThunk("brands/fetch", async () => {
 
 const initialState: InitialState = {
   brandsData: null,
-  brandsStatus: "idle",
+  brandsStatus: SERVICE_STATUS.idle,
 };
 
 // Slice del servicio
@@ -38,14 +39,14 @@ const brandsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchBrands.pending, (state) => {
-        state.brandsStatus = "loading";
+        state.brandsStatus = SERVICE_STATUS.loading;
       })
       .addCase(fetchBrands.fulfilled, (state, action) => {
-        state.brandsStatus = "succeeded";
+        state.brandsStatus = SERVICE_STATUS.succeeded;
         state.brandsData = action.payload;
       })
       .addCase(fetchBrands.rejected, (state) => {
-        state.brandsStatus = "failed";
+        state.brandsStatus = SERVICE_STATUS.failed;
       });
   },
 });

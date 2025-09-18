@@ -11,6 +11,7 @@ import styles from "./fuelDataProvider.module.css";
 import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { RootState } from "@/globalConfig/redux/store";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { Table, TabsContent } from "@/modules/global/components";
 import { columnsTable } from "@/modules/global/components/table/table.model";
 
@@ -288,12 +289,13 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
         /> */}
 
       <div className={styles.topResumeData}>
-        {fuelSummaryStatus === "succeeded" && fuelSummaryData?.value && (
-          <>
-            <ReportSummary summaryValues={fuelSummaryData.value} />
-            <DonutGraphic devices={fuelSummaryData.value.devices} />
-          </>
-        )}
+        {fuelSummaryStatus === SERVICE_STATUS.succeeded &&
+          fuelSummaryData?.value && (
+            <>
+              <ReportSummary summaryValues={fuelSummaryData.value} />
+              <DonutGraphic devices={fuelSummaryData.value.devices} />
+            </>
+          )}
 
         <DataErrorHandler
           LANGUAGE={LANGUAGE}
@@ -306,16 +308,17 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
           tabOptions={tabOptions}
           tabContents={[
             <div key={1}>
-              {fuelSummaryStatus === "succeeded" && vehiclesReport && (
-                <Table
-                  LANGUAGE={LANGUAGE}
-                  columns={vehiclesColumns}
-                  data={vehiclesReport}
-                  idKey="imei"
-                  showGoFuel
-                  showGoOBD
-                />
-              )}
+              {fuelSummaryStatus === SERVICE_STATUS.succeeded &&
+                vehiclesReport && (
+                  <Table
+                    LANGUAGE={LANGUAGE}
+                    columns={vehiclesColumns}
+                    data={vehiclesReport}
+                    idKey="imei"
+                    showGoFuel
+                    showGoOBD
+                  />
+                )}
 
               <DataErrorHandler
                 LANGUAGE={LANGUAGE}
@@ -324,17 +327,18 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
               />
             </div>,
             <div key={2}>
-              {topFuelReportStatus === "succeeded" && topFuelReportCharges && (
-                <Table
-                  LANGUAGE={LANGUAGE}
-                  columns={topFuelReportChargesColumns}
-                  data={topFuelReportCharges}
-                  idKey="imei"
-                  showViewModal
-                  showGoFuel
-                  showGoOBD
-                />
-              )}
+              {topFuelReportStatus === SERVICE_STATUS.succeeded &&
+                topFuelReportCharges && (
+                  <Table
+                    LANGUAGE={LANGUAGE}
+                    columns={topFuelReportChargesColumns}
+                    data={topFuelReportCharges}
+                    idKey="imei"
+                    showViewModal
+                    showGoFuel
+                    showGoOBD
+                  />
+                )}
 
               <DataErrorHandler
                 LANGUAGE={LANGUAGE}
@@ -343,7 +347,7 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
               />
             </div>,
             <div key={3}>
-              {topFuelReportStatus === "succeeded" &&
+              {topFuelReportStatus === SERVICE_STATUS.succeeded &&
                 topFuelReportDischarges && (
                   <Table
                     LANGUAGE={LANGUAGE}

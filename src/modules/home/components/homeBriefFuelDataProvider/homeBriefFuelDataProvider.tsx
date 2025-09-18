@@ -7,6 +7,7 @@ import stylesHome from "./homeBriefFuelDataProvider.module.css";
 import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { RootState } from "@/globalConfig/redux/store";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -20,12 +21,13 @@ export const HomeBriefFuelDataProvider = ({ LANGUAGE }: Props) => {
   return (
     <div className={stylesHome.container}>
       <div className={styles.topResumeData}>
-        {fuelSummaryStatus === "succeeded" && fuelSummaryData?.value && (
-          <>
-            <ReportSummary summaryValues={fuelSummaryData.value} />
-            <DonutGraphic devices={fuelSummaryData.value.devices} />
-          </>
-        )}
+        {fuelSummaryStatus === SERVICE_STATUS.succeeded &&
+          fuelSummaryData?.value && (
+            <>
+              <ReportSummary summaryValues={fuelSummaryData.value} />
+              <DonutGraphic devices={fuelSummaryData.value.devices} />
+            </>
+          )}
         <DataErrorHandler
           LANGUAGE={LANGUAGE}
           hasData={!!fuelSummaryData?.value}

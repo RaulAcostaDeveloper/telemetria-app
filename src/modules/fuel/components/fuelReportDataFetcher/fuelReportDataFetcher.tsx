@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { TryFuelReportOnFailed } from "./tryFuelReportOnFailed/tryFuelReportOnFailed";
 import { fetchFuelData } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { fetchFuelPerformance } from "@/globalConfig/redux/slices/fuelPerformanceSlice";
@@ -59,7 +60,7 @@ export const FuelReportDataFetcher = ({ imei }: Props) => {
       if (
         isAuthenticated &&
         imei.length > 10 &&
-        lastFuelReportStatus === "succeeded" // si el anterior llamado es succeeded entonces sigue
+        lastFuelReportStatus === SERVICE_STATUS.succeeded // si el anterior llamado es succeeded entonces sigue
       ) {
         dispatch(
           fetchLastFuelReport({

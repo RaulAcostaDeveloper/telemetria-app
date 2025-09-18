@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { fetchFuelData } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { fetchFuelPerformance } from "@/globalConfig/redux/slices/fuelPerformanceSlice";
 import { fetchLastFuelReport } from "@/globalConfig/redux/slices/lastFuelReportSlice";
@@ -31,7 +32,7 @@ export const TryFuelReportOnFailed = ({ imei }: Props) => {
 
   useEffect(() => {
     if (
-      fuelDataStatus === "failed" &&
+      fuelDataStatus === SERVICE_STATUS.failed &&
       isAuthenticated &&
       startDate &&
       endDate &&
@@ -51,7 +52,7 @@ export const TryFuelReportOnFailed = ({ imei }: Props) => {
 
   useEffect(() => {
     if (
-      fuelPerformanceStatus === "failed" &&
+      fuelPerformanceStatus === SERVICE_STATUS.failed &&
       isAuthenticated &&
       startDate &&
       endDate &&
@@ -71,7 +72,7 @@ export const TryFuelReportOnFailed = ({ imei }: Props) => {
 
   useEffect(() => {
     if (
-      lastFuelReportStatus === "failed" &&
+      lastFuelReportStatus === SERVICE_STATUS.failed &&
       isAuthenticated &&
       startDate &&
       endDate &&

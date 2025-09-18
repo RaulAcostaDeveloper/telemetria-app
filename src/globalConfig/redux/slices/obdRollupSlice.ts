@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getObdRollup } from "@/modules/telemetryObd/services/rollup/rollup";
 
 interface ObdRollupDetails {
@@ -30,7 +31,7 @@ interface Data {
 
 interface InitialState {
   obdRollupData: Data | null;
-  obdRollupStatus: string;
+  obdRollupStatus: SERVICE_STATUS;
 }
 
 export const fetchObdRollup = createAsyncThunk(
@@ -50,7 +51,7 @@ export const fetchObdRollup = createAsyncThunk(
 
 const initialState: InitialState = {
   obdRollupData: null,
-  obdRollupStatus: "idle",
+  obdRollupStatus: SERVICE_STATUS.idle,
 };
 
 // Slice del servicio
@@ -61,14 +62,14 @@ const obdRollupSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchObdRollup.pending, (state) => {
-        state.obdRollupStatus = "loading";
+        state.obdRollupStatus = SERVICE_STATUS.loading;
       })
       .addCase(fetchObdRollup.fulfilled, (state, action) => {
-        state.obdRollupStatus = "succeeded";
+        state.obdRollupStatus = SERVICE_STATUS.succeeded;
         state.obdRollupData = action.payload;
       })
       .addCase(fetchObdRollup.rejected, (state) => {
-        state.obdRollupStatus = "failed";
+        state.obdRollupStatus = SERVICE_STATUS.failed;
       });
   },
 });

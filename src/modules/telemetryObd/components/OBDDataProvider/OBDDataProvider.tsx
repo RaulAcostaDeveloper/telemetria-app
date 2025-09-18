@@ -16,6 +16,7 @@ import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/D
 import { FuelDataReport } from "@/modules/fuel/components/fuelNowContainer/fuelDataReport/fuelDataReport";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { RootState } from "@/globalConfig/redux/store";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { Table } from "@/modules/global/components";
 import { columnsTable } from "@/modules/global/components/table/table.model";
 import { formatNumberWithCommas } from "@/modules/global/utils/utils";
@@ -93,7 +94,7 @@ export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
 
   return (
     <div className={styles.telemetryObd}>
-      {obdRollupStatus === "succeeded" &&
+      {obdRollupStatus === SERVICE_STATUS.succeeded &&
         obdRollupData &&
         obdRollupData.value &&
         teleVehiclesOBDData && (

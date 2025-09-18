@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getVehicleByImei } from "@/modules/management/services/vehicles/vehicleByImei";
 
 export interface VehicleByImei {
@@ -27,7 +29,7 @@ interface Data {
 
 interface InitialState {
   vehicleByImeiData: Data | null;
-  vehicleByImeiStatus: string;
+  vehicleByImeiStatus: SERVICE_STATUS;
 }
 
 export const fetchVehicleByImei = createAsyncThunk(
@@ -39,7 +41,7 @@ export const fetchVehicleByImei = createAsyncThunk(
 
 const initialState: InitialState = {
   vehicleByImeiData: null,
-  vehicleByImeiStatus: "idle",
+  vehicleByImeiStatus: SERVICE_STATUS.idle,
 };
 
 // Slice del servicio
@@ -50,14 +52,14 @@ const vehicleByImeiSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchVehicleByImei.pending, (state) => {
-        state.vehicleByImeiStatus = "loading";
+        state.vehicleByImeiStatus = SERVICE_STATUS.loading;
       })
       .addCase(fetchVehicleByImei.fulfilled, (state, action) => {
-        state.vehicleByImeiStatus = "succeeded";
+        state.vehicleByImeiStatus = SERVICE_STATUS.succeeded;
         state.vehicleByImeiData = action.payload;
       })
       .addCase(fetchVehicleByImei.rejected, (state) => {
-        state.vehicleByImeiStatus = "failed";
+        state.vehicleByImeiStatus = SERVICE_STATUS.failed;
       });
   },
 });

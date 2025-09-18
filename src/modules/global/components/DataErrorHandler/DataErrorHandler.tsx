@@ -1,23 +1,24 @@
-import { LanguageInterface } from "../../language/constants/language.model";
-import { ErrorMessage } from "../errorMessage/errorMessage";
 import LoaderAnimation from "../loaderAnimation/loaderAnimation";
+import { ErrorMessage } from "../errorMessage/errorMessage";
+import { LanguageInterface } from "../../language/constants/language.model";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import styles from "./dataErrorHandler.module.css";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   hasData: boolean;
-  infoStatus: string;
+  infoStatus: SERVICE_STATUS;
 }
 
 const decideFeedback = ({ LANGUAGE, hasData, infoStatus }: Props) => {
   switch (infoStatus) {
-    case "loading":
+    case SERVICE_STATUS.loading:
       return (
         <div>
           <LoaderAnimation />
         </div>
       );
-    case "succeeded":
+    case SERVICE_STATUS.succeeded:
       return (
         hasData === false && (
           <ErrorMessage
@@ -26,7 +27,7 @@ const decideFeedback = ({ LANGUAGE, hasData, infoStatus }: Props) => {
           />
         )
       );
-    case "failed":
+    case SERVICE_STATUS.failed:
       return (
         <div>
           <ErrorMessage LANGUAGE={LANGUAGE} />

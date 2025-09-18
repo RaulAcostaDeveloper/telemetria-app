@@ -1,5 +1,7 @@
-import { fetchLogin } from "@/modules/auth/services/postLogin";
 import { createSlice } from "@reduxjs/toolkit";
+
+import { SERVICE_STATUS } from "../types/serviceTypes";
+import { fetchLogin } from "@/modules/auth/services/postLogin";
 
 interface UserData {
   userId: string;
@@ -18,13 +20,13 @@ interface LoginData {
 interface AuthState {
   isAuthenticated: boolean;
   loginServerData: LoginData | null;
-  loginStatus: string;
+  loginStatus: SERVICE_STATUS;
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
   loginServerData: null,
-  loginStatus: "idle",
+  loginStatus: SERVICE_STATUS.idle,
 };
 
 // Middleware. Se está moviendo a /modules/auth/services/postLogin
@@ -46,22 +48,22 @@ export const authSlice = createSlice({
     logoutAction: (state) => {
       state.isAuthenticated = false;
       state.loginServerData = null;
-      state.loginStatus = "idle";
+      state.loginStatus = SERVICE_STATUS.idle;
     },
   },
   extraReducers: (builder) => {
     // Tiene que ver con el middleware
     builder
       .addCase(fetchLogin.pending, (state) => {
-        state.loginStatus = "loading";
+        state.loginStatus = SERVICE_STATUS.loading;
         state.loginServerData = null;
       })
       .addCase(fetchLogin.fulfilled, (state, action) => {
-        state.loginStatus = "succeeded";
+        state.loginStatus = SERVICE_STATUS.succeeded;
         state.loginServerData = action.payload;
       })
       .addCase(fetchLogin.rejected, (state) => {
-        state.loginStatus = "failed";
+        state.loginStatus = SERVICE_STATUS.failed;
         state.loginServerData = null;
       });
   },

@@ -1,9 +1,11 @@
-import { fetchObdTravelMetrics } from "@/globalConfig/redux/slices/obdTravelMetricsSlice";
-import { AppDispatch, RootState } from "@/globalConfig/redux/store";
-import { useAuth } from "@/modules/auth/utils";
-import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { AppDispatch, RootState } from "@/globalConfig/redux/store";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
+import { fetchObdTravelMetrics } from "@/globalConfig/redux/slices/obdTravelMetricsSlice";
+import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
+import { useAuth } from "@/modules/auth/utils";
 
 interface Props {
   imei: string;
@@ -24,7 +26,7 @@ export const TryObdReportOnFailed = ({ imei }: Props) => {
 
   useEffect(() => {
     if (
-      obdTravelMetricsStatus === "failed" &&
+      obdTravelMetricsStatus === SERVICE_STATUS.failed &&
       isAuthenticated &&
       startDate &&
       endDate &&

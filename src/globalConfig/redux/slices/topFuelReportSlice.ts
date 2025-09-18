@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getTopFuelReport } from "@/modules/fuel/services/topFuelReport/topFuelReport";
 
 interface ChargesTopReport {
@@ -49,12 +50,12 @@ interface Data {
 
 interface InitialState {
   topFuelReportData: Data | null;
-  topFuelReportStatus: string;
+  topFuelReportStatus: SERVICE_STATUS;
 }
 
 const initialState: InitialState = {
   topFuelReportData: null,
-  topFuelReportStatus: "idle",
+  topFuelReportStatus: SERVICE_STATUS.idle,
 };
 
 export const fetchTopFuelReport = createAsyncThunk(
@@ -81,14 +82,14 @@ const topFuelReportSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchTopFuelReport.pending, (state) => {
-        state.topFuelReportStatus = "loading";
+        state.topFuelReportStatus = SERVICE_STATUS.loading;
       })
       .addCase(fetchTopFuelReport.fulfilled, (state, action) => {
-        state.topFuelReportStatus = "succeeded";
+        state.topFuelReportStatus = SERVICE_STATUS.succeeded;
         state.topFuelReportData = action.payload;
       })
       .addCase(fetchTopFuelReport.rejected, (state) => {
-        state.topFuelReportStatus = "failed";
+        state.topFuelReportStatus = SERVICE_STATUS.failed;
       });
   },
 });

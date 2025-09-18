@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getObdTravelMetrics } from "@/modules/telemetryObd/services/travel-metrics/travel-metrics";
 
 interface ObdTravelMetricsTimeTraveledDetails {
@@ -31,7 +32,7 @@ interface Data {
 
 interface InitialState {
   obdTravelMetricsData: Data | null;
-  obdTravelMetricsStatus: string;
+  obdTravelMetricsStatus: SERVICE_STATUS;
 }
 
 export const fetchObdTravelMetrics = createAsyncThunk(
@@ -51,7 +52,7 @@ export const fetchObdTravelMetrics = createAsyncThunk(
 
 const initialState: InitialState = {
   obdTravelMetricsData: null,
-  obdTravelMetricsStatus: "idle",
+  obdTravelMetricsStatus: SERVICE_STATUS.idle,
 };
 
 // Slice del servicio
@@ -62,14 +63,14 @@ const obdTravelMetricsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchObdTravelMetrics.pending, (state) => {
-        state.obdTravelMetricsStatus = "loading";
+        state.obdTravelMetricsStatus = SERVICE_STATUS.loading;
       })
       .addCase(fetchObdTravelMetrics.fulfilled, (state, action) => {
-        state.obdTravelMetricsStatus = "succeeded";
+        state.obdTravelMetricsStatus = SERVICE_STATUS.succeeded;
         state.obdTravelMetricsData = action.payload;
       })
       .addCase(fetchObdTravelMetrics.rejected, (state) => {
-        state.obdTravelMetricsStatus = "failed";
+        state.obdTravelMetricsStatus = SERVICE_STATUS.failed;
       });
   },
 });

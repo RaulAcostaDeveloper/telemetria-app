@@ -13,6 +13,7 @@ import {
 import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
 import { FuelBehaviorTab } from "@/modules/fuel/components/fuelBehaviorTab/fuelBehaviorTab";
 import { RootState } from "@/globalConfig/redux/store";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { TabsContent } from "@/modules/global/components";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
@@ -118,18 +119,19 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
         tabOptions={vehicleTabs}
         tabContents={[
           <div key={0}>
-            {fuelDataStatus === "succeeded" && fuelDataData?.value && (
-              <>
-                <FuelBehaviorTab
-                  LANGUAGE={LANGUAGE}
-                  fuelDataData={fuelDataData.value}
-                  opBEngineOff={opBEngineOff}
-                  opBEngineOffCoasting={opBEngineOffCoast}
-                  opBEngineOnIdle={opBEngineOnIdle}
-                  opBEngineOnMoving={opBEngineOnMoving}
-                />
-              </>
-            )}
+            {fuelDataStatus === SERVICE_STATUS.succeeded &&
+              fuelDataData?.value && (
+                <>
+                  <FuelBehaviorTab
+                    LANGUAGE={LANGUAGE}
+                    fuelDataData={fuelDataData.value}
+                    opBEngineOff={opBEngineOff}
+                    opBEngineOffCoasting={opBEngineOffCoast}
+                    opBEngineOnIdle={opBEngineOnIdle}
+                    opBEngineOnMoving={opBEngineOnMoving}
+                  />
+                </>
+              )}
 
             <DataErrorHandler
               LANGUAGE={LANGUAGE}
@@ -138,7 +140,7 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
             />
           </div>,
           <div key={1}>
-            {fuelPerformanceStatus === "succeeded" &&
+            {fuelPerformanceStatus === SERVICE_STATUS.succeeded &&
               fuelPerformanceData?.value && (
                 <>
                   <FuelPerformanceMetrics
@@ -155,7 +157,7 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
             />
           </div>,
           <div key={2}>
-            {lastFuelReportStatus === "succeeded" &&
+            {lastFuelReportStatus === SERVICE_STATUS.succeeded &&
               lastFuelReportData?.value && (
                 <>
                   <FuelNowContainer

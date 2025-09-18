@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getGroups } from "@/modules/management/services/groups/groups";
 import { ndIfEmpty } from "@/globalConfig/utils/utils";
 
@@ -19,7 +21,7 @@ interface Data {
 
 interface InitialState {
   groupsData: Data | null;
-  groupsStatus: string;
+  groupsStatus: SERVICE_STATUS;
 }
 
 export const fetchGroups = createAsyncThunk(
@@ -31,7 +33,7 @@ export const fetchGroups = createAsyncThunk(
 
 const initialState: InitialState = {
   groupsData: null,
-  groupsStatus: "idle",
+  groupsStatus: SERVICE_STATUS.idle,
 };
 
 function setObjNDIfEmpty(payload: Data) {
@@ -54,14 +56,14 @@ const groupsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchGroups.pending, (state) => {
-        state.groupsStatus = "loading";
+        state.groupsStatus = SERVICE_STATUS.loading;
       })
       .addCase(fetchGroups.fulfilled, (state, action) => {
-        state.groupsStatus = "succeeded";
+        state.groupsStatus = SERVICE_STATUS.succeeded;
         state.groupsData = setObjNDIfEmpty(action.payload);
       })
       .addCase(fetchGroups.rejected, (state) => {
-        state.groupsStatus = "failed";
+        state.groupsStatus = SERVICE_STATUS.failed;
       });
   },
 });

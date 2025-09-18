@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAuth } from "@/modules/auth/utils";
-import { fetchVehicleByImei } from "@/globalConfig/redux/slices/vehicleByImeiSlice";
 
 import styles from "./headerTextWords.module.css";
-
-// Tipado
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
+import { fetchVehicleByImei } from "@/globalConfig/redux/slices/vehicleByImeiSlice";
+import { useAuth } from "@/modules/auth/utils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -34,7 +33,7 @@ export const HeaderTextWords = ({ LANGUAGE, section, url }: Props) => {
 
   return (
     <>
-      {vehicleByImeiStatus === "succeeded" && vehicleByImeiData ? (
+      {vehicleByImeiStatus === SERVICE_STATUS.succeeded && vehicleByImeiData ? (
         <>
           {vehicleByImeiData.value?.plate && (
             <span className={styles.plate}>

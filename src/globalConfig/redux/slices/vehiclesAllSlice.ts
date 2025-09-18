@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getVehiclesAll } from "@/modules/management/services/vehicles/vehiclesAll";
 
 interface Vehicle {
@@ -31,7 +33,7 @@ interface Data {
 
 interface InitialState {
   vehiclesAllData: Data | null;
-  vehiclesAllStatus: string;
+  vehiclesAllStatus: SERVICE_STATUS;
 }
 
 export const fetchVehiclesAll = createAsyncThunk(
@@ -43,7 +45,7 @@ export const fetchVehiclesAll = createAsyncThunk(
 
 const initialState: InitialState = {
   vehiclesAllData: null,
-  vehiclesAllStatus: "idle",
+  vehiclesAllStatus: SERVICE_STATUS.idle,
 };
 
 // Slice del servicio
@@ -54,14 +56,14 @@ const vehiclesAllSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchVehiclesAll.pending, (state) => {
-        state.vehiclesAllStatus = "loading";
+        state.vehiclesAllStatus = SERVICE_STATUS.loading;
       })
       .addCase(fetchVehiclesAll.fulfilled, (state, action) => {
-        state.vehiclesAllStatus = "succeeded";
+        state.vehiclesAllStatus = SERVICE_STATUS.succeeded;
         state.vehiclesAllData = action.payload;
       })
       .addCase(fetchVehiclesAll.rejected, (state) => {
-        state.vehiclesAllStatus = "failed";
+        state.vehiclesAllStatus = SERVICE_STATUS.failed;
       });
   },
 });

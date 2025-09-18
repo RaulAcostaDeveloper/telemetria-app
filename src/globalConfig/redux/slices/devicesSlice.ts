@@ -1,5 +1,7 @@
-import { getDevices } from "@/modules/management/services/devices/devices";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { SERVICE_STATUS } from "../types/serviceTypes";
+import { getDevices } from "@/modules/management/services/devices/devices";
 import { ndIfEmpty } from "@/globalConfig/utils/utils";
 
 interface Devices {
@@ -27,7 +29,7 @@ interface Data {
 
 interface InitialState {
   devicesData: Data | null;
-  devicesStatus: string;
+  devicesStatus: SERVICE_STATUS;
 }
 
 export const fetchDevices = createAsyncThunk(
@@ -39,7 +41,7 @@ export const fetchDevices = createAsyncThunk(
 
 const initialState: InitialState = {
   devicesData: null,
-  devicesStatus: "idle",
+  devicesStatus: SERVICE_STATUS.idle,
 };
 
 /** Asigna "ND" a valores null, undefined y cadenas vacias.*/
@@ -79,14 +81,14 @@ const devicesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchDevices.pending, (state) => {
-        state.devicesStatus = "loading";
+        state.devicesStatus = SERVICE_STATUS.loading;
       })
       .addCase(fetchDevices.fulfilled, (state, action) => {
-        state.devicesStatus = "succeeded";
+        state.devicesStatus = SERVICE_STATUS.succeeded;
         state.devicesData = setObjNDIfEmpty(action.payload);
       })
       .addCase(fetchDevices.rejected, (state) => {
-        state.devicesStatus = "failed";
+        state.devicesStatus = SERVICE_STATUS.failed;
       });
   },
 });
