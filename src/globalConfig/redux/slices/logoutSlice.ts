@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { SERVICE_STATUS } from "../types/serviceTypes";
 import { logoutSession } from "@/modules/auth/services/logout";
 
 interface LoginData {
@@ -9,12 +11,12 @@ interface LoginData {
 
 interface LogoutState {
   logoutData: string | LoginData | null;
-  logoutStatus: string;
+  logoutStatus: SERVICE_STATUS;
 }
 
 const initialState: LogoutState = {
   logoutData: null,
-  logoutStatus: "idle",
+  logoutStatus: SERVICE_STATUS.idle,
 };
 
 export const callLogout = createAsyncThunk("logout/fetch", async () => {
@@ -28,13 +30,13 @@ const logoutSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(callLogout.pending, (state) => {
-        state.logoutStatus = "loading";
+        state.logoutStatus = SERVICE_STATUS.loading;
       })
       .addCase(callLogout.fulfilled, (state) => {
-        state.logoutStatus = "succeeded";
+        state.logoutStatus = SERVICE_STATUS.succeeded;
       })
       .addCase(callLogout.rejected, (state) => {
-        state.logoutStatus = "failed";
+        state.logoutStatus = SERVICE_STATUS.failed;
       });
   },
 });

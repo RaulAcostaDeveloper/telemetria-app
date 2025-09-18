@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getDrivers } from "@/modules/management/services/drivers/drivers";
 import { ndIfEmpty } from "@/globalConfig/utils/utils";
 
@@ -26,7 +28,7 @@ interface Data {
 
 interface InitialState {
   driversData: Data | null;
-  driversStatus: string;
+  driversStatus: SERVICE_STATUS;
 }
 
 export const fetchDrivers = createAsyncThunk(
@@ -38,7 +40,7 @@ export const fetchDrivers = createAsyncThunk(
 
 const initialState: InitialState = {
   driversData: null,
-  driversStatus: "idle",
+  driversStatus: SERVICE_STATUS.idle,
 };
 
 /** Asigna "ND" a valores null, undefined y cadenas vacias.*/
@@ -67,14 +69,14 @@ const driversSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchDrivers.pending, (state) => {
-        state.driversStatus = "loading";
+        state.driversStatus = SERVICE_STATUS.loading;
       })
       .addCase(fetchDrivers.fulfilled, (state, action) => {
-        state.driversStatus = "succeeded";
+        state.driversStatus = SERVICE_STATUS.succeeded;
         state.driversData = setObjNDIfEmpty(action.payload);
       })
       .addCase(fetchDrivers.rejected, (state) => {
-        state.driversStatus = "failed";
+        state.driversStatus = SERVICE_STATUS.failed;
       });
   },
 });

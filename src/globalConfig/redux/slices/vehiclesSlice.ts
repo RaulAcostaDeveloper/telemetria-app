@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getVehicles } from "@/modules/management/services/vehicles/vehicles";
 import { ndIfEmpty } from "@/globalConfig/utils/utils";
 
@@ -35,7 +37,7 @@ interface Data {
 
 interface InitialState {
   vehiclesData: Data | null;
-  vehiclesStatus: string;
+  vehiclesStatus: SERVICE_STATUS;
 }
 
 export const fetchVehicles = createAsyncThunk(
@@ -47,7 +49,7 @@ export const fetchVehicles = createAsyncThunk(
 
 const initialState: InitialState = {
   vehiclesData: null,
-  vehiclesStatus: "idle",
+  vehiclesStatus: SERVICE_STATUS.idle,
 };
 
 /** Asigna "ND" a valores null, undefined y cadenas vacias.*/
@@ -86,14 +88,14 @@ const vehiclesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchVehicles.pending, (state) => {
-        state.vehiclesStatus = "loading";
+        state.vehiclesStatus = SERVICE_STATUS.loading;
       })
       .addCase(fetchVehicles.fulfilled, (state, action) => {
-        state.vehiclesStatus = "succeeded";
+        state.vehiclesStatus = SERVICE_STATUS.succeeded;
         state.vehiclesData = setObjNDIfEmpty(action.payload);
       })
       .addCase(fetchVehicles.rejected, (state) => {
-        state.vehiclesStatus = "failed";
+        state.vehiclesStatus = SERVICE_STATUS.failed;
       });
   },
 });

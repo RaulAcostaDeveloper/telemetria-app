@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { fetchDevices } from "@/globalConfig/redux/slices/devicesSlice";
 import { fetchDrivers } from "@/globalConfig/redux/slices/driversSlice";
 import { fetchFuelSummary } from "@/globalConfig/redux/slices/fuelSummarySlice";
@@ -40,7 +41,7 @@ export const TryFetchOnFailed = () => {
 
   useEffect(() => {
     if (
-      fuelSummaryStatus === "failed" &&
+      fuelSummaryStatus === SERVICE_STATUS.failed &&
       isAuthenticated &&
       startDate &&
       endDate
@@ -60,7 +61,7 @@ export const TryFetchOnFailed = () => {
 
   useEffect(() => {
     if (
-      topFuelReportStatus === "failed" &&
+      topFuelReportStatus === SERVICE_STATUS.failed &&
       isAuthenticated &&
       startDate &&
       endDate
@@ -80,7 +81,7 @@ export const TryFetchOnFailed = () => {
 
   useEffect(() => {
     if (
-      obdRollupStatus === "failed" &&
+      obdRollupStatus === SERVICE_STATUS.failed &&
       isAuthenticated &&
       startDate &&
       endDate
@@ -99,7 +100,7 @@ export const TryFetchOnFailed = () => {
 
   useEffect(() => {
     if (
-      vehiclesStatus === "failed" &&
+      vehiclesStatus === SERVICE_STATUS.failed &&
       isAuthenticated &&
       startDate &&
       endDate
@@ -115,7 +116,12 @@ export const TryFetchOnFailed = () => {
   }, [vehiclesStatus, isAuthenticated, startDate, endDate]);
 
   useEffect(() => {
-    if (driversStatus === "failed" && isAuthenticated && startDate && endDate) {
+    if (
+      driversStatus === SERVICE_STATUS.failed &&
+      isAuthenticated &&
+      startDate &&
+      endDate
+    ) {
       setTimeout(() => {
         dispatch(
           fetchDrivers({
@@ -127,7 +133,12 @@ export const TryFetchOnFailed = () => {
   }, [driversStatus, isAuthenticated, startDate, endDate]);
 
   useEffect(() => {
-    if (devicesStatus === "failed" && isAuthenticated && startDate && endDate) {
+    if (
+      devicesStatus === SERVICE_STATUS.failed &&
+      isAuthenticated &&
+      startDate &&
+      endDate
+    ) {
       setTimeout(() => {
         dispatch(
           fetchDevices({
@@ -139,7 +150,12 @@ export const TryFetchOnFailed = () => {
   }, [devicesStatus, isAuthenticated, startDate, endDate]);
 
   useEffect(() => {
-    if (groupsStatus === "failed" && isAuthenticated && startDate && endDate) {
+    if (
+      groupsStatus === SERVICE_STATUS.failed &&
+      isAuthenticated &&
+      startDate &&
+      endDate
+    ) {
       setTimeout(() => {
         dispatch(
           fetchGroups({

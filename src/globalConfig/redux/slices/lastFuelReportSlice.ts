@@ -1,5 +1,7 @@
 // Slice del servicio
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getLastFuelReport } from "@/modules/fuel/services/lastFuelReport/lastFuelReport";
 
 export const fetchLastFuelReport = createAsyncThunk(
@@ -43,12 +45,12 @@ interface Data {
 
 interface InitialState {
   lastFuelReportData: Data | null;
-  lastFuelReportStatus: string;
+  lastFuelReportStatus: SERVICE_STATUS;
 }
 
 const initialState: InitialState = {
   lastFuelReportData: null,
-  lastFuelReportStatus: "idle",
+  lastFuelReportStatus: SERVICE_STATUS.idle,
 };
 
 const lastFuelReportSlice = createSlice({
@@ -58,14 +60,14 @@ const lastFuelReportSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchLastFuelReport.pending, (state) => {
-        state.lastFuelReportStatus = "loading";
+        state.lastFuelReportStatus = SERVICE_STATUS.loading;
       })
       .addCase(fetchLastFuelReport.fulfilled, (state, action) => {
-        state.lastFuelReportStatus = "succeeded";
+        state.lastFuelReportStatus = SERVICE_STATUS.succeeded;
         state.lastFuelReportData = action.payload;
       })
       .addCase(fetchLastFuelReport.rejected, (state) => {
-        state.lastFuelReportStatus = "failed";
+        state.lastFuelReportStatus = SERVICE_STATUS.failed;
       });
   },
 });

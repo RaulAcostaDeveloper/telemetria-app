@@ -6,10 +6,11 @@ import {
   loginAction,
   logoutAction,
 } from "@/globalConfig/redux/slices/authSlice";
-import { fetchLogin } from "../../services/postLogin";
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
-import { fetchBrands } from "@/globalConfig/redux/slices/brandsSlice";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { callLogout } from "@/globalConfig/redux/slices/logoutSlice";
+import { fetchBrands } from "@/globalConfig/redux/slices/brandsSlice";
+import { fetchLogin } from "../../services/postLogin";
 
 export const useAuth = () => {
   const router = useRouter();
@@ -33,12 +34,15 @@ export const useAuth = () => {
       if (
         loginServerData &&
         loginServerData.value &&
-        loginStatus === "succeeded" &&
+        loginStatus === SERVICE_STATUS.succeeded &&
         loginServerData?.code === 200 &&
         loginServerData.value.userId.length > 3
       ) {
         loginState();
-      } else if (loginStatus !== "idle" && loginStatus !== "loading") {
+      } else if (
+        loginStatus !== SERVICE_STATUS.idle &&
+        loginStatus !== SERVICE_STATUS.loading
+      ) {
         const isPushedLogin = false;
         logoutState(isPushedLogin);
       }
@@ -47,11 +51,14 @@ export const useAuth = () => {
 
   useEffect(() => {
     if (isFromFirstSession) {
-      if (200 === brandsData?.code && brandsStatus === "succeeded") {
+      if (
+        200 === brandsData?.code &&
+        brandsStatus === SERVICE_STATUS.succeeded
+      ) {
         loginState();
       } else if (
-        brandsStatus !== "idle" &&
-        brandsStatus !== "loading" &&
+        brandsStatus !== SERVICE_STATUS.idle &&
+        brandsStatus !== SERVICE_STATUS.loading &&
         200 !== brandsData?.code
       ) {
         logoutState();

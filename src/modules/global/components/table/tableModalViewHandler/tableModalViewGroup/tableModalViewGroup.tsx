@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import LoaderAnimation from "../../../loaderAnimation/loaderAnimation";
 import styles from "./tableModalViewGroup.module.css";
 import {
   MODAL_OPTION,
@@ -11,10 +10,11 @@ import {
   columnsTable,
   dataTable,
 } from "../../table.model";
-import { ErrorMessage } from "../../../errorMessage/errorMessage";
+import { DataErrorHandler } from "../../../DataErrorHandler/DataErrorHandler";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { Modal } from "../../../modal/modal";
 import { RootState } from "@/globalConfig/redux/store";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { Table } from "../../table";
 import { Vehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
 
@@ -107,7 +107,7 @@ export const TableModalViewGroup = ({
       }
     >
       <div className={styles.container}>
-        {vehiclesStatus === "succeeded" && vehiclesTableData && (
+        {vehiclesStatus === SERVICE_STATUS.succeeded && vehiclesTableData && (
           <Table
             LANGUAGE={LANGUAGE}
             columns={vehicleColumns}
@@ -120,13 +120,11 @@ export const TableModalViewGroup = ({
           />
         )}
 
-        {vehiclesStatus === "loading" && (
-          <div>
-            <LoaderAnimation />
-          </div>
-        )}
-
-        {vehiclesStatus === "failed" && <ErrorMessage LANGUAGE={LANGUAGE} />}
+        <DataErrorHandler
+          LANGUAGE={LANGUAGE}
+          hasData={!!groupsVehicles}
+          infoStatus={vehiclesStatus}
+        />
       </div>
     </Modal>
   );

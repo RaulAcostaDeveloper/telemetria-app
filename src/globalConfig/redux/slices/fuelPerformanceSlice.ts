@@ -1,5 +1,7 @@
-import { getFuelPerformance } from "@/modules/fuel/services/fuelPerformance/fuelPerformance";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { SERVICE_STATUS } from "../types/serviceTypes";
+import { getFuelPerformance } from "@/modules/fuel/services/fuelPerformance/fuelPerformance";
 
 export interface FuelPerformanceValues {
   deviceId: string;
@@ -21,7 +23,7 @@ interface Data {
 
 interface InitialState {
   fuelPerformanceData: Data | null;
-  fuelPerformanceStatus: string;
+  fuelPerformanceStatus: SERVICE_STATUS;
 }
 
 export const fetchFuelPerformance = createAsyncThunk(
@@ -41,7 +43,7 @@ export const fetchFuelPerformance = createAsyncThunk(
 
 const initialState: InitialState = {
   fuelPerformanceData: null,
-  fuelPerformanceStatus: "idle",
+  fuelPerformanceStatus: SERVICE_STATUS.idle,
 };
 
 // Slice del servicio
@@ -52,14 +54,14 @@ const fuelPerformanceSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchFuelPerformance.pending, (state) => {
-        state.fuelPerformanceStatus = "loading";
+        state.fuelPerformanceStatus = SERVICE_STATUS.loading;
       })
       .addCase(fetchFuelPerformance.fulfilled, (state, action) => {
-        state.fuelPerformanceStatus = "succeeded";
+        state.fuelPerformanceStatus = SERVICE_STATUS.succeeded;
         state.fuelPerformanceData = action.payload;
       })
       .addCase(fetchFuelPerformance.rejected, (state) => {
-        state.fuelPerformanceStatus = "failed";
+        state.fuelPerformanceStatus = SERVICE_STATUS.failed;
       });
   },
 });

@@ -10,6 +10,7 @@ import {
 import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { RootState } from "@/globalConfig/redux/store";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { Table, TabsContent } from "@/modules/global/components";
 import { formatDateTime } from "@/modules/global/utils/utils";
 
@@ -262,18 +263,19 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
         tabOptions={fuelTabs}
         tabContents={[
           <div key={1}>
-            {vehiclesStatus === "succeeded" && vehiclesTableData && (
-              <Table
-                LANGUAGE={LANGUAGE}
-                columns={vehicleColumns}
-                data={vehiclesTableData}
-                idKey="imeIs"
-                modalOption={MODAL_OPTION.VEHICLES}
-                showGoFuel
-                showGoOBD
-                showViewModal
-              />
-            )}
+            {vehiclesStatus === SERVICE_STATUS.succeeded &&
+              vehiclesTableData && (
+                <Table
+                  LANGUAGE={LANGUAGE}
+                  columns={vehicleColumns}
+                  data={vehiclesTableData}
+                  idKey="imeIs"
+                  modalOption={MODAL_OPTION.VEHICLES}
+                  showGoFuel
+                  showGoOBD
+                  showViewModal
+                />
+              )}
 
             <DataErrorHandler
               LANGUAGE={LANGUAGE}
@@ -282,7 +284,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
             />
           </div>,
           <div key={2}>
-            {devicesStatus === "succeeded" && devicesTableData && (
+            {devicesStatus === SERVICE_STATUS.succeeded && devicesTableData && (
               <Table
                 LANGUAGE={LANGUAGE}
                 columns={devicesColumns}
@@ -297,7 +299,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
             />
           </div>,
           <div key={3}>
-            {driversStatus === "succeeded" && driversTableData && (
+            {driversStatus === SERVICE_STATUS.succeeded && driversTableData && (
               <Table
                 LANGUAGE={LANGUAGE}
                 columns={driversColumns}
@@ -312,7 +314,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
             />
           </div>,
           <div key={4}>
-            {groupsStatus === "succeeded" && groupsTableData && (
+            {groupsStatus === SERVICE_STATUS.succeeded && groupsTableData && (
               <Table
                 LANGUAGE={LANGUAGE}
                 columns={groupsColumns}

@@ -1,5 +1,7 @@
-import { getFuelSummary } from "@/modules/fuel/services/fuelSummary/fuelSummary";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { SERVICE_STATUS } from "../types/serviceTypes";
+import { getFuelSummary } from "@/modules/fuel/services/fuelSummary/fuelSummary";
 
 // Tipado de los datos
 export interface Devices {
@@ -36,7 +38,7 @@ interface Data {
 
 interface InitialState {
   fuelSummaryData: Data | null;
-  fuelSummaryStatus: string;
+  fuelSummaryStatus: SERVICE_STATUS;
 }
 
 // Función middleware de redux para interceptar con caché
@@ -59,7 +61,7 @@ export const fetchFuelSummary = createAsyncThunk(
 
 const initialState: InitialState = {
   fuelSummaryData: null,
-  fuelSummaryStatus: "idle",
+  fuelSummaryStatus: SERVICE_STATUS.idle,
 };
 
 // Slice del servicio
@@ -70,14 +72,14 @@ const fuelSummarySlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchFuelSummary.pending, (state) => {
-        state.fuelSummaryStatus = "loading";
+        state.fuelSummaryStatus = SERVICE_STATUS.loading;
       })
       .addCase(fetchFuelSummary.fulfilled, (state, action) => {
-        state.fuelSummaryStatus = "succeeded";
+        state.fuelSummaryStatus = SERVICE_STATUS.succeeded;
         state.fuelSummaryData = action.payload;
       })
       .addCase(fetchFuelSummary.rejected, (state) => {
-        state.fuelSummaryStatus = "failed";
+        state.fuelSummaryStatus = SERVICE_STATUS.failed;
       });
   },
 });

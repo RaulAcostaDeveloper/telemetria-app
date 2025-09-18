@@ -11,6 +11,7 @@ import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMess
 import { GeneralButton } from "@/modules/global/components/generalButton/generalButton";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { RootState } from "@/globalConfig/redux/store";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { useAuth } from "@/modules/auth/utils";
 
 interface Props {
@@ -36,7 +37,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
   }, [name, password, LANGUAGE]);
 
   useEffect(() => {
-    if ("loading" === loginStatus) {
+    if (SERVICE_STATUS.loading === loginStatus) {
       setMemoryCodeStatus(-1);
       setMemoryIfStatus(false);
     }
@@ -45,14 +46,17 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
       setMemoryIfStatus(!!loginServerData);
       setMemoryCodeStatus(loginServerData.code);
     } else if (
-      "succeeded" === loginStatus &&
+      SERVICE_STATUS.succeeded === loginStatus &&
       loginServerData &&
       200 === loginServerData
     ) {
       //Limpio si ya inició satisfactoriamente sesión
       setMemoryIfStatus(false);
       setMemoryCodeStatus(-1);
-    } else if ("failed" === loginStatus && undefined === loginServerData) {
+    } else if (
+      SERVICE_STATUS.failed === loginStatus &&
+      undefined === loginServerData
+    ) {
       setMemoryIfStatus(true);
       setMemoryCodeStatus(0);
     }
@@ -112,7 +116,8 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
     setCapsLock(isCaps);
   };
 
-  return loginStatus === "loading" || loginStatus === "succeeded" ? (
+  return loginStatus === SERVICE_STATUS.loading ||
+    loginStatus === SERVICE_STATUS.succeeded ? (
     <div>
       <CheckLogin />
     </div>
@@ -179,7 +184,9 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
           disabled={isFormValid ? false : true}
         />
         {errorSelector()}
-        {loginStatus === "failed" && <ErrorMessage LANGUAGE={LANGUAGE} />}
+        {loginStatus === SERVICE_STATUS.failed && (
+          <ErrorMessage LANGUAGE={LANGUAGE} />
+        )}
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ import {
 } from "@/modules/telemetryObd/components";
 import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
 import { RootState } from "@/globalConfig/redux/store";
+import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { TabsContent } from "@/modules/global/components";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
@@ -150,7 +151,7 @@ export const ObdReportDataProvider = () => {
         tabOptions={tabOptions}
         tabContents={[
           <div key={1}>
-            {obdTravelMetricsStatus === "succeeded" && rpmData && (
+            {obdTravelMetricsStatus === SERVICE_STATUS.succeeded && rpmData && (
               <SingleLineHighChart
                 chartData={rpmData}
                 LANGUAGE={LANGUAGE}
@@ -166,9 +167,9 @@ export const ObdReportDataProvider = () => {
             />
           </div>,
           <div key={2}>
-            {obdTravelMetricsStatus === "succeeded" &&
+            {obdTravelMetricsStatus === SERVICE_STATUS.succeeded &&
               obdTravelMetricsData?.value &&
-              vehicleByImeiStatus === "succeeded" &&
+              vehicleByImeiStatus === SERVICE_STATUS.succeeded &&
               vehicleByImeiData?.value && (
                 <ObdAnalysisTab
                   LANGUAGE={LANGUAGE}
@@ -189,14 +190,15 @@ export const ObdReportDataProvider = () => {
             />
           </div>,
           <div key={3}>
-            {obdTravelMetricsStatus === "succeeded" && driverDistanceData && (
-              <SingleLineHighChart
-                chartData={driverDistanceData}
-                LANGUAGE={LANGUAGE}
-                type={SINGLE_CHART_TYPES.distance}
-                handleClicGeoData={handleClicGeoData}
-              />
-            )}
+            {obdTravelMetricsStatus === SERVICE_STATUS.succeeded &&
+              driverDistanceData && (
+                <SingleLineHighChart
+                  chartData={driverDistanceData}
+                  LANGUAGE={LANGUAGE}
+                  type={SINGLE_CHART_TYPES.distance}
+                  handleClicGeoData={handleClicGeoData}
+                />
+              )}
             <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!driverDistanceData}
@@ -204,14 +206,15 @@ export const ObdReportDataProvider = () => {
             />
           </div>,
           <div key={4}>
-            {obdTravelMetricsStatus === "succeeded" && driverTime && (
-              <SingleLineHighChart
-                chartData={driverTime}
-                LANGUAGE={LANGUAGE}
-                type={SINGLE_CHART_TYPES.timeTraveled}
-                handleClicGeoData={handleClicGeoData}
-              />
-            )}
+            {obdTravelMetricsStatus === SERVICE_STATUS.succeeded &&
+              driverTime && (
+                <SingleLineHighChart
+                  chartData={driverTime}
+                  LANGUAGE={LANGUAGE}
+                  type={SINGLE_CHART_TYPES.timeTraveled}
+                  handleClicGeoData={handleClicGeoData}
+                />
+              )}
             <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!driverTime}
