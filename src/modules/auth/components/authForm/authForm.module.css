@@ -1,5 +1,5 @@
 .formContainer {
-  height: 320px;
+  height: 360px;
   width: 500px;
   border: 1px solid #e5e7eb;
   border-radius: 0.75rem;
@@ -7,7 +7,7 @@
 }
 
 .authForm {
-  min-height: 320px;
+  min-height: 360px;
   width: 100%;
   font-size: 3rem;
   display: flex;
@@ -32,14 +32,25 @@
 .inputsContainers input {
   font-size: 2rem;
   border-radius: 0.35rem;
+  margin-bottom: 1rem;
   padding: 0.3rem;
   border-width: 0;
   background-color: var(--company-color-1);
+  padding: 1.2rem;
+  box-shadow: var(--input-shadow-1) 0px 6px 60px -12px inset,
+    var(--input-shadow-0) 4px 4px 10px -4px inset;
 }
 
 .inputsContainers input:hover,
 .inputsContainers input:focus {
-  background-color: var(--company-color-2);
+  box-shadow: var(--input-shadow-2) 0px 6px 60px -12px inset,
+    var(--input-shadow-0) 4px 4px 10px -4px inset;
+}
+
+.inputsContainers input:focus,
+.inputsContainers input:focus-visible {
+  outline: 2px solid var(--input-shadow-2);
+  outline-offset: 2px;
 }
 
 .errorMessageContainer {
@@ -60,7 +71,7 @@
 
 .authForm button {
   padding: 1rem;
-  margin: 0 2rem;
+  margin: 2rem;
   width: calc(100% - 4rem);
   border-radius: 0.5rem;
   font-size: 2rem;
