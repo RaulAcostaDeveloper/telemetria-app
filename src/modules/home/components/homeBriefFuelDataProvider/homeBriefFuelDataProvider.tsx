@@ -1,14 +1,12 @@
 import { useSelector } from "react-redux";
 
 import DonutGraphic from "@/modules/global/components/donutGraphic/DonutGraphic";
-import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
 import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
 import styles from "@/modules/fuel/components/fuelDataProvider/fuelDataProvider.module.css";
 import stylesHome from "./homeBriefFuelDataProvider.module.css";
-import { RootState } from "@/globalConfig/redux/store";
-import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
+import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
+import { RootState } from "@/globalConfig/redux/store";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -28,11 +26,10 @@ export const HomeBriefFuelDataProvider = ({ LANGUAGE }: Props) => {
             <DonutGraphic devices={fuelSummaryData.value.devices} />
           </>
         )}
-        <StatusNoInfoComponent
+        <DataErrorHandler
           LANGUAGE={LANGUAGE}
           hasData={!!fuelSummaryData?.value}
           infoStatus={fuelSummaryStatus}
-          messageIfEmpty={LANGUAGE.notifications.nullValue}
         />
       </div>
     </div>

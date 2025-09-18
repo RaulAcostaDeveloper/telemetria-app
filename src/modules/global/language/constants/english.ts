@@ -17,7 +17,7 @@ export const ENGLISH: LanguageInterface = {
   },
   notifications: {
     unexpectedError: "Unexpected error",
-    genericServiceError: "Failed to fetch data",
+    genericServiceError: "Failed to fetch data, trying again...",
     nullValue: "No information",
   },
   header: {

@@ -10,11 +10,10 @@ import {
   FuelNowContainer,
   FuelPerformanceMetrics,
 } from "@/modules/fuel/components";
-import { RootState } from "@/globalConfig/redux/store";
+import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
 import { FuelBehaviorTab } from "@/modules/fuel/components/fuelBehaviorTab/fuelBehaviorTab";
-import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
+import { RootState } from "@/globalConfig/redux/store";
 import { TabsContent } from "@/modules/global/components";
-
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
 export interface OBValue {
@@ -111,7 +110,7 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
         rows: [],
       });
     }
-  }, [lastFuelReportData]);
+  }, [lastFuelReportData, LANGUAGE]);
 
   return (
     <div className={styles.fuelReportDataProvider}>
@@ -132,11 +131,10 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
               </>
             )}
 
-            <StatusNoInfoComponent
+            <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!fuelDataData?.value}
               infoStatus={fuelDataStatus}
-              messageIfEmpty={LANGUAGE.notifications.nullValue}
             />
           </div>,
           <div key={1}>
@@ -150,11 +148,10 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
                 </>
               )}
 
-            <StatusNoInfoComponent
+            <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!fuelPerformanceData?.value}
               infoStatus={fuelPerformanceStatus}
-              messageIfEmpty={LANGUAGE.notifications.nullValue}
             />
           </div>,
           <div key={2}>
@@ -171,11 +168,10 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
                 </>
               )}
 
-            <StatusNoInfoComponent
+            <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!lastFuelReportData?.value}
               infoStatus={lastFuelReportStatus}
-              messageIfEmpty={LANGUAGE.notifications.nullValue}
             />
           </div>,
         ]}

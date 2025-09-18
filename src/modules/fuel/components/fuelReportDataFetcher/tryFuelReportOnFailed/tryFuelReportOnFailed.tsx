@@ -9,7 +9,11 @@ import { fetchLastFuelReport } from "@/globalConfig/redux/slices/lastFuelReportS
 import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
 import { useAuth } from "@/modules/auth/utils";
 
-export const TryFuelReportOnFailed = () => {
+interface Props {
+  imei: string;
+}
+
+export const TryFuelReportOnFailed = ({ imei }: Props) => {
   const { isAuthenticated } = useAuth();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -30,7 +34,8 @@ export const TryFuelReportOnFailed = () => {
       fuelDataStatus === "failed" &&
       isAuthenticated &&
       startDate &&
-      endDate
+      endDate &&
+      imei.length > 10
     ) {
       setTimeout(() => {
         dispatch(
@@ -42,14 +47,15 @@ export const TryFuelReportOnFailed = () => {
         );
       }, 5000);
     }
-  }, [fuelDataStatus, isAuthenticated, startDate, endDate]);
+  }, [fuelDataStatus, isAuthenticated, startDate, endDate, imei]);
 
   useEffect(() => {
     if (
       fuelPerformanceStatus === "failed" &&
       isAuthenticated &&
       startDate &&
-      endDate
+      endDate &&
+      imei.length > 10
     ) {
       setTimeout(() => {
         dispatch(
@@ -61,14 +67,15 @@ export const TryFuelReportOnFailed = () => {
         );
       }, 5000);
     }
-  }, [fuelPerformanceStatus, isAuthenticated, startDate, endDate]);
+  }, [fuelPerformanceStatus, isAuthenticated, startDate, endDate, imei]);
 
   useEffect(() => {
     if (
       lastFuelReportStatus === "failed" &&
       isAuthenticated &&
       startDate &&
-      endDate
+      endDate &&
+      imei.length > 10
     ) {
       setTimeout(() => {
         dispatch(
@@ -78,7 +85,7 @@ export const TryFuelReportOnFailed = () => {
         );
       }, 5000);
     }
-  }, [lastFuelReportStatus, isAuthenticated, startDate, endDate]);
+  }, [lastFuelReportStatus, isAuthenticated, startDate, endDate, imei]);
 
   return null;
 };

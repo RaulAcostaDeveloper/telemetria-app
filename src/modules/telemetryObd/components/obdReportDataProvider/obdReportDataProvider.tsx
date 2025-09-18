@@ -13,8 +13,8 @@ import {
   SINGLE_CHART_TYPES,
   SingleLineHighChart,
 } from "@/modules/telemetryObd/components";
+import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
 import { RootState } from "@/globalConfig/redux/store";
-import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
 import { TabsContent } from "@/modules/global/components";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
@@ -159,11 +159,10 @@ export const ObdReportDataProvider = () => {
               />
             )}
 
-            <StatusNoInfoComponent
+            <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!rpmData}
               infoStatus={obdTravelMetricsStatus}
-              messageIfEmpty={LANGUAGE.notifications.nullValue}
             />
           </div>,
           <div key={2}>
@@ -183,11 +182,10 @@ export const ObdReportDataProvider = () => {
                 />
               )}
 
-            <StatusNoInfoComponent
+            <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!obdTravelMetricsData?.value}
               infoStatus={obdTravelMetricsStatus}
-              messageIfEmpty={LANGUAGE.notifications.nullValue}
             />
           </div>,
           <div key={3}>
@@ -199,11 +197,10 @@ export const ObdReportDataProvider = () => {
                 handleClicGeoData={handleClicGeoData}
               />
             )}
-            <StatusNoInfoComponent
+            <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!driverDistanceData}
               infoStatus={obdTravelMetricsStatus}
-              messageIfEmpty={LANGUAGE.notifications.nullValue}
             />
           </div>,
           <div key={4}>
@@ -215,11 +212,10 @@ export const ObdReportDataProvider = () => {
                 handleClicGeoData={handleClicGeoData}
               />
             )}
-            <StatusNoInfoComponent
+            <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!driverTime}
               infoStatus={obdTravelMetricsStatus}
-              messageIfEmpty={LANGUAGE.notifications.nullValue}
             />
           </div>,
         ]}

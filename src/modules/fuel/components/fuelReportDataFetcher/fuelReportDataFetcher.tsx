@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AppDispatch, RootState } from "@/globalConfig/redux/store";
+import { TryFuelReportOnFailed } from "./tryFuelReportOnFailed/tryFuelReportOnFailed";
 import { fetchFuelData } from "@/globalConfig/redux/slices/fuelDataSlice";
 import { fetchFuelPerformance } from "@/globalConfig/redux/slices/fuelPerformanceSlice";
 import { fetchLastFuelReport } from "@/globalConfig/redux/slices/lastFuelReportSlice";
@@ -73,5 +74,5 @@ export const FuelReportDataFetcher = ({ imei }: Props) => {
     };
   }, [isAuthenticated, imei, lastFuelReportStatus]);
 
-  return null;
+  return <TryFuelReportOnFailed imei={imei} />;
 };
