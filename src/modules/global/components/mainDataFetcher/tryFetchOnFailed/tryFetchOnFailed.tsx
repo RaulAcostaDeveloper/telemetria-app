@@ -1,0 +1,154 @@
+"use client";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { AppDispatch, RootState } from "@/globalConfig/redux/store";
+import { fetchDevices } from "@/globalConfig/redux/slices/devicesSlice";
+import { fetchDrivers } from "@/globalConfig/redux/slices/driversSlice";
+import { fetchFuelSummary } from "@/globalConfig/redux/slices/fuelSummarySlice";
+import { fetchGroups } from "@/globalConfig/redux/slices/groupsSlice";
+import { fetchObdRollup } from "@/globalConfig/redux/slices/obdRollupSlice";
+import { fetchTopFuelReport } from "@/globalConfig/redux/slices/topFuelReportSlice";
+import { fetchVehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
+import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
+import { useAuth } from "@/modules/auth/utils";
+
+export const TryFetchOnFailed = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  // Usuario autenticado a nivel estado de la aplicación
+  const { isAuthenticated } = useAuth();
+
+  // Datos del calendario
+  const { startDate, endDate } = useSelector(
+    (state: RootState) => state.calendar
+  );
+
+  const { vehiclesStatus } = useSelector((state: RootState) => state.vehicles);
+  const { driversStatus } = useSelector((state: RootState) => state.drivers);
+  const { devicesStatus } = useSelector((state: RootState) => state.devices);
+  const { groupsStatus } = useSelector((state: RootState) => state.groups);
+  const { fuelSummaryStatus } = useSelector(
+    (state: RootState) => state.fuelSummary
+  );
+  const { topFuelReportStatus } = useSelector(
+    (state: RootState) => state.topFuelReport
+  );
+  const { obdRollupStatus } = useSelector(
+    (state: RootState) => state.obdRollup
+  );
+
+  useEffect(() => {
+    if (
+      fuelSummaryStatus === "failed" &&
+      isAuthenticated &&
+      startDate &&
+      endDate
+    ) {
+      setTimeout(() => {
+        dispatch(
+          fetchFuelSummary({
+            accountId: "90926", //"4992"
+            startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+            endDate: formatToLocalIso8601(endDate),
+            performanceType: "1",
+          })
+        );
+      }, 5000);
+    }
+  }, [fuelSummaryStatus, isAuthenticated, startDate, endDate]);
+
+  useEffect(() => {
+    if (
+      topFuelReportStatus === "failed" &&
+      isAuthenticated &&
+      startDate &&
+      endDate
+    ) {
+      setTimeout(() => {
+        dispatch(
+          fetchTopFuelReport({
+            accountId: "90926",
+            startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+            endDate: formatToLocalIso8601(endDate),
+            numberOfVehicles: 10,
+          })
+        );
+      }, 5000);
+    }
+  }, [topFuelReportStatus, isAuthenticated, startDate, endDate]);
+
+  useEffect(() => {
+    if (
+      obdRollupStatus === "failed" &&
+      isAuthenticated &&
+      startDate &&
+      endDate
+    ) {
+      setTimeout(() => {
+        dispatch(
+          fetchObdRollup({
+            accountId: "90926",
+            startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+            endDate: formatToLocalIso8601(endDate),
+          })
+        );
+      }, 5000);
+    }
+  }, [obdRollupStatus, isAuthenticated, startDate, endDate]);
+
+  useEffect(() => {
+    if (
+      vehiclesStatus === "failed" &&
+      isAuthenticated &&
+      startDate &&
+      endDate
+    ) {
+      setTimeout(() => {
+        dispatch(
+          fetchVehicles({
+            accountId: "90926",
+          })
+        );
+      }, 5000);
+    }
+  }, [vehiclesStatus, isAuthenticated, startDate, endDate]);
+
+  useEffect(() => {
+    if (driversStatus === "failed" && isAuthenticated && startDate && endDate) {
+      setTimeout(() => {
+        dispatch(
+          fetchDrivers({
+            accountId: "90926",
+          })
+        );
+      }, 5000);
+    }
+  }, [driversStatus, isAuthenticated, startDate, endDate]);
+
+  useEffect(() => {
+    if (devicesStatus === "failed" && isAuthenticated && startDate && endDate) {
+      setTimeout(() => {
+        dispatch(
+          fetchDevices({
+            accountId: "90926",
+          })
+        );
+      }, 5000);
+    }
+  }, [devicesStatus, isAuthenticated, startDate, endDate]);
+
+  useEffect(() => {
+    if (groupsStatus === "failed" && isAuthenticated && startDate && endDate) {
+      setTimeout(() => {
+        dispatch(
+          fetchGroups({
+            accountId: "90926",
+          })
+        );
+      }, 5000);
+    }
+  }, [groupsStatus, isAuthenticated, startDate, endDate]);
+
+  return null;
+};

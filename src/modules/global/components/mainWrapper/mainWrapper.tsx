@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/globalConfig/redux/store";
+import { useSelector } from "react-redux";
+import { RootState } from "@/globalConfig/redux/store";
 
 import CheckLogin from "@/modules/login/checkLogin/checkLogin";
 import styles from "./mainWrapper.module.css";
@@ -18,15 +18,8 @@ import { Menu } from "../menu/menu";
 import { PageContainer } from "../pageContainer/pageContainer";
 import { SPANISH } from "../../language/constants/spanish";
 import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
-import { fetchDevices } from "@/globalConfig/redux/slices/devicesSlice";
-import { fetchDrivers } from "@/globalConfig/redux/slices/driversSlice";
-import { fetchFuelSummary } from "@/globalConfig/redux/slices/fuelSummarySlice";
-import { fetchGroups } from "@/globalConfig/redux/slices/groupsSlice";
-import { fetchObdRollup } from "@/globalConfig/redux/slices/obdRollupSlice";
-import { fetchTopFuelReport } from "@/globalConfig/redux/slices/topFuelReportSlice";
-import { fetchVehicles } from "@/globalConfig/redux/slices/vehiclesSlice";
-import { formatToLocalIso8601 } from "../../utils/utils";
 import { useAuth } from "../../../auth/utils";
+import { MainDataFetcher } from "../mainDataFetcher/mainDataFetcher";
 
 interface Props {
   children: React.ReactNode;
@@ -36,8 +29,6 @@ export const MainWrapper = ({ children }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | null>(null);
   // LANGUAGE objeto que se utiliza en la interfaz
   const [LANGUAGE, setLanguageObject] = useState<LanguageInterface>(SPANISH);
-
-  const dispatch = useDispatch<AppDispatch>();
 
   // Opción del lenguaje (ejemplo inglés, español, etc.)
   const languageSelected = useSelector(
@@ -49,11 +40,6 @@ export const MainWrapper = ({ children }: Props) => {
 
   // Servicio para probar la sesion activa
   const { brandsStatus } = useSelector((state: RootState) => state.brands);
-
-  // Datos del calendario
-  const { startDate, endDate } = useSelector(
-    (state: RootState) => state.calendar
-  );
 
   useEffect(() => {
     tryFirstServerSession();
@@ -113,61 +99,6 @@ export const MainWrapper = ({ children }: Props) => {
     }
   }, []);
 
-  // Llamado de servicios al inicio de la sesión del usuario
-  useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(
-        fetchVehicles({
-          accountId: "90926",
-        })
-      );
-      dispatch(
-        fetchDevices({
-          accountId: "90926",
-        })
-      );
-      dispatch(
-        fetchDrivers({
-          accountId: "90926",
-        })
-      );
-      dispatch(
-        fetchGroups({
-          accountId: "90926",
-        })
-      );
-    }
-  }, [isAuthenticated]);
-
-  // Llamado de servicios al inicio de la sesión del usuario
-  useEffect(() => {
-    if (isAuthenticated && startDate && endDate) {
-      dispatch(
-        fetchFuelSummary({
-          accountId: "90926", //"4992"
-          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
-          endDate: formatToLocalIso8601(endDate),
-          performanceType: "1",
-        })
-      );
-      dispatch(
-        fetchTopFuelReport({
-          accountId: "90926",
-          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
-          endDate: formatToLocalIso8601(endDate),
-          numberOfVehicles: 10,
-        })
-      );
-      dispatch(
-        fetchObdRollup({
-          accountId: "90926",
-          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
-          endDate: formatToLocalIso8601(endDate),
-        })
-      );
-    }
-  }, [isAuthenticated, startDate, endDate]);
-
   // BrandsStatus es el servicio que usamos para la verificación de la sesión
   return brandsStatus === "loading" ? (
     <div>
@@ -175,6 +106,7 @@ export const MainWrapper = ({ children }: Props) => {
     </div>
   ) : (
     <div className={`${styles.mainWrapper}`}>
+      {isAuthenticated && <MainDataFetcher />}
       {isAuthenticated && (
         <Menu
           LANGUAGE={LANGUAGE}

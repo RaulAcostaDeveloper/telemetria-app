@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import GeoModal, {
   GeoModalData,
@@ -10,15 +10,11 @@ import {
   FuelNowContainer,
   FuelPerformanceMetrics,
 } from "@/modules/fuel/components";
-import { AppDispatch, RootState } from "@/globalConfig/redux/store";
+import { RootState } from "@/globalConfig/redux/store";
 import { FuelBehaviorTab } from "@/modules/fuel/components/fuelBehaviorTab/fuelBehaviorTab";
 import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
 import { TabsContent } from "@/modules/global/components";
-import { fetchFuelData } from "@/globalConfig/redux/slices/fuelDataSlice";
-import { fetchFuelPerformance } from "@/globalConfig/redux/slices/fuelPerformanceSlice";
-import { fetchLastFuelReport } from "@/globalConfig/redux/slices/lastFuelReportSlice";
-import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
-import { useAuth } from "@/modules/auth/utils";
+
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
 export interface OBValue {
@@ -41,14 +37,6 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
   const [opBEngineOffCoast, setOpBEngineOffCoast] = useState<OBValue[]>([]);
   const [opBEngineOnIdle, setOpBEngineOnIdle] = useState<OBValue[]>([]);
   const [opBEngineOnMoving, setOpBEngineOnMoving] = useState<OBValue[]>([]);
-
-  const { isAuthenticated } = useAuth();
-
-  const dispatch = useDispatch<AppDispatch>();
-
-  const { startDate, endDate } = useSelector(
-    (state: RootState) => state.calendar
-  );
 
   const { fuelDataData, fuelDataStatus } = useSelector(
     (state: RootState) => state.fuelData
@@ -113,50 +101,6 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
     setOpBEngineOnIdle(engineOnIdle);
     setOpBEngineOnMoving(engineOnMoving);
   }, [fuelDataData]);
-
-  useEffect(() => {
-    if (isAuthenticated && startDate && endDate) {
-      dispatch(
-        fetchFuelData({
-          imei: "862524060822760", // imei.toString(),
-          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
-          endDate: formatToLocalIso8601(endDate),
-        })
-      );
-
-      dispatch(
-        fetchFuelPerformance({
-          imei: "862524060822760", // imei.toString(),
-          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
-          endDate: formatToLocalIso8601(endDate),
-        })
-      );
-
-      dispatch(
-        fetchLastFuelReport({
-          imei: "862524060822760", // imei.toString(),
-        })
-      );
-    }
-  }, [dispatch, isAuthenticated, startDate, endDate, imei]);
-
-  // Actualiza datos del vehiculo cuando el imei no es ND ni indefinido.
-  useEffect(() => {
-    // Tener la data actualizada cada 10 segundos
-    const intervalId = setInterval(() => {
-      if (isAuthenticated) {
-        dispatch(
-          fetchLastFuelReport({
-            imei: "862524060822760", // imei.toString(),
-          })
-        );
-      }
-    }, 20000);
-
-    return () => {
-      clearTimeout(intervalId);
-    };
-  }, [isAuthenticated]);
 
   useEffect(() => {
     if (lastFuelReportData?.value) {
