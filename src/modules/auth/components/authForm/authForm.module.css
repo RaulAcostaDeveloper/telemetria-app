@@ -33,6 +33,13 @@
   font-size: 2rem;
   border-radius: 0.35rem;
   padding: 0.3rem;
+  border-width: 0;
+  background-color: var(--company-color-1);
+}
+
+.inputsContainers input:hover,
+.inputsContainers input:focus {
+  background-color: var(--company-color-2);
 }
 
 .errorMessageContainer {
