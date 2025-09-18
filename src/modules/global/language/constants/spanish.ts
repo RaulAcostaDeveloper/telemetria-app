@@ -17,7 +17,7 @@ export const SPANISH: LanguageInterface = {
   },
   notifications: {
     unexpectedError: "Error inesperado",
-    genericServiceError: "Error al obtener datos",
+    genericServiceError: "Error al obtener datos, reintentando...",
     nullValue: "No hay información",
   },
   header: {

@@ -1,3 +1,4 @@
+import { ObdReportDataFetcher } from "@/modules/telemetryObd/components/obdReportDataFetcher/obdReportDataFetcher";
 import { ObdReportDataProvider } from "@/modules/telemetryObd/components";
 
 interface Page {
@@ -9,5 +10,10 @@ interface Page {
 export default function TelemetryVehicle({ params }: Page) {
   const { imei } = params; // imei del vehiculo
 
-  return <ObdReportDataProvider imei={imei} />;
+  return (
+    <>
+      <ObdReportDataFetcher imei={imei} />
+      <ObdReportDataProvider />
+    </>
+  );
 }

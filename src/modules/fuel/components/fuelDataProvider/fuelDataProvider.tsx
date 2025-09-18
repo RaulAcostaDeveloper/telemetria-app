@@ -8,11 +8,11 @@ import { LocalShipping, LocalGasStation } from "@mui/icons-material";
 import DonutGraphic from "@/modules/global/components/donutGraphic/DonutGraphic";
 import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
 import styles from "./fuelDataProvider.module.css";
-import { columnsTable } from "@/modules/global/components/table/table.model";
-import { RootState } from "@/globalConfig/redux/store";
+import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { RootState } from "@/globalConfig/redux/store";
 import { Table, TabsContent } from "@/modules/global/components";
-import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
+import { columnsTable } from "@/modules/global/components/table/table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -295,11 +295,10 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
           </>
         )}
 
-        <StatusNoInfoComponent
+        <DataErrorHandler
           LANGUAGE={LANGUAGE}
           hasData={!!fuelSummaryData?.value}
           infoStatus={fuelSummaryStatus}
-          messageIfEmpty={LANGUAGE.notifications.nullValue}
         />
       </div>
       <div className={styles.fuelTabs}>
@@ -318,11 +317,10 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
                 />
               )}
 
-              <StatusNoInfoComponent
+              <DataErrorHandler
                 LANGUAGE={LANGUAGE}
                 hasData={!!vehiclesReport}
                 infoStatus={fuelSummaryStatus}
-                messageIfEmpty={LANGUAGE.notifications.nullValue}
               />
             </div>,
             <div key={2}>
@@ -338,11 +336,10 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
                 />
               )}
 
-              <StatusNoInfoComponent
+              <DataErrorHandler
                 LANGUAGE={LANGUAGE}
                 hasData={!!topFuelReportCharges}
                 infoStatus={topFuelReportStatus}
-                messageIfEmpty={LANGUAGE.notifications.nullValue}
               />
             </div>,
             <div key={3}>
@@ -359,11 +356,10 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
                   />
                 )}
 
-              <StatusNoInfoComponent
+              <DataErrorHandler
                 LANGUAGE={LANGUAGE}
                 hasData={!!topFuelReportDischarges}
                 infoStatus={topFuelReportStatus}
-                messageIfEmpty={LANGUAGE.notifications.nullValue}
               />
             </div>,
           ]}

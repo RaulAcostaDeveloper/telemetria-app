@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import GeoModal, {
   GeoModalData,
@@ -13,22 +13,13 @@ import {
   SINGLE_CHART_TYPES,
   SingleLineHighChart,
 } from "@/modules/telemetryObd/components";
-import { AppDispatch, RootState } from "@/globalConfig/redux/store";
-import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
+import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
+import { RootState } from "@/globalConfig/redux/store";
 import { TabsContent } from "@/modules/global/components";
-import { fetchObdTravelMetrics } from "@/globalConfig/redux/slices/obdTravelMetricsSlice";
-import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
-import { useAuth } from "@/modules/auth/utils";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
 
-interface Props {
-  imei: string;
-}
-
-export const ObdReportDataProvider = ({ imei }: Props) => {
+export const ObdReportDataProvider = () => {
   const LANGUAGE = useLanguage();
-
-  const dispatch = useDispatch<AppDispatch>();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [geoModalData, setGeoModalData] = useState<GeoModalData>();
@@ -42,12 +33,6 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
   const [engineHours, setEngineHours] = useState<number | string>("NA");
   const [idleTime, setIdleTime] = useState<number | string>("NA");
   const [maxSpeed, setMaxSpeed] = useState<number | string>("NA");
-
-  const { isAuthenticated } = useAuth();
-
-  const { startDate, endDate } = useSelector(
-    (state: RootState) => state.calendar
-  );
 
   const { obdTravelMetricsData, obdTravelMetricsStatus } = useSelector(
     (state: RootState) => state.obdTravelMetrics
@@ -68,18 +53,6 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
     setGeoModalData(geoModalData);
     setIsModalOpen(true);
   };
-
-  useEffect(() => {
-    if (isAuthenticated && startDate && endDate) {
-      dispatch(
-        fetchObdTravelMetrics({
-          deviceId: "862524060822760", // imei.toString(),
-          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
-          endDate: formatToLocalIso8601(endDate),
-        })
-      );
-    }
-  }, [isAuthenticated, startDate, endDate, imei]);
 
   useEffect(() => {
     if (obdTravelMetricsData?.value) {
@@ -149,7 +122,6 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
       }
 
       // idleTime
-
       if (lastObject.driverIdleTime && firstObject.driverIdleTime) {
         const idleTime = lastObject.driverIdleTime - firstObject.driverIdleTime;
         setIdleTime(Math.round(idleTime * 100) / 100);
@@ -187,11 +159,10 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
               />
             )}
 
-            <StatusNoInfoComponent
+            <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!rpmData}
               infoStatus={obdTravelMetricsStatus}
-              messageIfEmpty={LANGUAGE.notifications.nullValue}
             />
           </div>,
           <div key={2}>
@@ -211,11 +182,10 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
                 />
               )}
 
-            <StatusNoInfoComponent
+            <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!obdTravelMetricsData?.value}
               infoStatus={obdTravelMetricsStatus}
-              messageIfEmpty={LANGUAGE.notifications.nullValue}
             />
           </div>,
           <div key={3}>
@@ -227,11 +197,10 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
                 handleClicGeoData={handleClicGeoData}
               />
             )}
-            <StatusNoInfoComponent
+            <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!driverDistanceData}
               infoStatus={obdTravelMetricsStatus}
-              messageIfEmpty={LANGUAGE.notifications.nullValue}
             />
           </div>,
           <div key={4}>
@@ -243,11 +212,10 @@ export const ObdReportDataProvider = ({ imei }: Props) => {
                 handleClicGeoData={handleClicGeoData}
               />
             )}
-            <StatusNoInfoComponent
+            <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!driverTime}
               infoStatus={obdTravelMetricsStatus}
-              messageIfEmpty={LANGUAGE.notifications.nullValue}
             />
           </div>,
         ]}

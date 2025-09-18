@@ -7,11 +7,11 @@ import {
   MODAL_OPTION,
   columnsTable,
 } from "@/modules/global/components/table/table.model";
+import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
 import { RootState } from "@/globalConfig/redux/store";
 import { Table, TabsContent } from "@/modules/global/components";
 import { formatDateTime } from "@/modules/global/utils/utils";
-import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -275,11 +275,10 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
               />
             )}
 
-            <StatusNoInfoComponent
+            <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!vehiclesTableData}
               infoStatus={vehiclesStatus}
-              messageIfEmpty={LANGUAGE.notifications.nullValue}
             />
           </div>,
           <div key={2}>
@@ -291,11 +290,10 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
               />
             )}
 
-            <StatusNoInfoComponent
+            <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!devicesTableData}
               infoStatus={devicesStatus}
-              messageIfEmpty={LANGUAGE.notifications.nullValue}
             />
           </div>,
           <div key={3}>
@@ -307,11 +305,10 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
               />
             )}
 
-            <StatusNoInfoComponent
+            <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!driversTableData}
               infoStatus={driversStatus}
-              messageIfEmpty={LANGUAGE.notifications.nullValue}
             />
           </div>,
           <div key={4}>
@@ -326,11 +323,10 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
               />
             )}
 
-            <StatusNoInfoComponent
+            <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!groupsTableData}
               infoStatus={groupsStatus}
-              messageIfEmpty={LANGUAGE.notifications.nullValue}
             />
           </div>,
         ]}

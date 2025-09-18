@@ -12,13 +12,13 @@ import CardContentIdle from "@/modules/global/components/cardsDeck/cardContentId
 import CardContentTCT5 from "@/modules/global/components/cardsDeck/cardContentTCT5";
 import CardGenThird from "@/modules/global/components/cardsDeck/cardGenThird";
 import styles from "./OBDDataProvider.module.css";
-import { columnsTable } from "@/modules/global/components/table/table.model";
-import { RootState } from "@/globalConfig/redux/store";
+import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
 import { FuelDataReport } from "@/modules/fuel/components/fuelNowContainer/fuelDataReport/fuelDataReport";
 import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { RootState } from "@/globalConfig/redux/store";
 import { Table } from "@/modules/global/components";
+import { columnsTable } from "@/modules/global/components/table/table.model";
 import { formatNumberWithCommas } from "@/modules/global/utils/utils";
-import { StatusNoInfoComponent } from "@/modules/global/components/statusNoInfoComponent/statusNoInfoComponent";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -173,11 +173,10 @@ export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
           </>
         )}
 
-      <StatusNoInfoComponent
+      <DataErrorHandler
         LANGUAGE={LANGUAGE}
         hasData={!!obdRollupData}
         infoStatus={obdRollupStatus}
-        messageIfEmpty={LANGUAGE.notifications.nullValue}
       />
     </div>
   );
