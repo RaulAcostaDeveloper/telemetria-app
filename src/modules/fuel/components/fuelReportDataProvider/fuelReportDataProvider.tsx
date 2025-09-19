@@ -16,6 +16,7 @@ import { RootState } from "@/globalConfig/redux/store";
 import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { TabsContent } from "@/modules/global/components";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
+import { Insights, ListAlt, LocalGasStation } from "@mui/icons-material";
 
 export interface OBValue {
   startDate: string;
@@ -47,9 +48,9 @@ export const FuelReportDataProvider = () => {
   );
 
   const vehicleTabs = [
-    { text: LANGUAGE.fuelVehicle.tabs.behavior },
-    { text: LANGUAGE.fuelVehicle.tabs.reports },
-    { text: LANGUAGE.fuelVehicle.tabs.fuelNow },
+    { text: LANGUAGE.fuelVehicle.tabs.behavior, icon: Insights },
+    { text: LANGUAGE.fuelVehicle.tabs.reports, icon: ListAlt },
+    { text: LANGUAGE.fuelVehicle.tabs.fuelNow, icon: LocalGasStation },
   ];
 
   useEffect(() => {

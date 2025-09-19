@@ -18,6 +18,7 @@ import { RootState } from "@/globalConfig/redux/store";
 import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { TabsContent } from "@/modules/global/components";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
+import { ListAlt, Route, Speed, WorkHistory } from "@mui/icons-material";
 
 export const ObdReportDataProvider = () => {
   const LANGUAGE = useLanguage();
@@ -44,10 +45,16 @@ export const ObdReportDataProvider = () => {
   );
 
   const tabOptions = [
-    { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.averageRpm },
-    { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.analysis },
-    { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.totalDistance },
-    { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.totalTimeWorked },
+    { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.averageRpm, icon: Speed },
+    { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.analysis, icon: ListAlt },
+    {
+      text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.totalDistance,
+      icon: Route,
+    },
+    {
+      text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.totalTimeWorked,
+      icon: WorkHistory,
+    },
   ];
 
   const handleClicGeoData = (geoModalData: GeoModalData) => {

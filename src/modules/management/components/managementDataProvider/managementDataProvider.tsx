@@ -13,6 +13,12 @@ import { RootState } from "@/globalConfig/redux/store";
 import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { Table, TabsContent } from "@/modules/global/components";
 import { formatDateTime } from "@/modules/global/utils/utils";
+import {
+  DirectionsCar,
+  DeviceHub,
+  AccountBox,
+  Groups,
+} from "@mui/icons-material";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -36,10 +42,22 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   );
 
   const fuelTabs = [
-    { text: LANGUAGE.management.tabs.vehicles },
-    { text: LANGUAGE.management.tabs.devices },
-    { text: LANGUAGE.management.tabs.drivers },
-    { text: LANGUAGE.management.tabs.groups },
+    {
+      text: LANGUAGE.management.tabs.vehicles,
+      icon: DirectionsCar,
+    },
+    {
+      text: LANGUAGE.management.tabs.devices,
+      icon: DeviceHub,
+    },
+    {
+      text: LANGUAGE.management.tabs.drivers,
+      icon: AccountBox,
+    },
+    {
+      text: LANGUAGE.management.tabs.groups,
+      icon: Groups,
+    },
   ];
 
   // falta modelo, año, grupo, serial number (bin o mac address)
