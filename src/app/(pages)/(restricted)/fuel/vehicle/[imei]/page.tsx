@@ -13,7 +13,7 @@ export default function FuelVehicle({ params }: Page) {
   return (
     <>
       <FuelReportDataFetcher imei={imei} />
-      <FuelReportDataProvider imei={imei} />
+      <FuelReportDataProvider />
     </>
   );
 }

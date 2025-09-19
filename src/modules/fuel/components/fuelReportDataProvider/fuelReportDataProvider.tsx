@@ -23,11 +23,7 @@ export interface OBValue {
   speed: number;
 }
 
-interface Props {
-  imei: string;
-}
-
-export const FuelReportDataProvider = ({ imei }: Props) => {
+export const FuelReportDataProvider = () => {
   const LANGUAGE = useLanguage();
 
   // Operational Behavior (Estacionado, apagado, Avanzando, apagado y avanzando)
@@ -162,7 +158,6 @@ export const FuelReportDataProvider = ({ imei }: Props) => {
                 <>
                   <FuelNowContainer
                     LANGUAGE={LANGUAGE}
-                    imei={imei}
                     isModalOpen={isModalOpen}
                     lastFuelReportData={lastFuelReportData.value}
                     setIsModalOpen={setIsModalOpen}

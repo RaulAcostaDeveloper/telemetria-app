@@ -15,7 +15,6 @@ import { LanguageInterface } from "@/modules/global/language/constants/language.
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  imei: string;
   isModalOpen: boolean;
   lastFuelReportData: LastFuelReportData;
   setIsModalOpen: (toggle: boolean) => void;
@@ -23,7 +22,6 @@ interface Props {
 
 export const FuelNowContainer = ({
   LANGUAGE,
-  // imei,
   isModalOpen,
   lastFuelReportData,
   setIsModalOpen,
