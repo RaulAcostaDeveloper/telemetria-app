@@ -36,16 +36,8 @@ interface InitialState {
 
 export const fetchObdRollup = createAsyncThunk(
   "obdRollup/fetch",
-  async ({
-    accountId,
-    startDate,
-    endDate,
-  }: {
-    accountId: string;
-    startDate: string;
-    endDate: string;
-  }) => {
-    return getObdRollup(accountId, startDate, endDate);
+  async ({ startDate, endDate }: { startDate: string; endDate: string }) => {
+    return getObdRollup(startDate, endDate);
   }
 );
 

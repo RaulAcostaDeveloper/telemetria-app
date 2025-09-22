@@ -31,12 +31,9 @@ interface InitialState {
   driversStatus: SERVICE_STATUS;
 }
 
-export const fetchDrivers = createAsyncThunk(
-  "drivers/fetch",
-  async ({ accountId }: { accountId: string }) => {
-    return getDrivers(accountId);
-  }
-);
+export const fetchDrivers = createAsyncThunk("drivers/fetch", async () => {
+  return getDrivers();
+});
 
 const initialState: InitialState = {
   driversData: null,
