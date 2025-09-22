@@ -45,17 +45,15 @@ interface InitialState {
 export const fetchFuelSummary = createAsyncThunk(
   "fuelSummary/fetch",
   async ({
-    accountId,
     startDate,
     endDate,
     performanceType,
   }: {
-    accountId: string;
     startDate: string;
     endDate: string;
     performanceType: string;
   }) => {
-    return getFuelSummary(accountId, startDate, endDate, performanceType);
+    return getFuelSummary(startDate, endDate, performanceType);
   }
 );
 
