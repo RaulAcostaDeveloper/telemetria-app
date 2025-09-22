@@ -1,12 +1,12 @@
 import { getCached } from "@/globalConfig/cache/cache";
-const url = "https://stage.transtelemetrix.com/api/management/";
+const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/management/me";
 
 // Función fetch con enlace a caché
 export async function getDrivers(
   forceRefresh = true // Se le puede indicar que no busque en caché
 ) {
   // Construcción de la url con parámetros
-  const fullUrl = `${url}me/drivers`;
+  const fullUrl = `${url}/drivers`;
   const options: RequestInit = {
     method: "GET",
     headers: {

@@ -1,5 +1,5 @@
 import { getCached } from "@/globalConfig/cache/cache";
-const url = "https://stage.transtelemetrix.com/api/analytics/obd/device/";
+const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/analytics/obd/device/";
 
 // Función fetch con enlace a caché
 export async function getObdTravelMetrics(

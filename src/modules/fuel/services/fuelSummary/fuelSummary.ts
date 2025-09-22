@@ -1,6 +1,6 @@
 import { getCached } from "@/globalConfig/cache/cache";
 
-const url = "https://stage.transtelemetrix.com/api/analytics/fuel/clients";
+const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/analytics/fuel/clients/me";
 
 // Función fetch con enlace a caché
 export async function getFuelSummary(
@@ -10,7 +10,7 @@ export async function getFuelSummary(
   // forceRefresh = true // Se le puede indicar que no busque en caché
 ) {
   // Construcción de la url con parámetros
-  const fullUrl = `${url}/me/summary?startDate=${startDate}&endDate=${endDate}&performanceType=${performanceType}`;
+  const fullUrl = `${url}/summary?startDate=${startDate}&endDate=${endDate}&performanceType=${performanceType}`;
   const options: RequestInit = {
     method: "GET",
     headers: {

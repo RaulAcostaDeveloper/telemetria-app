@@ -1,7 +1,7 @@
 import { getCached } from "@/globalConfig/cache/cache";
 
 const url =
-  "https://stage.transtelemetrix.com/api/management/authentication/logout";
+  process.env.NEXT_PUBLIC_URL_SERVICE + "/management/authentication/logout";
 
 export async function logoutSession(
   forceRefresh = true //hace que no busque en caché

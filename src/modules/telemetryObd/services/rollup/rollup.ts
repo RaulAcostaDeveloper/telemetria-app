@@ -1,5 +1,5 @@
 import { getCached } from "@/globalConfig/cache/cache";
-const url = "https://stage.transtelemetrix.com/api/analytics/obd/clients/";
+const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/analytics/obd/clients/me";
 
 // Función fetch con enlace a caché
 export async function getObdRollup(
@@ -8,7 +8,7 @@ export async function getObdRollup(
   // forceRefresh = true // Se le puede indicar que no busque en caché
 ) {
   // Construcción de la url con parámetros
-  const fullUrl = `${url}me/rollup?startDate=${startDate}&endDate=${endDate}`;
+  const fullUrl = `${url}/rollup?startDate=${startDate}&endDate=${endDate}`;
 
   // Construcción del key único para caché
   const key =
