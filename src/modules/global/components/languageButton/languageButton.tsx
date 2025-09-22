@@ -40,17 +40,39 @@ export const LanguageButton = ({ LANGUAGE }: Props) => {
     return [
       {
         flagIcon: (
-          <Image src="/png/english.png" width={20} height={20} alt="language" />
+          <Image
+            src="/png/english.png"
+            width={20}
+            height={20}
+            alt="language english"
+          />
         ),
         option: LANGUAGE_OPTIONS.ENGLISH,
         title: LANGUAGE.languages.english,
       },
       {
         flagIcon: (
-          <Image src="/png/espanol.png" width={20} height={20} alt="language" />
+          <Image
+            src="/png/espanol.png"
+            width={20}
+            height={20}
+            alt="language español"
+          />
         ),
         option: LANGUAGE_OPTIONS.SPANISH,
         title: LANGUAGE.languages.spanish,
+      },
+      {
+        flagIcon: (
+          <Image
+            src="/png/portugues.png"
+            width={20}
+            height={20}
+            alt="language portugues"
+          />
+        ),
+        option: LANGUAGE_OPTIONS.PORTUGUES,
+        title: LANGUAGE.languages.portugues,
       },
     ];
   }, [LANGUAGE]);

@@ -14,13 +14,14 @@ import { Header } from "../header/header";
 import { LANGUAGE_OPTIONS } from "../../language/utils/languageSelector.model";
 import { LanguageContext } from "../../language/components/languageProvider/languageProvider";
 import { LanguageInterface } from "../../language/constants/language.model";
+import { MainDataFetcher } from "../mainDataFetcher/mainDataFetcher";
 import { Menu } from "../menu/menu";
+import { PORTUGUES } from "../../language/constants/portugues";
 import { PageContainer } from "../pageContainer/pageContainer";
 import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
 import { SPANISH } from "../../language/constants/spanish";
 import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
 import { useAuth } from "../../../auth/utils";
-import { MainDataFetcher } from "../mainDataFetcher/mainDataFetcher";
 
 interface Props {
   children: React.ReactNode;
@@ -55,6 +56,9 @@ export const MainWrapper = ({ children }: Props) => {
         break;
       case LANGUAGE_OPTIONS.ENGLISH:
         setLanguageObject(ENGLISH);
+        break;
+      case LANGUAGE_OPTIONS.PORTUGUES:
+        setLanguageObject(PORTUGUES);
         break;
       default:
         setLanguageObject(SPANISH);

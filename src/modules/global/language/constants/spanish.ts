@@ -5,6 +5,7 @@ export const SPANISH: LanguageInterface = {
   languages: {
     english: "Inglés",
     spanish: "Español",
+    portugues: "Portugués",
   },
   languageButton: {
     selectLanguage: "Seleccionar idioma",

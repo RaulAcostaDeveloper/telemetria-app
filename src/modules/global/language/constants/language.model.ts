@@ -5,6 +5,7 @@ export interface LanguageInterface {
   languages: {
     spanish: string;
     english: string;
+    portugues: string;
   };
   languageButton: {
     selectLanguage: string;
