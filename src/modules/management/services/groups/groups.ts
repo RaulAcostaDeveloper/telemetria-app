@@ -3,11 +3,10 @@ const url = "https://stage.transtelemetrix.com/api/management/";
 
 // Función fetch con enlace a caché
 export async function getGroups(
-  accountId: string,
   forceRefresh = true // Se le puede indicar que no busque en caché
 ) {
   // Construcción de la url con parámetros
-  const fullUrl = `${url}${accountId}/vehicles/groups`;
+  const fullUrl = `${url}me/vehicles/groups`;
   const options: RequestInit = {
     method: "GET",
     headers: {
@@ -16,8 +15,7 @@ export async function getGroups(
     credentials: "include",
   };
   // Construcción del key único para caché
-  const cacheKey =
-    process.env.NEXT_PUBLIC_API_VERSION + `managementGroups-${accountId}`;
+  const cacheKey = process.env.NEXT_PUBLIC_API_VERSION + `managementGroups`;
 
   // Retorna DATA del servidor o DATA de caché
   return getCached(

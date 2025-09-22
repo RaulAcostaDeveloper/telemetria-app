@@ -32,12 +32,9 @@ interface InitialState {
   devicesStatus: SERVICE_STATUS;
 }
 
-export const fetchDevices = createAsyncThunk(
-  "devices/fetch",
-  async ({ accountId }: { accountId: string }) => {
-    return getDevices(accountId);
-  }
-);
+export const fetchDevices = createAsyncThunk("devices/fetch", async () => {
+  return getDevices();
+});
 
 const initialState: InitialState = {
   devicesData: null,
