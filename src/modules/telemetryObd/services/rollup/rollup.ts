@@ -9,12 +9,11 @@ export async function getObdRollup(
   // forceRefresh = true // Se le puede indicar que no busque en caché
 ) {
   // Construcción de la url con parámetros
-  const fullUrl = `${url}${accountId}/rollup?startDate=${startDate}&endDate=${endDate}`;
+  const fullUrl = `${url}me/rollup?startDate=${startDate}&endDate=${endDate}`;
 
   // Construcción del key único para caché
   const key =
-    process.env.NEXT_PUBLIC_API_VERSION +
-    `obdRollup-${accountId}-${startDate}-${endDate}`;
+    process.env.NEXT_PUBLIC_API_VERSION + `obdRollup-${startDate}-${endDate}`;
 
   const options: RequestInit = {
     method: "GET",

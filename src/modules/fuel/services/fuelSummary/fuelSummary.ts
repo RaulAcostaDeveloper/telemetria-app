@@ -11,7 +11,7 @@ export async function getFuelSummary(
   // forceRefresh = true // Se le puede indicar que no busque en caché
 ) {
   // Construcción de la url con parámetros
-  const fullUrl = `${url}/${accountId}/summary?startDate=${startDate}&endDate=${endDate}&performanceType=${performanceType}`;
+  const fullUrl = `${url}/me/summary?startDate=${startDate}&endDate=${endDate}&performanceType=${performanceType}`;
   const options: RequestInit = {
     method: "GET",
     headers: {
@@ -22,7 +22,7 @@ export async function getFuelSummary(
   // Construcción del key único para caché
   const key =
     process.env.NEXT_PUBLIC_API_VERSION +
-    `fuelSummary-${accountId}-${startDate}-${endDate}-${performanceType}`;
+    `fuelSummary-${startDate}-${endDate}-${performanceType}`;
 
   // Retorna DATA del servidor o DATA de caché
   return getCached(
