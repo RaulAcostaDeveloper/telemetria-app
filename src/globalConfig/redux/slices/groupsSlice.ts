@@ -24,12 +24,9 @@ interface InitialState {
   groupsStatus: SERVICE_STATUS;
 }
 
-export const fetchGroups = createAsyncThunk(
-  "groups/fetch",
-  async ({ accountId }: { accountId: string }) => {
-    return getGroups(accountId);
-  }
-);
+export const fetchGroups = createAsyncThunk("groups/fetch", async () => {
+  return getGroups();
+});
 
 const initialState: InitialState = {
   groupsData: null,

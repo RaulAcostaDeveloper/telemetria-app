@@ -28,26 +28,10 @@ export const MainDataFetcher = () => {
   // Llamado de servicios al inicio de la sesión del usuario
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(
-        fetchVehicles({
-          accountId: "90926",
-        })
-      );
-      dispatch(
-        fetchDevices({
-          accountId: "90926",
-        })
-      );
-      dispatch(
-        fetchDrivers({
-          accountId: "90926",
-        })
-      );
-      dispatch(
-        fetchGroups({
-          accountId: "90926",
-        })
-      );
+      dispatch(fetchVehicles());
+      dispatch(fetchDevices());
+      dispatch(fetchDrivers());
+      dispatch(fetchGroups());
     }
   }, [isAuthenticated]);
 
@@ -56,7 +40,6 @@ export const MainDataFetcher = () => {
     if (isAuthenticated && startDate && endDate) {
       dispatch(
         fetchFuelSummary({
-          accountId: "90926", //"4992"
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
           performanceType: "1",
@@ -64,7 +47,6 @@ export const MainDataFetcher = () => {
       );
       dispatch(
         fetchTopFuelReport({
-          accountId: "90926",
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
           numberOfVehicles: 10,
@@ -72,7 +54,6 @@ export const MainDataFetcher = () => {
       );
       dispatch(
         fetchObdRollup({
-          accountId: "90926",
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
         })

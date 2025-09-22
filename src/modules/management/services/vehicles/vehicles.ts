@@ -3,7 +3,6 @@ const url = "https://stage.transtelemetrix.com/api/management/";
 
 // Función fetch con enlace a caché
 export async function getVehicles(
-  accountId: string,
   forceRefresh = true // Se le puede indicar que no busque en caché
 ) {
   // Construcción de la url con parámetros

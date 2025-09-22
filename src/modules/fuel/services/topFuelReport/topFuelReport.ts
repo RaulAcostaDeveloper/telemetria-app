@@ -4,7 +4,6 @@ const url = "https://stage.transtelemetrix.com/api/analytics/fuel/clients";
 
 // Función fetch con enlace a caché
 export async function getTopFuelReport(
-  accountId: string,
   numberOfVehicles: number,
   startDate: string,
   endDate: string,

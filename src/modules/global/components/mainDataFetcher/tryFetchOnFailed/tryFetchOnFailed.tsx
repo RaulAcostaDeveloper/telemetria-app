@@ -49,7 +49,6 @@ export const TryFetchOnFailed = () => {
       setTimeout(() => {
         dispatch(
           fetchFuelSummary({
-            accountId: "90926", //"4992"
             startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
             endDate: formatToLocalIso8601(endDate),
             performanceType: "1",
@@ -69,7 +68,6 @@ export const TryFetchOnFailed = () => {
       setTimeout(() => {
         dispatch(
           fetchTopFuelReport({
-            accountId: "90926",
             startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
             endDate: formatToLocalIso8601(endDate),
             numberOfVehicles: 10,
@@ -89,7 +87,6 @@ export const TryFetchOnFailed = () => {
       setTimeout(() => {
         dispatch(
           fetchObdRollup({
-            accountId: "90926",
             startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
             endDate: formatToLocalIso8601(endDate),
           })
@@ -106,11 +103,7 @@ export const TryFetchOnFailed = () => {
       endDate
     ) {
       setTimeout(() => {
-        dispatch(
-          fetchVehicles({
-            accountId: "90926",
-          })
-        );
+        dispatch(fetchVehicles());
       }, 5000);
     }
   }, [vehiclesStatus, isAuthenticated, startDate, endDate]);
@@ -123,11 +116,7 @@ export const TryFetchOnFailed = () => {
       endDate
     ) {
       setTimeout(() => {
-        dispatch(
-          fetchDrivers({
-            accountId: "90926",
-          })
-        );
+        dispatch(fetchDrivers());
       }, 5000);
     }
   }, [driversStatus, isAuthenticated, startDate, endDate]);
@@ -140,11 +129,7 @@ export const TryFetchOnFailed = () => {
       endDate
     ) {
       setTimeout(() => {
-        dispatch(
-          fetchDevices({
-            accountId: "90926",
-          })
-        );
+        dispatch(fetchDevices());
       }, 5000);
     }
   }, [devicesStatus, isAuthenticated, startDate, endDate]);
@@ -157,11 +142,7 @@ export const TryFetchOnFailed = () => {
       endDate
     ) {
       setTimeout(() => {
-        dispatch(
-          fetchGroups({
-            accountId: "90926",
-          })
-        );
+        dispatch(fetchGroups());
       }, 5000);
     }
   }, [groupsStatus, isAuthenticated, startDate, endDate]);

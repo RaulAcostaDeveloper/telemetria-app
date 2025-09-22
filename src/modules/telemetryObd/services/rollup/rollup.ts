@@ -3,7 +3,6 @@ const url = "https://stage.transtelemetrix.com/api/analytics/obd/clients/";
 
 // Función fetch con enlace a caché
 export async function getObdRollup(
-  accountId: string,
   startDate: string,
   endDate: string
   // forceRefresh = true // Se le puede indicar que no busque en caché
