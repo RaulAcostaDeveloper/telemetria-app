@@ -15,7 +15,7 @@ interface LoginData {
 }
 
 const url =
-  "https://stage.transtelemetrix.com/api/management/authentication/login";
+  process.env.NEXT_PUBLIC_URL_SERVICE + "/management/authentication/login";
 
 // Se integra el middleware de\slices\authSlice.ts aquí para obtener el rejectWithValue(0)
 export const fetchLogin = createAsyncThunk(

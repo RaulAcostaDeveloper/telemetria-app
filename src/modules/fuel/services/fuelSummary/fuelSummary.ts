@@ -1,6 +1,6 @@
 import { getCached } from "@/globalConfig/cache/cache";
 
-const url = "https://stage.transtelemetrix.com/api/analytics/fuel/clients";
+const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/analytics/fuel/clients";
 
 // Función fetch con enlace a caché
 export async function getFuelSummary(
