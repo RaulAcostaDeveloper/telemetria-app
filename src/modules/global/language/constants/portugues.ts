@@ -124,6 +124,7 @@ export const PORTUGUES: LanguageInterface = {
       actions: "Ações",
       columns: "Colunas",
       total: "Total",
+      average: "Média",
     },
     formTitles: {
       filters: "Filtros",
