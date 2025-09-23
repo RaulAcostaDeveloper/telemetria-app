@@ -18,7 +18,7 @@ export const TryFetchOnFailed = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   // Usuario autenticado a nivel estado de la aplicación
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logoutState } = useAuth();
 
   // Datos del calendario
   const { startDate, endDate } = useSelector(
@@ -51,7 +51,7 @@ export const TryFetchOnFailed = () => {
           fetchFuelSummary({
             startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
             endDate: formatToLocalIso8601(endDate),
-            performanceType: "1",
+            logoutState,
           })
         );
       }, 5000);
@@ -70,7 +70,7 @@ export const TryFetchOnFailed = () => {
           fetchTopFuelReport({
             startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
             endDate: formatToLocalIso8601(endDate),
-            numberOfVehicles: 10,
+            logoutState,
           })
         );
       }, 5000);
@@ -89,6 +89,7 @@ export const TryFetchOnFailed = () => {
           fetchObdRollup({
             startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
             endDate: formatToLocalIso8601(endDate),
+            logoutState,
           })
         );
       }, 5000);
@@ -103,7 +104,7 @@ export const TryFetchOnFailed = () => {
       endDate
     ) {
       setTimeout(() => {
-        dispatch(fetchVehicles());
+        dispatch(fetchVehicles(logoutState));
       }, 5000);
     }
   }, [vehiclesStatus, isAuthenticated, startDate, endDate]);
@@ -116,7 +117,7 @@ export const TryFetchOnFailed = () => {
       endDate
     ) {
       setTimeout(() => {
-        dispatch(fetchDrivers());
+        dispatch(fetchDrivers(logoutState));
       }, 5000);
     }
   }, [driversStatus, isAuthenticated, startDate, endDate]);
@@ -129,7 +130,7 @@ export const TryFetchOnFailed = () => {
       endDate
     ) {
       setTimeout(() => {
-        dispatch(fetchDevices());
+        dispatch(fetchDevices(logoutState));
       }, 5000);
     }
   }, [devicesStatus, isAuthenticated, startDate, endDate]);
@@ -142,7 +143,7 @@ export const TryFetchOnFailed = () => {
       endDate
     ) {
       setTimeout(() => {
-        dispatch(fetchGroups());
+        dispatch(fetchGroups(logoutState));
       }, 5000);
     }
   }, [groupsStatus, isAuthenticated, startDate, endDate]);

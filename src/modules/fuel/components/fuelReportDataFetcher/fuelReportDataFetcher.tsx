@@ -18,7 +18,7 @@ interface Props {
 export const FuelReportDataFetcher = ({ imei }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logoutState } = useAuth();
 
   const { startDate, endDate } = useSelector(
     (state: RootState) => state.calendar
@@ -35,6 +35,7 @@ export const FuelReportDataFetcher = ({ imei }: Props) => {
           imei: "862524060822760", // imei.toString(),
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
+          logoutState,
         })
       );
 
@@ -43,12 +44,14 @@ export const FuelReportDataFetcher = ({ imei }: Props) => {
           imei: "862524060822760", // imei.toString(),
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
+          logoutState,
         })
       );
 
       dispatch(
         fetchLastFuelReport({
           imei: "862524060822760", // imei.toString(),
+          logoutState,
         })
       );
     }
@@ -65,6 +68,7 @@ export const FuelReportDataFetcher = ({ imei }: Props) => {
         dispatch(
           fetchLastFuelReport({
             imei: "862524060822760", // imei.toString(),
+            logoutState,
           })
         );
       }

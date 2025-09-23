@@ -1,3 +1,0 @@
-Módulo para manejar permisos del usuario
-Es decir, la pantalla donde se añaden o quitan permisos
-no confundir con /modules/global/userScope que sirve para manejar la lógica del user Scope

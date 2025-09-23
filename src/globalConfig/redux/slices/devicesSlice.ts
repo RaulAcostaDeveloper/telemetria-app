@@ -32,9 +32,12 @@ interface InitialState {
   devicesStatus: SERVICE_STATUS;
 }
 
-export const fetchDevices = createAsyncThunk("devices/fetch", async () => {
-  return getDevices();
-});
+export const fetchDevices = createAsyncThunk(
+  "devices/fetch",
+  async (logoutState: () => void) => {
+    return getDevices({ logoutState });
+  }
+);
 
 const initialState: InitialState = {
   devicesData: null,

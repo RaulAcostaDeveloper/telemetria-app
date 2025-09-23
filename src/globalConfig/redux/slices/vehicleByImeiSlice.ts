@@ -22,7 +22,7 @@ export interface VehicleByImei {
 }
 
 interface Data {
-  code: number;
+  statusCode: number;
   message: string;
   value: VehicleByImei | null;
 }
@@ -34,8 +34,8 @@ interface InitialState {
 
 export const fetchVehicleByImei = createAsyncThunk(
   "vehicleByImei/fetch",
-  async ({ imei }: { imei: string }) => {
-    return getVehicleByImei(imei);
+  async ({ imei, logoutState }: { imei: string; logoutState: () => void }) => {
+    return getVehicleByImei({ imei, logoutState });
   }
 );
 

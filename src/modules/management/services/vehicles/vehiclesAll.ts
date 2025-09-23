@@ -1,10 +1,10 @@
-import { getCached } from "@/globalConfig/cache/cache";
-const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/management/vehicles";
+import { FetchProps } from "@/globalConfig/redux/types/serviceTypes";
+import { middlewareAfterFetch } from "@/modules/global/utils/middlewareAfterFetch";
+
+const fullUrl = process.env.NEXT_PUBLIC_URL_SERVICE + "/management/vehicles";
 
 // Función fetch con enlace a caché
-export async function getVehiclesAll(
-  forceRefresh = true // Se le puede indicar que no busque en caché
-) {
+export async function getVehiclesAll({ logoutState }: FetchProps) {
   // Esta url no requiere parámetros adicionales
   const options: RequestInit = {
     method: "GET",
@@ -13,29 +13,17 @@ export async function getVehiclesAll(
     },
     credentials: "include",
   };
+
   // Construcción del key único para caché
   const cacheKey =
     process.env.NEXT_PUBLIC_API_VERSION + `managementVehiclesAll`;
 
   // Retorna DATA del servidor o DATA de caché
-  return getCached(
+  return middlewareAfterFetch({
     cacheKey,
-    async () => {
-      try {
-        const response = await fetch(url, options);
-        const result =
-          response.status === 200
-            ? await response.json()
-            : {
-                code: response.status,
-                message: response.statusText,
-                value: null,
-              };
-        return result;
-      } catch {
-        throw new Error("Error al obtener todos los vehiculos");
-      }
-    },
-    forceRefresh // poner un forceRefresh en caso de necesitarlo
-  );
+    fullUrl,
+    options,
+    forceRefresh: true,
+    logoutState,
+  });
 }

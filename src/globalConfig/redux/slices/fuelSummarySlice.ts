@@ -47,13 +47,13 @@ export const fetchFuelSummary = createAsyncThunk(
   async ({
     startDate,
     endDate,
-    performanceType,
+    logoutState,
   }: {
     startDate: string;
     endDate: string;
-    performanceType: string;
+    logoutState: () => void;
   }) => {
-    return getFuelSummary(startDate, endDate, performanceType);
+    return getFuelSummary({ startDate, endDate, logoutState });
   }
 );
 

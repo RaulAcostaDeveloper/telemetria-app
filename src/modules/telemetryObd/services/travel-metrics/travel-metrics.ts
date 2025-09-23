@@ -1,20 +1,22 @@
-import { getCached } from "@/globalConfig/cache/cache";
+import { FetchProps } from "@/globalConfig/redux/types/serviceTypes";
+import { middlewareAfterFetch } from "@/modules/global/utils/middlewareAfterFetch";
+
 const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/analytics/obd/device/";
 
 // Función fetch con enlace a caché
-export async function getObdTravelMetrics(
-  deviceId: string,
-  startDate: string,
-  endDate: string
-  // forceRefresh = true // Se le puede indicar que no busque en caché
-) {
+export async function getObdTravelMetrics({
+  imei,
+  startDate,
+  endDate,
+  logoutState,
+}: FetchProps) {
   // Construcción de la url con parámetros
-  const fullUrl = `${url}${deviceId}/travel-metrics?startDate=${startDate}&endDate=${endDate}`;
+  const fullUrl = `${url}${imei}/travel-metrics?startDate=${startDate}&endDate=${endDate}`;
 
   // Construcción del key único para caché
-  const key =
+  const cacheKey =
     process.env.NEXT_PUBLIC_API_VERSION +
-    `obdTravelMetrics-${deviceId}-${startDate}-${endDate}`;
+    `obdTravelMetrics-${imei}-${startDate}-${endDate}`;
 
   const options: RequestInit = {
     method: "GET",
@@ -25,26 +27,10 @@ export async function getObdTravelMetrics(
   };
 
   // Retorna DATA del servidor o DATA de caché
-  return getCached(
-    key,
-    async () => {
-      try {
-        const response = await fetch(fullUrl, options);
-        const result =
-          response.status === 200
-            ? await response.json()
-            : {
-                code: response.status,
-                message: response.statusText,
-                value: null,
-              };
-        return result;
-      } catch {
-        throw new Error(
-          "Error al obtener servicio de obd device travel metrics"
-        );
-      }
-    }
-    // forceRefresh
-  );
+  return middlewareAfterFetch({
+    cacheKey,
+    fullUrl,
+    options,
+    logoutState,
+  });
 }

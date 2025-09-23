@@ -36,8 +36,16 @@ interface InitialState {
 
 export const fetchObdRollup = createAsyncThunk(
   "obdRollup/fetch",
-  async ({ startDate, endDate }: { startDate: string; endDate: string }) => {
-    return getObdRollup(startDate, endDate);
+  async ({
+    startDate,
+    endDate,
+    logoutState,
+  }: {
+    startDate: string;
+    endDate: string;
+    logoutState: () => void;
+  }) => {
+    return getObdRollup({ startDate, endDate, logoutState });
   }
 );
 

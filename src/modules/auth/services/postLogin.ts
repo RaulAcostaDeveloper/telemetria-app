@@ -17,6 +17,8 @@ interface LoginData {
 const url =
   process.env.NEXT_PUBLIC_URL_SERVICE + "/management/authentication/login";
 
+// PENDIENTE arreglar esta excepción
+
 // Se integra el middleware de\slices\authSlice.ts aquí para obtener el rejectWithValue(0)
 export const fetchLogin = createAsyncThunk(
   "login/fetch",

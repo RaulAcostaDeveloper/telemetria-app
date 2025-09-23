@@ -1,3 +1,0 @@
-Elementos relacionados a los reportes tanto individuales como colectivos (globales).
-
-Algunos reportes son de tipo combustible y otros de tipo telemetría.

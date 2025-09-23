@@ -126,12 +126,14 @@ export const fetchFuelData = createAsyncThunk(
     imei,
     startDate,
     endDate,
+    logoutState,
   }: {
     imei: string;
     startDate: string;
     endDate: string;
+    logoutState: () => void;
   }) => {
-    return getFuelData(imei, startDate, endDate);
+    return getFuelData({ imei, startDate, endDate, logoutState });
   }
 );
 

@@ -61,15 +61,15 @@ const initialState: InitialState = {
 export const fetchTopFuelReport = createAsyncThunk(
   "topFuelReportStatus/fetch",
   async ({
-    numberOfVehicles,
     startDate,
     endDate,
+    logoutState,
   }: {
-    numberOfVehicles: number;
     startDate: string;
     endDate: string;
+    logoutState: () => void;
   }) => {
-    return getTopFuelReport(numberOfVehicles, startDate, endDate);
+    return getTopFuelReport({ startDate, endDate, logoutState });
   }
 );
 

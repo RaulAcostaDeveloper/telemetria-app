@@ -26,7 +26,7 @@ interface ArrayVehicles {
 }
 
 interface Data {
-  code: number;
+  statusCode: number;
   message: string;
   value: ArrayVehicles | null;
 }
@@ -38,8 +38,8 @@ interface InitialState {
 
 export const fetchVehiclesAll = createAsyncThunk(
   "vehiclesAll/fetch",
-  async ({ forceRefresh }: { forceRefresh: boolean }) => {
-    return getVehiclesAll(forceRefresh);
+  async (logoutState: () => void) => {
+    return getVehiclesAll({ logoutState });
   }
 );
 
