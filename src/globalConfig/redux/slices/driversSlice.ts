@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getDrivers } from "@/modules/management/services/drivers/drivers";
 import { ndIfEmpty } from "@/globalConfig/utils/utils";
+import { useAuth } from "@/modules/auth/utils";
 
 interface Drivers {
   id: number;
@@ -32,7 +33,8 @@ interface InitialState {
 }
 
 export const fetchDrivers = createAsyncThunk("drivers/fetch", async () => {
-  return getDrivers();
+  const { logoutState } = useAuth();
+  return getDrivers(logoutState);
 });
 
 const initialState: InitialState = {

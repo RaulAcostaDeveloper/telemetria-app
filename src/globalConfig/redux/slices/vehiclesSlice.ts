@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getVehicles } from "@/modules/management/services/vehicles/vehicles";
 import { ndIfEmpty } from "@/globalConfig/utils/utils";
+import { useAuth } from "@/modules/auth/utils";
 
 interface Group {
   id: string;
@@ -41,7 +42,8 @@ interface InitialState {
 }
 
 export const fetchVehicles = createAsyncThunk("vehicles/fetch", async () => {
-  return getVehicles();
+  const { logoutState } = useAuth();
+  return getVehicles(logoutState);
 });
 
 const initialState: InitialState = {

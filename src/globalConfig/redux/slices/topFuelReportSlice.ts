@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getTopFuelReport } from "@/modules/fuel/services/topFuelReport/topFuelReport";
+import { useAuth } from "@/modules/auth/utils";
 
 interface ChargesTopReport {
   id: string;
@@ -69,7 +70,8 @@ export const fetchTopFuelReport = createAsyncThunk(
     startDate: string;
     endDate: string;
   }) => {
-    return getTopFuelReport(numberOfVehicles, startDate, endDate);
+    const { logoutState } = useAuth();
+    return getTopFuelReport(logoutState, numberOfVehicles, startDate, endDate);
   }
 );
 

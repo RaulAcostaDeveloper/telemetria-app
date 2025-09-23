@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getGroups } from "@/modules/management/services/groups/groups";
 import { ndIfEmpty } from "@/globalConfig/utils/utils";
+import { useAuth } from "@/modules/auth/utils";
 
 interface Groups {
   id: number;
@@ -25,7 +26,8 @@ interface InitialState {
 }
 
 export const fetchGroups = createAsyncThunk("groups/fetch", async () => {
-  return getGroups();
+  const { logoutState } = useAuth();
+  return getGroups(logoutState);
 });
 
 const initialState: InitialState = {

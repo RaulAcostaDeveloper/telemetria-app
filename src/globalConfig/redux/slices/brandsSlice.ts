@@ -1,6 +1,7 @@
 import { SERVICE_STATUS } from "../types/serviceTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getBrands } from "@/modules/management/services/brands/brands";
+import { useAuth } from "@/modules/auth/utils";
 
 export interface Brand {
   id: number;
@@ -23,7 +24,8 @@ interface InitialState {
 }
 
 export const fetchBrands = createAsyncThunk("brands/fetch", async () => {
-  return getBrands();
+  const { logoutState } = useAuth();
+  return getBrands(logoutState);
 });
 
 const initialState: InitialState = {

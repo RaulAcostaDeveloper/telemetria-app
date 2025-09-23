@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getFuelData } from "@/modules/fuel/services/fuelData/fuelData";
+import { useAuth } from "@/modules/auth/utils";
 
 interface LevelMessages {
   eventId: number;
@@ -125,7 +126,8 @@ export const fetchFuelData = createAsyncThunk(
     startDate: string;
     endDate: string;
   }) => {
-    return getFuelData(imei, startDate, endDate);
+    const { logoutState } = useAuth();
+    return getFuelData(imei, logoutState, startDate, endDate);
   }
 );
 

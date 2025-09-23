@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getFuelPerformance } from "@/modules/fuel/services/fuelPerformance/fuelPerformance";
+import { useAuth } from "@/modules/auth/utils";
 
 export interface FuelPerformanceValues {
   deviceId: string;
@@ -37,7 +38,8 @@ export const fetchFuelPerformance = createAsyncThunk(
     startDate: string;
     endDate: string;
   }) => {
-    return getFuelPerformance(imei, startDate, endDate);
+    const { logoutState } = useAuth();
+    return getFuelPerformance(imei, logoutState, startDate, endDate);
   }
 );
 
