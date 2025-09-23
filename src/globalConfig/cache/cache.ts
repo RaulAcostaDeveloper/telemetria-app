@@ -59,9 +59,7 @@ export async function cleanExpiredCache(): Promise<void> {
   }
 }
 
-function dataHasStatusCode(
-  data: unknown
-): data is { code: number; statusCode: number } {
+function dataHasStatusCode(data: unknown): data is { statusCode: number } {
   return (
     typeof (data as any).statusCode === "number" // por eso es importante homologar
   );

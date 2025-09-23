@@ -4,7 +4,7 @@ import { SERVICE_STATUS } from "../types/serviceTypes";
 import { logoutSession } from "@/modules/auth/services/logout";
 
 interface LoginData {
-  code: number;
+  statusCode: number;
   message: string;
   value: null;
 }
