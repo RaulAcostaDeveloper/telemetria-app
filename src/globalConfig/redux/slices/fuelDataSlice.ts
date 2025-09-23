@@ -93,8 +93,14 @@ interface PerformancesBetweenCharges {
 //   status: number; // estados: estacionado, encendido y en movimiento
 // }
 
+interface ShowFuelDataSelection {
+  isCAN: boolean;
+  isSensor: boolean;
+}
+
 export interface FuelDataValues {
   deviceId: string;
+  showData: ShowFuelDataSelection;
   levelMessages: LevelMessages[];
   charges: Charges[];
   discharges: Discharges[];
