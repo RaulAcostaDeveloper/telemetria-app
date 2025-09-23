@@ -1,4 +1,4 @@
-import { getCached } from "@/globalConfig/cache/cache";
+import { UseMiddlewareAfterFetch } from "@/modules/global/utils/useMiddlewareAfterFetch";
 const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/management/me";
 
 // Función fetch con enlace a caché
@@ -18,24 +18,10 @@ export async function getGroups(
   const cacheKey = process.env.NEXT_PUBLIC_API_VERSION + `managementGroups`;
 
   // Retorna DATA del servidor o DATA de caché
-  return getCached(
+  return UseMiddlewareAfterFetch({
     cacheKey,
-    async () => {
-      try {
-        const response = await fetch(fullUrl, options);
-        const result =
-          response.status === 200
-            ? await response.json()
-            : {
-                code: response.status,
-                message: response.statusText,
-                value: null,
-              };
-        return result;
-      } catch {
-        throw new Error("Error al obtener grupos");
-      }
-    },
-    forceRefresh // poner un forceRefresh en caso de necesitarlo
-  );
+    fullUrl,
+    options,
+    forceRefresh,
+  });
 }

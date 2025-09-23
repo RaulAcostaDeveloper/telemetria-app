@@ -1,4 +1,4 @@
-import { getCached } from "@/globalConfig/cache/cache";
+import { UseMiddlewareAfterFetch } from "@/modules/global/utils/useMiddlewareAfterFetch";
 
 const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/analytics/fuel/clients/me";
 
@@ -19,29 +19,15 @@ export async function getFuelSummary(
     credentials: "include",
   };
   // Construcción del key único para caché
-  const key =
+  const cacheKey =
     process.env.NEXT_PUBLIC_API_VERSION +
     `fuelSummary-${startDate}-${endDate}-${performanceType}`;
 
   // Retorna DATA del servidor o DATA de caché
-  return getCached(
-    key,
-    async () => {
-      try {
-        const response = await fetch(fullUrl, options);
-        const result =
-          response.status === 200
-            ? await response.json()
-            : {
-                code: response.status,
-                message: response.statusText,
-                value: null,
-              };
-        return result;
-      } catch {
-        throw new Error("Error al obtener vehículos");
-      }
-    }
-    // forceRefresh
-  );
+  return UseMiddlewareAfterFetch({
+    cacheKey,
+    fullUrl,
+    options,
+    //forceRefresh,
+  });
 }

@@ -1,5 +1,5 @@
-import { getCached } from "@/globalConfig/cache/cache";
-const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/management/vehicles";
+import { UseMiddlewareAfterFetch } from "@/modules/global/utils/useMiddlewareAfterFetch";
+const fullUrl = process.env.NEXT_PUBLIC_URL_SERVICE + "/management/vehicles";
 
 // Función fetch con enlace a caché
 export async function getVehiclesAll(
@@ -18,24 +18,10 @@ export async function getVehiclesAll(
     process.env.NEXT_PUBLIC_API_VERSION + `managementVehiclesAll`;
 
   // Retorna DATA del servidor o DATA de caché
-  return getCached(
+  return UseMiddlewareAfterFetch({
     cacheKey,
-    async () => {
-      try {
-        const response = await fetch(url, options);
-        const result =
-          response.status === 200
-            ? await response.json()
-            : {
-                code: response.status,
-                message: response.statusText,
-                value: null,
-              };
-        return result;
-      } catch {
-        throw new Error("Error al obtener todos los vehiculos");
-      }
-    },
-    forceRefresh // poner un forceRefresh en caso de necesitarlo
-  );
+    fullUrl,
+    options,
+    forceRefresh,
+  });
 }
