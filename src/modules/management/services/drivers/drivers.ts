@@ -1,4 +1,4 @@
-import { UseMiddlewareAfterFetch } from "@/modules/global/utils/useMiddlewareAfterFetch";
+import { getCached } from "@/globalConfig/cache/cache";
 const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/management/me";
 
 // Función fetch con enlace a caché
@@ -18,10 +18,24 @@ export async function getDrivers(
   const cacheKey = process.env.NEXT_PUBLIC_API_VERSION + `managementDrivers`;
 
   // Retorna DATA del servidor o DATA de caché
-  return UseMiddlewareAfterFetch({
+  return getCached(
     cacheKey,
-    fullUrl,
-    options,
-    forceRefresh,
-  });
+    async () => {
+      try {
+        const response = await fetch(fullUrl, options);
+        const result =
+          response.status === 200
+            ? await response.json()
+            : {
+                code: response.status,
+                message: response.statusText,
+                value: null,
+              };
+        return result;
+      } catch {
+        throw new Error("Error al obtener conductores");
+      }
+    },
+    forceRefresh // poner un forceRefresh en caso de necesitarlo
+  );
 }
