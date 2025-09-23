@@ -32,12 +32,14 @@ export const fetchFuelPerformance = createAsyncThunk(
     imei,
     startDate,
     endDate,
+    logoutState,
   }: {
     imei: string;
     startDate: string;
     endDate: string;
+    logoutState: () => void;
   }) => {
-    return getFuelPerformance(imei, startDate, endDate);
+    return getFuelPerformance({ imei, startDate, endDate, logoutState });
   }
 );
 

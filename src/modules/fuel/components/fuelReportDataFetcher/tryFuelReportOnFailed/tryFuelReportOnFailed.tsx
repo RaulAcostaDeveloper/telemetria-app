@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const TryFuelReportOnFailed = ({ imei }: Props) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logoutState } = useAuth();
   const dispatch = useDispatch<AppDispatch>();
 
   const { startDate, endDate } = useSelector(
@@ -44,6 +44,7 @@ export const TryFuelReportOnFailed = ({ imei }: Props) => {
             imei: "862524060822760", // imei.toString(),
             startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
             endDate: formatToLocalIso8601(endDate),
+            logoutState,
           })
         );
       }, 5000);
@@ -64,6 +65,7 @@ export const TryFuelReportOnFailed = ({ imei }: Props) => {
             imei: "862524060822760", // imei.toString(),
             startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
             endDate: formatToLocalIso8601(endDate),
+            logoutState,
           })
         );
       }, 5000);
@@ -82,6 +84,7 @@ export const TryFuelReportOnFailed = ({ imei }: Props) => {
         dispatch(
           fetchLastFuelReport({
             imei: "862524060822760", // imei.toString(),
+            logoutState,
           })
         );
       }, 5000);

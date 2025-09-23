@@ -52,14 +52,14 @@ export const useAuth = () => {
   useEffect(() => {
     if (isFromFirstSession) {
       if (
-        200 === brandsData?.code &&
+        200 === brandsData?.statusCode &&
         brandsStatus === SERVICE_STATUS.succeeded
       ) {
         loginState();
       } else if (
         brandsStatus !== SERVICE_STATUS.idle &&
         brandsStatus !== SERVICE_STATUS.loading &&
-        200 !== brandsData?.code
+        200 !== brandsData?.statusCode
       ) {
         logoutState();
       }

@@ -6,8 +6,8 @@ import { getLastFuelReport } from "@/modules/fuel/services/lastFuelReport/lastFu
 
 export const fetchLastFuelReport = createAsyncThunk(
   "lastFuelReportStatus/fetch",
-  async ({ imei }: { imei: string }) => {
-    return getLastFuelReport(imei);
+  async ({ imei, logoutState }: { imei: string; logoutState: () => void }) => {
+    return getLastFuelReport({ imei, logoutState });
   }
 );
 

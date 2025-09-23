@@ -1,39 +1,15 @@
-import { getCached } from "@/globalConfig/cache/cache";
+import { middlewareAfterFetch } from "@/modules/global/utils/middlewareAfterFetch";
 
-const url =
+const fullUrl =
   process.env.NEXT_PUBLIC_URL_SERVICE + "/management/authentication/logout";
 
-export async function logoutSession(
-  forceRefresh = true //hace que no busque en caché
-) {
+export async function logoutSession() {
   const cacheKey = process.env.NEXT_PUBLIC_API_VERSION + `logout`;
 
-  return getCached(
+  return middlewareAfterFetch({
     cacheKey,
-    async () => {
-      const options: RequestInit = {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      };
-      try {
-        const response = await fetch(url, options);
-        const result =
-          response.status == 200
-            ? await response.json()
-            : {
-                code: response.status,
-                message: response.statusText,
-                value: null,
-              };
-        return result;
-      } catch {
-        throw new Error("Error al cerrar sesión");
-      }
-    },
-    forceRefresh
-  );
+    fullUrl,
+    forceRefresh: true,
+    logoutState: () => {},
+  });
 }

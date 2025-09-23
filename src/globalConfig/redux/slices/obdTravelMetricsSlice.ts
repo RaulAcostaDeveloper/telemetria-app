@@ -38,15 +38,17 @@ interface InitialState {
 export const fetchObdTravelMetrics = createAsyncThunk(
   "obdTravelMetrics/fetch",
   async ({
-    deviceId,
+    imei,
     startDate,
     endDate,
+    logoutState,
   }: {
-    deviceId: string;
+    imei: string;
     startDate: string;
     endDate: string;
+    logoutState: () => void;
   }) => {
-    return getObdTravelMetrics(deviceId, startDate, endDate);
+    return getObdTravelMetrics({ imei, startDate, endDate, logoutState });
   }
 );
 

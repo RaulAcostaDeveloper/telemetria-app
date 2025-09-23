@@ -4,14 +4,14 @@ const LIFE_TIME_CACHE = 1000 * 60 * 60 * 10;
 export const ONE_HOUR = 1000 * 60 * 60;
 
 // Función genérica de manejo de caché con dexie.js
-export async function getCached<T>(
+export async function getCached<Data>(
   key: string,
-  fetcher: () => Promise<T>,
+  data: Data,
   forceRefresh = false
-): Promise<T> {
+): Promise<Data> {
   const now = Date.now();
 
-  const table = getCacheTable<T>();
+  const table = getCacheTable<Data>();
   const cached = await table.get(key);
 
   if (!forceRefresh && cached && now - cached.timestamp) {
@@ -19,13 +19,10 @@ export async function getCached<T>(
     return cached.data;
   }
 
-  // Ejecuta la función fetch proporcionada
-  const data = await fetcher();
-
   // Guarda en caché sólo si el código es 200
   if (
-    dataHasCodeOrStatusCode(data) &&
-    (data.code === 200 || data.statusCode === 200) && // por eso es importante homologar
+    dataHasStatusCode(data) &&
+    data.statusCode === 200 && // por eso es importante homologar
     forceRefresh !== true
   ) {
     await table.put({ key, timestamp: now, data });
@@ -62,11 +59,10 @@ export async function cleanExpiredCache(): Promise<void> {
   }
 }
 
-function dataHasCodeOrStatusCode(
+function dataHasStatusCode(
   data: unknown
 ): data is { code: number; statusCode: number } {
   return (
-    typeof (data as any).code === "number" ||
     typeof (data as any).statusCode === "number" // por eso es importante homologar
   );
 }

@@ -40,9 +40,12 @@ interface InitialState {
   vehiclesStatus: SERVICE_STATUS;
 }
 
-export const fetchVehicles = createAsyncThunk("vehicles/fetch", async () => {
-  return getVehicles();
-});
+export const fetchVehicles = createAsyncThunk(
+  "vehicles/fetch",
+  async (logoutState: () => void) => {
+    return getVehicles({ logoutState });
+  }
+);
 
 const initialState: InitialState = {
   vehiclesData: null,

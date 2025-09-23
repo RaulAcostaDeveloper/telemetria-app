@@ -18,7 +18,7 @@ export const MainDataFetcher = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   // Usuario autenticado a nivel estado de la aplicación
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logoutState } = useAuth();
 
   // Datos del calendario
   const { startDate, endDate } = useSelector(
@@ -28,10 +28,10 @@ export const MainDataFetcher = () => {
   // Llamado de servicios al inicio de la sesión del usuario
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(fetchVehicles());
-      dispatch(fetchDevices());
-      dispatch(fetchDrivers());
-      dispatch(fetchGroups());
+      dispatch(fetchVehicles(logoutState));
+      dispatch(fetchDevices(logoutState));
+      dispatch(fetchDrivers(logoutState));
+      dispatch(fetchGroups(logoutState));
     }
   }, [isAuthenticated]);
 
@@ -42,20 +42,21 @@ export const MainDataFetcher = () => {
         fetchFuelSummary({
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
-          performanceType: "1",
+          logoutState,
         })
       );
       dispatch(
         fetchTopFuelReport({
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
-          numberOfVehicles: 10,
+          logoutState,
         })
       );
       dispatch(
         fetchObdRollup({
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
+          logoutState,
         })
       );
     }

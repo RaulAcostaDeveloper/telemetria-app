@@ -15,7 +15,7 @@ interface Props {
 export const ObdReportDataFetcher = ({ imei }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logoutState } = useAuth();
 
   const { startDate, endDate } = useSelector(
     (state: RootState) => state.calendar
@@ -25,9 +25,10 @@ export const ObdReportDataFetcher = ({ imei }: Props) => {
     if (isAuthenticated && startDate && endDate && imei.length > 10) {
       dispatch(
         fetchObdTravelMetrics({
-          deviceId: "862524060822760", // imei.toString(),
+          imei: "862524060822760", // imei.toString(),
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
+          logoutState,
         })
       );
     }
