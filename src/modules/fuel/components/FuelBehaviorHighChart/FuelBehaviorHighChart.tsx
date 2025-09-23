@@ -127,7 +127,7 @@ export const FuelBehaviorHighChart = ({
       .sort((a, b) => a.x - b.x);
   }, [fuelDataData]);
 
-  const levelMessages2Data = useMemo(() => {
+  const levelMessagesCANData = useMemo(() => {
     return fuelDataData.levelMessages
       .map((c) => ({
         x: new Date(c.dateGps).getTime(),
@@ -185,6 +185,37 @@ export const FuelBehaviorHighChart = ({
   }, [fuelDataData]);
 
   const chartOptions = useMemo(() => {
+    // @ts-expect-error //No se puede determinar el tipo de Chart
+    const removeSeries = (chart) => {
+      const serieFuelCAN = chart.series.find(
+        (serie: { name: string }) =>
+          serie.name === LANGUAGE.highCharts.titles.fuelVariationCAN
+      );
+
+      const serieFuelSensor = chart.series.find(
+        (serie: { name: string }) =>
+          serie.name === LANGUAGE.highCharts.titles.fuelVariation
+      );
+
+      if (fuelDataData.showData.isSensor) {
+        if (serieFuelCAN) {
+          serieFuelCAN.remove(false);
+          chart.redraw();
+        }
+      } else if (fuelDataData.showData.isCAN) {
+        if (serieFuelSensor) {
+          serieFuelSensor.remove(false);
+          chart.redraw();
+        }
+      } else {
+        if (serieFuelSensor && serieFuelCAN) {
+          serieFuelSensor.remove(false);
+          serieFuelCAN.remove(false);
+          chart.redraw();
+        }
+      }
+    };
+
     const plotBands = [
       ...opBEngineOff.map((c) => ({
         from: new Date(c.startDate).getTime(),
@@ -335,7 +366,7 @@ export const FuelBehaviorHighChart = ({
         {
           yAxis: 0,
           name: LANGUAGE.highCharts.titles.fuelVariationCAN,
-          data: levelMessages2Data,
+          data: levelMessagesCANData,
           color: "#f77f00",
           lineWidth: 2,
           tooltip: {
@@ -356,7 +387,6 @@ export const FuelBehaviorHighChart = ({
               },
             },
           },
-          visible: false, //atributo que deselecciona esta gráfica por default
         },
         {
           yAxis: 0,
@@ -422,6 +452,13 @@ export const FuelBehaviorHighChart = ({
       chart: {
         height: 600,
         panning: true,
+        events: {
+          render: function () {
+            // eslint-disable-next-line @typescript-eslint/no-this-alias
+            const chart = this;
+            removeSeries(chart);
+          },
+        },
       },
       legend: {
         enabled: true,
@@ -499,9 +536,10 @@ export const FuelBehaviorHighChart = ({
     dailyPerformancesData,
     disChargesData,
     dischargesTooltipFields,
+    fuelDataData,
     handleClicGeoData,
+    levelMessagesCANData,
     levelMessagesData,
-    levelMessages2Data,
     levelMessagesTooltipFields,
     opBEngineOff,
     opBEngineOnIdle,
