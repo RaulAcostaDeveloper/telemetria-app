@@ -1,9 +1,9 @@
-import { getCached } from "@/globalConfig/cache/cache";
+import { UseMiddlewareAfterFetch } from "@/modules/global/utils/useMiddlewareAfterFetch";
 
 const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/analytics/fuel/devices";
 
 // Función fetch con enlace a caché
-export async function getLastFuelReport(
+export function getLastFuelReport(
   imei: string,
   forceRefresh = true // Se le puede indicar que no busque en caché
 ) {
@@ -18,26 +18,11 @@ export async function getLastFuelReport(
   };
   // Construcción del key único para caché
   const cacheKey = process.env.NEXT_PUBLIC_API_VERSION + `last-report-${imei}`;
-
   // Retorna DATA del servidor o DATA de caché
-  return getCached(
+  return UseMiddlewareAfterFetch({
     cacheKey,
-    async () => {
-      try {
-        const response = await fetch(fullUrl, options);
-        const result =
-          response.status === 200
-            ? await response.json()
-            : {
-                code: response.status,
-                message: response.statusText,
-                value: null,
-              };
-        return result;
-      } catch {
-        throw new Error("Error al obtener último reporte de combustible");
-      }
-    },
-    forceRefresh
-  );
+    fullUrl,
+    options,
+    forceRefresh,
+  });
 }
