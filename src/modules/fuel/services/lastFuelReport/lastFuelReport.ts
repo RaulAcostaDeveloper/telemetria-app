@@ -5,7 +5,6 @@ const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/analytics/fuel/devices";
 // Función fetch con enlace a caché
 export function getLastFuelReport(
   imei: string,
-  logoutState: () => void,
   forceRefresh = true // Se le puede indicar que no busque en caché
 ) {
   // Construcción de la url con parámetros
@@ -24,7 +23,6 @@ export function getLastFuelReport(
     cacheKey,
     fullUrl,
     options,
-    logoutState,
     forceRefresh,
   });
 }

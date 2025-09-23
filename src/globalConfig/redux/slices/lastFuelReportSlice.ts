@@ -3,14 +3,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getLastFuelReport } from "@/modules/fuel/services/lastFuelReport/lastFuelReport";
-import { useAuth } from "@/modules/auth/utils";
 
 export const fetchLastFuelReport = createAsyncThunk(
   "lastFuelReportStatus/fetch",
   async ({ imei }: { imei: string }) => {
-    // Obtengo la funcion logoutState que ejecutaré en caso de codigo 401
-    const { logoutState } = useAuth();
-    return getLastFuelReport(imei, logoutState);
+    return getLastFuelReport(imei);
   }
 );
 

@@ -1,25 +1,27 @@
 import { getCached } from "@/globalConfig/cache/cache";
+import { useAuth } from "@/modules/auth/utils";
 
 interface Props {
   cacheKey: string;
   fullUrl: string;
   options: RequestInit;
-  logoutState: () => void;
   forceRefresh?: boolean;
 }
 
-const fetchResponse = async (
-  fullUrl: string,
-  options: RequestInit,
-  logoutState: () => void
-) => {
+const LogoutOn401 = () => {
+  const { logoutState } = useAuth();
+  logoutState();
+  return null;
+};
+
+const fetchResponse = async (fullUrl: string, options: RequestInit) => {
   try {
     const response = await fetch(fullUrl, options);
     let result;
     if (200 === response.status) {
       result = await response.json();
     } else if (401 === response.status) {
-      logoutState();
+      LogoutOn401();
     } else {
       result = {
         code: response.status,
@@ -37,12 +39,11 @@ export async function UseMiddlewareAfterFetch({
   cacheKey,
   fullUrl,
   options,
-  logoutState,
   forceRefresh = false,
 }: Props) {
   return getCached(
     cacheKey,
-    await fetchResponse(fullUrl, options, logoutState),
+    await fetchResponse(fullUrl, options),
     forceRefresh
   );
 }
