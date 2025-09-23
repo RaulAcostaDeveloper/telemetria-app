@@ -1,10 +1,9 @@
-import { UseMiddlewareAfterFetch } from "@/modules/global/utils/useMiddlewareAfterFetch";
+import { getCached } from "@/globalConfig/cache/cache";
 const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/analytics/obd/device/";
 
 // Función fetch con enlace a caché
 export async function getObdTravelMetrics(
   deviceId: string,
-  logoutState: () => void,
   startDate: string,
   endDate: string
   // forceRefresh = true // Se le puede indicar que no busque en caché
@@ -13,7 +12,7 @@ export async function getObdTravelMetrics(
   const fullUrl = `${url}${deviceId}/travel-metrics?startDate=${startDate}&endDate=${endDate}`;
 
   // Construcción del key único para caché
-  const cacheKey =
+  const key =
     process.env.NEXT_PUBLIC_API_VERSION +
     `obdTravelMetrics-${deviceId}-${startDate}-${endDate}`;
 
@@ -26,10 +25,26 @@ export async function getObdTravelMetrics(
   };
 
   // Retorna DATA del servidor o DATA de caché
-  return UseMiddlewareAfterFetch({
-    cacheKey,
-    fullUrl,
-    options,
-    logoutState,
-  });
+  return getCached(
+    key,
+    async () => {
+      try {
+        const response = await fetch(fullUrl, options);
+        const result =
+          response.status === 200
+            ? await response.json()
+            : {
+                code: response.status,
+                message: response.statusText,
+                value: null,
+              };
+        return result;
+      } catch {
+        throw new Error(
+          "Error al obtener servicio de obd device travel metrics"
+        );
+      }
+    }
+    // forceRefresh
+  );
 }

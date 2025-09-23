@@ -1,10 +1,9 @@
-import { UseMiddlewareAfterFetch } from "@/modules/global/utils/useMiddlewareAfterFetch";
+import { getCached } from "@/globalConfig/cache/cache";
 
 const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/analytics/fuel/clients/me";
 
 // Función fetch con enlace a caché
 export async function getTopFuelReport(
-  logoutState: () => void,
   numberOfVehicles: number,
   startDate: string,
   endDate: string,
@@ -20,16 +19,29 @@ export async function getTopFuelReport(
     credentials: "include",
   };
   // Construcción del key único para caché
-  const cacheKey =
+  const key =
     process.env.NEXT_PUBLIC_API_VERSION +
     `topFuelReport-${numberOfVehicles}-${startDate}-${endDate}`;
 
   // Retorna DATA del servidor o DATA de caché
-  return UseMiddlewareAfterFetch({
-    cacheKey,
-    fullUrl,
-    options,
-    logoutState,
-    forceRefresh,
-  });
+  return getCached(
+    key,
+    async () => {
+      try {
+        const response = await fetch(fullUrl, options);
+        const result =
+          response.status === 200
+            ? await response.json()
+            : {
+                code: response.status,
+                message: response.statusText,
+                value: null,
+              };
+        return result;
+      } catch {
+        throw new Error("Error al obtener top fuel report de combustible");
+      }
+    },
+    forceRefresh
+  );
 }

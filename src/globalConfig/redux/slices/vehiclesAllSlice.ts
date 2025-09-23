@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getVehiclesAll } from "@/modules/management/services/vehicles/vehiclesAll";
-import { useAuth } from "@/modules/auth/utils";
 
 interface Vehicle {
   id: string;
@@ -40,8 +39,7 @@ interface InitialState {
 export const fetchVehiclesAll = createAsyncThunk(
   "vehiclesAll/fetch",
   async ({ forceRefresh }: { forceRefresh: boolean }) => {
-    const { logoutState } = useAuth();
-    return getVehiclesAll(logoutState, forceRefresh);
+    return getVehiclesAll(forceRefresh);
   }
 );
 

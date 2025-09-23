@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getFuelSummary } from "@/modules/fuel/services/fuelSummary/fuelSummary";
-import { useAuth } from "@/modules/auth/utils";
 
 // Tipado de los datos
 export interface Devices {
@@ -54,8 +53,7 @@ export const fetchFuelSummary = createAsyncThunk(
     endDate: string;
     performanceType: string;
   }) => {
-    const { logoutState } = useAuth();
-    return getFuelSummary(logoutState, startDate, endDate, performanceType);
+    return getFuelSummary(startDate, endDate, performanceType);
   }
 );
 

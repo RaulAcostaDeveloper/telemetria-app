@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getObdTravelMetrics } from "@/modules/telemetryObd/services/travel-metrics/travel-metrics";
-import { useAuth } from "@/modules/auth/utils";
 
 interface ObdTravelMetricsTimeTraveledDetails {
   lat: number;
@@ -47,8 +46,7 @@ export const fetchObdTravelMetrics = createAsyncThunk(
     startDate: string;
     endDate: string;
   }) => {
-    const { logoutState } = useAuth();
-    return getObdTravelMetrics(deviceId, logoutState, startDate, endDate);
+    return getObdTravelMetrics(deviceId, startDate, endDate);
   }
 );
 

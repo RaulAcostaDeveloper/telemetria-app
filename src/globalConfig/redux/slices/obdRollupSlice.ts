@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "../types/serviceTypes";
 import { getObdRollup } from "@/modules/telemetryObd/services/rollup/rollup";
-import { useAuth } from "@/modules/auth/utils";
 
 interface ObdRollupDetails {
   name: string;
@@ -38,8 +37,7 @@ interface InitialState {
 export const fetchObdRollup = createAsyncThunk(
   "obdRollup/fetch",
   async ({ startDate, endDate }: { startDate: string; endDate: string }) => {
-    const { logoutState } = useAuth();
-    return getObdRollup(logoutState, startDate, endDate);
+    return getObdRollup(startDate, endDate);
   }
 );
 
