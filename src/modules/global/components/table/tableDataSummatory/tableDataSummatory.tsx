@@ -33,6 +33,14 @@ export const TableDataSummatory = ({
     // Máximo 3 decimales
     return Math.round(total * 1000) / 1000;
   };
+  const calcAverage = (index: number): number => {
+    const sum = calcSumm(index);
+    if (0 !== sum && 0 !== filteredData.length) {
+      return Math.round(((sum / filteredData.length) * 1000) / 1000);
+    } else {
+      return 0;
+    }
+  };
 
   return (
     <div className={`${styles.tableDataSummatory}`}>
@@ -43,10 +51,16 @@ export const TableDataSummatory = ({
         return (
           <div key={el.columnName + index} style={defaultSpace}>
             {el.showTotal && (
-              <div className={`${styles.summatory}`}>
-                <p>{LANGUAGE.table.elements.total}</p>
-                <span>{calcSumm(index)}</span>
-              </div>
+              <>
+                <div className={`${styles.summatory}`}>
+                  <p>{LANGUAGE.table.elements.total}</p>
+                  <span>{calcSumm(index)}</span>
+                </div>
+                <div className={`${styles.average}`}>
+                  <p>{LANGUAGE.table.elements.average}</p>
+                  <span>{calcAverage(index)}</span>
+                </div>
+              </>
             )}
           </div>
         );
