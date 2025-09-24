@@ -64,11 +64,6 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   // En grupo, poder filtrar por nombre del grupo
   const vehicleColumns: columnsTable = [
     {
-      columnName: LANGUAGE.management.tableColumns.serialNumber,
-      defaultSpace: 4,
-      orderColumn: true,
-    },
-    {
       columnName: LANGUAGE.management.tableColumns.plates,
       defaultSpace: 2,
       orderColumn: true,
@@ -84,15 +79,10 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       filterSelector: true,
       orderColumn: true,
     },
+
     {
       columnName: LANGUAGE.management.tableColumns.model,
       defaultSpace: 2,
-      orderColumn: true,
-      filterSelector: true,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.vehicleType,
-      defaultSpace: 4,
       orderColumn: true,
       filterSelector: true,
     },
@@ -101,6 +91,12 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       defaultSpace: 2,
       orderColumn: true,
       minMaxFilter: true,
+    },
+    {
+      columnName: LANGUAGE.management.tableColumns.vehicleType,
+      defaultSpace: 4,
+      orderColumn: true,
+      filterSelector: true,
     },
     {
       columnName: LANGUAGE.management.tableColumns.driver,
@@ -113,20 +109,25 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       filterSelector: true,
       orderColumn: true,
     },
+    {
+      columnName: LANGUAGE.management.tableColumns.serialNumber,
+      defaultSpace: 4,
+      orderColumn: true,
+    },
   ];
 
   // Ejemplo de como añadir o quitar elementos en la tabla
   const vehiclesTableData = useMemo(() => {
     return vehiclesData?.value?.vehicles.map((value) => ({
-      serialNumber: value.serialNumber,
       plate: value.plate,
       name: value.name,
       brand: value.brand,
       model: value.model,
-      vehicleType: value.vehicleType,
       year: value.year,
+      vehicleType: value.vehicleType,
       driver: value.driver,
       groupName: value.group[0].name,
+      serialNumber: value.serialNumber,
       groupId: value.group[0].id,
       imeIs: value.imeIs, ///aqui name, no mostrar imeis pero si que exista.
       id: value.id,

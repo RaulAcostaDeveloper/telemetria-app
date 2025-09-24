@@ -264,7 +264,7 @@ export const SPANISH: LanguageInterface = {
     summaryReports: {
       labels: {
         inventory: "Inventario total",
-        performance: "Rendimiento de la flota",
+        performance: "Rendimiento promedio de la flota",
         fuelCharged: "Combustible cargado",
         fuelDischarged: "Combustible descargado",
         unitsAnalyzed: "Unidades analizadas",
@@ -291,7 +291,7 @@ export const SPANISH: LanguageInterface = {
       discharges: "Descargas",
     },
     vehicleReports: {
-      distanceEfficiency: "Rendimiento por distancia",
+      distanceEfficiency: "Rendimiento",
       distanceTravelled: "Distancia recorrida",
       fuelConsumed: "Combustible consumido",
       fuelEnd: "Combustible final",
@@ -355,7 +355,7 @@ export const SPANISH: LanguageInterface = {
       groupVehicles: "Vehículos del grupo",
       vehicleInformation: "Información del vehículo",
       address: "Dirección",
-      alias: "Alias",
+      alias: "Nombre",
       brand: "Marca",
       celphone: "Teléfono",
       createdAt: "Fecha de creación",
@@ -370,7 +370,7 @@ export const SPANISH: LanguageInterface = {
       imei: "IMEI",
       lastDataDate: "Fecha de último reporte",
       lastnames: "Apellido(s)",
-      license: "License",
+      license: "Licencia",
       model: "Modelo",
       name: "Nombre",
       names: "Nombre(s)",

@@ -52,8 +52,13 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.lastFuelLevel,
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.plate,
       defaultSpace: 3,
+      orderColumn: true,
+    },
+    {
+      columnName: LANGUAGE.fuel.vehiclesTableColumns.lastFuelLevel,
+      defaultSpace: 5,
       orderColumn: true,
       minMaxFilter: true,
       showTotal: true,
@@ -94,13 +99,8 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
       minMaxFilter: true,
     },
     {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.plate,
-      defaultSpace: 6,
-      orderColumn: true,
-    },
-    {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.lastReportDate,
-      defaultSpace: 3,
+      defaultSpace: 4,
       orderColumn: true,
     },
   ];
@@ -108,13 +108,13 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
   const vehiclesReport = useMemo(() => {
     return fuelSummaryData?.value?.devices.map((value) => ({
       name: value.name,
+      plate: value.plate,
       lastFuelLevel: value.lastFuelLevel,
       performanceOdometer: value.performanceOdometer,
       fuelLoadCount: value.fuelLoadCount,
       fuelUnloadCount: value.fuelUnloadCount,
       fuelLoaded: value.fuelLoaded,
       fuelUnloaded: value.fuelUnloaded,
-      plate: value.plate,
       lastReportDate: value.lastReportDate,
       imei: value.imei,
     }));

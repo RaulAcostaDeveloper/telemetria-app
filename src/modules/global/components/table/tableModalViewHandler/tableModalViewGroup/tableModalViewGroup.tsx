@@ -57,12 +57,6 @@ export const TableModalViewGroup = ({
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.year,
-      defaultSpace: 2,
-      orderColumn: true,
-      minMaxFilter: true,
-    },
-    {
       columnName: LANGUAGE.management.tableColumns.alias,
       defaultSpace: 3,
       orderColumn: true,
@@ -79,15 +73,21 @@ export const TableModalViewGroup = ({
       orderColumn: true,
       filterSelector: true,
     },
+    {
+      columnName: LANGUAGE.management.tableColumns.year,
+      defaultSpace: 2,
+      orderColumn: true,
+      minMaxFilter: true,
+    },
   ];
 
   const vehiclesTableData: dataTable | undefined = groupsVehicles?.map(
     (value) => ({
       plate: value.plate,
-      year: value.year,
       name: value.name,
       brand: value.brand,
       model: value.model,
+      year: value.year,
       groupName: value.group[0].name,
       groupId: value.group[0].id,
       imeIs: value.imeIs,
