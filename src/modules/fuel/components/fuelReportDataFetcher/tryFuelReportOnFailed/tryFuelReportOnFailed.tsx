@@ -41,7 +41,7 @@ export const TryFuelReportOnFailed = ({ imei }: Props) => {
       setTimeout(() => {
         dispatch(
           fetchFuelData({
-            imei: "862524060822760", // imei.toString(),
+            imei: imei, // imei.toString(),
             startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
             endDate: formatToLocalIso8601(endDate),
             logoutState,
@@ -62,7 +62,7 @@ export const TryFuelReportOnFailed = ({ imei }: Props) => {
       setTimeout(() => {
         dispatch(
           fetchFuelPerformance({
-            imei: "862524060822760", // imei.toString(),
+            imei: imei, // imei.toString(),
             startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
             endDate: formatToLocalIso8601(endDate),
             logoutState,
@@ -83,7 +83,7 @@ export const TryFuelReportOnFailed = ({ imei }: Props) => {
       setTimeout(() => {
         dispatch(
           fetchLastFuelReport({
-            imei: "862524060822760", // imei.toString(),
+            imei: imei, // imei.toString(),
             logoutState,
           })
         );

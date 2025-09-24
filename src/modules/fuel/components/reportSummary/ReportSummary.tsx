@@ -44,8 +44,8 @@ const ReportSummary = ({ summaryValues }: Props) => {
             {summaryValues.performanceOdometer
               ? `${formatNumberWithCommas(
                   summaryValues.performanceOdometer
-                )}  Km`
-              : "0,00  Km"}
+                )}  Km / L`
+              : "0,00  Km / L"}
           </span>
         </div>
       </div>

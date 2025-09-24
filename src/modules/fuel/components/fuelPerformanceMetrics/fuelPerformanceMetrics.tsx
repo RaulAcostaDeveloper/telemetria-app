@@ -32,12 +32,12 @@ export const FuelPerformanceMetrics = ({
             "ND"
           }
         />
-        <MetricItem
+        {/* <MetricItem
           LANGUAGE={LANGUAGE}
           metric="L/H"
           name={LANGUAGE.fuelVehicle.vehicleReports.timeEfficiency}
           value={fuelPerformanceData.performanceByTime.toLocaleString("en-US")}
-        />
+        /> */}
         <MetricItem
           LANGUAGE={LANGUAGE}
           isLast

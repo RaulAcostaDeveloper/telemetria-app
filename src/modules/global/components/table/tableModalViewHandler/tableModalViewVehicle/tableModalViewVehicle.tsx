@@ -29,6 +29,10 @@ export const TableModalViewVehicle = ({
             <p>{dataObject.imeIs}</p>
           </div>
           <div>
+            <h4>{LANGUAGE.management.tableColumns.plates}</h4>
+            <p>{dataObject.plate}</p>
+          </div>
+          <div>
             <h4>{LANGUAGE.management.tableColumns.name}</h4>
             <p>{dataObject.name}</p>
           </div>
@@ -40,30 +44,25 @@ export const TableModalViewVehicle = ({
             <h4>{LANGUAGE.management.tableColumns.model}</h4>
             <p>{dataObject.model}</p>
           </div>
-
           <div>
-            <h4>{LANGUAGE.management.tableColumns.groupName}</h4>
-            <p>{dataObject.groupName ?? "ND"}</p>
-          </div>
-          <div>
-            <h4>{LANGUAGE.management.tableColumns.driver}</h4>
-            <p>{dataObject.driver}</p>
-          </div>
-          <div>
-            <h4>{LANGUAGE.management.tableColumns.plates}</h4>
-            <p>{dataObject.plate}</p>
-          </div>
-          <div>
-            <h4>{LANGUAGE.management.tableColumns.serialNumber}</h4>
-            <p>{dataObject.serialNumber}</p>
+            <h4>{LANGUAGE.management.tableColumns.year}</h4>
+            <p>{dataObject.year}</p>
           </div>
           <div>
             <h4>{LANGUAGE.management.tableColumns.vehicleType}</h4>
             <p>{dataObject.vehicleType}</p>
           </div>
           <div>
-            <h4>{LANGUAGE.management.tableColumns.year}</h4>
-            <p>{dataObject.year}</p>
+            <h4>{LANGUAGE.management.tableColumns.driver}</h4>
+            <p>{dataObject.driver}</p>
+          </div>
+          <div>
+            <h4>{LANGUAGE.management.tableColumns.groupName}</h4>
+            <p>{dataObject.groupName ?? "ND"}</p>
+          </div>
+          <div>
+            <h4>{LANGUAGE.management.tableColumns.serialNumber}</h4>
+            <p>{dataObject.serialNumber}</p>
           </div>
         </div>
         <div className={styles.rightSide}>

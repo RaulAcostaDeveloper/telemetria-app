@@ -32,7 +32,7 @@ export const FuelReportDataFetcher = ({ imei }: Props) => {
     if (isAuthenticated && startDate && endDate && imei.length > 10) {
       dispatch(
         fetchFuelData({
-          imei: "862524060822760", // imei.toString(),
+          imei: imei, // imei.toString(),
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
           logoutState,
@@ -41,7 +41,7 @@ export const FuelReportDataFetcher = ({ imei }: Props) => {
 
       dispatch(
         fetchFuelPerformance({
-          imei: "862524060822760", // imei.toString(),
+          imei: imei, // imei.toString(),
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
           logoutState,
@@ -50,7 +50,7 @@ export const FuelReportDataFetcher = ({ imei }: Props) => {
 
       dispatch(
         fetchLastFuelReport({
-          imei: "862524060822760", // imei.toString(),
+          imei: imei, // imei.toString(),
           logoutState,
         })
       );
@@ -67,7 +67,7 @@ export const FuelReportDataFetcher = ({ imei }: Props) => {
       ) {
         dispatch(
           fetchLastFuelReport({
-            imei: "862524060822760", // imei.toString(),
+            imei: imei, // imei.toString(),
             logoutState,
           })
         );

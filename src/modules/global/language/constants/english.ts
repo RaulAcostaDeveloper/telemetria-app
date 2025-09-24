@@ -264,7 +264,7 @@ export const ENGLISH: LanguageInterface = {
     summaryReports: {
       labels: {
         inventory: "Total inventory",
-        performance: "Fleet performance",
+        performance: "Average fleet performance",
         fuelCharged: "Fuel filled",
         fuelDischarged: "Fuel drained",
         unitsAnalyzed: "Units analyzed",
@@ -291,7 +291,7 @@ export const ENGLISH: LanguageInterface = {
       discharges: "Drains",
     },
     vehicleReports: {
-      distanceEfficiency: "Distance efficiency",
+      distanceEfficiency: "Efficiency",
       distanceTravelled: "Distance traveled",
       fuelConsumed: "Fuel consumed",
       fuelEnd: "Final fuel",
@@ -355,7 +355,7 @@ export const ENGLISH: LanguageInterface = {
       groupVehicles: "Group's vehicles",
       vehicleInformation: "Vehicle information",
       address: "Address",
-      alias: "Alias",
+      alias: "Name",
       brand: "Brand",
       celphone: "Phone",
       createdAt: "Creation date",
