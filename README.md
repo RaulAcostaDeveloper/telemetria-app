@@ -1,12 +1,12 @@
-# solid-snake - Blackfyre Transtelemetrix
+# solid-snake - Darksister Transtelemetrix
 
-Se hace este proyecto para el producto Blackfyre - Transtelemetris
+Se hace este proyecto para el producto Darksister - Transtelemetris
 
 ## Tecnologías y lenguajes
 
-- Next.js 14.2.24
+- Next.js 14.2.28
 - TypeScript
-- Node.js 20.16
+- Node.js 22.19
 - CSS modules
 - HighCharts, HighCharts Stock, Highcharts react official
 - DnD Kit (drag and drop)
@@ -16,13 +16,14 @@ Se hace este proyecto para el producto Blackfyre - Transtelemetris
 - React google maps
 - Redux tookit
 - Jest (unit test)
-- Axios (http request)
+- MUI icons
+- Dexie
 
 ## Reglas de uso
 
-- Solicita acceso al archivo de one drive que define el uso de este proyecto
+- Solicita acceso a los archivos de one drive que define el uso de este proyecto
 
-- Archivo Arquitectura Front End - Transtelemetrix: https://innovariamx-my.sharepoint.com/:w:/g/personal/raul_acosta_transtelemetrix_com/EVLlbSTQdsNJpnkq3AZqdhwBhy1DDxD6ebjK-ZjN6jlkVA?e=M8AxOa
+- Archivos Reglas e Instrucciones Front End - Transtelemetrix: (https://innovariamx-my.sharepoint.com/my?id=%2Fpersonal%2Fraul%5Facosta%5Ftranstelemetrix%5Fcom%2FDocuments%2FDocumentos%20compartidos%20%2D%20Transtelemetrix%2FFront%20End%20Team&ga=1)
 
 - Sigue las instrucciones y normas para codificar y construir funcionalidad en este proyecto
 
@@ -32,8 +33,8 @@ Se hace este proyecto para el producto Blackfyre - Transtelemetris
 `npx create-next-app@14.2.24 solid-snake`
 
 **Instalar dependencias**
-`nvm install 20.16`
-`nvm use 20`
+`nvm install 22.19`
+`nvm use 22`
 `npm install`
 
 **Levantar el proyecto en desarrollo**
@@ -41,10 +42,14 @@ Se hace este proyecto para el producto Blackfyre - Transtelemetris
 
 Abrir [http://localhost:3000](http://localhost:3000) en el navegador web para ver el proyecto en ejecución.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Archivo .env
+
+- Solicitar al equipo el contenido del archivo .env
 
 ## Ramas
 
 - production: Es la rama de despliegue a la aplicación
 
-- develop: Es la rama de pruebas pre-producción
+- state: Es la rama de pruebas antes de desplegar
+
+- develop: Es la rama de integración de desarrollo
