@@ -9,7 +9,7 @@ interface UserData {
 }
 
 interface LoginData {
-  code: number;
+  statusCode: number;
   message: string;
   value: UserData | null;
 }
@@ -34,16 +34,30 @@ export const fetchLogin = createAsyncThunk(
     };
 
     try {
-      const res = await fetch(url, options);
-      const result: LoginData =
-        res.status == 200
-          ? await res.json()
-          : ({
-              code: res.status,
-              message: res.statusText,
-              value: null,
-            } as LoginData);
-      return result;
+      const response = await fetch(url, options);
+      if (response.ok) {
+        const result = await response.json();
+
+        if (response.status === 200) {
+          return {
+            statusCode: response.status,
+            message: "OK",
+            value: result.value,
+          } as LoginData;
+        } else {
+          return {
+            statusCode: response.status,
+            message: response.statusText,
+            value: null,
+          } as LoginData;
+        }
+      } else {
+        return {
+          statusCode: response.status,
+          message: response.statusText,
+          value: null,
+        } as LoginData;
+      }
     } catch {
       return rejectWithValue(0); //Sin conexión / timeout / DNS => no hay respuesta HTTP
     }

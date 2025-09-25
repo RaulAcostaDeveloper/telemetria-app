@@ -12,7 +12,7 @@ interface UserData {
 }
 
 interface LoginData {
-  code: number;
+  statusCode: number;
   message: string;
   value: UserData | null;
 }

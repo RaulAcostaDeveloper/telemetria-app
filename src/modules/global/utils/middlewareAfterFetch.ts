@@ -12,7 +12,6 @@ const fetchResponse = async ({ fullUrl, options, logoutState }: fetchProps) => {
 
     if (401 === response.status) {
       logoutState();
-
       return {
         statusCode: response.status,
         message: "Unauthorized",
@@ -65,7 +64,6 @@ export async function middlewareAfterFetch({
 }: MiddlewareProps) {
   if (options) {
     const data = await fetchResponse({ fullUrl, options, logoutState });
-
     return getCached(cacheKey, data, forceRefresh);
   } else {
     const data = await fetchResponse({ fullUrl, logoutState });
