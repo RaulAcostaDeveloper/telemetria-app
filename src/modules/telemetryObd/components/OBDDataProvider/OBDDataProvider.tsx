@@ -23,10 +23,10 @@ import { formatNumberWithCommas } from "@/modules/global/utils/utils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  showTable?: boolean; //Esconde la tabla si el módulo es usado en Home.
+  hideTable?: boolean; //Esconde la tabla si el módulo es usado en Home.
 }
 
-export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
+export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
   const { obdRollupData, obdRollupStatus } = useSelector(
     (state: RootState) => state.obdRollup
   );
@@ -159,7 +159,7 @@ export const OBDDataProvider = ({ LANGUAGE, showTable }: Props) => {
                 />
               </CardGenThird>
             </section>
-            {showTable && (
+            {!hideTable && (
               <Table
                 title={LANGUAGE.teleOBD.tableTitle.registerTeleOBD}
                 LANGUAGE={LANGUAGE}

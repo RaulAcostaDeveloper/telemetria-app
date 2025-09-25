@@ -7,7 +7,7 @@ export default function Telemetry() {
 
   return (
     <div>
-      <OBDDataProvider LANGUAGE={LANGUAGE} showTable />
+      <OBDDataProvider LANGUAGE={LANGUAGE} />
     </div>
   );
 }

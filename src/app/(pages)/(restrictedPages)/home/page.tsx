@@ -1,7 +1,7 @@
 "use client";
-import { HomeBriefFuelDataProvider } from "@/modules/home/components";
 import { OBDDataProvider } from "@/modules/telemetryObd/components";
 import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
+import { FuelDataProvider } from "@/modules/fuel/components";
 
 export default function Home() {
   const LANGUAGE = useLanguage();
@@ -9,9 +9,9 @@ export default function Home() {
   return (
     <div>
       {/* <section> */}
-      <HomeBriefFuelDataProvider LANGUAGE={LANGUAGE} />
+      <FuelDataProvider LANGUAGE={LANGUAGE} hideTabs />
       {/* </section> */}
-      <OBDDataProvider LANGUAGE={LANGUAGE} />
+      <OBDDataProvider LANGUAGE={LANGUAGE} hideTable />
     </div>
   );
 }

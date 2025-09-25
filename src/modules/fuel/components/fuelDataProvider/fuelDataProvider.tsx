@@ -17,9 +17,10 @@ import { columnsTable } from "@/modules/global/components/table/table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
+  hideTabs?: boolean;
 }
 
-export const FuelDataProvider = ({ LANGUAGE }: Props) => {
+export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
   const { fuelSummaryData, fuelSummaryStatus } = useSelector(
     (state: RootState) => state.fuelSummary
   );
@@ -303,72 +304,74 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
           infoStatus={fuelSummaryStatus}
         />
       </div>
-      <div className={styles.fuelTabs}>
-        <TabsContent
-          tabOptions={tabOptions}
-          tabContents={[
-            <div key={1}>
-              {fuelSummaryStatus === SERVICE_STATUS.succeeded &&
-                vehiclesReport && (
-                  <Table
-                    LANGUAGE={LANGUAGE}
-                    columns={vehiclesColumns}
-                    data={vehiclesReport}
-                    idKey="imei"
-                    showGoFuel
-                    showGoOBD
-                  />
-                )}
+      {!hideTabs && (
+        <div className={styles.fuelTabs}>
+          <TabsContent
+            tabOptions={tabOptions}
+            tabContents={[
+              <div key={1}>
+                {fuelSummaryStatus === SERVICE_STATUS.succeeded &&
+                  vehiclesReport && (
+                    <Table
+                      LANGUAGE={LANGUAGE}
+                      columns={vehiclesColumns}
+                      data={vehiclesReport}
+                      idKey="imei"
+                      showGoFuel
+                      showGoOBD
+                    />
+                  )}
 
-              <DataErrorHandler
-                LANGUAGE={LANGUAGE}
-                hasData={!!vehiclesReport}
-                infoStatus={fuelSummaryStatus}
-              />
-            </div>,
-            <div key={2}>
-              {topFuelReportStatus === SERVICE_STATUS.succeeded &&
-                topFuelReportCharges && (
-                  <Table
-                    LANGUAGE={LANGUAGE}
-                    columns={topFuelReportChargesColumns}
-                    data={topFuelReportCharges}
-                    idKey="imei"
-                    showViewModal
-                    showGoFuel
-                    showGoOBD
-                  />
-                )}
+                <DataErrorHandler
+                  LANGUAGE={LANGUAGE}
+                  hasData={!!vehiclesReport}
+                  infoStatus={fuelSummaryStatus}
+                />
+              </div>,
+              <div key={2}>
+                {topFuelReportStatus === SERVICE_STATUS.succeeded &&
+                  topFuelReportCharges && (
+                    <Table
+                      LANGUAGE={LANGUAGE}
+                      columns={topFuelReportChargesColumns}
+                      data={topFuelReportCharges}
+                      idKey="imei"
+                      showViewModal
+                      showGoFuel
+                      showGoOBD
+                    />
+                  )}
 
-              <DataErrorHandler
-                LANGUAGE={LANGUAGE}
-                hasData={!!topFuelReportCharges}
-                infoStatus={topFuelReportStatus}
-              />
-            </div>,
-            <div key={3}>
-              {topFuelReportStatus === SERVICE_STATUS.succeeded &&
-                topFuelReportDischarges && (
-                  <Table
-                    LANGUAGE={LANGUAGE}
-                    columns={topFuelReportDischargesColumns}
-                    data={topFuelReportDischarges}
-                    idKey="imei"
-                    showViewModal
-                    showGoFuel
-                    showGoOBD
-                  />
-                )}
+                <DataErrorHandler
+                  LANGUAGE={LANGUAGE}
+                  hasData={!!topFuelReportCharges}
+                  infoStatus={topFuelReportStatus}
+                />
+              </div>,
+              <div key={3}>
+                {topFuelReportStatus === SERVICE_STATUS.succeeded &&
+                  topFuelReportDischarges && (
+                    <Table
+                      LANGUAGE={LANGUAGE}
+                      columns={topFuelReportDischargesColumns}
+                      data={topFuelReportDischarges}
+                      idKey="imei"
+                      showViewModal
+                      showGoFuel
+                      showGoOBD
+                    />
+                  )}
 
-              <DataErrorHandler
-                LANGUAGE={LANGUAGE}
-                hasData={!!topFuelReportDischarges}
-                infoStatus={topFuelReportStatus}
-              />
-            </div>,
-          ]}
-        />
-      </div>
+                <DataErrorHandler
+                  LANGUAGE={LANGUAGE}
+                  hasData={!!topFuelReportDischarges}
+                  infoStatus={topFuelReportStatus}
+                />
+              </div>,
+            ]}
+          />
+        </div>
+      )}
     </div>
   );
 };
