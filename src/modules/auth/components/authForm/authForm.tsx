@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 
-import CheckLogin from "@/modules/login/checkLogin/checkLogin";
+import CheckLogin from "@/modules/auth/components/checkLogin/checkLogin";
 import encryptUserAndPassword from "../../utils/cryptoReference/cryptoReference";
 import styles from "./authForm.module.css";
 import { ButtonTypes } from "@/modules/global/components/generalButton/generalButton.model";
@@ -122,71 +122,73 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
       <CheckLogin />
     </div>
   ) : (
-    <div className={styles.formContainer}>
-      <div className={styles.authForm}>
-        <div className={styles.logoContainer}>
-          <Image
-            alt={LANGUAGE.menu.titles.logo}
-            height={100}
-            src={"/svg/Imagotipo_Black_transtelemetris.svg"}
-            width={460}
-          />
-        </div>
-
-        <div className={styles.inputsContainers}>
-          <label htmlFor="username">{LANGUAGE.auth.authForm.name}</label>
-          <input
-            id="username"
-            type="text"
-            placeholder={LANGUAGE.auth.authForm.name}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            onKeyDown={(e) => {
-              handlePassKeyDown(e);
-              handleKeyEvent(e);
-            }}
-            onKeyUp={handleKeyEvent}
-          />
-        </div>
-
-        <div className={styles.inputsContainers}>
-          <label htmlFor="password">{LANGUAGE.auth.authForm.password}</label>
-          <input
-            id="password"
-            type="password"
-            placeholder={LANGUAGE.auth.authForm.password}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            onKeyDown={(e) => {
-              handlePassKeyDown(e);
-              handleKeyEvent(e);
-            }}
-            onKeyUp={handleKeyEvent}
-          />
-        </div>
-
-        {capsLock && (
-          <div className={styles.mayusActivated}>
+    <div className={styles.loginPage}>
+      <div className={styles.formContainer}>
+        <div className={styles.authForm}>
+          <div className={styles.logoContainer}>
             <Image
-              src={"/png/bloq-mayus.png"}
-              width={20}
-              height={20}
-              alt="bloq mayus"
+              alt={LANGUAGE.menu.titles.logo}
+              height={100}
+              src={"/svg/Imagotipo_Black_transtelemetris.svg"}
+              width={460}
             />
-            <span>{LANGUAGE.auth.authForm.mayusActivated}</span>
           </div>
-        )}
 
-        <GeneralButton
-          callback={onClickGetToken}
-          title={LANGUAGE.auth.authForm.loginButton}
-          type={ButtonTypes.CONFIRM}
-          disabled={isFormValid ? false : true}
-        />
-        {errorSelector()}
-        {loginStatus === SERVICE_STATUS.failed && (
-          <ErrorMessage LANGUAGE={LANGUAGE} />
-        )}
+          <div className={styles.inputsContainers}>
+            <label htmlFor="username">{LANGUAGE.auth.authForm.name}</label>
+            <input
+              id="username"
+              type="text"
+              placeholder={LANGUAGE.auth.authForm.name}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              onKeyDown={(e) => {
+                handlePassKeyDown(e);
+                handleKeyEvent(e);
+              }}
+              onKeyUp={handleKeyEvent}
+            />
+          </div>
+
+          <div className={styles.inputsContainers}>
+            <label htmlFor="password">{LANGUAGE.auth.authForm.password}</label>
+            <input
+              id="password"
+              type="password"
+              placeholder={LANGUAGE.auth.authForm.password}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => {
+                handlePassKeyDown(e);
+                handleKeyEvent(e);
+              }}
+              onKeyUp={handleKeyEvent}
+            />
+          </div>
+
+          {capsLock && (
+            <div className={styles.mayusActivated}>
+              <Image
+                src={"/png/bloq-mayus.png"}
+                width={20}
+                height={20}
+                alt="bloq mayus"
+              />
+              <span>{LANGUAGE.auth.authForm.mayusActivated}</span>
+            </div>
+          )}
+
+          <GeneralButton
+            callback={onClickGetToken}
+            title={LANGUAGE.auth.authForm.loginButton}
+            type={ButtonTypes.CONFIRM}
+            disabled={isFormValid ? false : true}
+          />
+          {errorSelector()}
+          {loginStatus === SERVICE_STATUS.failed && (
+            <ErrorMessage LANGUAGE={LANGUAGE} />
+          )}
+        </div>
       </div>
     </div>
   );

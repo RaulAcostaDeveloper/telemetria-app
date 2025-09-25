@@ -5,9 +5,5 @@ import { ManagementDataProvider } from "@/modules/management/components";
 export default function Management() {
   const LANGUAGE = useLanguage();
 
-  return (
-    <div>
-      <ManagementDataProvider LANGUAGE={LANGUAGE} />
-    </div>
-  );
+  return <ManagementDataProvider LANGUAGE={LANGUAGE} />;
 }

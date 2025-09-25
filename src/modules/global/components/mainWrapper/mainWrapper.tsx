@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/globalConfig/redux/store";
 
-import CheckLogin from "@/modules/login/checkLogin/checkLogin";
+import CheckLogin from "@/modules/auth/components/checkLogin/checkLogin";
 import styles from "./mainWrapper.module.css";
 import {
   localStorageGetItem,

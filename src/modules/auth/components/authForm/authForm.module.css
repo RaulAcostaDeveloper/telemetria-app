@@ -1,3 +1,13 @@
+.loginPage {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 3rem;
+}
+
 .formContainer {
   width: 500px;
   border: 1px solid #e5e7eb;

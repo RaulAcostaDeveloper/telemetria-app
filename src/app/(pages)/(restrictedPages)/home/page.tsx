@@ -8,9 +8,7 @@ export default function Home() {
 
   return (
     <div>
-      {/* <section> */}
       <FuelDataProvider LANGUAGE={LANGUAGE} hideTabs />
-      {/* </section> */}
       <OBDDataProvider LANGUAGE={LANGUAGE} hideTable />
     </div>
   );

@@ -5,9 +5,5 @@ import { useLanguage } from "@/modules/global/language/components/languageProvid
 export default function Telemetry() {
   const LANGUAGE = useLanguage();
 
-  return (
-    <div>
-      <OBDDataProvider LANGUAGE={LANGUAGE} />
-    </div>
-  );
+  return <OBDDataProvider LANGUAGE={LANGUAGE} />;
 }
