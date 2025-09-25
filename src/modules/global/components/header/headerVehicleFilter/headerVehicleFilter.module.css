@@ -5,14 +5,14 @@
 }
 .container input {
   padding: 1.2rem;
-  box-shadow: var(--input-shadow-1) 0px 6px 60px -12px inset,
-    var(--input-shadow-0) 4px 4px 10px -4px inset;
+  box-shadow: rgba(138, 138, 241, 0.25) 0px 6px 60px -12px inset,
+    rgba(0, 0, 0, 0.5) 4px 4px 10px -4px inset;
 }
 .container input:focus {
-  outline: 2px solid var(--input-shadow-2);
+  outline: 2px solid rgba(77, 77, 143, 0.25);
   outline-offset: 2px;
-  box-shadow: var(--input-shadow-2) 0px 6px 60px -12px inset,
-    var(--input-shadow-0) 4px 4px 10px -4px inset;
+  box-shadow: rgba(77, 77, 143, 0.25) 0px 6px 60px -12px inset,
+    rgba(0, 0, 0, 0.5) 4px 4px 10px -4px inset;
 }
 
 .input {

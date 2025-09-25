@@ -19,7 +19,7 @@
 }
 
 .icon {
-  color: var(--button-color-3);
+  color: var(--danger);
   height: 100%;
   padding-right: 6px;
   display: flex;

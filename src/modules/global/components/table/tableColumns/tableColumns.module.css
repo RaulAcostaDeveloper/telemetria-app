@@ -28,7 +28,7 @@
 }
 
 .columnButton:hover {
-  background-color: var(--company-color-5-rgba-10);
+  background-color: var(--company-color-5-dark);
 }
 
 .columnSortIcon {

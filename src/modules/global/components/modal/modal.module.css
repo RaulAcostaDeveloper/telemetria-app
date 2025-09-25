@@ -12,7 +12,7 @@
 }
 
 .insideModal {
-  background-color: var(--button-color-3);
+  background-color: var(--danger);
   background-color: white;
   border-radius: 20px;
   height: auto;
