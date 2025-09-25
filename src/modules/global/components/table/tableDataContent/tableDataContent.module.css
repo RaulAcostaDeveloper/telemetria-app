@@ -15,7 +15,7 @@
 }
 
 .dataObject:hover {
-  background-color: var(--company-color-2);
+  background-color: var(--company-color-1);
 }
 
 .scrollUp {

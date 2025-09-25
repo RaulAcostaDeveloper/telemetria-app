@@ -126,7 +126,7 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
                 ).map((action, idx) => (
                   <div
                     key={idx}
-                    className={`${styles.button}  ${
+                    className={`${
                       vehicle.imeIs.length > 10
                         ? ""
                         : `${styles.reportsDisabled}`
