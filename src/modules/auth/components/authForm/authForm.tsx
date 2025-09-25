@@ -44,7 +44,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
 
     if (loginServerData && null !== loginServerData) {
       setMemoryIfStatus(!!loginServerData);
-      setMemoryCodeStatus(loginServerData.code);
+      setMemoryCodeStatus(loginServerData.statusCode);
     } else if (
       SERVICE_STATUS.succeeded === loginStatus &&
       loginServerData &&
