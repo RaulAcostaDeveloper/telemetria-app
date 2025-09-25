@@ -35,7 +35,7 @@ export const useAuth = () => {
         loginServerData &&
         loginServerData.value &&
         loginStatus === SERVICE_STATUS.succeeded &&
-        loginServerData?.code === 200 &&
+        loginServerData?.statusCode === 200 &&
         loginServerData.value.userId.length > 3
       ) {
         loginState();
