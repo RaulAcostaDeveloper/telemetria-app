@@ -1,6 +1,6 @@
-import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
+import LoaderAnimation from "@/global/components/loaderAnimation/loaderAnimation";
 import styles from "./fuelNowVehicleTank.module.css";
-import { GaugeGraphic } from "@/modules/global/components";
+import { GaugeGraphic } from "@/global/components";
 
 interface Props {
   tankValues: number[] | undefined;

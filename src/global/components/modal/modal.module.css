@@ -1,0 +1,50 @@
+.modal {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 4;
+}
+
+.insideModal {
+  background-color: var(--danger);
+  background-color: white;
+  border-radius: 20px;
+  height: auto;
+  max-width: 90%;
+  min-width: 320px;
+  position: relative;
+  z-index: 2;
+}
+
+.closeButton {
+  background-color: transparent;
+  border-radius: 10%;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  right: 5px;
+  top: 0px;
+  color: white;
+}
+
+.closeButton:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.title h3 {
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 0;
+  background-color: var(--company-color-6);
+  color: white;
+}

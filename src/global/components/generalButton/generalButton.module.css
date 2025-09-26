@@ -1,0 +1,131 @@
+.generalButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  padding: 10px 5px;
+  border: none;
+  border-radius: 4px;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  transition: 0.5s;
+}
+
+.generalButton:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transform: translateY(-1px);
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconWithTitle {
+  padding-left: 5px;
+}
+
+.disabled {
+  background-color: var(--disabled);
+  color: #b0c4de;
+  cursor: no-drop;
+}
+
+.confirm {
+  background-color: var(--send);
+}
+
+.confirm:focus {
+  outline: none;
+  background-color: var(--send-dark);
+}
+
+.confirm:hover {
+  background-color: var(--send-dark);
+}
+
+.success {
+  background-color: var(--confirm);
+}
+
+.success:focus {
+  outline: none;
+  background-color: var(--confirm-dark);
+}
+
+.success:hover {
+  background-color: var(--confirm-dark);
+}
+
+.danger {
+  background-color: var(--danger);
+}
+
+.danger:focus {
+  outline: none;
+  background-color: var(--danger-dark);
+}
+
+.danger:hover {
+  background-color: var(--danger-dark);
+}
+
+.warning {
+  background-color: var(--warning);
+  color: #111827;
+}
+
+.warning:focus {
+  outline: none;
+  background-color: var(--warning-dark);
+}
+
+.warning:hover {
+  background-color: var(--warning-dark);
+}
+
+.userAction {
+  background-color: var(--calltoaction);
+}
+
+.userAction:focus {
+  outline: none;
+  background-color: var(--calltoaction-dark);
+}
+
+.userAction:hover {
+  background-color: var(--calltoaction-dark);
+}
+
+.neutral {
+  background-color: var(--neutral);
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.neutral:focus {
+  outline: none;
+  background-color: var(--neutral-dark);
+}
+
+.neutral:hover {
+  background-color: var(--neutral-dark);
+}
+
+.premium {
+  background-color: var(--premium);
+}
+
+.premium:focus {
+  outline: none;
+  background-color: var(--premium-dark);
+}
+
+.premium:hover {
+  background-color: var(--premium-dark);
+}

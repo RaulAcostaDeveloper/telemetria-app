@@ -5,11 +5,11 @@ import { useRouter } from "next/navigation";
 import {
   loginAction,
   logoutAction,
-} from "@/globalConfig/redux/slices/authSlice";
-import { AppDispatch, RootState } from "@/globalConfig/redux/store";
-import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
-import { callLogout } from "@/globalConfig/redux/slices/logoutSlice";
-import { fetchBrands } from "@/globalConfig/redux/slices/brandsSlice";
+} from "@/global/redux/serviceSlices/authSlice";
+import { AppDispatch, RootState } from "@/global/redux/store";
+import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
+import { callLogout } from "@/global/redux/serviceSlices/logoutSlice";
+import { fetchBrands } from "@/global/redux/serviceSlices/brandsSlice";
 import { fetchLogin } from "../../services/postLogin";
 
 export const useAuth = () => {

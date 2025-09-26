@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { AppDispatch, RootState } from "@/globalConfig/redux/store";
-import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
-import { fetchObdTravelMetrics } from "@/globalConfig/redux/slices/obdTravelMetricsSlice";
-import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
+import { AppDispatch, RootState } from "@/global/redux/store";
+import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
+import { fetchObdTravelMetrics } from "@/global/redux/serviceSlices/obdTravelMetricsSlice";
+import { formatToLocalIso8601 } from "@/global/utils/utils";
 import { useAuth } from "@/modules/auth/utils";
 
 interface Props {

@@ -1,0 +1,54 @@
+.columns {
+  display: flex;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background-color: var(--company-color-5);
+}
+
+.column {
+  display: flex;
+  padding: 5px;
+  border: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.columnTitle {
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  font-weight: 600;
+  color: var(--company-color-1);
+}
+
+.columnButton {
+  cursor: pointer;
+  font: inherit;
+  background-color: var(--company-color-5);
+}
+
+.columnButton:hover {
+  background-color: var(--company-color-5-dark);
+}
+
+.columnSortIcon {
+  font-size: 1rem;
+  position: relative;
+  top: 2px;
+}
+
+.firstButton {
+  border-top-left-radius: 4px;
+}
+
+.lastButton {
+  border-top-right-radius: 4px;
+}
+
+.actions {
+  width: auto;
+  padding: 0 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

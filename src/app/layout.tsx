@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import {
-  CacheCleaner,
-  MainWrapper,
-  ReduxProvider,
-} from "@/modules/global/components";
+import { CacheCleaner, MainWrapper, ReduxProvider } from "@/global/components";
 import {
   neuropolFont,
   nunitoFont,
   nunitoItalicFont,
-} from "@/globalConfig/fonts/fonts";
+} from "@/globalConfig/fontsConfig/fonts";
 
 export const metadata: Metadata = {
   title: "Core - Transtelemetrix",

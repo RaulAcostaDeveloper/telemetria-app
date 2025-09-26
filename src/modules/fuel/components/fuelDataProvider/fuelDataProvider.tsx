@@ -5,21 +5,22 @@ import { useSelector } from "react-redux";
 import { LocalShipping, LocalGasStation } from "@mui/icons-material";
 
 // import { FuelFilter } from "../fuelFilter/fuelFilter";
-import DonutGraphic from "@/modules/global/components/donutGraphic/DonutGraphic";
+import DonutGraphic from "@/global/components/donutGraphic/DonutGraphic";
 import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
 import styles from "./fuelDataProvider.module.css";
-import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { RootState } from "@/globalConfig/redux/store";
-import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
-import { Table, TabsContent } from "@/modules/global/components";
-import { columnsTable } from "@/modules/global/components/table/table.model";
+import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
+import { LanguageInterface } from "@/global/language/constants/language.model";
+import { RootState } from "@/global/redux/store";
+import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
+import { Table, TabsContent } from "@/global/components";
+import { columnsTable } from "@/global/components/table/table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
+  hideTabs?: boolean;
 }
 
-export const FuelDataProvider = ({ LANGUAGE }: Props) => {
+export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
   const { fuelSummaryData, fuelSummaryStatus } = useSelector(
     (state: RootState) => state.fuelSummary
   );
@@ -36,12 +37,12 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
     {
       text: LANGUAGE.fuel.tabs.topCharges,
       icon: LocalGasStation,
-      iconStyle: { color: "var(--container-performance-2)" },
+      iconStyle: { color: "rgb(4, 187, 4)" },
     },
     {
       text: LANGUAGE.fuel.tabs.topDischarges,
       icon: LocalGasStation,
-      iconStyle: { color: "var(--container-performance-3)" },
+      iconStyle: { color: "rgb(223, 44, 59)" },
     },
   ];
 
@@ -303,72 +304,74 @@ export const FuelDataProvider = ({ LANGUAGE }: Props) => {
           infoStatus={fuelSummaryStatus}
         />
       </div>
-      <div className={styles.fuelTabs}>
-        <TabsContent
-          tabOptions={tabOptions}
-          tabContents={[
-            <div key={1}>
-              {fuelSummaryStatus === SERVICE_STATUS.succeeded &&
-                vehiclesReport && (
-                  <Table
-                    LANGUAGE={LANGUAGE}
-                    columns={vehiclesColumns}
-                    data={vehiclesReport}
-                    idKey="imei"
-                    showGoFuel
-                    showGoOBD
-                  />
-                )}
+      {!hideTabs && (
+        <div className={styles.fuelTabs}>
+          <TabsContent
+            tabOptions={tabOptions}
+            tabContents={[
+              <div key={1}>
+                {fuelSummaryStatus === SERVICE_STATUS.succeeded &&
+                  vehiclesReport && (
+                    <Table
+                      LANGUAGE={LANGUAGE}
+                      columns={vehiclesColumns}
+                      data={vehiclesReport}
+                      idKey="imei"
+                      showGoFuel
+                      showGoOBD
+                    />
+                  )}
 
-              <DataErrorHandler
-                LANGUAGE={LANGUAGE}
-                hasData={!!vehiclesReport}
-                infoStatus={fuelSummaryStatus}
-              />
-            </div>,
-            <div key={2}>
-              {topFuelReportStatus === SERVICE_STATUS.succeeded &&
-                topFuelReportCharges && (
-                  <Table
-                    LANGUAGE={LANGUAGE}
-                    columns={topFuelReportChargesColumns}
-                    data={topFuelReportCharges}
-                    idKey="imei"
-                    showViewModal
-                    showGoFuel
-                    showGoOBD
-                  />
-                )}
+                <DataErrorHandler
+                  LANGUAGE={LANGUAGE}
+                  hasData={!!vehiclesReport}
+                  infoStatus={fuelSummaryStatus}
+                />
+              </div>,
+              <div key={2}>
+                {topFuelReportStatus === SERVICE_STATUS.succeeded &&
+                  topFuelReportCharges && (
+                    <Table
+                      LANGUAGE={LANGUAGE}
+                      columns={topFuelReportChargesColumns}
+                      data={topFuelReportCharges}
+                      idKey="imei"
+                      showViewModal
+                      showGoFuel
+                      showGoOBD
+                    />
+                  )}
 
-              <DataErrorHandler
-                LANGUAGE={LANGUAGE}
-                hasData={!!topFuelReportCharges}
-                infoStatus={topFuelReportStatus}
-              />
-            </div>,
-            <div key={3}>
-              {topFuelReportStatus === SERVICE_STATUS.succeeded &&
-                topFuelReportDischarges && (
-                  <Table
-                    LANGUAGE={LANGUAGE}
-                    columns={topFuelReportDischargesColumns}
-                    data={topFuelReportDischarges}
-                    idKey="imei"
-                    showViewModal
-                    showGoFuel
-                    showGoOBD
-                  />
-                )}
+                <DataErrorHandler
+                  LANGUAGE={LANGUAGE}
+                  hasData={!!topFuelReportCharges}
+                  infoStatus={topFuelReportStatus}
+                />
+              </div>,
+              <div key={3}>
+                {topFuelReportStatus === SERVICE_STATUS.succeeded &&
+                  topFuelReportDischarges && (
+                    <Table
+                      LANGUAGE={LANGUAGE}
+                      columns={topFuelReportDischargesColumns}
+                      data={topFuelReportDischarges}
+                      idKey="imei"
+                      showViewModal
+                      showGoFuel
+                      showGoOBD
+                    />
+                  )}
 
-              <DataErrorHandler
-                LANGUAGE={LANGUAGE}
-                hasData={!!topFuelReportDischarges}
-                infoStatus={topFuelReportStatus}
-              />
-            </div>,
-          ]}
-        />
-      </div>
+                <DataErrorHandler
+                  LANGUAGE={LANGUAGE}
+                  hasData={!!topFuelReportDischarges}
+                  infoStatus={topFuelReportStatus}
+                />
+              </div>,
+            ]}
+          />
+        </div>
+      )}
     </div>
   );
 };

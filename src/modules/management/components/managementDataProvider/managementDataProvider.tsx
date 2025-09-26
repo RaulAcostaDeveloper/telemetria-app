@@ -6,13 +6,13 @@ import styles from "./managementDataProvider.module.css";
 import {
   MODAL_OPTION,
   columnsTable,
-} from "@/modules/global/components/table/table.model";
-import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { RootState } from "@/globalConfig/redux/store";
-import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
-import { Table, TabsContent } from "@/modules/global/components";
-import { formatDateTime } from "@/modules/global/utils/utils";
+} from "@/global/components/table/table.model";
+import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
+import { LanguageInterface } from "@/global/language/constants/language.model";
+import { RootState } from "@/global/redux/store";
+import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
+import { Table, TabsContent } from "@/global/components";
+import { formatDateTime } from "@/global/utils/utils";
 import {
   DirectionsCar,
   DeviceHub,

@@ -1,1 +1,0 @@
-Módulo global para funciones y elementos que controlen el scope del usuario

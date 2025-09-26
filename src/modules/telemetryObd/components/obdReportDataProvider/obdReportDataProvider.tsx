@@ -3,9 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import GeoModal, {
-  GeoModalData,
-} from "@/modules/global/components/geoModal/geoModal";
+import GeoModal, { GeoModalData } from "@/global/components/geoModal/geoModal";
 import styles from "./obdReportDataProvider.module.css";
 import {
   ObdAnalysisTab,
@@ -13,11 +11,11 @@ import {
   SINGLE_CHART_TYPES,
   SingleLineHighChart,
 } from "@/modules/telemetryObd/components";
-import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
-import { RootState } from "@/globalConfig/redux/store";
-import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
-import { TabsContent } from "@/modules/global/components";
-import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
+import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
+import { RootState } from "@/global/redux/store";
+import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
+import { TabsContent } from "@/global/components";
+import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 import { ListAlt, Route, Speed, WorkHistory } from "@mui/icons-material";
 
 export const ObdReportDataProvider = () => {

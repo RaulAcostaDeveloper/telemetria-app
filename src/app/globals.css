@@ -4,8 +4,8 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box; /*asegura que el ancho y alto incluyan padding y borde sin alterar el tamaño del contendor*/
-  font-size: 62.5%; /*Define 1rem como 10px, facilitando el cálculo y conversión de tamaños en CSS.*/
+  box-sizing: border-box;
+  font-size: 62.5%;
 }
 
 body {
@@ -17,9 +17,7 @@ button {
   font-family: var(--font-nunito);
 }
 
-/* VARIABLES CSS */
-
-/* Nota: Las variables para fuentes de letra están declaradas en src\globalConfig\fonts\fonts.ts /
+/* VARIABLES GLOBALES CSS */
 
 /* Variables de colores de la empresa (theme) */
 :root {
@@ -33,113 +31,56 @@ button {
 
 /*  Variables de colores de la empresa (theme) obscurecidas 10% (hovers) */
 :root {
-  --company-color-1-rgba-10: color-mix(
-    in srgb,
-    var(--company-color-1),
-    black 10%
-  );
-  --company-color-2-rgba-10: color-mix(
-    in srgb,
-    var(--company-color-2),
-    black 10%
-  );
-  --company-color-3-rgba-10: color-mix(
-    in srgb,
-    var(--company-color-3),
-    black 10%
-  );
-  --company-color-4-rgba-10: color-mix(
-    in srgb,
-    var(--company-color-4),
-    black 10%
-  );
-  --company-color-5-rgba-10: color-mix(
-    in srgb,
-    var(--company-color-5),
-    black 10%
-  );
-  --company-color-6-rgba-10: color-mix(
-    in srgb,
-    var(--company-color-6),
-    black 10%
-  );
+  --company-color-1-dark: color-mix(in srgb, var(--company-color-1), black 10%);
+  --company-color-2-dark: color-mix(in srgb, var(--company-color-2), black 10%);
+  --company-color-3-dark: color-mix(in srgb, var(--company-color-3), black 10%);
+  --company-color-4-dark: color-mix(in srgb, var(--company-color-4), black 10%);
+  --company-color-5-dark: color-mix(in srgb, var(--company-color-5), black 10%);
+  --company-color-6-dark: color-mix(in srgb, var(--company-color-6), black 10%);
 }
 
 /* Variables de colores de botones */
 :root {
   /* Botón 1: Acción principal, Envío, Confirmación, Inicio de sesión */
-  --button-color-1: #007bff;
+  --send: #007bff;
 
   /* Botón 2: Éxito, confirmación, Aceptar, Guardar, Continuar  */
-  --button-color-2: #198754;
+  --confirm: #198754;
 
   /* Botón 3: Advertencia, Eliminación, Cancelar, Salir */
-  --button-color-3: #b91c1c;
+  --danger: #b91c1c;
 
   /* Botón 4: Precaución, Advertencia, Atención, Reintentar, Acción riesgosa */
-  --button-color-4: #ffb300;
+  --warning: #ffb300;
 
   /* Botón 5: Llamado a la acción, Comprar ahora, Subscribirse, Empezar */
-  --button-color-5: #ff6f00;
+  --calltoaction: #ff6f00;
 
   /* Botón 6: Neutralidad, deshabilitado, cancelado, omitir, poca relevancia */
-  --button-color-6: #e5e7eb;
+  --neutral: #e5e7eb;
 
   /* Botón 7: Alternativo, elegante, acción premium */
-  --button-color-7: #111111;
+  --premium: #111111;
 
   /* Botón deshabilitado */
-  --button-color-8: #b0c4de;
+  --disabled: #b0c4de;
 }
 
 /* Variables de colores de botones obscurecidOs 10% (hovers) */
 :root {
-  --button-color-1-rgba-10: color-mix(
-    in srgb,
-    var(--button-color-1),
-    black 10%
-  );
-  --button-color-2-rgba-10: color-mix(
-    in srgb,
-    var(--button-color-2),
-    black 10%
-  );
-  --button-color-3-rgba-10: color-mix(
-    in srgb,
-    var(--button-color-3),
-    black 10%
-  );
-  --button-color-4-rgba-10: color-mix(
-    in srgb,
-    var(--button-color-4),
-    black 10%
-  );
-  --button-color-5-rgba-10: color-mix(
-    in srgb,
-    var(--button-color-5),
-    black 10%
-  );
-  --button-color-6-rgba-10: color-mix(
-    in srgb,
-    var(--button-color-6),
-    black 10%
-  );
-  --button-color-7-rgba-10: color-mix(
-    in srgb,
-    var(--button-color-7),
-    black 10%
-  );
+  --send-dark: color-mix(in srgb, var(--send), black 10%);
+  --confirm-dark: color-mix(in srgb, var(--confirm), black 10%);
+  --danger-dark: color-mix(in srgb, var(--danger), black 10%);
+  --warning-dark: color-mix(in srgb, var(--warning), black 10%);
+  --calltoaction-dark: color-mix(in srgb, var(--calltoaction), black 10%);
+  --neutral-dark: color-mix(in srgb, var(--neutral), black 10%);
+  --premium-dark: color-mix(in srgb, var(--premium), black 10%);
 }
+
 /*Variables para colores transparentes */
 :root {
   /*Contenedor para advertencia*/
-  --warning-color-transparent-1: #fef2f2;
-}
-/*Variables para colores de contenedores */
-:root {
-  --container-performance-1: #ff9100;
-  --container-performance-2: rgb(4, 187, 4);
-  --container-performance-3: rgb(223, 44, 59);
+  --danger-transparent: rgb(254, 242, 242);
 }
 
 /* Transición del color base para la animación del loader*/
@@ -155,9 +96,4 @@ button {
   --cell-color1: hwb(190 0% 49.8%);
 }
 
-/* Input. Colores en box-shadow de input login */
-:root {
-  --input-shadow-0: rgba(0, 0, 0, 0.5);
-  --input-shadow-1: rgba(138, 138, 241, 0.25);
-  --input-shadow-2: rgba(77, 77, 143, 0.25);
-}
+/* TO DO añadir variables para bordes, sombras, etc. */

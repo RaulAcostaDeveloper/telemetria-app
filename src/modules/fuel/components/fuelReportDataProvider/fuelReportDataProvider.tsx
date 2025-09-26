@@ -2,20 +2,18 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import GeoModal, {
-  GeoModalData,
-} from "@/modules/global/components/geoModal/geoModal";
+import GeoModal, { GeoModalData } from "@/global/components/geoModal/geoModal";
 import styles from "./fuelReportDataProvider.module.css";
 import {
   FuelNowContainer,
   FuelPerformanceMetrics,
 } from "@/modules/fuel/components";
-import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
+import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import { FuelBehaviorTab } from "@/modules/fuel/components/fuelBehaviorTab/fuelBehaviorTab";
-import { RootState } from "@/globalConfig/redux/store";
-import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
-import { TabsContent } from "@/modules/global/components";
-import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
+import { RootState } from "@/global/redux/store";
+import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
+import { TabsContent } from "@/global/components";
+import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 import { Insights, ListAlt, LocalGasStation } from "@mui/icons-material";
 
 export interface OBValue {

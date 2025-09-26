@@ -1,5 +1,5 @@
-import { FetchProps } from "@/globalConfig/redux/types/serviceTypes";
-import { middlewareAfterFetch } from "@/modules/global/utils/middlewareAfterFetch";
+import { FetchProps } from "@/global/redux/serviceSlices/types/serviceTypes";
+import { middlewareAfterFetch } from "@/global/utils/middlewareAfterFetch";
 
 const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/management/device/";
 

@@ -1,4 +1,4 @@
-import { middlewareAfterFetch } from "@/modules/global/utils/middlewareAfterFetch";
+import { middlewareAfterFetch } from "@/global/utils/middlewareAfterFetch";
 
 const fullUrl =
   process.env.NEXT_PUBLIC_URL_SERVICE + "/management/authentication/logout";

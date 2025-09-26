@@ -1,5 +1,5 @@
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { TabsContent } from "@/modules/global/components";
+import { LanguageInterface } from "@/global/language/constants/language.model";
+import { TabsContent } from "@/global/components";
 
 interface Props {
   LANGUAGE: LanguageInterface;

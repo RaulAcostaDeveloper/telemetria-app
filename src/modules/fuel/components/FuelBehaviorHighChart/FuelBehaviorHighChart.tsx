@@ -10,15 +10,15 @@ import {
   getDisChargesTooltipFields,
   getLevelMessagesTooltipFields,
   getPerformancesBetweenChargesTooltipFields,
-} from "@/modules/global/utils/highChartUtils";
+} from "@/global/utils/highChartUtils";
 import {
   getLabelsForChargeGeoMap,
   getLabelsForDischargeGeoMap,
   getLabelsForLevelMessagesGeoMap,
-} from "@/modules/global/utils/geoMapUtils";
-import { FuelDataValues } from "@/globalConfig/redux/slices/fuelDataSlice";
-import { GeoModalData } from "@/modules/global/components/geoModal/geoModal";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+} from "@/global/utils/geoMapUtils";
+import { FuelDataValues } from "@/global/redux/serviceSlices/fuelDataSlice";
+import { GeoModalData } from "@/global/components/geoModal/geoModal";
+import { LanguageInterface } from "@/global/language/constants/language.model";
 import { OBValue } from "../fuelReportDataProvider/fuelReportDataProvider";
 
 interface Props {

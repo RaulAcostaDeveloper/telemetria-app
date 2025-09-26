@@ -1,0 +1,16 @@
+import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
+
+import LoaderAnimation from "@/global/components/loaderAnimation/loaderAnimation";
+import styles from "./checkLogin.module.css";
+
+//Vista presentada cuando la sesion se está cargando (loading)
+export default function CheckLogin() {
+  const LANGUAGE = useLanguage();
+
+  return (
+    <div className={styles.checklogin}>
+      <p>{LANGUAGE.auth.checklogin.maintitle}</p>
+      <LoaderAnimation cellSize={52} />
+    </div>
+  );
+}

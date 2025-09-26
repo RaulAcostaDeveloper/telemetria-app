@@ -9,15 +9,15 @@ import {
   getDistanceTooltipFields,
   getRPMTooltipFields,
   getTimeTraveledTooltipFields,
-} from "@/modules/global/utils/highChartUtils";
-import { GeoModalData } from "@/modules/global/components/geoModal/geoModal";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+} from "@/global/utils/highChartUtils";
+import { GeoModalData } from "@/global/components/geoModal/geoModal";
+import { LanguageInterface } from "@/global/language/constants/language.model";
 import {
   DataObject,
   getLabelsForDistanceGeoMap,
   getLabelsForRPMGeoMap,
   getLabelsForTimeTraveledGeoMap,
-} from "@/modules/global/utils/geoMapUtils";
+} from "@/global/utils/geoMapUtils";
 
 export interface ObdChartPoint {
   x: number;
