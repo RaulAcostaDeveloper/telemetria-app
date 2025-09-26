@@ -2,12 +2,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { AppDispatch, RootState } from "@/globalConfig/redux/store";
-import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
-import { fetchFuelData } from "@/globalConfig/redux/slices/fuelDataSlice";
-import { fetchFuelPerformance } from "@/globalConfig/redux/slices/fuelPerformanceSlice";
-import { fetchLastFuelReport } from "@/globalConfig/redux/slices/lastFuelReportSlice";
-import { formatToLocalIso8601 } from "@/modules/global/utils/utils";
+import { AppDispatch, RootState } from "@/global/redux/store";
+import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
+import { fetchFuelData } from "@/global/redux/serviceSlices/fuelDataSlice";
+import { fetchFuelPerformance } from "@/global/redux/serviceSlices/fuelPerformanceSlice";
+import { fetchLastFuelReport } from "@/global/redux/serviceSlices/lastFuelReportSlice";
+import { formatToLocalIso8601 } from "@/global/utils/utils";
 import { useAuth } from "@/modules/auth/utils";
 
 interface Props {

@@ -6,12 +6,12 @@ import { useSelector } from "react-redux";
 import CheckLogin from "@/modules/auth/components/checkLogin/checkLogin";
 import encryptUserAndPassword from "../../utils/cryptoReference/cryptoReference";
 import styles from "./authForm.module.css";
-import { ButtonTypes } from "@/modules/global/components/generalButton/generalButton.model";
-import { ErrorMessage } from "@/modules/global/components/errorMessage/errorMessage";
-import { GeneralButton } from "@/modules/global/components/generalButton/generalButton";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { RootState } from "@/globalConfig/redux/store";
-import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
+import { ButtonTypes } from "@/global/components/generalButton/generalButton.model";
+import { ErrorMessage } from "@/global/components/errorMessage/errorMessage";
+import { GeneralButton } from "@/global/components/generalButton/generalButton";
+import { LanguageInterface } from "@/global/language/constants/language.model";
+import { RootState } from "@/global/redux/store";
+import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { useAuth } from "@/modules/auth/utils";
 
 interface Props {

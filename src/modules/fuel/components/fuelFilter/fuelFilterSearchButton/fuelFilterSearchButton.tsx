@@ -1,8 +1,8 @@
 import SearchIcon from "@mui/icons-material/Search";
 
 import styles from "./fuelFilterSearchButton.module.css";
-import { ButtonTypes, GeneralButton } from "@/modules/global/components";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { ButtonTypes, GeneralButton } from "@/global/components";
+import { LanguageInterface } from "@/global/language/constants/language.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;

@@ -1,8 +1,8 @@
 import styles from "./obdAnalisisTab.module.css";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { LanguageInterface } from "@/global/language/constants/language.model";
 import { MetricItem } from "@/modules/fuel/components/fuelPerformanceMetrics/metricItem/metricItem";
-import { ObdTravelMetricsDataValues } from "@/globalConfig/redux/slices/obdTravelMetricsSlice";
-import { VehicleByImei } from "@/globalConfig/redux/slices/vehicleByImeiSlice";
+import { ObdTravelMetricsDataValues } from "@/global/redux/serviceSlices/obdTravelMetricsSlice";
+import { VehicleByImei } from "@/global/redux/serviceSlices/vehicleByImeiSlice";
 
 interface Props {
   LANGUAGE: LanguageInterface;

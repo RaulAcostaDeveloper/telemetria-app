@@ -1,7 +1,7 @@
 import { MetricItem } from "./metricItem/metricItem";
 import styles from "./fuelPerformanceMetrics.module.css";
-import { FuelPerformanceValues } from "@/globalConfig/redux/slices/fuelPerformanceSlice";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { FuelPerformanceValues } from "@/global/redux/serviceSlices/fuelPerformanceSlice";
+import { LanguageInterface } from "@/global/language/constants/language.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;

@@ -1,4 +1,4 @@
-import LoaderAnimation from "@/modules/global/components/loaderAnimation/loaderAnimation";
+import LoaderAnimation from "@/global/components/loaderAnimation/loaderAnimation";
 import styles from "./page.module.css";
 
 export default function Home() {

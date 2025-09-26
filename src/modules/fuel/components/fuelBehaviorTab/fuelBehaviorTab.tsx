@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import styles from "./fuelBehaviorTab.module.css";
 
-import GeoModal, {
-  GeoModalData,
-} from "@/modules/global/components/geoModal/geoModal";
+import GeoModal, { GeoModalData } from "@/global/components/geoModal/geoModal";
 import { FuelBehaviorHighChart } from "../FuelBehaviorHighChart/FuelBehaviorHighChart";
-import { FuelDataValues } from "@/globalConfig/redux/slices/fuelDataSlice";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { FuelDataValues } from "@/global/redux/serviceSlices/fuelDataSlice";
+import { LanguageInterface } from "@/global/language/constants/language.model";
 import { OBValue } from "../fuelReportDataProvider/fuelReportDataProvider";
 import { ToggleButton } from "../FuelBehaviorHighChart/toggleButton/toggleButton";
 

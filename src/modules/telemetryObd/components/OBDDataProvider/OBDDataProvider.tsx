@@ -7,19 +7,19 @@ import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
 import HourglassDisabledIcon from "@mui/icons-material/HourglassDisabled";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 
-import CardContentDrivenTime from "@/modules/global/components/cardsDeck/cardContentDrivenTime";
-import CardContentIdle from "@/modules/global/components/cardsDeck/cardContentIdle";
-import CardContentTCT5 from "@/modules/global/components/cardsDeck/cardContentTCT5";
-import CardGenThird from "@/modules/global/components/cardsDeck/cardGenThird";
+import CardContentDrivenTime from "@/global/components/cardsDeck/cardContentDrivenTime";
+import CardContentIdle from "@/global/components/cardsDeck/cardContentIdle";
+import CardContentTCT5 from "@/global/components/cardsDeck/cardContentTCT5";
+import CardGenThird from "@/global/components/cardsDeck/cardGenThird";
 import styles from "./OBDDataProvider.module.css";
-import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
+import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import { FuelDataReport } from "@/modules/fuel/components/fuelNowContainer/fuelDataReport/fuelDataReport";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { RootState } from "@/globalConfig/redux/store";
-import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
-import { Table } from "@/modules/global/components";
-import { columnsTable } from "@/modules/global/components/table/table.model";
-import { formatNumberWithCommas } from "@/modules/global/utils/utils";
+import { LanguageInterface } from "@/global/language/constants/language.model";
+import { RootState } from "@/global/redux/store";
+import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
+import { Table } from "@/global/components";
+import { columnsTable } from "@/global/components/table/table.model";
+import { formatNumberWithCommas } from "@/global/utils/utils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -91,6 +91,8 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
       showTotal: true,
     },
   ];
+  console.log("obdRollupStatus ", obdRollupStatus);
+  console.log("hasData ", obdRollupData);
 
   return (
     <div className={styles.telemetryObd}>

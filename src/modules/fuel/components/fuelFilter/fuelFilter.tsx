@@ -4,7 +4,7 @@ import { useState } from "react";
 import styles from "./fuelFilter.module.css";
 import { FuelFilterContent } from "./fuelFilterContent/fuelFilterContent";
 import { FuelFilterHeader } from "./fuelFilterHeader/fuelFilterHeader";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { LanguageInterface } from "@/global/language/constants/language.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;

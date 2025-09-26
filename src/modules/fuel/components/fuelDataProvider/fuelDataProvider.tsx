@@ -5,15 +5,15 @@ import { useSelector } from "react-redux";
 import { LocalShipping, LocalGasStation } from "@mui/icons-material";
 
 // import { FuelFilter } from "../fuelFilter/fuelFilter";
-import DonutGraphic from "@/modules/global/components/donutGraphic/DonutGraphic";
+import DonutGraphic from "@/global/components/donutGraphic/DonutGraphic";
 import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
 import styles from "./fuelDataProvider.module.css";
-import { DataErrorHandler } from "@/modules/global/components/DataErrorHandler/DataErrorHandler";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { RootState } from "@/globalConfig/redux/store";
-import { SERVICE_STATUS } from "@/globalConfig/redux/types/serviceTypes";
-import { Table, TabsContent } from "@/modules/global/components";
-import { columnsTable } from "@/modules/global/components/table/table.model";
+import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
+import { LanguageInterface } from "@/global/language/constants/language.model";
+import { RootState } from "@/global/redux/store";
+import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
+import { Table, TabsContent } from "@/global/components";
+import { columnsTable } from "@/global/components/table/table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -37,12 +37,12 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
     {
       text: LANGUAGE.fuel.tabs.topCharges,
       icon: LocalGasStation,
-      iconStyle: { color: "rgb(4, 187, 4);" },
+      iconStyle: { color: "rgb(4, 187, 4)" },
     },
     {
       text: LANGUAGE.fuel.tabs.topDischarges,
       icon: LocalGasStation,
-      iconStyle: { color: "rgb(223, 44, 59);" },
+      iconStyle: { color: "rgb(223, 44, 59)" },
     },
   ];
 

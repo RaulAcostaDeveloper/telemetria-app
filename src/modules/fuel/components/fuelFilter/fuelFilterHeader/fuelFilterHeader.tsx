@@ -1,6 +1,6 @@
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import styles from "./fuelFilterHeader.module.css";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { LanguageInterface } from "@/global/language/constants/language.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;

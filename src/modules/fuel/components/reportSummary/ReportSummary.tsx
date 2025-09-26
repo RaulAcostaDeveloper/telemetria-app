@@ -8,10 +8,10 @@ import {
   Troubleshoot,
   DataThresholding,
 } from "@mui/icons-material";
-import { formatNumberWithCommas } from "@/modules/global/utils/utils";
+import { formatNumberWithCommas } from "@/global/utils/utils";
 import styles from "./reportSummary.module.css";
-import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
-import { SummaryFuelValues } from "@/globalConfig/redux/slices/fuelSummarySlice";
+import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
+import { SummaryFuelValues } from "@/global/redux/serviceSlices/fuelSummarySlice";
 
 interface Props {
   summaryValues: SummaryFuelValues;

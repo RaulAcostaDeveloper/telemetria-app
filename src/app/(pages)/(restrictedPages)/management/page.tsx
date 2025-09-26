@@ -1,5 +1,5 @@
 "use client";
-import { useLanguage } from "@/modules/global/language/components/languageProvider/languageProvider";
+import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 import { ManagementDataProvider } from "@/modules/management/components";
 
 export default function Management() {

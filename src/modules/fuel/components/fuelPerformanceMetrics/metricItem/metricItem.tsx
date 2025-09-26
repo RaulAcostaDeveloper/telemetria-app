@@ -1,7 +1,7 @@
 "use client";
 import styles from "./metricItem.module.css";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
-import { PrimitiveValue } from "@/modules/global/components/table/table.model";
+import { LanguageInterface } from "@/global/language/constants/language.model";
+import { PrimitiveValue } from "@/global/components/table/table.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;

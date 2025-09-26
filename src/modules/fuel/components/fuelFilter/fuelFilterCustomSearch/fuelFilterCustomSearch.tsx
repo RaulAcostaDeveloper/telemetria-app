@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 import styles from "./fuelFilterCustomSearch.module.css";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { LanguageInterface } from "@/global/language/constants/language.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;

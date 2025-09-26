@@ -7,11 +7,11 @@ import NoCrashIcon from "@mui/icons-material/NoCrash";
 import { SpeedRounded } from "@mui/icons-material";
 
 import styles from "./fuelNowContainer.module.css";
-import { LastFuelReportData } from "@/globalConfig/redux/slices/lastFuelReportSlice";
-import { ButtonTypes, GeneralButton } from "@/modules/global/components";
+import { LastFuelReportData } from "@/global/redux/serviceSlices/lastFuelReportSlice";
+import { ButtonTypes, GeneralButton } from "@/global/components";
 import { FuelDataReport } from "./fuelDataReport/fuelDataReport";
 import { FuelNowVehicleTank } from "./fuelNowVehicleTank/fuelNowVehicleTank";
-import { LanguageInterface } from "@/modules/global/language/constants/language.model";
+import { LanguageInterface } from "@/global/language/constants/language.model";
 
 interface Props {
   LANGUAGE: LanguageInterface;
