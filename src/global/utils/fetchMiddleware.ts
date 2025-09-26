@@ -1,4 +1,4 @@
-import { getCached } from "@/global/cache/cache";
+import { getCached, putCache } from "@/global/cache/cache";
 
 interface fetchProps {
   fullUrl: string;
@@ -58,6 +58,14 @@ export async function fetchMiddleware({
   forceRefresh,
   logoutState,
 }: MiddlewareProps) {
-  const data = await fetchResponse({ fullUrl, options, logoutState });
-  return getCached(cacheKey, data, forceRefresh);
+  const cacheData = await getCached(cacheKey, forceRefresh);
+  if (cacheData) {
+    // Si hay en caché, retorna lo de caché
+    return cacheData;
+  } else {
+    // Si no, hace el fetch (con su propia lógica)
+    const fetchData = await fetchResponse({ fullUrl, options, logoutState });
+    putCache(cacheKey, fetchData, forceRefresh);
+    return fetchData;
+  }
 }

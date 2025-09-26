@@ -69,7 +69,7 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
   /** Filtra todos los resultados que coincidan por el primer "imeIs" en el array.
    *   Ejemplo imei con proposito de saber que teclear en input: 868689060250000 */
   const filteredByImei = vehiclesData?.value?.vehicles?.filter((vehicle) =>
-    vehicle.imeIs.toLowerCase().includes(query.toLowerCase())
+    vehicle.imeIs[0].toLowerCase().includes(query.toLowerCase())
   );
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,9 +102,9 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
                   <span>{vehicle.brand}</span>
                 </div>
                 <div>
-                  {vehicle.imeIs.length > 10 && (
+                  {vehicle.imeIs[0].length > 10 && (
                     <span className={styles.imei}>
-                      &#40; {vehicle.imeIs} &#41;
+                      &#40; {vehicle.imeIs[0]} &#41;
                     </span>
                   )}
                 </div>
@@ -127,22 +127,24 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
                   <div
                     key={idx}
                     className={`${
-                      vehicle.imeIs.length > 10
+                      vehicle.imeIs[0].length > 10
                         ? ""
                         : `${styles.reportsDisabled}`
                     }`}
                     title={`${
-                      vehicle.imeIs.length > 10
+                      vehicle.imeIs[0].length > 10
                         ? ""
                         : LANGUAGE.table.actions.noImei
                     }`}
                   >
                     <Link
                       key={idx}
-                      href={`/${action.routePrefix}/vehicle/${vehicle.imeIs}`}
+                      href={`/${action.routePrefix}/vehicle/${vehicle.imeIs[0]}`}
                       onClick={() => setShowDropdown(false)}
                       className={`${
-                        vehicle.imeIs.length > 10 ? "" : styles.reportDisabled
+                        vehicle.imeIs[0].length > 10
+                          ? ""
+                          : styles.reportDisabled
                       }`}
                     >
                       <button

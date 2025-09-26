@@ -2,9 +2,9 @@ import Dexie, { Table } from "dexie";
 
 // Librería para manejar grandes volúmenes de datos
 export interface CacheEntry<T> {
-  cacheKey: string;
+  key: string;
   timestamp: number;
-  data: T;
+  fetchData: T;
 }
 
 export interface CacheDBSchema {

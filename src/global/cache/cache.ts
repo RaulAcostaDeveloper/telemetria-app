@@ -9,12 +9,11 @@ interface Data {
   value: unknown | null;
 }
 
-// Aquí se maneja la lógica del caché
+// Aquí se maneja la lógica para obtener de caché
 export async function getCached(
   cacheKey: string,
-  data: Data,
   forceRefresh = false
-): Promise<Data> {
+): Promise<Data | null> {
   const now = Date.now();
 
   const table = getCacheTable<Data>();
@@ -22,15 +21,27 @@ export async function getCached(
 
   if (!forceRefresh && cacheData && now - cacheData.timestamp) {
     // Retorna data en caché
-    return cacheData.data;
+    return cacheData.fetchData;
+  } else {
+    return null;
   }
+}
+
+// Aquí se maneja la lógica para guardar en caché
+export async function putCache(
+  cacheKey: string,
+  fetchData: Data,
+  forceRefresh = false
+) {
+  const now = Date.now();
+  const table = getCacheTable<Data>();
 
   // Guardar en caché sólo si el código es 200
-  if (data.statusCode === 200 && forceRefresh !== true) {
+  if (fetchData.statusCode === 200 && forceRefresh !== true) {
     // Guarda o eeemplaza los datos en caché
-    await table.put({ cacheKey, timestamp: now, data });
+    await table.put({ key: cacheKey, timestamp: now, fetchData });
   }
-  return data;
+  return fetchData;
 }
 
 // Eliminar un elemento de caché manualmente
