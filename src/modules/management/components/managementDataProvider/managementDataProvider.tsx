@@ -29,9 +29,6 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     (state: RootState) => state.vehicles
   );
 
-  console.log("vehiclesData ", vehiclesData);
-  console.log("vehiclesStatus ", vehiclesStatus);
-
   const { driversData, driversStatus } = useSelector(
     (state: RootState) => state.drivers
   );
