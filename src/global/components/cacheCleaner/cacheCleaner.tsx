@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { cleanExpiredCache, ONE_HOUR } from "@/globalConfig/cacheConfig/cache";
+import { cleanExpiredCache, ONE_HOUR } from "@/global/cache/cache";
 
 // Componente que ejecuta la función para limpiar caché expirado
 // Se ejecuta al iniciar la aplicación

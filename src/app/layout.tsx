@@ -5,7 +5,7 @@ import {
   neuropolFont,
   nunitoFont,
   nunitoItalicFont,
-} from "@/globalConfig/fontsConfig/fonts";
+} from "@/global/fonts/fonts";
 
 export const metadata: Metadata = {
   title: "Core - Transtelemetrix",

@@ -7,7 +7,7 @@ import styles from "./mainWrapper.module.css";
 import {
   localStorageGetItem,
   localStorageSetItem,
-} from "../../../globalConfig/localStorage/utils/storageService";
+} from "../../localStorage/utils/storageService";
 import { ENGLISH } from "../../language/constants/english";
 import { Header } from "../header/header";
 import { LANGUAGE_OPTIONS } from "../../language/utils/languageSelector.model";
@@ -20,7 +20,7 @@ import { PageContainer } from "../pageContainer/pageContainer";
 import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { SPANISH } from "../../language/constants/spanish";
-import { STORAGE_KEYS } from "../../../globalConfig/localStorage/constants/storageKeys";
+import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
 import { useAuth } from "../../../modules/auth/utils";
 
 interface Props {

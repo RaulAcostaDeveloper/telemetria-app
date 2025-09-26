@@ -1,4 +1,4 @@
-import { getCached } from "@/globalConfig/cacheConfig/cache";
+import { getCached } from "@/global/cache/cache";
 
 interface fetchProps {
   fullUrl: string;

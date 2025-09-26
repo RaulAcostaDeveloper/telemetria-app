@@ -3,8 +3,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   localStorageGetItem,
   localStorageSetItem,
-} from "@/globalConfig/localStorage/utils/storageService";
-import { STORAGE_KEYS } from "@/globalConfig/localStorage/constants/storageKeys";
+} from "@/global/localStorage/utils/storageService";
+import { STORAGE_KEYS } from "@/global/localStorage/constants/storageKeys";
 import { toLocalISOString } from "@/global/utils/utils";
 
 // NOTA: startDate (desde) es la fecha más lejana. endDate (hasta) es la fecha más cercana.

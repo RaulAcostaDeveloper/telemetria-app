@@ -7,12 +7,12 @@ import styles from "./languageButton.module.css";
 import {
   localStorageGetItem,
   localStorageSetItem,
-} from "../../../globalConfig/localStorage/utils/storageService";
+} from "../../localStorage/utils/storageService";
 import { AppDispatch } from "@/global/redux/store";
 import { LANGUAGE_OPTIONS } from "../../language/utils/languageSelector.model";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { LanguageSelector } from "./languageSelector/languageSelector";
-import { STORAGE_KEYS } from "../../../globalConfig/localStorage/constants/storageKeys";
+import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
 import { StarIcon } from "./starIcon/starIcon";
 import { setLanguageReducer } from "@/global/redux/slices/languageSlice";
 
