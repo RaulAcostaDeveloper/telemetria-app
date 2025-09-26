@@ -1,5 +1,7 @@
 Descripción del Componente Calendar
 
+// Pendiente To Do Re factorizar este componente, mejorar la legibilidad y el funcionamiento
+
 El componente Calendar es un componente de interfaz de usuario  que permite a los usuarios seleccionar un rango de fechas para el filtrado de reportes. Este componente ofrece dos métodos principales para la selección de fechas:
 
 1. Selección personalizada: 

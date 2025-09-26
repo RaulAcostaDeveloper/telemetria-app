@@ -51,18 +51,13 @@ interface MiddlewareProps {
   logoutState: () => void;
 }
 
-export async function middlewareAfterFetch({
+export async function fetchMiddleware({
   cacheKey,
   fullUrl,
   options,
   forceRefresh,
   logoutState,
 }: MiddlewareProps) {
-  if (options) {
-    const data = await fetchResponse({ fullUrl, options, logoutState });
-    return getCached(cacheKey, data, forceRefresh);
-  } else {
-    const data = await fetchResponse({ fullUrl, logoutState });
-    return getCached(cacheKey, data, forceRefresh);
-  }
+  const data = await fetchResponse({ fullUrl, options, logoutState });
+  return getCached(cacheKey, data, forceRefresh);
 }

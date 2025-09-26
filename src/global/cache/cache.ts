@@ -1,6 +1,6 @@
 import { getCacheTable } from "./dexie";
 
-const LIFE_TIME_CACHE = 1000 * 60 * 60 * 10;
+const LIFE_TIME_CACHE = 1000 * 60 * 60 * 10; // 10 horas
 export const ONE_HOUR = 1000 * 60 * 60;
 
 interface Data {
@@ -9,40 +9,37 @@ interface Data {
   value: unknown | null;
 }
 
-// Función genérica de manejo de caché con dexie.js
+// Aquí se maneja la lógica del caché
 export async function getCached(
-  key: string,
+  cacheKey: string,
   data: Data,
   forceRefresh = false
 ): Promise<Data> {
   const now = Date.now();
 
   const table = getCacheTable<Data>();
-  const cached = await table.get(key);
+  const cacheData = await table.get(cacheKey);
 
-  if (!forceRefresh && cached && now - cached.timestamp) {
+  if (!forceRefresh && cacheData && now - cacheData.timestamp) {
     // Retorna data en caché
-    return cached.data;
+    return cacheData.data;
   }
 
-  // Guarda en caché sólo si el código es 200
-  if (
-    data.statusCode === 200 && // por eso es importante homologar
-    forceRefresh !== true
-  ) {
-    await table.put({ key, timestamp: now, data });
+  // Guardar en caché sólo si el código es 200
+  if (data.statusCode === 200 && forceRefresh !== true) {
+    // Guarda o eeemplaza los datos en caché
+    await table.put({ cacheKey, timestamp: now, data });
   }
-  // Reemplaza los datos en caché
   return data;
 }
 
-// Función para eliminar un elemento de caché manualmente
-export async function clearCacheByKey(key?: string) {
+// Eliminar un elemento de caché manualmente
+export async function clearCacheByKey(cacheKey: string) {
   const table = getCacheTable();
-  if (key) {
-    await table.delete(key);
-  } else {
-    console.error("No se encontró el Key del Caché ", key);
+  try {
+    await table.delete(cacheKey);
+  } catch (error) {
+    console.error("No se encontró el Key del Caché ", cacheKey, " - ", error);
   }
 }
 

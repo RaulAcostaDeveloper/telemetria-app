@@ -1,5 +1,5 @@
 import { FetchProps } from "@/global/redux/serviceSlices/types/serviceTypes";
-import { middlewareAfterFetch } from "@/global/utils/middlewareAfterFetch";
+import { fetchMiddleware } from "@/global/utils/fetchMiddleware";
 
 const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/management/me";
 
@@ -18,7 +18,7 @@ export async function getGroups({ logoutState }: FetchProps) {
   const cacheKey = process.env.NEXT_PUBLIC_API_VERSION + `managementGroups`;
 
   // Retorna DATA del servidor o DATA de caché
-  return middlewareAfterFetch({
+  return fetchMiddleware({
     cacheKey,
     fullUrl,
     options,

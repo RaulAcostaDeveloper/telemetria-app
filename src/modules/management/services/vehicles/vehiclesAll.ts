@@ -1,5 +1,5 @@
 import { FetchProps } from "@/global/redux/serviceSlices/types/serviceTypes";
-import { middlewareAfterFetch } from "@/global/utils/middlewareAfterFetch";
+import { fetchMiddleware } from "@/global/utils/fetchMiddleware";
 
 const fullUrl = process.env.NEXT_PUBLIC_URL_SERVICE + "/management/vehicles";
 
@@ -19,7 +19,7 @@ export async function getVehiclesAll({ logoutState }: FetchProps) {
     process.env.NEXT_PUBLIC_API_VERSION + `managementVehiclesAll`;
 
   // Retorna DATA del servidor o DATA de caché
-  return middlewareAfterFetch({
+  return fetchMiddleware({
     cacheKey,
     fullUrl,
     options,
