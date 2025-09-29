@@ -91,8 +91,6 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
       showTotal: true,
     },
   ];
-  console.log("obdRollupStatus ", obdRollupStatus);
-  console.log("hasData ", obdRollupData);
 
   return (
     <div className={styles.telemetryObd}>

@@ -4,7 +4,7 @@ import Dexie, { Table } from "dexie";
 export interface CacheEntry<T> {
   key: string;
   timestamp: number;
-  data: T;
+  fetchData: T;
 }
 
 export interface CacheDBSchema {

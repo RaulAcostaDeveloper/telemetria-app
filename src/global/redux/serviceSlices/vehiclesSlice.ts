@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getVehicles } from "@/modules/management/services/vehicles/vehicles";
-import { ndIfEmpty } from "@/global/utils/ndIfEmpty";
 
 interface Group {
   id: string;
@@ -52,34 +51,6 @@ const initialState: InitialState = {
   vehiclesStatus: SERVICE_STATUS.idle,
 };
 
-/** Asigna "ND" a valores null, undefined y cadenas vacias.*/
-function setObjNDIfEmpty(payload: Data) {
-  if (!payload?.value) return payload;
-
-  const S = (v: unknown) => ndIfEmpty(v as any).toString();
-  const toImeiString = (v: unknown): string => {
-    if (Array.isArray(v)) return S(v[0]); // usa el primero si viene como array
-    return S(v); // si ya es string, normaliza
-  };
-
-  const revised =
-    payload.value.vehicles?.map((vehicle) => ({
-      ...vehicle, // preserva id, group, etc.
-      plate: S(vehicle.plate),
-      name: S(vehicle.name),
-      brand: S(vehicle.brand),
-      model: S(vehicle.model),
-      vehicleType: S(vehicle.vehicleType),
-      year: S(vehicle.year),
-      driver: S(vehicle.driver),
-      serialNumber: S(vehicle.serialNumber),
-      imeIs: toImeiString(vehicle.imeIs), // <- string, no array
-    })) ?? [];
-
-  payload.value.vehicles = revised;
-  return payload;
-}
-
 // Slice del servicio
 const vehiclesSlice = createSlice({
   name: "vehicles",
@@ -92,7 +63,7 @@ const vehiclesSlice = createSlice({
       })
       .addCase(fetchVehicles.fulfilled, (state, action) => {
         state.vehiclesStatus = SERVICE_STATUS.succeeded;
-        state.vehiclesData = setObjNDIfEmpty(action.payload);
+        state.vehiclesData = action.payload;
       })
       .addCase(fetchVehicles.rejected, (state) => {
         state.vehiclesStatus = SERVICE_STATUS.failed;

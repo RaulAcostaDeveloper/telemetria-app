@@ -1,4 +1,4 @@
-import { getCached } from "@/global/cache/cache";
+import { getCached, putCache } from "@/global/cache/cache";
 
 interface fetchProps {
   fullUrl: string;
@@ -20,21 +20,21 @@ const fetchResponse = async ({ fullUrl, options, logoutState }: fetchProps) => {
     }
 
     if (response.ok) {
-      const result = await response.json();
-
-      if (response.status === 200) {
+      if (response.status !== 200) {
         return {
           statusCode: response.status,
-          message: "OK",
-          value: result.value,
-        };
-      } else {
-        return {
-          statusCode: response.status,
-          message: response.statusText,
+          message: "No Content",
           value: null,
         };
       }
+
+      const result = await response.json();
+
+      return {
+        statusCode: response.status,
+        message: result.message,
+        value: result.value,
+      };
     } else {
       throw new Error("Error al obtener servicio.");
     }
@@ -51,18 +51,21 @@ interface MiddlewareProps {
   logoutState: () => void;
 }
 
-export async function middlewareAfterFetch({
+export async function fetchMiddleware({
   cacheKey,
   fullUrl,
   options,
   forceRefresh,
   logoutState,
 }: MiddlewareProps) {
-  if (options) {
-    const data = await fetchResponse({ fullUrl, options, logoutState });
-    return getCached(cacheKey, data, forceRefresh);
+  const cacheData = await getCached(cacheKey, forceRefresh);
+  if (cacheData) {
+    // Si hay en caché, retorna lo de caché
+    return cacheData;
   } else {
-    const data = await fetchResponse({ fullUrl, logoutState });
-    return getCached(cacheKey, data, forceRefresh);
+    // Si no, hace el fetch (con su propia lógica)
+    const fetchData = await fetchResponse({ fullUrl, options, logoutState });
+    putCache(cacheKey, fetchData, forceRefresh);
+    return fetchData;
   }
 }
