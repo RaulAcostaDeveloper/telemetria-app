@@ -3,7 +3,7 @@ import TableInCardT5 from "./tableInCardT5";
 import styles from "./cardContentStyle.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ObdRollupDataValues } from "@/global/redux/serviceSlices/obdRollupSlice";
-import { format2DecimalsString, median } from "../../utils/utils";
+import { format2DecimalsString, getMedian2d } from "../../utils/utils";
 
 interface Props {
   data: ObdRollupDataValues;
@@ -43,7 +43,7 @@ export default function CardContentIdle({ data, LANGUAGE }: Props) {
   const rangeSize = evalRange / 10;
   const titleValueSubtitle = {
     text: LANGUAGE.teleOBD.charts.subtitleIdle,
-    value: parseFloat(median(ascendingIdle).toFixed(2)),
+    value: getMedian2d(ascendingIdle),
   };
 
   // Array de objetos con 1. rango a usar. 2. vehiculos que entran en dicho rango.
