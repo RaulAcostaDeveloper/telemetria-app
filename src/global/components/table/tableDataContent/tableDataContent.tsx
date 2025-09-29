@@ -155,7 +155,7 @@ export const TableDataContent = ({
                 <div key={colIndex} style={defaultSpace}>
                   <TableDataProp
                     LANGUAGE={LANGUAGE}
-                    value={ndIfEmpty(dataValues[colIndex]) ?? "-"}
+                    value={ndIfEmpty(dataValues[colIndex])}
                     defaultSpace={defaultSpace}
                   />
                 </div>

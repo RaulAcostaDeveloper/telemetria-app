@@ -2,13 +2,14 @@
 import styles from "./metricItem.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { PrimitiveValue } from "@/global/components/table/table.model";
+import { ndIfEmpty } from "@/global/utils/ndIfEmpty";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   isLast?: boolean;
   metric: string;
   name: string;
-  value: string | number;
+  value: PrimitiveValue | undefined;
 }
 
 export const MetricItem = ({
@@ -39,7 +40,7 @@ export const MetricItem = ({
         <span className={styles.title}>{name}</span>
       </div>
       <div>
-        <span>{value}</span> <span>{metric}</span>
+        <span>{ndIfEmpty(value)}</span> <span>{metric}</span>
       </div>
     </button>
   );

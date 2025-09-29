@@ -25,7 +25,7 @@ export const TableDeleteModal = ({
   const deleteFeedback = () => {
     if (deleteFunction) {
       if (idObject) {
-        deleteFunction(idObject);
+        deleteFunction(idObject.toString());
       } else {
         console.error("No se ha pasado un idKey a la tabla");
       }

@@ -1,15 +1,10 @@
 // Ver los vehículos que pertenecen a este grupo
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 import styles from "./tableModalViewGroup.module.css";
-import {
-  MODAL_OPTION,
-  PrimitiveValue,
-  columnsTable,
-  dataTable,
-} from "../../table.model";
+import { MODAL_OPTION, PrimitiveValue, columnsTable } from "../../table.model";
 import { DataErrorHandler } from "../../../DataErrorHandler/DataErrorHandler";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { Modal } from "../../../modal/modal";
@@ -81,8 +76,8 @@ export const TableModalViewGroup = ({
     },
   ];
 
-  const vehiclesTableData: dataTable | undefined = groupsVehicles?.map(
-    (value) => ({
+  const vehiclesTableData = useMemo(() => {
+    return groupsVehicles?.map((value) => ({
       plate: value.plate,
       name: value.name,
       brand: value.brand,
@@ -90,13 +85,13 @@ export const TableModalViewGroup = ({
       year: value.year,
       groupName: value.group[0].name,
       groupId: value.group[0].id,
-      imeIs: value.imeIs,
+      imeIs: value.imeIs[0],
       id: value.id,
       serialNumber: value.serialNumber,
       vehicleType: value.vehicleType,
       driver: value.driver,
-    })
-  );
+    }));
+  }, [groupsVehicles]);
 
   return (
     <Modal
@@ -107,22 +102,24 @@ export const TableModalViewGroup = ({
       }
     >
       <div className={styles.container}>
-        {vehiclesStatus === SERVICE_STATUS.succeeded && vehiclesTableData && (
-          <Table
-            LANGUAGE={LANGUAGE}
-            columns={vehicleColumns}
-            data={vehiclesTableData}
-            idKey="imeIs"
-            modalOption={MODAL_OPTION.VEHICLES}
-            showGoFuel
-            showGoOBD
-            showViewModal
-          />
-        )}
+        {vehiclesStatus === SERVICE_STATUS.succeeded &&
+          vehiclesData?.value &&
+          vehiclesTableData && (
+            <Table
+              LANGUAGE={LANGUAGE}
+              columns={vehicleColumns}
+              data={vehiclesTableData}
+              idKey="imeIs"
+              modalOption={MODAL_OPTION.VEHICLES}
+              showGoFuel
+              showGoOBD
+              showViewModal
+            />
+          )}
 
         <DataErrorHandler
           LANGUAGE={LANGUAGE}
-          hasData={!!groupsVehicles}
+          hasData={!!vehiclesTableData}
           infoStatus={vehiclesStatus}
         />
       </div>
