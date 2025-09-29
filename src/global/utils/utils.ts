@@ -283,3 +283,27 @@ export function format2DecimalsString(value: number): string {
   const trunc = Math.trunc(value * 100) / 100;
   return trunc.toFixed(2);
 }
+
+/**
+ * Obtención de la mediana.
+ *
+ * El arreglo de valores debe venir ordenado.
+ *
+ * Contempla cuando el total de elementos es par e impar.
+ *
+ * @param orderedValues - Arreglo de números ordenado
+ * @returns Valor de la mediana, con redorndeo a 2 decimales.
+ */
+export function getMedian2d(orderedValues: number[]): number {
+  const arrLength = orderedValues.length;
+  let final = 0;
+  if (0 === arrLength % 2) {
+    //Número par
+    const half = arrLength / 2;
+    final = (orderedValues[half - 1] + orderedValues[half]) / 2;
+  } else {
+    //Número non
+    final = orderedValues[Math.ceil(arrLength / 2) - 1];
+  }
+  return parseFloat(final.toFixed(2));
+}
