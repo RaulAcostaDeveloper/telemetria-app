@@ -45,7 +45,7 @@ export const MainWrapper = ({ children }: Props) => {
 
   useEffect(() => {
     tryFirstServerSession();
-  }, []);
+  }, [tryFirstServerSession]);
 
   // Actualiza el objeto LANGUAGE según la opción del estado de la aplicación
   // Actualizar en caso de agregar un nuevo idioma

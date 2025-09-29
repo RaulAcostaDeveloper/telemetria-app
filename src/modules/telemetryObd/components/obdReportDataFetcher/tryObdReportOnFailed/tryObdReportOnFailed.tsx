@@ -43,7 +43,15 @@ export const TryObdReportOnFailed = ({ imei }: Props) => {
         );
       }, 5000);
     }
-  }, [obdTravelMetricsStatus, isAuthenticated, startDate, endDate, imei]);
+  }, [
+    obdTravelMetricsStatus,
+    isAuthenticated,
+    startDate,
+    endDate,
+    imei,
+    dispatch,
+    logoutState,
+  ]);
 
   return null;
 };
