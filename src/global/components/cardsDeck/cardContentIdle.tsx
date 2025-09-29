@@ -3,7 +3,7 @@ import TableInCardT5 from "./tableInCardT5";
 import styles from "./cardContentStyle.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ObdRollupDataValues } from "@/global/redux/serviceSlices/obdRollupSlice";
-import { format2DecimalsString } from "../../utils/utils";
+import { format2DecimalsString, median } from "../../utils/utils";
 
 interface Props {
   data: ObdRollupDataValues;
@@ -29,21 +29,22 @@ export default function CardContentIdle({ data, LANGUAGE }: Props) {
     return a - b;
   };
 
+  /*   const average =
+      magnitudes.reduce((a, b) => {
+        return a + b;
+      }) / magnitudes.length; */
+
   const ascendingIdle = magnitudes.toSorted(compareNumbers);
   const descendingIdle = ascendingIdle.toReversed();
   const top5Idle = descendingIdle.slice(0, 5);
-  const average =
-    magnitudes.reduce((a, b) => {
-      return a + b;
-    }) / magnitudes.length;
-  const titleValueSubtitle = {
-    text: LANGUAGE.teleOBD.charts.subtitleIdle,
-    value: Math.trunc(average),
-  };
   const minIdle = ascendingIdle[0];
   const maxIdle = descendingIdle[0];
   const evalRange = maxIdle - minIdle;
   const rangeSize = evalRange / 10;
+  const titleValueSubtitle = {
+    text: LANGUAGE.teleOBD.charts.subtitleIdle,
+    value: parseFloat(median(ascendingIdle).toFixed(2)),
+  };
 
   // Array de objetos con 1. rango a usar. 2. vehiculos que entran en dicho rango.
   // Se usa el limite superior como numérico de cada rango.

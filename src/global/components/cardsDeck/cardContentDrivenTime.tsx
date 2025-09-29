@@ -3,7 +3,7 @@ import TableInCardT5 from "./tableInCardT5";
 import styles from "./cardContentStyle.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ObdRollupDataValues } from "@/global/redux/serviceSlices/obdRollupSlice";
-import { format2DecimalsString } from "../../utils/utils";
+import { format2DecimalsString, median } from "../../utils/utils";
 
 interface Props {
   data: ObdRollupDataValues;
@@ -21,15 +21,10 @@ export default function CardContentDrivenTime({ data, LANGUAGE }: Props) {
     (value) => value.driverTime as number
   );
 
-  const average =
+  /*   const average =
     hours.reduce((a, b) => {
       return a + b;
-    }) / hours.length;
-
-  const titleValueSubtitle = {
-    text: LANGUAGE.teleOBD.charts.subtitleDriven,
-    value: Math.trunc(average),
-  };
+    }) / hours.length; */
 
   const compareNumbers = (a: number, b: number) => {
     return a - b;
@@ -42,6 +37,12 @@ export default function CardContentDrivenTime({ data, LANGUAGE }: Props) {
   const maxHours = descendingHours[0];
   const evalRange = maxHours - minHours;
   const rangeSize = evalRange / 10;
+
+  const titleValueSubtitle = {
+    text: LANGUAGE.teleOBD.charts.subtitleDriven,
+    //value: Math.trunc(median(ascendingHours)),
+    value: parseFloat(median(ascendingHours).toFixed(2)),
+  };
 
   // Array de objetos con 1. rango a usar. 2. cantidad de vehiculos que entran en dicho rango.
   // Se usa el limite superior del bloque como numérico de cada rango.
