@@ -35,7 +35,7 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
     return obdRollupData?.value?.details.map((value) => ({
       name: value.name,
       plate: value.plate,
-      driverDistance: value.driverDistance ?? "ND",
+      driverDistance: value.driverDistance,
       averageSpeed: value.averageSpeed,
       driverTime: value.driverTime,
       driverIdleTime: value.driverIdleTime,
