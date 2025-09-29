@@ -20,21 +20,21 @@ const fetchResponse = async ({ fullUrl, options, logoutState }: fetchProps) => {
     }
 
     if (response.ok) {
-      const result = await response.json();
-
-      if (response.status === 200) {
+      if (response.status !== 200) {
         return {
           statusCode: response.status,
-          message: "OK",
-          value: result.value,
-        };
-      } else {
-        return {
-          statusCode: response.status,
-          message: response.statusText,
+          message: "No Content",
           value: null,
         };
       }
+
+      const result = await response.json();
+
+      return {
+        statusCode: response.status,
+        message: result.message,
+        value: result.value,
+      };
     } else {
       throw new Error("Error al obtener servicio.");
     }
