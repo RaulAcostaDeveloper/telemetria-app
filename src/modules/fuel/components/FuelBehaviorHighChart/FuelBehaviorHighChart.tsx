@@ -366,6 +366,7 @@ export const FuelBehaviorHighChart = ({
         {
           yAxis: 0,
           name: LANGUAGE.highCharts.titles.fuelVariationCAN,
+          type: "line",
           data: levelMessagesCANData,
           color: "#f77f00",
           lineWidth: 2,
@@ -391,6 +392,7 @@ export const FuelBehaviorHighChart = ({
         {
           yAxis: 0,
           name: LANGUAGE.highCharts.titles.fuelVariation,
+          type: "line",
           data: levelMessagesData,
           color: "#006af5",
           lineWidth: 2,
@@ -416,6 +418,7 @@ export const FuelBehaviorHighChart = ({
         {
           yAxis: 1,
           name: LANGUAGE.highCharts.titles.performancesBetweenCharges,
+          type: "line",
           data: performancesBetweenChargesData,
           marker: { enabled: true, radius: 4, symbol: "square" },
           color: "#f5c800",
@@ -428,6 +431,7 @@ export const FuelBehaviorHighChart = ({
         {
           yAxis: 1,
           name: LANGUAGE.highCharts.titles.dailyPerformance,
+          type: "line",
           data: dailyPerformancesData,
           marker: { enabled: true, radius: 4, symbol: "circle" },
           color: "#8f07ff",

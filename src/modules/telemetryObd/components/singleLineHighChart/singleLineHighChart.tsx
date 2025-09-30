@@ -147,6 +147,7 @@ export const SingleLineHighChart = ({
         {
           yAxis: 0,
           data: chartData,
+          type: "line",
           color: "#006af5",
           lineWidth: 2,
           tooltip: {
