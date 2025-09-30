@@ -366,6 +366,7 @@ export const FuelBehaviorHighChart = ({
         {
           yAxis: 0,
           name: LANGUAGE.highCharts.titles.fuelVariationCAN,
+          type: "line",
           data: levelMessagesCANData,
           color: "#f77f00",
           lineWidth: 2,
@@ -391,6 +392,7 @@ export const FuelBehaviorHighChart = ({
         {
           yAxis: 0,
           name: LANGUAGE.highCharts.titles.fuelVariation,
+          type: "line",
           data: levelMessagesData,
           color: "#006af5",
           lineWidth: 2,
