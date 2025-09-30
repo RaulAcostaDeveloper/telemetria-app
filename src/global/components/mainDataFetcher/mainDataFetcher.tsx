@@ -33,7 +33,7 @@ export const MainDataFetcher = () => {
       dispatch(fetchDrivers(logoutState));
       dispatch(fetchGroups(logoutState));
     }
-  }, [dispatch, isAuthenticated, logoutState]);
+  }, [isAuthenticated]);
 
   // Llamado de servicios al inicio de la sesión del usuario
   useEffect(() => {
@@ -60,7 +60,7 @@ export const MainDataFetcher = () => {
         })
       );
     }
-  }, [isAuthenticated, startDate, endDate, dispatch, logoutState]);
+  }, [isAuthenticated, startDate, endDate]);
 
   return <TryFetchOnFailed />;
 };

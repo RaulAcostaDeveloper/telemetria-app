@@ -32,7 +32,7 @@ export const ObdReportDataFetcher = ({ imei }: Props) => {
         })
       );
     }
-  }, [isAuthenticated, startDate, endDate, imei, dispatch, logoutState]);
+  }, [isAuthenticated, startDate, endDate, imei]);
 
   return <TryObdReportOnFailed imei={imei} />;
 };

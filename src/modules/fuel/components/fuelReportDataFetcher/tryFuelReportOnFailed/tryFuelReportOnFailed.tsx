@@ -49,15 +49,7 @@ export const TryFuelReportOnFailed = ({ imei }: Props) => {
         );
       }, 5000);
     }
-  }, [
-    fuelDataStatus,
-    isAuthenticated,
-    startDate,
-    endDate,
-    imei,
-    dispatch,
-    logoutState,
-  ]);
+  }, [fuelDataStatus, isAuthenticated, startDate, endDate, imei]);
 
   useEffect(() => {
     if (
@@ -78,15 +70,7 @@ export const TryFuelReportOnFailed = ({ imei }: Props) => {
         );
       }, 5000);
     }
-  }, [
-    fuelPerformanceStatus,
-    isAuthenticated,
-    startDate,
-    endDate,
-    imei,
-    dispatch,
-    logoutState,
-  ]);
+  }, [fuelPerformanceStatus, isAuthenticated, startDate, endDate, imei]);
 
   useEffect(() => {
     if (
@@ -105,15 +89,7 @@ export const TryFuelReportOnFailed = ({ imei }: Props) => {
         );
       }, 5000);
     }
-  }, [
-    lastFuelReportStatus,
-    isAuthenticated,
-    startDate,
-    endDate,
-    imei,
-    dispatch,
-    logoutState,
-  ]);
+  }, [lastFuelReportStatus, isAuthenticated, startDate, endDate, imei]);
 
   return null;
 };
