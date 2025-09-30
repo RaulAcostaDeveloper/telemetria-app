@@ -6,6 +6,7 @@ import styles from "./geoModal.module.css";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { Modal } from "../modal/modal";
 import { TooltipGeoField } from "../../utils/geoMapUtils";
+import { ndIfEmpty } from "@/global/utils/ndIfEmpty";
 
 const GoogleMapClientOnly = dynamic(
   () => import("./googleMapClientComponent/googleMapClientComponent"),
@@ -46,7 +47,9 @@ const GeoModal = ({
             {geoModalData.rows.map((row, index) => (
               <div className={styles.row} key={index}>
                 <span className={styles.label}>{row.label}:</span>
-                <span className={styles.value}>{String(row.value)}</span>
+                <span className={styles.value}>
+                  {ndIfEmpty(String(row.value))}
+                </span>
               </div>
             ))}
           </div>

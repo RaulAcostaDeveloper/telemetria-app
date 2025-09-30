@@ -56,7 +56,7 @@ export const ObdAnalysisTab = ({
           LANGUAGE={LANGUAGE}
           metric=""
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.averageRpm}
-          value={obdAnalyticsData.rpmAverage?.toString() ?? "NA"}
+          value={obdAnalyticsData.rpmAverage?.toString()}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
@@ -79,7 +79,7 @@ export const ObdAnalysisTab = ({
           name={
             LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.totalTimeTraveled
           }
-          value={obdAnalyticsData.totalTimeTraveled?.toString() ?? "NA"}
+          value={obdAnalyticsData.totalTimeTraveled?.toString()}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}

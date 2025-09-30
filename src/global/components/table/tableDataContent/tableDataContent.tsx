@@ -6,6 +6,7 @@ import { LanguageInterface } from "../../../language/constants/language.model";
 import { TableActions } from "../tableActions/tableActions";
 import { TableDataProp } from "../tableDataProp/tableDataProp";
 import { MODAL_OPTION, columnsTable, dataTable } from "../table.model";
+import { ndIfEmpty } from "@/global/utils/ndIfEmpty";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -154,7 +155,7 @@ export const TableDataContent = ({
                 <div key={colIndex} style={defaultSpace}>
                   <TableDataProp
                     LANGUAGE={LANGUAGE}
-                    value={dataValues[colIndex] ?? "-"}
+                    value={ndIfEmpty(dataValues[colIndex])}
                     defaultSpace={defaultSpace}
                   />
                 </div>

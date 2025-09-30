@@ -1,17 +1,12 @@
-export function ndIfEmpty(rawVal: string | number | null | undefined){
-  if(rawVal){
-    if(typeof rawVal === "string"){
-      rawVal = rawVal.trim()
-      if(rawVal.length > 0){
-        return rawVal
-      }else{
-        return "ND"
-      }
-    }else{
-      //regresa un number
-      return rawVal;
+import { PrimitiveValue } from "../components/table/table.model";
+
+export function ndIfEmpty(value: PrimitiveValue | undefined): PrimitiveValue {
+  if (value === undefined || value === null) return "ND";
+  if (typeof value === "string") {
+    if (value.trim().length > 0 === false) {
+      return "ND";
     }
-  }else{
-    return "ND";
   }
+
+  return value; // cualquier otro tipo distinto de null/undefined/string vacío
 }

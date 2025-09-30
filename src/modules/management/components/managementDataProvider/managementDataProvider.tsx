@@ -129,7 +129,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       groupName: value.group[0].name,
       serialNumber: value.serialNumber,
       groupId: value.group[0].id,
-      imeIs: value.imeIs, ///aqui name, no mostrar imeis pero si que exista.
+      imeIs: value.imeIs[0], ///aqui name, no mostrar imeis pero si que exista.
       id: value.id,
     }));
   }, [vehiclesData]);
@@ -283,6 +283,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
         tabContents={[
           <div key={1}>
             {vehiclesStatus === SERVICE_STATUS.succeeded &&
+              vehiclesData?.value &&
               vehiclesTableData && (
                 <Table
                   LANGUAGE={LANGUAGE}
@@ -303,13 +304,15 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
             />
           </div>,
           <div key={2}>
-            {devicesStatus === SERVICE_STATUS.succeeded && devicesTableData && (
-              <Table
-                LANGUAGE={LANGUAGE}
-                columns={devicesColumns}
-                data={devicesTableData}
-              />
-            )}
+            {devicesStatus === SERVICE_STATUS.succeeded &&
+              devicesData?.value &&
+              devicesTableData && (
+                <Table
+                  LANGUAGE={LANGUAGE}
+                  columns={devicesColumns}
+                  data={devicesTableData}
+                />
+              )}
 
             <DataErrorHandler
               LANGUAGE={LANGUAGE}
@@ -318,13 +321,15 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
             />
           </div>,
           <div key={3}>
-            {driversStatus === SERVICE_STATUS.succeeded && driversTableData && (
-              <Table
-                LANGUAGE={LANGUAGE}
-                columns={driversColumns}
-                data={driversTableData}
-              />
-            )}
+            {driversStatus === SERVICE_STATUS.succeeded &&
+              driversData?.value &&
+              driversTableData && (
+                <Table
+                  LANGUAGE={LANGUAGE}
+                  columns={driversColumns}
+                  data={driversTableData}
+                />
+              )}
 
             <DataErrorHandler
               LANGUAGE={LANGUAGE}
@@ -333,16 +338,18 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
             />
           </div>,
           <div key={4}>
-            {groupsStatus === SERVICE_STATUS.succeeded && groupsTableData && (
-              <Table
-                LANGUAGE={LANGUAGE}
-                columns={groupsColumns}
-                data={groupsTableData}
-                idKey="id"
-                modalOption={MODAL_OPTION.GROUPS}
-                showViewModal
-              />
-            )}
+            {groupsStatus === SERVICE_STATUS.succeeded &&
+              groupsData?.value &&
+              groupsTableData && (
+                <Table
+                  LANGUAGE={LANGUAGE}
+                  columns={groupsColumns}
+                  data={groupsTableData}
+                  idKey="id"
+                  modalOption={MODAL_OPTION.GROUPS}
+                  showViewModal
+                />
+              )}
 
             <DataErrorHandler
               LANGUAGE={LANGUAGE}

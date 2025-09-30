@@ -56,7 +56,7 @@ export const TableActions = ({
       dataObject[idKey] !== null &&
       dataObject[idKey].toString().length > 10
     ) {
-      setImei(dataObject[idKey]);
+      setImei(dataObject[idKey].toString());
     }
   }, [dataObject, idKey]);
 

@@ -94,7 +94,14 @@ export const TryFetchOnFailed = () => {
         );
       }, 5000);
     }
-  }, [obdRollupStatus, isAuthenticated, startDate, endDate]);
+  }, [
+    obdRollupStatus,
+    isAuthenticated,
+    startDate,
+    endDate,
+    dispatch,
+    logoutState,
+  ]);
 
   useEffect(() => {
     if (
@@ -107,7 +114,14 @@ export const TryFetchOnFailed = () => {
         dispatch(fetchVehicles(logoutState));
       }, 5000);
     }
-  }, [vehiclesStatus, isAuthenticated, startDate, endDate]);
+  }, [
+    vehiclesStatus,
+    isAuthenticated,
+    startDate,
+    endDate,
+    dispatch,
+    logoutState,
+  ]);
 
   useEffect(() => {
     if (
@@ -120,7 +134,14 @@ export const TryFetchOnFailed = () => {
         dispatch(fetchDrivers(logoutState));
       }, 5000);
     }
-  }, [driversStatus, isAuthenticated, startDate, endDate]);
+  }, [
+    driversStatus,
+    isAuthenticated,
+    startDate,
+    endDate,
+    dispatch,
+    logoutState,
+  ]);
 
   useEffect(() => {
     if (
@@ -133,7 +154,14 @@ export const TryFetchOnFailed = () => {
         dispatch(fetchDevices(logoutState));
       }, 5000);
     }
-  }, [devicesStatus, isAuthenticated, startDate, endDate]);
+  }, [
+    devicesStatus,
+    isAuthenticated,
+    startDate,
+    endDate,
+    dispatch,
+    logoutState,
+  ]);
 
   useEffect(() => {
     if (
@@ -146,7 +174,14 @@ export const TryFetchOnFailed = () => {
         dispatch(fetchGroups(logoutState));
       }, 5000);
     }
-  }, [groupsStatus, isAuthenticated, startDate, endDate]);
+  }, [
+    groupsStatus,
+    isAuthenticated,
+    startDate,
+    endDate,
+    dispatch,
+    logoutState,
+  ]);
 
   return null;
 };

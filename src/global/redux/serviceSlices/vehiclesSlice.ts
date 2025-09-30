@@ -8,8 +8,6 @@ interface Group {
   name: string;
 }
 
-/* imeIs llega del payload como string[] | [], pero es procesado en setObjNDIfEmpty()
-  para regresar como string. */
 export interface Vehicles {
   id: number;
   plate: string;
@@ -21,7 +19,7 @@ export interface Vehicles {
   serialNumber: string;
   driver: string;
   group: Group[];
-  imeIs: string; //Un vehículo puede no tener IMEIs asignadas
+  imeIs: string[]; //Un vehículo puede no tener IMEIs asignadas
 }
 
 interface ArrayVehicles {

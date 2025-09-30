@@ -4,6 +4,7 @@ import styles from "./tableModalViewVehicle.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { Modal } from "../../../modal/modal";
 import { PrimitiveValue } from "../../table.model";
+import { ndIfEmpty } from "@/global/utils/ndIfEmpty";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -26,43 +27,43 @@ export const TableModalViewVehicle = ({
         <div className={styles.leftSide}>
           <div>
             <h4>{LANGUAGE.management.tableColumns.imei}</h4>
-            <p>{dataObject.imeIs}</p>
+            <p>{ndIfEmpty(dataObject.imeIs)}</p>
           </div>
           <div>
             <h4>{LANGUAGE.management.tableColumns.plates}</h4>
-            <p>{dataObject.plate}</p>
+            <p>{ndIfEmpty(dataObject.plate)}</p>
           </div>
           <div>
             <h4>{LANGUAGE.management.tableColumns.name}</h4>
-            <p>{dataObject.name}</p>
+            <p>{ndIfEmpty(dataObject.name)}</p>
           </div>
           <div>
             <h4>{LANGUAGE.management.tableColumns.brand}</h4>
-            <p>{dataObject.brand}</p>
+            <p>{ndIfEmpty(dataObject.brand)}</p>
           </div>
           <div>
             <h4>{LANGUAGE.management.tableColumns.model}</h4>
-            <p>{dataObject.model}</p>
+            <p>{ndIfEmpty(dataObject.model)}</p>
           </div>
           <div>
             <h4>{LANGUAGE.management.tableColumns.year}</h4>
-            <p>{dataObject.year}</p>
+            <p>{ndIfEmpty(dataObject.year)}</p>
           </div>
           <div>
             <h4>{LANGUAGE.management.tableColumns.vehicleType}</h4>
-            <p>{dataObject.vehicleType}</p>
+            <p>{ndIfEmpty(dataObject.vehicleType)}</p>
           </div>
           <div>
             <h4>{LANGUAGE.management.tableColumns.driver}</h4>
-            <p>{dataObject.driver}</p>
+            <p>{ndIfEmpty(dataObject.driver)}</p>
           </div>
           <div>
             <h4>{LANGUAGE.management.tableColumns.groupName}</h4>
-            <p>{dataObject.groupName ?? "ND"}</p>
+            <p>{ndIfEmpty(dataObject.groupName)}</p>
           </div>
           <div>
             <h4>{LANGUAGE.management.tableColumns.serialNumber}</h4>
-            <p>{dataObject.serialNumber}</p>
+            <p>{ndIfEmpty(dataObject.serialNumber)}</p>
           </div>
         </div>
         <div className={styles.rightSide}>
