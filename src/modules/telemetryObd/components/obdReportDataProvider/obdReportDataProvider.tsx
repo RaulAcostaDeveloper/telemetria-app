@@ -61,7 +61,10 @@ export const ObdReportDataProvider = () => {
   };
 
   useEffect(() => {
-    if (obdTravelMetricsData?.value) {
+    if (
+      obdTravelMetricsData?.value &&
+      obdTravelMetricsData?.value.timeTraveledDetails.length > 0
+    ) {
       const totalEventNumber =
         obdTravelMetricsData.value.timeTraveledDetails.length;
       const lastObject =
@@ -157,7 +160,8 @@ export const ObdReportDataProvider = () => {
         tabContents={[
           <div key={1}>
             {obdTravelMetricsStatus === SERVICE_STATUS.succeeded &&
-              obdTravelMetricsData?.value && (
+              obdTravelMetricsData?.value &&
+              obdTravelMetricsData.value.timeTraveledDetails.length > 0 && (
                 <SingleLineHighChart
                   chartData={rpmData}
                   LANGUAGE={LANGUAGE}
@@ -168,7 +172,10 @@ export const ObdReportDataProvider = () => {
 
             <DataErrorHandler
               LANGUAGE={LANGUAGE}
-              hasData={!!obdTravelMetricsData?.value}
+              hasData={
+                !!obdTravelMetricsData?.value &&
+                obdTravelMetricsData.value.timeTraveledDetails.length > 0
+              }
               infoStatus={obdTravelMetricsStatus}
             />
           </div>,
@@ -197,7 +204,8 @@ export const ObdReportDataProvider = () => {
           </div>,
           <div key={3}>
             {obdTravelMetricsStatus === SERVICE_STATUS.succeeded &&
-              obdTravelMetricsData?.value && (
+              obdTravelMetricsData?.value &&
+              obdTravelMetricsData.value.timeTraveledDetails.length > 0 && (
                 <SingleLineHighChart
                   chartData={driverDistanceData}
                   LANGUAGE={LANGUAGE}
@@ -207,13 +215,17 @@ export const ObdReportDataProvider = () => {
               )}
             <DataErrorHandler
               LANGUAGE={LANGUAGE}
-              hasData={!!obdTravelMetricsData?.value}
+              hasData={
+                !!obdTravelMetricsData?.value &&
+                obdTravelMetricsData.value.timeTraveledDetails.length > 0
+              }
               infoStatus={obdTravelMetricsStatus}
             />
           </div>,
           <div key={4}>
             {obdTravelMetricsStatus === SERVICE_STATUS.succeeded &&
-              obdTravelMetricsData?.value && (
+              obdTravelMetricsData?.value &&
+              obdTravelMetricsData.value.timeTraveledDetails.length > 0 && (
                 <SingleLineHighChart
                   chartData={driverTime}
                   LANGUAGE={LANGUAGE}
@@ -223,7 +235,10 @@ export const ObdReportDataProvider = () => {
               )}
             <DataErrorHandler
               LANGUAGE={LANGUAGE}
-              hasData={!!obdTravelMetricsData?.value}
+              hasData={
+                !!obdTravelMetricsData?.value &&
+                obdTravelMetricsData.value.timeTraveledDetails.length > 0
+              }
               infoStatus={obdTravelMetricsStatus}
             />
           </div>,

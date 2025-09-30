@@ -55,7 +55,7 @@ export const FuelReportDataFetcher = ({ imei }: Props) => {
         })
       );
     }
-  }, [isAuthenticated, startDate, endDate, imei, dispatch, logoutState]);
+  }, [isAuthenticated, startDate, endDate, imei]);
 
   useEffect(() => {
     // Tener la data actualizada cada 10 segundos
@@ -77,7 +77,7 @@ export const FuelReportDataFetcher = ({ imei }: Props) => {
     return () => {
       clearTimeout(intervalId);
     };
-  }, [isAuthenticated, imei, lastFuelReportStatus, dispatch, logoutState]);
+  }, [isAuthenticated, imei, lastFuelReportStatus]);
 
   return <TryFuelReportOnFailed imei={imei} />;
 };
