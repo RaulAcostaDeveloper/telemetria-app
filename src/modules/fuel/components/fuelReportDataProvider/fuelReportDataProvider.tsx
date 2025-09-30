@@ -4,17 +4,15 @@ import { useSelector } from "react-redux";
 
 import GeoModal, { GeoModalData } from "@/global/components/geoModal/geoModal";
 import styles from "./fuelReportDataProvider.module.css";
-import {
-  FuelNowContainer,
-  FuelPerformanceMetrics,
-} from "@/modules/fuel/components";
 import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import { FuelBehaviorTab } from "@/modules/fuel/components/fuelBehaviorTab/fuelBehaviorTab";
+import { FuelNowTab } from "../fuelNowTab/fuelNowTab";
+import { FuelPerformanceMetrics } from "@/modules/fuel/components";
+import { Insights, ListAlt, LocalGasStation } from "@mui/icons-material";
 import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { TabsContent } from "@/global/components";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
-import { Insights, ListAlt, LocalGasStation } from "@mui/icons-material";
 
 export interface OBValue {
   startDate: string;
@@ -39,10 +37,6 @@ export const FuelReportDataProvider = () => {
 
   const { fuelPerformanceData, fuelPerformanceStatus } = useSelector(
     (state: RootState) => state.fuelPerformance
-  );
-
-  const { lastFuelReportData, lastFuelReportStatus } = useSelector(
-    (state: RootState) => state.lastFuelReport
   );
 
   const vehicleTabs = [
@@ -97,17 +91,6 @@ export const FuelReportDataProvider = () => {
     setOpBEngineOnMoving(engineOnMoving);
   }, [fuelDataData]);
 
-  useEffect(() => {
-    if (lastFuelReportData?.value) {
-      setGeoModalData({
-        lat: parseFloat(lastFuelReportData?.value.lat.toString()),
-        lon: parseFloat(lastFuelReportData?.value.lon.toString()),
-        title: LANGUAGE.geoModalTitles.fuelNowTitle,
-        rows: [],
-      });
-    }
-  }, [lastFuelReportData, LANGUAGE]);
-
   return (
     <div className={styles.fuelReportDataProvider}>
       <TabsContent
@@ -152,22 +135,11 @@ export const FuelReportDataProvider = () => {
             />
           </div>,
           <div key={2}>
-            {lastFuelReportStatus === SERVICE_STATUS.succeeded &&
-              lastFuelReportData?.value && (
-                <>
-                  <FuelNowContainer
-                    LANGUAGE={LANGUAGE}
-                    isModalOpen={isModalOpen}
-                    lastFuelReportData={lastFuelReportData.value}
-                    setIsModalOpen={setIsModalOpen}
-                  />
-                </>
-              )}
-
-            <DataErrorHandler
+            <FuelNowTab
               LANGUAGE={LANGUAGE}
-              hasData={!!lastFuelReportData?.value}
-              infoStatus={lastFuelReportStatus}
+              isModalOpen={isModalOpen}
+              setGeoModalData={setGeoModalData}
+              setIsModalOpen={setIsModalOpen}
             />
           </div>,
         ]}
