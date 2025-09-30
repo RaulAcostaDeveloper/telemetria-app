@@ -418,6 +418,7 @@ export const FuelBehaviorHighChart = ({
         {
           yAxis: 1,
           name: LANGUAGE.highCharts.titles.performancesBetweenCharges,
+          type: "line",
           data: performancesBetweenChargesData,
           marker: { enabled: true, radius: 4, symbol: "square" },
           color: "#f5c800",
@@ -430,6 +431,7 @@ export const FuelBehaviorHighChart = ({
         {
           yAxis: 1,
           name: LANGUAGE.highCharts.titles.dailyPerformance,
+          type: "line",
           data: dailyPerformancesData,
           marker: { enabled: true, radius: 4, symbol: "circle" },
           color: "#8f07ff",
