@@ -12,7 +12,7 @@
   width: 500px;
   border: 1px solid #e5e7eb;
   border-radius: 0.75rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px var(--shadow-min);
 }
 
 .authForm {
@@ -47,13 +47,13 @@
   background-color: var(--company-color-1);
   padding: 1.2rem;
   box-shadow: rgba(138, 138, 241, 0.25) 0px 6px 60px -12px inset,
-    rgba(0, 0, 0, 0.5) 4px 4px 10px -4px inset;
+    var(--shadow-mid) 4px 4px 10px -4px inset;
 }
 
 .inputsContainers input:hover,
 .inputsContainers input:focus {
   box-shadow: rgba(77, 77, 143, 0.25) 0px 6px 60px -12px inset,
-    rgba(0, 0, 0, 0.5) 4px 4px 10px -4px inset;
+    var(--shadow-mid) 4px 4px 10px -4px inset;
 }
 
 .inputsContainers input:focus,

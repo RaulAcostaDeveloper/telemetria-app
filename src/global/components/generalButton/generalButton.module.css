@@ -10,14 +10,14 @@
   padding: 10px 5px;
   border: none;
   border-radius: 4px;
-  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 2px 2px 5px 0px var(--shadow-bold);
+  -moz-box-shadow: 2px 2px 5px 0px var(--shadow-bold);
+  box-shadow: 2px 2px 5px 0px var(--shadow-bold);
   transition: 0.5s;
 }
 
 .generalButton:hover {
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 6px 18px var(--shadow-soft);
   transform: translateY(-1px);
 }
 

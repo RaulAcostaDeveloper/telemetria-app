@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   margin-top: -10px; /* medida en contraposicion al margen de la tabla */
-  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 2px 5px 0px var(--shadow-bold);
   background-color: var(--company-color-1);
   border-top: 1px solid rgb(65 48 48 / 15%);
 }

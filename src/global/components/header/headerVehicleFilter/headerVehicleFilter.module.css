@@ -6,13 +6,13 @@
 .container input {
   padding: 1.2rem;
   box-shadow: rgba(138, 138, 241, 0.25) 0px 6px 60px -12px inset,
-    rgba(0, 0, 0, 0.5) 4px 4px 10px -4px inset;
+    var(--shadow-mid) 4px 4px 10px -4px inset;
 }
 .container input:focus {
   outline: 2px solid rgba(77, 77, 143, 0.25);
   outline-offset: 2px;
   box-shadow: rgba(77, 77, 143, 0.25) 0px 6px 60px -12px inset,
-    rgba(0, 0, 0, 0.5) 4px 4px 10px -4px inset;
+    var(--shadow-mid) 4px 4px 10px -4px inset;
 }
 
 .input {
@@ -93,9 +93,9 @@
 
 .iconButton:hover {
   background-color: rgba(0, 0, 0, 0.05);
-  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 0px 2px 0px var(--shadow-bold);
+  -moz-box-shadow: 0px 0px 2px 0px var(--shadow-bold);
+  box-shadow: 0px 0px 2px 0px var(--shadow-bold);
 }
 
 .imei {

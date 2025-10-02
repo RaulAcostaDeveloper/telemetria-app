@@ -8,7 +8,7 @@
   background-color: white;
   color: black;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px var(--shadow-min);
   padding: 1rem;
   width: 42rem;
   min-height: 27rem;
@@ -84,7 +84,7 @@
   width: 1rem;
   height: 1rem;
   border-radius: 9999px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px var(--shadow-min);
   transition: transform 0.3s ease-in-out;
 }
 
@@ -114,7 +114,7 @@
   z-index: 10;
   background-color: white;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px var(--shadow-min);
   border: 1px solid var(--neutral);
   width: 100%;
 }

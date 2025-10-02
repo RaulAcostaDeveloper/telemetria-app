@@ -13,9 +13,9 @@
   border-radius: 8px;
   max-width: 300px;
   display: flex;
-  box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 4px 4px 5px 0px var(--shadow-bold);
+  -webkit-box-shadow: 4px 4px 5px 0px var(--shadow-bold);
+  -moz-box-shadow: 4px 4px 5px 0px var(--shadow-bold);
 }
 
 .icon {
