@@ -7,5 +7,5 @@
   padding: 12px;
   overflow: auto;
 
-  box-shadow: 0 0 1rem 0 hsla(200, 37%, 81%, 0.5); /* #bdd5e1 ó --company-color-2 */
+  box-shadow: 0 0 1rem 0 var(--shadow-gray-mid); /* #bdd5e1 ó --company-color-2 */
 }
