@@ -17,6 +17,7 @@ import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes"
 import { TabsContent } from "@/global/components";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 import { ListAlt, Route, Speed, WorkHistory } from "@mui/icons-material";
+import { NO_DATA } from "@/global/utils/ndIfEmpty";
 
 export const ObdReportDataProvider = () => {
   const LANGUAGE = useLanguage();
@@ -28,11 +29,13 @@ export const ObdReportDataProvider = () => {
     []
   );
   const [driverTime, setDriverTimeData] = useState<ObdChartPoint[]>([]);
-  const [averageSpeed, setAverageSpeed] = useState<number | string>("NA");
-  const [driverDistance, setDriverDistance] = useState<number | string>("NA");
-  const [engineHours, setEngineHours] = useState<number | string>("NA");
-  const [idleTime, setIdleTime] = useState<number | string>("NA");
-  const [maxSpeed, setMaxSpeed] = useState<number | string>("NA");
+  const [averageSpeed, setAverageSpeed] = useState<number | string>(NO_DATA);
+  const [driverDistance, setDriverDistance] = useState<number | string>(
+    NO_DATA
+  );
+  const [engineHours, setEngineHours] = useState<number | string>(NO_DATA);
+  const [idleTime, setIdleTime] = useState<number | string>(NO_DATA);
+  const [maxSpeed, setMaxSpeed] = useState<number | string>(NO_DATA);
 
   const { obdTravelMetricsData, obdTravelMetricsStatus } = useSelector(
     (state: RootState) => state.obdTravelMetrics
@@ -60,6 +63,8 @@ export const ObdReportDataProvider = () => {
     setIsModalOpen(true);
   };
 
+  // Pendiente. Es un problema con los valores anteriores de la consulta del servicio en el slice
+  // Por un momento, el valor del slice es el de la anterior consulta, entonces SI entra el cálculo
   useEffect(() => {
     if (
       obdTravelMetricsData?.value &&
@@ -80,7 +85,7 @@ export const ObdReportDataProvider = () => {
               dateGps: c.dateGPS,
               lat: c.lat,
               lon: c.lon,
-              value: c.rpm ?? "NA",
+              value: c.rpm ?? NO_DATA,
             },
           }))
           .sort((a, b) => a.x - b.x);
@@ -95,7 +100,7 @@ export const ObdReportDataProvider = () => {
               dateGps: c.dateGPS,
               lat: c.lat,
               lon: c.lon,
-              value: c.driverDistance ?? "NA",
+              value: c.driverDistance ?? NO_DATA,
             },
           }))
           .sort((a, b) => a.x - b.x);
@@ -110,7 +115,7 @@ export const ObdReportDataProvider = () => {
               dateGps: c.dateGPS,
               lat: c.lat,
               lon: c.lon,
-              value: c.driverTime ?? "NA",
+              value: c.driverTime ?? NO_DATA,
             },
           }))
           .sort((a, b) => a.x - b.x);
@@ -150,6 +155,15 @@ export const ObdReportDataProvider = () => {
           ? speeds.reduce((acc, val) => acc + val, 0) / speeds.length
           : 0;
       setAverageSpeed(Math.round(averageSpeed * 100) / 100);
+    } else {
+      setRpmData([]);
+      setDriverDistanceData([]);
+      setDriverTimeData([]);
+      setDriverDistance(NO_DATA);
+      setEngineHours(NO_DATA);
+      setIdleTime(NO_DATA);
+      setMaxSpeed(NO_DATA);
+      setAverageSpeed(NO_DATA);
     }
   }, [obdTravelMetricsData]);
 
