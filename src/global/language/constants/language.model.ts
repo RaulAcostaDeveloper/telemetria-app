@@ -106,6 +106,7 @@ export interface LanguageInterface {
       columns: string;
       total: string;
       average: string;
+      validDataLength: string;
     };
     formTitles: {
       filters: string;

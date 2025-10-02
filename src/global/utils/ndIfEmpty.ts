@@ -1,10 +1,12 @@
 import { PrimitiveValue } from "../components/table/table.model";
 
+export const NO_DATA = "ND";
+
 export function ndIfEmpty(value: PrimitiveValue | undefined): PrimitiveValue {
-  if (value === undefined || value === null) return "ND";
+  if (value === undefined || value === null) return NO_DATA;
   if (typeof value === "string") {
     if (value.trim().length > 0 === false) {
-      return "ND";
+      return NO_DATA;
     }
   }
 

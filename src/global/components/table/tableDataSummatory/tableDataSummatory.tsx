@@ -1,6 +1,8 @@
 import styles from "./tableDataSummatory.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
+import { SummatoryButtons } from "./summatoryButtons";
 import { columnsTable, dataTable } from "../table.model";
+import { ndIfEmpty, NO_DATA } from "@/global/utils/ndIfEmpty";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -13,33 +15,16 @@ export const TableDataSummatory = ({
   filteredData,
   LANGUAGE,
 }: Props) => {
-  // Calcula la suma de todos los valores de ese parámetro
-  const calcSumm = (index: number): number => {
-    let total = 0;
+  const calcValidDataLength = (index: number) => {
+    let validDataLength = 0;
 
-    for (const item of filteredData) {
+    filteredData.map((item) => {
       const key = Object.keys(item)[index];
-
-      if (key) {
-        const rawValue = item[key];
-        const value = Number(rawValue);
-
-        if (!isNaN(value)) {
-          total += value;
-        }
+      if (ndIfEmpty(item[key]) !== NO_DATA) {
+        validDataLength++;
       }
-    }
-
-    // Máximo 3 decimales
-    return Math.round(total * 1000) / 1000;
-  };
-  const calcAverage = (index: number): number => {
-    const sum = calcSumm(index);
-    if (0 !== sum && 0 !== filteredData.length) {
-      return Math.round(((sum / filteredData.length) * 1000) / 1000);
-    } else {
-      return 0;
-    }
+    });
+    return validDataLength;
   };
 
   return (
@@ -51,16 +36,12 @@ export const TableDataSummatory = ({
         return (
           <div key={el.columnName + index} style={defaultSpace}>
             {el.showTotal && (
-              <>
-                <div className={`${styles.summatory}`}>
-                  <p>{LANGUAGE.table.elements.total}</p>
-                  <span>{calcSumm(index)}</span>
-                </div>
-                <div className={`${styles.average}`}>
-                  <p>{LANGUAGE.table.elements.average}</p>
-                  <span>{calcAverage(index)}</span>
-                </div>
-              </>
+              <SummatoryButtons
+                LANGUAGE={LANGUAGE}
+                filteredData={filteredData}
+                index={index}
+                validDataLength={calcValidDataLength(index)}
+              />
             )}
           </div>
         );
