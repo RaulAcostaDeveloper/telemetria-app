@@ -5,9 +5,10 @@ import { GaugeGraphic } from "@/global/components";
 interface Props {
   tankValues: number[] | undefined;
   title: string;
+  averageTankSize: number | undefined;
 }
 
-export const FuelNowVehicleTank = ({ tankValues, title }: Props) => {
+export const FuelNowVehicleTank = ({ tankValues, title, averageTankSize }: Props) => {
   return (
     <>
       <>
@@ -18,7 +19,7 @@ export const FuelNowVehicleTank = ({ tankValues, title }: Props) => {
                 <GaugeGraphic
                   value={value}
                   metric="L"
-                  max={45}
+                  max={averageTankSize ?? 0}
                   title={title + " " + (index + 1)}
                 />
               </div>
