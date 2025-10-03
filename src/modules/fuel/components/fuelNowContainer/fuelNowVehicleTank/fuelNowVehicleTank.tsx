@@ -1,33 +1,30 @@
-import LoaderAnimation from "@/global/components/loaderAnimation/loaderAnimation";
 import styles from "./fuelNowVehicleTank.module.css";
 import { GaugeGraphic } from "@/global/components";
 
 interface Props {
   tankValues: number[] | undefined;
   title: string;
+  averageTankSize: number;
 }
 
-export const FuelNowVehicleTank = ({ tankValues, title }: Props) => {
+export const FuelNowVehicleTank = ({ tankValues, title, averageTankSize }: Props) => {
+  console.log('tankValues', tankValues, 'averageTankSize', averageTankSize);
   return (
     <>
       <>
-        {tankValues ? (
+        {tankValues && 1 < averageTankSize && (
           <>
             {tankValues.map((value, index) => (
               <div key={index} className={styles.graphic}>
                 <GaugeGraphic
                   value={value}
                   metric="L"
-                  max={45}
+                  max={averageTankSize}
                   title={title + " " + (index + 1)}
                 />
               </div>
             ))}
           </>
-        ) : (
-          <div>
-            <LoaderAnimation />
-          </div>
         )}
       </>
     </>

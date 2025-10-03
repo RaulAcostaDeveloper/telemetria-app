@@ -35,6 +35,7 @@ export interface LastFuelReportData {
   canCurrentLevel: number;
   dateAvl: string;
   sensorCurrentLevel: number | null;
+  maxFuelCapacity: number;
 }
 
 interface Data {

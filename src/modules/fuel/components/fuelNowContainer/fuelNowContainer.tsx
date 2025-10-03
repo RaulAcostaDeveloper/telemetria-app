@@ -44,13 +44,19 @@ export const FuelNowContainer = ({
   );
 
   const tankValues = lastFuelReportData.tanksLevels
-    ?.split(",")
+    ?.split(/\s*[,|]\s*/) //quita espacios y separa por coma y por pipe.
     .map(Number)
     .filter((n) => !isNaN(n));
 
   const numberOfTanks = tankValues?.length;
   const fuelNow = (tankValues ?? []).reduce((acc, val) => acc + val, 0);
-  const totalCapacity = 45 * (numberOfTanks ?? 0);
+  const totalCapacity = lastFuelReportData.maxFuelCapacity ?? 0;
+  let averageTankSize: number;
+  if (numberOfTanks && 0 < numberOfTanks && 0 < totalCapacity){
+    averageTankSize = totalCapacity / numberOfTanks;
+  }else{
+    averageTankSize = 1;
+  }
 
   return (
     <div>
@@ -113,6 +119,7 @@ export const FuelNowContainer = ({
         <FuelNowVehicleTank
           tankValues={tankValues}
           title={LANGUAGE.fuelVehicle.fuelNow.tank}
+          averageTankSize={averageTankSize}
         />
       </div>
     </div>
