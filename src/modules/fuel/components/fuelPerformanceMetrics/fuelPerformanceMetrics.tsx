@@ -29,12 +29,12 @@ export const FuelPerformanceMetrics = ({
           name={LANGUAGE.fuelVehicle.vehicleReports.distanceTravelled}
           value={fuelPerformanceData.distanceTraveled?.toLocaleString("en-US")}
         />
-        {/* <MetricItem
+        <MetricItem
           LANGUAGE={LANGUAGE}
-          metric="L/H"
-          name={LANGUAGE.fuelVehicle.vehicleReports.timeEfficiency}
-          value={fuelPerformanceData.performanceByTime.toLocaleString("en-US")}
-        /> */}
+          metric="L"
+          name={LANGUAGE.fuelVehicle.vehicleReports.fuelConsumed}
+          value={fuelPerformanceData.fuelConsumed?.toLocaleString("en-US")}
+        />
         <MetricItem
           LANGUAGE={LANGUAGE}
           isLast
@@ -44,12 +44,6 @@ export const FuelPerformanceMetrics = ({
         />
       </div>
       <div className={styles.cuadricula}>
-        <MetricItem
-          LANGUAGE={LANGUAGE}
-          metric="L"
-          name={LANGUAGE.fuelVehicle.vehicleReports.fuelConsumed}
-          value={fuelPerformanceData.fuelConsumed?.toLocaleString("en-US")}
-        />
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric="L"
@@ -64,10 +58,16 @@ export const FuelPerformanceMetrics = ({
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
-          isLast
           metric="L"
           name={LANGUAGE.fuelVehicle.vehicleReports.fuelLoaded}
           value={fuelPerformanceData.fuelCharged?.toLocaleString("en-US")}
+        />
+        <MetricItem
+          LANGUAGE={LANGUAGE}
+          metric="L"
+          isLast
+          name={LANGUAGE.fuelVehicle.vehicleReports.fuelUnloaded}
+          value={fuelPerformanceData.fuelDischarged.toLocaleString("en-US")}
         />
       </div>
     </div>

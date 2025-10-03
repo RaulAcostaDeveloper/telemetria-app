@@ -297,6 +297,7 @@ export const SPANISH: LanguageInterface = {
       fuelConsumed: "Combustible consumido",
       fuelEnd: "Combustible final",
       fuelLoaded: "Combustible cargado",
+      fuelUnloaded: "Combustible descargado",
       fuelStart: "Combustible inicial",
       operatingHours: "Horas operando",
       timeEfficiency: "Rendimiento por tiempo",

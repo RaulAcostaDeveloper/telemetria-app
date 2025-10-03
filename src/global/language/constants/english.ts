@@ -297,6 +297,7 @@ export const ENGLISH: LanguageInterface = {
       fuelConsumed: "Fuel consumed",
       fuelEnd: "Final fuel",
       fuelLoaded: "Fuel filled",
+      fuelUnloaded: "Fuel unloaded",
       fuelStart: "Initial fuel",
       operatingHours: "Operating hours",
       timeEfficiency: "Time efficiency",

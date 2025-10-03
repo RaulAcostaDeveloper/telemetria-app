@@ -277,6 +277,7 @@ export interface LanguageInterface {
       fuelConsumed: string;
       fuelEnd: string;
       fuelLoaded: string;
+      fuelUnloaded: string;
       fuelStart: string;
       operatingHours: string;
       timeEfficiency: string;

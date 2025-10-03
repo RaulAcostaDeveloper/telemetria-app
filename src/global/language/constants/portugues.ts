@@ -296,6 +296,7 @@ export const PORTUGUES: LanguageInterface = {
       fuelConsumed: "Combustível consumido",
       fuelEnd: "Combustível final",
       fuelLoaded: "Combustível abastecido",
+      fuelUnloaded: "Combustível descarregado",
       fuelStart: "Combustível inicial",
       operatingHours: "Horas em operação",
       timeEfficiency: "Rendimento por tempo",
