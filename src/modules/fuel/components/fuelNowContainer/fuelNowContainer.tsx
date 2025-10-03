@@ -51,7 +51,12 @@ export const FuelNowContainer = ({
   const numberOfTanks = tankValues?.length;
   const fuelNow = (tankValues ?? []).reduce((acc, val) => acc + val, 0);
   const totalCapacity = lastFuelReportData.maxFuelCapacity ?? 0;
-  const averageTankSize = numberOfTanks && totalCapacity / numberOfTanks;
+  let averageTankSize: number;
+  if (numberOfTanks && 0 < numberOfTanks && 0 < totalCapacity){
+    averageTankSize = totalCapacity / numberOfTanks;
+  }else{
+    averageTankSize = 1;
+  }
 
   return (
     <div>
