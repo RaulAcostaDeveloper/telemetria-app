@@ -126,6 +126,7 @@ export const SPANISH: LanguageInterface = {
       columns: "Columnas",
       total: "Total",
       average: "Promedio",
+      validDataLength: "Valores válidos:",
     },
     formTitles: {
       filters: "Filtros",

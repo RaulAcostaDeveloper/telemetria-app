@@ -20,3 +20,28 @@
     font-weight: bold;
   }
 }
+
+.button {
+  width: 100%;
+  cursor: copy;
+}
+
+.button:hover span {
+  text-decoration: underline;
+}
+
+.button p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button svg {
+  margin-left: 5px;
+  color: rgba(0, 0, 0, 0.4);
+  cursor: help;
+}
+
+.button svg:hover {
+  color: rgba(0, 0, 0, 0.5);
+}
