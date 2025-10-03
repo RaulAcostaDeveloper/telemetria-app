@@ -1,6 +1,7 @@
 import styles from "./obdAnalisisTab.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { MetricItem } from "@/modules/fuel/components/fuelPerformanceMetrics/metricItem/metricItem";
+import { NO_DATA } from "@/global/utils/ndIfEmpty";
 import { ObdTravelMetricsDataValues } from "@/global/redux/serviceSlices/obdTravelMetricsSlice";
 import { VehicleByImei } from "@/global/redux/serviceSlices/vehicleByImeiSlice";
 
@@ -103,7 +104,7 @@ export const ObdAnalysisTab = ({
           LANGUAGE={LANGUAGE}
           metric="km/h"
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.allowedMaxSpeed}
-          value={"NA"} // pendiente
+          value={NO_DATA} // pendiente
           isLast
         />
       </div>
