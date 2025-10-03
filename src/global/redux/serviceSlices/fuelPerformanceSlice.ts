@@ -13,6 +13,7 @@ export interface FuelPerformanceValues {
   operationTime: number;
   performanceByDistance: number;
   performanceByTime: number;
+  fuelDischarged: number;
 }
 
 interface Data {
