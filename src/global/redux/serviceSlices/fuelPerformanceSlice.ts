@@ -52,7 +52,10 @@ const initialState: InitialState = {
 const fuelPerformanceSlice = createSlice({
   name: "fuelPerformance",
   initialState,
-  reducers: {},
+  reducers: {
+    // Reiniciar el estado al desmontar el componente del reporte individual
+    resetfuelPerformanceSlice: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchFuelPerformance.pending, (state) => {
@@ -67,5 +70,7 @@ const fuelPerformanceSlice = createSlice({
       });
   },
 });
+
+export const { resetfuelPerformanceSlice } = fuelPerformanceSlice.actions;
 
 export default fuelPerformanceSlice.reducer;
