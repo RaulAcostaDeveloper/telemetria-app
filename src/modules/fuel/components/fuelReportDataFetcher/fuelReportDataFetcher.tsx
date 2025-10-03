@@ -2,12 +2,21 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import {
+  fetchFuelData,
+  resetfuelDataSlice,
+} from "@/global/redux/serviceSlices/fuelDataSlice";
+import {
+  fetchFuelPerformance,
+  resetfuelPerformanceSlice,
+} from "@/global/redux/serviceSlices/fuelPerformanceSlice";
+import {
+  fetchLastFuelReport,
+  resetLastFuelReportSlice,
+} from "@/global/redux/serviceSlices/lastFuelReportSlice";
 import { AppDispatch, RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { TryFuelReportOnFailed } from "./tryFuelReportOnFailed/tryFuelReportOnFailed";
-import { fetchFuelData } from "@/global/redux/serviceSlices/fuelDataSlice";
-import { fetchFuelPerformance } from "@/global/redux/serviceSlices/fuelPerformanceSlice";
-import { fetchLastFuelReport } from "@/global/redux/serviceSlices/lastFuelReportSlice";
 import { formatToLocalIso8601 } from "@/global/utils/utils";
 import { useAuth } from "@/modules/auth/utils";
 
@@ -27,6 +36,15 @@ export const FuelReportDataFetcher = ({ imei }: Props) => {
   const { lastFuelReportStatus } = useSelector(
     (state: RootState) => state.lastFuelReport
   );
+
+  useEffect(() => {
+    return () => {
+      // Reiniciar el estado al desmontar
+      dispatch(resetLastFuelReportSlice());
+      dispatch(resetfuelDataSlice());
+      dispatch(resetfuelPerformanceSlice());
+    };
+  }, []);
 
   useEffect(() => {
     if (isAuthenticated && startDate && endDate && imei.length > 10) {

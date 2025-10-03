@@ -146,7 +146,10 @@ const initialState: InitialState = {
 const fuelDataSlice = createSlice({
   name: "fuelData",
   initialState,
-  reducers: {},
+  reducers: {
+    // Reiniciar el estado al desmontar el componente del reporte individual
+    resetfuelDataSlice: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchFuelData.pending, (state) => {
@@ -161,5 +164,7 @@ const fuelDataSlice = createSlice({
       });
   },
 });
+
+export const { resetfuelDataSlice } = fuelDataSlice.actions;
 
 export default fuelDataSlice.reducer;

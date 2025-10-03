@@ -57,7 +57,10 @@ const initialState: InitialState = {
 const lastFuelReportSlice = createSlice({
   name: "lastFuelReport",
   initialState,
-  reducers: {},
+  reducers: {
+    // Reiniciar el estado al desmontar el componente del reporte individual
+    resetLastFuelReportSlice: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchLastFuelReport.pending, (state) => {
@@ -72,5 +75,7 @@ const lastFuelReportSlice = createSlice({
       });
   },
 });
+
+export const { resetLastFuelReportSlice } = lastFuelReportSlice.actions;
 
 export default lastFuelReportSlice.reducer;

@@ -61,7 +61,10 @@ const initialState: InitialState = {
 const obdTravelMetricsSlice = createSlice({
   name: "obdTravelMetrics",
   initialState,
-  reducers: {},
+  reducers: {
+    // Reiniciar el estado al desmontar el componente del reporte individual
+    resetObdTravelMetricsSlice: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchObdTravelMetrics.pending, (state) => {
@@ -76,5 +79,7 @@ const obdTravelMetricsSlice = createSlice({
       });
   },
 });
+
+export const { resetObdTravelMetricsSlice } = obdTravelMetricsSlice.actions;
 
 export default obdTravelMetricsSlice.reducer;
