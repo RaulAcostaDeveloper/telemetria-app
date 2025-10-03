@@ -21,6 +21,7 @@ export interface ObdTravelMetricsDataValues {
   deviceID: string;
   totalTimeTraveled: null | number;
   rpmAverage: null | number;
+  maxSpeedAllowed: number | null;
   timeTraveledDetails: ObdTravelMetricsTimeTraveledDetails[];
 }
 
