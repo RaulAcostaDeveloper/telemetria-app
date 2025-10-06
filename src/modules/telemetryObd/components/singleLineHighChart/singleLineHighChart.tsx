@@ -1,8 +1,8 @@
 "use client";
 import { useMemo } from "react";
-import * as Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
+import Highcharts from "highcharts";
 import HighstockInit from "highcharts/modules/stock";
+import dynamic from "next/dynamic";
 
 import {
   createTooltipFormatter,
@@ -18,6 +18,10 @@ import {
   getLabelsForRPMGeoMap,
   getLabelsForTimeTraveledGeoMap,
 } from "@/global/utils/geoMapUtils";
+
+const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
+  ssr: false,
+});
 
 export interface ObdChartPoint {
   x: number;

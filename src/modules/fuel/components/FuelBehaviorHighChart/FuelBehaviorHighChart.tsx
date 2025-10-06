@@ -1,8 +1,8 @@
 "use client";
 import { useMemo } from "react";
-import * as Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
+import Highcharts from "highcharts";
 import HighstockInit from "highcharts/modules/stock";
+import dynamic from "next/dynamic";
 
 import {
   createTooltipFormatter,
@@ -20,6 +20,10 @@ import { FuelDataValues } from "@/global/redux/serviceSlices/fuelDataSlice";
 import { GeoModalData } from "@/global/components/geoModal/geoModal";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { OBValue } from "../fuelReportDataProvider/fuelReportDataProvider";
+
+const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
+  ssr: false,
+});
 
 interface Props {
   LANGUAGE: LanguageInterface;
