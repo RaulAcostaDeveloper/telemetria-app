@@ -3,6 +3,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getDevices } from "@/modules/management/services/devices/devices";
 
+export type statusNum = "0" | "1" | "2" | "3";
+
 interface Devices {
   id: number;
   name: string;
@@ -12,7 +14,7 @@ interface Devices {
   model: string;
   imei: string;
   phoneNumber: string;
-  status: string;
+  status: statusNum;
   registrationDate: string;
 }
 

@@ -1,4 +1,6 @@
 import React from "react";
+import { statusNum } from "../redux/serviceSlices/devicesSlice";
+import { NO_DATA } from "./ndIfEmpty";
 
 export const toKebabCase = (str: string) => {
   return str
@@ -306,4 +308,31 @@ export function getMedian2d(orderedValues: number[]): number {
     final = orderedValues[Math.ceil(arrLength / 2) - 1];
   }
   return parseFloat(final.toFixed(2));
+}
+
+/**
+ * Traductor entre string de valor numérico y significado práctico 
+ * para el status de management devices
+ * 
+ * @param status - cadena de texto con posible valor numérico que 
+ * será traducido en la funcion.
+ * @returns string con la traducción realizada.
+ */
+export function deviceStatusTranslator(status: statusNum){
+  let translatedStatus
+  switch (status) {
+    case "1":
+      translatedStatus = "a"
+      break;
+    case "2":
+      translatedStatus = "b"
+    break;
+    case "3":
+      translatedStatus = "c"
+      break;
+    default:
+      translatedStatus = NO_DATA;
+      break;
+  }
+  return translatedStatus
 }
