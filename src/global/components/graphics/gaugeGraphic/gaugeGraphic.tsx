@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Highcharts from "highcharts";
 import dynamic from "next/dynamic";
 
 const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
@@ -17,6 +16,18 @@ interface Props {
 
 export const GaugeGraphic = ({ title, max, metric, value }: Props) => {
   const [isReady, setIsReady] = useState(false);
+  const [Highcharts, setHighcharts] = useState<unknown>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    (async () => {
+      const importedModule = await import("highcharts");
+      if (isMounted) setHighcharts(importedModule.default ?? importedModule);
+    })();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -61,8 +72,7 @@ export const GaugeGraphic = ({ title, max, metric, value }: Props) => {
         max: max,
         tickPixelInterval: 100,
         tickPosition: "inside",
-        tickColor:
-          Highcharts.defaultOptions.chart?.backgroundColor || "#FFFFFF",
+        tickColor: "#FFFFFF",
         tickLength: 20,
         tickWidth: 2,
         minorTickInterval: undefined,
@@ -104,7 +114,7 @@ export const GaugeGraphic = ({ title, max, metric, value }: Props) => {
           dataLabels: {
             format: "{y} " + metric + " - " + percent + " %",
             borderWidth: 1,
-            color: Highcharts.defaultOptions.title?.style?.color || "#333333",
+            color: "#333333",
             padding: 10,
             style: {
               fontSize: "1.2rem",
@@ -132,7 +142,7 @@ export const GaugeGraphic = ({ title, max, metric, value }: Props) => {
 
   return (
     <>
-      {isReady && (
+      {isReady && Highcharts && (
         <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       )}
     </>

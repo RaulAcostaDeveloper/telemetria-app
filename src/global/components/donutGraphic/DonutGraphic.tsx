@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from "react";
-import Highcharts from "highcharts";
 import dynamic from "next/dynamic";
 
 import styles from "./donutGraphic.module.css";
@@ -28,21 +27,36 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
   const [segmentsCount, setSegmentsCount] = useState<SegmentOption>(10);
   const [is3DReady, setIs3DReady] = useState(false);
 
+  const [Highcharts, setHighcharts] = useState<unknown>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    (async () => {
+      const importedModule = await import("highcharts");
+      if (isMounted) setHighcharts(importedModule.default ?? importedModule);
+    })();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   // Nos aseguramos que highcharts 3d solo se cargue del lado del cliente
   useEffect(() => {
-    (async () => {
-      try {
-        await import("highcharts/highcharts-3d.js");
-        setIs3DReady(true);
-      } catch (err) {
-        console.error(
-          ' No se pudo importar "highcharts/highcharts-3d.js". El donut 3D no podrá mostrarse.',
-          err
-        );
-        setIs3DReady(false);
-      }
-    })();
-  }, []);
+    if (Highcharts) {
+      (async () => {
+        try {
+          await import("highcharts/highcharts-3d.js");
+          setIs3DReady(true);
+        } catch (err) {
+          console.error(
+            ' No se pudo importar "highcharts/highcharts-3d.js". El donut 3D no podrá mostrarse.',
+            err
+          );
+          setIs3DReady(false);
+        }
+      })();
+    }
+  }, [Highcharts]);
 
   const chartOptions: Highcharts.Options = useMemo(() => {
     if (!is3DReady) {
@@ -244,7 +258,7 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
       </div>
 
       <div className={styles.chartWrapper}>
-        {!is3DReady || !HighchartsReact ? (
+        {!is3DReady || !HighchartsReact || !Highcharts ? (
           <div className={styles.loadingText}>
             {LANGUAGE.fuel.donutGrpahic.waitingMessage}
             <LoaderAnimation />

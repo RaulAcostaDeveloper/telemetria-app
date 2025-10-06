@@ -1,7 +1,5 @@
 "use client";
-import { useMemo } from "react";
-import Highcharts from "highcharts";
-import HighstockInit from "highcharts/modules/stock";
+import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 
 import {
@@ -35,10 +33,6 @@ interface Props {
   opBEngineOnMoving: OBValue[];
 }
 
-if (typeof HighstockInit === "function") {
-  (HighstockInit as (hc: typeof Highcharts) => void)(Highcharts);
-}
-
 export const FuelBehaviorHighChart = ({
   LANGUAGE,
   fuelDataData,
@@ -48,6 +42,30 @@ export const FuelBehaviorHighChart = ({
   opBEngineOnIdle,
   opBEngineOnMoving,
 }: Props) => {
+  const [Highcharts, setHighcharts] = useState<unknown>(null);
+  const [HighstockInit, setHighstockInit] = useState<unknown>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    (async () => {
+      const importedModule = await import("highcharts");
+      if (isMounted) setHighcharts(importedModule.default ?? importedModule);
+
+      const importedModule2 = await import("highcharts/modules/stock");
+      if (isMounted)
+        setHighstockInit(importedModule2.default ?? importedModule2);
+    })();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (Highcharts && HighstockInit && typeof HighstockInit === "function") {
+      (HighstockInit as (hc: typeof Highcharts) => void)(Highcharts);
+    }
+  }, [Highcharts, HighstockInit]);
+
   // Tooltip de cada serie
   const chargesTooltipFields = getChargesTooltipFields(LANGUAGE);
 
@@ -557,10 +575,14 @@ export const FuelBehaviorHighChart = ({
   ]);
 
   return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      constructorType="stockChart"
-      options={chartOptions}
-    />
+    <>
+      {Highcharts && HighchartsReact && HighstockInit && (
+        <HighchartsReact
+          highcharts={Highcharts}
+          constructorType="stockChart"
+          options={chartOptions}
+        />
+      )}
+    </>
   );
 };
