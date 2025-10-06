@@ -128,7 +128,7 @@ export const GaugeGraphic = ({ title, max, metric, value }: Props) => {
         split: false,
       },
     };
-  }, []);
+  }, [max, metric, percent, title, value]);
 
   return (
     <>
