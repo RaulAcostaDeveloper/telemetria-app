@@ -173,7 +173,7 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
             },
             formatter: function () {
               if ((this.y as number) > 0) {
-                return `<span>${this.point.name}</span>`;
+                return `<span>${this.name}</span>`;
               }
               return null;
             },
@@ -187,8 +187,8 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
         formatter: function () {
           return (
             `<div style="text-align: center;">` +
-            `<span>${this.point.name}</span><br/>` +
-            `<span>Vehículos: ${this.y}</span>` +
+            `<span>${this.name}</span><br/>` +
+            `<span>${LANGUAGE.management.tabs.vehicles}: ${this.y}</span>` +
             `</div>`
           );
         },
