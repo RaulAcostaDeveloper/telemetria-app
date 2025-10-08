@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import Highcharts from "highcharts";
 import dynamic from "next/dynamic";
 
 const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
@@ -25,7 +24,18 @@ interface Props {
 }
 
 const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
-  const [isReady, setIsReady] = useState(false);
+  const [Highcharts, setHighcharts] = useState<unknown>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    (async () => {
+      const importedModule = await import("highcharts");
+      if (isMounted) setHighcharts(importedModule.default ?? importedModule);
+    })();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const measureData = useMemo(() => {
     return rangesArray.map((r) => ({
@@ -46,6 +56,8 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
         spacingLeft: 0,
         spacingRight: 30, //espacio adicional para centrar gráfica. 10 es el default.
       },
+      title: { text: "" },
+      legend: { enabled: false },
       series: [
         {
           type: "column",
@@ -129,27 +141,10 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
     };
   }, [langSelection, measureData]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        await import("highcharts/highcharts-more");
-        await import("highcharts/modules/solid-gauge");
-        setIsReady(true);
-      } catch (err) {
-        console.warn(err);
-        setIsReady(false);
-      }
-    })();
-  }, []);
-
   return (
     <>
-      {isReady && (
-        <HighchartsReact
-          highcharts={Highcharts}
-          constructorType="stockChart"
-          options={chartOptions}
-        />
+      {Highcharts && HighchartsReact && (
+        <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       )}
     </>
   );

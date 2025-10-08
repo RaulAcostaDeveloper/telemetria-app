@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from "react";
-import Highcharts from "highcharts";
 import dynamic from "next/dynamic";
 
 import styles from "./donutGraphic.module.css";
@@ -28,22 +27,36 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
   const [segmentsCount, setSegmentsCount] = useState<SegmentOption>(10);
   const [is3DReady, setIs3DReady] = useState(false);
 
+  const [Highcharts, setHighcharts] = useState<unknown>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    (async () => {
+      const importedModule = await import("highcharts");
+      if (isMounted) setHighcharts(importedModule.default ?? importedModule);
+    })();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   // Nos aseguramos que highcharts 3d solo se cargue del lado del cliente
   useEffect(() => {
-    (async () => {
-      try {
-        await import("highcharts/highcharts-3d.js");
-        console.log("✔ Highcharts 3D cargado (efecto secundario).");
-        setIs3DReady(true);
-      } catch (err) {
-        console.error(
-          ' No se pudo importar "highcharts/highcharts-3d.js". El donut 3D no podrá mostrarse.',
-          err
-        );
-        setIs3DReady(false);
-      }
-    })();
-  }, []);
+    if (Highcharts) {
+      (async () => {
+        try {
+          await import("highcharts/highcharts-3d.js");
+          setIs3DReady(true);
+        } catch (err) {
+          console.error(
+            ' No se pudo importar "highcharts/highcharts-3d.js". El donut 3D no podrá mostrarse.',
+            err
+          );
+          setIs3DReady(false);
+        }
+      })();
+    }
+  }, [Highcharts]);
 
   const chartOptions: Highcharts.Options = useMemo(() => {
     if (!is3DReady) {
@@ -55,11 +68,23 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
 
     let allValues: number[];
     if (selectedMetric === "Combustible") {
-      allValues = devices.map((d) => d.lastFuelLevel);
+      allValues = devices
+        .map((d) => d.lastFuelLevel)
+        .filter(
+          (v): v is number => typeof v === "number" && Number.isFinite(v)
+        );
     } else if (selectedMetric === "Cargado") {
-      allValues = devices.map((d) => d.fuelLoaded);
+      allValues = devices
+        .map((d) => d.fuelLoaded)
+        .filter(
+          (v): v is number => typeof v === "number" && Number.isFinite(v)
+        );
     } else if (selectedMetric === "Descargado") {
-      allValues = devices.map((d) => d.fuelUnloaded);
+      allValues = devices
+        .map((d) => d.fuelUnloaded)
+        .filter(
+          (v): v is number => typeof v === "number" && Number.isFinite(v)
+        );
     } else {
       allValues = [];
     }
@@ -160,9 +185,9 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
               color: "#000",
               textOutline: "none",
             },
-            formatter: function (this: any): string | null {
+            formatter: function () {
               if ((this.y as number) > 0) {
-                return `<span>${this.point.name}</span>`;
+                return `<span>${this.name}</span>`;
               }
               return null;
             },
@@ -173,11 +198,11 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
       tooltip: {
         useHTML: true, // ← Permite <br/> en el tooltip
         style: { fontSize: "2.6rem", fontWeight: "bold" },
-        formatter: function (this: any) {
+        formatter: function () {
           return (
             `<div style="text-align: center;">` +
-            `<span>${this.point.name}</span><br/>` +
-            `<span>Vehículos: ${this.y}</span>` +
+            `<span>${this.name}</span><br/>` +
+            `<span>${LANGUAGE.management.tabs.vehicles}: ${this.y}</span>` +
             `</div>`
           );
         },
@@ -233,7 +258,7 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
       </div>
 
       <div className={styles.chartWrapper}>
-        {!is3DReady || !HighchartsReact ? (
+        {!is3DReady || !HighchartsReact || !Highcharts ? (
           <div className={styles.loadingText}>
             {LANGUAGE.fuel.donutGrpahic.waitingMessage}
             <LoaderAnimation />

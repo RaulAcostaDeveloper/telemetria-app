@@ -34,8 +34,8 @@ export const TableFilter = ({
       onChange={handleChange}
     >
       <option value="">{LANGUAGE.table.actions.any}</option>
-      {options.map((opt) => (
-        <option key={opt} value={opt ?? ""}>
+      {options.map((opt, index) => (
+        <option key={index} value={opt?.toString() ?? ""}>
           {opt}
         </option>
       ))}

@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const HeaderTextWords = ({ LANGUAGE, section, url }: Props) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logoutState } = useAuth();
   const dispatch = useDispatch<AppDispatch>();
   const segmentsURL = url.split("/").filter(Boolean);
   const lastSegmentURL = segmentsURL[segmentsURL.length - 1];
@@ -27,7 +27,7 @@ export const HeaderTextWords = ({ LANGUAGE, section, url }: Props) => {
 
   useEffect(() => {
     if (isAuthenticated && lastSegmentURL && lastSegmentURL.length > 3) {
-      dispatch(fetchVehicleByImei({ imei: lastSegmentURL }));
+      dispatch(fetchVehicleByImei({ imei: lastSegmentURL, logoutState }));
     }
   }, [dispatch, isAuthenticated, lastSegmentURL]);
 

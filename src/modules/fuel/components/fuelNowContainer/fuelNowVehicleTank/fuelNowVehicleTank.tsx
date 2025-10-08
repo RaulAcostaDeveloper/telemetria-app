@@ -7,8 +7,11 @@ interface Props {
   averageTankSize: number;
 }
 
-export const FuelNowVehicleTank = ({ tankValues, title, averageTankSize }: Props) => {
-  console.log('tankValues', tankValues, 'averageTankSize', averageTankSize);
+export const FuelNowVehicleTank = ({
+  tankValues,
+  title,
+  averageTankSize,
+}: Props) => {
   return (
     <>
       <>
