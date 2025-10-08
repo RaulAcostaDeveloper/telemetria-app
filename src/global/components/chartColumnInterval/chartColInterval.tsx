@@ -56,6 +56,8 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
         spacingLeft: 0,
         spacingRight: 30, //espacio adicional para centrar gráfica. 10 es el default.
       },
+      title: { text: "" },
+      legend: { enabled: false },
       series: [
         {
           type: "column",
