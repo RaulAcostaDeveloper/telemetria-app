@@ -3,7 +3,10 @@ import TableInCardT5 from "./tableInCardT5";
 import styles from "./cardContentStyle.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ObdRollupDataValues } from "@/global/redux/serviceSlices/obdRollupSlice";
-import { format2DecimalsString, getMedian2d } from "../../utils/utils";
+import {
+  format2DecimalsString,
+  getMedian2d,
+} from "../../../../global/utils/utils";
 
 interface Props {
   data: ObdRollupDataValues;

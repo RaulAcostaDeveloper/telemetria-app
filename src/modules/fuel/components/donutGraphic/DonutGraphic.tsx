@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import styles from "./donutGraphic.module.css";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 import { Devices } from "@/global/redux/serviceSlices/fuelSummarySlice";
-import LoaderAnimation from "../loaderAnimation/loaderAnimation";
+import LoaderAnimation from "../../../../global/components/loaderAnimation/loaderAnimation";
 
 // Cargamos HighchartsReact dinámicamente para evitar que se cargue del lado del servidor
 const HighchartsReact = dynamic(() => import("highcharts-react-official"), {

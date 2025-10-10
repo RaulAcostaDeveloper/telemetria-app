@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { LocalShipping, LocalGasStation } from "@mui/icons-material";
 
 // import { FuelFilter } from "../fuelFilter/fuelFilter";
-import DonutGraphic from "@/global/components/donutGraphic/DonutGraphic";
+import DonutGraphic from "@/modules/fuel/components/donutGraphic/DonutGraphic";
 import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
 import styles from "./fuelDataProvider.module.css";
 import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";

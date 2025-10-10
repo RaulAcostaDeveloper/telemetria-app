@@ -13,7 +13,7 @@ import { Header } from "../header/header";
 import { LANGUAGE_OPTIONS } from "../../language/utils/languageSelector.model";
 import { LanguageContext } from "../../language/components/languageProvider/languageProvider";
 import { LanguageInterface } from "../../language/constants/language.model";
-import { MainDataFetcher } from "../mainDataFetcher/mainDataFetcher";
+import { MainDataFetcher } from "./mainDataFetcher/mainDataFetcher";
 import { Menu } from "../menu/menu";
 import { PORTUGUES } from "../../language/constants/portugues";
 import { PageContainer } from "../pageContainer/pageContainer";

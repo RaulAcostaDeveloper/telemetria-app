@@ -7,10 +7,10 @@ import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
 import HourglassDisabledIcon from "@mui/icons-material/HourglassDisabled";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 
-import CardContentDrivenTime from "@/global/components/cardsDeck/cardContentDrivenTime";
-import CardContentIdle from "@/global/components/cardsDeck/cardContentIdle";
-import CardContentTCT5 from "@/global/components/cardsDeck/cardContentTCT5";
-import CardGenThird from "@/global/components/cardsDeck/cardGenThird";
+import CardContentDrivenTime from "@/modules/telemetryObd/components/cardsDeck/cardContentDrivenTime";
+import CardContentIdle from "@/modules/telemetryObd/components/cardsDeck/cardContentIdle";
+import CardContentTCT5 from "@/modules/telemetryObd/components/cardsDeck/cardContentTCT5";
+import CardGenThird from "@/modules/telemetryObd/components/cardsDeck/cardGenThird";
 import styles from "./OBDDataProvider.module.css";
 import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import { FuelDataReport } from "@/modules/fuel/components/fuelNowContainer/fuelDataReport/fuelDataReport";

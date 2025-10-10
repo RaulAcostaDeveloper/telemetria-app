@@ -4,16 +4,17 @@ import Image from "next/image";
 import { useDispatch } from "react-redux";
 
 import styles from "./languageButton.module.css";
+
+import { AppDispatch } from "@/global/redux/store";
+import { LANGUAGE_OPTIONS } from "@/global/language/utils/languageSelector.model";
+import { LanguageInterface } from "@/global/language/constants/language.model";
+import { LanguageSelector } from "./languageSelector/languageSelector";
+import { STORAGE_KEYS } from "@/global/localStorage/constants/storageKeys";
+import { StarIcon } from "./starIcon/starIcon";
 import {
   localStorageGetItem,
   localStorageSetItem,
-} from "../../localStorage/utils/storageService";
-import { AppDispatch } from "@/global/redux/store";
-import { LANGUAGE_OPTIONS } from "../../language/utils/languageSelector.model";
-import { LanguageInterface } from "../../language/constants/language.model";
-import { LanguageSelector } from "./languageSelector/languageSelector";
-import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
-import { StarIcon } from "./starIcon/starIcon";
+} from "@/global/localStorage/utils/storageService";
 import { setLanguageReducer } from "@/global/redux/slices/languageSlice";
 
 export type LanguageSelectorOption = {

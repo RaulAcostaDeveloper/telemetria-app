@@ -10,9 +10,9 @@ import styles from "./header.module.css";
 import { CalendarToday } from "@mui/icons-material";
 import { HeaderBackButton } from "./headerBackButton/headerBackButton";
 import { HeaderTextContent } from "./headerTextContent/headerTextContent";
-import { LanguageButton } from "../languageButton/languageButton";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { formatDateTime } from "@/global/utils/utils";
+import { LanguageButton } from "./languageButton/languageButton";
 
 interface CalendarState {
   endDate: string | null;
