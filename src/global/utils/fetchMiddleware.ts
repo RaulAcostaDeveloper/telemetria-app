@@ -59,7 +59,7 @@ export async function fetchMiddleware({
   logoutState,
 }: MiddlewareProps) {
   const cacheData = await getCached(cacheKey, forceRefresh);
-  if (cacheData) {
+  if (false) {
     // Si hay en caché, retorna lo de caché
     return cacheData;
   } else {
