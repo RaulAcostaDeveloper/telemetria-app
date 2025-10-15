@@ -12,7 +12,7 @@ import { LanguageInterface } from "@/global/language/constants/language.model";
 import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { Table, TabsContent } from "@/global/components";
-import { formatDateTime } from "@/global/utils/utils";
+import { deviceStatusTranslator, formatDateTime } from "@/global/utils/utils";
 import {
   DirectionsCar,
   DeviceHub,
@@ -188,7 +188,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       imei: value.imei,
       model: value.model,
       brand: value.brand,
-      status: value.status,
+      status: deviceStatusTranslator(value.status, LANGUAGE),
       name: value.name,
       type: value.type,
       createdAt: formatDateTime(value.createdAt),
