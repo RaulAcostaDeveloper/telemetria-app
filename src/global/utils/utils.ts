@@ -9,18 +9,21 @@ export const toKebabCase = (str: string) => {
 };
 
 // Usar esta función para formatear startDate y endDate del slice y usarla en el llamado de la API
-export const formatToLocalIso8601 = (date: string): string => {
-  const isoDate = new Date(date);
+// También es UTC
+export const formatToLocalIso8601 = (input: string | Date): string => {
+  const date = typeof input === "string" ? new Date(input) : new Date(input);
 
-  // Obtiene componentes individuales en hora local
-  const year = isoDate.getFullYear();
-  const month = String(isoDate.getMonth() + 1).padStart(2, "0");
-  const day = String(isoDate.getDate()).padStart(2, "0");
-  const hours = String(isoDate.getHours()).padStart(2, "0");
-  const minutes = String(isoDate.getMinutes()).padStart(2, "0");
-  const seconds = String(isoDate.getSeconds()).padStart(2, "0");
+  if (Number.isNaN(date.getTime())) {
+    throw new Error("Invalid date");
+  }
 
-  // Construye la cadena ISO 8601 para usarla en las APIS
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  const hours = String(date.getUTCHours()).padStart(2, "0");
+  const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+  const seconds = String(date.getUTCSeconds()).padStart(2, "0");
+
   return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
 };
 
