@@ -188,7 +188,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       imei: value.imei,
       model: value.model,
       brand: value.brand,
-      status: deviceStatusTranslator(value.status),
+      status: deviceStatusTranslator(value.status, LANGUAGE),
       name: value.name,
       type: value.type,
       createdAt: formatDateTime(value.createdAt),

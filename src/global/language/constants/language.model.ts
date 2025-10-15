@@ -367,6 +367,10 @@ export interface LanguageInterface {
       version: string;
       year: string;
     };
+    dataProvider: {
+      active: string;
+      inactive: string;
+    };
   };
   teleOBD: {
     resumes: {

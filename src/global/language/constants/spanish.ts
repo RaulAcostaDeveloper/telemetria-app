@@ -387,6 +387,10 @@ export const SPANISH: LanguageInterface = {
       version: "Versión",
       year: "Año",
     },
+    dataProvider: {
+      active: "activo",
+      inactive: "inactivo",
+    },
   },
   teleOBD: {
     resumes: {

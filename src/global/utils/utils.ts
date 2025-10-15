@@ -1,6 +1,7 @@
 import React from "react";
 import { statusNum } from "../redux/serviceSlices/devicesSlice";
 import { NO_DATA } from "./ndIfEmpty";
+import { LanguageInterface } from "@/global/language/constants/language.model";
 
 export const toKebabCase = (str: string) => {
   return str
@@ -311,28 +312,28 @@ export function getMedian2d(orderedValues: number[]): number {
 }
 
 /**
- * Traductor entre string de valor numérico y significado práctico 
+ * Traductor entre string de valor numérico y significado práctico
  * para el status de management devices
- * 
- * @param status - cadena de texto con posible valor numérico que 
+ *
+ * @param status - cadena de texto con posible valor numérico que
  * será traducido en la funcion.
  * @returns string con la traducción realizada.
  */
-export function deviceStatusTranslator(status: statusNum){
-  let translatedStatus
+export function deviceStatusTranslator(
+  status: statusNum,
+  LANGUAGE: LanguageInterface
+) {
+  let translatedStatus;
   switch (status) {
-    case "1":
-      translatedStatus = "a"
+    case "0":
+      translatedStatus = LANGUAGE.management.dataProvider.inactive;
       break;
-    case "2":
-      translatedStatus = "b"
-    break;
-    case "3":
-      translatedStatus = "c"
+    case "1":
+      translatedStatus = LANGUAGE.management.dataProvider.active;
       break;
     default:
       translatedStatus = NO_DATA;
       break;
   }
-  return translatedStatus
+  return translatedStatus;
 }
