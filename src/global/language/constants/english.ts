@@ -183,6 +183,12 @@ export const ENGLISH: LanguageInterface = {
         initialOdometer: "Initial odometer",
         finalOdometer: "Final odometer",
         distanceTravelled: "Distance traveled",
+        titleCharges: "Charges",
+        titleDischarges: "Discharges",
+        titleFuelVariationCAN: "Fuel level (CAN)",
+        titleFuelVariation: "Fuel level",
+        titlePerformanceBetween: "Performance Between Charges",
+        titlePerformanceDaily: "Daily Performance",
       },
       rpm: {
         rpm: "Revolutions per minute",

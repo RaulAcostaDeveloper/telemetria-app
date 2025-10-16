@@ -183,6 +183,12 @@ export const SPANISH: LanguageInterface = {
         initialOdometer: "Odómetro inicial",
         finalOdometer: "Odómetro final",
         distanceTravelled: "Distancia recorrida",
+        titleCharges: "Cargas",
+        titleDischarges: "Descargas",
+        titleFuelVariationCAN: "Nivel de combustible (CAN)",
+        titleFuelVariation: "Nivel de combustible",
+        titlePerformanceBetween: "Rendimiento entre cargas",
+        titlePerformanceDaily: "Rendimiento diario",
       },
       rpm: {
         rpm: "Revoluciones por minuto",

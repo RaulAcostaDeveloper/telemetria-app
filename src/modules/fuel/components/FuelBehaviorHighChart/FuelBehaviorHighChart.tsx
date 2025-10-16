@@ -356,7 +356,10 @@ export const FuelBehaviorHighChart = ({
             },
           },
           tooltip: {
-            pointFormatter: createTooltipFormatter(chargesTooltipFields),
+            pointFormatter: createTooltipFormatter(
+              LANGUAGE.highCharts.tooltips.fuel.titleCharges,
+              chargesTooltipFields
+            ),
           },
         },
         {
@@ -382,7 +385,10 @@ export const FuelBehaviorHighChart = ({
             },
           },
           tooltip: {
-            pointFormatter: createTooltipFormatter(dischargesTooltipFields),
+            pointFormatter: createTooltipFormatter(
+              LANGUAGE.highCharts.tooltips.fuel.titleDischarges,
+              dischargesTooltipFields
+            ),
           },
         },
         {
@@ -393,7 +399,10 @@ export const FuelBehaviorHighChart = ({
           color: "#f77f00",
           lineWidth: 2,
           tooltip: {
-            pointFormatter: createTooltipFormatter(levelMessagesTooltipFields),
+            pointFormatter: createTooltipFormatter(
+              LANGUAGE.highCharts.tooltips.fuel.titleFuelVariationCAN,
+              levelMessagesTooltipFields
+            ),
           },
           point: {
             events: {
@@ -419,7 +428,10 @@ export const FuelBehaviorHighChart = ({
           color: "#006af5",
           lineWidth: 2,
           tooltip: {
-            pointFormatter: createTooltipFormatter(levelMessagesTooltipFields),
+            pointFormatter: createTooltipFormatter(
+              LANGUAGE.highCharts.tooltips.fuel.titleFuelVariation,
+              levelMessagesTooltipFields
+            ),
           },
           point: {
             events: {
@@ -446,6 +458,7 @@ export const FuelBehaviorHighChart = ({
           color: "#f5c800",
           tooltip: {
             pointFormatter: createTooltipFormatter(
+              LANGUAGE.highCharts.tooltips.fuel.titlePerformanceBetween,
               performancesBetweenChargesTooltipFields
             ),
           },
@@ -459,6 +472,7 @@ export const FuelBehaviorHighChart = ({
           color: "#8f07ff",
           tooltip: {
             pointFormatter: createTooltipFormatter(
+              LANGUAGE.highCharts.tooltips.fuel.titlePerformanceDaily,
               performancesBetweenChargesTooltipFields
             ),
           },

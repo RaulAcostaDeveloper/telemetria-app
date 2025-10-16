@@ -163,6 +163,12 @@ export interface LanguageInterface {
         finalOdometer: string;
         distanceTravelled: string;
         tanks: string;
+        titleCharges: string;
+        titleDischarges: string;
+        titleFuelVariationCAN: string;
+        titleFuelVariation: string;
+        titlePerformanceBetween: string;
+        titlePerformanceDaily: string;
       };
       rpm: {
         rpm: string;
