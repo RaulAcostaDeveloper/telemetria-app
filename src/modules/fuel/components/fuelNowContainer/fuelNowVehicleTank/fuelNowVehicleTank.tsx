@@ -1,5 +1,5 @@
+import { GaugeGraphic } from "../../gaugeGraphic/gaugeGraphic";
 import styles from "./fuelNowVehicleTank.module.css";
-import { GaugeGraphic } from "@/global/components";
 
 interface Props {
   tankValues: number[] | undefined;

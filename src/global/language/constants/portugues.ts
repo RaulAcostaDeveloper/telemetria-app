@@ -394,8 +394,8 @@ export const PORTUGUES: LanguageInterface = {
       year: "Ano",
     },
     dataProvider: {
-      active: "ativo",
-      inactive: "inativo",
+      active: "Ativo",
+      inactive: "Inativo",
     },
   },
   teleOBD: {

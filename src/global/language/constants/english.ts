@@ -395,8 +395,8 @@ export const ENGLISH: LanguageInterface = {
       year: "Year",
     },
     dataProvider: {
-      active: "active",
-      inactive: "inactive",
+      active: "Active",
+      inactive: "Inactive",
     },
   },
   teleOBD: {
