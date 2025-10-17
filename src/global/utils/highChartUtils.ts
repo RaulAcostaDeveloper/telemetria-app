@@ -32,12 +32,14 @@ export function createTooltipFormatter(
       .join("");
 
     return `
-      <span style="width: 100%; font-size: 18px; font-weight: bold, display: inline-block; text-align: center;>
+      <div>
+      <div style="width: 100%; font-size: 18px; font-weight: bold, display: inline-block; text-align: center;>
         ${title}
-      </span>
+      </div>
       <div style="width: auto; padding: 7px; font-size: 14px; display: flex; flex-direction: column; gap: 5px;">
         ${content}
       </div>
+      <div>
     `;
   };
 }
