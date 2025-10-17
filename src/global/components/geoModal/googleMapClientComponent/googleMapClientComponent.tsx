@@ -1,10 +1,11 @@
 "use client";
 import { useMemo, useState, useEffect, useRef } from "react";
-import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 
-import { GeoModalData } from "../geoModal";
-import { LanguageInterface } from "@/global/language/constants/language.model";
 import LoaderAnimation from "../../loaderAnimation/loaderAnimation";
+import { GeoModalData } from "../geoModal";
+import { GoogleMapsLoader } from "./googleMapsLoader";
+import { LanguageInterface } from "@/global/language/constants/language.model";
+import { getEnvClient } from "@/global/utils/getEnviromentFromClient";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -17,20 +18,24 @@ const GoogleMapClientComponent = ({
   geoModalData,
   mapType,
 }: Props) => {
+  const [googleApiKey, setGoogleApiKey] = useState<string | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
 
   const mapRef = useRef<google.maps.Map | null>(null);
   const hasAnimatedRef = useRef(false);
 
-  const [language, region] = LANGUAGE.localeLanguage.split("-");
+  useEffect(() => {
+    (async () => {
+      try {
+        const { GOOGLE_MAPS_API_KEY } = await getEnvClient();
+        setGoogleApiKey(GOOGLE_MAPS_API_KEY ?? null);
+      } catch {
+        console.error("No se pudo cargar GOOGLE_MAPS_API_KEY");
+      }
+    })();
+  }, []);
 
   // Configuración de la API y el idioma del mapa
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
-    language,
-    region,
-  });
-
   const center = useMemo(
     () => ({
       lat: geoModalData.lat,
@@ -62,7 +67,7 @@ const GoogleMapClientComponent = ({
     }
   }, [center, mapLoaded]);
 
-  if (!isLoaded)
+  if (!googleApiKey)
     return (
       <div>
         <LoaderAnimation />
@@ -71,18 +76,18 @@ const GoogleMapClientComponent = ({
 
   // No dar tamaño aquí si no en el componente padre
   return (
-    <GoogleMap
-      mapContainerStyle={{ width: "100%", height: "100%" }}
-      center={center}
-      zoom={5}
-      mapTypeId={mapType}
-      onLoad={(map) => {
-        mapRef.current = map;
-        setMapLoaded(true);
-      }}
-    >
-      <Marker position={center} />
-    </GoogleMap>
+    <>
+      {googleApiKey && (
+        <GoogleMapsLoader
+          LANGUAGE={LANGUAGE}
+          center={center}
+          googleApiKey={googleApiKey}
+          mapRef={mapRef}
+          mapType={mapType}
+          setMapLoaded={setMapLoaded}
+        />
+      )}
+    </>
   );
 };
 

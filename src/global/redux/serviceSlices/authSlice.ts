@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "./types/serviceTypes";
-import { fetchLogin } from "@/modules/auth/services/postLogin";
+import { postLogin } from "@/modules/auth/services/postLogin";
 
 interface UserData {
   userId: string;
@@ -30,12 +30,13 @@ const initialState: AuthState = {
 };
 
 // Middleware. Se está moviendo a /modules/auth/services/postLogin
-/* export const fetchLogin = createAsyncThunk(
+
+export const fetchLogin = createAsyncThunk(
   "login/fetch",
-  async ({ encrypted }: { encrypted: string }, {rejectWithValue}) => {
-    return postLogin(encrypted, {rejectWithValue});
+  async ({ encrypted }: { encrypted: string }) => {
+    return postLogin({ encrypted });
   }
-); */
+);
 
 // Slice
 export const authSlice = createSlice({
@@ -57,14 +58,17 @@ export const authSlice = createSlice({
       .addCase(fetchLogin.pending, (state) => {
         state.loginStatus = SERVICE_STATUS.loading;
         state.loginServerData = null;
+        state.isAuthenticated = false;
       })
       .addCase(fetchLogin.fulfilled, (state, action) => {
         state.loginStatus = SERVICE_STATUS.succeeded;
         state.loginServerData = action.payload;
+        state.isAuthenticated = true;
       })
       .addCase(fetchLogin.rejected, (state) => {
         state.loginStatus = SERVICE_STATUS.failed;
         state.loginServerData = null;
+        state.isAuthenticated = false;
       });
   },
 });

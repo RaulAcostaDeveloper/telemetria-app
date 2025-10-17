@@ -1,7 +1,7 @@
 import { FetchProps } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { fetchMiddleware } from "@/global/utils/fetchMiddleware";
 
-const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/analytics/fuel/devices";
+const url = "/analytics/fuel/devices";
 
 // Función fetch con enlace a caché
 export async function getLastFuelReport({ imei, logoutState }: FetchProps) {
@@ -17,7 +17,7 @@ export async function getLastFuelReport({ imei, logoutState }: FetchProps) {
   };
 
   // Construcción del key único para caché
-  const cacheKey = process.env.NEXT_PUBLIC_API_VERSION + `last-report-${imei}`;
+  const cacheKey = `last-report-${imei}`;
 
   // Retorna DATA del servidor o DATA de caché
   return fetchMiddleware({
