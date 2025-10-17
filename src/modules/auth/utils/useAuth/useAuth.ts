@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
 import {
+  fetchLogin,
   loginAction,
   logoutAction,
 } from "@/global/redux/serviceSlices/authSlice";
@@ -10,7 +11,6 @@ import { AppDispatch, RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { callLogout } from "@/global/redux/serviceSlices/logoutSlice";
 import { fetchBrands } from "@/global/redux/serviceSlices/brandsSlice";
-import { fetchLogin } from "../../services/postLogin";
 
 export const useAuth = () => {
   const router = useRouter();

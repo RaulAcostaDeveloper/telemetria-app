@@ -1,7 +1,7 @@
 import { FetchProps } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { fetchMiddleware } from "@/global/utils/fetchMiddleware";
 
-const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/management/device/";
+const url = "/management/device/";
 
 // Función fetch con enlace a caché
 export async function getVehicleByImei({ imei, logoutState }: FetchProps) {
@@ -18,8 +18,7 @@ export async function getVehicleByImei({ imei, logoutState }: FetchProps) {
   };
 
   // Construcción del key único para caché
-  const cacheKey =
-    process.env.NEXT_PUBLIC_API_VERSION + `managementVehicleByImei-${imei}`;
+  const cacheKey = `managementVehicleByImei-${imei}`;
 
   // Retorna DATA del servidor o DATA de caché
   return fetchMiddleware({

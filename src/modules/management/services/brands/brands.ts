@@ -1,6 +1,6 @@
 import { fetchMiddleware } from "@/global/utils/fetchMiddleware";
 
-const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/management";
+const url = "/management";
 
 // Función fetch con enlace a caché
 export async function getBrands() {
@@ -14,7 +14,7 @@ export async function getBrands() {
     credentials: "include",
   };
   // Construcción del key único para caché
-  const cacheKey = process.env.NEXT_PUBLIC_API_VERSION + `managementBrands`;
+  const cacheKey = `managementBrands`;
 
   // Retorna DATA del servidor o DATA de caché
   return fetchMiddleware({
