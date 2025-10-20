@@ -71,7 +71,7 @@ export const FuelNowTab = ({
 
       <DataErrorHandler
         LANGUAGE={LANGUAGE}
-        hasData={!!lastFuelReportDataFormated?.value}
+        hasData={!!lastFuelReportData?.value}
         infoStatus={lastFuelReportStatus}
       />
     </>
