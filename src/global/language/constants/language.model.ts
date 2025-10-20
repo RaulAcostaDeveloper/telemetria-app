@@ -172,13 +172,16 @@ export interface LanguageInterface {
       };
       rpm: {
         rpm: string;
+        titleTelemetryRPM: string;
       };
       distance: {
         distance: string;
         distanceTraveled: string;
+        titleDistance: string;
       };
       timeTraveled: {
         timeTraveled: string;
+        titleTimeTraveled: string;
       };
       telemetryOBD: {
         xAxisDistance: string;
@@ -405,6 +408,9 @@ export interface LanguageInterface {
       subtitleDistance: string;
       subtitleDriven: string;
       subtitleIdle: string;
+      titleTooltipDistance: string;
+      titleTooltipDriven: string;
+      titleTooltipIdle: string;
       xAxisDistance: string;
       xAxisDriven: string;
       xAxisIdle: string;

@@ -93,6 +93,18 @@ export const SingleLineHighChart = ({
       }
     };
 
+    const tooltipTitles = () => {
+      switch (type) {
+        case SINGLE_CHART_TYPES.rpm:
+          return LANGUAGE.highCharts.tooltips.rpm.titleTelemetryRPM;
+        case SINGLE_CHART_TYPES.distance:
+          return LANGUAGE.highCharts.tooltips.distance.titleDistance;
+        case SINGLE_CHART_TYPES.timeTraveled:
+          return LANGUAGE.highCharts.tooltips.timeTraveled.titleTimeTraveled;
+        default:
+          return LANGUAGE.highCharts.tooltips.timeTraveled.titleTimeTraveled;
+      }
+    };
     const tooltipFields = () => {
       switch (type) {
         case SINGLE_CHART_TYPES.rpm:
@@ -173,7 +185,10 @@ export const SingleLineHighChart = ({
           color: "#006af5",
           lineWidth: 2,
           tooltip: {
-            pointFormatter: createTooltipFormatter(tooltipFields()),
+            pointFormatter: createTooltipFormatter(
+              tooltipTitles(),
+              tooltipFields()
+            ),
           },
           point: {
             events: {

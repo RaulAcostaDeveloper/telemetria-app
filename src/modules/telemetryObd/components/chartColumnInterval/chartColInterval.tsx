@@ -14,6 +14,7 @@ interface rangeNVehicles {
 
 interface langObj {
   title: string;
+  titleTooltip: string;
   xAxisTitle: string;
   yAxisTitle: string;
 }
@@ -114,6 +115,9 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
         formatter: function () {
           return `
             <div style="width: 100%; font-size: 18px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div style="width: 100%; font-size: 16px; font-weight: bold; display: inline-block; text-align: center;padding-bottom: 1em;">
+                ${langSelection.titleTooltip}
+              </div>
               <strong style="margin-right: 10px;">${langSelection.xAxisTitle}:</strong> <p style="padding-bottom: 1em;">${this.options.custom?.lastRange} h - ${this.x} h</p>
               <strong style="margin-right: 10px;">${langSelection.yAxisTitle}:</strong> <p>${this.y}</p>
             </div>

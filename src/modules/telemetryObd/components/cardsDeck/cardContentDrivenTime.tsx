@@ -87,6 +87,7 @@ export default function CardContentDrivenTime({ data, LANGUAGE }: Props) {
 
   const langSelection = {
     title: LANGUAGE.teleOBD.charts.titleDriven,
+    titleTooltip: LANGUAGE.teleOBD.charts.titleTooltipDriven,
     xAxisTitle: LANGUAGE.teleOBD.charts.xAxisDriven,
     yAxisTitle: LANGUAGE.teleOBD.charts.yAxis,
   };

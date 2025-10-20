@@ -31,14 +31,16 @@ export function createTooltipFormatter(
       .map(({ label, value }) => buildTooltipSection(label, value(c)))
       .join("");
 
+    const titleHTML = `<div style="width: 100%; font-size: 16px; font-weight: bold; display: inline-block; text-align: center;">
+          ${title}
+        </div>`;
+
     return `
       <div>
-      <div style="width: 100%; font-size: 18px; font-weight: bold, display: inline-block; text-align: center;>
-        ${title}
-      </div>
-      <div style="width: auto; padding: 7px; font-size: 14px; display: flex; flex-direction: column; gap: 5px;">
+        <div style="width: auto; padding: 7px; font-size: 14px; display: flex; flex-direction: column; gap: 5px;">
+        ${titleHTML}
         ${content}
-      </div>
+        </div>
       <div>
     `;
   };
