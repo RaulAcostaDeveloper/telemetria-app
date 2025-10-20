@@ -1,7 +1,7 @@
 import { FetchProps } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { fetchMiddleware } from "@/global/utils/fetchMiddleware";
 
-const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/analytics/obd/device/";
+const url = "/analytics/obd/device/";
 
 // Función fetch con enlace a caché
 export async function getObdTravelMetrics({
@@ -14,9 +14,7 @@ export async function getObdTravelMetrics({
   const fullUrl = `${url}${imei}/travel-metrics?startDate=${startDate}&endDate=${endDate}`;
 
   // Construcción del key único para caché
-  const cacheKey =
-    process.env.NEXT_PUBLIC_API_VERSION +
-    `obdTravelMetrics-${imei}-${startDate}-${endDate}`;
+  const cacheKey = `obdTravelMetrics-${imei}-${startDate}-${endDate}`;
 
   const options: RequestInit = {
     method: "GET",

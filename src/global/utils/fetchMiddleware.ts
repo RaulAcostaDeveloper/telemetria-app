@@ -1,4 +1,5 @@
 import { getCached, putCache } from "@/global/cache/cache";
+import { getEnvClient } from "./getEnviromentFromClient";
 
 interface fetchProps {
   fullUrl: string;
@@ -7,8 +8,10 @@ interface fetchProps {
 }
 
 const fetchResponse = async ({ fullUrl, options, logoutState }: fetchProps) => {
+  const { URL_SERVICE } = await getEnvClient();
+
   try {
-    const response = await fetch(fullUrl, options);
+    const response = await fetch(URL_SERVICE + fullUrl, options);
 
     if (401 === response.status) {
       logoutState();
@@ -58,7 +61,9 @@ export async function fetchMiddleware({
   forceRefresh,
   logoutState,
 }: MiddlewareProps) {
-  const cacheData = await getCached(cacheKey, forceRefresh);
+  const { API_VERSION } = await getEnvClient();
+
+  const cacheData = await getCached(API_VERSION + cacheKey, forceRefresh);
   if (false) {
     // Si hay en caché, retorna lo de caché
     return cacheData;

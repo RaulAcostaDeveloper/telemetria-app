@@ -1,7 +1,7 @@
 import { FetchProps } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { fetchMiddleware } from "@/global/utils/fetchMiddleware";
 
-const url = process.env.NEXT_PUBLIC_URL_SERVICE + "/analytics/obd/clients/me";
+const url = "/analytics/obd/clients/me";
 
 // Función fetch con enlace a caché
 export async function getObdRollup({
@@ -13,8 +13,7 @@ export async function getObdRollup({
   const fullUrl = `${url}/rollup?startDate=${startDate}&endDate=${endDate}`;
 
   // Construcción del key único para caché
-  const cacheKey =
-    process.env.NEXT_PUBLIC_API_VERSION + `obdRollup-${startDate}-${endDate}`;
+  const cacheKey = `obdRollup-${startDate}-${endDate}`;
 
   const options: RequestInit = {
     method: "GET",
