@@ -1,5 +1,5 @@
 # Etapa 1: Compilación
-FROM node:18-alpine AS builder
+FROM node:22-bookworm-slim AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
@@ -8,7 +8,7 @@ ENV DISABLE_ESLINT=true
 RUN npm run build
 
 # Etapa 2: Producción
-FROM node:18-alpine AS runner
+FROM node:22-bookworm-slim AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production

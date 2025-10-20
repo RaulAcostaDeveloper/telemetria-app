@@ -1,0 +1,23 @@
+name: front-end-local
+services:
+  web:
+    build:
+      context: .
+      dockerfile: .dockerfile
+      #args:
+      #  NEXT_PUBLIC_URL_SERVICE: ${NEXT_PUBLIC_URL_SERVICE}
+    image: hestia.azurecr.io/solidsnake:stage
+    container_name: darksister_local
+    env_file:
+      - ./.env         # <-- variables solo en runtime (no van a la imagen)
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    ports:
+      - "5000:3000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').request({host:'localhost',port:3000,path:'/'},r=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1)).end()"]
+      interval: 30s
+      timeout: 5s
+      retries: 5  
