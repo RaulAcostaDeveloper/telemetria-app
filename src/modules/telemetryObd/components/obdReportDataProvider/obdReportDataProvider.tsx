@@ -82,7 +82,6 @@ export const ObdReportDataProvider = () => {
           timeTraveledDetails,
         },
       };
-      console.log("dataFormated ", dataFormated);
 
       setObdTravelMetricsDataFormated(dataFormated);
     }
