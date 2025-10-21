@@ -32,7 +32,8 @@ export const formatToLocalIso8601 = (input: string | Date): string => {
 
 export function toLocalDateTime(isoDate: string): string {
   if (typeof isoDate !== "string") {
-    throw new TypeError("toLocalDateTime: isoDate debe ser una cadena.");
+    console.error("toLocalDateTime: isoDate debe ser una cadena.");
+    return isoDate;
   }
 
   const input = isoDate.trim();
@@ -53,21 +54,28 @@ export function toLocalDateTime(isoDate: string): string {
   const date = new Date(normalized);
 
   if (Number.isNaN(date.getTime())) {
-    throw new Error(`Fecha inválida: "${isoDate}"`);
+    console.error(`Fecha inválida: "${isoDate}"`);
+    return isoDate;
   }
 
   return formatLocal(date);
 }
 
-function formatLocal(d: Date): string {
-  const pad = (n: number) => String(n).padStart(2, "0");
-  const yyyy = d.getFullYear();
-  const MM = pad(d.getMonth() + 1);
-  const dd = pad(d.getDate());
-  const HH = pad(d.getHours());
-  const mm = pad(d.getMinutes());
-  const ss = pad(d.getSeconds());
-  return `${yyyy}-${MM}-${dd}T${HH}:${mm}:${ss}`;
+function formatLocal(date: Date) {
+  const pad2 = (n: number) => String(n).padStart(2, "0");
+
+  // Soporta 0000 y años negativos
+  const year = date.getFullYear();
+  const abs = Math.abs(year);
+  const yearStr = (year < 0 ? "-" : "") + String(abs).padStart(4, "0");
+
+  const MM = pad2(date.getMonth() + 1);
+  const dd = pad2(date.getDate());
+  const HH = pad2(date.getHours());
+  const mm = pad2(date.getMinutes());
+  const ss = pad2(date.getSeconds());
+
+  return `${yearStr}-${MM}-${dd}T${HH}:${mm}:${ss}`;
 }
 
 /**

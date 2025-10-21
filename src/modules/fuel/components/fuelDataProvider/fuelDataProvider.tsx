@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
 import { LocalShipping, LocalGasStation } from "@mui/icons-material";
@@ -14,8 +14,6 @@ import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { Table, TabsContent } from "@/global/components";
 import { columnsTable } from "@/global/components/table/table.model";
-import { FuelSummaryData } from "@/global/redux/serviceSlices/fuelSummarySlice";
-import { toLocalDateTime } from "@/global/utils/utils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -23,9 +21,6 @@ interface Props {
 }
 
 export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
-  const [fuelSummaryDataFormated, setFuelSummaryDataFormated] =
-    useState<FuelSummaryData>();
-
   const { fuelSummaryData, fuelSummaryStatus } = useSelector(
     (state: RootState) => state.fuelSummary
   );
@@ -33,25 +28,6 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
   const { topFuelReportData, topFuelReportStatus } = useSelector(
     (state: RootState) => state.topFuelReport
   );
-
-  useEffect(() => {
-    if (fuelSummaryData?.value) {
-      const devices = fuelSummaryData.value.devices.map((messages) => ({
-        ...messages,
-        lastReportDate: toLocalDateTime(messages.lastReportDate),
-      }));
-
-      const dataFormated = {
-        ...fuelSummaryData,
-        value: {
-          ...fuelSummaryData.value,
-          devices,
-        },
-      };
-
-      setFuelSummaryDataFormated(dataFormated);
-    }
-  }, [fuelSummaryData]);
 
   const tabOptions = [
     {
@@ -131,7 +107,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
   ];
 
   const vehiclesReport = useMemo(() => {
-    return fuelSummaryDataFormated?.value?.devices.map((value) => ({
+    return fuelSummaryData?.value?.devices.map((value) => ({
       name: value.name,
       plate: value.plate,
       lastFuelLevel: value.lastFuelLevel,
@@ -143,7 +119,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
       lastReportDate: value.lastReportDate,
       imei: value.imei,
     }));
-  }, [fuelSummaryDataFormated]);
+  }, [fuelSummaryData]);
 
   const topFuelReportChargesColumns: columnsTable = [
     {
@@ -315,10 +291,10 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
 
       <div className={styles.topResumeData}>
         {fuelSummaryStatus === SERVICE_STATUS.succeeded &&
-          fuelSummaryDataFormated?.value && (
+          fuelSummaryData?.value && (
             <>
-              <ReportSummary summaryValues={fuelSummaryDataFormated.value} />
-              <DonutGraphic devices={fuelSummaryDataFormated.value.devices} />
+              <ReportSummary summaryValues={fuelSummaryData.value} />
+              <DonutGraphic devices={fuelSummaryData.value.devices} />
             </>
           )}
 
