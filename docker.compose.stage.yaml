@@ -1,0 +1,8 @@
+services:
+  web:
+    # Nombre de la imagen con variable de entorno para el tag
+    image: hestia.azurecr.io/solidsnake:stage
+    # Indica que esta definición solo sirve para construir la imagen
+    build:
+      context: .
+      dockerfile: Dockerfile
