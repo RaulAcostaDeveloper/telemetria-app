@@ -177,6 +177,7 @@ export const SPANISH: LanguageInterface = {
         totalDischarges: "Total descarga",
         averagePerformance: "Rendimiento promedio",
         tanks: "Nivel de los tanques",
+        tanksSum: "Suma de combustible en tanques",
         fuelConsumed: "Combustible consumido",
         initialLevel: "Combustible inicial",
         finalLevel: "Combustible final",
@@ -192,6 +193,7 @@ export const SPANISH: LanguageInterface = {
         subtitleCharges: "Combustible",
         subtitleDischarges: "Combustible",
         subtitleFuelVariationCAN: "Combustible",
+        subtitlePerformanceBetween: "Combustible",
       },
       rpm: {
         rpm: "Revoluciones por minuto",

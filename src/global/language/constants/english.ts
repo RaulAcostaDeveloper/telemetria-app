@@ -177,6 +177,7 @@ export const ENGLISH: LanguageInterface = {
         totalDischarges: "Total discharges",
         averagePerformance: "Average performance",
         tanks: "Tank level",
+        tanksSum: "Sum Fuel in Tanks",
         fuelConsumed: "Fuel consumed",
         initialLevel: "Initial level",
         finalLevel: "Final level",
@@ -192,6 +193,7 @@ export const ENGLISH: LanguageInterface = {
         subtitleCharges: "Fuel",
         subtitleDischarges: "Fuel",
         subtitleFuelVariationCAN: "Fuel",
+        subtitlePerformanceBetween: "Fuel",
       },
       rpm: {
         rpm: "Revolutions per minute",

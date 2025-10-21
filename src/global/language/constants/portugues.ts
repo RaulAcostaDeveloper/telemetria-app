@@ -176,6 +176,7 @@ export const PORTUGUES: LanguageInterface = {
         totalDischarges: "Total de descargas",
         averagePerformance: "Rendimento médio",
         tanks: "Nível dos tanques",
+        tanksSum: "Adição nível dos tanques",
         fuelConsumed: "Combustível consumido",
         initialLevel: "Nível inicial",
         finalLevel: "Nível final",
@@ -191,6 +192,7 @@ export const PORTUGUES: LanguageInterface = {
         subtitleCharges: "Combustível",
         subtitleDischarges: "Combustível",
         subtitleFuelVariationCAN: "Combustível",
+        subtitlePerformanceBetween: "Combustível",
       },
       rpm: {
         rpm: "Rotações por minuto",

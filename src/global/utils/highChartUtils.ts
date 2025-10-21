@@ -69,6 +69,20 @@ export function createTooltipFormatter(
   };
 }
 
+const sumFuelTanks = (tanks: string | null) => {
+  let tanksArr: number[] = [];
+  let totalFuel = 0;
+  if (tanks) {
+    tanksArr = tanks
+      .split(/\s*[,|]\s*/)
+      .map(Number)
+      .filter((n) => !isNaN(n));
+    totalFuel = (tanksArr ?? []).reduce((acc, val) => acc + val, 0);
+    return totalFuel;
+  }
+  return totalFuel;
+};
+
 // Tooltips para diferentes series de datos
 
 export function getChargesTooltipFields(
@@ -230,6 +244,10 @@ export function getLevelMessagesTooltipFields(
         subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleFuelVariationCAN,
       },
     },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.tanksSum,
+      value: (data) => `${sumFuelTanks(data.tanks)} (L)`,
+    },
   ];
 }
 
@@ -240,22 +258,6 @@ export function getPerformancesBetweenChargesTooltipFields(
     {
       label: LANGUAGE.highCharts.tooltips.date,
       value: (data) => `${formatDateTime(data.dateGps)}`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.averagePerformance,
-      value: (data) => `${ndIfEmpty(data.averagePerformance)}  Km/h`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.fuelConsumed,
-      value: (data) => `${ndIfEmpty(data.fuelConsumed)} L`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.initialLevel,
-      value: (data) => `${ndIfEmpty(data.initialLevel)} L`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.finalLevel,
-      value: (data) => `${ndIfEmpty(data.finalLevel)}  L`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.initialOdometer,
@@ -269,6 +271,26 @@ export function getPerformancesBetweenChargesTooltipFields(
       label: LANGUAGE.highCharts.tooltips.fuel.distanceTravelled,
       value: (data) =>
         `${Number(data.finalOdometer) - Number(data.initialOdometer)} Km`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.averagePerformance,
+      value: (data) => `${ndIfEmpty(data.averagePerformance)}  Km/L`,
+      separator: {
+        position: 5,
+        subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitlePerformanceBetween,
+      },
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.fuelConsumed,
+      value: (data) => `${ndIfEmpty(data.fuelConsumed)} L`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.initialLevel,
+      value: (data) => `${ndIfEmpty(data.initialLevel)} L`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.finalLevel,
+      value: (data) => `${ndIfEmpty(data.finalLevel)}  L`,
     },
   ];
 }
