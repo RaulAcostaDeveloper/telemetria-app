@@ -189,6 +189,8 @@ export const ENGLISH: LanguageInterface = {
         titleFuelVariation: "Fuel level",
         titlePerformanceBetween: "Performance Between Charges",
         titlePerformanceDaily: "Daily Performance",
+        subtitleCharges: "Fuel",
+        subtitleDischarges: "Fuel",
         subtitleFuelVariationCAN: "Fuel",
       },
       rpm: {
@@ -200,10 +202,12 @@ export const ENGLISH: LanguageInterface = {
         distance: "Distance",
         distanceTraveled: "Distance traveled",
         titleDistance: "Distance Traveled",
+        subtitleDistance: "Telemetry",
       },
       timeTraveled: {
         timeTraveled: "Worked hours",
         titleTimeTraveled: "Worked Hours",
+        subtitleTimeTraveled: "Telemetry",
       },
       telemetryOBD: {
         xAxisDistance: "Distance traveled (km)",

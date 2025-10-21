@@ -188,6 +188,8 @@ export const PORTUGUES: LanguageInterface = {
         titleFuelVariation: "Nível de combustível",
         titlePerformanceBetween: "Rendimento entre cargas",
         titlePerformanceDaily: "Rendimento diário",
+        subtitleCharges: "Combustível",
+        subtitleDischarges: "Combustível",
         subtitleFuelVariationCAN: "Combustível",
       },
       rpm: {
@@ -199,10 +201,12 @@ export const PORTUGUES: LanguageInterface = {
         distance: "Distância",
         distanceTraveled: "Distância percorrida",
         titleDistance: "Distância percorrida",
+        subtitleDistance: "Telemetria",
       },
       timeTraveled: {
         timeTraveled: "Horas trabalhadas",
         titleTimeTraveled: "Horas trabalhadas",
+        subtitleTimeTraveled: "Telemetria",
       },
       telemetryOBD: {
         xAxisDistance: "Distância percorrida (km)",

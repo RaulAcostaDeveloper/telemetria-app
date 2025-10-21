@@ -169,6 +169,8 @@ export interface LanguageInterface {
         titleFuelVariation: string;
         titlePerformanceBetween: string;
         titlePerformanceDaily: string;
+        subtitleCharges: string;
+        subtitleDischarges: string;
         subtitleFuelVariationCAN: string;
       };
       rpm: {
@@ -180,10 +182,12 @@ export interface LanguageInterface {
         distance: string;
         distanceTraveled: string;
         titleDistance: string;
+        subtitleDistance: string;
       };
       timeTraveled: {
         timeTraveled: string;
         titleTimeTraveled: string;
+        subtitleTimeTraveled: string;
       };
       telemetryOBD: {
         xAxisDistance: string;
