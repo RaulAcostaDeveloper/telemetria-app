@@ -25,14 +25,14 @@ export interface ObdTravelMetricsDataValues {
   timeTraveledDetails: ObdTravelMetricsTimeTraveledDetails[];
 }
 
-interface Data {
+export interface ObdTravelMetricsData {
   statusCode: number;
   message: string;
   value: ObdTravelMetricsDataValues | null;
 }
 
 interface InitialState {
-  obdTravelMetricsData: Data | null;
+  obdTravelMetricsData: ObdTravelMetricsData | null;
   obdTravelMetricsStatus: SERVICE_STATUS;
 }
 

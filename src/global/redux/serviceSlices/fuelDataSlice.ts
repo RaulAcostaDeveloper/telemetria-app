@@ -77,7 +77,7 @@ interface DailyPerformances {
 
 interface PerformancesBetweenCharges {
   endDatePerformance: string;
-  startDatePerformace: string;
+  startDatePerformance: string;
   fuelConsumed: number | null;
   initialLevel: number | null;
   finalLevel: number | null;
@@ -109,14 +109,14 @@ export interface FuelDataValues {
   // operationalBehavior: OperationalBehavior[];
 }
 
-interface Data {
+export interface FuelDataData {
   statusCode: number;
   message: string;
   value: FuelDataValues | null;
 }
 
 interface InitialState {
-  fuelDataData: Data | null;
+  fuelDataData: FuelDataData | null;
   fuelDataStatus: SERVICE_STATUS;
 }
 

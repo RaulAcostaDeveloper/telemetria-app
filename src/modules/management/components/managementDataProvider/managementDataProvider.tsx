@@ -1,5 +1,5 @@
 "use client";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 import styles from "./managementDataProvider.module.css";
@@ -12,19 +12,28 @@ import { LanguageInterface } from "@/global/language/constants/language.model";
 import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { Table, TabsContent } from "@/global/components";
-import { deviceStatusTranslator, formatDateTime } from "@/global/utils/utils";
+import {
+  deviceStatusTranslator,
+  formatDateTime,
+  toLocalDateTime,
+} from "@/global/utils/utils";
 import {
   DirectionsCar,
   DeviceHub,
   AccountBox,
   Groups,
 } from "@mui/icons-material";
+import { DriversData } from "@/global/redux/serviceSlices/driversSlice";
+import { DevicesData } from "@/global/redux/serviceSlices/devicesSlice";
 
 interface Props {
   LANGUAGE: LanguageInterface;
 }
 
 export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
+  const [driversDataFormated, setDriversDataFormated] = useState<DriversData>();
+  const [devicesDataFormated, setDevicesDataFormated] = useState<DevicesData>();
+
   const { vehiclesData, vehiclesStatus } = useSelector(
     (state: RootState) => state.vehicles
   );
@@ -40,6 +49,41 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   const { groupsData, groupsStatus } = useSelector(
     (state: RootState) => state.groups
   );
+
+  useEffect(() => {
+    if (driversData?.value) {
+      const drivers = driversData.value.drivers.map((messages) => ({
+        ...messages,
+        entryDate: toLocalDateTime(messages.entryDate),
+      }));
+      const dataFormated = {
+        ...driversData,
+        value: {
+          ...driversData.value,
+          drivers,
+        },
+      };
+      setDriversDataFormated(dataFormated);
+    }
+  }, [driversData]);
+
+  useEffect(() => {
+    if (devicesData?.value) {
+      const devices = devicesData.value.devices.map((messages) => ({
+        ...messages,
+        createdAt: toLocalDateTime(messages.createdAt),
+        registrationDate: toLocalDateTime(messages.registrationDate),
+      }));
+      const dataFormated = {
+        ...devicesData,
+        value: {
+          ...devicesData.value,
+          devices,
+        },
+      };
+      setDevicesDataFormated(dataFormated);
+    }
+  }, [devicesData]);
 
   const fuelTabs = [
     {
@@ -184,7 +228,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   ];
 
   const devicesTableData = useMemo(() => {
-    return devicesData?.value?.devices.map((value) => ({
+    return devicesDataFormated?.value?.devices.map((value) => ({
       imei: value.imei,
       model: value.model,
       brand: value.brand,
@@ -195,7 +239,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       phoneNumber: value.phoneNumber,
       registrationDate: formatDateTime(value.registrationDate),
     }));
-  }, [devicesData]);
+  }, [devicesDataFormated]);
 
   const groupsColumns: columnsTable = [
     {
@@ -264,17 +308,17 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   ];
 
   const driversTableData = useMemo(() => {
-    return driversData?.value?.drivers.map((value) => ({
+    return driversDataFormated?.value?.drivers.map((value) => ({
       name: value.name,
       lastName: value.lastName,
       email: value.email,
       address: value.address,
-      entryDate: value.entryDate,
+      entryDate: formatDateTime(value.entryDate),
       alias: value.alias,
       groupName: value.groupName,
       license: value.license,
     }));
-  }, [driversData]);
+  }, [driversDataFormated]);
 
   return (
     <div className={styles.managementDataProvider}>
