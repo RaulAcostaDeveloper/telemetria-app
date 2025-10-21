@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getFuelData } from "@/modules/fuel/services/fuelData/fuelData";
+import { toLocalDateTime } from "@/global/utils/utils";
 
 interface LevelMessages {
   eventId: number;
@@ -109,7 +110,7 @@ export interface FuelDataValues {
   // operationalBehavior: OperationalBehavior[];
 }
 
-export interface FuelDataData {
+interface FuelDataData {
   statusCode: number;
   message: string;
   value: FuelDataValues | null;
@@ -137,6 +138,66 @@ export const fetchFuelData = createAsyncThunk(
   }
 );
 
+const fuelDataFormatter = (data: FuelDataData | null): FuelDataData | null => {
+  if (data && data.value) {
+    const levelMessages = data.value.levelMessages.map((messages) => ({
+      ...messages,
+      dateGps: toLocalDateTime(messages.dateGps),
+      dateServer: toLocalDateTime(messages.dateServer),
+      dateAvl: toLocalDateTime(messages.dateAvl),
+    }));
+
+    const charges = data.value.charges.map((charges) => ({
+      ...charges,
+      dateGps: toLocalDateTime(charges.dateGps),
+      endDate: toLocalDateTime(charges.endDate),
+      startDate: toLocalDateTime(charges.startDate),
+    }));
+
+    const discharges = data.value.discharges.map((discharges) => ({
+      ...discharges,
+      dateGps: toLocalDateTime(discharges.dateGps),
+      endDate: toLocalDateTime(discharges.endDate),
+      startDate: toLocalDateTime(discharges.startDate),
+    }));
+
+    const dailyPerformances = data.value.dailyPerformances.map(
+      (dailyPerformances) => ({
+        ...dailyPerformances,
+        updateAt: toLocalDateTime(dailyPerformances.updateAt),
+        endDate: toLocalDateTime(dailyPerformances.endDate),
+        startDate: toLocalDateTime(dailyPerformances.startDate),
+      })
+    );
+
+    const performancesBetweenCharges =
+      data.value.performancesBetweenCharges.map(
+        (performancesBetweenCharges) => ({
+          ...performancesBetweenCharges,
+          endDatePerformance: toLocalDateTime(
+            performancesBetweenCharges.endDatePerformance
+          ),
+          startDatePerformance: toLocalDateTime(
+            performancesBetweenCharges.startDatePerformance
+          ),
+        })
+      );
+
+    return {
+      ...data,
+      value: {
+        ...data.value,
+        levelMessages,
+        charges,
+        discharges,
+        dailyPerformances,
+        performancesBetweenCharges,
+      },
+    };
+  }
+  return null;
+};
+
 const initialState: InitialState = {
   fuelDataData: null,
   fuelDataStatus: SERVICE_STATUS.idle,
@@ -157,7 +218,7 @@ const fuelDataSlice = createSlice({
       })
       .addCase(fetchFuelData.fulfilled, (state, action) => {
         state.fuelDataStatus = SERVICE_STATUS.succeeded;
-        state.fuelDataData = action.payload;
+        state.fuelDataData = fuelDataFormatter(action.payload);
       })
       .addCase(fetchFuelData.rejected, (state) => {
         state.fuelDataStatus = SERVICE_STATUS.failed;

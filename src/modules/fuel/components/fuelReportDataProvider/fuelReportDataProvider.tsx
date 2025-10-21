@@ -6,14 +6,12 @@ import GeoModal, { GeoModalData } from "@/global/components/geoModal/geoModal";
 import styles from "./fuelReportDataProvider.module.css";
 import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import { FuelBehaviorTab } from "@/modules/fuel/components/fuelBehaviorTab/fuelBehaviorTab";
-import { FuelDataData } from "@/global/redux/serviceSlices/fuelDataSlice";
 import { FuelNowTab } from "../fuelNowTab/fuelNowTab";
 import { FuelPerformanceMetrics } from "@/modules/fuel/components";
 import { Insights, ListAlt, LocalGasStation } from "@mui/icons-material";
 import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { TabsContent } from "@/global/components";
-import { toLocalDateTime } from "@/global/utils/utils";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 
 export interface OBValue {
@@ -32,8 +30,6 @@ export const FuelReportDataProvider = () => {
   const [opBEngineOffCoast, setOpBEngineOffCoast] = useState<OBValue[]>([]);
   const [opBEngineOnIdle, setOpBEngineOnIdle] = useState<OBValue[]>([]);
   const [opBEngineOnMoving, setOpBEngineOnMoving] = useState<OBValue[]>([]);
-  const [fuelDataDataFormated, setFuelDataDataFormated] =
-    useState<FuelDataData>();
 
   const { fuelDataData, fuelDataStatus } = useSelector(
     (state: RootState) => state.fuelData
@@ -50,75 +46,12 @@ export const FuelReportDataProvider = () => {
   ];
 
   useEffect(() => {
-    if (fuelDataData?.value) {
-      const levelMessages = fuelDataData.value.levelMessages.map(
-        (messages) => ({
-          ...messages,
-          dateGps: toLocalDateTime(messages.dateGps),
-          dateServer: toLocalDateTime(messages.dateServer),
-          dateAvl: toLocalDateTime(messages.dateAvl),
-        })
-      );
-
-      const charges = fuelDataData.value.charges.map((charges) => ({
-        ...charges,
-        dateGps: toLocalDateTime(charges.dateGps),
-        endDate: toLocalDateTime(charges.endDate),
-        startDate: toLocalDateTime(charges.startDate),
-      }));
-
-      const discharges = fuelDataData.value.discharges.map((discharges) => ({
-        ...discharges,
-        dateGps: toLocalDateTime(discharges.dateGps),
-        endDate: toLocalDateTime(discharges.endDate),
-        startDate: toLocalDateTime(discharges.startDate),
-      }));
-
-      const dailyPerformances = fuelDataData.value.dailyPerformances.map(
-        (dailyPerformances) => ({
-          ...dailyPerformances,
-          updateAt: toLocalDateTime(dailyPerformances.updateAt),
-          endDate: toLocalDateTime(dailyPerformances.endDate),
-          startDate: toLocalDateTime(dailyPerformances.startDate),
-        })
-      );
-
-      const performancesBetweenCharges =
-        fuelDataData.value.performancesBetweenCharges.map(
-          (performancesBetweenCharges) => ({
-            ...performancesBetweenCharges,
-            endDatePerformance: toLocalDateTime(
-              performancesBetweenCharges.endDatePerformance
-            ),
-            startDatePerformance: toLocalDateTime(
-              performancesBetweenCharges.startDatePerformance
-            ),
-          })
-        );
-
-      const dataFormated = {
-        ...fuelDataData,
-        value: {
-          ...fuelDataData.value,
-          levelMessages,
-          charges,
-          discharges,
-          dailyPerformances,
-          performancesBetweenCharges,
-        },
-      };
-
-      setFuelDataDataFormated(dataFormated);
-    }
-  }, [fuelDataData]);
-
-  useEffect(() => {
     const engineOff: OBValue[] = [];
     const engineOffCoasting: OBValue[] = [];
     const engineOnIdle: OBValue[] = [];
     const engineOnMoving: OBValue[] = [];
 
-    const levelMessages = fuelDataDataFormated?.value?.levelMessages;
+    const levelMessages = fuelDataData?.value?.levelMessages;
     if (!levelMessages) return;
 
     levelMessages.forEach((el, i) => {
@@ -156,7 +89,7 @@ export const FuelReportDataProvider = () => {
     setOpBEngineOffCoast(engineOffCoasting);
     setOpBEngineOnIdle(engineOnIdle);
     setOpBEngineOnMoving(engineOnMoving);
-  }, [fuelDataDataFormated]);
+  }, [fuelDataData]);
 
   return (
     <div className={styles.fuelReportDataProvider}>
@@ -165,11 +98,11 @@ export const FuelReportDataProvider = () => {
         tabContents={[
           <div key={0}>
             {fuelDataStatus === SERVICE_STATUS.succeeded &&
-              fuelDataDataFormated?.value && (
+              fuelDataData?.value && (
                 <>
                   <FuelBehaviorTab
                     LANGUAGE={LANGUAGE}
-                    fuelDataData={fuelDataDataFormated.value}
+                    fuelDataData={fuelDataData.value}
                     opBEngineOff={opBEngineOff}
                     opBEngineOffCoasting={opBEngineOffCoast}
                     opBEngineOnIdle={opBEngineOnIdle}

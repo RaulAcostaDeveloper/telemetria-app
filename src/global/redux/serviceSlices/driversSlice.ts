@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getDrivers } from "@/modules/management/services/drivers/drivers";
+import { toLocalDateTime } from "@/global/utils/utils";
 
 interface Drivers {
   id: number;
@@ -19,7 +20,7 @@ interface ArrayDrivers {
   drivers: Drivers[];
 }
 
-export interface DriversData {
+interface DriversData {
   statusCode: number;
   message: string;
   value: ArrayDrivers | null;
@@ -36,6 +37,24 @@ export const fetchDrivers = createAsyncThunk(
     return getDrivers({ logoutState });
   }
 );
+
+const driversFormatter = (data: DriversData | null): DriversData | null => {
+  if (data && data.value) {
+    const drivers = data.value.drivers.map((messages) => ({
+      ...messages,
+      entryDate: toLocalDateTime(messages.entryDate),
+    }));
+
+    return {
+      ...data,
+      value: {
+        ...data.value,
+        drivers,
+      },
+    };
+  }
+  return null;
+};
 
 const initialState: InitialState = {
   driversData: null,
@@ -54,7 +73,7 @@ const driversSlice = createSlice({
       })
       .addCase(fetchDrivers.fulfilled, (state, action) => {
         state.driversStatus = SERVICE_STATUS.succeeded;
-        state.driversData = action.payload;
+        state.driversData = driversFormatter(action.payload);
       })
       .addCase(fetchDrivers.rejected, (state) => {
         state.driversStatus = SERVICE_STATUS.failed;
