@@ -94,6 +94,7 @@ export default function CardContentTCT5({ data, LANGUAGE }: Props) {
 
   const langSelection = {
     title: LANGUAGE.teleOBD.charts.titleDistance,
+    titleTooltip: LANGUAGE.teleOBD.charts.titleTooltipDistance,
     xAxisTitle: LANGUAGE.teleOBD.charts.xAxisDistance,
     yAxisTitle: LANGUAGE.teleOBD.charts.yAxis,
   };

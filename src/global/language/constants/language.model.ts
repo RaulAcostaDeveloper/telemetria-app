@@ -164,16 +164,33 @@ export interface LanguageInterface {
         finalOdometer: string;
         distanceTravelled: string;
         tanks: string;
+        tanksSum: string;
+        titleCharges: string;
+        titleDischarges: string;
+        titleFuelVariationCAN: string;
+        titleFuelVariation: string;
+        titlePerformanceBetween: string;
+        titlePerformanceDaily: string;
+        subtitleCharges: string;
+        subtitleDischarges: string;
+        subtitleFuelVariationCAN: string;
+        subtitlePerformanceBetween: string;
       };
       rpm: {
         rpm: string;
+        titleTelemetryRPM: string;
+        subtitleTelemetryRPM: string;
       };
       distance: {
         distance: string;
         distanceTraveled: string;
+        titleDistance: string;
+        subtitleDistance: string;
       };
       timeTraveled: {
         timeTraveled: string;
+        titleTimeTraveled: string;
+        subtitleTimeTraveled: string;
       };
       telemetryOBD: {
         xAxisDistance: string;
@@ -400,6 +417,9 @@ export interface LanguageInterface {
       subtitleDistance: string;
       subtitleDriven: string;
       subtitleIdle: string;
+      titleTooltipDistance: string;
+      titleTooltipDriven: string;
+      titleTooltipIdle: string;
       xAxisDistance: string;
       xAxisDriven: string;
       xAxisIdle: string;

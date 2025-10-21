@@ -90,6 +90,7 @@ export default function CardContentIdle({ data, LANGUAGE }: Props) {
 
   const langSelection = {
     title: LANGUAGE.teleOBD.charts.titleIdle,
+    titleTooltip: LANGUAGE.teleOBD.charts.titleTooltipIdle,
     xAxisTitle: LANGUAGE.teleOBD.charts.xAxisIdle,
     yAxisTitle: LANGUAGE.teleOBD.charts.yAxis,
   };

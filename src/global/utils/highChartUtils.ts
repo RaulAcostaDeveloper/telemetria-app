@@ -4,21 +4,43 @@ import { formatDateTime } from "./utils";
 
 type StringObject = Record<string, string>;
 
+interface Separator {
+  position: number;
+  subtitle: string;
+}
+
 export interface TooltipField {
   label: string;
   value: (data: StringObject) => string;
+  separator?: { position: number; subtitle: string };
 }
 
 // Constructor del tooltip
-function buildTooltipSection(label: string, value: string): string {
-  return `
+function buildTooltipSection(
+  label: string,
+  value: string,
+  index: number,
+  separator?: Separator
+): string {
+  let stringHTML = "";
+  if (separator && index + 1 === separator.position) {
+    stringHTML += `
+    <div style="font-size: 18px; padding-top: 0.5em; text-align: center;">
+      <div style="color: gray;">───────  ${separator.subtitle}  ───────</div>
+    </div>
+    `;
+  }
+  stringHTML += `
   <div style="width: 100%; font-size: 18px; display: flex; justify-content: space-between;">
     <strong style="margin-right: 10px;">${label}:</strong> <p>${value}</p>
   </div>
   `;
+
+  return stringHTML;
 }
 
 export function createTooltipFormatter(
+  title: string,
   fields: TooltipField[]
 ): (this: Highcharts.Point & { options: { custom: string } }) => string {
   return function (
@@ -27,16 +49,39 @@ export function createTooltipFormatter(
     const c = this.options.custom;
 
     const content = fields
-      .map(({ label, value }) => buildTooltipSection(label, value(c)))
+      .map(({ label, value, separator }, index) =>
+        buildTooltipSection(label, value(c), index, separator)
+      )
       .join("");
 
+    const titleHTML = `<div style="width: 100%; font-size: 16px; font-weight: normal; display: inline-block; text-align: center; color: gray;">
+          ${title}
+        </div>`;
+
     return `
-      <div style="width: auto; padding: 7px; font-size: 14px; display: flex; flex-direction: column; gap: 5px;">
+      <div>
+        <div style="width: auto; padding: 7px; font-size: 14px; display: flex; flex-direction: column; gap: 5px;">
+        ${titleHTML}
         ${content}
-      </div>
+        </div>
+      <div>
     `;
   };
 }
+
+const sumFuelTanks = (tanks: string | null) => {
+  let tanksArr: number[] = [];
+  let totalFuel = 0;
+  if (tanks) {
+    tanksArr = tanks
+      .split(/\s*[,|]\s*/)
+      .map(Number)
+      .filter((n) => !isNaN(n));
+    totalFuel = (tanksArr ?? []).reduce((acc, val) => acc + val, 0);
+    return totalFuel;
+  }
+  return totalFuel;
+};
 
 // Tooltips para diferentes series de datos
 
@@ -47,18 +92,6 @@ export function getChargesTooltipFields(
     {
       label: LANGUAGE.highCharts.tooltips.date,
       value: (data) => `${formatDateTime(data.dateGps)}`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
-      value: (data) => `${ndIfEmpty(data.initialFuel)} L`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.finalFuel,
-      value: (data) => `${ndIfEmpty(data.finalFuel)} L`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.totalCharges,
-      value: (data) => `${ndIfEmpty(data.magnitude)} L`,
     },
     { label: LANGUAGE.highCharts.tooltips.lat, value: (data) => data.lat },
     { label: LANGUAGE.highCharts.tooltips.lon, value: (data) => data.lon },
@@ -91,6 +124,22 @@ export function getChargesTooltipFields(
       label: LANGUAGE.highCharts.tooltips.fuel.address,
       value: (data) => `${ndIfEmpty(data.address)}`,
     },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
+      value: (data) => `${ndIfEmpty(data.initialFuel)} L`,
+      separator: {
+        position: 10,
+        subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleCharges,
+      },
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.finalFuel,
+      value: (data) => `${ndIfEmpty(data.finalFuel)} L`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.totalCharges,
+      value: (data) => `${ndIfEmpty(data.magnitude)} L`,
+    },
   ];
 }
 
@@ -104,18 +153,6 @@ export function getDisChargesTooltipFields(
     },
     { label: LANGUAGE.highCharts.tooltips.lat, value: (data) => data.lat },
     { label: LANGUAGE.highCharts.tooltips.lon, value: (data) => data.lon },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
-      value: (data) => `${ndIfEmpty(data.initialFuel)} L`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.finalFuel,
-      value: (data) => `${ndIfEmpty(data.finalFuel)} L`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.totalDischarges,
-      value: (data) => `${ndIfEmpty(data.magnitude)} L`,
-    },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.odometer,
       value: (data) => `${ndIfEmpty(data.odometer)} Km`,
@@ -144,6 +181,22 @@ export function getDisChargesTooltipFields(
     {
       label: LANGUAGE.highCharts.tooltips.fuel.address,
       value: (data) => `${ndIfEmpty(data.address)}`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
+      value: (data) => `${ndIfEmpty(data.initialFuel)} L`,
+      separator: {
+        position: 10,
+        subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleDischarges,
+      },
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.finalFuel,
+      value: (data) => `${ndIfEmpty(data.finalFuel)} L`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.totalDischarges,
+      value: (data) => `${ndIfEmpty(data.magnitude)} L`,
     },
   ];
 }
@@ -186,6 +239,14 @@ export function getLevelMessagesTooltipFields(
     {
       label: LANGUAGE.highCharts.tooltips.fuel.tanks,
       value: (data) => `${ndIfEmpty(data.tanks)} (L)`,
+      separator: {
+        position: 9,
+        subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleFuelVariationCAN,
+      },
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.tanksSum,
+      value: (data) => `${sumFuelTanks(data.tanks)} (L)`,
     },
   ];
 }
@@ -199,8 +260,25 @@ export function getPerformancesBetweenChargesTooltipFields(
       value: (data) => `${formatDateTime(data.dateGps)}`,
     },
     {
+      label: LANGUAGE.highCharts.tooltips.fuel.initialOdometer,
+      value: (data) => `${ndIfEmpty(data.initialOdometer)}  Km`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.finalOdometer,
+      value: (data) => `${ndIfEmpty(data.finalOdometer)} Km`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.distanceTravelled,
+      value: (data) =>
+        `${Number(data.finalOdometer) - Number(data.initialOdometer)} Km`,
+    },
+    {
       label: LANGUAGE.highCharts.tooltips.fuel.averagePerformance,
-      value: (data) => `${ndIfEmpty(data.averagePerformance)}  Km/h`,
+      value: (data) => `${ndIfEmpty(data.averagePerformance)}  Km/L`,
+      separator: {
+        position: 5,
+        subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitlePerformanceBetween,
+      },
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.fuelConsumed,
@@ -213,19 +291,6 @@ export function getPerformancesBetweenChargesTooltipFields(
     {
       label: LANGUAGE.highCharts.tooltips.fuel.finalLevel,
       value: (data) => `${ndIfEmpty(data.finalLevel)}  L`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.initialOdometer,
-      value: (data) => `${ndIfEmpty(data.initialOdometer)}  Km`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.finalOdometer,
-      value: (data) => `${ndIfEmpty(data.finalOdometer)} Km`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.distanceTravelled,
-      value: (data) =>
-        `${Number(data.finalOdometer) - Number(data.initialOdometer)} Km`,
     },
   ];
 }
@@ -243,6 +308,10 @@ export function getRPMTooltipFields(
     {
       label: LANGUAGE.highCharts.tooltips.rpm.rpm,
       value: (data) => `${ndIfEmpty(data.value)}`,
+      separator: {
+        position: 4,
+        subtitle: LANGUAGE.highCharts.tooltips.rpm.subtitleTelemetryRPM,
+      },
     },
   ];
 }
@@ -260,6 +329,10 @@ export function getDistanceTooltipFields(
     {
       label: LANGUAGE.highCharts.tooltips.distance.distanceTraveled,
       value: (data) => `${ndIfEmpty(data.value)} Km`,
+      separator: {
+        position: 4,
+        subtitle: LANGUAGE.highCharts.tooltips.distance.subtitleDistance,
+      },
     },
   ];
 }
@@ -277,6 +350,11 @@ export function getTimeTraveledTooltipFields(
     {
       label: LANGUAGE.highCharts.tooltips.timeTraveled.timeTraveled,
       value: (data) => `${ndIfEmpty(data.value)} H`,
+      separator: {
+        position: 4,
+        subtitle:
+          LANGUAGE.highCharts.tooltips.timeTraveled.subtitleTimeTraveled,
+      },
     },
   ];
 }
