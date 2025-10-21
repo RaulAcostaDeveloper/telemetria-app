@@ -30,6 +30,46 @@ export const formatToLocalIso8601 = (input: string | Date): string => {
   return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
 };
 
+export function toLocalDateTime(isoDate: string): string {
+  if (typeof isoDate !== "string") {
+    throw new TypeError("toLocalDateTime: isoDate debe ser una cadena.");
+  }
+
+  const input = isoDate.trim();
+
+  // En caso de que venga la fecha-sola devolver 0 0 0 am
+  const dateOnly = /^(\d{4})-(\d{2})-(\d{2})$/.exec(input);
+
+  if (dateOnly) {
+    const [, y, m, d] = dateOnly;
+    const local = new Date(Number(y), Number(m) - 1, Number(d), 0, 0, 0); // local time
+    return formatLocal(local);
+  }
+
+  const hasTZ = /([zZ]|[+\-]\d{2}:\d{2})$/.test(isoDate.trim());
+
+  const normalized = hasTZ ? isoDate : `${isoDate}Z`;
+
+  const date = new Date(normalized);
+
+  if (Number.isNaN(date.getTime())) {
+    throw new Error(`Fecha inválida: "${isoDate}"`);
+  }
+
+  return formatLocal(date);
+}
+
+function formatLocal(d: Date): string {
+  const pad = (n: number) => String(n).padStart(2, "0");
+  const yyyy = d.getFullYear();
+  const MM = pad(d.getMonth() + 1);
+  const dd = pad(d.getDate());
+  const HH = pad(d.getHours());
+  const mm = pad(d.getMinutes());
+  const ss = pad(d.getSeconds());
+  return `${yyyy}-${MM}-${dd}T${HH}:${mm}:${ss}`;
+}
+
 /**
  * Convierte una fecha a una cadena en formato ISO local.
  *

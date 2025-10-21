@@ -22,14 +22,14 @@ interface ArrayDevices {
   devices: Devices[];
 }
 
-interface Data {
+export interface DevicesData {
   statusCode: number;
   message: string;
   value: ArrayDevices | null;
 }
 
 interface InitialState {
-  devicesData: Data | null;
+  devicesData: DevicesData | null;
   devicesStatus: SERVICE_STATUS;
 }
 

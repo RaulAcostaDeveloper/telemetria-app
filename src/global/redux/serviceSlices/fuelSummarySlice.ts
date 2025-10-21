@@ -30,14 +30,14 @@ export interface SummaryFuelValues {
   totalDistanceTraveled: number;
 }
 
-interface Data {
+export interface FuelSummaryData {
   statusCode: number;
   message: string;
   value: SummaryFuelValues | null;
 }
 
 interface InitialState {
-  fuelSummaryData: Data | null;
+  fuelSummaryData: FuelSummaryData | null;
   fuelSummaryStatus: SERVICE_STATUS;
 }
 

@@ -19,14 +19,14 @@ interface ArrayDrivers {
   drivers: Drivers[];
 }
 
-interface Data {
+export interface DriversData {
   statusCode: number;
   message: string;
   value: ArrayDrivers | null;
 }
 
 interface InitialState {
-  driversData: Data | null;
+  driversData: DriversData | null;
   driversStatus: SERVICE_STATUS;
 }
 
