@@ -19,7 +19,8 @@ export const ENGLISH: LanguageInterface = {
   notifications: {
     unexpectedError: "Unexpected error",
     genericServiceError: "Failed to fetch data, trying again...",
-    nullValue: "No information",
+    nullValue: "No information for this time period",
+    graphicError: "Unable to display the chart",
   },
   header: {
     backButton: {

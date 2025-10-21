@@ -19,7 +19,8 @@ export const SPANISH: LanguageInterface = {
   notifications: {
     unexpectedError: "Error inesperado",
     genericServiceError: "Error al obtener datos, reintentando...",
-    nullValue: "No hay información",
+    nullValue: "No hay información en este periodo de tiempo",
+    graphicError: "No se pudo mostrar el gráfico",
   },
   header: {
     backButton: {

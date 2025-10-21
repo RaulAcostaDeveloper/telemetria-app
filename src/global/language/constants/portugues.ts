@@ -18,7 +18,8 @@ export const PORTUGUES: LanguageInterface = {
   notifications: {
     unexpectedError: "Erro inesperado",
     genericServiceError: "Erro ao obter dados, tentando novamente...",
-    nullValue: "Não há informações",
+    nullValue: "Não há informações para este intervalo de tempo",
+    graphicError: "Não foi possível apresentar o gráfico",
   },
   header: {
     backButton: {
