@@ -5,7 +5,7 @@ import { LanguageInterface } from "../../language/constants/language.model";
 
 interface Props {
   message?: string;
-  LANGUAGE: LanguageInterface;
+  LANGUAGE?: LanguageInterface;
 }
 
 export const ErrorMessage = ({ message, LANGUAGE }: Props) => {
@@ -19,7 +19,7 @@ export const ErrorMessage = ({ message, LANGUAGE }: Props) => {
           <span className={styles.errorMessage}>{message}</span>
         ) : (
           <span className={styles.errorMessage}>
-            {LANGUAGE.notifications.genericServiceError}
+            {LANGUAGE && LANGUAGE.notifications.genericServiceError}
           </span>
         )}
       </div>

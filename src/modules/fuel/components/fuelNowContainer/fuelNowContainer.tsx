@@ -120,6 +120,7 @@ export const FuelNowContainer = ({
           tankValues={tankValues}
           title={LANGUAGE.fuelVehicle.fuelNow.tank}
           averageTankSize={averageTankSize}
+          LANGUAGE={LANGUAGE}
         />
       </div>
     </div>

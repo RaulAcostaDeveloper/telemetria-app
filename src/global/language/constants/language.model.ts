@@ -20,6 +20,7 @@ export interface LanguageInterface {
     unexpectedError: string;
     genericServiceError: string;
     nullValue: string;
+    graphicError: string;
   };
   header: {
     backButton: {
