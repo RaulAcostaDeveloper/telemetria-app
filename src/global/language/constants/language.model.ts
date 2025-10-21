@@ -169,10 +169,12 @@ export interface LanguageInterface {
         titleFuelVariation: string;
         titlePerformanceBetween: string;
         titlePerformanceDaily: string;
+        subtitleFuelVariationCAN: string;
       };
       rpm: {
         rpm: string;
         titleTelemetryRPM: string;
+        subtitleTelemetryRPM: string;
       };
       distance: {
         distance: string;

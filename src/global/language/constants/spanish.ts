@@ -189,10 +189,12 @@ export const SPANISH: LanguageInterface = {
         titleFuelVariation: "Nivel de combustible",
         titlePerformanceBetween: "Rendimiento entre cargas",
         titlePerformanceDaily: "Rendimiento diario",
+        subtitleFuelVariationCAN: "Combustible",
       },
       rpm: {
         rpm: "Revoluciones por minuto",
         titleTelemetryRPM: "Revoluciones por minuto",
+        subtitleTelemetryRPM: "Telemetría",
       },
       distance: {
         distance: "Distancia",

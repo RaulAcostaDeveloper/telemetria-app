@@ -4,18 +4,39 @@ import { formatDateTime } from "./utils";
 
 type StringObject = Record<string, string>;
 
+interface Separator {
+  position: number;
+  subtitle: string;
+}
+
 export interface TooltipField {
   label: string;
   value: (data: StringObject) => string;
+  separator?: { position: number; subtitle: string };
 }
 
 // Constructor del tooltip
-function buildTooltipSection(label: string, value: string): string {
-  return `
+function buildTooltipSection(
+  label: string,
+  value: string,
+  index: number,
+  separator?: Separator
+): string {
+  let stringHTML = "";
+  if (separator && index + 1 === separator.position) {
+    stringHTML += `
+    <div style="font-size: 18px; padding-top: 0.5em; text-align: center;">
+      <div style="color: gray;">───────  ${separator.subtitle}  ───────</div>
+    </div>
+    `;
+  }
+  stringHTML += `
   <div style="width: 100%; font-size: 18px; display: flex; justify-content: space-between;">
     <strong style="margin-right: 10px;">${label}:</strong> <p>${value}</p>
   </div>
   `;
+
+  return stringHTML;
 }
 
 export function createTooltipFormatter(
@@ -28,10 +49,12 @@ export function createTooltipFormatter(
     const c = this.options.custom;
 
     const content = fields
-      .map(({ label, value }) => buildTooltipSection(label, value(c)))
+      .map(({ label, value, separator }, index) =>
+        buildTooltipSection(label, value(c), index, separator)
+      )
       .join("");
 
-    const titleHTML = `<div style="width: 100%; font-size: 16px; font-weight: bold; display: inline-block; text-align: center;">
+    const titleHTML = `<div style="width: 100%; font-size: 16px; font-weight: normal; display: inline-block; text-align: center; color: gray;">
           ${title}
         </div>`;
 
@@ -194,6 +217,10 @@ export function getLevelMessagesTooltipFields(
     {
       label: LANGUAGE.highCharts.tooltips.fuel.tanks,
       value: (data) => `${ndIfEmpty(data.tanks)} (L)`,
+      separator: {
+        position: 9,
+        subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleFuelVariationCAN,
+      },
     },
   ];
 }
@@ -251,6 +278,7 @@ export function getRPMTooltipFields(
     {
       label: LANGUAGE.highCharts.tooltips.rpm.rpm,
       value: (data) => `${ndIfEmpty(data.value)}`,
+      separator: { position: 4, subtitle: "Telemetría" },
     },
   ];
 }

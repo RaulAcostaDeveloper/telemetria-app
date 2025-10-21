@@ -189,10 +189,12 @@ export const ENGLISH: LanguageInterface = {
         titleFuelVariation: "Fuel level",
         titlePerformanceBetween: "Performance Between Charges",
         titlePerformanceDaily: "Daily Performance",
+        subtitleFuelVariationCAN: "Fuel",
       },
       rpm: {
         rpm: "Revolutions per minute",
         titleTelemetryRPM: "Revolutions per Minute",
+        subtitleTelemetryRPM: "Telemetry",
       },
       distance: {
         distance: "Distance",
