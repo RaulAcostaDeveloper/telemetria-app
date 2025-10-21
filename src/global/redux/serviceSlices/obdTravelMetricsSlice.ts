@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getObdTravelMetrics } from "@/modules/telemetryObd/services/travel-metrics/travel-metrics";
+import { toLocalDateTime } from "@/global/utils/utils";
 
 interface ObdTravelMetricsTimeTraveledDetails {
   lat: number;
@@ -25,14 +26,14 @@ export interface ObdTravelMetricsDataValues {
   timeTraveledDetails: ObdTravelMetricsTimeTraveledDetails[];
 }
 
-interface Data {
+interface ObdTravelMetricsData {
   statusCode: number;
   message: string;
   value: ObdTravelMetricsDataValues | null;
 }
 
 interface InitialState {
-  obdTravelMetricsData: Data | null;
+  obdTravelMetricsData: ObdTravelMetricsData | null;
   obdTravelMetricsStatus: SERVICE_STATUS;
 }
 
@@ -52,6 +53,28 @@ export const fetchObdTravelMetrics = createAsyncThunk(
     return getObdTravelMetrics({ imei, startDate, endDate, logoutState });
   }
 );
+
+const travelMetricsFormatter = (
+  data: ObdTravelMetricsData | null
+): ObdTravelMetricsData | null => {
+  if (data && data.value) {
+    const timeTraveledDetails = data.value.timeTraveledDetails.map(
+      (messages) => ({
+        ...messages,
+        dateGPS: toLocalDateTime(messages.dateGPS),
+      })
+    );
+
+    return {
+      ...data,
+      value: {
+        ...data.value,
+        timeTraveledDetails,
+      },
+    };
+  }
+  return null;
+};
 
 const initialState: InitialState = {
   obdTravelMetricsData: null,
@@ -73,7 +96,7 @@ const obdTravelMetricsSlice = createSlice({
       })
       .addCase(fetchObdTravelMetrics.fulfilled, (state, action) => {
         state.obdTravelMetricsStatus = SERVICE_STATUS.succeeded;
-        state.obdTravelMetricsData = action.payload;
+        state.obdTravelMetricsData = travelMetricsFormatter(action.payload);
       })
       .addCase(fetchObdTravelMetrics.rejected, (state) => {
         state.obdTravelMetricsStatus = SERVICE_STATUS.failed;

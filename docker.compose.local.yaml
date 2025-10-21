@@ -1,0 +1,28 @@
+# version: "3.9"
+# name: front-end-local
+
+# services:
+#   web:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     image: hestia.azurecr.io/solidsnake:stage
+#     container_name: solidsnake_web_local
+#     env_file:
+#       - ./.env
+#     environment:
+#       - NODE_ENV=production
+#       - PORT=3000
+#     ports:
+#       - "5000:3000"
+#     restart: unless-stopped
+
+services:
+  web:
+    # Nombre de la imagen con variable de entorno para el tag
+    image: hestia.azurecr.io/solidsnake:development
+
+    # Indica que esta definición solo sirve para construir la imagen
+    build:
+      context: .
+      dockerfile: Dockerfile

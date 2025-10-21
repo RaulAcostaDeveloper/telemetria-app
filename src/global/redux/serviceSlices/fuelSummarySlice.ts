@@ -2,20 +2,21 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getFuelSummary } from "@/modules/fuel/services/fuelSummary/fuelSummary";
+import { toLocalDateTime } from "@/global/utils/utils";
 
 // Tipado de los datos
 export interface Devices {
   imei: string;
   lastFuelLevel: number | null;
-  lastReportDate: string;
+  lastReportDate: string | null;
   name: string;
   plate: string;
-  fuelLoadCount: number;
-  fuelUnloadCount: number;
-  performanceOdometer: number;
+  fuelLoadCount: number | null;
+  fuelUnloadCount: number | null;
+  performanceOdometer: number | null;
   performanceHorometer: number;
-  fuelLoaded: number;
-  fuelUnloaded: number;
+  fuelLoaded: number | null;
+  fuelUnloaded: number | null;
 }
 
 export interface SummaryFuelValues {
@@ -30,14 +31,14 @@ export interface SummaryFuelValues {
   totalDistanceTraveled: number;
 }
 
-interface Data {
+interface FuelSummaryData {
   statusCode: number;
   message: string;
   value: SummaryFuelValues | null;
 }
 
 interface InitialState {
-  fuelSummaryData: Data | null;
+  fuelSummaryData: FuelSummaryData | null;
   fuelSummaryStatus: SERVICE_STATUS;
 }
 
@@ -57,6 +58,26 @@ export const fetchFuelSummary = createAsyncThunk(
   }
 );
 
+const fuelSummaryFormatter = (
+  data: FuelSummaryData | null
+): FuelSummaryData | null => {
+  if (data && data.value) {
+    const devices = data.value.devices.map((messages) => ({
+      ...messages,
+      lastReportDate: toLocalDateTime(messages.lastReportDate ?? ""),
+    }));
+
+    return {
+      ...data,
+      value: {
+        ...data.value,
+        devices,
+      },
+    };
+  }
+  return null;
+};
+
 const initialState: InitialState = {
   fuelSummaryData: null,
   fuelSummaryStatus: SERVICE_STATUS.idle,
@@ -74,7 +95,7 @@ const fuelSummarySlice = createSlice({
       })
       .addCase(fetchFuelSummary.fulfilled, (state, action) => {
         state.fuelSummaryStatus = SERVICE_STATUS.succeeded;
-        state.fuelSummaryData = action.payload;
+        state.fuelSummaryData = fuelSummaryFormatter(action.payload);
       })
       .addCase(fetchFuelSummary.rejected, (state) => {
         state.fuelSummaryStatus = SERVICE_STATUS.failed;

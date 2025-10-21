@@ -12,12 +12,12 @@ import {
   SingleLineHighChart,
 } from "@/modules/telemetryObd/components";
 import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
+import { ListAlt, Route, Speed, WorkHistory } from "@mui/icons-material";
+import { NO_DATA } from "@/global/utils/ndIfEmpty";
 import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { TabsContent } from "@/global/components";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
-import { ListAlt, Route, Speed, WorkHistory } from "@mui/icons-material";
-import { NO_DATA } from "@/global/utils/ndIfEmpty";
 
 export const ObdReportDataProvider = () => {
   const LANGUAGE = useLanguage();
@@ -63,8 +63,6 @@ export const ObdReportDataProvider = () => {
     setIsModalOpen(true);
   };
 
-  // Pendiente. Es un problema con los valores anteriores de la consulta del servicio en el slice
-  // Por un momento, el valor del slice es el de la anterior consulta, entonces SI entra el cálculo
   useEffect(() => {
     if (
       obdTravelMetricsData?.value &&

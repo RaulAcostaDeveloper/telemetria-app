@@ -269,7 +269,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       lastName: value.lastName,
       email: value.email,
       address: value.address,
-      entryDate: value.entryDate,
+      entryDate: formatDateTime(value.entryDate),
       alias: value.alias,
       groupName: value.groupName,
       license: value.license,

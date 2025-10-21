@@ -7,16 +7,16 @@ import NoCrashIcon from "@mui/icons-material/NoCrash";
 import { SpeedRounded } from "@mui/icons-material";
 
 import styles from "./fuelNowContainer.module.css";
-import { LastFuelReportData } from "@/global/redux/serviceSlices/lastFuelReportSlice";
 import { ButtonTypes, GeneralButton } from "@/global/components";
 import { FuelDataReport } from "./fuelDataReport/fuelDataReport";
 import { FuelNowVehicleTank } from "./fuelNowVehicleTank/fuelNowVehicleTank";
 import { LanguageInterface } from "@/global/language/constants/language.model";
+import { LastFuelReportValues } from "@/global/redux/serviceSlices/lastFuelReportSlice";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   isModalOpen: boolean;
-  lastFuelReportData: LastFuelReportData;
+  lastFuelReportData: LastFuelReportValues;
   setIsModalOpen: (toggle: boolean) => void;
 }
 
@@ -26,7 +26,7 @@ export const FuelNowContainer = ({
   lastFuelReportData,
   setIsModalOpen,
 }: Props) => {
-  const dateGps = new Date(lastFuelReportData.dateGps + "Z");
+  const dateGps = new Date(lastFuelReportData.dateGps);
 
   const dateOptions: Intl.DateTimeFormatOptions = {
     weekday: "long",
@@ -52,9 +52,9 @@ export const FuelNowContainer = ({
   const fuelNow = (tankValues ?? []).reduce((acc, val) => acc + val, 0);
   const totalCapacity = lastFuelReportData.maxFuelCapacity ?? 0;
   let averageTankSize: number;
-  if (numberOfTanks && 0 < numberOfTanks && 0 < totalCapacity){
+  if (numberOfTanks && 0 < numberOfTanks && 0 < totalCapacity) {
     averageTankSize = totalCapacity / numberOfTanks;
-  }else{
+  } else {
     averageTankSize = 1;
   }
 

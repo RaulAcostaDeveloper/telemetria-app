@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getLastFuelReport } from "@/modules/fuel/services/lastFuelReport/lastFuelReport";
+import { toLocalDateTime } from "@/global/utils/utils";
 
 export const fetchLastFuelReport = createAsyncThunk(
   "lastFuelReportStatus/fetch",
@@ -11,7 +12,24 @@ export const fetchLastFuelReport = createAsyncThunk(
   }
 );
 
-export interface LastFuelReportData {
+const lastFuelReportFormatter = (
+  data: LastFuelReportData | null
+): LastFuelReportData | null => {
+  if (data && data.value) {
+    return {
+      ...data,
+      value: {
+        ...data.value,
+        dateGps: toLocalDateTime(data.value.dateGps),
+        dateSvr: toLocalDateTime(data.value.dateSvr),
+        dateAvl: toLocalDateTime(data.value.dateAvl),
+      },
+    };
+  }
+  return null;
+};
+
+export interface LastFuelReportValues {
   id: string;
   lmId: string;
   accountId: number;
@@ -38,14 +56,14 @@ export interface LastFuelReportData {
   maxFuelCapacity: number;
 }
 
-interface Data {
+interface LastFuelReportData {
   statusCode: number;
   message: string;
-  value: LastFuelReportData | null;
+  value: LastFuelReportValues | null;
 }
 
 interface InitialState {
-  lastFuelReportData: Data | null;
+  lastFuelReportData: LastFuelReportData | null;
   lastFuelReportStatus: SERVICE_STATUS;
 }
 
@@ -68,7 +86,7 @@ const lastFuelReportSlice = createSlice({
       })
       .addCase(fetchLastFuelReport.fulfilled, (state, action) => {
         state.lastFuelReportStatus = SERVICE_STATUS.succeeded;
-        state.lastFuelReportData = action.payload;
+        state.lastFuelReportData = lastFuelReportFormatter(action.payload);
       })
       .addCase(fetchLastFuelReport.rejected, (state) => {
         state.lastFuelReportStatus = SERVICE_STATUS.failed;
