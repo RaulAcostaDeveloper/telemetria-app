@@ -141,7 +141,7 @@ export const SPANISH: LanguageInterface = {
       rangeSelectorShowAll: "Mostrar todo",
     },
     axisTitles: {
-      fuelVariation: "Nivel de combustible (L) (Sensor)",
+      fuelVariation: "Nivel de combustible (L)",
       fuelVariationCAN: "Nivel de combustible (L) (CAN)",
       time: "Tiempo",
       performance: "Rendimiento (L)",
@@ -151,8 +151,8 @@ export const SPANISH: LanguageInterface = {
     titles: {
       charges: "Cargas",
       disCharges: "Descargas",
-      fuelVariation: "Nivel de combustible (Sensor)",
-      fuelVariationCAN: "Nivel de combustible (CAN)",
+      fuelVariation: "Nivel de combustible ",
+      fuelVariationCAN: "Nivel de combustible",
       performancesBetweenCharges: "Rendimiento entre cargas",
       dailyPerformance: "Rendimiento diario",
       engineOff: "Motor apagado",

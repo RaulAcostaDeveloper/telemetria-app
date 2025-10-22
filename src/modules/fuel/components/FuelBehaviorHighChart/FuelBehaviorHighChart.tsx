@@ -456,6 +456,7 @@ export const FuelBehaviorHighChart = ({
           data: performancesBetweenChargesData,
           marker: { enabled: true, radius: 4, symbol: "square" },
           color: "#f5c800",
+          visible: false,
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titlePerformanceBetween,
@@ -470,6 +471,7 @@ export const FuelBehaviorHighChart = ({
           data: dailyPerformancesData,
           marker: { enabled: true, radius: 4, symbol: "circle" },
           color: "#8f07ff",
+          visible: false,
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titlePerformanceDaily,
