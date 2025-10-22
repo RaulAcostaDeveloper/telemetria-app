@@ -269,8 +269,7 @@ export function getPerformancesBetweenChargesTooltipFields(
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.distanceTravelled,
-      value: (data) =>
-        `${Number(data.finalOdometer) - Number(data.initialOdometer)} Km`,
+      value: (data) => `${data.kilometersTraveled} Km`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.averagePerformance,
