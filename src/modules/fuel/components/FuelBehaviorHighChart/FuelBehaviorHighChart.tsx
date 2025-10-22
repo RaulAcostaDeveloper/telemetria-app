@@ -85,7 +85,7 @@ export const FuelBehaviorHighChart = ({
           address: c.address,
           dateGps: c.dateGps,
           deviceBattery: c.deviceBattery,
-          endDate: c.dateGps,
+          endDate: c.endDate,
           finalFuel: c.finalFuel,
           ignition: Boolean(c.ignition),
           initialFuel: c.initialFuel,
@@ -111,7 +111,7 @@ export const FuelBehaviorHighChart = ({
           address: c.address,
           dateGps: c.dateGps,
           deviceBattery: c.deviceBattery,
-          endDate: c.dateGps,
+          endDate: c.endDate,
           eventId: c.eventId,
           finalFuel: c.finalFuel,
           ignition: Boolean(c.ignition),
@@ -511,6 +511,7 @@ export const FuelBehaviorHighChart = ({
         itemStyle: {
           fontSize: "18px",
         },
+        itemHiddenStyle: { color: "#9aa0a6", textDecoration: "none" },
       },
       credits: {
         enabled: false,

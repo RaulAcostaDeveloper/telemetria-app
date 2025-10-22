@@ -90,8 +90,12 @@ export function getChargesTooltipFields(
 ): TooltipField[] {
   return [
     {
-      label: LANGUAGE.highCharts.tooltips.date,
-      value: (data) => `${formatDateTime(data.dateGps)}`,
+      label: LANGUAGE.highCharts.tooltips.startDate,
+      value: (data) => `${formatDateTime(data.startDate)}`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.endDate,
+      value: (data) => `${formatDateTime(data.endDate)}`,
     },
     { label: LANGUAGE.highCharts.tooltips.lat, value: (data) => data.lat },
     { label: LANGUAGE.highCharts.tooltips.lon, value: (data) => data.lon },
@@ -128,7 +132,7 @@ export function getChargesTooltipFields(
       label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
       value: (data) => `${ndIfEmpty(data.initialFuel)} L`,
       separator: {
-        position: 10,
+        position: 11,
         subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleCharges,
       },
     },
@@ -148,8 +152,12 @@ export function getDisChargesTooltipFields(
 ): TooltipField[] {
   return [
     {
-      label: LANGUAGE.highCharts.tooltips.date,
-      value: (data) => `${formatDateTime(data.dateGps)}`,
+      label: LANGUAGE.highCharts.tooltips.startDate,
+      value: (data) => `${formatDateTime(data.startDate)}`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.endDate,
+      value: (data) => `${formatDateTime(data.endDate)}`,
     },
     { label: LANGUAGE.highCharts.tooltips.lat, value: (data) => data.lat },
     { label: LANGUAGE.highCharts.tooltips.lon, value: (data) => data.lon },
@@ -186,7 +194,7 @@ export function getDisChargesTooltipFields(
       label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
       value: (data) => `${ndIfEmpty(data.initialFuel)} L`,
       separator: {
-        position: 10,
+        position: 11,
         subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleDischarges,
       },
     },
