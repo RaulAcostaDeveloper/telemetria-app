@@ -187,7 +187,7 @@ export const PORTUGUES: LanguageInterface = {
         finalOdometer: "Odômetro final",
         distanceTravelled: "Distância percorrida",
         titleCharges: "Carga",
-        titleDischarges: "Descargas",
+        titleDischarges: "Descarga",
         titleFuelVariationCAN: "Nível de combustível",
         titleFuelVariation: "Nível de combustível",
         titlePerformanceBetween: "Rendimento entre cargas",
