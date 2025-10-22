@@ -183,6 +183,7 @@ export const FuelBehaviorHighChart = ({
           finalLevel: c.finalLevel,
           initialOdometer: c.initialOdometer,
           finalOdometer: c.finalOdometer,
+          kilometersTraveled: c.kilometersTraveled,
         },
       }))
       .sort((a, b) => a.x - b.x);
@@ -201,6 +202,7 @@ export const FuelBehaviorHighChart = ({
           finalLevel: c.finalLevel,
           initialOdometer: c.initialOdometer,
           finalOdometer: c.finalOdometer,
+          kilometersTraveled: c.kilometersTraveled,
         },
       }))
       .sort((a, b) => a.x - b.x);

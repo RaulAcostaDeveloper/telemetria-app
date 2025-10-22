@@ -74,6 +74,7 @@ interface DailyPerformances {
   finalLevel: number | null;
   initialOdometer: number;
   finalOdometer: number;
+  kilometersTraveled: number;
 }
 
 interface PerformancesBetweenCharges {
@@ -85,6 +86,7 @@ interface PerformancesBetweenCharges {
   averagePerformance: number;
   initialOdometer: number;
   finalOdometer: number;
+  kilometersTraveled: number;
 }
 
 // Este arreglo quizá haya que calcularlo con speed e ignition, EN 3 ARREGLOS
