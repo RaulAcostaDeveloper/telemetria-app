@@ -13,7 +13,7 @@ export const PORTUGUES: LanguageInterface = {
     home: "Início",
     management: "Recursos",
     fuel: "Combustível",
-    telemetryobd: "Diagnósticos",
+    telemetryobd: "Telemetria",
   },
   notifications: {
     unexpectedError: "Erro inesperado",
