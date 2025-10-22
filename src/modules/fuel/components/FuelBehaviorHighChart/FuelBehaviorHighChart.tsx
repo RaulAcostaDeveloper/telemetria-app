@@ -176,6 +176,7 @@ export const FuelBehaviorHighChart = ({
         x: new Date(c.endDatePerformance).getTime(),
         y: c.averagePerformance,
         custom: {
+          startDate: c.startDatePerformance,
           dateGps: c.endDatePerformance,
           averagePerformance: c.averagePerformance,
           fuelConsumed: c.fuelConsumed,
@@ -195,6 +196,7 @@ export const FuelBehaviorHighChart = ({
         x: new Date(c.endDate).getTime(),
         y: c.averagePerformance,
         custom: {
+          startDate: c.startDate,
           dateGps: c.endDate,
           averagePerformance: c.averagePerformance,
           fuelConsumed: c.fuelConsumed,

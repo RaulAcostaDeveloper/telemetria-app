@@ -141,6 +141,8 @@ export interface LanguageInterface {
     };
     tooltips: {
       date: string;
+      startDate: string;
+      endDate: string;
       lat: string;
       lon: string;
       fuel: {

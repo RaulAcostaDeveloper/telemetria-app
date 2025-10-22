@@ -161,6 +161,8 @@ export const SPANISH: LanguageInterface = {
     },
     tooltips: {
       date: "Fecha del evento",
+      startDate: "Fecha de inicio del evento",
+      endDate: "Fecha fin del evento",
       lat: "Latitud",
       lon: "Longitud",
       fuel: {

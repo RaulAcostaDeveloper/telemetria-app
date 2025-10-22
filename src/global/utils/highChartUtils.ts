@@ -256,7 +256,11 @@ export function getPerformancesBetweenChargesTooltipFields(
 ): TooltipField[] {
   return [
     {
-      label: LANGUAGE.highCharts.tooltips.date,
+      label: LANGUAGE.highCharts.tooltips.startDate,
+      value: (data) => `${formatDateTime(data.startDate)}`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.endDate,
       value: (data) => `${formatDateTime(data.dateGps)}`,
     },
     {
@@ -275,7 +279,7 @@ export function getPerformancesBetweenChargesTooltipFields(
       label: LANGUAGE.highCharts.tooltips.fuel.averagePerformance,
       value: (data) => `${ndIfEmpty(data.averagePerformance)}  Km/L`,
       separator: {
-        position: 5,
+        position: 6,
         subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitlePerformanceBetween,
       },
     },
