@@ -377,7 +377,7 @@ export const ENGLISH: LanguageInterface = {
       groupVehicles: "Group's vehicles",
       vehicleInformation: "Vehicle information",
       address: "Address",
-      alias: "Name",
+      alias: "Alias",
       brand: "Brand",
       celphone: "Phone",
       createdAt: "Creation date",

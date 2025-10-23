@@ -376,7 +376,7 @@ export const PORTUGUES: LanguageInterface = {
       groupVehicles: "Veículos do grupo",
       vehicleInformation: "Informações do veículo",
       address: "Endereço",
-      alias: "Nome",
+      alias: "Aliás",
       brand: "Marca",
       celphone: "Telefone",
       createdAt: "Data de criação",
