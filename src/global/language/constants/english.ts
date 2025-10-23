@@ -161,6 +161,8 @@ export const ENGLISH: LanguageInterface = {
     },
     tooltips: {
       date: "Event date",
+      startDate: "Start event date",
+      endDate: "End event date",
       lat: "Latitude",
       lon: "Longitude",
       fuel: {
@@ -185,8 +187,8 @@ export const ENGLISH: LanguageInterface = {
         initialOdometer: "Initial odometer",
         finalOdometer: "Final odometer",
         distanceTravelled: "Distance traveled",
-        titleCharges: "Charges",
-        titleDischarges: "Discharges",
+        titleCharges: "Charge",
+        titleDischarges: "Discharge",
         titleFuelVariationCAN: "Fuel level",
         titleFuelVariation: "Fuel level",
         titlePerformanceBetween: "Performance Between Charges",
