@@ -48,6 +48,6 @@
   transition: 0.3s;
 }
 
-.switch input:checked + .slider::before {
+.switch div[data-active="true"] + .slider::before {
   transform: translateX(20px);
 }
