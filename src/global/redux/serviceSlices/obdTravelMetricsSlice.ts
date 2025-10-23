@@ -23,6 +23,10 @@ export interface ObdTravelMetricsDataValues {
   totalTimeTraveled: null | number;
   rpmAverage: null | number;
   maxSpeedAllowed: number | null;
+  averageSpeed: number | null;
+  totalIdleTime: number | null;
+  totalEngineTime: number;
+  totalDistanceTraveled: number | null;
   timeTraveledDetails: ObdTravelMetricsTimeTraveledDetails[];
 }
 

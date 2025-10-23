@@ -28,13 +28,7 @@ export const ObdReportDataProvider = () => {
   const [driverDistanceData, setDriverDistanceData] = useState<ObdChartPoint[]>(
     []
   );
-  const [driverTime, setDriverTimeData] = useState<ObdChartPoint[]>([]);
-  const [averageSpeed, setAverageSpeed] = useState<number | string>(NO_DATA);
-  const [driverDistance, setDriverDistance] = useState<number | string>(
-    NO_DATA
-  );
-  const [engineHours, setEngineHours] = useState<number | string>(NO_DATA);
-  const [idleTime, setIdleTime] = useState<number | string>(NO_DATA);
+  const [driverTimeData, setDriverTimeData] = useState<ObdChartPoint[]>([]);
   const [maxSpeed, setMaxSpeed] = useState<number | string>(NO_DATA);
 
   const { obdTravelMetricsData, obdTravelMetricsStatus } = useSelector(
@@ -68,12 +62,6 @@ export const ObdReportDataProvider = () => {
       obdTravelMetricsData?.value &&
       obdTravelMetricsData?.value.timeTraveledDetails.length > 0
     ) {
-      const totalEventNumber =
-        obdTravelMetricsData.value.timeTraveledDetails.length;
-      const lastObject =
-        obdTravelMetricsData.value.timeTraveledDetails[totalEventNumber - 1];
-      const firstObject = obdTravelMetricsData.value.timeTraveledDetails[0];
-
       const dataRpm: ObdChartPoint[] =
         obdTravelMetricsData.value.timeTraveledDetails
           .map((c) => ({
@@ -119,26 +107,6 @@ export const ObdReportDataProvider = () => {
           .sort((a, b) => a.x - b.x);
       setDriverTimeData(dataDriverTime);
 
-      // driverDistance
-      if (lastObject.driverDistance && firstObject.driverDistance) {
-        const driverDistance =
-          lastObject.driverDistance - firstObject.driverDistance;
-        setDriverDistance(Math.round(driverDistance * 100) / 100);
-      }
-
-      // engineHours
-      if (lastObject.totalEngineHours && firstObject.totalEngineHours) {
-        const engineHours =
-          lastObject.totalEngineHours - firstObject.totalEngineHours;
-        setEngineHours(Math.round(engineHours * 100) / 100);
-      }
-
-      // idleTime
-      if (lastObject.driverIdleTime && firstObject.driverIdleTime) {
-        const idleTime = lastObject.driverIdleTime - firstObject.driverIdleTime;
-        setIdleTime(Math.round(idleTime * 100) / 100);
-      }
-
       const speeds = obdTravelMetricsData.value.timeTraveledDetails
         .map((item) => (typeof item.speed === "number" ? item.speed : null))
         .filter((val): val is number => val !== null && val > 0);
@@ -146,22 +114,11 @@ export const ObdReportDataProvider = () => {
       // maxSpeed
       const maxSpeed = speeds.length > 0 ? Math.max(...speeds) : 0;
       setMaxSpeed(maxSpeed);
-
-      // averageSpeed
-      const averageSpeed =
-        speeds.length > 0
-          ? speeds.reduce((acc, val) => acc + val, 0) / speeds.length
-          : 0;
-      setAverageSpeed(Math.round(averageSpeed * 100) / 100);
     } else {
       setRpmData([]);
       setDriverDistanceData([]);
       setDriverTimeData([]);
-      setDriverDistance(NO_DATA);
-      setEngineHours(NO_DATA);
-      setIdleTime(NO_DATA);
       setMaxSpeed(NO_DATA);
-      setAverageSpeed(NO_DATA);
     }
   }, [obdTravelMetricsData]);
 
@@ -196,7 +153,7 @@ export const ObdReportDataProvider = () => {
               obdTravelMetricsData?.value &&
               obdTravelMetricsData.value.timeTraveledDetails.length > 0 && (
                 <SingleLineHighChart
-                  chartData={driverTime}
+                  chartData={driverTimeData}
                   LANGUAGE={LANGUAGE}
                   type={SINGLE_CHART_TYPES.timeTraveled}
                   handleClicGeoData={handleClicGeoData}
@@ -240,10 +197,6 @@ export const ObdReportDataProvider = () => {
               vehicleByImeiData?.value && (
                 <ObdAnalysisTab
                   LANGUAGE={LANGUAGE}
-                  averageSpeed={averageSpeed}
-                  driverDistance={driverDistance}
-                  engineHours={engineHours}
-                  idleTime={idleTime}
                   maxSpeed={maxSpeed}
                   obdAnalyticsData={obdTravelMetricsData.value}
                   vehicleByImeiData={vehicleByImeiData.value}
