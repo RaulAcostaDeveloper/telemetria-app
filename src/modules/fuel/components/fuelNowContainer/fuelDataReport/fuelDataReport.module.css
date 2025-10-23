@@ -7,7 +7,7 @@
   border: none;
   text-align: left;
   background-color: transparent;
-  cursor: copy;
+  cursor: url("../../../../../../public/svg/copy-black.svg"), auto;
   padding-right: 10px;
   border-radius: 4px;
 }

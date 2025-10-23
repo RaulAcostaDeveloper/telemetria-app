@@ -10,6 +10,7 @@
 }
 
 .dataProp:hover {
-  cursor: copy;
+  cursor: url("../../../../../public/svg/copy-black.svg"), auto;
+  /* cursor: url("/public/svg/copy.svg"), auto; */
   text-decoration: underline;
 }

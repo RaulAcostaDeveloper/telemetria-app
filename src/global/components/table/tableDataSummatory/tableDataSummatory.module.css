@@ -23,7 +23,7 @@
 
 .button {
   width: 100%;
-  cursor: copy;
+  cursor: url("../../../../../public/svg/copy-black.svg"), auto;
 }
 
 .button:hover span {
