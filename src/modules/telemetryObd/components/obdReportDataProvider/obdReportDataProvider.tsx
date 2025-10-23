@@ -47,7 +47,6 @@ export const ObdReportDataProvider = () => {
 
   const tabOptions = [
     { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.averageRpm, icon: Speed },
-    { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.analysis, icon: ListAlt },
     {
       text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.totalDistance,
       icon: Route,
@@ -56,6 +55,7 @@ export const ObdReportDataProvider = () => {
       text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.totalTimeWorked,
       icon: WorkHistory,
     },
+    { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.analysis, icon: ListAlt },
   ];
 
   const handleClicGeoData = (geoModalData: GeoModalData) => {
@@ -194,6 +194,48 @@ export const ObdReportDataProvider = () => {
           <div key={2}>
             {obdTravelMetricsStatus === SERVICE_STATUS.succeeded &&
               obdTravelMetricsData?.value &&
+              obdTravelMetricsData.value.timeTraveledDetails.length > 0 && (
+                <SingleLineHighChart
+                  chartData={driverTime}
+                  LANGUAGE={LANGUAGE}
+                  type={SINGLE_CHART_TYPES.timeTraveled}
+                  handleClicGeoData={handleClicGeoData}
+                />
+              )}
+
+            <DataErrorHandler
+              LANGUAGE={LANGUAGE}
+              hasData={
+                !!obdTravelMetricsData?.value &&
+                obdTravelMetricsData.value.timeTraveledDetails.length > 0
+              }
+              infoStatus={obdTravelMetricsStatus}
+            />
+          </div>,
+          <div key={3}>
+            {obdTravelMetricsStatus === SERVICE_STATUS.succeeded &&
+              obdTravelMetricsData?.value &&
+              obdTravelMetricsData.value.timeTraveledDetails.length > 0 && (
+                <SingleLineHighChart
+                  chartData={driverDistanceData}
+                  LANGUAGE={LANGUAGE}
+                  type={SINGLE_CHART_TYPES.distance}
+                  handleClicGeoData={handleClicGeoData}
+                />
+              )}
+
+            <DataErrorHandler
+              LANGUAGE={LANGUAGE}
+              hasData={
+                !!obdTravelMetricsData?.value &&
+                obdTravelMetricsData.value.timeTraveledDetails.length > 0
+              }
+              infoStatus={obdTravelMetricsStatus}
+            />
+          </div>,
+          <div key={4}>
+            {obdTravelMetricsStatus === SERVICE_STATUS.succeeded &&
+              obdTravelMetricsData?.value &&
               vehicleByImeiStatus === SERVICE_STATUS.succeeded &&
               vehicleByImeiData?.value && (
                 <ObdAnalysisTab
@@ -211,46 +253,6 @@ export const ObdReportDataProvider = () => {
             <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!obdTravelMetricsData?.value}
-              infoStatus={obdTravelMetricsStatus}
-            />
-          </div>,
-          <div key={3}>
-            {obdTravelMetricsStatus === SERVICE_STATUS.succeeded &&
-              obdTravelMetricsData?.value &&
-              obdTravelMetricsData.value.timeTraveledDetails.length > 0 && (
-                <SingleLineHighChart
-                  chartData={driverDistanceData}
-                  LANGUAGE={LANGUAGE}
-                  type={SINGLE_CHART_TYPES.distance}
-                  handleClicGeoData={handleClicGeoData}
-                />
-              )}
-            <DataErrorHandler
-              LANGUAGE={LANGUAGE}
-              hasData={
-                !!obdTravelMetricsData?.value &&
-                obdTravelMetricsData.value.timeTraveledDetails.length > 0
-              }
-              infoStatus={obdTravelMetricsStatus}
-            />
-          </div>,
-          <div key={4}>
-            {obdTravelMetricsStatus === SERVICE_STATUS.succeeded &&
-              obdTravelMetricsData?.value &&
-              obdTravelMetricsData.value.timeTraveledDetails.length > 0 && (
-                <SingleLineHighChart
-                  chartData={driverTime}
-                  LANGUAGE={LANGUAGE}
-                  type={SINGLE_CHART_TYPES.timeTraveled}
-                  handleClicGeoData={handleClicGeoData}
-                />
-              )}
-            <DataErrorHandler
-              LANGUAGE={LANGUAGE}
-              hasData={
-                !!obdTravelMetricsData?.value &&
-                obdTravelMetricsData.value.timeTraveledDetails.length > 0
-              }
               infoStatus={obdTravelMetricsStatus}
             />
           </div>,
