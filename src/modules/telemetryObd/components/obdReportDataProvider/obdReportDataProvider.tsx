@@ -25,17 +25,8 @@ export const ObdReportDataProvider = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [geoModalData, setGeoModalData] = useState<GeoModalData>();
   const [rpmData, setRpmData] = useState<ObdChartPoint[]>([]);
-  const [driverDistanceData, setDriverDistanceData] = useState<ObdChartPoint[]>(
-    []
-  );
-  const [driverTime, setDriverTimeData] = useState<ObdChartPoint[]>([]);
-  const [averageSpeed, setAverageSpeed] = useState<number | string>(NO_DATA);
-  const [driverDistance, setDriverDistance] = useState<number | string>(
-    NO_DATA
-  );
-  const [engineHours, setEngineHours] = useState<number | string>(NO_DATA);
-  const [idleTime, setIdleTime] = useState<number | string>(NO_DATA);
-  const [maxSpeed, setMaxSpeed] = useState<number | string>(NO_DATA);
+  const [totalEngineHours, setTotalEngineHours] = useState<ObdChartPoint[]>([]);
+  const [driverDistance, setDriverDistance] = useState<ObdChartPoint[]>([]);
 
   const { obdTravelMetricsData, obdTravelMetricsStatus } = useSelector(
     (state: RootState) => state.obdTravelMetrics
@@ -47,7 +38,6 @@ export const ObdReportDataProvider = () => {
 
   const tabOptions = [
     { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.averageRpm, icon: Speed },
-    { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.analysis, icon: ListAlt },
     {
       text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.totalDistance,
       icon: Route,
@@ -56,6 +46,7 @@ export const ObdReportDataProvider = () => {
       text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.totalTimeWorked,
       icon: WorkHistory,
     },
+    { text: LANGUAGE.onBoardDiagnosticsVehicle.tabs.analysis, icon: ListAlt },
   ];
 
   const handleClicGeoData = (geoModalData: GeoModalData) => {
@@ -68,12 +59,6 @@ export const ObdReportDataProvider = () => {
       obdTravelMetricsData?.value &&
       obdTravelMetricsData?.value.timeTraveledDetails.length > 0
     ) {
-      const totalEventNumber =
-        obdTravelMetricsData.value.timeTraveledDetails.length;
-      const lastObject =
-        obdTravelMetricsData.value.timeTraveledDetails[totalEventNumber - 1];
-      const firstObject = obdTravelMetricsData.value.timeTraveledDetails[0];
-
       const dataRpm: ObdChartPoint[] =
         obdTravelMetricsData.value.timeTraveledDetails
           .map((c) => ({
@@ -89,6 +74,21 @@ export const ObdReportDataProvider = () => {
           .sort((a, b) => a.x - b.x);
       setRpmData(dataRpm);
 
+      const dataTotalEngineHours: ObdChartPoint[] =
+        obdTravelMetricsData.value.timeTraveledDetails
+          .map((c) => ({
+            x: new Date(c.dateGPS).getTime(),
+            y: c.totalEngineHours ?? 0,
+            custom: {
+              dateGps: c.dateGPS,
+              lat: c.lat,
+              lon: c.lon,
+              value: c.totalEngineHours ?? NO_DATA,
+            },
+          }))
+          .sort((a, b) => a.x - b.x);
+      setTotalEngineHours(dataTotalEngineHours);
+
       const dataDriverDistance: ObdChartPoint[] =
         obdTravelMetricsData.value.timeTraveledDetails
           .map((c) => ({
@@ -102,66 +102,11 @@ export const ObdReportDataProvider = () => {
             },
           }))
           .sort((a, b) => a.x - b.x);
-      setDriverDistanceData(dataDriverDistance);
-
-      const dataDriverTime: ObdChartPoint[] =
-        obdTravelMetricsData.value.timeTraveledDetails
-          .map((c) => ({
-            x: new Date(c.dateGPS).getTime(),
-            y: c.driverTime ?? 0,
-            custom: {
-              dateGps: c.dateGPS,
-              lat: c.lat,
-              lon: c.lon,
-              value: c.driverTime ?? NO_DATA,
-            },
-          }))
-          .sort((a, b) => a.x - b.x);
-      setDriverTimeData(dataDriverTime);
-
-      // driverDistance
-      if (lastObject.driverDistance && firstObject.driverDistance) {
-        const driverDistance =
-          lastObject.driverDistance - firstObject.driverDistance;
-        setDriverDistance(Math.round(driverDistance * 100) / 100);
-      }
-
-      // engineHours
-      if (lastObject.totalEngineHours && firstObject.totalEngineHours) {
-        const engineHours =
-          lastObject.totalEngineHours - firstObject.totalEngineHours;
-        setEngineHours(Math.round(engineHours * 100) / 100);
-      }
-
-      // idleTime
-      if (lastObject.driverIdleTime && firstObject.driverIdleTime) {
-        const idleTime = lastObject.driverIdleTime - firstObject.driverIdleTime;
-        setIdleTime(Math.round(idleTime * 100) / 100);
-      }
-
-      const speeds = obdTravelMetricsData.value.timeTraveledDetails
-        .map((item) => (typeof item.speed === "number" ? item.speed : null))
-        .filter((val): val is number => val !== null && val > 0);
-
-      // maxSpeed
-      const maxSpeed = speeds.length > 0 ? Math.max(...speeds) : 0;
-      setMaxSpeed(maxSpeed);
-
-      // averageSpeed
-      const averageSpeed =
-        speeds.length > 0
-          ? speeds.reduce((acc, val) => acc + val, 0) / speeds.length
-          : 0;
-      setAverageSpeed(Math.round(averageSpeed * 100) / 100);
+      setDriverDistance(dataDriverDistance);
     } else {
       setRpmData([]);
-      setDriverDistanceData([]);
-      setDriverTimeData([]);
-      setDriverDistance(NO_DATA);
-      setEngineHours(NO_DATA);
-      setIdleTime(NO_DATA);
-      setMaxSpeed(NO_DATA);
-      setAverageSpeed(NO_DATA);
+      setTotalEngineHours([]);
+      setDriverDistance([]);
     }
   }, [obdTravelMetricsData]);
 
@@ -194,23 +139,21 @@ export const ObdReportDataProvider = () => {
           <div key={2}>
             {obdTravelMetricsStatus === SERVICE_STATUS.succeeded &&
               obdTravelMetricsData?.value &&
-              vehicleByImeiStatus === SERVICE_STATUS.succeeded &&
-              vehicleByImeiData?.value && (
-                <ObdAnalysisTab
+              obdTravelMetricsData.value.timeTraveledDetails.length > 0 && (
+                <SingleLineHighChart
+                  chartData={driverDistance}
                   LANGUAGE={LANGUAGE}
-                  averageSpeed={averageSpeed}
-                  driverDistance={driverDistance}
-                  engineHours={engineHours}
-                  idleTime={idleTime}
-                  maxSpeed={maxSpeed}
-                  obdAnalyticsData={obdTravelMetricsData.value}
-                  vehicleByImeiData={vehicleByImeiData.value}
+                  type={SINGLE_CHART_TYPES.distance}
+                  handleClicGeoData={handleClicGeoData}
                 />
               )}
 
             <DataErrorHandler
               LANGUAGE={LANGUAGE}
-              hasData={!!obdTravelMetricsData?.value}
+              hasData={
+                !!obdTravelMetricsData?.value &&
+                obdTravelMetricsData.value.timeTraveledDetails.length > 0
+              }
               infoStatus={obdTravelMetricsStatus}
             />
           </div>,
@@ -219,12 +162,13 @@ export const ObdReportDataProvider = () => {
               obdTravelMetricsData?.value &&
               obdTravelMetricsData.value.timeTraveledDetails.length > 0 && (
                 <SingleLineHighChart
-                  chartData={driverDistanceData}
+                  chartData={totalEngineHours}
                   LANGUAGE={LANGUAGE}
-                  type={SINGLE_CHART_TYPES.distance}
+                  type={SINGLE_CHART_TYPES.timeTraveled}
                   handleClicGeoData={handleClicGeoData}
                 />
               )}
+
             <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={
@@ -237,20 +181,18 @@ export const ObdReportDataProvider = () => {
           <div key={4}>
             {obdTravelMetricsStatus === SERVICE_STATUS.succeeded &&
               obdTravelMetricsData?.value &&
-              obdTravelMetricsData.value.timeTraveledDetails.length > 0 && (
-                <SingleLineHighChart
-                  chartData={driverTime}
+              vehicleByImeiStatus === SERVICE_STATUS.succeeded &&
+              vehicleByImeiData?.value && (
+                <ObdAnalysisTab
                   LANGUAGE={LANGUAGE}
-                  type={SINGLE_CHART_TYPES.timeTraveled}
-                  handleClicGeoData={handleClicGeoData}
+                  obdAnalyticsData={obdTravelMetricsData.value}
+                  vehicleByImeiData={vehicleByImeiData.value}
                 />
               )}
+
             <DataErrorHandler
               LANGUAGE={LANGUAGE}
-              hasData={
-                !!obdTravelMetricsData?.value &&
-                obdTravelMetricsData.value.timeTraveledDetails.length > 0
-              }
+              hasData={!!obdTravelMetricsData?.value}
               infoStatus={obdTravelMetricsStatus}
             />
           </div>,

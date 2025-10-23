@@ -6,22 +6,12 @@ import { VehicleByImei } from "@/global/redux/serviceSlices/vehicleByImeiSlice";
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  averageSpeed: number | string;
-  driverDistance: number | string;
-  engineHours: number | string;
-  idleTime: number | string;
-  maxSpeed: number | string;
   obdAnalyticsData: ObdTravelMetricsDataValues;
   vehicleByImeiData: VehicleByImei;
 }
 
 export const ObdAnalysisTab = ({
   LANGUAGE,
-  averageSpeed,
-  driverDistance,
-  engineHours,
-  idleTime,
-  maxSpeed,
   obdAnalyticsData,
   vehicleByImeiData,
 }: Props) => {
@@ -62,7 +52,7 @@ export const ObdAnalysisTab = ({
           LANGUAGE={LANGUAGE}
           metric="km/h"
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.maxSpeed}
-          value={maxSpeed}
+          value={obdAnalyticsData.maxSpeed}
           isLast
         />
       </div>
@@ -71,7 +61,7 @@ export const ObdAnalysisTab = ({
           LANGUAGE={LANGUAGE}
           metric="km"
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.km}
-          value={driverDistance}
+          value={obdAnalyticsData.totalDistanceTraveled}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
@@ -85,19 +75,19 @@ export const ObdAnalysisTab = ({
           LANGUAGE={LANGUAGE}
           metric="h"
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.totalEngineHours}
-          value={engineHours}
+          value={obdAnalyticsData.totalEngineTime}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric="h"
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.totalIdleTime}
-          value={idleTime}
+          value={obdAnalyticsData.totalIdleTime}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
           metric="km/h"
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.averageSpeed}
-          value={averageSpeed}
+          value={obdAnalyticsData.averageSpeed}
         />
         <MetricItem
           LANGUAGE={LANGUAGE}
