@@ -29,7 +29,6 @@ export const ObdReportDataProvider = () => {
     []
   );
   const [driverTimeData, setDriverTimeData] = useState<ObdChartPoint[]>([]);
-  const [maxSpeed, setMaxSpeed] = useState<number | string>(NO_DATA);
 
   const { obdTravelMetricsData, obdTravelMetricsStatus } = useSelector(
     (state: RootState) => state.obdTravelMetrics
@@ -106,19 +105,10 @@ export const ObdReportDataProvider = () => {
           }))
           .sort((a, b) => a.x - b.x);
       setDriverTimeData(dataDriverTime);
-
-      const speeds = obdTravelMetricsData.value.timeTraveledDetails
-        .map((item) => (typeof item.speed === "number" ? item.speed : null))
-        .filter((val): val is number => val !== null && val > 0);
-
-      // maxSpeed
-      const maxSpeed = speeds.length > 0 ? Math.max(...speeds) : 0;
-      setMaxSpeed(maxSpeed);
     } else {
       setRpmData([]);
       setDriverDistanceData([]);
       setDriverTimeData([]);
-      setMaxSpeed(NO_DATA);
     }
   }, [obdTravelMetricsData]);
 
@@ -197,7 +187,6 @@ export const ObdReportDataProvider = () => {
               vehicleByImeiData?.value && (
                 <ObdAnalysisTab
                   LANGUAGE={LANGUAGE}
-                  maxSpeed={maxSpeed}
                   obdAnalyticsData={obdTravelMetricsData.value}
                   vehicleByImeiData={vehicleByImeiData.value}
                 />

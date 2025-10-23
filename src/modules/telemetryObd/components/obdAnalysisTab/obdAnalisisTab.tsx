@@ -6,14 +6,12 @@ import { VehicleByImei } from "@/global/redux/serviceSlices/vehicleByImeiSlice";
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  maxSpeed: number | string;
   obdAnalyticsData: ObdTravelMetricsDataValues;
   vehicleByImeiData: VehicleByImei;
 }
 
 export const ObdAnalysisTab = ({
   LANGUAGE,
-  maxSpeed,
   obdAnalyticsData,
   vehicleByImeiData,
 }: Props) => {
@@ -54,7 +52,7 @@ export const ObdAnalysisTab = ({
           LANGUAGE={LANGUAGE}
           metric="km/h"
           name={LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.maxSpeed}
-          value={maxSpeed}
+          value={obdAnalyticsData.maxSpeed}
           isLast
         />
       </div>
