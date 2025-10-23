@@ -25,10 +25,8 @@ export const ObdReportDataProvider = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [geoModalData, setGeoModalData] = useState<GeoModalData>();
   const [rpmData, setRpmData] = useState<ObdChartPoint[]>([]);
-  const [driverDistanceData, setDriverDistanceData] = useState<ObdChartPoint[]>(
-    []
-  );
-  const [driverTimeData, setDriverTimeData] = useState<ObdChartPoint[]>([]);
+  const [totalEngineHours, setTotalEngineHours] = useState<ObdChartPoint[]>([]);
+  const [driverDistance, setDriverDistance] = useState<ObdChartPoint[]>([]);
 
   const { obdTravelMetricsData, obdTravelMetricsStatus } = useSelector(
     (state: RootState) => state.obdTravelMetrics
@@ -76,6 +74,21 @@ export const ObdReportDataProvider = () => {
           .sort((a, b) => a.x - b.x);
       setRpmData(dataRpm);
 
+      const dataTotalEngineHours: ObdChartPoint[] =
+        obdTravelMetricsData.value.timeTraveledDetails
+          .map((c) => ({
+            x: new Date(c.dateGPS).getTime(),
+            y: c.totalEngineHours ?? 0,
+            custom: {
+              dateGps: c.dateGPS,
+              lat: c.lat,
+              lon: c.lon,
+              value: c.totalEngineHours ?? NO_DATA,
+            },
+          }))
+          .sort((a, b) => a.x - b.x);
+      setTotalEngineHours(dataTotalEngineHours);
+
       const dataDriverDistance: ObdChartPoint[] =
         obdTravelMetricsData.value.timeTraveledDetails
           .map((c) => ({
@@ -89,26 +102,11 @@ export const ObdReportDataProvider = () => {
             },
           }))
           .sort((a, b) => a.x - b.x);
-      setDriverDistanceData(dataDriverDistance);
-
-      const dataDriverTime: ObdChartPoint[] =
-        obdTravelMetricsData.value.timeTraveledDetails
-          .map((c) => ({
-            x: new Date(c.dateGPS).getTime(),
-            y: c.driverTime ?? 0,
-            custom: {
-              dateGps: c.dateGPS,
-              lat: c.lat,
-              lon: c.lon,
-              value: c.driverTime ?? NO_DATA,
-            },
-          }))
-          .sort((a, b) => a.x - b.x);
-      setDriverTimeData(dataDriverTime);
+      setDriverDistance(dataDriverDistance);
     } else {
       setRpmData([]);
-      setDriverDistanceData([]);
-      setDriverTimeData([]);
+      setTotalEngineHours([]);
+      setDriverDistance([]);
     }
   }, [obdTravelMetricsData]);
 
@@ -143,9 +141,9 @@ export const ObdReportDataProvider = () => {
               obdTravelMetricsData?.value &&
               obdTravelMetricsData.value.timeTraveledDetails.length > 0 && (
                 <SingleLineHighChart
-                  chartData={driverTimeData}
+                  chartData={driverDistance}
                   LANGUAGE={LANGUAGE}
-                  type={SINGLE_CHART_TYPES.timeTraveled}
+                  type={SINGLE_CHART_TYPES.distance}
                   handleClicGeoData={handleClicGeoData}
                 />
               )}
@@ -164,9 +162,9 @@ export const ObdReportDataProvider = () => {
               obdTravelMetricsData?.value &&
               obdTravelMetricsData.value.timeTraveledDetails.length > 0 && (
                 <SingleLineHighChart
-                  chartData={driverDistanceData}
+                  chartData={totalEngineHours}
                   LANGUAGE={LANGUAGE}
-                  type={SINGLE_CHART_TYPES.distance}
+                  type={SINGLE_CHART_TYPES.timeTraveled}
                   handleClicGeoData={handleClicGeoData}
                 />
               )}
