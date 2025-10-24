@@ -4,16 +4,14 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
 import LoaderAnimation from "../loaderAnimation/loaderAnimation";
-import { StockChartOptions } from "./highchartNext.model";
 
 const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
   ssr: false,
 });
 
 interface Props {
-  chartOptions: Highcharts.Options;
-  chartStockOptions: StockChartOptions;
-
+  chartOptions?: Highcharts.Options;
+  chartStockOptions?: unknown;
   isStock?: boolean;
   moreIsRequired?: boolean;
   isGauge?: boolean;
@@ -24,6 +22,7 @@ export const HighchartNext = ({
   chartOptions,
   isStock,
   moreIsRequired,
+  chartStockOptions,
   isGauge,
   is3d,
 }: Props) => {
@@ -88,7 +87,7 @@ export const HighchartNext = ({
         <HighchartsReact
           highcharts={HighchartsModule}
           constructorType={isStock ? "stockChart" : "chart"}
-          options={chartOptions}
+          options={isStock ? chartStockOptions : chartOptions}
         />
       ) : (
         <LoaderAnimation />

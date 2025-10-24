@@ -1,10 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
-import dynamic from "next/dynamic";
-
-const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
-  ssr: false,
-});
+import { useMemo } from "react";
 
 import {
   createTooltipFormatter,
@@ -20,6 +15,7 @@ import {
   getLabelsForRPMGeoMap,
   getLabelsForTimeTraveledGeoMap,
 } from "@/global/utils/geoMapUtils";
+import { HighchartNext } from "@/global/components/highchartNext/highchartNext";
 
 export interface ObdChartPoint {
   x: number;
@@ -51,30 +47,6 @@ export const SingleLineHighChart = ({
   handleClicGeoData,
   type,
 }: Props) => {
-  const [Highcharts, setHighcharts] = useState<unknown>(null);
-  const [HighstockInit, setHighstockInit] = useState<unknown>(null);
-
-  useEffect(() => {
-    let isMounted = true;
-    (async () => {
-      const importedModule = await import("highcharts");
-      if (isMounted) setHighcharts(importedModule.default ?? importedModule);
-
-      const importedModule2 = await import("highcharts/modules/stock");
-      if (isMounted)
-        setHighstockInit(importedModule2.default ?? importedModule2);
-    })();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (Highcharts && HighstockInit && typeof HighstockInit === "function") {
-      (HighstockInit as (hc: typeof Highcharts) => void)(Highcharts);
-    }
-  }, [Highcharts, HighstockInit]);
-
   const rpmTooltipFields = getRPMTooltipFields(LANGUAGE);
   const distanceTooltipFields = getDistanceTooltipFields(LANGUAGE);
   const timeTraveledTooltipFields = getTimeTraveledTooltipFields(LANGUAGE);
@@ -291,13 +263,7 @@ export const SingleLineHighChart = ({
 
   return (
     <>
-      {Highcharts && HighchartsReact && HighstockInit && (
-        <HighchartsReact
-          highcharts={Highcharts}
-          constructorType="stockChart"
-          options={chartOptions}
-        />
-      )}
+      <HighchartNext chartStockOptions={chartOptions} isStock />
     </>
   );
 };
