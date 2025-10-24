@@ -26,7 +26,7 @@ function buildTooltipSection(
   if (separator && index + 1 === separator.position) {
     stringHTML += `
     <div style="font-size: 18px; padding-top: 0.5em; text-align: center;">
-      <div style="color: gray;">───────  ${separator.subtitle}  ───────</div>
+      <div style="color: black;">───────  ${separator.subtitle}  ───────</div>
     </div>
     `;
   }
@@ -54,7 +54,7 @@ export function createTooltipFormatter(
       )
       .join("");
 
-    const titleHTML = `<div style="width: 100%; font-size: 16px; font-weight: normal; display: inline-block; text-align: center; color: gray;">
+    const titleHTML = `<div style="width: 100%; font-size: 16px; font-weight: bold; display: inline-block; text-align: center;">
           ${title}
         </div>`;
 
