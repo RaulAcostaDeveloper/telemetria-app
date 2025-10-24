@@ -144,6 +144,7 @@ export const FuelBehaviorHighChart = ({
           deviceBattery: c.deviceBattery,
           mainPower: c.externalPower,
           tanks: c.tanks,
+          currentLevelSmoothly: c.sensorCurrentLevelSmoothly,
         },
       }))
       .sort((a, b) => a.x - b.x);
@@ -164,6 +165,7 @@ export const FuelBehaviorHighChart = ({
           deviceBattery: c.deviceBattery,
           mainPower: c.externalPower,
           tanks: c.tanks,
+          currentLevelSmoothly: c.canCurrentLevelSmoothly,
         },
       }))
       .sort((a, b) => a.x - b.x);
