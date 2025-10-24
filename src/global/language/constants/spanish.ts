@@ -423,7 +423,7 @@ export const SPANISH: LanguageInterface = {
       title: "Top 5",
       name: "Nombre",
       plate: "Placas",
-      driverDistance: "Kilometraje (Km)",
+      driverDistance: "Distancia recorrida (Km)",
       averageSpeed: "Velocidad promedio (km/h)",
       driverTime: "Tiempo de conducción (h)",
       driverIdleTime: "Tiempo de estacionado (h)",

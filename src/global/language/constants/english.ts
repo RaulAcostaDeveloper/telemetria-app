@@ -423,7 +423,7 @@ export const ENGLISH: LanguageInterface = {
       title: "Top 5",
       name: "Name",
       plate: "License plate",
-      driverDistance: "Kilometers (Km)",
+      driverDistance: "Traveled Distance (Km)",
       averageSpeed: "Average speed (km/h)",
       driverTime: "Driving time (h)",
       driverIdleTime: "Idling time (h)",
