@@ -6,7 +6,7 @@
   padding: 10px;
   border: none;
   background-color: transparent;
-  cursor: url("../../../../../../public/svg/copy-black.svg"), auto;
+  cursor: var(--copy-icon-black);
 }
 
 .metricItem:hover {
