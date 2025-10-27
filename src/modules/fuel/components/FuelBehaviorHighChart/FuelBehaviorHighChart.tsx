@@ -39,14 +39,21 @@ export const FuelBehaviorHighChart = ({
   opBEngineOnMoving,
 }: Props) => {
   // Tooltip de cada serie
-  const chargesTooltipFields = getChargesTooltipFields(LANGUAGE);
+  const chargesTooltipFields = useMemo(() => {
+    return getChargesTooltipFields(LANGUAGE);
+  }, [LANGUAGE]);
 
-  const dischargesTooltipFields = getDisChargesTooltipFields(LANGUAGE);
+  const dischargesTooltipFields = useMemo(() => {
+    return getDisChargesTooltipFields(LANGUAGE);
+  }, [LANGUAGE]);
 
-  const levelMessagesTooltipFields = getLevelMessagesTooltipFields(LANGUAGE);
+  const levelMessagesTooltipFields = useMemo(() => {
+    return getLevelMessagesTooltipFields(LANGUAGE);
+  }, [LANGUAGE]);
 
-  const performancesBetweenChargesTooltipFields =
-    getPerformancesBetweenChargesTooltipFields(LANGUAGE);
+  const performancesBetweenChargesTooltipFields = useMemo(() => {
+    return getPerformancesBetweenChargesTooltipFields(LANGUAGE);
+  }, [LANGUAGE]);
 
   const chargesData = useMemo(() => {
     return fuelDataData.charges
@@ -184,39 +191,8 @@ export const FuelBehaviorHighChart = ({
       .sort((a, b) => a.x - b.x);
   }, [fuelDataData]);
 
-  const chartOptions = useMemo(() => {
-    // @ts-expect-error //No se puede determinar el tipo de Chart
-    const removeSeries = (chart) => {
-      const serieFuelCAN = chart.series.find(
-        (serie: { name: string }) =>
-          serie.name === LANGUAGE.highCharts.titles.fuelVariationCAN
-      );
-
-      const serieFuelSensor = chart.series.find(
-        (serie: { name: string }) =>
-          serie.name === LANGUAGE.highCharts.titles.fuelVariation
-      );
-
-      if (fuelDataData.showData.isSensor) {
-        if (serieFuelCAN) {
-          serieFuelCAN.remove(false);
-          chart.redraw();
-        }
-      } else if (fuelDataData.showData.isCAN) {
-        if (serieFuelSensor) {
-          serieFuelSensor.remove(false);
-          chart.redraw();
-        }
-      } else {
-        if (serieFuelSensor && serieFuelCAN) {
-          serieFuelSensor.remove(false);
-          serieFuelCAN.remove(false);
-          chart.redraw();
-        }
-      }
-    };
-
-    const plotBands = [
+  const plotBands = useMemo(() => {
+    return [
       ...opBEngineOff.map((c) => ({
         from: new Date(c.startDate).getTime(),
         to: new Date(c.endDate).getTime(),
@@ -258,6 +234,39 @@ export const FuelBehaviorHighChart = ({
         },
       })),
     ];
+  }, [opBEngineOff, opBEngineOnMoving, opBEngineOnIdle]);
+
+  const chartOptions = useMemo(() => {
+    // @ts-expect-error //No se puede determinar el tipo de Chart
+    const removeSeries = (chart) => {
+      const serieFuelCAN = chart.series.find(
+        (serie: { name: string }) =>
+          serie.name === LANGUAGE.highCharts.titles.fuelVariationCAN
+      );
+
+      const serieFuelSensor = chart.series.find(
+        (serie: { name: string }) =>
+          serie.name === LANGUAGE.highCharts.titles.fuelVariation
+      );
+
+      if (fuelDataData.showData.isSensor) {
+        if (serieFuelCAN) {
+          serieFuelCAN.remove(false);
+          chart.redraw();
+        }
+      } else if (fuelDataData.showData.isCAN) {
+        if (serieFuelSensor) {
+          serieFuelSensor.remove(false);
+          chart.redraw();
+        }
+      } else {
+        if (serieFuelSensor && serieFuelCAN) {
+          serieFuelSensor.remove(false);
+          serieFuelCAN.remove(false);
+          chart.redraw();
+        }
+      }
+    };
 
     return {
       xAxis: {
@@ -559,15 +568,12 @@ export const FuelBehaviorHighChart = ({
     disChargesData,
     dischargesTooltipFields,
     fuelDataData,
-    handleClicGeoData,
     levelMessagesCANData,
     levelMessagesData,
     levelMessagesTooltipFields,
-    opBEngineOff,
-    opBEngineOnIdle,
-    opBEngineOnMoving,
     performancesBetweenChargesData,
     performancesBetweenChargesTooltipFields,
+    plotBands,
   ]);
 
   return (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./fuelBehaviorTab.module.css";
 
 import GeoModal, { GeoModalData } from "@/global/components/geoModal/geoModal";
@@ -29,56 +29,13 @@ export const FuelBehaviorTab = ({
   const [geoModalData, setGeoModalData] = useState<GeoModalData>();
 
   // Operational Behavior (Estacionado, apagado, Avanzando, apagado y avanzando)
-  // Dentro del chart con el objetivo de ocultarlos con un toggle
-  const [insideOpBEngineOff, setinsideOpBEngineOff] = useState<OBValue[]>([]);
-  const [insideOpBEngineOffCoast, setinsideOpBEngineOffCoast] = useState<
-    OBValue[]
-  >([]);
-  const [insideOpBEngineOnIdle, setinsideOpBEngineOnIdle] = useState<OBValue[]>(
-    []
-  );
-  const [insideOpBEngineOnMoving, setinsideOpBEngineOnMoving] = useState<
-    OBValue[]
-  >([]);
 
-  useEffect(() => {
-    setinsideOpBEngineOff(opBEngineOff);
-    setinsideOpBEngineOffCoast(opBEngineOffCoasting);
-    setinsideOpBEngineOnIdle(opBEngineOnIdle);
-    setinsideOpBEngineOnMoving(opBEngineOnMoving);
-  }, [opBEngineOff, opBEngineOffCoasting, opBEngineOnIdle, opBEngineOnMoving]);
-
-  const toggleInsideOpBEngineOff = () => {
-    if (insideOpBEngineOff.length > 0) {
-      setinsideOpBEngineOff([]);
-    } else {
-      setinsideOpBEngineOff(opBEngineOff);
-    }
-  };
-
-  // const toggleInsideOpBEngineOffCoast = () => {
-  //   if (insideOpBEngineOffCoast.length > 0) {
-  //     setinsideOpBEngineOffCoast([]);
-  //   } else {
-  //     setinsideOpBEngineOffCoast(opBEngineOffCoasting);
-  //   }
-  // };
-
-  const toggleInsideOpBEngineOnIdle = () => {
-    if (insideOpBEngineOnIdle.length > 0) {
-      setinsideOpBEngineOnIdle([]);
-    } else {
-      setinsideOpBEngineOnIdle(opBEngineOnIdle);
-    }
-  };
-
-  const toggleInsideOpBEngineOnMoving = () => {
-    if (insideOpBEngineOnMoving.length > 0) {
-      setinsideOpBEngineOnMoving([]);
-    } else {
-      setinsideOpBEngineOnMoving(opBEngineOnMoving);
-    }
-  };
+  const [showOpBEngineOff, setShowOpBEngineOff] = useState<boolean>(true);
+  // const [showOpBEngineOffCoast, setShowOpBEngineOffCoast] =
+  //   useState<boolean>(true);
+  const [showOpBEngineOnIdle, setShowOpBEngineOnIdle] = useState<boolean>(true);
+  const [showOpBEngineOnMoving, setShowOpBEngineOnMoving] =
+    useState<boolean>(true);
 
   const handleClicGeoData = (geoModalData: GeoModalData) => {
     setGeoModalData(geoModalData);
@@ -91,37 +48,39 @@ export const FuelBehaviorTab = ({
         LANGUAGE={LANGUAGE}
         fuelDataData={fuelDataData}
         handleClicGeoData={handleClicGeoData}
-        opBEngineOff={insideOpBEngineOff}
-        opBEngineOffCoasting={insideOpBEngineOffCoast}
-        opBEngineOnIdle={insideOpBEngineOnIdle}
-        opBEngineOnMoving={insideOpBEngineOnMoving}
+        opBEngineOff={opBEngineOff}
+        opBEngineOffCoasting={opBEngineOffCoasting}
+        opBEngineOnIdle={opBEngineOnIdle}
+        opBEngineOnMoving={opBEngineOnMoving}
       />
+
       <div className={styles.toggleButtonsGroup}>
         <ToggleButton
-          action={() => toggleInsideOpBEngineOff()}
+          action={() => setShowOpBEngineOff(!showOpBEngineOff)}
           title={LANGUAGE.highCharts.titles.engineOff}
-          isOn={insideOpBEngineOff.length > 0}
+          isOn={showOpBEngineOff}
           activeColor="#fb99e6"
         />
         {/* <ToggleButton
-          action={() => toggleInsideOpBEngineOffCoast()}
+          action={() => setShowOpBEngineOffCoast(!showOpBEngineOffCoast)}
           title="Motor apagado y en movimiento"
           isOn={insideOpBEngineOffCoast.length > 0}
           activeColor="#ff000085"
         /> */}
         <ToggleButton
-          action={() => toggleInsideOpBEngineOnIdle()}
+          action={() => setShowOpBEngineOnIdle(!showOpBEngineOnIdle)}
           title={LANGUAGE.highCharts.titles.engineOnIdle}
-          isOn={insideOpBEngineOnIdle.length > 0}
+          isOn={showOpBEngineOnIdle}
           activeColor="#99e6fb"
         />
         <ToggleButton
-          action={() => toggleInsideOpBEngineOnMoving()}
+          action={() => setShowOpBEngineOnMoving(!showOpBEngineOnMoving)}
           title={LANGUAGE.highCharts.titles.engineOnMoving}
-          isOn={insideOpBEngineOnMoving.length > 0}
+          isOn={showOpBEngineOnMoving}
           activeColor="#e6fb99"
         />
       </div>
+
       {isModalOpen && geoModalData && (
         <GeoModal
           LANGUAGE={LANGUAGE}
