@@ -109,6 +109,7 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
         borderRadius: 6,
         padding: 10,
         shadow: true,
+        headerFormat: "",
         style: {
           pointerEvents: "none",
         },

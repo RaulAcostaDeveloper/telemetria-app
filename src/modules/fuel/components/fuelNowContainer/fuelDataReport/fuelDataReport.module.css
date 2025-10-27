@@ -7,7 +7,7 @@
   border: none;
   text-align: left;
   background-color: transparent;
-  cursor: copy;
+  cursor: var(--copy-icon-black);
   padding-right: 10px;
   border-radius: 4px;
 }
