@@ -245,16 +245,16 @@ export function getLevelMessagesTooltipFields(
       value: (data) => `${ndIfEmpty(data.mainPower)} (V)`,
     },
     {
-      label: LANGUAGE.highCharts.tooltips.fuel.tanks,
-      value: (data) => `${ndIfEmpty(data.tanks)} (L)`,
+      label: LANGUAGE.highCharts.tooltips.fuel.tanksSum,
+      value: (data) => `${sumFuelTanks(data.tanks)} (L)`,
       separator: {
         position: 9,
         subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleFuelVariationCAN,
       },
     },
     {
-      label: LANGUAGE.highCharts.tooltips.fuel.tanksSum,
-      value: (data) => `${sumFuelTanks(data.tanks)} (L)`,
+      label: LANGUAGE.highCharts.tooltips.fuel.tanks,
+      value: (data) => `${ndIfEmpty(data.tanks)} (L)`,
     },
   ];
 }

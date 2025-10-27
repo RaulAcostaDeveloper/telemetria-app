@@ -180,7 +180,7 @@ export const ENGLISH: LanguageInterface = {
         totalDischarges: "Total discharges",
         averagePerformance: "Average performance",
         tanks: "Tank level",
-        tanksSum: "Sum Fuel in Tanks",
+        tanksSum: "Sum Tanks",
         fuelConsumed: "Fuel consumed",
         initialLevel: "Initial level",
         finalLevel: "Final level",
