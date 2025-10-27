@@ -10,11 +10,22 @@ const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
 });
 
 interface Props {
+  // Opciones para charts "normales"
   chartOptions?: Highcharts.Options;
+
+  // Opciones para charts de stock (con más parámetros)
   chartStockOptions?: unknown;
+
+  // Indicar que el chart es de stock
   isStock?: boolean;
+
+  // El gráfico requiere importar de la librería "highcharts-more"
   moreIsRequired?: boolean;
+
+  // Es el gráfico gauge. En un futuro podrían ser más opciones
   isGauge?: boolean;
+
+  // El gráfico requiere importar de la libreria "highcharts-3d.js"
   is3d?: boolean;
 }
 
