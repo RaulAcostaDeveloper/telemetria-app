@@ -23,7 +23,7 @@
 
 .button {
   width: 100%;
-  cursor: copy;
+  cursor: var(--copy-icon-black);
 }
 
 .button:hover span {

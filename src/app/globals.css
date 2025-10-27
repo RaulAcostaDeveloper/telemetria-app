@@ -108,4 +108,9 @@ button {
   --shadow-orange-mid: hsla(25, 98%, 79%, 0.5);
 }
 
+:root {
+  --copy-icon-black: url("../../public/svg/copy-black.svg"), auto;
+  --copy-icon-white: url("../../public/svg/copy-white.svg"), auto;
+}
+
 /* TO DO añadir variables para bordes, etc. */

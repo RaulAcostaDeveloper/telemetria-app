@@ -465,6 +465,7 @@ export const FuelBehaviorHighChart = ({
         borderRadius: 6,
         padding: 10,
         shadow: true,
+        headerFormat: "",
         style: {
           pointerEvents: "none",
         },
