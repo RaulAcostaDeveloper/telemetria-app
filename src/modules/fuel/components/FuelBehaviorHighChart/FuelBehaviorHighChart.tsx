@@ -1,6 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
-import dynamic from "next/dynamic";
+import { useMemo } from "react";
 
 import {
   createTooltipFormatter,
@@ -18,10 +17,7 @@ import { FuelDataValues } from "@/global/redux/serviceSlices/fuelDataSlice";
 import { GeoModalData } from "@/global/components/geoModal/geoModal";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { OBValue } from "../fuelReportDataProvider/fuelReportDataProvider";
-
-const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
-  ssr: false,
-});
+import { HighchartNext } from "@/global/components/highchartNext/highchartNext";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -42,30 +38,6 @@ export const FuelBehaviorHighChart = ({
   opBEngineOnIdle,
   opBEngineOnMoving,
 }: Props) => {
-  const [Highcharts, setHighcharts] = useState<unknown>(null);
-  const [HighstockInit, setHighstockInit] = useState<unknown>(null);
-
-  useEffect(() => {
-    let isMounted = true;
-    (async () => {
-      const importedModule = await import("highcharts");
-      if (isMounted) setHighcharts(importedModule.default ?? importedModule);
-
-      const importedModule2 = await import("highcharts/modules/stock");
-      if (isMounted)
-        setHighstockInit(importedModule2.default ?? importedModule2);
-    })();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (Highcharts && HighstockInit && typeof HighstockInit === "function") {
-      (HighstockInit as (hc: typeof Highcharts) => void)(Highcharts);
-    }
-  }, [Highcharts, HighstockInit]);
-
   // Tooltip de cada serie
   const chargesTooltipFields = getChargesTooltipFields(LANGUAGE);
 
@@ -144,6 +116,7 @@ export const FuelBehaviorHighChart = ({
           deviceBattery: c.deviceBattery,
           mainPower: c.externalPower,
           tanks: c.tanks,
+          currentLevelSmoothly: c.sensorCurrentLevelSmoothly,
         },
       }))
       .sort((a, b) => a.x - b.x);
@@ -164,6 +137,7 @@ export const FuelBehaviorHighChart = ({
           deviceBattery: c.deviceBattery,
           mainPower: c.externalPower,
           tanks: c.tanks,
+          currentLevelSmoothly: c.canCurrentLevelSmoothly,
         },
       }))
       .sort((a, b) => a.x - b.x);
@@ -498,7 +472,7 @@ export const FuelBehaviorHighChart = ({
       },
       chart: {
         height: 600,
-        panning: true,
+        // panning: true,
         events: {
           render: function () {
             // eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -598,13 +572,7 @@ export const FuelBehaviorHighChart = ({
 
   return (
     <>
-      {Highcharts && HighchartsReact && HighstockInit && (
-        <HighchartsReact
-          highcharts={Highcharts}
-          constructorType="stockChart"
-          options={chartOptions}
-        />
-      )}
+      <HighchartNext isStock chartStockOptions={chartOptions} />
     </>
   );
 };

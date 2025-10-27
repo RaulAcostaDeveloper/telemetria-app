@@ -1,11 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import dynamic from "next/dynamic";
-
-const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
-  ssr: false,
-});
+import { useMemo } from "react";
+import { HighchartNext } from "@/global/components/highchartNext/highchartNext";
 
 interface Props {
   max: number;
@@ -15,34 +11,8 @@ interface Props {
 }
 
 export const GaugeGraphic = ({ title, max, metric, value }: Props) => {
-  const [isReady, setIsReady] = useState(false);
-  const [Highcharts, setHighcharts] = useState<unknown>(null);
-
-  useEffect(() => {
-    let isMounted = true;
-    (async () => {
-      const importedModule = await import("highcharts");
-      if (isMounted) setHighcharts(importedModule.default ?? importedModule);
-    })();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        await import("highcharts/highcharts-more");
-        await import("highcharts/modules/solid-gauge");
-        setIsReady(true);
-      } catch (err) {
-        console.warn(err);
-        setIsReady(false);
-      }
-    })();
-  }, []);
-
   const percent = Math.round((100 * value) / max);
+
   const chartOptions: Highcharts.Options = useMemo(() => {
     return {
       chart: {
@@ -142,9 +112,7 @@ export const GaugeGraphic = ({ title, max, metric, value }: Props) => {
 
   return (
     <>
-      {isReady && Highcharts && (
-        <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-      )}
+      <HighchartNext chartOptions={chartOptions} moreIsRequired isGauge />
     </>
   );
 };

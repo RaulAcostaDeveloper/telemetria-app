@@ -1,17 +1,11 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
-import dynamic from "next/dynamic";
+import React, { useState, useMemo } from "react";
 
 import styles from "./donutGraphic.module.css";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 import { Devices } from "@/global/redux/serviceSlices/fuelSummarySlice";
-import LoaderAnimation from "../../../../global/components/loaderAnimation/loaderAnimation";
-
-// Cargamos HighchartsReact dinámicamente para evitar que se cargue del lado del servidor
-const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
-  ssr: false,
-});
+import { HighchartNext } from "@/global/components/highchartNext/highchartNext";
 
 type MetricOption = "Combustible" | "Cargado" | "Descargado";
 type SegmentOption = 5 | 10 | 15;
@@ -25,47 +19,8 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
   const [selectedMetric, setSelectedMetric] =
     useState<MetricOption>("Combustible");
   const [segmentsCount, setSegmentsCount] = useState<SegmentOption>(10);
-  const [is3DReady, setIs3DReady] = useState(false);
-
-  const [Highcharts, setHighcharts] = useState<unknown>(null);
-
-  useEffect(() => {
-    let isMounted = true;
-    (async () => {
-      const importedModule = await import("highcharts");
-      if (isMounted) setHighcharts(importedModule.default ?? importedModule);
-    })();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  // Nos aseguramos que highcharts 3d solo se cargue del lado del cliente
-  useEffect(() => {
-    if (Highcharts) {
-      (async () => {
-        try {
-          await import("highcharts/highcharts-3d.js");
-          setIs3DReady(true);
-        } catch (err) {
-          console.error(
-            ' No se pudo importar "highcharts/highcharts-3d.js". El donut 3D no podrá mostrarse.',
-            err
-          );
-          setIs3DReady(false);
-        }
-      })();
-    }
-  }, [Highcharts]);
 
   const chartOptions: Highcharts.Options = useMemo(() => {
-    if (!is3DReady) {
-      return {
-        title: { text: `${LANGUAGE.fuel.donutGrpahic.waitingMessage}` },
-        series: [],
-      };
-    }
-
     let allValues: number[];
     if (selectedMetric === "Combustible") {
       allValues = devices
@@ -213,7 +168,7 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
       },
       accessibility: { enabled: false },
     };
-  }, [is3DReady, selectedMetric, segmentsCount, LANGUAGE, devices]);
+  }, [selectedMetric, segmentsCount, LANGUAGE, devices]);
 
   return (
     <div className={styles.container}>
@@ -258,16 +213,7 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
       </div>
 
       <div className={styles.chartWrapper}>
-        {!is3DReady || !HighchartsReact || !Highcharts ? (
-          <div className={styles.loadingText}>
-            {LANGUAGE.fuel.donutGrpahic.waitingMessage}
-            <LoaderAnimation />
-          </div>
-        ) : (
-          <div className={styles.highchartsContainer}>
-            <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-          </div>
-        )}
+        <HighchartNext is3d chartOptions={chartOptions} />
       </div>
     </div>
   );

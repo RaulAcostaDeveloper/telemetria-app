@@ -7,6 +7,5 @@ export * from "./header/header";
 export * from "./mainWrapper/mainWrapper";
 export * from "./menu/menu";
 export * from "./modal/modal";
-export * from "./reduxProvider/ReduxProvider";
 export * from "./table/table";
 export * from "./tabsContent/tabsContent";

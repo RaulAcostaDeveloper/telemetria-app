@@ -1,10 +1,6 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
-import dynamic from "next/dynamic";
-
-const HighchartsReact = dynamic(() => import("highcharts-react-official"), {
-  ssr: false,
-});
+import { useMemo } from "react";
+import { HighchartNext } from "@/global/components/highchartNext/highchartNext";
 
 interface rangeNVehicles {
   lastRange: number;
@@ -25,19 +21,6 @@ interface Props {
 }
 
 const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
-  const [Highcharts, setHighcharts] = useState<unknown>(null);
-
-  useEffect(() => {
-    let isMounted = true;
-    (async () => {
-      const importedModule = await import("highcharts");
-      if (isMounted) setHighcharts(importedModule.default ?? importedModule);
-    })();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   const measureData = useMemo(() => {
     return rangesArray.map((r) => ({
       x: r.range,
@@ -148,9 +131,7 @@ const ChartColInterval = ({ langSelection, rangesArray }: Props) => {
 
   return (
     <>
-      {Highcharts && HighchartsReact && (
-        <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-      )}
+      <HighchartNext chartOptions={chartOptions} />
     </>
   );
 };
