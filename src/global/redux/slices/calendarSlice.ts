@@ -77,14 +77,18 @@ const calendarSlice = createSlice({
       const dateNow = new Date();
       const lastDayAllowed = new Date(dateNow);
       lastDayAllowed.setDate(dateNow.getDate() - 90);
+      // Excepción de 1 día adicional para permitir seleccionar horas faltantes del día.
+      // Ej: 90 dias atras a partir de las 11 horas de hoy, requieren 11 horas más =~ 1 día adicional.
+      const lastDayAllowedPlus1 = new Date(dateNow);
+      lastDayAllowedPlus1.setDate(dateNow.getDate() - 91);
 
       const incomingStartDate = new Date(action.payload.startDate);
       const incomingEndDate = new Date(action.payload.endDate);
 
       // Verifica que las fechas que vengan no sean mayor a 90 días
       state.startDate =
-        incomingStartDate < lastDayAllowed
-          ? toLocalISOString(lastDayAllowed)
+        incomingStartDate < lastDayAllowedPlus1
+          ? toLocalISOString(lastDayAllowedPlus1)
           : action.payload.startDate;
 
       state.endDate =

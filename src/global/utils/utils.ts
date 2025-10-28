@@ -153,7 +153,9 @@ export const calculatePredefinedDateRange = (
     case 3: // Últimos 90 días
       startDate = new Date(today);
       startDate.setDate(today.getDate() - 90);
-      //Existe una restricción para no pasarse de 90 dias, por lo que la hora no la modificamos.
+      //Existe una restricción para no pasarse de 90 dias, por lo que
+      //las horas adicionales se agregan con 1 día más en calendarSlice.
+      startDate.setHours(0, 0, 0);
       endDate = today;
       break;
     case 4: // Este mes
