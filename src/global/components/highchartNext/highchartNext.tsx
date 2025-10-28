@@ -39,7 +39,7 @@ export const HighchartNext = ({
 }: Props) => {
   const [HighchartsModule, setHighchartsModule] = useState<unknown>(null);
   const [HighStockModule, setHighStockModule] = useState<unknown>(null);
-  const [isReady, setIsReady] = useState(false);
+  const [modulesReady, setModulesReady] = useState<boolean>(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -82,19 +82,21 @@ export const HighchartNext = ({
           }
         }
         if (is3d) {
-          await import("highcharts/highcharts-3d.js");
+          setTimeout(async () => {
+            await import("highcharts/highcharts-3d.js");
+          }, 1);
         }
-        setIsReady(true);
+        setModulesReady(true);
       } catch (err) {
         console.warn(err);
-        setIsReady(false);
+        setModulesReady(false);
       }
     })();
   }, [is3d, isGauge, moreIsRequired]);
 
   return (
     <>
-      {HighchartsModule && HighchartsReact && isReady ? (
+      {!!HighchartsModule && !!HighchartsReact && !!modulesReady ? (
         <HighchartsReact
           highcharts={HighchartsModule}
           constructorType={isStock ? "stockChart" : "chart"}

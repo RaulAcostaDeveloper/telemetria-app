@@ -4,3 +4,19 @@
   background-color: white;
   flex-wrap: wrap;
 }
+
+.hideOpBEngineOff :global(.opBEngineOff) {
+  fill: transparent;
+}
+
+.hideOpBEngineOffCoasting :global(.opBEngineOffCoasting) {
+  fill: transparent;
+}
+
+.hideOpBEngineOnMoving :global(.opBEngineOnMoving) {
+  fill: transparent;
+}
+
+.hideOpBEngineOnIdle :global(.opBEngineOnIdle) {
+  fill: transparent;
+}

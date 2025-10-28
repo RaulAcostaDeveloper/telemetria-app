@@ -39,14 +39,21 @@ export const FuelBehaviorHighChart = ({
   opBEngineOnMoving,
 }: Props) => {
   // Tooltip de cada serie
-  const chargesTooltipFields = getChargesTooltipFields(LANGUAGE);
+  const chargesTooltipFields = useMemo(() => {
+    return getChargesTooltipFields(LANGUAGE);
+  }, [LANGUAGE]);
 
-  const dischargesTooltipFields = getDisChargesTooltipFields(LANGUAGE);
+  const dischargesTooltipFields = useMemo(() => {
+    return getDisChargesTooltipFields(LANGUAGE);
+  }, [LANGUAGE]);
 
-  const levelMessagesTooltipFields = getLevelMessagesTooltipFields(LANGUAGE);
+  const levelMessagesTooltipFields = useMemo(() => {
+    return getLevelMessagesTooltipFields(LANGUAGE);
+  }, [LANGUAGE]);
 
-  const performancesBetweenChargesTooltipFields =
-    getPerformancesBetweenChargesTooltipFields(LANGUAGE);
+  const performancesBetweenChargesTooltipFields = useMemo(() => {
+    return getPerformancesBetweenChargesTooltipFields(LANGUAGE);
+  }, [LANGUAGE]);
 
   const chargesData = useMemo(() => {
     return fuelDataData.charges
@@ -184,6 +191,55 @@ export const FuelBehaviorHighChart = ({
       .sort((a, b) => a.x - b.x);
   }, [fuelDataData]);
 
+  const plotBands = useMemo(() => {
+    return [
+      ...opBEngineOff.map((c) => ({
+        from: new Date(c.startDate).getTime(),
+        to: new Date(c.endDate).getTime(),
+        color: "#fbccf1",
+        zIndex: 0,
+        className: "opBEngineOff",
+        custom: {
+          speed: c.speed,
+          dateGps: c.startDate,
+        },
+      })),
+      // ...opBEngineOffCoasting.map((c) => ({
+      //   from: new Date(c.startDate).getTime(),
+      //   to: new Date(c.endDate).getTime(),
+      //   color: "#ff000098",
+      //   className: "opBEngineOffCoasting",
+      //   zIndex: 0,
+      //   custom: {
+      //     speed: c.speed,
+      //     dateGps: c.startDate,
+      //   },
+      // })),
+      ...opBEngineOnMoving.map((c) => ({
+        from: new Date(c.startDate).getTime(),
+        to: new Date(c.endDate).getTime(),
+        color: "#f1fbcc",
+        zIndex: 0,
+        className: "opBEngineOnMoving",
+        custom: {
+          speed: c.speed,
+          dateGps: c.startDate,
+        },
+      })),
+      ...opBEngineOnIdle.map((c) => ({
+        from: new Date(c.startDate).getTime(),
+        to: new Date(c.endDate).getTime(),
+        color: "#ccf1fb",
+        zIndex: 0,
+        className: "opBEngineOnIdle",
+        custom: {
+          speed: c.speed,
+          dateGps: c.startDate,
+        },
+      })),
+    ];
+  }, [opBEngineOff, opBEngineOnMoving, opBEngineOnIdle]);
+
   const chartOptions = useMemo(() => {
     // @ts-expect-error //No se puede determinar el tipo de Chart
     const removeSeries = (chart) => {
@@ -215,49 +271,6 @@ export const FuelBehaviorHighChart = ({
         }
       }
     };
-
-    const plotBands = [
-      ...opBEngineOff.map((c) => ({
-        from: new Date(c.startDate).getTime(),
-        to: new Date(c.endDate).getTime(),
-        color: "#fbccf1",
-        zIndex: 0,
-        custom: {
-          speed: c.speed,
-          dateGps: c.startDate,
-        },
-      })),
-      // ...opBEngineOffCoasting.map((c) => ({
-      //   from: new Date(c.startDate).getTime(),
-      //   to: new Date(c.endDate).getTime(),
-      //   color: "#ff000098",
-      //   zIndex: 0,
-      //   custom: {
-      //     speed: c.speed,
-      //     dateGps: c.startDate,
-      //   },
-      // })),
-      ...opBEngineOnMoving.map((c) => ({
-        from: new Date(c.startDate).getTime(),
-        to: new Date(c.endDate).getTime(),
-        color: "#f1fbcc",
-        zIndex: 0,
-        custom: {
-          speed: c.speed,
-          dateGps: c.startDate,
-        },
-      })),
-      ...opBEngineOnIdle.map((c) => ({
-        from: new Date(c.startDate).getTime(),
-        to: new Date(c.endDate).getTime(),
-        color: "#ccf1fb",
-        zIndex: 0,
-        custom: {
-          speed: c.speed,
-          dateGps: c.startDate,
-        },
-      })),
-    ];
 
     return {
       xAxis: {
@@ -559,15 +572,12 @@ export const FuelBehaviorHighChart = ({
     disChargesData,
     dischargesTooltipFields,
     fuelDataData,
-    handleClicGeoData,
     levelMessagesCANData,
     levelMessagesData,
     levelMessagesTooltipFields,
-    opBEngineOff,
-    opBEngineOnIdle,
-    opBEngineOnMoving,
     performancesBetweenChargesData,
     performancesBetweenChargesTooltipFields,
+    plotBands,
   ]);
 
   return (

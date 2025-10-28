@@ -4,6 +4,8 @@
   margin-right: 15px;
   cursor: pointer;
   margin-top: 5px;
+  background-color: transparent;
+  border: none;
 }
 
 .toggleButton span {
