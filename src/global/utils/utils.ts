@@ -135,21 +135,25 @@ export const calculatePredefinedDateRange = (
     case 0: // Últimos 7 días
       startDate = new Date(today);
       startDate.setDate(today.getDate() - 7);
+      startDate.setHours(0, 0, 0);
       endDate = today;
       break;
     case 1: // Últimos 15 días
       startDate = new Date(today);
       startDate.setDate(today.getDate() - 15);
+      startDate.setHours(0, 0, 0);
       endDate = today;
       break;
     case 2: // Últimos 30 días
       startDate = new Date(today);
       startDate.setDate(today.getDate() - 30);
+      startDate.setHours(0, 0, 0);
       endDate = today;
       break;
     case 3: // Últimos 90 días
       startDate = new Date(today);
       startDate.setDate(today.getDate() - 90);
+      //Existe una restricción para no pasarse de 90 dias, por lo que la hora no la modificamos.
       endDate = today;
       break;
     case 4: // Este mes
