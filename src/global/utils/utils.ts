@@ -135,21 +135,27 @@ export const calculatePredefinedDateRange = (
     case 0: // Últimos 7 días
       startDate = new Date(today);
       startDate.setDate(today.getDate() - 7);
+      startDate.setHours(0, 0, 0);
       endDate = today;
       break;
     case 1: // Últimos 15 días
       startDate = new Date(today);
       startDate.setDate(today.getDate() - 15);
+      startDate.setHours(0, 0, 0);
       endDate = today;
       break;
     case 2: // Últimos 30 días
       startDate = new Date(today);
       startDate.setDate(today.getDate() - 30);
+      startDate.setHours(0, 0, 0);
       endDate = today;
       break;
     case 3: // Últimos 90 días
       startDate = new Date(today);
       startDate.setDate(today.getDate() - 90);
+      //Existe una restricción para no pasarse de 90 dias, por lo que
+      //las horas adicionales se agregan con 1 día más en calendarSlice.
+      startDate.setHours(0, 0, 0);
       endDate = today;
       break;
     case 4: // Este mes
@@ -164,6 +170,7 @@ export const calculatePredefinedDateRange = (
       );
       endDate = new Date(firstDayCurrentMonth);
       endDate.setDate(0); // El último día del mes anterior.
+      endDate.setHours(23, 59, 59);
       startDate = new Date(endDate.getFullYear(), endDate.getMonth(), 1);
       break;
     default:
