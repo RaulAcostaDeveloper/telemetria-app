@@ -164,6 +164,7 @@ export const calculatePredefinedDateRange = (
       );
       endDate = new Date(firstDayCurrentMonth);
       endDate.setDate(0); // El último día del mes anterior.
+      endDate.setHours(23, 59, 59);
       startDate = new Date(endDate.getFullYear(), endDate.getMonth(), 1);
       break;
     default:
