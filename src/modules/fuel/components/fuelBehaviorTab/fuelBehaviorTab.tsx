@@ -44,15 +44,23 @@ export const FuelBehaviorTab = ({
 
   return (
     <div>
-      <FuelBehaviorHighChart
-        LANGUAGE={LANGUAGE}
-        fuelDataData={fuelDataData}
-        handleClicGeoData={handleClicGeoData}
-        opBEngineOff={opBEngineOff}
-        opBEngineOffCoasting={opBEngineOffCoasting}
-        opBEngineOnIdle={opBEngineOnIdle}
-        opBEngineOnMoving={opBEngineOnMoving}
-      />
+      <div
+        className={`
+        ${showOpBEngineOff ? "" : styles.hideOpBEngineOff}
+        ${showOpBEngineOnIdle ? "" : styles.hideOpBEngineOnIdle}
+        ${showOpBEngineOnMoving ? "" : styles.hideOpBEngineOnMoving}
+        `}
+      >
+        <FuelBehaviorHighChart
+          LANGUAGE={LANGUAGE}
+          fuelDataData={fuelDataData}
+          handleClicGeoData={handleClicGeoData}
+          opBEngineOff={opBEngineOff}
+          opBEngineOffCoasting={opBEngineOffCoasting}
+          opBEngineOnIdle={opBEngineOnIdle}
+          opBEngineOnMoving={opBEngineOnMoving}
+        />
+      </div>
 
       <div className={styles.toggleButtonsGroup}>
         <ToggleButton

@@ -198,6 +198,7 @@ export const FuelBehaviorHighChart = ({
         to: new Date(c.endDate).getTime(),
         color: "#fbccf1",
         zIndex: 0,
+        className: "opBEngineOff",
         custom: {
           speed: c.speed,
           dateGps: c.startDate,
@@ -207,6 +208,7 @@ export const FuelBehaviorHighChart = ({
       //   from: new Date(c.startDate).getTime(),
       //   to: new Date(c.endDate).getTime(),
       //   color: "#ff000098",
+      //   className: "opBEngineOffCoasting",
       //   zIndex: 0,
       //   custom: {
       //     speed: c.speed,
@@ -218,6 +220,7 @@ export const FuelBehaviorHighChart = ({
         to: new Date(c.endDate).getTime(),
         color: "#f1fbcc",
         zIndex: 0,
+        className: "opBEngineOnMoving",
         custom: {
           speed: c.speed,
           dateGps: c.startDate,
@@ -228,6 +231,7 @@ export const FuelBehaviorHighChart = ({
         to: new Date(c.endDate).getTime(),
         color: "#ccf1fb",
         zIndex: 0,
+        className: "opBEngineOnIdle",
         custom: {
           speed: c.speed,
           dateGps: c.startDate,
