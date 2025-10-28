@@ -12,7 +12,11 @@ import { LanguageInterface } from "@/global/language/constants/language.model";
 import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { Table, TabsContent } from "@/global/components";
-import { deviceStatusTranslator, formatDateTime } from "@/global/utils/utils";
+import {
+  deviceStatusTranslator,
+  formatDateTime,
+  removeTimeAfterCommaOrT,
+} from "@/global/utils/utils";
 import {
   DirectionsCar,
   DeviceHub,
@@ -169,10 +173,10 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       orderColumn: true,
       filterSelector: true,
     },
-    {
+    /*     {
       columnName: LANGUAGE.management.tableColumns.createdAt,
       defaultSpace: 4,
-    },
+    }, */
     {
       columnName: LANGUAGE.management.tableColumns.phoneNumber,
       defaultSpace: 4,
@@ -191,9 +195,11 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       status: deviceStatusTranslator(value.status, LANGUAGE),
       name: value.name,
       type: value.type,
-      createdAt: formatDateTime(value.createdAt),
+      /* createdAt: formatDateTime(value.createdAt), */
       phoneNumber: value.phoneNumber,
-      registrationDate: formatDateTime(value.registrationDate),
+      registrationDate: removeTimeAfterCommaOrT(
+        formatDateTime(value.registrationDate)
+      ),
     }));
   }, [devicesData]);
 
