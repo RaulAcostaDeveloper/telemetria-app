@@ -395,3 +395,15 @@ export function deviceStatusTranslator(
   }
   return translatedStatus;
 }
+
+export function removeTimeAfterCommaOrT(time: string) {
+  const positionT = time.indexOf("T");
+  const positionComma = time.indexOf(",");
+  if (positionT > 0) {
+    return time.slice(0, positionT);
+  } else if (positionComma > 0) {
+    return time.slice(0, positionComma);
+  } else {
+    return time;
+  }
+}
