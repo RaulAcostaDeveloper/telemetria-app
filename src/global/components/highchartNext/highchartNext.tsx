@@ -84,7 +84,7 @@ export const HighchartNext = ({
         if (is3d) {
           setTimeout(async () => {
             await import("highcharts/highcharts-3d.js");
-          }, 1);
+          }, 100);
         }
         setModulesReady(true);
       } catch (err) {
