@@ -333,6 +333,7 @@ export const FuelBehaviorHighChart = ({
           color: "#4ec516",
           // Por defecto, el navigator toma la primera serie solamente
           showInNavigator: true,
+          cursor: "pointer",
           point: {
             events: {
               click: (e: Highcharts.PointClickEventObject) => {
@@ -363,6 +364,7 @@ export const FuelBehaviorHighChart = ({
           data: disChargesData,
           color: "#ff2033",
           showInNavigator: true,
+          cursor: "pointer",
           point: {
             events: {
               click: (e: Highcharts.PointClickEventObject) => {
@@ -393,6 +395,7 @@ export const FuelBehaviorHighChart = ({
           color: "#f77f00",
           lineWidth: 2,
           showInNavigator: true,
+          cursor: "pointer",
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titleFuelVariationCAN,
@@ -423,6 +426,7 @@ export const FuelBehaviorHighChart = ({
           color: "#006af5",
           lineWidth: 2,
           showInNavigator: true,
+          cursor: "pointer",
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titleFuelVariation,
