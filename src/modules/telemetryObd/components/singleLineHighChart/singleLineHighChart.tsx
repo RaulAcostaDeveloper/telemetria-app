@@ -156,6 +156,7 @@ export const SingleLineHighChart = ({
           type: "line",
           color: "#006af5",
           lineWidth: 2,
+          cursor: "pointer",
           tooltip: {
             pointFormatter: createTooltipFormatter(
               tooltipTitles(),
@@ -194,6 +195,9 @@ export const SingleLineHighChart = ({
       chart: {
         height: 600,
         panning: true,
+        zooming: {
+          type: "x",
+        },
       },
       credits: {
         enabled: false,
