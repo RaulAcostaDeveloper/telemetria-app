@@ -491,6 +491,9 @@ export const FuelBehaviorHighChart = ({
         },
       },
       chart: {
+        zooming: {
+          type: "x",
+        },
         height: 600,
         // panning: true,
         events: {

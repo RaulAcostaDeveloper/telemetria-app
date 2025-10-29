@@ -194,6 +194,9 @@ export const SingleLineHighChart = ({
       chart: {
         height: 600,
         panning: true,
+        zooming: {
+          type: "x",
+        },
       },
       credits: {
         enabled: false,
