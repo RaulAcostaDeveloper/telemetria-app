@@ -331,6 +331,8 @@ export const FuelBehaviorHighChart = ({
           name: LANGUAGE.highCharts.titles.charges,
           data: chargesData,
           color: "#4ec516",
+          // Por defecto, el navigator toma la primera serie solamente
+          showInNavigator: true,
           point: {
             events: {
               click: (e: Highcharts.PointClickEventObject) => {
@@ -360,6 +362,7 @@ export const FuelBehaviorHighChart = ({
           name: LANGUAGE.highCharts.titles.disCharges,
           data: disChargesData,
           color: "#ff2033",
+          showInNavigator: true,
           point: {
             events: {
               click: (e: Highcharts.PointClickEventObject) => {
@@ -389,6 +392,7 @@ export const FuelBehaviorHighChart = ({
           data: levelMessagesCANData,
           color: "#f77f00",
           lineWidth: 2,
+          showInNavigator: true,
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titleFuelVariationCAN,
@@ -418,6 +422,7 @@ export const FuelBehaviorHighChart = ({
           data: levelMessagesData,
           color: "#006af5",
           lineWidth: 2,
+          showInNavigator: true,
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titleFuelVariation,
@@ -448,6 +453,7 @@ export const FuelBehaviorHighChart = ({
           marker: { enabled: true, radius: 4, symbol: "square" },
           color: "#f5c800",
           visible: false,
+          showInNavigator: true,
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titlePerformanceBetween,
@@ -463,6 +469,7 @@ export const FuelBehaviorHighChart = ({
           marker: { enabled: true, radius: 4, symbol: "circle" },
           color: "#8f07ff",
           visible: false,
+          showInNavigator: true,
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titlePerformanceDaily,
