@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import styles from "./matrix.module.css";
 
-const validKeys = ["q", "w", "e", "r"];
+const validKeys = ["q", "w", "e", "r", "shift"];
 
 export const Matrix = () => {
   const divRef = useRef(null);
@@ -21,6 +21,7 @@ export const Matrix = () => {
     w: false,
     e: false,
     r: false,
+    shift: false,
   });
 
   useEffect(() => {
@@ -35,18 +36,17 @@ export const Matrix = () => {
       if (validKeys.includes(keyPressed)) {
         setTeclasPresionadas((prevState) => ({
           ...prevState,
-          [event.key]: true,
+          [keyPressed]: true, // 👈 usar keyPressed en minúscula
         }));
       }
     };
 
     const handleKeyUp = (event: KeyboardEvent) => {
       const keyPressed = event.key.toLowerCase();
-
       if (validKeys.includes(keyPressed)) {
         setTeclasPresionadas((prevState) => ({
           ...prevState,
-          [event.key]: false,
+          [keyPressed]: false, // 👈 usar keyPressed en minúscula
         }));
       }
     };
@@ -61,14 +61,14 @@ export const Matrix = () => {
   }, []);
 
   useEffect(() => {
-    const { q, w, e, r } = teclasPresionadas;
-    if (q) {
+    const { shift, q, w, e, r } = teclasPresionadas;
+    if (shift && q) {
       setUnoDown(true);
-    } else if (w) {
+    } else if (shift && w) {
       setDosDown(true);
-    } else if (e) {
+    } else if (shift && e) {
       setTresDown(true);
-    } else if (r) {
+    } else if (shift && r) {
       setCuatroDown(true);
     } else {
       // no hay ninguna tecla presionada
