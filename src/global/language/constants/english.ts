@@ -105,7 +105,7 @@ export const ENGLISH: LanguageInterface = {
     },
     actions: {
       close: "Close",
-      agree: "Ok",
+      agree: "Accept",
       copy: "Copy text",
       copyError: "Copy failed",
       deleteElement: "Delete item",
@@ -322,6 +322,7 @@ export const ENGLISH: LanguageInterface = {
       fuelUnloaded: "Fuel unloaded",
       fuelStart: "Initial fuel",
       operatingHours: "Operating hours",
+      maxSpeed: "Maximum Speed",
       timeEfficiency: "Time efficiency",
     },
     fuelNow: {

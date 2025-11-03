@@ -38,9 +38,9 @@ export const FuelPerformanceMetrics = ({
         <MetricItem
           LANGUAGE={LANGUAGE}
           isLast
-          metric="H"
-          name={LANGUAGE.fuelVehicle.vehicleReports.operatingHours}
-          value={fuelPerformanceData.operationTime.toLocaleString("en-US")}
+          metric="Km/h"
+          name={LANGUAGE.fuelVehicle.vehicleReports.maxSpeed}
+          value={fuelPerformanceData.maxSpeed?.toLocaleString("en-US")}
         />
       </div>
       <div className={styles.cuadricula}>

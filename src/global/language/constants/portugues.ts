@@ -321,6 +321,7 @@ export const PORTUGUES: LanguageInterface = {
       fuelUnloaded: "Combustível descarregado",
       fuelStart: "Combustível inicial",
       operatingHours: "Horas em operação",
+      maxSpeed: "Máxima velocidade",
       timeEfficiency: "Rendimento por tempo",
     },
     fuelNow: {

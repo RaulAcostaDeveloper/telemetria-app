@@ -302,6 +302,7 @@ export interface LanguageInterface {
       fuelUnloaded: string;
       fuelStart: string;
       operatingHours: string;
+      maxSpeed: string;
       timeEfficiency: string;
     };
     fuelNow: {
