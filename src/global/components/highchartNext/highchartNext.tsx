@@ -40,6 +40,7 @@ export const HighchartNext = ({
   const [HighchartsModule, setHighchartsModule] = useState<unknown>(null);
   const [HighStockModule, setHighStockModule] = useState<unknown>(null);
   const [modulesReady, setModulesReady] = useState<boolean>(false);
+  const [is3dReady, setis3dReady] = useState<boolean>(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -88,6 +89,7 @@ export const HighchartNext = ({
               // @ts-expect-error // window es unknown
               (window as unknown).Highcharts = H;
               await import("highcharts/highcharts-3d.js");
+              setis3dReady(true);
             }, 100);
           }
         }
@@ -101,7 +103,10 @@ export const HighchartNext = ({
 
   return (
     <>
-      {!!HighchartsModule && !!HighchartsReact && !!modulesReady ? (
+      {!!HighchartsModule &&
+      !!HighchartsReact &&
+      !!modulesReady &&
+      (is3d ? is3dReady : true) ? (
         <HighchartsReact
           highcharts={HighchartsModule}
           constructorType={isStock ? "stockChart" : "chart"}
