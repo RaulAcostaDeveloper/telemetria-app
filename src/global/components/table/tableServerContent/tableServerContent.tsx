@@ -159,12 +159,14 @@ export const TableServerContent = ({
           </div>
         </div>
 
-        {/* Suma de valores */}
-        <TableDataSummatory
+        {/* Suma de valores. Ocultada por generar ruido estético. 
+        IMPORTANTE: Sigue siendo util para cuando hagamos reportes impresos 
+        y CSV poderlo adaptar a esa documentación. */}
+        {/*         <TableDataSummatory
           LANGUAGE={LANGUAGE}
           columns={columns}
           filteredData={filteredData}
-        />
+        /> */}
       </div>
     </>
   );
