@@ -82,9 +82,14 @@ export const HighchartNext = ({
           }
         }
         if (is3d) {
-          setTimeout(async () => {
-            await import("highcharts/highcharts-3d.js");
-          }, 100);
+          if (typeof window !== "undefined") {
+            setTimeout(async () => {
+              const H = (await import("highcharts")).default;
+              // @ts-expect-error // window es unknown
+              (window as unknown).Highcharts = H;
+              await import("highcharts/highcharts-3d.js");
+            }, 100);
+          }
         }
         setModulesReady(true);
       } catch (err) {
