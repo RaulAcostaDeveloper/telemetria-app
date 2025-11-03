@@ -8,7 +8,6 @@ import {
 } from "@/global/fonts/fonts";
 import { CacheCleaner, MainWrapper } from "@/global/components";
 import { ReduxProvider } from "@/global/redux/provider/reduxProvider/ReduxProvider";
-import { Matrix } from "@/global/components/matrix/matrix";
 
 export const metadata: Metadata = {
   title: "Core - Transtelemetrix",
@@ -27,7 +26,6 @@ export default function RootLayout({
         className={`${nunitoItalicFont.variable} ${nunitoFont.variable} ${neuropolFont.variable}`}
       >
         <CacheCleaner />
-        <Matrix />
         <ReduxProvider>
           <MainWrapper>{children}</MainWrapper>
         </ReduxProvider>

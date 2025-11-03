@@ -64,7 +64,7 @@ export async function fetchMiddleware({
   const { API_VERSION } = await getEnvClient();
 
   const cacheData = await getCached(API_VERSION + cacheKey, forceRefresh);
-  if (false) {
+  if (cacheData) {
     // Si hay en caché, retorna lo de caché
     return cacheData;
   } else {
