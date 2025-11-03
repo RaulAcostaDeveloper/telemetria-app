@@ -248,6 +248,7 @@ export interface LanguageInterface {
       topCharges: string;
       unitys: string;
       topDischarges: string;
+      zones: string;
     };
     vehiclesTableColumns: {
       imei: string;

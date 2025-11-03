@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
-import { LocalShipping, LocalGasStation } from "@mui/icons-material";
+import { LocalShipping, LocalGasStation, Map } from "@mui/icons-material";
 
 // import { FuelFilter } from "../fuelFilter/fuelFilter";
 import DonutGraphic from "@/modules/fuel/components/donutGraphic/DonutGraphic";
@@ -33,6 +33,10 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
     {
       text: LANGUAGE.fuel.tabs.unitys,
       icon: LocalShipping,
+    },
+    {
+      text: LANGUAGE.fuel.tabs.zones,
+      icon: Map,
     },
     {
       text: LANGUAGE.fuel.tabs.topCharges,
@@ -281,6 +285,8 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
     }));
   }, [topFuelReportData]);
 
+  /* const zonesColumns: columnsTable = []; */
+
   return (
     <div>
       {/* Descomentar para mostrar el filtrado de combustible */}
@@ -329,6 +335,18 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                 />
               </div>,
               <div key={2}>
+                {/* {false && (
+                  <Table
+                    LANGUAGE={LANGUAGE}
+                    columns={zonesColumns}
+                    data={}
+                    idKey="imei"
+                    showGoFuel
+                    showGoOBD
+                  />
+                )} */}
+              </div>,
+              <div key={3}>
                 {topFuelReportStatus === SERVICE_STATUS.succeeded &&
                   topFuelReportCharges && (
                     <Table
@@ -348,7 +366,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                   infoStatus={topFuelReportStatus}
                 />
               </div>,
-              <div key={3}>
+              <div key={4}>
                 {topFuelReportStatus === SERVICE_STATUS.succeeded &&
                   topFuelReportDischarges && (
                     <Table
