@@ -267,6 +267,7 @@ export const PORTUGUES: LanguageInterface = {
       topCharges: "Top abastecimentos",
       unitys: "Unidades",
       topDischarges: "Top descargas",
+      zones: "Zonas",
     },
     vehiclesTableColumns: {
       imei: "IMEI",

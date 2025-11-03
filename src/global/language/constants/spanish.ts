@@ -268,6 +268,7 @@ export const SPANISH: LanguageInterface = {
       topCharges: "Top cargas",
       unitys: "Unidades",
       topDischarges: "Top descargas",
+      zones: "Zonas",
     },
     vehiclesTableColumns: {
       imei: "Imei",
