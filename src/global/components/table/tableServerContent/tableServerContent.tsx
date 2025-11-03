@@ -12,7 +12,7 @@ import { TableAddNewButton } from "../tableAddNewButton/tableAddNewButton";
 import { TableCSVButtonsContainer } from "../tableCSVButtonsContainer/tableCSVButtonsContainer";
 import { TableColumns } from "../tableColumns/tableColumns";
 import { TableDataContent } from "../tableDataContent/tableDataContent";
-import { TableDataSummatory } from "../tableDataSummatory/tableDataSummatory";
+import { TableDataSummatory } from "../tableDataSummatory/tableDataSummatory"; /* Se usará cuando se hagan reportes de Total y Promedio*/
 import { TableFiltersButton } from "../tableFiltersButton/tableFiltersButton";
 import { TableSearch } from "../tableSearch/tableSearch";
 

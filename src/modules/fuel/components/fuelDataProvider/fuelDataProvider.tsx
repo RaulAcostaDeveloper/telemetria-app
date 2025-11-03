@@ -35,10 +35,6 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
       icon: LocalShipping,
     },
     {
-      text: LANGUAGE.fuel.tabs.zones,
-      icon: Map,
-    },
-    {
       text: LANGUAGE.fuel.tabs.topCharges,
       icon: LocalGasStation,
       iconStyle: { color: "rgb(4, 187, 4)" },
@@ -47,6 +43,10 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
       text: LANGUAGE.fuel.tabs.topDischarges,
       icon: LocalGasStation,
       iconStyle: { color: "rgb(223, 44, 59)" },
+    },
+    {
+      text: LANGUAGE.fuel.tabs.zones,
+      icon: Map,
     },
   ];
 
@@ -335,18 +335,6 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                 />
               </div>,
               <div key={2}>
-                {/* {false && (
-                  <Table
-                    LANGUAGE={LANGUAGE}
-                    columns={zonesColumns}
-                    data={}
-                    idKey="imei"
-                    showGoFuel
-                    showGoOBD
-                  />
-                )} */}
-              </div>,
-              <div key={3}>
                 {topFuelReportStatus === SERVICE_STATUS.succeeded &&
                   topFuelReportCharges && (
                     <Table
@@ -366,7 +354,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                   infoStatus={topFuelReportStatus}
                 />
               </div>,
-              <div key={4}>
+              <div key={3}>
                 {topFuelReportStatus === SERVICE_STATUS.succeeded &&
                   topFuelReportDischarges && (
                     <Table
@@ -385,6 +373,18 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                   hasData={!!topFuelReportDischarges}
                   infoStatus={topFuelReportStatus}
                 />
+              </div>,
+              <div key={4}>
+                {/* {false && (
+                  <Table
+                    LANGUAGE={LANGUAGE}
+                    columns={zonesColumns}
+                    data={}
+                    idKey="imei"
+                    showGoFuel
+                    showGoOBD
+                  />
+                )} */}
               </div>,
             ]}
           />
