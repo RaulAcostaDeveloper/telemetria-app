@@ -105,6 +105,7 @@ export const SPANISH: LanguageInterface = {
     },
     actions: {
       close: "Cerrar",
+      agree: "Aceptar",
       copy: "Copiar el texto",
       copyError: "Error al copiar",
       deleteElement: "Eliminar elemento",

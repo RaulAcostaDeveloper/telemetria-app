@@ -104,6 +104,7 @@ export const PORTUGUES: LanguageInterface = {
     },
     actions: {
       close: "Fechar",
+      agree: "Aceitar",
       copy: "Copiar texto",
       copyError: "Erro ao copiar",
       deleteElement: "Excluir item",

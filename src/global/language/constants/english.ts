@@ -105,6 +105,7 @@ export const ENGLISH: LanguageInterface = {
     },
     actions: {
       close: "Close",
+      agree: "Ok",
       copy: "Copy text",
       copyError: "Copy failed",
       deleteElement: "Delete item",

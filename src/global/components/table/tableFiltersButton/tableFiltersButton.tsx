@@ -102,10 +102,10 @@ export const TableFiltersButton = ({
                     placeholder={LANGUAGE.table.actions.cleanFilters}
                   />
                   <GeneralButton
-                    type={ButtonTypes.NEUTRAL}
+                    type={ButtonTypes.CONFIRM}
                     callback={() => setIsOpen(!isOpen)}
-                    title={LANGUAGE.table.actions.close}
-                    placeholder={LANGUAGE.table.actions.close}
+                    title={LANGUAGE.table.actions.agree}
+                    placeholder={LANGUAGE.table.actions.agree}
                   />
                 </div>
               </>

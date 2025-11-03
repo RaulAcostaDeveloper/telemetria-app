@@ -85,6 +85,7 @@ export interface LanguageInterface {
     };
     actions: {
       close: string;
+      agree: string;
       copy: string;
       copyError: string;
       deleteElement: string;
