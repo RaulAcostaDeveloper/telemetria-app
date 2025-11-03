@@ -105,6 +105,7 @@ export const SPANISH: LanguageInterface = {
     },
     actions: {
       close: "Cerrar",
+      agree: "Aceptar",
       copy: "Copiar el texto",
       copyError: "Error al copiar",
       deleteElement: "Eliminar elemento",
@@ -321,6 +322,7 @@ export const SPANISH: LanguageInterface = {
       fuelUnloaded: "Combustible descargado",
       fuelStart: "Combustible inicial",
       operatingHours: "Horas operando",
+      maxSpeed: "Velocidad máxima",
       timeEfficiency: "Rendimiento por tiempo",
     },
     fuelNow: {

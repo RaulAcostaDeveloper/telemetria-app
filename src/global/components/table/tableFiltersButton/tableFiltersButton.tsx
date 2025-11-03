@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
 import styles from "./tableFiltersButton.module.css";
@@ -39,6 +39,11 @@ export const TableFiltersButton = ({
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const filtersRef = useRef<HTMLDivElement>(null);
+  const escFunction = useCallback((event: { key: string }) => {
+    if (event.key === "Escape") {
+      setIsOpen(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (filtersRef.current) {
@@ -63,6 +68,14 @@ export const TableFiltersButton = ({
       return () => document.removeEventListener("mousedown", onClickOutside);
     }
   }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, [escFunction]);
 
   const filtersOn: boolean = columns.some(
     (column) => "filterSelector" in column || "minMaxFilter" in column
@@ -102,10 +115,10 @@ export const TableFiltersButton = ({
                     placeholder={LANGUAGE.table.actions.cleanFilters}
                   />
                   <GeneralButton
-                    type={ButtonTypes.NEUTRAL}
+                    type={ButtonTypes.CONFIRM}
                     callback={() => setIsOpen(!isOpen)}
-                    title={LANGUAGE.table.actions.close}
-                    placeholder={LANGUAGE.table.actions.close}
+                    title={LANGUAGE.table.actions.agree}
+                    placeholder={LANGUAGE.table.actions.agree}
                   />
                 </div>
               </>

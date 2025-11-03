@@ -73,38 +73,40 @@ export const TableFilters = ({
       <div className={styles.tableFiltersTitle}>
         <h3>{LANGUAGE.table.formTitles.filters}</h3>
       </div>
-      {columns.map((col, colIndex) => (
-        <div key={colIndex}>
-          {(col.filterSelector || col.minMaxFilter) && (
-            <div
-              className={styles.filterContainer}
-              title={`${LANGUAGE.table.actions.filterBy} "${columns[colIndex].columnName}"`}
-            >
-              <label className={styles.title}>
-                {columns[colIndex].columnName}
-              </label>
-              {col.filterSelector && (
-                <TableFilter
-                  LANGUAGE={LANGUAGE}
-                  colIndex={colIndex}
-                  columnName={columns[colIndex].columnName}
-                  filterSelectors={filterSelectors}
-                  handleSelectorFilter={handleSelectorFilter}
-                  options={uniqueFilterValues[colIndex]}
-                />
-              )}
-              {col.minMaxFilter && (
-                <TableMinMaxFilter
-                  LANGUAGE={LANGUAGE}
-                  colIndex={colIndex}
-                  handleMinMaxFilter={handleMinMaxFilter}
-                  minMaxFilters={minMaxFilters}
-                />
-              )}
-            </div>
-          )}
-        </div>
-      ))}
+      <div className={styles.tableFiltersBody}>
+        {columns.map((col, colIndex) => (
+          <div key={colIndex}>
+            {(col.filterSelector || col.minMaxFilter) && (
+              <div
+                className={styles.filterContainer}
+                title={`${LANGUAGE.table.actions.filterBy} "${columns[colIndex].columnName}"`}
+              >
+                <label className={styles.title}>
+                  {columns[colIndex].columnName}
+                </label>
+                {col.filterSelector && (
+                  <TableFilter
+                    LANGUAGE={LANGUAGE}
+                    colIndex={colIndex}
+                    columnName={columns[colIndex].columnName}
+                    filterSelectors={filterSelectors}
+                    handleSelectorFilter={handleSelectorFilter}
+                    options={uniqueFilterValues[colIndex]}
+                  />
+                )}
+                {col.minMaxFilter && (
+                  <TableMinMaxFilter
+                    LANGUAGE={LANGUAGE}
+                    colIndex={colIndex}
+                    handleMinMaxFilter={handleMinMaxFilter}
+                    minMaxFilters={minMaxFilters}
+                  />
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

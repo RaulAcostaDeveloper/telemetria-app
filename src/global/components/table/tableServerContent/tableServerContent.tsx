@@ -12,7 +12,7 @@ import { TableAddNewButton } from "../tableAddNewButton/tableAddNewButton";
 import { TableCSVButtonsContainer } from "../tableCSVButtonsContainer/tableCSVButtonsContainer";
 import { TableColumns } from "../tableColumns/tableColumns";
 import { TableDataContent } from "../tableDataContent/tableDataContent";
-import { TableDataSummatory } from "../tableDataSummatory/tableDataSummatory";
+import { TableDataSummatory } from "../tableDataSummatory/tableDataSummatory"; /* Se usará cuando se hagan reportes de Total y Promedio*/
 import { TableFiltersButton } from "../tableFiltersButton/tableFiltersButton";
 import { TableSearch } from "../tableSearch/tableSearch";
 
@@ -159,7 +159,9 @@ export const TableServerContent = ({
           </div>
         </div>
 
-        {/* Suma de valores */}
+        {/* Suma de valores. Ocultada por generar ruido estético. 
+        IMPORTANTE: Sigue siendo util para cuando hagamos reportes impresos 
+        y CSV poderlo adaptar a esa documentación. */}
         <TableDataSummatory
           LANGUAGE={LANGUAGE}
           columns={columns}

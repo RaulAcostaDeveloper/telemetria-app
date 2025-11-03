@@ -85,6 +85,7 @@ export interface LanguageInterface {
     };
     actions: {
       close: string;
+      agree: string;
       copy: string;
       copyError: string;
       deleteElement: string;
@@ -301,6 +302,7 @@ export interface LanguageInterface {
       fuelUnloaded: string;
       fuelStart: string;
       operatingHours: string;
+      maxSpeed: string;
       timeEfficiency: string;
     };
     fuelNow: {
