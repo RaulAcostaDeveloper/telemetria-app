@@ -676,6 +676,11 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
         )}
         <div className={styles.selectPeriodButtonsContainer}>
           <GeneralButton
+            callback={toggleContainer}
+            title={LANGUAGE.header.calendar.cancelButtonLabel}
+            type={ButtonTypes.NEUTRAL}
+          />
+          <GeneralButton
             callback={() => {
               if (saveDate()) {
                 toggleContainer(); // sólo cierra cuando saveDate() devuelve true, haciendo que se muestre el mensaje de error.
@@ -683,11 +688,6 @@ const Calendar: React.FC<CalendarProps> = ({ toggleContainer, LANGUAGE }) => {
             }}
             title={LANGUAGE.header.calendar.acceptButtonLabel}
             type={ButtonTypes.CONFIRM}
-          />
-          <GeneralButton
-            callback={toggleContainer}
-            title={LANGUAGE.header.calendar.cancelButtonLabel}
-            type={ButtonTypes.DANGER}
           />
         </div>
       </div>

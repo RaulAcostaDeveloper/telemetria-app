@@ -19,6 +19,11 @@ button {
 
 /* VARIABLES GLOBALES CSS */
 
+/* Variables de colores comunes en texto */
+:root {
+  --low-emphasis: #9f9f9f;
+}
+
 /* Variables de colores de la empresa (theme) */
 :root {
   --company-color-1: #e8f7ff;
