@@ -14,3 +14,8 @@
   /* cursor: url("/public/svg/copy.svg"), auto; */
   text-decoration: underline;
 }
+
+.nd {
+  font-size: inherit;
+  color: var(--low-emphasis);
+}
