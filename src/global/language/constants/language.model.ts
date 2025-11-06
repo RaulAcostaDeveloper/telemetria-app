@@ -431,4 +431,17 @@ export interface LanguageInterface {
       yAxis: string;
     };
   };
+  zones: {
+    zonesFuelTable: {
+      zone: string;
+      profile: string;
+      country: string;
+      state: string;
+      city: string;
+      zipCode: string;
+      events: string;
+      charged: string;
+      discharged: string;
+    };
+  };
 }

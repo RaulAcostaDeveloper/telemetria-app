@@ -9,6 +9,7 @@ import DonutGraphic from "@/modules/fuel/components/donutGraphic/DonutGraphic";
 import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
 import styles from "./fuelDataProvider.module.css";
 import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
+import { FuelPageZonesTable } from "@/modules/zones/components/fuelPageZonesTable/fuelPageZonesTable";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
@@ -375,16 +376,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                 />
               </div>,
               <div key={4}>
-                {/* {false && (
-                  <Table
-                    LANGUAGE={LANGUAGE}
-                    columns={zonesColumns}
-                    data={}
-                    idKey="imei"
-                    showGoFuel
-                    showGoOBD
-                  />
-                )} */}
+                <FuelPageZonesTable LANGUAGE={LANGUAGE} />
               </div>,
             ]}
           />
