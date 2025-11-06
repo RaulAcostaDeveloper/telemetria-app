@@ -13,40 +13,53 @@ interface Props {
 export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
   const zonesTableColumns: columnsTable = [
     {
-      columnName: "Zona",
+      columnName: LANGUAGE.zones.zonesFuelTable.zone,
       defaultSpace: 3,
+      orderColumn: true,
     },
     {
-      columnName: "Perfil",
+      columnName: LANGUAGE.zones.zonesFuelTable.profile,
       defaultSpace: 3,
+      orderColumn: true,
     },
     {
-      columnName: "País",
+      columnName: LANGUAGE.zones.zonesFuelTable.country,
       defaultSpace: 2,
+      orderColumn: true,
+      filterSelector: true,
     },
     {
-      columnName: "Estado",
+      columnName: LANGUAGE.zones.zonesFuelTable.state,
       defaultSpace: 2,
+      orderColumn: true,
     },
     {
-      columnName: "Ciudad",
+      columnName: LANGUAGE.zones.zonesFuelTable.city,
       defaultSpace: 3,
+      orderColumn: true,
     },
     {
-      columnName: "Código postal",
+      columnName: LANGUAGE.zones.zonesFuelTable.zipCode,
       defaultSpace: 2,
+      orderColumn: true,
     },
     {
-      columnName: "Total eventos",
+      columnName: LANGUAGE.zones.zonesFuelTable.events,
       defaultSpace: 2,
+      orderColumn: true,
+      minMaxFilter: true,
     },
     {
-      columnName: "Litros cargados",
+      columnName: LANGUAGE.zones.zonesFuelTable.charged,
       defaultSpace: 2,
+      orderColumn: true,
+      minMaxFilter: true,
     },
     {
-      columnName: "Litros descargados",
+      columnName: LANGUAGE.zones.zonesFuelTable.discharged,
       defaultSpace: 3,
+      orderColumn: true,
+      minMaxFilter: true,
     },
   ];
 

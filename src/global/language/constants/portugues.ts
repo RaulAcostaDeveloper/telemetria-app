@@ -450,4 +450,17 @@ export const PORTUGUES: LanguageInterface = {
       yAxis: "Veículos",
     },
   },
+  zones: {
+    zonesFuelTable: {
+      zone: "Zona",
+      profile: "Perfil",
+      country: "País",
+      state: "Estado / Província",
+      city: "Cidade",
+      zipCode: "Código postal",
+      events: "Total de eventos",
+      charged: "Litros abastecidos",
+      discharged: "Litros descarregados",
+    },
+  },
 };
