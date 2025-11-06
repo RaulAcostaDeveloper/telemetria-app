@@ -118,6 +118,7 @@ export const PORTUGUES: LanguageInterface = {
       viewDetail: "Ver detalhes",
       goFuelReport: "Ir para relatório de combustível",
       goObdReport: "Ir para relatório de OBD",
+      goGenericReport: "Ir para relatório",
       cleanFilters: "Limpar",
       goPage: "Ir para a página",
       noFilters: "Não há filtros para esta tabela",

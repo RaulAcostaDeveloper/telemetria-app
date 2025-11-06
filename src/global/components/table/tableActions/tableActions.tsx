@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import ArticleIcon from "@mui/icons-material/Article";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
@@ -24,6 +25,7 @@ interface Props {
   showDelete?: boolean;
   showEdit?: boolean;
   showGoFuel?: boolean;
+  showGoGenericReport?: boolean;
   showGoOBD?: boolean;
   showGoPageView?: boolean;
   showViewModal?: boolean;
@@ -40,6 +42,7 @@ export const TableActions = ({
   showDelete,
   showEdit,
   showGoFuel,
+  showGoGenericReport,
   showGoOBD,
   showGoPageView,
   showViewModal,
@@ -104,6 +107,15 @@ export const TableActions = ({
             alt="car services"
           />
         </TableActionLink>
+      )}
+
+      {showGoGenericReport && viewPath && (
+        <TableActionLink
+          hasCompleteRoute={idKey ? true : false}
+          title={LANGUAGE.table.actions.goGenericReport}
+          Icon={ArrowRightAltIcon}
+          href={`${viewPath}${dataObject[idKey ?? ""] ?? ""}`}
+        />
       )}
 
       {showEdit && (

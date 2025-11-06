@@ -119,6 +119,7 @@ export const ENGLISH: LanguageInterface = {
       viewDetail: "View details",
       goFuelReport: "Go to fuel report",
       goObdReport: "Go to OBD report",
+      goGenericReport: "Go to report",
       cleanFilters: "Clear",
       goPage: "Go to page",
       noFilters: "No filters available for this table",
