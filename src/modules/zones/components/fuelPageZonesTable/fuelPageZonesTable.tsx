@@ -74,10 +74,18 @@ export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
       totalEvents: value.totalEvents,
       totalLitersCharges: value.totalLitersCharges,
       totalLitersDischarges: value.totalLitersDischarges,
+      id: value.id,
     }));
   }, []);
 
   return (
-    <Table columns={zonesTableColumns} data={zonesData} LANGUAGE={LANGUAGE} />
+    <Table
+      columns={zonesTableColumns}
+      data={zonesData}
+      LANGUAGE={LANGUAGE}
+      showGoGenericReport
+      idKey="id"
+      viewPath="/zones/zone/"
+    />
   );
 };

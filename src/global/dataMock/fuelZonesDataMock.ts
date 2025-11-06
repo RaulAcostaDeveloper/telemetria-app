@@ -1,4 +1,5 @@
 export interface FuelZonesDataMock {
+  id: number;
   zoneName: string;
   profileName: string;
   country: string;
@@ -12,6 +13,7 @@ export interface FuelZonesDataMock {
 
 export const fuelZonesDataMock: FuelZonesDataMock[] = [
   {
+    id: 351823,
     zoneName: "Zona Norte",
     profileName: "Operador A",
     country: "México",
@@ -23,6 +25,7 @@ export const fuelZonesDataMock: FuelZonesDataMock[] = [
     totalLitersDischarges: 8700,
   },
   {
+    id: 351263,
     zoneName: "Zona Sur",
     profileName: "Supervisor B",
     country: "México",
@@ -34,6 +37,7 @@ export const fuelZonesDataMock: FuelZonesDataMock[] = [
     totalLitersDischarges: 9100,
   },
   {
+    id: 351231,
     zoneName: "Zona Centro",
     profileName: "Administrador C",
     country: "México",
@@ -45,6 +49,7 @@ export const fuelZonesDataMock: FuelZonesDataMock[] = [
     totalLitersDischarges: 14800,
   },
   {
+    id: 354123,
     zoneName: "Zona Este",
     profileName: "Operador D",
     country: "México",
@@ -56,6 +61,7 @@ export const fuelZonesDataMock: FuelZonesDataMock[] = [
     totalLitersDischarges: 5400,
   },
   {
+    id: 325123,
     zoneName: "Zona Oeste",
     profileName: "Técnico E",
     country: "México",
