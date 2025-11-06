@@ -1,4 +1,4 @@
-export interface ZonesDataMock {
+export interface FuelZonesDataMock {
   zoneName: string;
   profileName: string;
   country: string;
@@ -10,7 +10,7 @@ export interface ZonesDataMock {
   totalLitersDischarges: number;
 }
 
-export const zonesDataMock: ZonesDataMock[] = [
+export const fuelZonesDataMock: FuelZonesDataMock[] = [
   {
     zoneName: "Zona Norte",
     profileName: "Operador A",

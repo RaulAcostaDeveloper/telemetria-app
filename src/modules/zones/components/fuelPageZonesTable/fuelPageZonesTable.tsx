@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { Table } from "@/global/components";
 import { columnsTable, dataTable } from "@/global/components/table/table.model";
-import { zonesDataMock } from "@/global/dataMock/zonesDataMock";
+import { fuelZonesDataMock } from "@/global/dataMock/fuelZonesDataMock";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -64,7 +64,7 @@ export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
   ];
 
   const zonesData: dataTable = useMemo(() => {
-    return zonesDataMock?.map((value) => ({
+    return fuelZonesDataMock?.map((value) => ({
       zoneName: value.zoneName,
       profileName: value.profileName,
       country: value.country,
