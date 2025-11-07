@@ -4,7 +4,7 @@ interface Page {
   };
 }
 
-export default function TelemetryVehicle({ params }: Page) {
+export default function ZonesVehicle({ params }: Page) {
   const { id } = params; // imei del vehiculo
 
   return <>{id}</>;

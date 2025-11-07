@@ -450,4 +450,11 @@ export const PORTUGUES: LanguageInterface = {
       yAxis: "Veículos",
     },
   },
+  zonesVehicle: {
+    tabs: {
+      map: "Mapa",
+      load: "Carga",
+      unload: "Descarga",
+    },
+  },
 };

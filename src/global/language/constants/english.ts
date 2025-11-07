@@ -451,4 +451,11 @@ export const ENGLISH: LanguageInterface = {
       yAxis: "Vehicles",
     },
   },
+  zonesVehicle: {
+    tabs: {
+      map: "Map",
+      load: "Load",
+      unload: "Unload",
+    },
+  },
 };

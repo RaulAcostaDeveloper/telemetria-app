@@ -431,4 +431,11 @@ export interface LanguageInterface {
       yAxis: string;
     };
   };
+  zonesVehicle: {
+    tabs: {
+      map: string;
+      load: string;
+      unload: string;
+    };
+  };
 }

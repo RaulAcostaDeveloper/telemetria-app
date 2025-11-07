@@ -1,0 +1,27 @@
+.container {
+  max-width: 49%;
+}
+.frame {
+  width: 350px;
+  padding: 1rem;
+}
+.row {
+  width: 350px;
+  max-width: 100%;
+  display: flex;
+  font-size: 2rem;
+  line-height: 1.1;
+  padding-top: 0.8rem;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(255, 255, 255);
+  border-bottom-width: 3px;
+}
+.row div:first-child {
+  width: 12rem;
+  font-weight: bold;
+  text-align: left;
+}
+.row div:nth-child(2) {
+  text-align: left;
+  text-overflow: ellipsis;
+}
