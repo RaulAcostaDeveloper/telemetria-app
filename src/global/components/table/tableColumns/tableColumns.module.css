@@ -25,6 +25,7 @@
   cursor: pointer;
   font: inherit;
   background-color: var(--company-color-5);
+  text-align: left;
 }
 
 .columnButton:hover {
