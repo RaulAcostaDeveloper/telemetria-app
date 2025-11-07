@@ -452,7 +452,6 @@ export const ENGLISH: LanguageInterface = {
       yAxis: "Vehicles",
     },
   },
-  },
   zones: {
     zonesFuelTable: {
       zone: "Zone",
@@ -465,7 +464,7 @@ export const ENGLISH: LanguageInterface = {
       charged: "Liters loaded",
       discharged: "Liters unloaded",
     },
-        tabs: {
+    tabs: {
       map: "Map",
       load: "Load",
       unload: "Unload",
