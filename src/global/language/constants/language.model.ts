@@ -98,6 +98,7 @@ export interface LanguageInterface {
       viewDetail: string;
       goFuelReport: string;
       goObdReport: string;
+      goGenericReport: string;
       noImei: string;
       cleanFilters: string;
       noFilters: string;
@@ -431,7 +432,19 @@ export interface LanguageInterface {
       yAxis: string;
     };
   };
-  zonesVehicle: {
+
+  zones: {
+    zonesFuelTable: {
+      zone: string;
+      profile: string;
+      country: string;
+      state: string;
+      city: string;
+      zipCode: string;
+      events: string;
+      charged: string;
+      discharged: string;
+    };
     tabs: {
       map: string;
       load: string;

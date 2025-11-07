@@ -119,6 +119,7 @@ export const ENGLISH: LanguageInterface = {
       viewDetail: "View details",
       goFuelReport: "Go to fuel report",
       goObdReport: "Go to OBD report",
+      goGenericReport: "Go to report",
       cleanFilters: "Clear",
       goPage: "Go to page",
       noFilters: "No filters available for this table",
@@ -451,7 +452,18 @@ export const ENGLISH: LanguageInterface = {
       yAxis: "Vehicles",
     },
   },
-  zonesVehicle: {
+  zones: {
+    zonesFuelTable: {
+      zone: "Zone",
+      profile: "Profile",
+      country: "Country",
+      state: "State / Province",
+      city: "City",
+      zipCode: "Postal code",
+      events: "Total events",
+      charged: "Liters loaded",
+      discharged: "Liters unloaded",
+    },
     tabs: {
       map: "Map",
       load: "Load",

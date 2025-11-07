@@ -1,28 +1,29 @@
 "use client";
-import styles from "./zonesDataProvider.module.css";
+import { useMemo } from "react";
 import { LocalGasStation, Map } from "@mui/icons-material";
+
+import styles from "./zonesDataProvider.module.css";
 import { TabsContent } from "@/global/components";
 import { ZonesMapTabSolo } from "../zonesMapTabSolo/zonesMapTabSolo";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
-import { useMemo } from "react";
 import { z0n3sD4t4M0ck } from "@/global/components/dataMock/z0n3sD4t4M0ck";
 
 interface Props {
-  imei: string;
+  id: string;
 }
 
-export const ZonesDataProvider = ({ imei }: Props) => {
+export const ZonesDataProvider = ({ id }: Props) => {
   const LANGUAGE = useLanguage();
   // TODO: Agregar mock de información a constantes.
   const zoneTabs = [
-    { text: LANGUAGE.zonesVehicle.tabs.map, icon: Map },
+    { text: LANGUAGE.zones.tabs.map, icon: Map },
     {
-      text: LANGUAGE.zonesVehicle.tabs.load,
+      text: LANGUAGE.zones.tabs.load,
       icon: LocalGasStation,
       iconStyle: { color: "rgb(4,187,4)" },
     },
     {
-      text: LANGUAGE.zonesVehicle.tabs.unload,
+      text: LANGUAGE.zones.tabs.unload,
       icon: LocalGasStation,
       iconStyle: { color: "223,44,59)" },
     },

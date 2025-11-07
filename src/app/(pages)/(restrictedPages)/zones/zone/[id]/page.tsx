@@ -1,3 +1,5 @@
+import { ZonesDataProvider } from "@/modules/zones/components/zonesDataProvider/zonesDataProvider";
+
 interface Page {
   params: {
     id: string;
@@ -5,7 +7,11 @@ interface Page {
 }
 
 export default function ZonesVehicle({ params }: Page) {
-  const { id } = params; // imei del vehiculo
+  const { id } = params;
 
-  return <>{id}</>;
+  return (
+    <>
+      <ZonesDataProvider id={id} />
+    </>
+  );
 }

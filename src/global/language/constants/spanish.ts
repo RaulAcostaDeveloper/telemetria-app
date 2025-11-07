@@ -119,6 +119,7 @@ export const SPANISH: LanguageInterface = {
       viewDetail: "Ver detalles",
       goFuelReport: "Ir a reporte de combustible",
       goObdReport: "Ir a reporte de OBD",
+      goGenericReport: "Ir al reporte",
       cleanFilters: "Limpiar",
       goPage: "Ir a la página",
       noFilters: "No hay filtros para esta tabla",
@@ -451,7 +452,18 @@ export const SPANISH: LanguageInterface = {
       yAxis: "Vehículos",
     },
   },
-  zonesVehicle: {
+  zones: {
+    zonesFuelTable: {
+      zone: "Zona",
+      profile: "Perfil",
+      country: "País",
+      state: "Estado",
+      city: "Ciudad",
+      zipCode: "Código postal",
+      events: "Total eventos",
+      charged: "Litros cargados",
+      discharged: "Litros descargados",
+    },
     tabs: {
       map: "Mapa",
       load: "Cargas",

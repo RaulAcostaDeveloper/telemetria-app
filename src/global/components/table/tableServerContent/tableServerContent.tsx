@@ -37,6 +37,7 @@ interface Props {
   showDelete?: boolean;
   showEdit?: boolean;
   showGoFuel?: boolean;
+  showGoGenericReport?: boolean;
   showGoOBD?: boolean;
   showGoPageView?: boolean;
   showViewModal?: boolean;
@@ -67,6 +68,7 @@ export const TableServerContent = ({
   showDelete,
   showEdit,
   showGoFuel,
+  showGoGenericReport,
   showGoOBD,
   showGoPageView,
   showViewModal,
@@ -127,7 +129,8 @@ export const TableServerContent = ({
                 showGoFuel ||
                 showGoOBD ||
                 showGoPageView ||
-                showViewModal
+                showViewModal ||
+                showGoGenericReport
               }
             />
 
@@ -145,11 +148,13 @@ export const TableServerContent = ({
                 showGoFuel ||
                 showGoOBD ||
                 showGoPageView ||
-                showViewModal
+                showViewModal ||
+                showGoGenericReport
               }
               showDelete={showDelete}
               showEdit={showEdit}
               showGoFuel={showGoFuel}
+              showGoGenericReport={showGoGenericReport}
               showGoOBD={showGoOBD}
               showGoPageView={showGoPageView}
               showViewModal={showViewModal}
