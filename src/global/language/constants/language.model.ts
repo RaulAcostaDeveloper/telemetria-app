@@ -432,7 +432,6 @@ export interface LanguageInterface {
       yAxis: string;
     };
   };
-
   zones: {
     zonesFuelTable: {
       zone: string;
