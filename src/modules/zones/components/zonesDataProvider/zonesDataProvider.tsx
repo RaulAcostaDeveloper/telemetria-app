@@ -35,6 +35,7 @@ export const ZonesDataProvider = ({ id }: Props) => {
 
   return (
     <div className={styles.zonesDataProvider}>
+      {id}
       <TabsContent
         tabOptions={zoneTabs}
         tabContents={[
