@@ -174,7 +174,6 @@ export const TableDataContent = ({
                 showEdit={showEdit}
                 showGoFuel={showGoFuel}
                 showGoOBD={showGoOBD}
-                showGoZones={true}
                 showGoPageView={showGoPageView}
                 showViewModal={showViewModal}
                 viewPath={viewPath}

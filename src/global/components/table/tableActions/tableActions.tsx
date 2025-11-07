@@ -25,7 +25,6 @@ interface Props {
   showEdit?: boolean;
   showGoFuel?: boolean;
   showGoOBD?: boolean;
-  showGoZones?: boolean;
   showGoPageView?: boolean;
   showViewModal?: boolean;
   viewPath?: string;
@@ -42,7 +41,6 @@ export const TableActions = ({
   showEdit,
   showGoFuel,
   showGoOBD,
-  showGoZones,
   showGoPageView,
   showViewModal,
   viewPath,
@@ -98,22 +96,6 @@ export const TableActions = ({
           noImeiTitle={LANGUAGE.table.actions.noImei}
           title={LANGUAGE.table.actions.goObdReport}
           href={"/telemetry/vehicle/" + imei}
-        >
-          <Image
-            src={"/png/car-gps.png"}
-            width={22}
-            height={22}
-            alt="car services"
-          />
-        </TableActionLink>
-      )}
-
-      {showGoZones && (
-        <TableActionLink
-          hasCompleteRoute={true}
-          noImeiTitle={LANGUAGE.table.actions.noImei}
-          title={LANGUAGE.table.actions.goObdReport}
-          href={"/zones/vehicle/" + imei}
         >
           <Image
             src={"/png/car-gps.png"}

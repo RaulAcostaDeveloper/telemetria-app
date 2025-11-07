@@ -1,34 +1,32 @@
 import dynamic from "next/dynamic";
 import styles from "./zonesMapTabSolo.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
-import { TooltipGeoField } from "@/global/utils/geoMapUtils";
 
-const GoogleMapClientOnly = dynamic(
+const GoogleMapSeveralMarkersClientC = dynamic(
   () =>
     import(
-      "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent"
+      "@/global/components/geoModal/googleMapSeveralMarkersClientC/googleMapSeveralMarkersClientC"
     ),
   { ssr: false }
 );
 
-type GeoData = {
-  lat: number;
-  lon: number;
+interface markerData {
+  id: number;
+  position: { lat: number; lng: number };
   title: string;
-  rows: TooltipGeoField[];
-};
+}
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  geoModalData: GeoData;
+  markersInZone: markerData[];
 }
 
-export const ZonesMapTabSolo = ({ LANGUAGE, geoModalData }: Props) => {
+export const ZonesMapTabSolo = ({ LANGUAGE, markersInZone }: Props) => {
   return (
     <div className={["containermap", styles.container].join(" ")}>
-      <GoogleMapClientOnly
+      <GoogleMapSeveralMarkersClientC
         LANGUAGE={LANGUAGE}
-        geoModalData={geoModalData}
+        places={markersInZone}
         mapType={"satellite"}
       />
     </div>

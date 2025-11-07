@@ -6,7 +6,6 @@ import { ZonesMapTabSolo } from "../zonesMapTabSolo/zonesMapTabSolo";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 import { useMemo } from "react";
 import { z0n3sD4t4M0ck } from "@/global/components/dataMock/z0n3sD4t4M0ck";
-import { ZoneSingleInfo } from "../zoneSingleInfo/zoneSingleInfo";
 
 interface Props {
   imei: string;
@@ -33,8 +32,6 @@ export const ZonesDataProvider = ({ imei }: Props) => {
     return z0n3sD4t4M0ck[1];
   }, []);
 
-  /* const { geoData, ...allButGeoZoneData } = allZoneData; */
-
   return (
     <div className={styles.zonesDataProvider}>
       <TabsContent
@@ -42,10 +39,9 @@ export const ZonesDataProvider = ({ imei }: Props) => {
         tabContents={[
           <div key={0}>
             <div className={["containertabmap", styles.container].join(" ")}>
-              <ZoneSingleInfo allZoneData={allZoneData} />
               <ZonesMapTabSolo
                 LANGUAGE={LANGUAGE}
-                geoModalData={allZoneData.geoData}
+                markersInZone={allZoneData.markersInZone}
               />
             </div>
           </div>,
