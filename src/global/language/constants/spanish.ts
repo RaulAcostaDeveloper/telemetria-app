@@ -464,5 +464,10 @@ export const SPANISH: LanguageInterface = {
       charged: "Litros cargados",
       discharged: "Litros descargados",
     },
+    tabs: {
+      map: "Mapa",
+      load: "Cargas",
+      unload: "Descargas",
+    },
   },
 };

@@ -444,5 +444,10 @@ export interface LanguageInterface {
       charged: string;
       discharged: string;
     };
+    tabs: {
+      map: string;
+      load: string;
+      unload: string;
+    };
   };
 }
