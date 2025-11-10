@@ -448,6 +448,16 @@ export interface LanguageInterface {
       map: string;
       load: string;
       unload: string;
+      loadTable: {
+        siteId: string;
+        date: string;
+        loadValue: string;
+      };
+      unloadTable: {
+        siteId: string;
+        date: string;
+        loadValue: string;
+      };
     };
   };
 }

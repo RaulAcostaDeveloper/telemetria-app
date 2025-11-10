@@ -467,6 +467,16 @@ export const PORTUGUES: LanguageInterface = {
       map: "Mapa",
       load: "Carga",
       unload: "Descarga",
+      loadTable: {
+        siteId: "Lugar",
+        date: "Data",
+        loadValue: "Carga",
+      },
+      unloadTable: {
+        siteId: "Site",
+        date: "Data",
+        loadValue: "Descarga",
+      },
     },
   },
 };

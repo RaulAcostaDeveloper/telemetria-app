@@ -468,6 +468,16 @@ export const SPANISH: LanguageInterface = {
       map: "Mapa",
       load: "Cargas",
       unload: "Descargas",
+      loadTable: {
+        siteId: "Unidad",
+        date: "Fecha",
+        loadValue: "Carga",
+      },
+      unloadTable: {
+        siteId: "Unidad",
+        date: "Fecha",
+        loadValue: "Descarga",
+      },
     },
   },
 };
