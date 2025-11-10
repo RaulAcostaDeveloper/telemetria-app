@@ -103,6 +103,7 @@ export const PORTUGUES: LanguageInterface = {
       filtersButton: "Filtros",
     },
     actions: {
+      addProfileToZone: "Editar o perfil da zona",
       close: "Fechar",
       agree: "Aceitar",
       copy: "Copiar texto",

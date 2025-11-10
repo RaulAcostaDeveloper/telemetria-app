@@ -84,6 +84,7 @@ export interface LanguageInterface {
       filtersButton: string;
     };
     actions: {
+      addProfileToZone: string;
       close: string;
       agree: string;
       copy: string;

@@ -3,7 +3,11 @@ import { useMemo } from "react";
 
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { Table } from "@/global/components";
-import { columnsTable, dataTable } from "@/global/components/table/table.model";
+import {
+  columnsTable,
+  dataTable,
+  MODAL_OPTION,
+} from "@/global/components/table/table.model";
 import { fuelZonesDataMock } from "@/global/dataMock/fuelZonesDataMock";
 
 interface Props {
@@ -86,6 +90,8 @@ export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
       showGoGenericReport
       idKey="id"
       viewPath="/zones/zone/"
+      showEdit
+      modalOption={MODAL_OPTION.ZONE}
     />
   );
 };

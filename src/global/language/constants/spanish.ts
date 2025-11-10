@@ -104,6 +104,7 @@ export const SPANISH: LanguageInterface = {
       filtersButton: "Filtros",
     },
     actions: {
+      addProfileToZone: "Editar el perfil de la zona",
       close: "Cerrar",
       agree: "Aceptar",
       copy: "Copiar el texto",
