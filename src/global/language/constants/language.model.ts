@@ -449,6 +449,16 @@ export interface LanguageInterface {
       map: string;
       load: string;
       unload: string;
+      loadTable: {
+        vehicleId: string;
+        date: string;
+        loadValue: string;
+      };
+      unloadTable: {
+        vehicleId: string;
+        date: string;
+        loadValue: string;
+      };
     };
   };
 }

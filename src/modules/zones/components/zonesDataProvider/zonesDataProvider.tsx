@@ -3,10 +3,12 @@ import { useMemo } from "react";
 import { LocalGasStation, Map } from "@mui/icons-material";
 
 import styles from "./zonesDataProvider.module.css";
-import { TabsContent } from "@/global/components";
+import { Table, TabsContent } from "@/global/components";
 import { ZonesMapTabSolo } from "../zonesMapTabSolo/zonesMapTabSolo";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 import { z0n3sD4t4M0ck } from "@/global/components/dataMock/z0n3sD4t4M0ck";
+import { columnsTable, dataTable } from "@/global/components/table/table.model";
+import { formatDateTime } from "@/global/utils/utils";
 
 interface Props {
   id: string;
@@ -29,13 +31,64 @@ export const ZonesDataProvider = ({ id }: Props) => {
     },
   ];
 
+  const loadsZoneColumns: columnsTable = [
+    {
+      columnName: LANGUAGE.zones.tabs.loadTable.vehicleId,
+      defaultSpace: 4,
+      orderColumn: true,
+    },
+    {
+      columnName: LANGUAGE.zones.tabs.loadTable.date,
+      defaultSpace: 4,
+      orderColumn: true,
+    },
+    {
+      columnName: `${LANGUAGE.zones.tabs.loadTable.loadValue} (L)`,
+      defaultSpace: 2,
+      orderColumn: true,
+      minMaxFilter: true,
+    },
+  ];
+
+  const unloadsZoneColumns: columnsTable = [
+    {
+      columnName: LANGUAGE.zones.tabs.unloadTable.vehicleId,
+      defaultSpace: 4,
+      orderColumn: true,
+    },
+    {
+      columnName: LANGUAGE.zones.tabs.unloadTable.date,
+      defaultSpace: 4,
+      orderColumn: true,
+    },
+    {
+      columnName: `${LANGUAGE.zones.tabs.unloadTable.loadValue} (L)`,
+      defaultSpace: 2,
+      orderColumn: true,
+      minMaxFilter: true,
+    },
+  ];
+
   const allZoneData = useMemo(() => {
     return z0n3sD4t4M0ck[1];
+  }, []);
+  const allZoneDataLoads: dataTable = useMemo(() => {
+    return allZoneData.loads?.map((v) => ({
+      id: v.vehicleId,
+      date: formatDateTime(v.date),
+      loadValue: v.loadValue,
+    }));
+  }, []);
+  const allZoneDataUnloads: dataTable = useMemo(() => {
+    return allZoneData.unloads?.map((v) => ({
+      id: v.vehicleId,
+      date: formatDateTime(v.date),
+      loadValue: v.loadValue,
+    }));
   }, []);
 
   return (
     <div className={styles.zonesDataProvider}>
-      {id}
       <TabsContent
         tabOptions={zoneTabs}
         tabContents={[
@@ -47,8 +100,28 @@ export const ZonesDataProvider = ({ id }: Props) => {
               />
             </div>
           </div>,
-          <div key={1}></div>,
-          <div key={2}></div>,
+          <div key={1}>
+            {allZoneData && (
+              <Table
+                LANGUAGE={LANGUAGE}
+                columns={loadsZoneColumns}
+                data={allZoneDataLoads}
+                idKey="id"
+                showViewModal
+              />
+            )}
+          </div>,
+          <div key={2}>
+            {allZoneData && (
+              <Table
+                LANGUAGE={LANGUAGE}
+                columns={unloadsZoneColumns}
+                data={allZoneDataUnloads}
+                idKey="id"
+                showViewModal
+              />
+            )}
+          </div>,
         ]}
       />
     </div>
