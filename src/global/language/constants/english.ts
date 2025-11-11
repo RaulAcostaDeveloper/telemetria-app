@@ -159,7 +159,7 @@ export const ENGLISH: LanguageInterface = {
       performancesBetweenCharges: "Performance between charges",
       dailyPerformance: "Daily performance",
       engineOff: "Engine off",
-      engineOnIdle: "Engine parket",
+      engineOnIdle: "Engine parked",
       engineOnMoving: "Engine running (moving)",
     },
     tooltips: {
@@ -355,7 +355,7 @@ export const ENGLISH: LanguageInterface = {
       totalTimeWorked: "Time worked",
     },
     analysisTab: {
-      totalIdleTime: "Total engine parket time",
+      totalIdleTime: "Total engine parked time",
       allowedMaxSpeed: "Allowed max speed",
       maxSpeed: "Max speed",
       averageRpm: "Average RPM",
@@ -422,7 +422,7 @@ export const ENGLISH: LanguageInterface = {
     resumes: {
       distance: "Total distance traveled",
       timeDriven: "Total driving time",
-      timeIdle: "Total engine parket time",
+      timeIdle: "Total engine parked time",
     },
     tableColumns: {
       title: "Top 5",
@@ -431,7 +431,7 @@ export const ENGLISH: LanguageInterface = {
       driverDistance: "Traveled Distance (Km)",
       averageSpeed: "Average speed (km/h)",
       driverTime: "Driving time (h)",
-      driverIdleTime: "Engine parket time (h)",
+      driverIdleTime: "Engine parked time (h)",
       maxSpeed: "Max speed (km/h)",
     },
     tableTitle: {
@@ -440,16 +440,16 @@ export const ENGLISH: LanguageInterface = {
     charts: {
       titleDistance: "Driving distance",
       titleDriven: "Driving time",
-      titleIdle: "Engine parket time",
+      titleIdle: "Engine parked time",
       subtitleDistance: "Median distance traveled",
       subtitleDriven: "Median driving time",
-      subtitleIdle: "Median engine parket time",
+      subtitleIdle: "Median engine parked time",
       titleTooltipDistance: "Distance Traveled",
       titleTooltipDriven: "Driven Time",
-      titleTooltipIdle: "Engine parket time",
+      titleTooltipIdle: "Engine parked time",
       xAxisDistance: "Distance traveled (km)",
       xAxisDriven: "Driven time (h)",
-      xAxisIdle: "Engine parket time (h)",
+      xAxisIdle: "Engine parked time (h)",
       yAxis: "Vehicles",
     },
   },
