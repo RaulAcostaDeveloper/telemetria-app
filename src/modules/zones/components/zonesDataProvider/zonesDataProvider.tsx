@@ -36,13 +36,11 @@ export const ZonesDataProvider = ({ id }: Props) => {
       columnName: LANGUAGE.zones.tabs.loadTable.vehicleId,
       defaultSpace: 4,
       orderColumn: true,
-      filterSelector: true,
     },
     {
       columnName: LANGUAGE.zones.tabs.loadTable.date,
       defaultSpace: 4,
       orderColumn: true,
-      filterSelector: true,
     },
     {
       columnName: `${LANGUAGE.zones.tabs.loadTable.loadValue} (L)`,
@@ -57,13 +55,11 @@ export const ZonesDataProvider = ({ id }: Props) => {
       columnName: LANGUAGE.zones.tabs.unloadTable.vehicleId,
       defaultSpace: 4,
       orderColumn: true,
-      filterSelector: true,
     },
     {
       columnName: LANGUAGE.zones.tabs.unloadTable.date,
       defaultSpace: 4,
       orderColumn: true,
-      filterSelector: true,
     },
     {
       columnName: `${LANGUAGE.zones.tabs.unloadTable.loadValue} (L)`,
