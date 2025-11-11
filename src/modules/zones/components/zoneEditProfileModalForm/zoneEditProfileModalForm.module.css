@@ -6,7 +6,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .row {
@@ -23,9 +23,7 @@
   display: block;
 }
 
-.inputNormal input,
-.inputNormal select,
-.inputNormal textarea {
+.inputNormal .input {
   appearance: none;
   background-color: white;
   width: 200px;
@@ -39,11 +37,11 @@
   color: rgba(0, 0, 0, 0.7);
 }
 
-.inputNormal input[type="text"] {
+.inputNormal .input[type="text"] {
   padding: 5px;
 }
 
-.inputNormal input[type="color"] {
+.inputNormal .input[type="color"] {
   cursor: pointer;
   padding: 4px;
 }
@@ -60,22 +58,15 @@
   cursor: pointer;
 }
 
-.inputNormal input:focus,
-.inputNormal select:focus,
-.inputLarge textarea:focus {
+.inputNormal .input:focus,
+.inputNormal .input:hover {
   outline: none;
-}
-
-.inputNormal input:hover,
-.inputNormal select:hover,
-.inputLarge textarea:hover {
   -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-4);
   -moz-box-shadow: 2px 2px 5px 0px var(--company-color-4);
   box-shadow: 2px 2px 5px 0px var(--company-color-4);
 }
 
-.withValue {
-  border: 2px solid var(--company-color-4);
+.inputNormal .withValue {
   -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-4);
   -moz-box-shadow: 2px 2px 5px 0px var(--company-color-4);
   box-shadow: 2px 2px 5px 0px var(--company-color-4);
@@ -91,7 +82,7 @@
   width: 100%;
 }
 
-.inputLarge textarea {
+.inputLarge .textarea {
   width: 100%;
   height: 60px;
   resize: vertical;

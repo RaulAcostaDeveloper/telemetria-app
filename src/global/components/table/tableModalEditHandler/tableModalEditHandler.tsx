@@ -26,7 +26,7 @@ export const TableModalEditHandler = ({
         <ZoneEditProfileModalForm
           LANGUAGE={LANGUAGE}
           closeModal={closeModal}
-          idObject={idObject}
+          id={idObject}
         />
       );
     default:

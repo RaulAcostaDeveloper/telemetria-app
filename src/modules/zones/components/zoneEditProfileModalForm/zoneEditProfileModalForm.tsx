@@ -9,19 +9,36 @@ import { PrimitiveValue } from "@/global/components/table/table.model";
 interface Props {
   LANGUAGE: LanguageInterface;
   closeModal: () => void;
-  idObject: PrimitiveValue;
+  id: PrimitiveValue;
 }
 
 export const ZoneEditProfileModalForm = ({
   LANGUAGE,
   closeModal,
-  idObject,
+  id,
 }: Props) => {
+  const [name, setName] = useState<string>("");
   const [category, setCategory] = useState("");
-  const categoryOptions = ["una opción"];
+  const [authCharges, setAuthCharges] = useState("");
+  const [authDisharges, setAuthDisharges] = useState("");
+  const [authRalenti, setAuthRalenti] = useState("");
+  const [color, setColor] = useState<string>("");
+  const [provider, setProvider] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+
   const onConfirm = () => {
-    console.log("id object", idObject);
+    console.log("id ", id);
+
+    console.log("name", name);
+    console.log("category", category);
+    console.log("authCharges", authCharges);
+    console.log("authDisharges", authDisharges);
+    console.log("authRalenti", authRalenti);
+    console.log("color", color);
+    console.log("provider", provider);
+    console.log("description", description);
   };
+
   return (
     <Modal
       LANGUAGE={LANGUAGE}
@@ -30,11 +47,11 @@ export const ZoneEditProfileModalForm = ({
     >
       <div className={styles.form}>
         <div className={styles.row}>
-          <InputText
+          <Input
             name="nameProfile"
             title="Nombre del perfíl"
-            value={category}
-            set={setCategory}
+            value={name}
+            set={setName}
             isLeft
           />
           <Select
@@ -50,33 +67,33 @@ export const ZoneEditProfileModalForm = ({
           <Select
             title="Cargas"
             name="loadedAuth"
-            value={category}
-            set={setCategory}
-            options={categoryOptions}
+            value={authCharges}
+            set={setAuthCharges}
+            options={authOptions}
             isLeft
           />
           <Select
             title="Descargas"
             name="unloadedAuth"
-            value={category}
-            set={setCategory}
-            options={categoryOptions}
+            value={authDisharges}
+            set={setAuthDisharges}
+            options={authOptions}
           />
         </div>
         <div className={styles.row}>
           <Select
             title="Ralentí"
             name="ralenti"
-            value={category}
-            set={setCategory}
-            options={categoryOptions}
+            value={authRalenti}
+            set={setAuthRalenti}
+            options={authOptions}
             isLeft
           />
-          <InputText
+          <Input
             title="Color"
             name="color"
-            value={category}
-            set={setCategory}
+            value={color}
+            set={setColor}
             isColor
           />
         </div>
@@ -85,19 +102,19 @@ export const ZoneEditProfileModalForm = ({
           <Select
             title="Proveedor"
             name="provider"
-            value={category}
-            set={setCategory}
-            options={categoryOptions}
+            value={provider}
+            set={setProvider}
+            options={providerOptions}
             isLeft
           />
         </div>
 
         <div className={styles.row}>
-          <InputText
+          <Input
             title="Descripción"
             name="description"
-            value={category}
-            set={setCategory}
+            value={description}
+            set={setDescription}
             isLarge
           />
         </div>
@@ -112,6 +129,18 @@ export const ZoneEditProfileModalForm = ({
             callback={onConfirm}
             title={LANGUAGE.table.buttons.saveEdit}
             type={ButtonTypes.CONFIRM}
+            disabled={
+              !(
+                name &&
+                category &&
+                authCharges &&
+                authDisharges &&
+                authRalenti &&
+                color &&
+                provider &&
+                description
+              )
+            }
           />
         </div>
       </div>
@@ -136,7 +165,7 @@ const Select = ({ title, name, value, set, options, isLeft }: SelectProps) => {
         name={name}
         value={value}
         onChange={(e) => set(e.target.value)}
-        className={`${styles.selectInput} ${
+        className={` ${styles.input} ${styles.selectInput} ${
           value !== "" ? styles.withValue : ""
         }`}
       >
@@ -161,7 +190,7 @@ interface InputProps {
   isLeft?: boolean;
 }
 
-const InputText = ({
+const Input = ({
   title,
   name,
   value,
@@ -183,6 +212,9 @@ const InputText = ({
           id={name}
           value={value}
           onChange={(e) => set(e.target.value)}
+          className={` ${styles.input} ${styles.textarea} ${
+            value !== "" ? styles.withValue : ""
+          }`}
         />
       ) : (
         <input
@@ -191,8 +223,13 @@ const InputText = ({
           id={name}
           value={value}
           onChange={(e) => set(e.target.value)}
+          className={` ${styles.input} ${value !== "" ? styles.withValue : ""}`}
         />
       )}
     </div>
   );
 };
+
+const categoryOptions = ["una categoría", "otra categoría"];
+const authOptions = ["Autorizada", "No autorizada"];
+const providerOptions = ["un proveedor", "otro proveedor"];
