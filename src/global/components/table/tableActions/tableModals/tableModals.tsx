@@ -39,6 +39,7 @@ export const TableModals = ({
           LANGUAGE={LANGUAGE}
           closeModal={closeEditModal}
           modalOption={modalOption}
+          idObject={idObject}
         />
       )}
 

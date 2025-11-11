@@ -50,7 +50,7 @@ export async function clearCacheByKey(cacheKey: string) {
   try {
     await table.delete(cacheKey);
   } catch (error) {
-    console.error("No se encontró el Key del Caché ", cacheKey, " - ", error);
+    console.warn("No se encontró el Key del Caché ", cacheKey, " - ", error);
   }
 }
 
@@ -68,6 +68,6 @@ export async function cleanExpiredCache(): Promise<void> {
       `[CACHE CLEANUP] Eliminadas ${deletedCount} entradas expiradas.`
     );
   } catch (error) {
-    console.error("[CACHE CLEANUP ERROR]", error);
+    console.warn("[CACHE CLEANUP ERROR]", error);
   }
 }

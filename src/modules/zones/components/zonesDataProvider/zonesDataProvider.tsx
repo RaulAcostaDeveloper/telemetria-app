@@ -6,7 +6,7 @@ import styles from "./zonesDataProvider.module.css";
 import { Table, TabsContent } from "@/global/components";
 import { ZonesMapTabSolo } from "../zonesMapTabSolo/zonesMapTabSolo";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
-import { z0n3sD4t4M0ck } from "@/global/components/dataMock/z0n3sD4t4M0ck";
+import { z0n3sD4t4M0ck } from "@/global/dataMock/z0n3sD4t4M0ck";
 import { columnsTable, dataTable } from "@/global/components/table/table.model";
 import { formatDateTime } from "@/global/utils/utils";
 

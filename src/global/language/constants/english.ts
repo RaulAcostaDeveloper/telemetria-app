@@ -104,6 +104,7 @@ export const ENGLISH: LanguageInterface = {
       filtersButton: "Filters",
     },
     actions: {
+      addProfileToZone: "Edit zone's profile",
       close: "Close",
       agree: "Accept",
       copy: "Copy text",
@@ -158,7 +159,7 @@ export const ENGLISH: LanguageInterface = {
       performancesBetweenCharges: "Performance between charges",
       dailyPerformance: "Daily performance",
       engineOff: "Engine off",
-      engineOnIdle: "Engine idling",
+      engineOnIdle: "Engine parked",
       engineOnMoving: "Engine running (moving)",
     },
     tooltips: {
@@ -354,7 +355,7 @@ export const ENGLISH: LanguageInterface = {
       totalTimeWorked: "Time worked",
     },
     analysisTab: {
-      totalIdleTime: "Total idle time",
+      totalIdleTime: "Total engine parked time",
       allowedMaxSpeed: "Allowed max speed",
       maxSpeed: "Max speed",
       averageRpm: "Average RPM",
@@ -421,7 +422,7 @@ export const ENGLISH: LanguageInterface = {
     resumes: {
       distance: "Total distance traveled",
       timeDriven: "Total driving time",
-      timeIdle: "Total idling time",
+      timeIdle: "Total engine parked time",
     },
     tableColumns: {
       title: "Top 5",
@@ -430,7 +431,7 @@ export const ENGLISH: LanguageInterface = {
       driverDistance: "Traveled Distance (Km)",
       averageSpeed: "Average speed (km/h)",
       driverTime: "Driving time (h)",
-      driverIdleTime: "Idling time (h)",
+      driverIdleTime: "Engine parked time (h)",
       maxSpeed: "Max speed (km/h)",
     },
     tableTitle: {
@@ -439,20 +440,32 @@ export const ENGLISH: LanguageInterface = {
     charts: {
       titleDistance: "Driving distance",
       titleDriven: "Driving time",
-      titleIdle: "Idle time",
+      titleIdle: "Engine parked time",
       subtitleDistance: "Median distance traveled",
       subtitleDriven: "Median driving time",
-      subtitleIdle: "Median idle time",
+      subtitleIdle: "Median engine parked time",
       titleTooltipDistance: "Distance Traveled",
       titleTooltipDriven: "Driven Time",
-      titleTooltipIdle: "Idle Time",
+      titleTooltipIdle: "Engine parked time",
       xAxisDistance: "Distance traveled (km)",
       xAxisDriven: "Driven time (h)",
-      xAxisIdle: "Idle time (h)",
+      xAxisIdle: "Engine parked time (h)",
       yAxis: "Vehicles",
     },
   },
   zones: {
+    zoneProfileForm: {
+      name: "Name",
+      category: "Category",
+      charges: "Charges",
+      discharges: "Discharges",
+      ralenti: "Idle",
+      color: "Color",
+      provider: "Provider",
+      description: "Description",
+      authorized: "Authorized",
+      noAuthorized: "Not authorized",
+    },
     zonesFuelTable: {
       zone: "Zone",
       profile: "Profile",

@@ -32,7 +32,7 @@ const GoogleMapClientComponent = ({ LANGUAGE, places, mapType }: Props) => {
         const { GOOGLE_MAPS_API_KEY } = await getEnvClient();
         setGoogleApiKey(GOOGLE_MAPS_API_KEY ?? null);
       } catch {
-        console.error("No se pudo cargar GOOGLE_MAPS_API_KEY");
+        console.warn("No se pudo cargar GOOGLE_MAPS_API_KEY");
       }
     })();
   }, []);

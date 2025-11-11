@@ -75,6 +75,14 @@ export const TableActions = ({
         />
       )}
 
+      {showEdit && (
+        <TableActionButton
+          title={LANGUAGE.table.actions.editElement}
+          callBack={() => setShowEditModal(true)}
+          Icon={ModeEditIcon}
+        />
+      )}
+
       {showViewModal && modalOption && (
         <TableActionButton
           title={LANGUAGE.table.actions.viewDetail}
@@ -115,14 +123,6 @@ export const TableActions = ({
           title={LANGUAGE.table.actions.goGenericReport}
           Icon={ArrowRightAltIcon}
           href={`${viewPath}${dataObject[idKey ?? ""] ?? ""}`}
-        />
-      )}
-
-      {showEdit && (
-        <TableActionButton
-          title={LANGUAGE.table.actions.editElement}
-          callBack={() => setShowEditModal(true)}
-          Icon={ModeEditIcon}
         />
       )}
 

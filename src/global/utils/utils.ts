@@ -32,7 +32,7 @@ export const formatToLocalIso8601 = (input: string | Date): string => {
 
 export function toLocalDateTime(isoDate: string): string {
   if (typeof isoDate !== "string") {
-    console.error("toLocalDateTime: isoDate debe ser una cadena.");
+    console.warn("toLocalDateTime: isoDate debe ser una cadena.");
     return isoDate;
   }
 
@@ -54,7 +54,7 @@ export function toLocalDateTime(isoDate: string): string {
   const date = new Date(normalized);
 
   if (Number.isNaN(date.getTime())) {
-    console.error(`Fecha inválida: "${isoDate}"`);
+    console.warn(`Fecha inválida: "${isoDate}"`);
     return isoDate;
   }
 

@@ -77,6 +77,14 @@ export const TableServerContent = ({
   viewPath,
   windowMaxSize,
 }: Props) => {
+  const showActions =
+    showDelete ||
+    showEdit ||
+    showGoFuel ||
+    showGoOBD ||
+    showGoPageView ||
+    showViewModal ||
+    showGoGenericReport;
   return (
     <>
       <div className={styles.inside}>
@@ -123,15 +131,7 @@ export const TableServerContent = ({
               columnOrdered={columnOrdered}
               columns={columns}
               setColumnOrdered={setColumnOrdered}
-              showActions={
-                showDelete ||
-                showEdit ||
-                showGoFuel ||
-                showGoOBD ||
-                showGoPageView ||
-                showViewModal ||
-                showGoGenericReport
-              }
+              showActions={showActions}
             />
 
             {/* Registros de la tabla */}
@@ -142,15 +142,7 @@ export const TableServerContent = ({
               filteredData={filteredData}
               idKey={idKey}
               modalOption={modalOption}
-              showActions={
-                showDelete ||
-                showEdit ||
-                showGoFuel ||
-                showGoOBD ||
-                showGoPageView ||
-                showViewModal ||
-                showGoGenericReport
-              }
+              showActions={showActions}
               showDelete={showDelete}
               showEdit={showEdit}
               showGoFuel={showGoFuel}

@@ -1,0 +1,89 @@
+.form {
+  padding: 15px;
+}
+
+.bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.row {
+  margin: 15px 0;
+  display: flex;
+}
+
+.inputNormal {
+  font-size: 2rem;
+}
+
+.inputNormal label {
+  font-weight: 600;
+  display: block;
+}
+
+.inputNormal .input {
+  appearance: none;
+  background-color: white;
+  width: 200px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid var(--shadow-soft);
+  padding: 8px;
+  -webkit-box-shadow: 2px 2px 5px 0px var(--shadow-bold);
+  -moz-box-shadow: 2px 2px 5px 0px var(--shadow-bold);
+  box-shadow: 2px 2px 5px 0px var(--shadow-bold);
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.inputNormal .input[type="text"] {
+  padding: 5px;
+}
+
+.inputNormal .input[type="color"] {
+  cursor: pointer;
+  padding: 4px;
+}
+
+.left {
+  margin-right: 20px;
+}
+
+.selectInput {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-position: right 5px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  cursor: pointer;
+}
+
+.inputNormal .input:focus,
+.inputNormal .input:hover {
+  outline: none;
+  -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-4);
+  -moz-box-shadow: 2px 2px 5px 0px var(--company-color-4);
+  box-shadow: 2px 2px 5px 0px var(--company-color-4);
+}
+
+.inputNormal .withValue {
+  -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-4);
+  -moz-box-shadow: 2px 2px 5px 0px var(--company-color-4);
+  box-shadow: 2px 2px 5px 0px var(--company-color-4);
+}
+
+.selectInput option {
+  font-size: 1.2rem;
+  /* No se puede poner cursor pointer en un option */
+  /* cursor: pointer; */
+}
+
+.inputLarge {
+  width: 100%;
+}
+
+.inputLarge .textarea {
+  width: 100%;
+  height: 60px;
+  resize: vertical;
+}

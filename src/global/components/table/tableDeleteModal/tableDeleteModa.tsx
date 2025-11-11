@@ -27,10 +27,10 @@ export const TableDeleteModal = ({
       if (idObject) {
         deleteFunction(idObject.toString());
       } else {
-        console.error("No se ha pasado un idKey a la tabla");
+        console.warn("No se ha pasado un idKey a la tabla");
       }
     } else {
-      console.error("No se le ha pasado una función deleteFunction a la tabla");
+      console.warn("No se le ha pasado una función deleteFunction a la tabla");
     }
   };
 
