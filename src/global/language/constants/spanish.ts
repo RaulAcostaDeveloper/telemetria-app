@@ -469,12 +469,12 @@ export const SPANISH: LanguageInterface = {
       load: "Cargas",
       unload: "Descargas",
       loadTable: {
-        siteId: "Unidad",
+        vehicleId: "Vehículo",
         date: "Fecha",
         loadValue: "Carga",
       },
       unloadTable: {
-        siteId: "Unidad",
+        vehicleId: "Vehículo",
         date: "Fecha",
         loadValue: "Descarga",
       },

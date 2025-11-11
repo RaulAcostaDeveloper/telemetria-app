@@ -33,7 +33,7 @@ export const ZonesDataProvider = ({ id }: Props) => {
 
   const loadsZoneColumns: columnsTable = [
     {
-      columnName: LANGUAGE.zones.tabs.loadTable.siteId,
+      columnName: LANGUAGE.zones.tabs.loadTable.vehicleId,
       defaultSpace: 4,
       orderColumn: true,
     },
@@ -54,7 +54,7 @@ export const ZonesDataProvider = ({ id }: Props) => {
   }, []);
   const allZoneDataLoads: dataTable = useMemo(() => {
     return allZoneData.loads?.map((v) => ({
-      id: v.id,
+      id: v.vehicleId,
       date: formatDateTime(v.date),
       loadValue: `${v.loadValue} L`,
     }));
@@ -62,7 +62,6 @@ export const ZonesDataProvider = ({ id }: Props) => {
 
   return (
     <div className={styles.zonesDataProvider}>
-      {id}
       <TabsContent
         tabOptions={zoneTabs}
         tabContents={[

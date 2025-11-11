@@ -469,12 +469,12 @@ export const ENGLISH: LanguageInterface = {
       load: "Load",
       unload: "Unload",
       loadTable: {
-        siteId: "Site",
+        vehicleId: "Vehicle",
         date: "Date",
         loadValue: "Load",
       },
       unloadTable: {
-        siteId: "Site",
+        vehicleId: "Vehicle",
         date: "Date",
         loadValue: "Unload",
       },

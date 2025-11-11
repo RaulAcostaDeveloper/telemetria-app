@@ -449,12 +449,12 @@ export interface LanguageInterface {
       load: string;
       unload: string;
       loadTable: {
-        siteId: string;
+        vehicleId: string;
         date: string;
         loadValue: string;
       };
       unloadTable: {
-        siteId: string;
+        vehicleId: string;
         date: string;
         loadValue: string;
       };

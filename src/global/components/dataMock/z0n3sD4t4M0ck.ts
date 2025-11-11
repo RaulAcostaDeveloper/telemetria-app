@@ -12,12 +12,7 @@ interface MarkerData {
   title: string;
 }
 interface loadData {
-  id: string;
-  date: string;
-  loadValue: number;
-}
-interface unloadData {
-  siteId: string;
+  vehicleId: string;
   date: string;
   loadValue: number;
 }
@@ -26,7 +21,7 @@ export interface zoneDataMock {
   markersInZone: MarkerData[];
   geoData: GeoData;
   loads: loadData[];
-  unloads: unloadData[];
+  unloads: loadData[];
 }
 
 export const z0n3sD4t4M0ck: zoneDataMock[] = [
@@ -57,34 +52,34 @@ export const z0n3sD4t4M0ck: zoneDataMock[] = [
     },
     loads: [
       {
-        id: "S170 (849494949494943)",
+        vehicleId: "S170 (849494949494943)",
         date: "2025-09-19T14:03:22",
         loadValue: 580,
       },
       {
-        id: "S171 (849494949494943)",
+        vehicleId: "S171 (849494949494943)",
         date: "2025-09-20T14:03:22",
         loadValue: 400,
       },
       {
-        id: "S172 (849494949494943)",
+        vehicleId: "S172 (849494949494943)",
         date: "2025-09-20T16:03:22",
         loadValue: 200,
       },
     ],
     unloads: [
       {
-        siteId: "S170 (849494949494943)",
+        vehicleId: "S170 (849494949494943)",
         date: "2025/09/21T14:03:22",
         loadValue: 280,
       },
       {
-        siteId: "S171 (849494949494943)",
+        vehicleId: "S171 (849494949494943)",
         date: "2025/09/22T14:03:22",
         loadValue: 100,
       },
       {
-        siteId: "S172 (849494949494943)",
+        vehicleId: "S172 (849494949494943)",
         date: "2025/09/22T16:03:22",
         loadValue: 10,
       },
@@ -117,34 +112,34 @@ export const z0n3sD4t4M0ck: zoneDataMock[] = [
     },
     loads: [
       {
-        id: "S170 (849494949494943)",
+        vehicleId: "S170 (849494949494943)",
         date: "2025-09-19T14:03:22",
         loadValue: 580,
       },
       {
-        id: "S171 (849494949494943)",
+        vehicleId: "S171 (849494949494943)",
         date: "2025-09-20T14:03:22",
         loadValue: 400,
       },
       {
-        id: "S172 (849494949494943)",
+        vehicleId: "S172 (849494949494943)",
         date: "2025-09-20T16:03:22",
         loadValue: 200,
       },
     ],
     unloads: [
       {
-        siteId: "S170 (849494949494943)",
+        vehicleId: "S170 (849494949494943)",
         date: "2025-09-21T14:03:22",
         loadValue: 280,
       },
       {
-        siteId: "S171 (849494949494943)",
+        vehicleId: "S171 (849494949494943)",
         date: "2025-09-22T14:03:22",
         loadValue: 100,
       },
       {
-        siteId: "S172 (849494949494943)",
+        vehicleId: "S172 (849494949494943)",
         date: "2025-09-22T16:03:22",
         loadValue: 10,
       },

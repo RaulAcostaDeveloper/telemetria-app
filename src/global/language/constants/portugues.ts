@@ -468,12 +468,12 @@ export const PORTUGUES: LanguageInterface = {
       load: "Carga",
       unload: "Descarga",
       loadTable: {
-        siteId: "Lugar",
+        vehicleId: "Veículo",
         date: "Data",
         loadValue: "Carga",
       },
       unloadTable: {
-        siteId: "Site",
+        vehicleId: "Veículos",
         date: "Data",
         loadValue: "Descarga",
       },
