@@ -468,6 +468,16 @@ export const ENGLISH: LanguageInterface = {
       map: "Map",
       load: "Load",
       unload: "Unload",
+      loadTable: {
+        vehicleId: "Vehicle",
+        date: "Date",
+        loadValue: "Load",
+      },
+      unloadTable: {
+        vehicleId: "Vehicle",
+        date: "Date",
+        loadValue: "Unload",
+      },
     },
   },
 };
