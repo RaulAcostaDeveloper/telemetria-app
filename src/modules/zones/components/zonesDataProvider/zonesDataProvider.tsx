@@ -107,7 +107,6 @@ export const ZonesDataProvider = ({ id }: Props) => {
                 columns={loadsZoneColumns}
                 data={allZoneDataLoads}
                 idKey="id"
-                filterSelector
                 showViewModal
               />
             )}
