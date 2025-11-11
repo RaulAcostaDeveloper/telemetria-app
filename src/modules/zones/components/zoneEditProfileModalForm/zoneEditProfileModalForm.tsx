@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
 
+import styles from "./zoneEditProfileModalForm.module.css";
 import { ButtonTypes, GeneralButton, Modal } from "@/global/components";
 import { LanguageInterface } from "@/global/language/constants/language.model";
-import styles from "./zoneEditProfileModalForm.module.css";
 import { PrimitiveValue } from "@/global/components/table/table.model";
 
 interface Props {
@@ -26,17 +26,22 @@ export const ZoneEditProfileModalForm = ({
   const [provider, setProvider] = useState<string>("");
   const [description, setDescription] = useState<string>("");
 
-  const onConfirm = () => {
-    console.log("id ", id);
+  const authOptions = [
+    LANGUAGE.zones.zoneProfileForm.authorized,
+    LANGUAGE.zones.zoneProfileForm.noAuthorized,
+  ];
 
-    console.log("name", name);
-    console.log("category", category);
-    console.log("authCharges", authCharges);
-    console.log("authDisharges", authDisharges);
-    console.log("authRalenti", authRalenti);
-    console.log("color", color);
-    console.log("provider", provider);
-    console.log("description", description);
+  const onConfirm = () => {
+    // Pendiente implementar
+    console.log("id ", id);
+    // console.log("name", name);
+    // console.log("category", category);
+    // console.log("authCharges", authCharges);
+    // console.log("authDisharges", authDisharges);
+    // console.log("authRalenti", authRalenti);
+    // console.log("color", color);
+    // console.log("provider", provider);
+    // console.log("description", description);
   };
 
   return (
@@ -230,6 +235,6 @@ const Input = ({
   );
 };
 
+// Esto nos lo van a proporcionar en un futuro
 const categoryOptions = ["una categoría", "otra categoría"];
-const authOptions = ["Autorizada", "No autorizada"];
 const providerOptions = ["un proveedor", "otro proveedor"];

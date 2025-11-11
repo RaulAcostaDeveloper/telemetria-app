@@ -434,6 +434,18 @@ export interface LanguageInterface {
     };
   };
   zones: {
+    zoneProfileForm: {
+      name: string;
+      category: string;
+      charges: string;
+      discharges: string;
+      ralenti: string;
+      color: string;
+      provider: string;
+      description: string;
+      authorized: string;
+      noAuthorized: string;
+    };
     zonesFuelTable: {
       zone: string;
       profile: string;

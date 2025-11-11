@@ -32,7 +32,7 @@ export const SummatoryButtons = ({
     try {
       await navigator.clipboard.writeText(String(text));
     } catch (err) {
-      console.error(LANGUAGE.table.actions.copyError, " ", err);
+      console.warn(LANGUAGE.table.actions.copyError, " ", err);
     }
   };
 

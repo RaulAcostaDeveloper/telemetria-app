@@ -22,7 +22,7 @@ export const localStorageSetItem = <T>(
       localStorage.setItem(key, JSON.stringify(data));
     }
   } catch (error) {
-    console.error(`Error guardando ${key} en localStorage`, error);
+    console.warn(`warn guardando ${key} en localStorage`, error);
   }
 };
 
@@ -33,7 +33,7 @@ export const localStorageGetItem = <T>(key: string): T | null => {
       const data: StorageItem<T> = JSON.parse(item);
       return data.value;
     } else {
-      console.error(`Error obteniendo ${key} de localStorage`);
+      console.warn(`Error obteniendo ${key} de localStorage`);
       return null;
     }
   }

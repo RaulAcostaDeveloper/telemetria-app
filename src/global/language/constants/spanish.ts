@@ -454,6 +454,18 @@ export const SPANISH: LanguageInterface = {
     },
   },
   zones: {
+    zoneProfileForm: {
+      name: "Nombre",
+      category: "Categoría",
+      charges: "Cargas",
+      discharges: "Descargas",
+      ralenti: "Ralentí",
+      color: "Color",
+      provider: "Proveedor",
+      description: "Descripción",
+      authorized: "Autorizado",
+      noAuthorized: "No autorizado",
+    },
     zonesFuelTable: {
       zone: "Zona",
       profile: "Perfil",

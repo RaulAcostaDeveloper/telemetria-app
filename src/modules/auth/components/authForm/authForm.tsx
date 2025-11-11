@@ -67,7 +67,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
     if (encrypted !== undefined) {
       tryLoginHook(encrypted);
     } else {
-      console.error("ERROR: No se ha encriptado el usuario y contraseña");
+      console.warn("ERROR: No se ha encriptado el usuario y contraseña");
     }
   };
 
