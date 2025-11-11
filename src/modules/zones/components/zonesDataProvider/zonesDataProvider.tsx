@@ -43,9 +43,29 @@ export const ZonesDataProvider = ({ id }: Props) => {
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.zones.tabs.loadTable.loadValue,
+      columnName: `${LANGUAGE.zones.tabs.loadTable.loadValue} (L)`,
       defaultSpace: 2,
       orderColumn: true,
+      minMaxFilter: true,
+    },
+  ];
+
+  const unloadsZoneColumns: columnsTable = [
+    {
+      columnName: LANGUAGE.zones.tabs.unloadTable.vehicleId,
+      defaultSpace: 4,
+      orderColumn: true,
+    },
+    {
+      columnName: LANGUAGE.zones.tabs.unloadTable.date,
+      defaultSpace: 4,
+      orderColumn: true,
+    },
+    {
+      columnName: `${LANGUAGE.zones.tabs.unloadTable.loadValue} (L)`,
+      defaultSpace: 2,
+      orderColumn: true,
+      minMaxFilter: true,
     },
   ];
 
@@ -56,7 +76,14 @@ export const ZonesDataProvider = ({ id }: Props) => {
     return allZoneData.loads?.map((v) => ({
       id: v.vehicleId,
       date: formatDateTime(v.date),
-      loadValue: `${v.loadValue} L`,
+      loadValue: v.loadValue,
+    }));
+  }, []);
+  const allZoneDataUnloads: dataTable = useMemo(() => {
+    return allZoneData.unloads?.map((v) => ({
+      id: v.vehicleId,
+      date: formatDateTime(v.date),
+      loadValue: v.loadValue,
     }));
   }, []);
 
@@ -84,7 +111,17 @@ export const ZonesDataProvider = ({ id }: Props) => {
               />
             )}
           </div>,
-          <div key={2}></div>,
+          <div key={2}>
+            {allZoneData && (
+              <Table
+                LANGUAGE={LANGUAGE}
+                columns={unloadsZoneColumns}
+                data={allZoneDataUnloads}
+                idKey="id"
+                showViewModal
+              />
+            )}
+          </div>,
         ]}
       />
     </div>
