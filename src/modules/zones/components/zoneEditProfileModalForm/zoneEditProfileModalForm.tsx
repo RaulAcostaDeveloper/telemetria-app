@@ -30,62 +30,76 @@ export const ZoneEditProfileModalForm = ({
     >
       <div className={styles.form}>
         <div className={styles.row}>
-          <div className={`${styles.inputNormal} ${styles.left}`}>
-            <label htmlFor="nameProfile">Nombre de la zona</label>
-            <input type="text" name="nameProfile" id="nameProfile" />
-          </div>
-          <div className={styles.inputNormal}>
-            <label htmlFor="nameProfile">Categoría de la zona</label>
-            <Select
-              value={category}
-              set={setCategory}
-              options={categoryOptions}
-            />
-          </div>
+          <InputText
+            name="nameProfile"
+            title="Nombre del perfíl"
+            value={category}
+            set={setCategory}
+            isLeft
+          />
+          <Select
+            title="Categoría"
+            name="category"
+            value={category}
+            set={setCategory}
+            options={categoryOptions}
+          />
         </div>
 
         <div className={styles.row}>
-          <div className={`${styles.inputNormal} ${styles.left}`}>
-            <label htmlFor="nameProfile">Nombre de la zona</label>
-            <Select
-              value={category}
-              set={setCategory}
-              options={categoryOptions}
-            />
-          </div>
-          <div className={styles.inputNormal}>
-            <label htmlFor="nameProfile">Categoría de la zona</label>
-            <Select
-              value={category}
-              set={setCategory}
-              options={categoryOptions}
-            />
-          </div>
+          <Select
+            title="Cargas"
+            name="loadedAuth"
+            value={category}
+            set={setCategory}
+            options={categoryOptions}
+            isLeft
+          />
+          <Select
+            title="Descargas"
+            name="unloadedAuth"
+            value={category}
+            set={setCategory}
+            options={categoryOptions}
+          />
         </div>
         <div className={styles.row}>
-          <div className={`${styles.inputNormal} ${styles.left}`}>
-            <label htmlFor="nameProfile">Nombre de la zona</label>
-            <Select
-              value={category}
-              set={setCategory}
-              options={categoryOptions}
-            />
-          </div>
-          <div className={styles.inputNormal}>
-            <label htmlFor="color">Categoría de la zona</label>
-            <input type="color" name="color" id="color" />
-          </div>
+          <Select
+            title="Ralentí"
+            name="ralenti"
+            value={category}
+            set={setCategory}
+            options={categoryOptions}
+            isLeft
+          />
+          <InputText
+            title="Color"
+            name="color"
+            value={category}
+            set={setCategory}
+            isColor
+          />
         </div>
 
         <div className={styles.row}>
-          <div className={`${styles.inputNormal} ${styles.left}`}>
-            <label htmlFor="nameProfile">Nombre de la zona</label>
-            <Select
-              value={category}
-              set={setCategory}
-              options={categoryOptions}
-            />
-          </div>
+          <Select
+            title="Proveedor"
+            name="provider"
+            value={category}
+            set={setCategory}
+            options={categoryOptions}
+            isLeft
+          />
+        </div>
+
+        <div className={styles.row}>
+          <InputText
+            title="Descripción"
+            name="description"
+            value={category}
+            set={setCategory}
+            isLarge
+          />
         </div>
 
         <div className={styles.bottom}>
@@ -106,26 +120,79 @@ export const ZoneEditProfileModalForm = ({
 };
 
 interface SelectProps {
+  title: string;
+  name: string;
   value: string;
   set: (value: string) => void;
   options: string[];
+  isLeft?: boolean;
 }
 
-const Select = ({ value, set, options }: SelectProps) => {
+const Select = ({ title, name, value, set, options, isLeft }: SelectProps) => {
   return (
-    <select
-      value={value}
-      onChange={(e) => set(e.target.value)}
-      className={`${styles.selectInput} ${
-        value !== "" ? styles.withValue : ""
+    <div className={`${styles.inputNormal} ${isLeft ? styles.left : ""}`}>
+      <label htmlFor={name}>{title}</label>
+      <select
+        name={name}
+        value={value}
+        onChange={(e) => set(e.target.value)}
+        className={`${styles.selectInput} ${
+          value !== "" ? styles.withValue : ""
+        }`}
+      >
+        <option value="">Seleccionar una opción</option>
+        {options.map((opt, index) => (
+          <option key={index} value={opt?.toString() ?? ""}>
+            {opt}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
+interface InputProps {
+  title: string;
+  name: string;
+  value: string;
+  set: (value: string) => void;
+  isColor?: boolean;
+  isLarge?: boolean;
+  isLeft?: boolean;
+}
+
+const InputText = ({
+  title,
+  name,
+  value,
+  set,
+  isColor,
+  isLarge,
+  isLeft,
+}: InputProps) => {
+  return (
+    <div
+      className={`${styles.inputNormal} ${isLeft ? styles.left : ""} ${
+        isLarge ? styles.inputLarge : ""
       }`}
     >
-      <option value="">Seleccionar una opción</option>
-      {options.map((opt, index) => (
-        <option key={index} value={opt?.toString() ?? ""}>
-          {opt}
-        </option>
-      ))}
-    </select>
+      <label htmlFor={name}>{title}</label>
+      {isLarge ? (
+        <textarea
+          name={name}
+          id={name}
+          value={value}
+          onChange={(e) => set(e.target.value)}
+        />
+      ) : (
+        <input
+          type={`${isColor ? "color" : "text"}`}
+          name={name}
+          id={name}
+          value={value}
+          onChange={(e) => set(e.target.value)}
+        />
+      )}
+    </div>
   );
 };
