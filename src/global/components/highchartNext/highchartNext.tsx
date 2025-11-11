@@ -41,6 +41,7 @@ export const HighchartNext = ({
   const [HighStockModule, setHighStockModule] = useState<unknown>(null);
   const [modulesReady, setModulesReady] = useState<boolean>(false);
   const [is3dReady, setis3dReady] = useState<boolean>(false);
+  const [isReRenderReady, setisReRenderReady] = useState<boolean>(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -54,6 +55,9 @@ export const HighchartNext = ({
           setHighStockModule(stockModule.default ?? stockModule);
         }
       }
+      setTimeout(() => {
+        setisReRenderReady(true);
+      }, 500);
     })();
     return () => {
       isMounted = false;
@@ -106,6 +110,7 @@ export const HighchartNext = ({
       {!!HighchartsModule &&
       !!HighchartsReact &&
       !!modulesReady &&
+      !!isReRenderReady &&
       (is3d ? is3dReady : true) ? (
         <HighchartsReact
           highcharts={HighchartsModule}
