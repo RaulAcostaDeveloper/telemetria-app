@@ -1,6 +1,6 @@
 import { toLocalDateTime } from "@/global/utils/utils";
 import styles from "./zoneSingleInfo.module.css";
-import { zoneDataMock } from "@/global/components/dataMock/z0n3sD4t4M0ck";
+import { zoneDataMock } from "@/global/dataMock/z0n3sD4t4M0ck";
 
 /* type allButGeoZoneData = Omit<zoneDataMock, "geoData">; */
 
