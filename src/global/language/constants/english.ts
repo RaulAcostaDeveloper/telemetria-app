@@ -159,7 +159,7 @@ export const ENGLISH: LanguageInterface = {
       performancesBetweenCharges: "Performance between charges",
       dailyPerformance: "Daily performance",
       engineOff: "Engine off",
-      engineOnIdle: "Engine parqued",
+      engineOnIdle: "Engine parket",
       engineOnMoving: "Engine running (moving)",
     },
     tooltips: {
@@ -355,7 +355,7 @@ export const ENGLISH: LanguageInterface = {
       totalTimeWorked: "Time worked",
     },
     analysisTab: {
-      totalIdleTime: "Total engine parqued time",
+      totalIdleTime: "Total engine parket time",
       allowedMaxSpeed: "Allowed max speed",
       maxSpeed: "Max speed",
       averageRpm: "Average RPM",
@@ -422,7 +422,7 @@ export const ENGLISH: LanguageInterface = {
     resumes: {
       distance: "Total distance traveled",
       timeDriven: "Total driving time",
-      timeIdle: "Total engine parqued time",
+      timeIdle: "Total engine parket time",
     },
     tableColumns: {
       title: "Top 5",
@@ -431,7 +431,7 @@ export const ENGLISH: LanguageInterface = {
       driverDistance: "Traveled Distance (Km)",
       averageSpeed: "Average speed (km/h)",
       driverTime: "Driving time (h)",
-      driverIdleTime: "Engine parqued time (h)",
+      driverIdleTime: "Engine parket time (h)",
       maxSpeed: "Max speed (km/h)",
     },
     tableTitle: {
@@ -440,16 +440,16 @@ export const ENGLISH: LanguageInterface = {
     charts: {
       titleDistance: "Driving distance",
       titleDriven: "Driving time",
-      titleIdle: "Engine parqued time",
+      titleIdle: "Engine parket time",
       subtitleDistance: "Median distance traveled",
       subtitleDriven: "Median driving time",
-      subtitleIdle: "Median engine parqued time",
+      subtitleIdle: "Median engine parket time",
       titleTooltipDistance: "Distance Traveled",
       titleTooltipDriven: "Driven Time",
-      titleTooltipIdle: "Engine parqued time",
+      titleTooltipIdle: "Engine parket time",
       xAxisDistance: "Distance traveled (km)",
       xAxisDriven: "Driven time (h)",
-      xAxisIdle: "Engine parqued time (h)",
+      xAxisIdle: "Engine parket time (h)",
       yAxis: "Vehicles",
     },
   },
@@ -464,7 +464,7 @@ export const ENGLISH: LanguageInterface = {
       provider: "Provider",
       description: "Description",
       authorized: "Authorized",
-      noAuthorized: "No authorized",
+      noAuthorized: "Not authorized",
     },
     zonesFuelTable: {
       zone: "Zone",
