@@ -121,7 +121,7 @@ export const TableServerContent = ({
             />
           )}
         </div>
-
+        {/*  */}
         {/* Tabla */}
         <div className={`${styles.tableContent}`}>
           <div>
