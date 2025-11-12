@@ -456,6 +456,7 @@ export interface LanguageInterface {
       events: string;
       charged: string;
       discharged: string;
+      zoneModalTitle: string;
     };
     tabs: {
       map: string;

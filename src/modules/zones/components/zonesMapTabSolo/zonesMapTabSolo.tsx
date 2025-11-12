@@ -10,7 +10,7 @@ const GoogleMapSeveralMarkersClientC = dynamic(
   { ssr: false }
 );
 
-interface markerData {
+export interface markerData {
   id: number;
   position: { lat: number; lng: number };
   title: string;

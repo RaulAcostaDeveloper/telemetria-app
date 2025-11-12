@@ -65,13 +65,11 @@ export const TableActions = ({
 
   return (
     <div className={`${styles.tableActions}`}>
-      {showGoPageView && (
-        <TableActionLink
-          hasCompleteRoute={viewPath ? true : false}
-          noImeiTitle={""}
-          title={LANGUAGE.table.actions.goPage + " " + viewPath}
-          Icon={ArticleIcon}
-          href={`${viewPath}${dataObject[idKey ?? ""] ?? ""}`}
+      {showViewModal && modalOption && (
+        <TableActionButton
+          title={LANGUAGE.table.actions.viewDetail}
+          callBack={() => setViewModal(true)}
+          Icon={VisibilityIcon}
         />
       )}
 
@@ -80,14 +78,6 @@ export const TableActions = ({
           title={LANGUAGE.table.actions.editElement}
           callBack={() => setShowEditModal(true)}
           Icon={ModeEditIcon}
-        />
-      )}
-
-      {showViewModal && modalOption && (
-        <TableActionButton
-          title={LANGUAGE.table.actions.viewDetail}
-          callBack={() => setViewModal(true)}
-          Icon={VisibilityIcon}
         />
       )}
 
@@ -122,6 +112,16 @@ export const TableActions = ({
           hasCompleteRoute={idKey ? true : false}
           title={LANGUAGE.table.actions.goGenericReport}
           Icon={ArrowRightAltIcon}
+          href={`${viewPath}${dataObject[idKey ?? ""] ?? ""}`}
+        />
+      )}
+
+      {showGoPageView && (
+        <TableActionLink
+          hasCompleteRoute={viewPath ? true : false}
+          noImeiTitle={""}
+          title={LANGUAGE.table.actions.goPage + " " + viewPath}
+          Icon={ArticleIcon}
           href={`${viewPath}${dataObject[idKey ?? ""] ?? ""}`}
         />
       )}

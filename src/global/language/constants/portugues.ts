@@ -466,6 +466,7 @@ export const PORTUGUES: LanguageInterface = {
       noAuthorized: "Não autorizado",
     },
     zonesFuelTable: {
+      zoneModalTitle: "Mapa de zona",
       zone: "Zona",
       profile: "Perfil",
       country: "País",
