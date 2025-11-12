@@ -92,7 +92,6 @@ export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
       viewPath="/zones/zone/"
       showEdit
       modalOption={MODAL_OPTION.ZONE}
-      showViewModal
     />
   );
 };
