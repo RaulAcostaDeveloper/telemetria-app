@@ -18,6 +18,8 @@ interface loadData {
 }
 
 export interface zoneDataMock {
+  zoneId: string;
+  zoneName: string;
   markersInZone: MarkerData[];
   geoData: GeoData;
   loads: loadData[];
@@ -26,6 +28,8 @@ export interface zoneDataMock {
 
 export const z0n3sD4t4M0ck: zoneDataMock[] = [
   {
+    zoneId: "1",
+    zoneName: "Zona Norte F",
     markersInZone: [
       {
         id: 1,
@@ -86,6 +90,8 @@ export const z0n3sD4t4M0ck: zoneDataMock[] = [
     ],
   },
   {
+    zoneId: "2",
+    zoneName: "Zona Sur F",
     markersInZone: [
       {
         id: 3,

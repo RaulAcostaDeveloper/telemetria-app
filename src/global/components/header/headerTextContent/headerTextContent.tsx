@@ -15,14 +15,16 @@ export const HeaderTextContent = ({ LANGUAGE, currentUrl }: Props) => {
       return "single-fuel";
     } else if (currentUrl.match(/telemetry\/vehicle/)) {
       return "single-telemetry";
-    } else if (currentUrl.match(/home|s+/)) {
-      return "home";
     } else if (currentUrl.match(/management/)) {
       return "management";
     } else if (currentUrl.match(/fuel/)) {
       return "fuel";
     } else if (currentUrl.match(/telemetry/)) {
       return "telemetryobd";
+    } else if (currentUrl.match(/zones\/zone/)) {
+      return "single-zone";
+    } else if (currentUrl.match(/home|s+/)) {
+      return "home";
     } else {
       return "";
     }
@@ -76,6 +78,16 @@ export const HeaderTextContent = ({ LANGUAGE, currentUrl }: Props) => {
         return (
           <div className={styles.platesAndName}>
             <span>{LANGUAGE.sectionName.telemetryobd}</span>
+          </div>
+        );
+      case "single-zone":
+        return (
+          <div className={styles.platesAndName}>
+            <HeaderTextWords
+              LANGUAGE={LANGUAGE}
+              section={site}
+              url={currentUrl}
+            />
           </div>
         );
       default:
