@@ -7,7 +7,11 @@ import { Table, TabsContent } from "@/global/components";
 import { ZonesMapTabSolo } from "../zonesMapTabSolo/zonesMapTabSolo";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 import { z0n3sD4t4M0ck } from "@/global/dataMock/z0n3sD4t4M0ck";
-import { columnsTable, dataTable } from "@/global/components/table/table.model";
+import {
+  columnsTable,
+  dataTable,
+  MODAL_OPTION,
+} from "@/global/components/table/table.model";
 import { formatDateTime } from "@/global/utils/utils";
 
 interface Props {
@@ -18,7 +22,6 @@ export const ZonesDataProvider = ({ id }: Props) => {
   const LANGUAGE = useLanguage();
   // TODO: Agregar mock de información a constantes.
   const zoneTabs = [
-    { text: LANGUAGE.zones.tabs.map, icon: Map },
     {
       text: LANGUAGE.zones.tabs.load,
       icon: LocalGasStation,
@@ -27,8 +30,9 @@ export const ZonesDataProvider = ({ id }: Props) => {
     {
       text: LANGUAGE.zones.tabs.unload,
       icon: LocalGasStation,
-      iconStyle: { color: "223,44,59)" },
+      iconStyle: { color: "rgb(223,44,59)" },
     },
+    { text: LANGUAGE.zones.tabs.map, icon: Map },
   ];
 
   const loadsZoneColumns: columnsTable = [
@@ -93,14 +97,6 @@ export const ZonesDataProvider = ({ id }: Props) => {
         tabOptions={zoneTabs}
         tabContents={[
           <div key={0}>
-            <div className={["containertabmap", styles.container].join(" ")}>
-              <ZonesMapTabSolo
-                LANGUAGE={LANGUAGE}
-                markersInZone={allZoneData.markersInZone}
-              />
-            </div>
-          </div>,
-          <div key={1}>
             {allZoneData && (
               <Table
                 LANGUAGE={LANGUAGE}
@@ -108,10 +104,11 @@ export const ZonesDataProvider = ({ id }: Props) => {
                 data={allZoneDataLoads}
                 idKey="id"
                 showViewModal
+                modalOption={MODAL_OPTION.ZONE}
               />
             )}
           </div>,
-          <div key={2}>
+          <div key={1}>
             {allZoneData && (
               <Table
                 LANGUAGE={LANGUAGE}
@@ -119,8 +116,17 @@ export const ZonesDataProvider = ({ id }: Props) => {
                 data={allZoneDataUnloads}
                 idKey="id"
                 showViewModal
+                modalOption={MODAL_OPTION.ZONE}
               />
             )}
+          </div>,
+          <div key={2}>
+            <div className={["containertabmap", styles.container].join(" ")}>
+              <ZonesMapTabSolo
+                LANGUAGE={LANGUAGE}
+                markersInZone={allZoneData.markersInZone}
+              />
+            </div>
           </div>,
         ]}
       />
