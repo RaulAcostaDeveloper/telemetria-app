@@ -43,7 +43,7 @@ export const DataShower = ({ LANGUAGE, data }: Props) => {
             name={el.title}
             value={ndIfEmpty(el.value)}
             key={index}
-            isLast={index + 1 === data.left.length}
+            isLast={index + 1 === data.right.length}
           />
         ))}
       </div>
