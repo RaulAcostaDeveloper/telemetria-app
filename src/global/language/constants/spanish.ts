@@ -454,6 +454,10 @@ export const SPANISH: LanguageInterface = {
     },
   },
   zones: {
+    zoneProfileDataShower: {
+      zoneName: "Nombre de la zona",
+      profileName: "Nombre del perfil",
+    },
     zoneProfileForm: {
       name: "Nombre",
       category: "Categoría",

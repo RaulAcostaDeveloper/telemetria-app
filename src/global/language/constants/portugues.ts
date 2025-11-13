@@ -453,6 +453,10 @@ export const PORTUGUES: LanguageInterface = {
     },
   },
   zones: {
+    zoneProfileDataShower: {
+      zoneName: "Nome zone",
+      profileName: "Nome perfil",
+    },
     zoneProfileForm: {
       name: "Nome",
       category: "Categoria",
