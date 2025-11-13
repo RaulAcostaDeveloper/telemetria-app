@@ -1,4 +1,4 @@
-import styles from "./dataShower.module.css";
+import styles from "./dataShelf.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { MetricItem } from "./metricItem/metricItem";
 import { PrimitiveValue } from "../table/table.model";
@@ -10,17 +10,17 @@ interface Element {
   metric?: string;
 }
 
-export interface DataShower {
+export interface DataShelf {
   left: Element[];
   right: Element[];
 }
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  data: DataShower;
+  data: DataShelf;
 }
 
-export const DataShower = ({ LANGUAGE, data }: Props) => {
+export const DataShelf = ({ LANGUAGE, data }: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.cuadricula}>

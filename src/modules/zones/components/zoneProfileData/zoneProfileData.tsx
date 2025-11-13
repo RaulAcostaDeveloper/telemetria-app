@@ -1,4 +1,4 @@
-import { DataShower } from "@/global/components/dataShower/datasShower";
+import { DataShelf } from "@/global/components/dataShower/dataShelf";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ZoneIdDetailsDataMock } from "@/global/dataMock/zoneIdDetailsDataMock";
 
@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const ZoneProfileData = ({ LANGUAGE }: Props) => {
-  const data: DataShower = {
+  const data: DataShelf = {
     left: [
       {
         title: LANGUAGE.zones.zoneProfileDataShower.zoneName,
@@ -51,5 +51,5 @@ export const ZoneProfileData = ({ LANGUAGE }: Props) => {
       },
     ],
   };
-  return <DataShower LANGUAGE={LANGUAGE} data={data} />;
+  return <DataShelf LANGUAGE={LANGUAGE} data={data} />;
 };

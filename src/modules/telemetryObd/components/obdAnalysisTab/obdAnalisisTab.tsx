@@ -1,4 +1,4 @@
-import { DataShower } from "@/global/components/dataShower/datasShower";
+import { DataShelf } from "@/global/components/dataShower/dataShelf";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ObdTravelMetricsDataValues } from "@/global/redux/serviceSlices/obdTravelMetricsSlice";
 import { VehicleByImei } from "@/global/redux/serviceSlices/vehicleByImeiSlice";
@@ -14,7 +14,7 @@ export const ObdAnalysisTab = ({
   obdAnalyticsData,
   vehicleByImeiData,
 }: Props) => {
-  const data: DataShower = {
+  const data: DataShelf = {
     left: [
       {
         title: LANGUAGE.onBoardDiagnosticsVehicle.analysisTab.plate,
@@ -76,5 +76,5 @@ export const ObdAnalysisTab = ({
     ],
   };
 
-  return <DataShower LANGUAGE={LANGUAGE} data={data} />;
+  return <DataShelf LANGUAGE={LANGUAGE} data={data} />;
 };
