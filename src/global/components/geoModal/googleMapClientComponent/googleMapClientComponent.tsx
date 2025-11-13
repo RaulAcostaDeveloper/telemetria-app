@@ -7,10 +7,20 @@ import { GoogleMapsLoader } from "./googleMapsLoader";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { getEnvClient } from "@/global/utils/getEnviromentFromClient";
 
+export interface MarkerData {
+  id: number;
+  position: { lat: number; lng: number };
+  title: string;
+}
+
 interface Props {
   LANGUAGE: LanguageInterface;
-  geoModalData: GeoModalData;
+  geoModalData: GeoModalData | MarkerData[];
   mapType: "roadmap" | "satellite";
+}
+interface Center {
+  lat: number;
+  lng: number;
 }
 
 const GoogleMapClientComponent = ({
@@ -23,6 +33,8 @@ const GoogleMapClientComponent = ({
 
   const mapRef = useRef<google.maps.Map | null>(null);
   const hasAnimatedRef = useRef(false);
+  let center: Center;
+  let places: MarkerData[];
 
   useEffect(() => {
     (async () => {
@@ -30,23 +42,32 @@ const GoogleMapClientComponent = ({
         const { GOOGLE_MAPS_API_KEY } = await getEnvClient();
         setGoogleApiKey(GOOGLE_MAPS_API_KEY ?? null);
       } catch {
-        console.warn("No se pudo cargar GOOGLE_MAPS_API_KEY");
+        console.error("No se pudo cargar GOOGLE_MAPS_API_KEY");
       }
     })();
   }, []);
 
+  function isGeoModalData(g: GeoModalData | MarkerData[]): g is GeoModalData {
+    return (g as GeoModalData).rows !== undefined;
+  }
+
   // Configuración de la API y el idioma del mapa
-  const center = useMemo(
-    () => ({
-      lat: geoModalData.lat,
-      lng: geoModalData.lon,
-    }),
-    [geoModalData.lat, geoModalData.lon]
-  );
+  if (isGeoModalData(geoModalData)) {
+    // eslint-disable-next-line prefer-const
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    center = useMemo(() => {
+      return {
+        lat: geoModalData.lat,
+        lng: geoModalData.lon,
+      };
+    }, [geoModalData]);
+  } else {
+    places = geoModalData;
+  }
 
   useEffect(() => {
     // Efecto de zoom
-    if (mapLoaded && mapRef.current && !hasAnimatedRef.current) {
+    if (mapLoaded && mapRef.current && !hasAnimatedRef.current && center) {
       hasAnimatedRef.current = true;
 
       mapRef.current.panTo(center);
@@ -81,6 +102,7 @@ const GoogleMapClientComponent = ({
         <GoogleMapsLoader
           LANGUAGE={LANGUAGE}
           center={center}
+          places={places}
           googleApiKey={googleApiKey}
           mapRef={mapRef}
           mapType={mapType}

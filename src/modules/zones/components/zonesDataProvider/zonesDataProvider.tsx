@@ -104,7 +104,7 @@ export const ZonesDataProvider = ({ id }: Props) => {
                 data={allZoneDataLoads}
                 idKey="id"
                 showViewModal
-                modalOption={MODAL_OPTION.ZONE}
+                modalOption={MODAL_OPTION.ZONELOAD}
               />
             )}
           </div>,
@@ -116,7 +116,7 @@ export const ZonesDataProvider = ({ id }: Props) => {
                 data={allZoneDataUnloads}
                 idKey="id"
                 showViewModal
-                modalOption={MODAL_OPTION.ZONE}
+                modalOption={MODAL_OPTION.ZONEUNLOAD}
               />
             )}
           </div>,
