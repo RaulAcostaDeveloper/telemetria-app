@@ -455,6 +455,7 @@ export const ENGLISH: LanguageInterface = {
   },
   zones: {
     zoneProfileDataShelf: {
+      title: "Profile data",
       zoneName: "Zone name",
       profileName: "Profile name",
     },

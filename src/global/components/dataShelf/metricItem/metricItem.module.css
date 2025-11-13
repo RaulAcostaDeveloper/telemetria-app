@@ -8,6 +8,7 @@
   background-color: transparent;
   cursor: var(--copy-icon-black);
   text-align: right;
+  background-color: white;
 }
 
 .metricItem:hover {

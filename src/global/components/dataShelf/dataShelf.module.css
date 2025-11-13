@@ -9,4 +9,5 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 1.6px 3.2px 3.2px var(--shadow-mid);
+  background-color: white;
 }

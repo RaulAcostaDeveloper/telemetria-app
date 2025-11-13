@@ -1,7 +1,8 @@
+import styles from "./zoneProfileData.module.css";
+import { Collapsable } from "@/global/components/collapsable/collapsable";
 import { DataShelf } from "@/global/components/dataShelf/dataShelf";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ZoneIdDetailsDataMock } from "@/global/dataMock/zoneIdDetailsDataMock";
-
 interface Props {
   LANGUAGE: LanguageInterface;
 }
@@ -51,5 +52,14 @@ export const ZoneProfileData = ({ LANGUAGE }: Props) => {
       },
     ],
   };
-  return <DataShelf LANGUAGE={LANGUAGE} data={data} />;
+  return (
+    <div className={styles.container}>
+      <Collapsable
+        LANGUAGE={LANGUAGE}
+        title={LANGUAGE.zones.zoneProfileDataShelf.title}
+      >
+        <DataShelf LANGUAGE={LANGUAGE} data={data} />
+      </Collapsable>
+    </div>
+  );
 };

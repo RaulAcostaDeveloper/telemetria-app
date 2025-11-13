@@ -1,0 +1,31 @@
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.377);
+  border-radius: 4px;
+  background-color: var(--company-color-6);
+  color: var(--company-color-1);
+  cursor: pointer;
+  z-index: 2;
+  position: relative;
+}
+
+.title {
+  font-size: 1.5rem;
+}
+
+.icon {
+  transition: 1s;
+}
+
+.iconOpen {
+  transform: rotate(90deg);
+}
+
+.inside {
+  background-color: rgba(0, 0, 0, 0.055);
+  border-radius: 4px;
+}
