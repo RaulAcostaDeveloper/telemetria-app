@@ -4,11 +4,12 @@ import { LocalGasStation, Map } from "@mui/icons-material";
 
 import styles from "./zonesDataProvider.module.css";
 import { Table, TabsContent } from "@/global/components";
+import { ZoneProfileData } from "../zoneProfileData/zoneProfileData";
 import { ZonesMapTabSolo } from "../zonesMapTabSolo/zonesMapTabSolo";
-import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
-import { z0n3sD4t4M0ck } from "@/global/dataMock/z0n3sD4t4M0ck";
 import { columnsTable, dataTable } from "@/global/components/table/table.model";
 import { formatDateTime } from "@/global/utils/utils";
+import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
+import { z0n3sD4t4M0ck } from "@/global/dataMock/z0n3sD4t4M0ck";
 
 interface Props {
   id: string;
@@ -89,6 +90,7 @@ export const ZonesDataProvider = ({ id }: Props) => {
 
   return (
     <div className={styles.zonesDataProvider}>
+      <ZoneProfileData LANGUAGE={LANGUAGE} />
       <TabsContent
         tabOptions={zoneTabs}
         tabContents={[

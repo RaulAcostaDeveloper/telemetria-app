@@ -434,6 +434,10 @@ export interface LanguageInterface {
     };
   };
   zones: {
+    zoneProfileDataShelf: {
+      zoneName: string;
+      profileName: string;
+    };
     zoneProfileForm: {
       name: string;
       category: string;

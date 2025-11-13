@@ -1,7 +1,6 @@
-import { DataShower } from "@/global/components/dataShower/datasShower";
+import { DataShelf } from "@/global/components/dataShelf/dataShelf";
 import { FuelPerformanceValues } from "@/global/redux/serviceSlices/fuelPerformanceSlice";
 import { LanguageInterface } from "@/global/language/constants/language.model";
-
 interface Props {
   LANGUAGE: LanguageInterface;
   fuelPerformanceData: FuelPerformanceValues;
@@ -11,7 +10,7 @@ export const FuelPerformanceMetrics = ({
   LANGUAGE,
   fuelPerformanceData,
 }: Props) => {
-  const data: DataShower = {
+  const data: DataShelf = {
     left: [
       {
         title: LANGUAGE.fuelVehicle.vehicleReports.distanceEfficiency,
@@ -59,5 +58,5 @@ export const FuelPerformanceMetrics = ({
     ],
   };
 
-  return <DataShower LANGUAGE={LANGUAGE} data={data} />;
+  return <DataShelf LANGUAGE={LANGUAGE} data={data} />;
 };

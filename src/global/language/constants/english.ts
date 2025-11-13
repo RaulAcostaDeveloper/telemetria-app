@@ -454,6 +454,10 @@ export const ENGLISH: LanguageInterface = {
     },
   },
   zones: {
+    zoneProfileDataShelf: {
+      zoneName: "Zone name",
+      profileName: "Profile name",
+    },
     zoneProfileForm: {
       name: "Name",
       category: "Category",
