@@ -1,4 +1,4 @@
-import { DataShelf } from "@/global/components/dataShower/dataShelf";
+import { DataShelf } from "@/global/components/dataShelf/dataShelf";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ZoneIdDetailsDataMock } from "@/global/dataMock/zoneIdDetailsDataMock";
 
@@ -10,11 +10,11 @@ export const ZoneProfileData = ({ LANGUAGE }: Props) => {
   const data: DataShelf = {
     left: [
       {
-        title: LANGUAGE.zones.zoneProfileDataShower.zoneName,
+        title: LANGUAGE.zones.zoneProfileDataShelf.zoneName,
         value: ZoneIdDetailsDataMock.value.zoneName,
       },
       {
-        title: LANGUAGE.zones.zoneProfileDataShower.profileName,
+        title: LANGUAGE.zones.zoneProfileDataShelf.profileName,
         value: ZoneIdDetailsDataMock.value.profileName,
       },
       {

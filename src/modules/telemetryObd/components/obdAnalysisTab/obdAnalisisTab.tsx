@@ -1,4 +1,4 @@
-import { DataShelf } from "@/global/components/dataShower/dataShelf";
+import { DataShelf } from "@/global/components/dataShelf/dataShelf";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ObdTravelMetricsDataValues } from "@/global/redux/serviceSlices/obdTravelMetricsSlice";
 import { VehicleByImei } from "@/global/redux/serviceSlices/vehicleByImeiSlice";

@@ -434,7 +434,7 @@ export interface LanguageInterface {
     };
   };
   zones: {
-    zoneProfileDataShower: {
+    zoneProfileDataShelf: {
       zoneName: string;
       profileName: string;
     };

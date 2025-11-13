@@ -1,4 +1,4 @@
-import { DataShelf } from "@/global/components/dataShower/dataShelf";
+import { DataShelf } from "@/global/components/dataShelf/dataShelf";
 import { FuelPerformanceValues } from "@/global/redux/serviceSlices/fuelPerformanceSlice";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 interface Props {
