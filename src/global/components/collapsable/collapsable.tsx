@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
@@ -11,16 +11,31 @@ interface Props {
   LANGUAGE: LanguageInterface;
   title: string;
   children: React.ReactNode;
+  defaultOpen?: boolean | null | undefined; // por asunto del local storage debe iniciar null
+  set?: (toggle: boolean) => void; // para controlar el local storage en un nivel superior
 }
 
-export const Collapsable = ({ LANGUAGE, title, children }: Props) => {
+export const Collapsable = ({
+  LANGUAGE,
+  title,
+  children,
+  defaultOpen,
+  set = () => {},
+}: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsOpen(defaultOpen ?? false);
+  }, [defaultOpen]);
 
   return (
     <>
       <button
         className={styles.header}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          setIsOpen(!isOpen);
+          set(!isOpen);
+        }}
         title={
           isOpen
             ? LANGUAGE.fuel.filter.hideFilters

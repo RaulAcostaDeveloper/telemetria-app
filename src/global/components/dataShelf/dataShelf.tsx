@@ -13,6 +13,8 @@ interface Element {
 export interface DataShelf {
   left: Element[];
   right: Element[];
+  third?: Element[];
+  fourth?: Element[];
 }
 
 interface Props {
@@ -47,6 +49,34 @@ export const DataShelf = ({ LANGUAGE, data }: Props) => {
           />
         ))}
       </div>
+      {data.third && (
+        <div className={styles.cuadricula}>
+          {data.third.map((el, index) => (
+            <MetricItem
+              LANGUAGE={LANGUAGE}
+              metric={el.metric ?? ""}
+              name={el.title}
+              value={ndIfEmpty(el.value)}
+              key={index}
+              isLast={index + 1 === data.third?.length}
+            />
+          ))}
+        </div>
+      )}
+      {data.fourth && (
+        <div className={styles.cuadricula}>
+          {data.fourth.map((el, index) => (
+            <MetricItem
+              LANGUAGE={LANGUAGE}
+              metric={el.metric ?? ""}
+              name={el.title}
+              value={ndIfEmpty(el.value)}
+              key={index}
+              isLast={index + 1 === data.fourth?.length}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
