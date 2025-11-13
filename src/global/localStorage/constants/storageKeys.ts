@@ -7,4 +7,5 @@ export const STORAGE_KEYS = {
   FUEL_FILTER_GROUP: "fuel_filter_group",
   FUEL_FILTER_BRAND: "fuel_filter_brand",
   FUEL_FILTER_MODEL: "fuel_filter_model",
+  IS_OPEN_PROFILE_ZONE: "is_open_profile_zone",
 };
