@@ -42,10 +42,10 @@ export const Collapsable = ({
             : LANGUAGE.fuel.filter.showFilters
         }
       >
-        <h2 className={styles.title}>{title}</h2>
         <ArrowForwardIosIcon
           className={`${styles.icon} ${isOpen ? styles.iconOpen : ""}`}
         />
+        <h2 className={styles.title}>{title}</h2>
       </button>
 
       <div className={styles.inside}>
