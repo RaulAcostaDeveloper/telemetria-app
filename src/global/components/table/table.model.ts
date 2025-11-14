@@ -34,4 +34,6 @@ export enum MODAL_OPTION {
   VEHICLES = "vehicles",
   GROUPS = "groups",
   ZONE = "zone",
+  ZONELOAD = "zone-load",
+  ZONEUNLOAD = "zone-unload",
 }

@@ -55,7 +55,9 @@ export const HeaderTextWords = ({ LANGUAGE, section, url }: Props) => {
       {"single-zone" === section && (
         <>{zoneDataMock && <span>{zoneDataMock[1].zoneName}</span>}</>
       )}
-      {vehicleByImeiStatus === SERVICE_STATUS.succeeded && vehicleByImeiData ? (
+      {"single-zone" !== section &&
+      vehicleByImeiStatus === SERVICE_STATUS.succeeded &&
+      vehicleByImeiData ? (
         <>
           {vehicleByImeiData.value?.plate && (
             <span className={styles.plate}>

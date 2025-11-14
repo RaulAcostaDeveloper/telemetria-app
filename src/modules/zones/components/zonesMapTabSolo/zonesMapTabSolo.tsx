@@ -2,10 +2,10 @@ import dynamic from "next/dynamic";
 import styles from "./zonesMapTabSolo.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 
-const GoogleMapSeveralMarkersClientC = dynamic(
+const GoogleMapClientComponent = dynamic(
   () =>
     import(
-      "@/global/components/geoModal/googleMapSeveralMarkersClientC/googleMapSeveralMarkersClientC"
+      "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent"
     ),
   { ssr: false }
 );
@@ -24,9 +24,9 @@ interface Props {
 export const ZonesMapTabSolo = ({ LANGUAGE, markersInZone }: Props) => {
   return (
     <div className={["containermap", styles.container].join(" ")}>
-      <GoogleMapSeveralMarkersClientC
+      <GoogleMapClientComponent
         LANGUAGE={LANGUAGE}
-        places={markersInZone}
+        geoModalData={markersInZone}
         mapType={"satellite"}
       />
     </div>

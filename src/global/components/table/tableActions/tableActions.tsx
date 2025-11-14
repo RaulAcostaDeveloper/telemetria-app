@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
@@ -53,6 +53,14 @@ export const TableActions = ({
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
   const [viewModal, setViewModal] = useState<boolean>(false);
 
+  const escFunction = useCallback((event: { key: string }) => {
+    if (event.key === "Escape") {
+      setViewModal(false);
+      setShowEditModal(false);
+      setShowDeleteModal(false);
+    }
+  }, []);
+
   useEffect(() => {
     if (
       idKey &&
@@ -62,6 +70,13 @@ export const TableActions = ({
       setImei(dataObject[idKey].toString());
     }
   }, [dataObject, idKey]);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, [escFunction]);
 
   return (
     <div className={`${styles.tableActions}`}>
