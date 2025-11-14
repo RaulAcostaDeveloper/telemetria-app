@@ -9,10 +9,10 @@ import { TooltipGeoField } from "@/global/utils/geoMapUtils";
 import { markerData } from "../zonesMapTabSolo/zonesMapTabSolo";
 import { ndIfEmpty } from "@/global/utils/ndIfEmpty";
 
-const GoogleMapSeveralMarkers = dynamic(
+const GoogleMapClientOnly = dynamic(
   () =>
     import(
-      "@/global/components/geoModal/googleMapSeveralMarkersClientC/googleMapSeveralMarkersClientC"
+      "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent"
     ),
   { ssr: false }
 );
@@ -71,10 +71,10 @@ const GeoModalZone = ({
               ...(height !== undefined && { height: `${height}px` }),
             }}
           >
-            <GoogleMapSeveralMarkers
+            <GoogleMapClientOnly
               LANGUAGE={LANGUAGE}
               mapType={"satellite"}
-              places={geoModalData.markersInZone}
+              geoModalData={geoModalData.markersInZone}
             />
           </div>
         </div>
