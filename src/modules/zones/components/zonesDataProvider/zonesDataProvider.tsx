@@ -81,6 +81,9 @@ export const ZonesDataProvider = ({ id }: Props) => {
       id: v.vehicleId,
       date: formatDateTime(v.date),
       loadValue: v.loadValue,
+      lat: v.singlePointInfo.lat,
+      lng: v.singlePointInfo.lng,
+      title: v.singlePointInfo.title,
     }));
   }, []);
   const allZoneDataUnloads: dataTable = useMemo(() => {

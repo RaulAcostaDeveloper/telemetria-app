@@ -6,15 +6,23 @@ interface GeoData {
   title: string;
   rows: TooltipGeoField[];
 }
+interface GeoDataWithLng {
+  lat: number;
+  lng: number;
+  title: string;
+  rows: TooltipGeoField[];
+}
 interface MarkerData {
   id: number;
   position: { lat: number; lng: number };
   title: string;
+  rows: TooltipGeoField[];
 }
 interface loadData {
   vehicleId: string;
   date: string;
   loadValue: number;
+  singlePointInfo: GeoDataWithLng;
 }
 
 export interface zoneDataMock {
@@ -38,6 +46,11 @@ export const z0n3sD4t4M0ck: zoneDataMock[] = [
           lng: -103.4160823,
         },
         title: "Parque Escaleno",
+        rows: [
+          { label: "vehicleId", value: "S170 (849494949494943)" },
+          { label: "date", value: "2025-09-19T14:03:22" },
+          { label: "loadValue", value: "580" },
+        ],
       },
       {
         id: 2,
@@ -46,6 +59,11 @@ export const z0n3sD4t4M0ck: zoneDataMock[] = [
           lng: -103.4194916,
         },
         title: "Walmart",
+        rows: [
+          { label: "vehicleId", value: "S171 (849494949494943)" },
+          { label: "date", value: "2025-09-20T14:03:22" },
+          { label: "loadValue", value: "400" },
+        ],
       },
     ],
     geoData: {
@@ -59,33 +77,69 @@ export const z0n3sD4t4M0ck: zoneDataMock[] = [
         vehicleId: "S170 (849494949494943)",
         date: "2025-09-19T14:03:22",
         loadValue: 580,
+        singlePointInfo: {
+          lat: 20.6663943,
+          lng: -103.4160823,
+          title: "Parque Escaleno",
+          rows: [],
+        },
       },
       {
         vehicleId: "S171 (849494949494943)",
         date: "2025-09-20T14:03:22",
         loadValue: 400,
+        singlePointInfo: {
+          lat: 20.6663943,
+          lng: -103.4160823,
+          title: "Parque Escaleno",
+          rows: [],
+        },
       },
       {
         vehicleId: "S172 (849494949494943)",
         date: "2025-09-20T16:03:22",
         loadValue: 200,
+        singlePointInfo: {
+          lat: 20.6663943,
+          lng: -103.4160823,
+          title: "Parque Escaleno",
+          rows: [],
+        },
       },
     ],
     unloads: [
       {
         vehicleId: "S170 (849494949494943)",
-        date: "2025/09/21T14:03:22",
-        loadValue: 280,
+        date: "2025-09-19T14:03:22",
+        loadValue: 580,
+        singlePointInfo: {
+          lat: 20.6663943,
+          lng: -103.4160823,
+          title: "Parque Escaleno",
+          rows: [],
+        },
       },
       {
         vehicleId: "S171 (849494949494943)",
-        date: "2025/09/22T14:03:22",
-        loadValue: 100,
+        date: "2025-09-20T14:03:22",
+        loadValue: 400,
+        singlePointInfo: {
+          lat: 20.6663943,
+          lng: -103.4160823,
+          title: "Parque Escaleno",
+          rows: [],
+        },
       },
       {
         vehicleId: "S172 (849494949494943)",
-        date: "2025/09/22T16:03:22",
-        loadValue: 10,
+        date: "2025-09-20T16:03:22",
+        loadValue: 200,
+        singlePointInfo: {
+          lat: 20.6663943,
+          lng: -103.4160823,
+          title: "Parque Escaleno",
+          rows: [],
+        },
       },
     ],
   },
@@ -100,6 +154,7 @@ export const z0n3sD4t4M0ck: zoneDataMock[] = [
           lng: -103.4160823,
         },
         title: "Parque Escaleno",
+        rows: [],
       },
       {
         id: 4,
@@ -108,6 +163,7 @@ export const z0n3sD4t4M0ck: zoneDataMock[] = [
           lng: -103.4194916,
         },
         title: "Walmart",
+        rows: [],
       },
     ],
     geoData: {
@@ -121,33 +177,69 @@ export const z0n3sD4t4M0ck: zoneDataMock[] = [
         vehicleId: "S170 (849494949494943)",
         date: "2025-09-19T14:03:22",
         loadValue: 580,
+        singlePointInfo: {
+          lat: 20.6663943,
+          lng: -103.4160823,
+          title: "Parque Escaleno",
+          rows: [],
+        },
       },
       {
         vehicleId: "S171 (849494949494943)",
         date: "2025-09-20T14:03:22",
         loadValue: 400,
+        singlePointInfo: {
+          lat: 20.6663943,
+          lng: -103.4160823,
+          title: "Parque Escaleno",
+          rows: [],
+        },
       },
       {
         vehicleId: "S172 (849494949494943)",
         date: "2025-09-20T16:03:22",
         loadValue: 200,
+        singlePointInfo: {
+          lat: 20.6663943,
+          lng: -103.4160823,
+          title: "Parque Escaleno",
+          rows: [],
+        },
       },
     ],
     unloads: [
       {
         vehicleId: "S170 (849494949494943)",
-        date: "2025-09-21T14:03:22",
-        loadValue: 280,
+        date: "2025-09-19T14:03:22",
+        loadValue: 580,
+        singlePointInfo: {
+          lat: 20.6663943,
+          lng: -103.4160823,
+          title: "Parque Escaleno",
+          rows: [],
+        },
       },
       {
         vehicleId: "S171 (849494949494943)",
-        date: "2025-09-22T14:03:22",
-        loadValue: 100,
+        date: "2025-09-20T14:03:22",
+        loadValue: 400,
+        singlePointInfo: {
+          lat: 20.6663943,
+          lng: -103.4160823,
+          title: "Parque Escaleno",
+          rows: [],
+        },
       },
       {
         vehicleId: "S172 (849494949494943)",
-        date: "2025-09-22T16:03:22",
-        loadValue: 10,
+        date: "2025-09-20T16:03:22",
+        loadValue: 200,
+        singlePointInfo: {
+          lat: 20.6663943,
+          lng: -103.4160823,
+          title: "Parque Escaleno",
+          rows: [],
+        },
       },
     ],
   },
