@@ -4,6 +4,7 @@ import { TableModalViewGroup } from "./tableModalViewGroup/tableModalViewGroup";
 import { TableModalViewVehicle } from "./tableModalViewVehicle/tableModalViewVehicle";
 import { ZoneLoadsModal } from "@/modules/zones/components/zoneLoadsModal/zoneLoadsModal";
 import { ZoneUnloadsModal } from "@/modules/zones/components/zoneUnloadsModal/zoneUnloadsModal";
+import { TableModalViewZone } from "./tableModalViewZone/tableModalViewZone";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -30,6 +31,14 @@ export const TableModalViewHandler = ({
     case MODAL_OPTION.GROUPS:
       return (
         <TableModalViewGroup
+          LANGUAGE={LANGUAGE}
+          closeModal={closeModal}
+          dataObject={dataObject}
+        />
+      );
+    case MODAL_OPTION.ZONE:
+      return (
+        <TableModalViewZone
           LANGUAGE={LANGUAGE}
           closeModal={closeModal}
           dataObject={dataObject}

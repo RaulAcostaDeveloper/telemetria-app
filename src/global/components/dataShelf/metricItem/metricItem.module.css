@@ -1,0 +1,30 @@
+.metricItem {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 3.2rem;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: var(--copy-icon-black);
+  text-align: justify;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.metricItem:hover {
+  background-color: #cccccc2a;
+}
+
+.metricItem:active {
+  background-color: #cccccc45;
+}
+
+.title {
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.border {
+  border-bottom: 1px solid #ccc;
+}

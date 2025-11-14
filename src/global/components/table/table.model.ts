@@ -10,7 +10,7 @@ interface column {
 
 export type columnsTable = column[];
 
-export type PrimitiveValue = string | number | boolean | null;
+export type PrimitiveValue = string | number | boolean | null | undefined;
 
 export type dataTable = Record<string, PrimitiveValue>[];
 
