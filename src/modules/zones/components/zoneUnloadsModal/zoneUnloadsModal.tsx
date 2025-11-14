@@ -1,5 +1,7 @@
 import { PrimitiveValue } from "@/global/components/table/table.model";
 import { LanguageInterface } from "@/global/language/constants/language.model";
+import GeoModal from "@/global/components/geoModal/geoModal";
+import { TooltipGeoField } from "@/global/utils/geoMapUtils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -12,5 +14,19 @@ export const ZoneUnloadsModal = ({
   closeModal,
   dataObject,
 }: Props) => {
-  return <></>;
+  const geoModalData = {
+    lat: dataObject.lat as number,
+    lon: dataObject.lng as number,
+    title: dataObject.title as string,
+    rows: [] as TooltipGeoField[],
+  };
+  return (
+    <>
+      <GeoModal
+        LANGUAGE={LANGUAGE}
+        closeModal={closeModal}
+        geoModalData={geoModalData}
+      />
+    </>
+  );
 };

@@ -1,4 +1,4 @@
-import GeoModal, { GeoModalData } from "@/global/components/geoModal/geoModal";
+import GeoModal from "@/global/components/geoModal/geoModal";
 import { PrimitiveValue } from "@/global/components/table/table.model";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { TooltipGeoField } from "@/global/utils/geoMapUtils";

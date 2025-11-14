@@ -6,7 +6,11 @@ import styles from "./zonesDataProvider.module.css";
 import { Table, TabsContent } from "@/global/components";
 import { ZoneProfileData } from "../zoneProfileData/zoneProfileData";
 import { ZonesMapTabSolo } from "../zonesMapTabSolo/zonesMapTabSolo";
-import { columnsTable, dataTable, MODAL_OPTION } from "@/global/components/table/table.model";
+import {
+  columnsTable,
+  dataTable,
+  MODAL_OPTION,
+} from "@/global/components/table/table.model";
 import { formatDateTime } from "@/global/utils/utils";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 import { z0n3sD4t4M0ck } from "@/global/dataMock/z0n3sD4t4M0ck";
@@ -88,6 +92,9 @@ export const ZonesDataProvider = ({ id }: Props) => {
       id: v.vehicleId,
       date: formatDateTime(v.date),
       loadValue: v.loadValue,
+      lat: v.singlePointInfo.lat,
+      lng: v.singlePointInfo.lng,
+      title: v.singlePointInfo.title,
     }));
   }, []);
 
