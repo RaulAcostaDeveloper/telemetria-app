@@ -434,6 +434,11 @@ export interface LanguageInterface {
     };
   };
   zones: {
+    zoneProfileDataShelf: {
+      title: string;
+      zoneName: string;
+      profileName: string;
+    };
     zoneProfileForm: {
       name: string;
       category: string;
@@ -456,6 +461,7 @@ export interface LanguageInterface {
       events: string;
       charged: string;
       discharged: string;
+      zoneModalTitle: string;
     };
     tabs: {
       map: string;

@@ -454,6 +454,11 @@ export const ENGLISH: LanguageInterface = {
     },
   },
   zones: {
+    zoneProfileDataShelf: {
+      title: "Profile data",
+      zoneName: "Zone name",
+      profileName: "Profile name",
+    },
     zoneProfileForm: {
       name: "Name",
       category: "Category",
@@ -467,6 +472,7 @@ export const ENGLISH: LanguageInterface = {
       noAuthorized: "Not authorized",
     },
     zonesFuelTable: {
+      zoneModalTitle: "Zone map",
       zone: "Zone",
       profile: "Profile",
       country: "Country",

@@ -453,6 +453,11 @@ export const PORTUGUES: LanguageInterface = {
     },
   },
   zones: {
+    zoneProfileDataShelf: {
+      title: "Dados de perfil",
+      zoneName: "Nome zone",
+      profileName: "Nome perfil",
+    },
     zoneProfileForm: {
       name: "Nome",
       category: "Categoria",
@@ -466,6 +471,7 @@ export const PORTUGUES: LanguageInterface = {
       noAuthorized: "Não autorizado",
     },
     zonesFuelTable: {
+      zoneModalTitle: "Mapa de zona",
       zone: "Zona",
       profile: "Perfil",
       country: "País",
