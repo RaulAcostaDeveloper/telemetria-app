@@ -18,6 +18,7 @@ import topFuelReportSlice from "@/global/redux/serviceSlices/topFuelReportSlice"
 import vehicleByImeiSlice from "@/global/redux/serviceSlices/vehicleByImeiSlice";
 import vehiclesAllSlice from "@/global/redux/serviceSlices/vehiclesAllSlice";
 import vehiclesSlice from "@/global/redux/serviceSlices/vehiclesSlice";
+import zoneDetailsSlice from "@/global/redux/serviceSlices/zoneDetails";
 
 export const store = configureStore({
   reducer: {
@@ -39,6 +40,7 @@ export const store = configureStore({
     vehicleByImei: vehicleByImeiSlice,
     vehicles: vehiclesSlice,
     vehiclesAll: vehiclesAllSlice,
+    zoneDetails: zoneDetailsSlice,
   },
   devTools: true,
 });

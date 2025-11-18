@@ -6,6 +6,7 @@ export enum SERVICE_STATUS {
 }
 
 export interface FetchProps {
+  id?: string;
   imei?: string;
   startDate?: string;
   endDate?: string;

@@ -1,3 +1,4 @@
+import { ZonesReportDataFetcher } from "@/modules/zones/components/zoneReportDataFetcher/zoneReportDataFetcher";
 import { ZonesDataProvider } from "@/modules/zones/components/zonesDataProvider/zonesDataProvider";
 
 interface Page {
@@ -12,6 +13,7 @@ export default function ZonesVehicle({ params }: Page) {
   return (
     <>
       <ZonesDataProvider id={id} />
+      <ZonesReportDataFetcher id={id} />
     </>
   );
 }
