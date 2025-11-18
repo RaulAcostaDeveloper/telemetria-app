@@ -9,14 +9,16 @@ import {
 import { Collapsable } from "@/global/components/collapsable/collapsable";
 import { DataShelf } from "@/global/components/dataShelf/dataShelf";
 import { LanguageInterface } from "@/global/language/constants/language.model";
+import { ProfileModalHandler } from "./profileModalHandler/profileModalHandlet";
 import { STORAGE_KEYS } from "@/global/localStorage/constants/storageKeys";
 import { ZoneIdDetailsDataMock } from "@/global/dataMock/zoneIdDetailsDataMock";
 
 interface Props {
   LANGUAGE: LanguageInterface;
+  id: string;
 }
 
-export const ZoneProfileData = ({ LANGUAGE }: Props) => {
+export const ZoneProfileData = ({ LANGUAGE, id }: Props) => {
   const [isProfileDataOpen, setIsProfileDataOpen] = useState<boolean | null>(
     null
   );
@@ -96,6 +98,7 @@ export const ZoneProfileData = ({ LANGUAGE }: Props) => {
         defaultOpen={isProfileDataOpen}
         set={setIsProfileDataOpen}
       >
+        <ProfileModalHandler LANGUAGE={LANGUAGE} id={id} />
         <DataShelf LANGUAGE={LANGUAGE} data={data} />
       </Collapsable>
     </div>

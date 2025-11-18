@@ -23,7 +23,7 @@ export const ZoneEditProfileModalForm = ({
   const [authDisharges, setAuthDisharges] = useState("");
   const [authRalenti, setAuthRalenti] = useState("");
   // rgb hexadecimal
-  const [color, setColor] = useState<string>("");
+  const [color, setColor] = useState<string>("#000000");
   const [provider, setProvider] = useState<string>("");
   const [description, setDescription] = useState<string>("");
 
@@ -143,8 +143,7 @@ export const ZoneEditProfileModalForm = ({
                 authDisharges &&
                 authRalenti &&
                 color &&
-                provider &&
-                description
+                provider
               )
             }
           />
