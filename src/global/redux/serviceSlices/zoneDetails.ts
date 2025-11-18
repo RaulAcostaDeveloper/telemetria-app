@@ -68,4 +68,6 @@ const zoneDetailsSlice = createSlice({
   },
 });
 
+export const { resetZoneDetailsSlice } = zoneDetailsSlice.actions;
+
 export default zoneDetailsSlice.reducer;
