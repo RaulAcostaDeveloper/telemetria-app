@@ -1,5 +1,5 @@
 export interface FuelZonesDataMock {
-  id: number;
+  id: string;
   zoneName: string;
   profileName: string;
   country: string;
@@ -13,7 +13,7 @@ export interface FuelZonesDataMock {
 
 export const fuelZonesDataMock: FuelZonesDataMock[] = [
   {
-    id: 351823,
+    id: "ede1ecd4-0f35-4070-9ac7-00034cce965e",
     zoneName: "Zona Norte",
     profileName: "Operador A",
     country: "México",
@@ -25,7 +25,7 @@ export const fuelZonesDataMock: FuelZonesDataMock[] = [
     totalLitersDischarges: 8700,
   },
   {
-    id: 351263,
+    id: "ede1ecd4-0f35-4070-9ac7-00034cce965e",
     zoneName: "Zona Sur",
     profileName: "Supervisor B",
     country: "México",
@@ -37,7 +37,7 @@ export const fuelZonesDataMock: FuelZonesDataMock[] = [
     totalLitersDischarges: 9100,
   },
   {
-    id: 351231,
+    id: "ede1ecd4-0f35-4070-9ac7-00034cce965e",
     zoneName: "Zona Centro",
     profileName: "Administrador C",
     country: "México",
@@ -49,7 +49,7 @@ export const fuelZonesDataMock: FuelZonesDataMock[] = [
     totalLitersDischarges: 14800,
   },
   {
-    id: 354123,
+    id: "ede1ecd4-0f35-4070-9ac7-00034cce965e",
     zoneName: "Zona Este",
     profileName: "Operador D",
     country: "México",
@@ -61,7 +61,7 @@ export const fuelZonesDataMock: FuelZonesDataMock[] = [
     totalLitersDischarges: 5400,
   },
   {
-    id: 325123,
+    id: "ede1ecd4-0f35-4070-9ac7-00034cce965e",
     zoneName: "Zona Oeste",
     profileName: "Técnico E",
     country: "México",
