@@ -19,6 +19,7 @@ import vehicleByImeiSlice from "@/global/redux/serviceSlices/vehicleByImeiSlice"
 import vehiclesAllSlice from "@/global/redux/serviceSlices/vehiclesAllSlice";
 import vehiclesSlice from "@/global/redux/serviceSlices/vehiclesSlice";
 import zoneDetailsSlice from "@/global/redux/serviceSlices/zoneDetails";
+import zonesSummarySlice from "@/global/redux/serviceSlices/zonesSummary";
 
 export const store = configureStore({
   reducer: {
@@ -41,6 +42,7 @@ export const store = configureStore({
     vehicles: vehiclesSlice,
     vehiclesAll: vehiclesAllSlice,
     zoneDetails: zoneDetailsSlice,
+    zonesSummary: zonesSummarySlice,
   },
   devTools: true,
 });

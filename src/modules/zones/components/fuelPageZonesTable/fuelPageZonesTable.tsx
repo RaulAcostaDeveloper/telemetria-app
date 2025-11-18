@@ -1,20 +1,26 @@
 "use client";
 import { useMemo } from "react";
+import { useSelector } from "react-redux";
 
-import { LanguageInterface } from "@/global/language/constants/language.model";
-import { Table } from "@/global/components";
 import {
   columnsTable,
-  dataTable,
   MODAL_OPTION,
 } from "@/global/components/table/table.model";
-import { fuelZonesDataMock } from "@/global/dataMock/fuelZonesDataMock";
+import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
+import { LanguageInterface } from "@/global/language/constants/language.model";
+import { RootState } from "@/global/redux/store";
+import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
+import { Table } from "@/global/components";
 
 interface Props {
   LANGUAGE: LanguageInterface;
 }
 
 export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
+  const { zonesSummaryData, zonesSummaryStatus } = useSelector(
+    (state: RootState) => state.zonesSummary
+  );
+
   const zonesTableColumns: columnsTable = [
     {
       columnName: LANGUAGE.zones.zonesFuelTable.zone,
@@ -67,31 +73,43 @@ export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
     },
   ];
 
-  const zonesData: dataTable = useMemo(() => {
-    return fuelZonesDataMock?.map((value) => ({
+  const zonesData = useMemo(() => {
+    return zonesSummaryData?.value?.zones.map((value) => ({
       zoneName: value.zoneName,
       profileName: value.profileName,
       country: value.country,
       state: value.state,
       city: value.city,
-      zipCode: value.zipCode,
+      postalCode: value.postalCode,
       totalEvents: value.totalEvents,
-      totalLitersCharges: value.totalLitersCharges,
-      totalLitersDischarges: value.totalLitersDischarges,
-      id: value.id,
+      loadedLiters: value.loadedLiters,
+      unloadedLiters: value.unloadedLiters,
+      id: value.zoneId,
     }));
-  }, []);
+  }, [zonesSummaryData]);
 
   return (
-    <Table
-      columns={zonesTableColumns}
-      data={zonesData}
-      LANGUAGE={LANGUAGE}
-      showGoGenericReport
-      idKey="id"
-      viewPath="/zones/zone/"
-      showEdit
-      modalOption={MODAL_OPTION.ZONE}
-    />
+    <div>
+      {zonesSummaryStatus === SERVICE_STATUS.succeeded &&
+        zonesSummaryData?.value &&
+        zonesData && (
+          <Table
+            columns={zonesTableColumns}
+            data={zonesData}
+            LANGUAGE={LANGUAGE}
+            showGoGenericReport
+            idKey="id"
+            viewPath="/zones/zone/"
+            showEdit
+            modalOption={MODAL_OPTION.ZONE}
+          />
+        )}
+
+      <DataErrorHandler
+        LANGUAGE={LANGUAGE}
+        hasData={!!zonesSummaryData?.value}
+        infoStatus={zonesSummaryStatus}
+      />
+    </div>
   );
 };

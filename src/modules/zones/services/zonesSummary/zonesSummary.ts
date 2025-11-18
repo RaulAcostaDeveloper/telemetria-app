@@ -10,7 +10,7 @@ export async function getZonesSummary({
   logoutState,
 }: FetchProps) {
   // Construcción de la url con parámetros
-  const fullUrl = `${url}/data?startDate=${startDate}&endDate=${endDate}`;
+  const fullUrl = `${url}?startDate=${startDate}&endDate=${endDate}`;
   const options: RequestInit = {
     method: "GET",
     headers: {

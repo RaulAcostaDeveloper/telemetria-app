@@ -11,6 +11,7 @@ import { fetchGroups } from "@/global/redux/serviceSlices/groupsSlice";
 import { fetchObdRollup } from "@/global/redux/serviceSlices/obdRollupSlice";
 import { fetchTopFuelReport } from "@/global/redux/serviceSlices/topFuelReportSlice";
 import { fetchVehicles } from "@/global/redux/serviceSlices/vehiclesSlice";
+import { fetchZonesSummary } from "@/global/redux/serviceSlices/zonesSummary";
 import { formatToLocalIso8601 } from "@/global/utils/utils";
 import { useAuth } from "@/modules/auth/utils";
 
@@ -31,6 +32,9 @@ export const TryFetchOnFailed = () => {
   const { groupsStatus } = useSelector((state: RootState) => state.groups);
   const { fuelSummaryStatus } = useSelector(
     (state: RootState) => state.fuelSummary
+  );
+  const { zonesSummaryStatus } = useSelector(
+    (state: RootState) => state.zonesSummary
   );
   const { topFuelReportStatus } = useSelector(
     (state: RootState) => state.topFuelReport
@@ -147,6 +151,25 @@ export const TryFetchOnFailed = () => {
       }, 5000);
     }
   }, [groupsStatus, isAuthenticated, startDate, endDate]);
+
+  useEffect(() => {
+    if (
+      zonesSummaryStatus === SERVICE_STATUS.failed &&
+      isAuthenticated &&
+      startDate &&
+      endDate
+    ) {
+      setTimeout(() => {
+        dispatch(
+          fetchZonesSummary({
+            startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+            endDate: formatToLocalIso8601(endDate),
+            logoutState,
+          })
+        );
+      }, 5000);
+    }
+  }, [zonesSummaryStatus, isAuthenticated, startDate, endDate]);
 
   return null;
 };
