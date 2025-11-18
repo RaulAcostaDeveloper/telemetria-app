@@ -100,7 +100,7 @@ export const ZonesDataProvider = ({ id }: Props) => {
 
   return (
     <div className={styles.zonesDataProvider}>
-      <ZoneProfileData LANGUAGE={LANGUAGE} />
+      <ZoneProfileData LANGUAGE={LANGUAGE} id={id} />
       <TabsContent
         tabOptions={zoneTabs}
         tabContents={[
