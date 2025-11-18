@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AppDispatch, RootState } from "@/global/redux/store";
+import { TryFetchOnFailed } from "./tryFetchOnFailed/tryFetchOnFailed";
 import { fetchDevices } from "@/global/redux/serviceSlices/devicesSlice";
 import { fetchDrivers } from "@/global/redux/serviceSlices/driversSlice";
 import { fetchFuelSummary } from "@/global/redux/serviceSlices/fuelSummarySlice";
@@ -10,9 +11,9 @@ import { fetchGroups } from "@/global/redux/serviceSlices/groupsSlice";
 import { fetchObdRollup } from "@/global/redux/serviceSlices/obdRollupSlice";
 import { fetchTopFuelReport } from "@/global/redux/serviceSlices/topFuelReportSlice";
 import { fetchVehicles } from "@/global/redux/serviceSlices/vehiclesSlice";
+import { fetchZonesSummary } from "@/global/redux/serviceSlices/zonesSummary";
 import { formatToLocalIso8601 } from "../../../utils/utils";
 import { useAuth } from "@/modules/auth/utils";
-import { TryFetchOnFailed } from "./tryFetchOnFailed/tryFetchOnFailed";
 
 export const MainDataFetcher = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -54,6 +55,13 @@ export const MainDataFetcher = () => {
       );
       dispatch(
         fetchObdRollup({
+          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+          endDate: formatToLocalIso8601(endDate),
+          logoutState,
+        })
+      );
+      dispatch(
+        fetchZonesSummary({
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
           logoutState,

@@ -4,7 +4,10 @@ import { useDispatch } from "react-redux";
 
 import { AppDispatch } from "@/global/redux/store";
 import { TryZoneReportOnFailed } from "./tryZoneReportDataFetchet/tryZoneReportDataFetchet";
-import { fetchZoneDetails } from "@/global/redux/serviceSlices/zoneDetails";
+import {
+  fetchZoneDetails,
+  resetZoneDetailsSlice,
+} from "@/global/redux/serviceSlices/zoneDetails";
 import { useAuth } from "@/modules/auth/utils";
 
 interface Props {
@@ -14,6 +17,13 @@ interface Props {
 export const ZonesReportDataFetcher = ({ id }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const { isAuthenticated, logoutState } = useAuth();
+
+  useEffect(() => {
+    return () => {
+      // Reiniciar el estado al desmontar
+      dispatch(resetZoneDetailsSlice());
+    };
+  }, []);
 
   useEffect(() => {
     if (isAuthenticated && id) {
