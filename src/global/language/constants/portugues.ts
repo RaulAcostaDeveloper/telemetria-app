@@ -472,6 +472,27 @@ export const PORTUGUES: LanguageInterface = {
       noAuthorized: "Não autorizado",
       selectAnOption: "Selecione uma opção",
     },
+    zoneProfileCategories: {
+      garage: "Oficina", // TALLER
+      gasStation: "Posto de Gasolina", // GASOLINERA
+      restArea: "Área de Descanso", // DESCANSO
+      headquarters: "Sede Corporativa", // CORPORATIVO
+      tollBooth: "Pedágio", // CASETA
+      selfConsumption: "Autoconsumo", // AUTOCONSUMO
+      impoundLot: "Pátio de Apreensão", // CORRALÓN
+      carWash: "Lava-Rápido", // AUTOLAVADO
+      privateProperty: "Propriedade Particular", // PARTICULAR
+      parkingLot: "Estacionamento", // PENSIÓN
+      branchOffice: "Filial", // SUCURSAL
+      tireShop: "Borracharia", // LLANTERA
+      riskArea: "Área de Risco", // LUGAR DE RIESGO
+      fuelLoad: "Abastecimento de Combustível", // CARGA DE COMBUSTIBLE
+      mainOffice: "Matriz", // MATRIZ
+      client: "Cliente", // CLIENTE
+      supplier: "Fornecedor", // PROVEEDOR
+      distributionCenter: "Centro de Distribuição", // CEDIS
+      robbery: "Roubo", // ROBO
+    },
     zonesFuelTable: {
       zoneModalTitle: "Mapa de zona",
       zone: "Zona",

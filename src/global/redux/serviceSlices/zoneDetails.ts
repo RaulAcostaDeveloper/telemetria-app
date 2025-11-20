@@ -16,7 +16,7 @@ interface ZoneDetailsValue {
   idleState: number;
   provider: string;
   color: string;
-  zoneTypeName: string;
+  zoneProviderName: string;
   zoneCategoryName: string;
   radioZone: number;
   lat: number;

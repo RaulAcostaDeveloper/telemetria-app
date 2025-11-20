@@ -5,18 +5,17 @@ import { getZoneProfileDetails } from "@/modules/zones/services/zoneProfileDetai
 
 interface ZoneProfileDetailsExtends {
   nick: string;
-  zoneTypeId: string;
+  zoneProviderId: string;
   chargeState: number;
   dischargeState: number;
   idleState: number;
   color: string;
-  provider: string;
   description: string;
   accountId: string;
   zoneId: string;
   zoneCategoryId: string;
   zoneName: string;
-  zoneTypeName: string;
+  zoneProviderName: string;
   zoneCategoryName: string;
 }
 

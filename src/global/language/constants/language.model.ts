@@ -453,6 +453,27 @@ export interface LanguageInterface {
       noAuthorized: string;
       selectAnOption: string;
     };
+    zoneProfileCategories: {
+      garage: string; // TALLER
+      gasStation: string; // GASOLINERA
+      restArea: string; // DESCANSO
+      headquarters: string; // CORPORATIVO
+      tollBooth: string; // CASETA
+      selfConsumption: string; // AUTOCONSUMO
+      impoundLot: string; // CORRALÓN
+      carWash: string; // AUTOLAVADO
+      privateProperty: string; // PARTICULAR
+      parkingLot: string; // PENSIÓN
+      branchOffice: string; // SUCURSAL
+      tireShop: string; // LLANTERA
+      riskArea: string; // LUGAR DE RIESGO
+      fuelLoad: string; // CARGA DE COMBUSTIBLE
+      mainOffice: string; // MATRIZ
+      client: string; // CLIENTE
+      supplier: string; // PROVEEDOR
+      distributionCenter: string; // CEDIS
+      robbery: string; // ROBO
+    };
     zonesFuelTable: {
       zone: string;
       profile: string;
