@@ -1,26 +1,28 @@
 "use client";
 import { useMemo } from "react";
+import { useSelector } from "react-redux";
+
 import { LocalGasStation, Map } from "@mui/icons-material";
 
-import styles from "./zonesDataProvider.module.css";
 import { Table, TabsContent } from "@/global/components";
-import { ZoneProfileData } from "../zoneProfileData/zoneProfileData";
-import { ZonesMapTabSolo } from "../zonesMapTabSolo/zonesMapTabSolo";
+import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import {
   columnsTable,
   dataTable,
   MODAL_OPTION,
 } from "@/global/components/table/table.model";
-import { formatDateTime } from "@/global/utils/utils";
-import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
-import { z0n3sD4t4M0ck } from "@/global/dataMock/z0n3sD4t4M0ck";
-import { useSelector } from "react-redux";
 import { RootState } from "@/global/redux/store";
-import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import {
   Charges,
   Discharges,
 } from "@/global/redux/serviceSlices/fuelSummarySlice";
+import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
+import { ZoneProfileData } from "../zoneProfileData/zoneProfileData";
+import { ZonesMapTabSolo } from "../zonesMapTabSolo/zonesMapTabSolo";
+import { formatDateTime } from "@/global/utils/utils";
+import { z0n3sD4t4M0ck } from "@/global/dataMock/z0n3sD4t4M0ck";
+
+import styles from "./zonesDataProvider.module.css";
 
 interface Props {
   zoneId: string;
@@ -77,28 +79,30 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
 
   const loadsSummary = useMemo(() => {
     return fuelSummaryData?.value?.charges.map((v) => ({
-      address: v.address, //"Lomas del Seminario, Av Manuel J. Clouthier 325, Lomas de Guadalupe, 45030 Zapopan, Jal."
-      dateGps: v.dateGps, //"2025-10-03T23:25:52"
-      deviceBattery: v.deviceBattery, //100
-      endDate: v.endDate, //"2025-10-03T23:35:01"
-      eventId: v.eventId, //602
-      finalFuel: v.finalFuel, //45
-      ignition: v.ignition, //false
-      imei: v.imei, //"862524060822760"
-      initialFuel: v.initialFuel, //3
-      lat: v.lat, //20.668894
-      lon: v.lon, //-103.41846
-      magnitude: v.magnitude, //42
-      mainPower: v.mainPower, //13
-      odometer: v.odometer, //68994
-      origin: v.origin, //0
-      speed: v.speed, //0
-      startDate: v.startDate, //"2025-10-03T23:27:52"
-      zoneId: v.zoneId, //"80cdfbca-8a53-4551-bce6-1a6c0ea0aaf1"
+      address: v.address,
+      dateGps: v.dateGps,
+      deviceBattery: v.deviceBattery,
+      endDate: v.endDate,
+      eventId: v.eventId,
+      finalFuel: v.finalFuel,
+      ignition: v.ignition,
+      imei: v.imei,
+      initialFuel: v.initialFuel,
+      lat: v.lat,
+      lon: v.lon,
+      magnitude: v.magnitude,
+      mainPower: v.mainPower,
+      odometer: v.odometer,
+      origin: v.origin,
+      speed: v.speed,
+      startDate: v.startDate,
+      zoneId: v.zoneId,
     }));
   }, [fuelSummaryData]);
+
   const loadsSingle: Charges[] | undefined =
     loadsSummary && findWithZoneId(loadsSummary);
+
   if (loadsSingle) {
     forTableLoads = loadsSingle.map((v) => ({
       imei: v.imei,
@@ -128,28 +132,29 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
 
   const unloadsSummary = useMemo(() => {
     return fuelSummaryData?.value?.discharges.map((v) => ({
-      address: v.address, //"Lomas del Seminario, Av Manuel J. Clouthier 325, Lomas de Guadalupe, 45030 Zapopan, Jal."
-      dateGps: v.dateGps, //"2025-10-03T23:25:52"
-      deviceBattery: v.deviceBattery, //100
-      endDate: v.endDate, //"2025-10-03T23:35:01"
-      eventId: v.eventId, //602
-      finalFuel: v.finalFuel, //45
-      ignition: v.ignition, //false
-      imei: v.imei, //"862524060822760"
-      initialFuel: v.initialFuel, //3
-      lat: v.lat, //20.668894
-      lon: v.lon, //-103.41846
-      magnitude: v.magnitude, //42
-      mainPower: v.mainPower, //13
-      odometer: v.odometer, //68994
-      origin: v.origin, //0
-      speed: v.speed, //0
-      startDate: v.startDate, //"2025-10-03T23:27:52"
-      zoneId: v.zoneId, //"80cdfbca-8a53-4551-bce6-1a6c0ea0aaf1"
+      address: v.address,
+      dateGps: v.dateGps,
+      deviceBattery: v.deviceBattery,
+      endDate: v.endDate,
+      eventId: v.eventId,
+      finalFuel: v.finalFuel,
+      ignition: v.ignition,
+      imei: v.imei,
+      initialFuel: v.initialFuel,
+      lat: v.lat,
+      lon: v.lon,
+      magnitude: v.magnitude,
+      mainPower: v.mainPower,
+      odometer: v.odometer,
+      speed: v.speed,
+      startDate: v.startDate,
+      zoneId: v.zoneId,
     }));
   }, [fuelSummaryData]);
+
   const unloadsSingle: Discharges[] | undefined =
     unloadsSummary && findWithZoneId(unloadsSummary);
+
   if (unloadsSingle) {
     forTableUnloads = unloadsSingle.map((v) => ({
       imei: v.imei,
@@ -159,9 +164,10 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
   }
 
   // Lo usaré de referencia para el mapa, lo borro en la tarea correspondiente.
-  /*   const allZoneData = useMemo(() => {
+  const allZoneData = useMemo(() => {
     return z0n3sD4t4M0ck[1];
   }, []);
+
   const allZoneDataLoads: dataTable = useMemo(() => {
     return allZoneData.loads?.map((v) => ({
       id: v.vehicleId,
@@ -172,6 +178,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       title: v.singlePointInfo.title,
     }));
   }, []);
+
   const allZoneDataUnloads: dataTable = useMemo(() => {
     return allZoneData.unloads?.map((v) => ({
       id: v.vehicleId,
@@ -181,11 +188,11 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       lng: v.singlePointInfo.lng,
       title: v.singlePointInfo.title,
     }));
-  }, []); */
+  }, []);
 
   return (
     <div className={styles.zonesDataProvider}>
-      <ZoneProfileData LANGUAGE={LANGUAGE} id={id} />
+      <ZoneProfileData LANGUAGE={LANGUAGE} id={zoneId} />
       <TabsContent
         tabOptions={zoneTabs}
         tabContents={[
