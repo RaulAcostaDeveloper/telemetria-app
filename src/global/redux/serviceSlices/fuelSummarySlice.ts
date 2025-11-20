@@ -102,6 +102,12 @@ export const fetchFuelSummary = createAsyncThunk(
   }
 );
 
+function getPlateFromImei(devicesArr: Devices[], imei: string): string {
+  const deviceTarget = devicesArr.find((d) => d.imei === imei);
+  const validator = deviceTarget?.plate ? deviceTarget.plate : "";
+  return validator;
+}
+
 const fuelSummaryFormatter = (
   data: FuelSummaryData | null
 ): FuelSummaryData | null => {
@@ -110,12 +116,24 @@ const fuelSummaryFormatter = (
       ...messages,
       lastReportDate: toLocalDateTime(messages.lastReportDate ?? ""),
     }));
+    const charges = data.value.charges.map((v) => ({
+      ...v,
+      imei: `${getPlateFromImei(devices, v.imei)} (${v.imei})`,
+    }));
+    const discharges = data.value.discharges.map((v) => ({
+      ...v,
+      imei: `${getPlateFromImei(devices, v.imei)} (${v.imei})`,
+    }));
+
+    //const discharges
 
     return {
       ...data,
       value: {
         ...data.value,
         devices,
+        charges,
+        discharges,
       },
     };
   }

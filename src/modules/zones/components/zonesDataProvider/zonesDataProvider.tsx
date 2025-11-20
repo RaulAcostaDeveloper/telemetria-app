@@ -71,7 +71,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     },
     {
       columnName: `${LANGUAGE.zones.tabs.loadTable.loadValue} (L)`,
-      defaultSpace: 2,
+      defaultSpace: 3,
       orderColumn: true,
       minMaxFilter: true,
     },
@@ -124,7 +124,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     },
     {
       columnName: `${LANGUAGE.zones.tabs.unloadTable.loadValue} (L)`,
-      defaultSpace: 2,
+      defaultSpace: 3,
       orderColumn: true,
       minMaxFilter: true,
     },
@@ -146,6 +146,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       magnitude: v.magnitude,
       mainPower: v.mainPower,
       odometer: v.odometer,
+      origin: v.origin,
       speed: v.speed,
       startDate: v.startDate,
       zoneId: v.zoneId,
