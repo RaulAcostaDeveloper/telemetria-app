@@ -1,18 +1,19 @@
 "use client";
-import { useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./zoneEditProfileModalForm.module.css";
+import { AppDispatch, RootState } from "@/global/redux/store";
 import { ButtonTypes, GeneralButton, Modal } from "@/global/components";
 import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import { LanguageInterface } from "@/global/language/constants/language.model";
-import { PrimitiveValue } from "@/global/components/table/table.model";
-import { RootState } from "@/global/redux/store";
+import { fetchZoneProfileDetails } from "@/global/redux/serviceSlices/zoneProfileDetailsSlice";
+import { useAuth } from "@/modules/auth/utils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   closeModal: () => void;
-  id: PrimitiveValue;
+  id: string;
 }
 
 export const ZoneEditProfileModalForm = ({
@@ -20,12 +21,18 @@ export const ZoneEditProfileModalForm = ({
   closeModal,
   id,
 }: Props) => {
+  const [isPost, setIsPost] = useState<boolean>(false);
+
   const { zoneCategoriesData, zoneCategoriesStatus } = useSelector(
     (state: RootState) => state.zoneCategories
   );
 
   const { zoneProvidersData } = useSelector(
     (state: RootState) => state.zoneProviders
+  );
+
+  const { zoneProfileDetailsData } = useSelector(
+    (state: RootState) => state.zoneProfileDetails
   );
 
   const [name, setName] = useState<string>("");
@@ -38,28 +45,27 @@ export const ZoneEditProfileModalForm = ({
   const [provider, setProvider] = useState<string>("");
   const [description, setDescription] = useState<string>("");
 
-  const authOptions = [
-    {
-      name: LANGUAGE.zones.zoneProfileForm.authorized,
-      id: "1",
-    },
-    {
-      name: LANGUAGE.zones.zoneProfileForm.noAuthorized,
-      id: "0",
-    },
-  ];
+  const authOptions = useMemo(
+    () => [
+      {
+        name: LANGUAGE.zones.zoneProfileForm.noAuthorized,
+        id: "0",
+      },
+      {
+        name: LANGUAGE.zones.zoneProfileForm.authorized,
+        id: "1",
+      },
+    ],
+    [LANGUAGE]
+  );
 
   const onConfirm = () => {
     // Pendiente implementar
-    console.log("id ", id);
-    // console.log("name", name);
-    // console.log("category", category);
-    // console.log("authCharges", authCharges);
-    // console.log("authDisharges", authDisharges);
-    // console.log("authRalenti", authRalenti);
-    // console.log("color", color);
-    // console.log("provider", provider);
-    // console.log("description", description);
+    if (isPost) {
+      // POST
+    } else {
+      // PUT
+    }
   };
 
   // Está pendiente mapear que id corresponde a que nombre (categoría y proveedor)
@@ -78,12 +84,35 @@ export const ZoneEditProfileModalForm = ({
     }));
   }, [zoneProvidersData]);
 
+  useEffect(() => {
+    if (zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0]) {
+      const data = zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0];
+      setIsPost(true);
+
+      setName(data.nick);
+      setCategory(data.zoneCategoryId);
+      setProvider(data.zoneTypeName);
+      setAuthCharges(
+        data.chargeState ? authOptions[1].name : authOptions[0].name
+      );
+      setAuthDisharges(
+        data.dischargeState ? authOptions[1].name : authOptions[0].name
+      );
+      setAuthRalenti(
+        data.idleState ? authOptions[1].name : authOptions[0].name
+      );
+      setColor(data.color);
+      setDescription(data.description);
+    }
+  }, [zoneProfileDetailsData, authOptions]);
+
   return (
     <Modal
       LANGUAGE={LANGUAGE}
       closeModal={closeModal}
       title={LANGUAGE.table.actions.addProfileToZone}
     >
+      <FetcherProfileData id={id} />
       {zoneCategories && zoneProviders && (
         <div className={styles.form}>
           <div className={styles.row}>
@@ -293,4 +322,25 @@ const Input = ({
       )}
     </div>
   );
+};
+
+interface PropsFetcherProfileData {
+  id: string;
+}
+
+const FetcherProfileData = ({ id }: PropsFetcherProfileData) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { isAuthenticated, logoutState } = useAuth();
+
+  useEffect(() => {
+    if (id && isAuthenticated) {
+      dispatch(
+        fetchZoneProfileDetails({
+          id, // imei.toString(),
+          logoutState,
+        })
+      );
+    }
+  }, [isAuthenticated, id]);
+  return null;
 };
