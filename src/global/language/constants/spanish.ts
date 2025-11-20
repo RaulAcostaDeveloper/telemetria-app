@@ -471,6 +471,7 @@ export const SPANISH: LanguageInterface = {
       description: "Descripción",
       authorized: "Autorizado",
       noAuthorized: "No autorizado",
+      selectAnOption: "Selecciona una opción",
     },
     zonesFuelTable: {
       zoneModalTitle: "Mapa de la zona",

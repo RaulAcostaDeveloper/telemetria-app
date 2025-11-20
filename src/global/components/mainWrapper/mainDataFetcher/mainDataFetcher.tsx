@@ -11,6 +11,8 @@ import { fetchGroups } from "@/global/redux/serviceSlices/groupsSlice";
 import { fetchObdRollup } from "@/global/redux/serviceSlices/obdRollupSlice";
 import { fetchTopFuelReport } from "@/global/redux/serviceSlices/topFuelReportSlice";
 import { fetchVehicles } from "@/global/redux/serviceSlices/vehiclesSlice";
+import { fetchZoneCategories } from "@/global/redux/serviceSlices/zoneCategoriesSlice";
+import { fetchZoneProviders } from "@/global/redux/serviceSlices/zoneProvidersSlice";
 import { fetchZonesSummary } from "@/global/redux/serviceSlices/zonesSummary";
 import { formatToLocalIso8601 } from "../../../utils/utils";
 import { useAuth } from "@/modules/auth/utils";
@@ -29,10 +31,12 @@ export const MainDataFetcher = () => {
   // Llamado de servicios al inicio de la sesión del usuario
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(fetchVehicles(logoutState));
       dispatch(fetchDevices(logoutState));
       dispatch(fetchDrivers(logoutState));
       dispatch(fetchGroups(logoutState));
+      dispatch(fetchVehicles(logoutState));
+      dispatch(fetchZoneCategories(logoutState));
+      dispatch(fetchZoneProviders(logoutState));
     }
   }, [isAuthenticated]);
 
