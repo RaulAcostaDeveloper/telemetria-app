@@ -451,6 +451,7 @@ export interface LanguageInterface {
       description: string;
       authorized: string;
       noAuthorized: string;
+      selectAnOption: string;
     };
     zonesFuelTable: {
       zone: string;

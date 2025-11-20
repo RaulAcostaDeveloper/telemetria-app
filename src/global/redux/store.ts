@@ -18,7 +18,9 @@ import topFuelReportSlice from "@/global/redux/serviceSlices/topFuelReportSlice"
 import vehicleByImeiSlice from "@/global/redux/serviceSlices/vehicleByImeiSlice";
 import vehiclesAllSlice from "@/global/redux/serviceSlices/vehiclesAllSlice";
 import vehiclesSlice from "@/global/redux/serviceSlices/vehiclesSlice";
+import zoneCategoriesSlice from "@/global/redux/serviceSlices/zoneCategoriesSlice";
 import zoneDetailsSlice from "@/global/redux/serviceSlices/zoneDetails";
+import zoneProvidersSlice from "@/global/redux/serviceSlices/zoneProvidersSlice";
 import zonesSummarySlice from "@/global/redux/serviceSlices/zonesSummary";
 
 export const store = configureStore({
@@ -41,7 +43,9 @@ export const store = configureStore({
     vehicleByImei: vehicleByImeiSlice,
     vehicles: vehiclesSlice,
     vehiclesAll: vehiclesAllSlice,
+    zoneCategories: zoneCategoriesSlice,
     zoneDetails: zoneDetailsSlice,
+    zoneProviders: zoneProvidersSlice,
     zonesSummary: zonesSummarySlice,
   },
   devTools: true,

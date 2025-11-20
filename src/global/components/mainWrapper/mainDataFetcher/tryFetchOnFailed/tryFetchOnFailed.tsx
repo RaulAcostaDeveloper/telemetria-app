@@ -11,6 +11,8 @@ import { fetchGroups } from "@/global/redux/serviceSlices/groupsSlice";
 import { fetchObdRollup } from "@/global/redux/serviceSlices/obdRollupSlice";
 import { fetchTopFuelReport } from "@/global/redux/serviceSlices/topFuelReportSlice";
 import { fetchVehicles } from "@/global/redux/serviceSlices/vehiclesSlice";
+import { fetchZoneCategories } from "@/global/redux/serviceSlices/zoneCategoriesSlice";
+import { fetchZoneProviders } from "@/global/redux/serviceSlices/zoneProvidersSlice";
 import { fetchZonesSummary } from "@/global/redux/serviceSlices/zonesSummary";
 import { formatToLocalIso8601 } from "@/global/utils/utils";
 import { useAuth } from "@/modules/auth/utils";
@@ -30,15 +32,26 @@ export const TryFetchOnFailed = () => {
   const { driversStatus } = useSelector((state: RootState) => state.drivers);
   const { devicesStatus } = useSelector((state: RootState) => state.devices);
   const { groupsStatus } = useSelector((state: RootState) => state.groups);
+  const { zoneCategoriesStatus } = useSelector(
+    (state: RootState) => state.zoneCategories
+  );
+
+  const { zoneProvidersStatus } = useSelector(
+    (state: RootState) => state.zoneProviders
+  );
+
   const { fuelSummaryStatus } = useSelector(
     (state: RootState) => state.fuelSummary
   );
+
   const { zonesSummaryStatus } = useSelector(
     (state: RootState) => state.zonesSummary
   );
+
   const { topFuelReportStatus } = useSelector(
     (state: RootState) => state.topFuelReport
   );
+
   const { obdRollupStatus } = useSelector(
     (state: RootState) => state.obdRollup
   );
@@ -138,6 +151,22 @@ export const TryFetchOnFailed = () => {
       }, 5000);
     }
   }, [devicesStatus, isAuthenticated, startDate, endDate]);
+
+  useEffect(() => {
+    if (zoneCategoriesStatus === SERVICE_STATUS.failed && isAuthenticated) {
+      setTimeout(() => {
+        dispatch(fetchZoneCategories(logoutState));
+      }, 5000);
+    }
+  }, [groupsStatus, isAuthenticated, startDate, endDate]);
+
+  useEffect(() => {
+    if (zoneProvidersStatus === SERVICE_STATUS.failed && isAuthenticated) {
+      setTimeout(() => {
+        dispatch(fetchZoneProviders(logoutState));
+      }, 5000);
+    }
+  }, [groupsStatus, isAuthenticated, startDate, endDate]);
 
   useEffect(() => {
     if (
