@@ -20,44 +20,44 @@ export interface Devices {
 }
 
 export interface Charges {
-  imei: string;
-  eventId: number;
   address: string;
+  dateGps: string;
+  deviceBattery: number;
+  endDate: string;
+  eventId: number;
+  finalFuel: number;
+  ignition: true;
+  imei: string;
+  initialFuel: number;
   lat: number;
   lon: number;
-  odometer: number;
-  speed: number;
-  ignition: true;
-  deviceBattery: number;
-  mainPower: number;
   magnitude: number;
-  initialFuel: number;
-  finalFuel: number;
-  startDate: string;
-  endDate: string;
+  mainPower: number;
+  odometer: number;
   origin: number;
-  dateGps: string;
+  speed: number;
+  startDate: string;
   zoneId: string;
 }
 
 export interface Discharges {
-  imei: string;
-  eventId: number;
   address: string;
+  dateGps: string;
+  deviceBattery: number;
+  endDate: string;
+  eventId: number;
+  finalFuel: number;
+  ignition: true;
+  imei: string;
+  initialFuel: number;
   lat: number;
   lon: number;
-  odometer: number;
-  speed: number;
-  ignition: true;
-  deviceBattery: number;
-  mainPower: number;
   magnitude: number;
-  initialFuel: number;
-  finalFuel: number;
-  startDate: string;
-  endDate: string;
+  mainPower: number;
+  odometer: number;
   origin: number;
-  dateGps: string;
+  speed: number;
+  startDate: string;
   zoneId: string;
 }
 

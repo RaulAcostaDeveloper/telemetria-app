@@ -12,7 +12,7 @@ export default function ZonesVehicle({ params }: Page) {
 
   return (
     <>
-      <ZonesDataProvider id={id} />
+      <ZonesDataProvider zoneId={id} />
       <ZonesReportDataFetcher id={id} />
     </>
   );
