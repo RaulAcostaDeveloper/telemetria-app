@@ -1,18 +1,21 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 import styles from "./zoneEditProfileModalForm.module.css";
 import { ButtonTypes, GeneralButton, Modal } from "@/global/components";
 import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
+import { FetcherProfileData } from "./fetchetProfileData/fetcherProfileData";
+import { Input } from "./input/input";
 import { LanguageInterface } from "@/global/language/constants/language.model";
-import { PrimitiveValue } from "@/global/components/table/table.model";
 import { RootState } from "@/global/redux/store";
+import { Select } from "./select/select";
+import { getCategories } from "./categories";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   closeModal: () => void;
-  id: PrimitiveValue;
+  id: string;
 }
 
 export const ZoneEditProfileModalForm = ({
@@ -20,6 +23,8 @@ export const ZoneEditProfileModalForm = ({
   closeModal,
   id,
 }: Props) => {
+  const [isPost, setIsPost] = useState<boolean>(false);
+
   const { zoneCategoriesData, zoneCategoriesStatus } = useSelector(
     (state: RootState) => state.zoneCategories
   );
@@ -28,55 +33,94 @@ export const ZoneEditProfileModalForm = ({
     (state: RootState) => state.zoneProviders
   );
 
+  const { zoneProfileDetailsData } = useSelector(
+    (state: RootState) => state.zoneProfileDetails
+  );
+
   const [name, setName] = useState<string>("");
-  const [category, setCategory] = useState("");
-  const [authCharges, setAuthCharges] = useState("");
-  const [authDisharges, setAuthDisharges] = useState("");
+  const [categoryId, setCategoryId] = useState<string>("");
+  const [authCharges, setAuthCharges] = useState<string>("");
+  const [authDisharges, setAuthDisharges] = useState<string>("");
   const [authRalenti, setAuthRalenti] = useState("");
   // rgb hexadecimal
   const [color, setColor] = useState<string>("#000000");
-  const [provider, setProvider] = useState<string>("");
+  const [providerId, setProviderId] = useState<string>("");
   const [description, setDescription] = useState<string>("");
 
-  const authOptions = [
-    {
-      name: LANGUAGE.zones.zoneProfileForm.authorized,
-      id: "1",
-    },
-    {
-      name: LANGUAGE.zones.zoneProfileForm.noAuthorized,
-      id: "0",
-    },
-  ];
+  const authOptions = useMemo(
+    () => [
+      {
+        name: LANGUAGE.zones.zoneProfileForm.noAuthorized,
+        id: "0",
+      },
+      {
+        name: LANGUAGE.zones.zoneProfileForm.authorized,
+        id: "1",
+      },
+    ],
+    [LANGUAGE]
+  );
 
   const onConfirm = () => {
     // Pendiente implementar
-    console.log("id ", id);
-    // console.log("name", name);
-    // console.log("category", category);
-    // console.log("authCharges", authCharges);
-    // console.log("authDisharges", authDisharges);
-    // console.log("authRalenti", authRalenti);
-    // console.log("color", color);
-    // console.log("provider", provider);
-    // console.log("description", description);
+    if (isPost) {
+      // POST
+    } else {
+      // PUT
+    }
   };
 
   // Está pendiente mapear que id corresponde a que nombre (categoría y proveedor)
   // No dejar renderizado lo que venga en el servicio si no mapearlo desde LENGUAJE
-  const zoneCategories = useMemo(() => {
-    return zoneCategoriesData?.value?.zoneCategories.map((value) => ({
-      name: value.name,
-      id: value.id,
-    }));
-  }, [zoneCategoriesData]);
 
-  const zoneProviders = useMemo(() => {
-    return zoneProvidersData?.value?.zoneTypes.map((value) => ({
-      name: value.name,
-      id: value.id,
-    }));
-  }, [zoneProvidersData]);
+  useEffect(() => {
+    if (zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0]) {
+      const data = zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0];
+      setIsPost(true);
+
+      setName(data.nick);
+      setCategoryId(data.zoneCategoryId);
+      setProviderId(data.zoneProviderId);
+      setAuthCharges(data.chargeState.toString());
+      setAuthDisharges(data.dischargeState.toString());
+      setAuthRalenti(data.idleState.toString());
+      setColor(data.color);
+      setDescription(data.description);
+    }
+  }, [zoneProfileDetailsData, authOptions]);
+
+  useEffect(() => {
+    // Validar que tengamos los ID correctos de categorías
+
+    const zoneIds = new Set(
+      zoneCategoriesData?.value?.zoneCategories?.map((c) => c.id) ?? []
+    );
+    const categoryIds = new Set(getCategories(LANGUAGE).map((c) => c.id));
+
+    const missingInCategories: string[] = [];
+
+    zoneIds.forEach((id) => {
+      if (!categoryIds.has(id)) {
+        missingInCategories.push(id);
+      }
+    });
+
+    const extraInCategories: string[] = [];
+
+    categoryIds.forEach((id) => {
+      if (!zoneIds.has(id)) {
+        extraInCategories.push(id);
+      }
+    });
+
+    const isValid =
+      missingInCategories.length === 0 && extraInCategories.length === 0;
+    if (!isValid) {
+      console.error("Se ha encontrado disparidad entre los ID de categorias: ");
+      console.error("missingInCategories ", missingInCategories);
+      console.error("extraInCategories ", extraInCategories);
+    }
+  }, [zoneCategoriesData]);
 
   return (
     <Modal
@@ -84,111 +128,114 @@ export const ZoneEditProfileModalForm = ({
       closeModal={closeModal}
       title={LANGUAGE.table.actions.addProfileToZone}
     >
-      {zoneCategories && zoneProviders && (
-        <div className={styles.form}>
-          <div className={styles.row}>
-            <Input
-              title={LANGUAGE.zones.zoneProfileForm.name}
-              name="nameProfile"
-              value={name}
-              set={setName}
-              isLeft
-            />
-            <Select
-              title={LANGUAGE.zones.zoneProfileForm.category}
-              selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
-              name="category"
-              value={category}
-              set={setCategory}
-              options={zoneCategories}
-            />
-          </div>
+      <FetcherProfileData id={id} />
+      {zoneCategoriesData?.value?.zoneCategories &&
+        zoneProvidersData?.value && (
+          <div className={styles.form}>
+            <div className={styles.row}>
+              <Input
+                title={LANGUAGE.zones.zoneProfileForm.name}
+                name="nameProfile"
+                value={name}
+                set={setName}
+                isLeft
+              />
+              <Select
+                title={LANGUAGE.zones.zoneProfileForm.category}
+                selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
+                name="category"
+                value={categoryId}
+                set={setCategoryId}
+                options={getCategories(LANGUAGE)}
+              />
+            </div>
 
-          <div className={styles.row}>
-            <Select
-              title={LANGUAGE.zones.zoneProfileForm.charges}
-              selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
-              name="loadedAuth"
-              value={authCharges}
-              set={setAuthCharges}
-              options={authOptions}
-              isLeft
-            />
-            <Select
-              title={LANGUAGE.zones.zoneProfileForm.discharges}
-              selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
-              name="unloadedAuth"
-              value={authDisharges}
-              set={setAuthDisharges}
-              options={authOptions}
-            />
-          </div>
-          <div className={styles.row}>
-            <Select
-              title={LANGUAGE.zones.zoneProfileForm.ralenti}
-              selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
-              name="ralenti"
-              value={authRalenti}
-              set={setAuthRalenti}
-              options={authOptions}
-              isLeft
-            />
-            <Input
-              title={LANGUAGE.zones.zoneProfileForm.color}
-              name="color"
-              value={color}
-              set={setColor}
-              isColor
-            />
-          </div>
+            <div className={styles.row}>
+              <Select
+                title={LANGUAGE.zones.zoneProfileForm.charges}
+                selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
+                name="loadedAuth"
+                value={authCharges}
+                set={setAuthCharges}
+                options={authOptions}
+                isLeft
+              />
+              <Select
+                title={LANGUAGE.zones.zoneProfileForm.discharges}
+                selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
+                name="unloadedAuth"
+                value={authDisharges}
+                set={setAuthDisharges}
+                options={authOptions}
+              />
+            </div>
 
-          <div className={styles.row}>
-            <Select
-              title={LANGUAGE.zones.zoneProfileForm.provider}
-              selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
-              name="provider"
-              value={provider}
-              set={setProvider}
-              options={zoneProviders}
-              isLeft
-            />
-          </div>
+            <div className={styles.row}>
+              <Select
+                title={LANGUAGE.zones.zoneProfileForm.ralenti}
+                selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
+                name="ralenti"
+                value={authRalenti}
+                set={setAuthRalenti}
+                options={authOptions}
+                isLeft
+              />
+              <Input
+                title={LANGUAGE.zones.zoneProfileForm.color}
+                name="color"
+                value={color}
+                set={setColor}
+                isColor
+              />
+            </div>
 
-          <div className={styles.row}>
-            <Input
-              title={LANGUAGE.zones.zoneProfileForm.description}
-              name="description"
-              value={description}
-              set={setDescription}
-              isLarge
-            />
-          </div>
+            <div className={styles.row}>
+              <Select
+                title={LANGUAGE.zones.zoneProfileForm.provider}
+                selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
+                name="provider"
+                value={providerId}
+                set={setProviderId}
+                options={zoneProvidersData.value.zoneTypes}
+                isLeft
+              />
+            </div>
 
-          <div className={styles.bottom}>
-            <GeneralButton
-              callback={closeModal}
-              title={LANGUAGE.table.buttons.cancel}
-              type={ButtonTypes.NEUTRAL}
-            />
-            <GeneralButton
-              callback={onConfirm}
-              title={LANGUAGE.table.buttons.saveEdit}
-              type={ButtonTypes.CONFIRM}
-              disabled={
-                !(
-                  name &&
-                  category &&
-                  authCharges &&
-                  authDisharges &&
-                  authRalenti &&
-                  color &&
-                  provider
-                )
-              }
-            />
+            <div className={styles.row}>
+              <Input
+                title={LANGUAGE.zones.zoneProfileForm.description}
+                name="description"
+                value={description}
+                set={setDescription}
+                isLarge
+              />
+            </div>
+
+            <div className={styles.bottom}>
+              <GeneralButton
+                callback={closeModal}
+                title={LANGUAGE.table.buttons.cancel}
+                type={ButtonTypes.NEUTRAL}
+              />
+              <GeneralButton
+                callback={onConfirm}
+                title={LANGUAGE.table.buttons.saveEdit}
+                type={ButtonTypes.CONFIRM}
+                disabled={
+                  !(
+                    name &&
+                    categoryId &&
+                    authCharges &&
+                    authDisharges &&
+                    authRalenti &&
+                    color &&
+                    providerId
+                  )
+                }
+              />
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
       <DataErrorHandler
         LANGUAGE={LANGUAGE}
@@ -196,101 +243,5 @@ export const ZoneEditProfileModalForm = ({
         infoStatus={zoneCategoriesStatus}
       />
     </Modal>
-  );
-};
-
-interface Option {
-  name: string;
-  id: string;
-}
-
-interface SelectProps {
-  isLeft?: boolean;
-  name: string;
-  options: Option[];
-  selectTitle: string;
-  set: (value: string) => void;
-  title: string;
-  value: string;
-}
-
-const Select = ({
-  isLeft,
-  name,
-  options,
-  selectTitle,
-  set,
-  title,
-  value,
-}: SelectProps) => {
-  return (
-    <div className={`${styles.inputNormal} ${isLeft ? styles.left : ""}`}>
-      <label htmlFor={name}>{title}</label>
-      <select
-        name={name}
-        value={value}
-        onChange={(e) => set(e.target.value)}
-        className={` ${styles.input} ${styles.selectInput} ${
-          value !== "" ? styles.withValue : ""
-        }`}
-      >
-        <option value="">{selectTitle}</option>
-        {options.map((opt, index) => (
-          <option key={index} value={opt.name?.toString() ?? ""}>
-            {opt.name}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-};
-
-interface InputProps {
-  title: string;
-  name: string;
-  value: string;
-  set: (value: string) => void;
-  isColor?: boolean;
-  isLarge?: boolean;
-  isLeft?: boolean;
-}
-
-const Input = ({
-  title,
-  name,
-  value,
-  set,
-  isColor,
-  isLarge,
-  isLeft,
-}: InputProps) => {
-  return (
-    <div
-      className={`${styles.inputNormal} ${isLeft ? styles.left : ""} ${
-        isLarge ? styles.inputLarge : ""
-      }`}
-    >
-      <label htmlFor={name}>{title}</label>
-      {isLarge ? (
-        <textarea
-          name={name}
-          id={name}
-          value={value}
-          onChange={(e) => set(e.target.value)}
-          className={` ${styles.input} ${styles.textarea} ${
-            value !== "" ? styles.withValue : ""
-          }`}
-        />
-      ) : (
-        <input
-          type={`${isColor ? "color" : "text"}`}
-          name={name}
-          id={name}
-          value={value}
-          onChange={(e) => set(e.target.value)}
-          className={` ${styles.input} ${value !== "" ? styles.withValue : ""}`}
-        />
-      )}
-    </div>
   );
 };

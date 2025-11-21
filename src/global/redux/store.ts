@@ -20,6 +20,7 @@ import vehiclesAllSlice from "@/global/redux/serviceSlices/vehiclesAllSlice";
 import vehiclesSlice from "@/global/redux/serviceSlices/vehiclesSlice";
 import zoneCategoriesSlice from "@/global/redux/serviceSlices/zoneCategoriesSlice";
 import zoneDetailsSlice from "@/global/redux/serviceSlices/zoneDetails";
+import zoneProfileDetailsSlice from "@/global/redux/serviceSlices/zoneProfileDetailsSlice";
 import zoneProvidersSlice from "@/global/redux/serviceSlices/zoneProvidersSlice";
 import zonesSummarySlice from "@/global/redux/serviceSlices/zonesSummary";
 
@@ -45,6 +46,7 @@ export const store = configureStore({
     vehiclesAll: vehiclesAllSlice,
     zoneCategories: zoneCategoriesSlice,
     zoneDetails: zoneDetailsSlice,
+    zoneProfileDetails: zoneProfileDetailsSlice,
     zoneProviders: zoneProvidersSlice,
     zonesSummary: zonesSummarySlice,
   },

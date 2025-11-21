@@ -473,6 +473,27 @@ export const SPANISH: LanguageInterface = {
       noAuthorized: "No autorizado",
       selectAnOption: "Selecciona una opción",
     },
+    zoneProfileCategories: {
+      garage: "Taller", // TALLER
+      gasStation: "Gasolinera", // GASOLINERA
+      restArea: "Descanso", // DESCANSO
+      headquarters: "Corporativo", // CORPORATIVO
+      tollBooth: "Caseta", // CASETA
+      selfConsumption: "Autoconsumo", // AUTOCONSUMO
+      impoundLot: "Corralón", // CORRALÓN
+      carWash: "Autolavado", // AUTOLAVADO
+      privateProperty: "Particular", // PARTICULAR
+      parkingLot: "Pensión", // PENSIÓN
+      branchOffice: "Sucursal", // SUCURSAL
+      tireShop: "llantera", // LLANTERA
+      riskArea: "Lugar de riesgo", // LUGAR DE RIESGO
+      fuelLoad: "Carga de combustible", // CARGA DE COMBUSTIBLE
+      mainOffice: "Matriz", // MATRIZ
+      client: "Cliente", // CLIENTE
+      supplier: "Proveedor", // PROVEEDOR
+      distributionCenter: "Cedis", // CEDIS
+      robbery: "Robo", // ROBO
+    },
     zonesFuelTable: {
       zoneModalTitle: "Mapa de la zona",
       zone: "Zona",
