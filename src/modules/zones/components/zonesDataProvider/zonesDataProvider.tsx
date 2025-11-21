@@ -20,13 +20,24 @@ import { useLanguage } from "@/global/language/components/languageProvider/langu
 import { ZoneProfileData } from "../zoneProfileData/zoneProfileData";
 import { ZonesMapTabSolo } from "../zonesMapTabSolo/zonesMapTabSolo";
 import { formatDateTime } from "@/global/utils/utils";
-import { z0n3sD4t4M0ck } from "@/global/dataMock/z0n3sD4t4M0ck";
+import { MarkerData } from "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent";
 
 import styles from "./zonesDataProvider.module.css";
 
 interface Props {
   zoneId: string;
 }
+
+// google maps utiliza "lng" en vez de "lon"
+interface ChargesVarLng extends Omit<Charges, "lon"> {
+  lng: number;
+}
+
+// google maps utiliza "lng" en vez de "lon"
+interface DischargesVarLng extends Omit<Discharges, "lon"> {
+  lng: number;
+}
+
 // Para meter a un genérico los argumentos que comparten zoneId.
 type WithZoneId = { zoneId: string };
 
@@ -80,16 +91,17 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
   const loadsSummary = useMemo(() => {
     return fuelSummaryData?.value?.charges.map((v) => ({
       address: v.address,
-      dateGps: v.dateGps,
+      dateGps: formatDateTime(v.dateGps),
       deviceBattery: v.deviceBattery,
       endDate: v.endDate,
       eventId: v.eventId,
       finalFuel: v.finalFuel,
+      idIndexEvent: v.idIndexEvent,
       ignition: v.ignition,
       imei: v.imei,
       initialFuel: v.initialFuel,
       lat: v.lat,
-      lon: v.lon,
+      lng: v.lon,
       magnitude: v.magnitude,
       mainPower: v.mainPower,
       odometer: v.odometer,
@@ -100,7 +112,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     }));
   }, [fuelSummaryData]);
 
-  const loadsSingle: Charges[] | undefined =
+  const loadsSingle: ChargesVarLng[] | undefined =
     loadsSummary && findWithZoneId(loadsSummary);
 
   if (loadsSingle) {
@@ -138,11 +150,12 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       endDate: v.endDate,
       eventId: v.eventId,
       finalFuel: v.finalFuel,
+      idIndexEvent: v.idIndexEvent,
       ignition: v.ignition,
       imei: v.imei,
       initialFuel: v.initialFuel,
       lat: v.lat,
-      lon: v.lon,
+      lng: v.lon,
       magnitude: v.magnitude,
       mainPower: v.mainPower,
       odometer: v.odometer,
@@ -153,7 +166,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     }));
   }, [fuelSummaryData]);
 
-  const unloadsSingle: Discharges[] | undefined =
+  const unloadsSingle: DischargesVarLng[] | undefined =
     unloadsSummary && findWithZoneId(unloadsSummary);
 
   if (unloadsSingle) {
@@ -164,32 +177,25 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     }));
   }
 
-  // Lo usaré de referencia para el mapa, lo borro en la tarea correspondiente.
-  const allZoneData = useMemo(() => {
-    return z0n3sD4t4M0ck[1];
-  }, []);
-
-  const allZoneDataLoads: dataTable = useMemo(() => {
-    return allZoneData.loads?.map((v) => ({
-      id: v.vehicleId,
-      date: formatDateTime(v.date),
-      loadValue: v.loadValue,
-      lat: v.singlePointInfo.lat,
-      lng: v.singlePointInfo.lng,
-      title: v.singlePointInfo.title,
+  let formatedMarkersLoads: MarkerData[] = [];
+  if (loadsSingle) {
+    formatedMarkersLoads = loadsSingle.map((v) => ({
+      id: v.idIndexEvent as string,
+      position: { lat: v.lat, lng: v.lng },
+      title: v.address,
     }));
-  }, []);
+  }
 
-  const allZoneDataUnloads: dataTable = useMemo(() => {
-    return allZoneData.unloads?.map((v) => ({
-      id: v.vehicleId,
-      date: formatDateTime(v.date),
-      loadValue: v.loadValue,
-      lat: v.singlePointInfo.lat,
-      lng: v.singlePointInfo.lng,
-      title: v.singlePointInfo.title,
+  let formatedMarkersUnloads: MarkerData[] = [];
+  if (unloadsSingle) {
+    formatedMarkersUnloads = unloadsSingle.map((v) => ({
+      id: v.idIndexEvent as string,
+      position: { lat: v.lat, lng: v.lng },
+      title: v.address,
     }));
-  }, []);
+  }
+
+  const allMarkers = [...formatedMarkersLoads, ...formatedMarkersUnloads];
 
   return (
     <div className={styles.zonesDataProvider}>
@@ -235,10 +241,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
           </div>,
           <div key={2}>
             <div className={["containertabmap", styles.container].join(" ")}>
-              <ZonesMapTabSolo
-                LANGUAGE={LANGUAGE}
-                markersInZone={allZoneData.markersInZone}
-              />
+              <ZonesMapTabSolo LANGUAGE={LANGUAGE} markersInZone={allMarkers} />
             </div>
           </div>,
         ]}

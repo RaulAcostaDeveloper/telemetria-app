@@ -11,7 +11,7 @@ const GoogleMapClientComponent = dynamic(
 );
 
 export interface markerData {
-  id: number;
+  id: number | string;
   position: { lat: number; lng: number };
   title: string;
 }
