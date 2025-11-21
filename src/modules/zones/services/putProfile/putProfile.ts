@@ -7,6 +7,7 @@ export interface PostProfile {
   color: string;
   description: string;
   dischargeState: number;
+  idProfile: string;
   idleState: number;
   logoutState: () => void;
   nick: string;
@@ -16,11 +17,12 @@ export interface PostProfile {
 }
 
 // Función fetch con enlace a caché
-export async function postZoneProfile({
+export async function putZoneProfile({
   chargeState,
   color,
   description,
   dischargeState,
+  idProfile,
   idleState,
   logoutState,
   nick,
@@ -29,9 +31,9 @@ export async function postZoneProfile({
   zoneProviderId,
 }: PostProfile) {
   // Construcción de la url con parámetros
-  const fullUrl = `${url}`;
+  const fullUrl = `${url}/${idProfile}`;
   const options: RequestInit = {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
@@ -49,7 +51,7 @@ export async function postZoneProfile({
     }),
   };
   // Construcción del key único para caché
-  const cacheKey = `postProfile`;
+  const cacheKey = `putProfile`;
 
   // Retorna DATA del servidor o DATA de caché
   return fetchMiddleware({

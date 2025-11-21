@@ -8,6 +8,7 @@ import { LanguageInterface } from "@/global/language/constants/language.model";
 import { Modal } from "@/global/components";
 import { ProfileForm } from "./profileForm/profileForm";
 import { fetchPostZoneProfile } from "@/global/redux/serviceSlices/postZoneProfile";
+import { fetchPutZoneProfile } from "@/global/redux/serviceSlices/putZoneProfile";
 import { getCategories } from "./categories";
 import { useAuth } from "@/modules/auth/utils";
 
@@ -50,9 +51,27 @@ export const ZoneEditProfileModalForm = ({
 
   const onConfirm = () => {
     // Pendiente implementar
-    if (isPut) {
+    if (isPut && zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0]) {
       // PUT
+      dispatch(
+        fetchPutZoneProfile({
+          nick: name,
+          zoneProviderId: providerId,
+          chargeState: Number(authCharges),
+          dischargeState: Number(authDisharges),
+          idleState: Number(authRalenti),
+          color,
+          description,
+          zoneId: id,
+          idProfile:
+            zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0]
+              .idProfile,
+          zoneCategoryId: categoryId,
+          logoutState,
+        })
+      );
     } else {
+      // POST
       dispatch(
         fetchPostZoneProfile({
           nick: name,
@@ -62,13 +81,11 @@ export const ZoneEditProfileModalForm = ({
           idleState: Number(authRalenti),
           color,
           description,
-          accountId: "2C93162F-5C7A-46F8-8AF5-535F8B47A1C1",
           zoneId: id,
           zoneCategoryId: categoryId,
           logoutState,
         })
       );
-      // POST
     }
   };
 
