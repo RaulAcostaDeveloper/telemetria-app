@@ -26,6 +26,7 @@ export interface Charges {
   endDate: string;
   eventId: number;
   finalFuel: number;
+  idIndexEvent?: string;
   ignition: true;
   imei: string;
   initialFuel: number;
@@ -47,6 +48,7 @@ export interface Discharges {
   endDate: string;
   eventId: number;
   finalFuel: number;
+  idIndexEvent?: string;
   ignition: true;
   imei: string;
   initialFuel: number;
@@ -116,12 +118,14 @@ const fuelSummaryFormatter = (
       ...messages,
       lastReportDate: toLocalDateTime(messages.lastReportDate ?? ""),
     }));
-    const charges = data.value.charges.map((v) => ({
+    const charges = data.value.charges.map((v, i) => ({
       ...v,
+      idIndexEvent: `${i}-${v.eventId}`,
       imei: `${getPlateFromImei(devices, v.imei)} (${v.imei})`,
     }));
-    const discharges = data.value.discharges.map((v) => ({
+    const discharges = data.value.discharges.map((v, i) => ({
       ...v,
+      idIndexEvent: `${i}-${v.eventId}`,
       imei: `${getPlateFromImei(devices, v.imei)} (${v.imei})`,
     }));
 

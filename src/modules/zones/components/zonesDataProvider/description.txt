@@ -31,3 +31,12 @@ es la siguiente:
 
 El contenido del objeto para una Descarga, al día de hoy (2025-11-20) es el mismo.
 
+IMPORTANTE:
+El objeto anterior de Cargas y Descargas, recibe desde el slice un atributo adicional:
+idIndexEvent, que está compuesto por el index al momento de iterar el arreglo de objetos
+proveniente de la petición al endpoint, un guión (-) y el código de evento "eventId" del
+mismo objeto. Ejemplo: 
+idIndexEvent = "2-602"
+
+La utilidad de este indice es poder identificar cada marcador generado en el mapa con un
+id unico sin comprometer o exponer los id unicos de la base de datos.
