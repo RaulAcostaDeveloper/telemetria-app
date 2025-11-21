@@ -1,34 +1,34 @@
 import { fetchMiddleware } from "@/global/utils/fetchMiddleware";
 
-const url = "/analytics/zone/profile";
+const url = "/analytics/zone/profiles";
 
 export interface PostProfile {
-  nick: string;
-  zoneProviderId: string;
+  accountId: string;
   chargeState: number;
-  dischargeState: number;
-  idleState: number;
   color: string;
   description: string;
-  accountId: string;
-  zoneId: string;
-  zoneCategoryId: string;
+  dischargeState: number;
+  idleState: number;
   logoutState: () => void;
+  nick: string;
+  zoneCategoryId: string;
+  zoneId: string;
+  zoneProviderId: string;
 }
 
 // Función fetch con enlace a caché
-export async function getZonesSummary({
-  nick,
-  zoneProviderId,
+export async function postZoneProfile({
+  accountId,
   chargeState,
-  dischargeState,
-  idleState,
   color,
   description,
-  accountId,
-  zoneId,
-  zoneCategoryId,
+  dischargeState,
+  idleState,
   logoutState,
+  nick,
+  zoneCategoryId,
+  zoneId,
+  zoneProviderId,
 }: PostProfile) {
   // Construcción de la url con parámetros
   const fullUrl = `${url}`;
@@ -39,16 +39,16 @@ export async function getZonesSummary({
     },
     credentials: "include",
     body: JSON.stringify({
-      nick,
-      zoneProviderId,
+      accountId,
       chargeState,
-      dischargeState,
-      idleState,
       color,
       description,
-      accountId,
-      zoneId,
+      dischargeState,
+      idleState,
+      nick,
       zoneCategoryId,
+      zoneId,
+      zoneProviderId,
     }),
   };
   // Construcción del key único para caché

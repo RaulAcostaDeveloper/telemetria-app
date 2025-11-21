@@ -1,13 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
+import { AppDispatch, RootState } from "@/global/redux/store";
 import { FetcherProfileData } from "./fetchetProfileData/fetcherProfileData";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { Modal } from "@/global/components";
 import { ProfileForm } from "./profileForm/profileForm";
-import { RootState } from "@/global/redux/store";
+import { fetchPostZoneProfile } from "@/global/redux/serviceSlices/postZoneProfile";
 import { getCategories } from "./categories";
+import { useAuth } from "@/modules/auth/utils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -20,6 +22,9 @@ export const ZoneEditProfileModalForm = ({
   closeModal,
   id,
 }: Props) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { logoutState } = useAuth();
+
   const [isPut, setIsPut] = useState<boolean>(false);
 
   const { zoneCategoriesData, zoneCategoriesStatus } = useSelector(
@@ -39,7 +44,6 @@ export const ZoneEditProfileModalForm = ({
   const [authCharges, setAuthCharges] = useState<string>("");
   const [authDisharges, setAuthDisharges] = useState<string>("");
   const [authRalenti, setAuthRalenti] = useState("");
-  // rgb hexadecimal
   const [color, setColor] = useState<string>("#000000");
   const [providerId, setProviderId] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -49,6 +53,21 @@ export const ZoneEditProfileModalForm = ({
     if (isPut) {
       // PUT
     } else {
+      dispatch(
+        fetchPostZoneProfile({
+          nick: name,
+          zoneProviderId: providerId,
+          chargeState: Number(authCharges),
+          dischargeState: Number(authDisharges),
+          idleState: Number(authRalenti),
+          color,
+          description,
+          accountId: "2C93162F-5C7A-46F8-8AF5-535F8B47A1C1",
+          zoneId: id,
+          zoneCategoryId: categoryId,
+          logoutState,
+        })
+      );
       // POST
     }
   };
