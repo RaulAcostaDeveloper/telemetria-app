@@ -12,14 +12,14 @@ interface ArrayProviders {
   zoneTypes: ZoneTypes[];
 }
 
-interface Data {
+export interface ZoneProvidersData {
   statusCode: number;
   message: string;
   value: ArrayProviders | null;
 }
 
 interface InitialState {
-  zoneProvidersData: Data | null;
+  zoneProvidersData: ZoneProvidersData | null;
   zoneProvidersStatus: SERVICE_STATUS;
 }
 

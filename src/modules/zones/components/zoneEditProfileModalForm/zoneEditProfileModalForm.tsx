@@ -1,16 +1,15 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import styles from "./zoneEditProfileModalForm.module.css";
-import { ButtonTypes, GeneralButton, Modal } from "@/global/components";
-import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
+import { AppDispatch, RootState } from "@/global/redux/store";
 import { FetcherProfileData } from "./fetchetProfileData/fetcherProfileData";
-import { Input } from "./input/input";
 import { LanguageInterface } from "@/global/language/constants/language.model";
-import { RootState } from "@/global/redux/store";
-import { Select } from "./select/select";
+import { Modal } from "@/global/components";
+import { ProfileForm } from "./profileForm/profileForm";
+import { fetchPostZoneProfile } from "@/global/redux/serviceSlices/postZoneProfile";
 import { getCategories } from "./categories";
+import { useAuth } from "@/modules/auth/utils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -23,7 +22,10 @@ export const ZoneEditProfileModalForm = ({
   closeModal,
   id,
 }: Props) => {
-  const [isPost, setIsPost] = useState<boolean>(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const { logoutState } = useAuth();
+
+  const [isPut, setIsPut] = useState<boolean>(false);
 
   const { zoneCategoriesData, zoneCategoriesStatus } = useSelector(
     (state: RootState) => state.zoneCategories
@@ -42,41 +44,39 @@ export const ZoneEditProfileModalForm = ({
   const [authCharges, setAuthCharges] = useState<string>("");
   const [authDisharges, setAuthDisharges] = useState<string>("");
   const [authRalenti, setAuthRalenti] = useState("");
-  // rgb hexadecimal
   const [color, setColor] = useState<string>("#000000");
   const [providerId, setProviderId] = useState<string>("");
   const [description, setDescription] = useState<string>("");
 
-  const authOptions = useMemo(
-    () => [
-      {
-        name: LANGUAGE.zones.zoneProfileForm.noAuthorized,
-        id: "0",
-      },
-      {
-        name: LANGUAGE.zones.zoneProfileForm.authorized,
-        id: "1",
-      },
-    ],
-    [LANGUAGE]
-  );
-
   const onConfirm = () => {
     // Pendiente implementar
-    if (isPost) {
-      // POST
-    } else {
+    if (isPut) {
       // PUT
+    } else {
+      dispatch(
+        fetchPostZoneProfile({
+          nick: name,
+          zoneProviderId: providerId,
+          chargeState: Number(authCharges),
+          dischargeState: Number(authDisharges),
+          idleState: Number(authRalenti),
+          color,
+          description,
+          accountId: "2C93162F-5C7A-46F8-8AF5-535F8B47A1C1",
+          zoneId: id,
+          zoneCategoryId: categoryId,
+          logoutState,
+        })
+      );
+      // POST
     }
   };
 
-  // Está pendiente mapear que id corresponde a que nombre (categoría y proveedor)
-  // No dejar renderizado lo que venga en el servicio si no mapearlo desde LENGUAJE
-
   useEffect(() => {
+    // Inicializar con datos
     if (zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0]) {
       const data = zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0];
-      setIsPost(true);
+      setIsPut(true);
 
       setName(data.nick);
       setCategoryId(data.zoneCategoryId);
@@ -87,7 +87,7 @@ export const ZoneEditProfileModalForm = ({
       setColor(data.color);
       setDescription(data.description);
     }
-  }, [zoneProfileDetailsData, authOptions]);
+  }, [zoneProfileDetailsData]);
 
   useEffect(() => {
     // Validar que tengamos los ID correctos de categorías
@@ -129,118 +129,29 @@ export const ZoneEditProfileModalForm = ({
       title={LANGUAGE.table.actions.addProfileToZone}
     >
       <FetcherProfileData id={id} />
-      {zoneCategoriesData?.value?.zoneCategories &&
-        zoneProvidersData?.value && (
-          <div className={styles.form}>
-            <div className={styles.row}>
-              <Input
-                title={LANGUAGE.zones.zoneProfileForm.name}
-                name="nameProfile"
-                value={name}
-                set={setName}
-                isLeft
-              />
-              <Select
-                title={LANGUAGE.zones.zoneProfileForm.category}
-                selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
-                name="category"
-                value={categoryId}
-                set={setCategoryId}
-                options={getCategories(LANGUAGE)}
-              />
-            </div>
-
-            <div className={styles.row}>
-              <Select
-                title={LANGUAGE.zones.zoneProfileForm.charges}
-                selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
-                name="loadedAuth"
-                value={authCharges}
-                set={setAuthCharges}
-                options={authOptions}
-                isLeft
-              />
-              <Select
-                title={LANGUAGE.zones.zoneProfileForm.discharges}
-                selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
-                name="unloadedAuth"
-                value={authDisharges}
-                set={setAuthDisharges}
-                options={authOptions}
-              />
-            </div>
-
-            <div className={styles.row}>
-              <Select
-                title={LANGUAGE.zones.zoneProfileForm.ralenti}
-                selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
-                name="ralenti"
-                value={authRalenti}
-                set={setAuthRalenti}
-                options={authOptions}
-                isLeft
-              />
-              <Input
-                title={LANGUAGE.zones.zoneProfileForm.color}
-                name="color"
-                value={color}
-                set={setColor}
-                isColor
-              />
-            </div>
-
-            <div className={styles.row}>
-              <Select
-                title={LANGUAGE.zones.zoneProfileForm.provider}
-                selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
-                name="provider"
-                value={providerId}
-                set={setProviderId}
-                options={zoneProvidersData.value.zoneTypes}
-                isLeft
-              />
-            </div>
-
-            <div className={styles.row}>
-              <Input
-                title={LANGUAGE.zones.zoneProfileForm.description}
-                name="description"
-                value={description}
-                set={setDescription}
-                isLarge
-              />
-            </div>
-
-            <div className={styles.bottom}>
-              <GeneralButton
-                callback={closeModal}
-                title={LANGUAGE.table.buttons.cancel}
-                type={ButtonTypes.NEUTRAL}
-              />
-              <GeneralButton
-                callback={onConfirm}
-                title={LANGUAGE.table.buttons.saveEdit}
-                type={ButtonTypes.CONFIRM}
-                disabled={
-                  !(
-                    name &&
-                    categoryId &&
-                    authCharges &&
-                    authDisharges &&
-                    authRalenti &&
-                    color &&
-                    providerId
-                  )
-                }
-              />
-            </div>
-          </div>
-        )}
-
-      <DataErrorHandler
+      <ProfileForm
         LANGUAGE={LANGUAGE}
-        hasData={!!zoneCategoriesData?.value}
-        infoStatus={zoneCategoriesStatus}
+        authCharges={authCharges}
+        authDisharges={authDisharges}
+        authRalenti={authRalenti}
+        categoryId={categoryId}
+        closeModal={closeModal}
+        color={color}
+        description={description}
+        name={name}
+        onConfirm={onConfirm}
+        providerId={providerId}
+        setAuthCharges={setAuthCharges}
+        setAuthDisharges={setAuthDisharges}
+        setAuthRalenti={setAuthRalenti}
+        setCategoryId={setCategoryId}
+        setColor={setColor}
+        setDescription={setDescription}
+        setName={setName}
+        setProviderId={setProviderId}
+        zoneCategoriesData={zoneCategoriesData}
+        zoneCategoriesStatus={zoneCategoriesStatus}
+        zoneProvidersData={zoneProvidersData}
       />
     </Modal>
   );

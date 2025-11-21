@@ -1,7 +1,7 @@
 import { FetchProps } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { fetchMiddleware } from "@/global/utils/fetchMiddleware";
 
-const url = "/analytics/zone/";
+const url = "/analytics/zone";
 
 // Función fetch con enlace a caché
 export async function getZoneProfileDetails({ id, logoutState }: FetchProps) {

@@ -37,7 +37,7 @@ export const Select = ({
       >
         <option value="">{selectTitle}</option>
         {options.map((opt, index) => (
-          <option key={index} value={opt.name?.toString() ?? ""}>
+          <option key={index} value={opt.id?.toString() ?? ""}>
             {opt.name}
           </option>
         ))}

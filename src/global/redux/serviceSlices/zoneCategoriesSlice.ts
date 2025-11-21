@@ -12,14 +12,14 @@ interface ArrayCategories {
   zoneCategories: ZoneCategories[];
 }
 
-interface Data {
+export interface ZoneCategoriesData {
   statusCode: number;
   message: string;
   value: ArrayCategories | null;
 }
 
 interface InitialState {
-  zoneCategoriesData: Data | null;
+  zoneCategoriesData: ZoneCategoriesData | null;
   zoneCategoriesStatus: SERVICE_STATUS;
 }
 
