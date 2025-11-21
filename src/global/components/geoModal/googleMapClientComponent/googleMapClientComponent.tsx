@@ -8,7 +8,7 @@ import { LanguageInterface } from "@/global/language/constants/language.model";
 import { getEnvClient } from "@/global/utils/getEnviromentFromClient";
 
 export interface MarkerData {
-  id: number;
+  id: number | string;
   position: { lat: number; lng: number };
   title: string;
 }
