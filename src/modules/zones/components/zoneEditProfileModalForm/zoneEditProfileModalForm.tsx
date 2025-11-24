@@ -8,8 +8,11 @@ import { LanguageInterface } from "@/global/language/constants/language.model";
 import { Modal } from "@/global/components";
 import { ProfileForm } from "./profileForm/profileForm";
 import { fetchPostZoneProfile } from "@/global/redux/serviceSlices/postZoneProfile";
+import { fetchPutZoneProfile } from "@/global/redux/serviceSlices/putZoneProfile";
 import { getCategories } from "./categories";
 import { useAuth } from "@/modules/auth/utils";
+import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
+import LoaderAnimation from "@/global/components/loaderAnimation/loaderAnimation";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -27,15 +30,22 @@ export const ZoneEditProfileModalForm = ({
 
   const [isPut, setIsPut] = useState<boolean>(false);
 
+  const { putZoneProfileStatus } = useSelector(
+    (state: RootState) => state.putZoneProfile
+  );
+  const { postZoneProfileStatus } = useSelector(
+    (state: RootState) => state.postZoneProfile
+  );
+
   const { zoneCategoriesData, zoneCategoriesStatus } = useSelector(
     (state: RootState) => state.zoneCategories
   );
 
-  const { zoneProvidersData } = useSelector(
+  const { zoneProvidersData, zoneProvidersStatus } = useSelector(
     (state: RootState) => state.zoneProviders
   );
 
-  const { zoneProfileDetailsData } = useSelector(
+  const { zoneProfileDetailsData, zoneProfileDetailsStatus } = useSelector(
     (state: RootState) => state.zoneProfileDetails
   );
 
@@ -50,9 +60,27 @@ export const ZoneEditProfileModalForm = ({
 
   const onConfirm = () => {
     // Pendiente implementar
-    if (isPut) {
+    if (isPut && zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0]) {
       // PUT
+      dispatch(
+        fetchPutZoneProfile({
+          nick: name,
+          zoneProviderId: providerId,
+          chargeState: Number(authCharges),
+          dischargeState: Number(authDisharges),
+          idleState: Number(authRalenti),
+          color,
+          description,
+          zoneId: id,
+          idProfile:
+            zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0]
+              .idProfile,
+          zoneCategoryId: categoryId,
+          logoutState,
+        })
+      );
     } else {
+      // POST
       dispatch(
         fetchPostZoneProfile({
           nick: name,
@@ -62,15 +90,22 @@ export const ZoneEditProfileModalForm = ({
           idleState: Number(authRalenti),
           color,
           description,
-          accountId: "2C93162F-5C7A-46F8-8AF5-535F8B47A1C1",
           zoneId: id,
           zoneCategoryId: categoryId,
           logoutState,
         })
       );
-      // POST
     }
   };
+
+  useEffect(() => {
+    if (
+      postZoneProfileStatus === SERVICE_STATUS.succeeded ||
+      putZoneProfileStatus === SERVICE_STATUS.succeeded
+    ) {
+      closeModal();
+    }
+  }, [postZoneProfileStatus, putZoneProfileStatus]);
 
   useEffect(() => {
     // Inicializar con datos
@@ -129,30 +164,39 @@ export const ZoneEditProfileModalForm = ({
       title={LANGUAGE.table.actions.addProfileToZone}
     >
       <FetcherProfileData id={id} />
-      <ProfileForm
-        LANGUAGE={LANGUAGE}
-        authCharges={authCharges}
-        authDisharges={authDisharges}
-        authRalenti={authRalenti}
-        categoryId={categoryId}
-        closeModal={closeModal}
-        color={color}
-        description={description}
-        name={name}
-        onConfirm={onConfirm}
-        providerId={providerId}
-        setAuthCharges={setAuthCharges}
-        setAuthDisharges={setAuthDisharges}
-        setAuthRalenti={setAuthRalenti}
-        setCategoryId={setCategoryId}
-        setColor={setColor}
-        setDescription={setDescription}
-        setName={setName}
-        setProviderId={setProviderId}
-        zoneCategoriesData={zoneCategoriesData}
-        zoneCategoriesStatus={zoneCategoriesStatus}
-        zoneProvidersData={zoneProvidersData}
-      />
+      {/* Cargar datos del formulario */}
+      {postZoneProfileStatus === SERVICE_STATUS.loading ||
+      putZoneProfileStatus === SERVICE_STATUS.loading ||
+      zoneProfileDetailsStatus === SERVICE_STATUS.loading ||
+      zoneCategoriesStatus === SERVICE_STATUS.loading ||
+      zoneProvidersStatus === SERVICE_STATUS.loading ? (
+        <LoaderAnimation />
+      ) : (
+        <ProfileForm
+          LANGUAGE={LANGUAGE}
+          authCharges={authCharges}
+          authDisharges={authDisharges}
+          authRalenti={authRalenti}
+          categoryId={categoryId}
+          closeModal={closeModal}
+          color={color}
+          description={description}
+          name={name}
+          onConfirm={onConfirm}
+          providerId={providerId}
+          setAuthCharges={setAuthCharges}
+          setAuthDisharges={setAuthDisharges}
+          setAuthRalenti={setAuthRalenti}
+          setCategoryId={setCategoryId}
+          setColor={setColor}
+          setDescription={setDescription}
+          setName={setName}
+          setProviderId={setProviderId}
+          zoneCategoriesData={zoneCategoriesData}
+          zoneCategoriesStatus={zoneCategoriesStatus}
+          zoneProvidersData={zoneProvidersData}
+        />
+      )}
     </Modal>
   );
 };

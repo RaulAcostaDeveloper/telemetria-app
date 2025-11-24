@@ -4,19 +4,20 @@ import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getZoneProfileDetails } from "@/modules/zones/services/zoneProfileDetails/zoneProfileDetails";
 
 interface ZoneProfileDetailsExtends {
-  nick: string;
-  zoneProviderId: string;
+  accountId: string;
   chargeState: number;
-  dischargeState: number;
-  idleState: number;
   color: string;
   description: string;
-  accountId: string;
-  zoneId: string;
+  dischargeState: number;
+  idProfile: string;
+  idleState: number;
+  nick: string;
   zoneCategoryId: string;
-  zoneName: string;
-  zoneProviderName: string;
   zoneCategoryName: string;
+  zoneId: string;
+  zoneName: string;
+  zoneProviderId: string;
+  zoneProviderName: string;
 }
 
 interface ZoneProfileDetailsValue {
