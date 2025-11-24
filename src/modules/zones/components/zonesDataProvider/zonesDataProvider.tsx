@@ -120,6 +120,8 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       imei: v.imei,
       dateGps: v.dateGps,
       magnitude: v.magnitude,
+      lat: v.lat,
+      lng: v.lng,
     }));
   }
 
@@ -174,6 +176,8 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       imei: v.imei,
       dateGps: v.dateGps,
       magnitude: v.magnitude,
+      lat: v.lat,
+      lng: v.lng,
     }));
   }
 
