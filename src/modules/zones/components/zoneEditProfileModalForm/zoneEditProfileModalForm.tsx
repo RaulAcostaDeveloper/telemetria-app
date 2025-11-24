@@ -2,17 +2,19 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import LoaderAnimation from "@/global/components/loaderAnimation/loaderAnimation";
 import { AppDispatch, RootState } from "@/global/redux/store";
 import { FetcherProfileData } from "./fetchetProfileData/fetcherProfileData";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { Modal } from "@/global/components";
 import { ProfileForm } from "./profileForm/profileForm";
+import { PutProfile } from "../../services/putProfile/putProfile";
+import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { fetchPostZoneProfile } from "@/global/redux/serviceSlices/postZoneProfile";
 import { fetchPutZoneProfile } from "@/global/redux/serviceSlices/putZoneProfile";
 import { getCategories } from "./categories";
+import { isDifferentProfile } from "../../utils/compareProfileObjects";
 import { useAuth } from "@/modules/auth/utils";
-import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
-import LoaderAnimation from "@/global/components/loaderAnimation/loaderAnimation";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -49,36 +51,46 @@ export const ZoneEditProfileModalForm = ({
     (state: RootState) => state.zoneProfileDetails
   );
 
-  const [name, setName] = useState<string>("");
-  const [categoryId, setCategoryId] = useState<string>("");
   const [authCharges, setAuthCharges] = useState<string>("");
   const [authDisharges, setAuthDisharges] = useState<string>("");
   const [authRalenti, setAuthRalenti] = useState("");
+  const [categoryId, setCategoryId] = useState<string>("");
   const [color, setColor] = useState<string>("#000000");
-  const [providerId, setProviderId] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [providerId, setProviderId] = useState<string>("");
 
   const onConfirm = () => {
-    // Pendiente implementar
-    if (isPut && zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0]) {
+    const profileDetails =
+      zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0];
+
+    if (isPut && profileDetails) {
       // PUT
-      dispatch(
-        fetchPutZoneProfile({
-          nick: name,
-          zoneProviderId: providerId,
-          chargeState: Number(authCharges),
-          dischargeState: Number(authDisharges),
-          idleState: Number(authRalenti),
-          color,
-          description,
-          zoneId: id,
-          idProfile:
-            zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0]
-              .idProfile,
-          zoneCategoryId: categoryId,
-          logoutState,
+      const updated: PutProfile = {
+        nick: name,
+        zoneProviderId: providerId,
+        chargeState: Number(authCharges),
+        dischargeState: Number(authDisharges),
+        idleState: Number(authRalenti),
+        color,
+        description,
+        zoneId: id,
+        idProfile: profileDetails.idProfile,
+        zoneCategoryId: categoryId,
+        logoutState,
+      };
+
+      // Enviar PUT sólo si se ha cambiado algo
+      if (
+        isDifferentProfile({
+          original: profileDetails,
+          updated,
         })
-      );
+      ) {
+        dispatch(fetchPutZoneProfile(updated));
+      } else {
+        closeModal();
+      }
     } else {
       // POST
       dispatch(

@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getZoneProfileDetails } from "@/modules/zones/services/zoneProfileDetails/zoneProfileDetails";
 
-interface ZoneProfileDetailsExtends {
+export interface ZoneProfileDetailsExtends {
   accountId: string;
   chargeState: number;
   color: string;
