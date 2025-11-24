@@ -2,7 +2,7 @@ import { fetchMiddleware } from "@/global/utils/fetchMiddleware";
 
 const url = "/analytics/zone/profiles";
 
-export interface PostProfile {
+export interface PutProfile {
   chargeState: number;
   color: string;
   description: string;
@@ -29,7 +29,7 @@ export async function putZoneProfile({
   zoneCategoryId,
   zoneId,
   zoneProviderId,
-}: PostProfile) {
+}: PutProfile) {
   // Construcción de la url con parámetros
   const fullUrl = `${url}/${idProfile}`;
   const options: RequestInit = {
