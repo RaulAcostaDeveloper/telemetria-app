@@ -11,6 +11,8 @@ import { fetchPostZoneProfile } from "@/global/redux/serviceSlices/postZoneProfi
 import { fetchPutZoneProfile } from "@/global/redux/serviceSlices/putZoneProfile";
 import { getCategories } from "./categories";
 import { useAuth } from "@/modules/auth/utils";
+import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
+import LoaderAnimation from "@/global/components/loaderAnimation/loaderAnimation";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -28,15 +30,22 @@ export const ZoneEditProfileModalForm = ({
 
   const [isPut, setIsPut] = useState<boolean>(false);
 
+  const { putZoneProfileStatus } = useSelector(
+    (state: RootState) => state.putZoneProfile
+  );
+  const { postZoneProfileStatus } = useSelector(
+    (state: RootState) => state.postZoneProfile
+  );
+
   const { zoneCategoriesData, zoneCategoriesStatus } = useSelector(
     (state: RootState) => state.zoneCategories
   );
 
-  const { zoneProvidersData } = useSelector(
+  const { zoneProvidersData, zoneProvidersStatus } = useSelector(
     (state: RootState) => state.zoneProviders
   );
 
-  const { zoneProfileDetailsData } = useSelector(
+  const { zoneProfileDetailsData, zoneProfileDetailsStatus } = useSelector(
     (state: RootState) => state.zoneProfileDetails
   );
 
@@ -88,6 +97,15 @@ export const ZoneEditProfileModalForm = ({
       );
     }
   };
+
+  useEffect(() => {
+    if (
+      postZoneProfileStatus === SERVICE_STATUS.succeeded ||
+      putZoneProfileStatus === SERVICE_STATUS.succeeded
+    ) {
+      closeModal();
+    }
+  }, [postZoneProfileStatus, putZoneProfileStatus]);
 
   useEffect(() => {
     // Inicializar con datos
@@ -146,30 +164,39 @@ export const ZoneEditProfileModalForm = ({
       title={LANGUAGE.table.actions.addProfileToZone}
     >
       <FetcherProfileData id={id} />
-      <ProfileForm
-        LANGUAGE={LANGUAGE}
-        authCharges={authCharges}
-        authDisharges={authDisharges}
-        authRalenti={authRalenti}
-        categoryId={categoryId}
-        closeModal={closeModal}
-        color={color}
-        description={description}
-        name={name}
-        onConfirm={onConfirm}
-        providerId={providerId}
-        setAuthCharges={setAuthCharges}
-        setAuthDisharges={setAuthDisharges}
-        setAuthRalenti={setAuthRalenti}
-        setCategoryId={setCategoryId}
-        setColor={setColor}
-        setDescription={setDescription}
-        setName={setName}
-        setProviderId={setProviderId}
-        zoneCategoriesData={zoneCategoriesData}
-        zoneCategoriesStatus={zoneCategoriesStatus}
-        zoneProvidersData={zoneProvidersData}
-      />
+      {/* Cargar datos del formulario */}
+      {postZoneProfileStatus === SERVICE_STATUS.loading ||
+      putZoneProfileStatus === SERVICE_STATUS.loading ||
+      zoneProfileDetailsStatus === SERVICE_STATUS.loading ||
+      zoneCategoriesStatus === SERVICE_STATUS.loading ||
+      zoneProvidersStatus === SERVICE_STATUS.loading ? (
+        <LoaderAnimation />
+      ) : (
+        <ProfileForm
+          LANGUAGE={LANGUAGE}
+          authCharges={authCharges}
+          authDisharges={authDisharges}
+          authRalenti={authRalenti}
+          categoryId={categoryId}
+          closeModal={closeModal}
+          color={color}
+          description={description}
+          name={name}
+          onConfirm={onConfirm}
+          providerId={providerId}
+          setAuthCharges={setAuthCharges}
+          setAuthDisharges={setAuthDisharges}
+          setAuthRalenti={setAuthRalenti}
+          setCategoryId={setCategoryId}
+          setColor={setColor}
+          setDescription={setDescription}
+          setName={setName}
+          setProviderId={setProviderId}
+          zoneCategoriesData={zoneCategoriesData}
+          zoneCategoriesStatus={zoneCategoriesStatus}
+          zoneProvidersData={zoneProvidersData}
+        />
+      )}
     </Modal>
   );
 };
