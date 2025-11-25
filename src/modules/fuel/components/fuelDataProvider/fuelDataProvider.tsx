@@ -26,22 +26,18 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
     (state: RootState) => state.fuelSummary
   );
 
-  const { topFuelReportData, topFuelReportStatus } = useSelector(
-    (state: RootState) => state.topFuelReport
-  );
-
   const tabOptions = [
     {
       text: LANGUAGE.fuel.tabs.unitys,
       icon: LocalShipping,
     },
     {
-      text: LANGUAGE.fuel.tabs.topCharges,
+      text: LANGUAGE.fuel.tabs.charges,
       icon: LocalGasStation,
       iconStyle: { color: "rgb(4, 187, 4)" },
     },
     {
-      text: LANGUAGE.fuel.tabs.topDischarges,
+      text: LANGUAGE.fuel.tabs.discharges,
       icon: LocalGasStation,
       iconStyle: { color: "rgb(223, 44, 59)" },
     },
@@ -126,165 +122,85 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
     }));
   }, [fuelSummaryData]);
 
-  const topFuelReportChargesColumns: columnsTable = [
+  const fuelReportChargesColumns: columnsTable = [
     {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.name,
-      defaultSpace: 2,
-      orderColumn: true,
+      columnName: LANGUAGE.zones.tabs.loadTable.vehicleId,
+      defaultSpace: 4,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.plates,
-      defaultSpace: 2,
-      orderColumn: true,
+      columnName: LANGUAGE.zones.tabs.loadTable.date,
+      defaultSpace: 4,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.brand,
+      columnName: `${LANGUAGE.fuelVehicle.vehicleReports.fuelStart} (L)`,
       defaultSpace: 3,
-      filterSelector: true,
       orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.model,
-      defaultSpace: 2,
-      orderColumn: true,
-      filterSelector: true,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.groupName,
-      defaultSpace: 3,
-      filterSelector: true,
-      orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.driver,
-      defaultSpace: 4,
-      orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.vehicleType,
-      defaultSpace: 4,
-      orderColumn: true,
-      filterSelector: true,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.serialNumber,
-      defaultSpace: 4,
-      orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelLoadCount,
-      defaultSpace: 2,
-      orderColumn: true,
-      showTotal: false,
       minMaxFilter: true,
     },
     {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelLoaded,
+      columnName: `${LANGUAGE.zones.tabs.loadTable.loadValue} (L)`,
+      defaultSpace: 2,
+      orderColumn: true,
+      minMaxFilter: true,
+    },
+    {
+      columnName: `${LANGUAGE.fuelVehicle.vehicleReports.fuelEnd} (L)`,
       defaultSpace: 3,
       orderColumn: true,
-      showTotal: false,
       minMaxFilter: true,
     },
   ];
 
-  const topFuelReportCharges = useMemo(() => {
-    return topFuelReportData?.value?.charges.map((value) => ({
-      name: value.name,
-      plate: value.plate,
-      brand: value.brand,
-      model: value.model,
-      group: value.group,
-      driver: value.driver,
-      vehicleType: value.vehicleType,
-      serialNumber: value.serialNumber,
-      totalCharges: value.totalNumberCharges,
-      totalLitersCharges: value.totalLitersCharges,
-      imei: value.imeis[0],
-      id: value.id,
-      clientOwnerName: value.clientOwnerName,
-      economicNumber: value.economicNumber,
+  const fuelReportCharges = useMemo(() => {
+    return fuelSummaryData?.value?.charges.map((value) => ({
+      vehicle: value.imei,
+      date: value.dateGps,
+      initialFuel: value.initialFuel,
+      charge: value.magnitude,
+      finalFuel: value.finalFuel,
+      imei: value.imeiClean,
     }));
-  }, [topFuelReportData]);
+  }, [fuelSummaryData]);
 
-  const topFuelReportDischargesColumns: columnsTable = [
+  const fuelReportDischargesColumns: columnsTable = [
     {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.name,
-      defaultSpace: 2,
-      orderColumn: true,
+      columnName: LANGUAGE.zones.tabs.loadTable.vehicleId,
+      defaultSpace: 4,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.plates,
-      defaultSpace: 2,
-      orderColumn: true,
+      columnName: LANGUAGE.zones.tabs.loadTable.date,
+      defaultSpace: 4,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.brand,
+      columnName: `${LANGUAGE.fuelVehicle.vehicleReports.fuelStart} (L)`,
       defaultSpace: 3,
-      filterSelector: true,
       orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.model,
-      defaultSpace: 2,
-      orderColumn: true,
-      filterSelector: true,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.groupName,
-      defaultSpace: 3,
-      filterSelector: true,
-      orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.driver,
-      defaultSpace: 4,
-      orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.vehicleType,
-      defaultSpace: 4,
-      orderColumn: true,
-      filterSelector: true,
-    },
-    {
-      columnName: LANGUAGE.management.tableColumns.serialNumber,
-      defaultSpace: 4,
-      orderColumn: true,
-    },
-    {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelUnloadCount,
-      defaultSpace: 2,
-      orderColumn: true,
-      showTotal: false,
       minMaxFilter: true,
     },
     {
-      columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelUnloaded,
+      columnName: `${LANGUAGE.zones.tabs.unloadTable.loadValue} (L)`,
+      defaultSpace: 2,
+      orderColumn: true,
+      minMaxFilter: true,
+    },
+    {
+      columnName: `${LANGUAGE.fuelVehicle.vehicleReports.fuelEnd} (L)`,
       defaultSpace: 3,
       orderColumn: true,
-      showTotal: false,
       minMaxFilter: true,
     },
   ];
 
-  const topFuelReportDischarges = useMemo(() => {
-    return topFuelReportData?.value?.discharges.map((value) => ({
-      name: value.name,
-      plate: value.plate,
-      brand: value.brand,
-      model: value.model,
-      group: value.group,
-      driver: value.driver,
-      vehicleType: value.vehicleType,
-      serialNumber: value.serialNumber,
-      totalNumberDischarges: value.totalNumberDischarges,
-      totalLitersDischarges: value.totalLitersDischarges,
-      imei: value.imeis[0],
-      id: value.id,
-      clientOwnerName: value.clientOwnerName,
-      economicNumber: value.economicNumber,
+  const fuelReportDischarges = useMemo(() => {
+    return fuelSummaryData?.value?.discharges.map((value) => ({
+      vehicle: value.imei,
+      date: value.dateGps,
+      initialFuel: value.initialFuel,
+      discharge: value.magnitude,
+      finalFuel: value.finalFuel,
+      imei: value.imeiClean,
     }));
-  }, [topFuelReportData]);
+  }, [fuelSummaryData]);
 
   /* const zonesColumns: columnsTable = []; */
 
@@ -336,12 +252,12 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                 />
               </div>,
               <div key={2}>
-                {topFuelReportStatus === SERVICE_STATUS.succeeded &&
-                  topFuelReportCharges && (
+                {fuelSummaryStatus === SERVICE_STATUS.succeeded &&
+                  fuelReportCharges && (
                     <Table
                       LANGUAGE={LANGUAGE}
-                      columns={topFuelReportChargesColumns}
-                      data={topFuelReportCharges}
+                      columns={fuelReportChargesColumns}
+                      data={fuelReportCharges}
                       idKey="imei"
                       showViewModal
                       showGoFuel
@@ -351,17 +267,17 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
 
                 <DataErrorHandler
                   LANGUAGE={LANGUAGE}
-                  hasData={!!topFuelReportCharges}
-                  infoStatus={topFuelReportStatus}
+                  hasData={!!fuelReportCharges}
+                  infoStatus={fuelSummaryStatus}
                 />
               </div>,
               <div key={3}>
-                {topFuelReportStatus === SERVICE_STATUS.succeeded &&
-                  topFuelReportDischarges && (
+                {fuelSummaryStatus === SERVICE_STATUS.succeeded &&
+                  fuelReportDischarges && (
                     <Table
                       LANGUAGE={LANGUAGE}
-                      columns={topFuelReportDischargesColumns}
-                      data={topFuelReportDischarges}
+                      columns={fuelReportDischargesColumns}
+                      data={fuelReportDischarges}
                       idKey="imei"
                       showViewModal
                       showGoFuel
@@ -371,8 +287,8 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
 
                 <DataErrorHandler
                   LANGUAGE={LANGUAGE}
-                  hasData={!!topFuelReportDischarges}
-                  infoStatus={topFuelReportStatus}
+                  hasData={!!fuelReportDischarges}
+                  infoStatus={fuelSummaryStatus}
                 />
               </div>,
               <div key={4}>
