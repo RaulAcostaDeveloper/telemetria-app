@@ -13,10 +13,38 @@ export interface MarkerData {
   title: string;
 }
 
+export interface Circle {
+  center: google.maps.LatLngLiteral;
+  radius: number;
+}
+export interface ZoneDetail {
+  center: {
+    lat: number | undefined;
+    lng: number | undefined;
+  };
+  radius: number | undefined;
+  color: string | undefined;
+  zoneName: string | undefined;
+  zoneId: string | undefined;
+  profileName: string | undefined;
+  country: string | undefined;
+  state: string | undefined;
+  city: string | undefined;
+  postalCode: string | undefined;
+  idProfile: string | undefined;
+  description: string | undefined;
+  chargeState: number | undefined;
+  dischargeState: number | undefined;
+  idleState: number | undefined;
+  zoneProviderName: string | undefined;
+  zoneCategoryName: string | undefined;
+}
+
 interface Props {
   LANGUAGE: LanguageInterface;
   geoModalData: GeoModalData | MarkerData[];
   mapType: "roadmap" | "satellite";
+  zoneCircle?: ZoneDetail;
 }
 interface Center {
   lat: number;
@@ -27,14 +55,16 @@ const GoogleMapClientComponent = ({
   LANGUAGE,
   geoModalData,
   mapType,
+  zoneCircle,
 }: Props) => {
+  console.log("zoneCircle: ", zoneCircle);
   const [googleApiKey, setGoogleApiKey] = useState<string | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
 
   const mapRef = useRef<google.maps.Map | null>(null);
   const hasAnimatedRef = useRef(false);
-  let center: Center;
-  let places: MarkerData[];
+  let center: Center | undefined;
+  let places: MarkerData[] | undefined;
 
   useEffect(() => {
     (async () => {
@@ -61,8 +91,10 @@ const GoogleMapClientComponent = ({
         lng: geoModalData.lon,
       };
     }, [geoModalData]);
+    places = undefined;
   } else {
     places = geoModalData;
+    center = undefined;
   }
 
   useEffect(() => {
@@ -106,6 +138,7 @@ const GoogleMapClientComponent = ({
           googleApiKey={googleApiKey}
           mapRef={mapRef}
           mapType={mapType}
+          zoneCircle={zoneCircle}
           setMapLoaded={setMapLoaded}
         />
       )}

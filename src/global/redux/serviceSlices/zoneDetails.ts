@@ -10,6 +10,7 @@ interface ZoneDetailsValue {
   state: string;
   city: string;
   postalCode: string;
+  idProfile: string;
   description: string;
   chargeState: number;
   dischargeState: number;

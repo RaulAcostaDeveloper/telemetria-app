@@ -2,8 +2,8 @@ import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import LoaderAnimation from "../../loaderAnimation/loaderAnimation";
-import { MutableRefObject, useCallback } from "react";
-import { MarkerData } from "./googleMapClientComponent";
+import { MutableRefObject, useCallback, useRef } from "react";
+import { MarkerData, ZoneDetail } from "./googleMapClientComponent";
 
 interface Center {
   lat: number;
@@ -17,6 +17,7 @@ interface Props {
   googleApiKey: string;
   mapRef: MutableRefObject<google.maps.Map | null>;
   mapType: "roadmap" | "satellite";
+  zoneCircle?: ZoneDetail;
   setMapLoaded: (toggle: boolean) => void;
 }
 export const GoogleMapsLoader = ({
@@ -26,8 +27,10 @@ export const GoogleMapsLoader = ({
   googleApiKey,
   mapRef,
   mapType,
+  zoneCircle,
   setMapLoaded,
 }: Props) => {
+  const mapCircleRef = useRef<google.maps.Circle | null>(null);
   const [language, region] = LANGUAGE.localeLanguage.split("-");
 
   const { isLoaded } = useLoadScript({
@@ -48,6 +51,27 @@ export const GoogleMapsLoader = ({
         map.setCenter(center);
         map.setZoom(5);
         setMapLoaded(true);
+      }
+
+      //Agrega circulo
+      if (!mapCircleRef.current && zoneCircle) {
+        mapCircleRef.current = new google.maps.Circle({
+          map: mapRef.current,
+          center: { lat: 23.1921389, lng: -113.2624907 }, //zoneCircle.center as Center,
+          radius: 2000, //(zoneCircle.radius as number) + 2000,
+          strokeColor: zoneCircle.color,
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: zoneCircle.color,
+          fillOpacity: 0.8,
+        });
+      } else if (mapCircleRef.current && zoneCircle) {
+        if (zoneCircle.center.lat && zoneCircle.center.lng) {
+          mapCircleRef.current.setCenter(zoneCircle.center as Center);
+        }
+        if (zoneCircle.radius) {
+          mapCircleRef.current.setRadius(zoneCircle.radius);
+        }
       }
     },
     [places, center, mapRef, setMapLoaded]
