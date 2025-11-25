@@ -13,10 +13,6 @@ export interface MarkerData {
   title: string;
 }
 
-export interface Circle {
-  center: google.maps.LatLngLiteral;
-  radius: number;
-}
 export interface ZoneDetail {
   center: {
     lat: number | undefined;
@@ -57,10 +53,8 @@ const GoogleMapClientComponent = ({
   mapType,
   zoneCircle,
 }: Props) => {
-  console.log("zoneCircle: ", zoneCircle);
   const [googleApiKey, setGoogleApiKey] = useState<string | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
-
   const mapRef = useRef<google.maps.Map | null>(null);
   const hasAnimatedRef = useRef(false);
   let center: Center | undefined;
