@@ -205,7 +205,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     <div className={styles.zonesDataProvider}>
       <ZoneProfileData LANGUAGE={LANGUAGE} id={zoneId} />
       <div className={styles.separator}>
-        <Collapsable LANGUAGE={LANGUAGE} title="Mapa">
+        <Collapsable LANGUAGE={LANGUAGE} title={LANGUAGE.zones.tabs.map}>
           <div className={["containertabmap", styles.container].join(" ")}>
             <ZonesMapTabSolo LANGUAGE={LANGUAGE} markersInZone={allMarkers} />
           </div>
