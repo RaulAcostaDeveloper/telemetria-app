@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
-import { LocalGasStation, Map } from "@mui/icons-material";
+import { LocalGasStation } from "@mui/icons-material";
 
 import { Table, TabsContent } from "@/global/components";
 import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
@@ -23,6 +23,7 @@ import { formatDateTime } from "@/global/utils/utils";
 import { MarkerData } from "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent";
 
 import styles from "./zonesDataProvider.module.css";
+import { Collapsable } from "@/global/components/collapsable/collapsable";
 
 interface Props {
   zoneId: string;
@@ -66,7 +67,6 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       icon: LocalGasStation,
       iconStyle: { color: "rgb(223,44,59)" },
     },
-    { text: LANGUAGE.zones.tabs.map, icon: Map },
   ];
 
   const loadsZoneColumns: columnsTable = [
@@ -204,6 +204,13 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
   return (
     <div className={styles.zonesDataProvider}>
       <ZoneProfileData LANGUAGE={LANGUAGE} id={zoneId} />
+      <div className={styles.separator}>
+        <Collapsable LANGUAGE={LANGUAGE} title={LANGUAGE.zones.tabs.map}>
+          <div className={["containertabmap", styles.container].join(" ")}>
+            <ZonesMapTabSolo LANGUAGE={LANGUAGE} markersInZone={allMarkers} />
+          </div>
+        </Collapsable>
+      </div>
       <TabsContent
         tabOptions={zoneTabs}
         tabContents={[
@@ -242,11 +249,6 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
               hasData={!!unloadsSingle}
               infoStatus={fuelSummaryStatus}
             />
-          </div>,
-          <div key={2}>
-            <div className={["containertabmap", styles.container].join(" ")}>
-              <ZonesMapTabSolo LANGUAGE={LANGUAGE} markersInZone={allMarkers} />
-            </div>
           </div>,
         ]}
       />
