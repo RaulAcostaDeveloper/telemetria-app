@@ -29,6 +29,7 @@ export interface Charges {
   idIndexEvent?: string;
   ignition: true;
   imei: string;
+  imeiClean: string;
   initialFuel: number;
   lat: number;
   lon: number;
@@ -51,6 +52,7 @@ export interface Discharges {
   idIndexEvent?: string;
   ignition: true;
   imei: string;
+  imeiClean: string;
   initialFuel: number;
   lat: number;
   lon: number;
@@ -122,11 +124,13 @@ const fuelSummaryFormatter = (
       ...v,
       idIndexEvent: `${i}-${v.eventId}`,
       imei: `${getPlateFromImei(devices, v.imei)} (${v.imei})`,
+      imeiClean: v.imei,
     }));
     const discharges = data.value.discharges.map((v, i) => ({
       ...v,
       idIndexEvent: `${i}-${v.eventId}`,
       imei: `${getPlateFromImei(devices, v.imei)} (${v.imei})`,
+      imeiClean: v.imei,
     }));
 
     //const discharges

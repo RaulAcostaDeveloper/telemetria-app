@@ -9,7 +9,6 @@ import { fetchDrivers } from "@/global/redux/serviceSlices/driversSlice";
 import { fetchFuelSummary } from "@/global/redux/serviceSlices/fuelSummarySlice";
 import { fetchGroups } from "@/global/redux/serviceSlices/groupsSlice";
 import { fetchObdRollup } from "@/global/redux/serviceSlices/obdRollupSlice";
-import { fetchTopFuelReport } from "@/global/redux/serviceSlices/topFuelReportSlice";
 import { fetchVehicles } from "@/global/redux/serviceSlices/vehiclesSlice";
 import { fetchZoneCategories } from "@/global/redux/serviceSlices/zoneCategoriesSlice";
 import { fetchZoneProviders } from "@/global/redux/serviceSlices/zoneProvidersSlice";
@@ -45,13 +44,6 @@ export const MainDataFetcher = () => {
     if (isAuthenticated && startDate && endDate) {
       dispatch(
         fetchFuelSummary({
-          startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
-          endDate: formatToLocalIso8601(endDate),
-          logoutState,
-        })
-      );
-      dispatch(
-        fetchTopFuelReport({
           startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
           endDate: formatToLocalIso8601(endDate),
           logoutState,

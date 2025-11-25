@@ -248,9 +248,9 @@ export interface LanguageInterface {
       search: string;
     };
     tabs: {
-      topCharges: string;
+      charges: string;
       unitys: string;
-      topDischarges: string;
+      discharges: string;
       zones: string;
     };
     vehiclesTableColumns: {

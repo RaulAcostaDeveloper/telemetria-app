@@ -267,9 +267,9 @@ export const PORTUGUES: LanguageInterface = {
       search: "Buscar",
     },
     tabs: {
-      topCharges: "Top abastecimentos",
+      charges: "Abastecimentos",
       unitys: "Unidades",
-      topDischarges: "Top descargas",
+      discharges: "Descargas",
       zones: "Zonas",
     },
     vehiclesTableColumns: {

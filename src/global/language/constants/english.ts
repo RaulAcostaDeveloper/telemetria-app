@@ -268,9 +268,9 @@ export const ENGLISH: LanguageInterface = {
       search: "Search",
     },
     tabs: {
-      topCharges: "Top refuels",
+      charges: "Refuels",
       unitys: "Units",
-      topDischarges: "Top discharges",
+      discharges: "Discharges",
       zones: "Zones",
     },
     vehiclesTableColumns: {
