@@ -2,26 +2,25 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getZoneDetails } from "@/modules/zones/services/zoneDetails/zoneDetails";
 
-interface ZoneDetailsValue {
-  zoneName: string;
-  zoneId: string;
-  profileName: string;
-  country: string;
-  state: string;
-  city: string;
-  postalCode: string;
-  idProfile: string;
-  description: string;
+export interface ZoneDetailsValue {
   chargeState: number;
-  dischargeState: number;
-  idleState: number;
-  provider: string;
+  city: string;
   color: string;
-  zoneProviderName: string;
-  zoneCategoryName: string;
-  radioZone: number;
+  country: string;
+  description: string;
+  dischargeState: number;
+  idProfile: string;
+  idleState: number;
   lat: number;
   lon: number;
+  postalCode: string;
+  profileName: string;
+  radioZone: number;
+  state: string;
+  zoneCategoryName: string;
+  zoneId: string;
+  zoneName: string;
+  zoneProviderName: string;
 }
 
 interface Data {

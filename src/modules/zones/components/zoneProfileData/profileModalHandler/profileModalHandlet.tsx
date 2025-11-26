@@ -3,7 +3,6 @@ import { useState } from "react";
 
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 
-import styles from "./profileModalHandler.module.css";
 import { ButtonTypes, GeneralButton } from "@/global/components";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ZoneEditProfileModalForm } from "../../zoneEditProfileModalForm/zoneEditProfileModalForm";
@@ -17,7 +16,7 @@ export const ProfileModalHandler = ({ LANGUAGE, id }: Props) => {
   const [isOpenForm, setIsOpenForm] = useState(false);
 
   return (
-    <div className={styles.buttonContainer}>
+    <div>
       <GeneralButton
         type={ButtonTypes.CONFIRM}
         callback={() => setIsOpenForm(true)}

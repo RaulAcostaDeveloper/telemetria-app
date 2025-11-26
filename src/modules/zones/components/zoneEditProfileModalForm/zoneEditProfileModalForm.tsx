@@ -15,6 +15,7 @@ import { fetchPutZoneProfile } from "@/global/redux/serviceSlices/putZoneProfile
 import { getCategories } from "./categories";
 import { isDifferentProfile } from "../../utils/compareProfileObjects";
 import { useAuth } from "@/modules/auth/utils";
+import { fetchZoneDetails } from "@/global/redux/serviceSlices/zoneDetails";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -28,7 +29,7 @@ export const ZoneEditProfileModalForm = ({
   id,
 }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
-  const { logoutState } = useAuth();
+  const { isAuthenticated, logoutState } = useAuth();
 
   const [isPut, setIsPut] = useState<boolean>(false);
 
@@ -116,6 +117,17 @@ export const ZoneEditProfileModalForm = ({
       putZoneProfileStatus === SERVICE_STATUS.succeeded
     ) {
       closeModal();
+      setTimeout(() => {
+        // Actualizar con los nuevos datos
+        if (isAuthenticated && id) {
+          dispatch(
+            fetchZoneDetails({
+              id: id.toString(),
+              logoutState,
+            })
+          );
+        }
+      }, 2000);
     }
   }, [postZoneProfileStatus, putZoneProfileStatus]);
 
