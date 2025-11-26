@@ -1,0 +1,15 @@
+.profileInfo {
+  font-size: 2.5rem;
+  width: 320px;
+  margin: 10px;
+  text-align: justify;
+}
+
+.title {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.isLarge {
+  width: 660px;
+}

@@ -7,18 +7,19 @@ import {
   localStorageSetItem,
 } from "@/global/localStorage/utils/storageService";
 import { Collapsable } from "@/global/components/collapsable/collapsable";
-import { DataShelf } from "@/global/components/dataShelf/dataShelf";
 import { LanguageInterface } from "@/global/language/constants/language.model";
+import { ProfileInfo } from "./profileInfo/profileInfo";
 import { ProfileModalHandler } from "./profileModalHandler/profileModalHandlet";
 import { STORAGE_KEYS } from "@/global/localStorage/constants/storageKeys";
-import { ZoneIdDetailsDataMock } from "@/global/dataMock/zoneIdDetailsDataMock";
+import { ZoneDetailsValue } from "@/global/redux/serviceSlices/zoneDetails";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   id: string;
+  zoneDetailsData: ZoneDetailsValue;
 }
 
-export const ZoneProfileData = ({ LANGUAGE, id }: Props) => {
+export const ZoneProfileData = ({ LANGUAGE, id, zoneDetailsData }: Props) => {
   const [isProfileDataOpen, setIsProfileDataOpen] = useState<boolean | null>(
     null
   );
@@ -44,52 +45,6 @@ export const ZoneProfileData = ({ LANGUAGE, id }: Props) => {
     }
   }, [isProfileDataOpen]);
 
-  const data: DataShelf = {
-    left: [
-      {
-        title: LANGUAGE.zones.zoneProfileDataShelf.zoneName,
-        value: ZoneIdDetailsDataMock.value.zoneName,
-      },
-      {
-        title: LANGUAGE.zones.zoneProfileDataShelf.profileName,
-        value: ZoneIdDetailsDataMock.value.profileName,
-      },
-      {
-        title: LANGUAGE.zones.zoneProfileForm.category,
-        value: ZoneIdDetailsDataMock.value.zoneCategoryName,
-      },
-    ],
-    right: [
-      {
-        title: LANGUAGE.zones.zoneProfileForm.provider,
-        value: ZoneIdDetailsDataMock.value.provider,
-      },
-      {
-        title: LANGUAGE.zones.zoneProfileForm.charges,
-        value: ZoneIdDetailsDataMock.value.chargeState
-          ? LANGUAGE.zones.zoneProfileForm.authorized
-          : LANGUAGE.zones.zoneProfileForm.noAuthorized,
-      },
-      {
-        title: LANGUAGE.zones.zoneProfileForm.discharges,
-        value: ZoneIdDetailsDataMock.value.dischargeState
-          ? LANGUAGE.zones.zoneProfileForm.authorized
-          : LANGUAGE.zones.zoneProfileForm.noAuthorized,
-      },
-    ],
-    third: [
-      {
-        title: LANGUAGE.zones.zoneProfileForm.ralenti,
-        value: ZoneIdDetailsDataMock.value.idleState
-          ? LANGUAGE.zones.zoneProfileForm.authorized
-          : LANGUAGE.zones.zoneProfileForm.noAuthorized,
-      },
-      {
-        title: LANGUAGE.zones.zoneProfileForm.description,
-        value: ZoneIdDetailsDataMock.value.description,
-      },
-    ],
-  };
   return (
     <div className={styles.container}>
       <Collapsable
@@ -98,8 +53,63 @@ export const ZoneProfileData = ({ LANGUAGE, id }: Props) => {
         defaultOpen={isProfileDataOpen}
         set={setIsProfileDataOpen}
       >
-        <ProfileModalHandler LANGUAGE={LANGUAGE} id={id} />
-        <DataShelf LANGUAGE={LANGUAGE} data={data} />
+        <div className={styles.inside}>
+          <div className={styles.infoSection}>
+            <ProfileInfo
+              title={LANGUAGE.zones.zoneProfileDataShelf.zoneName}
+              value={zoneDetailsData.zoneName}
+            />
+            <ProfileInfo
+              title={LANGUAGE.zones.zoneProfileDataShelf.profileName}
+              value={zoneDetailsData.profileName}
+            />
+            <ProfileInfo
+              title={LANGUAGE.zones.zoneProfileForm.category}
+              value={zoneDetailsData.zoneCategoryName}
+              // Cuando añadan el categoryId en los detalles de la zona
+              // {
+              //   getCategories(LANGUAGE).find((item) => item.id === "targetId")
+              //     ?.name
+              // }
+            />
+            <ProfileInfo
+              title={LANGUAGE.zones.zoneProfileForm.provider}
+              value={zoneDetailsData.zoneProviderName}
+            />
+            <ProfileInfo
+              title={LANGUAGE.zones.zoneProfileForm.charges}
+              value={
+                zoneDetailsData.chargeState
+                  ? LANGUAGE.zones.zoneProfileForm.authorized
+                  : LANGUAGE.zones.zoneProfileForm.noAuthorized
+              }
+            />
+            <ProfileInfo
+              title={LANGUAGE.zones.zoneProfileForm.discharges}
+              value={
+                zoneDetailsData.dischargeState
+                  ? LANGUAGE.zones.zoneProfileForm.authorized
+                  : LANGUAGE.zones.zoneProfileForm.noAuthorized
+              }
+            />
+            <ProfileInfo
+              title={LANGUAGE.zones.zoneProfileForm.ralenti}
+              value={
+                zoneDetailsData.idleState
+                  ? LANGUAGE.zones.zoneProfileForm.authorized
+                  : LANGUAGE.zones.zoneProfileForm.noAuthorized
+              }
+            />
+            <ProfileInfo
+              title={LANGUAGE.zones.zoneProfileForm.description}
+              value={zoneDetailsData.description}
+              isLarge
+            />
+          </div>
+          <div className={styles.buttonSection}>
+            <ProfileModalHandler LANGUAGE={LANGUAGE} id={id} />
+          </div>
+        </div>
       </Collapsable>
     </div>
   );

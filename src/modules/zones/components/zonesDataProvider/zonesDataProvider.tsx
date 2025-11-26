@@ -52,6 +52,10 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     (state: RootState) => state.fuelSummary
   );
 
+  const { zoneDetailsData, zoneDetailsStatus } = useSelector(
+    (state: RootState) => state.zoneDetails
+  );
+
   function findWithZoneId<T extends WithZoneId>(arrObj: T[]): T[] | undefined {
     return arrObj.filter((v) => v.zoneId === zoneId);
   }
@@ -205,7 +209,20 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
 
   return (
     <div className={styles.zonesDataProvider}>
-      <ZoneProfileData LANGUAGE={LANGUAGE} id={zoneId} />
+      {zoneDetailsData?.value && zoneDetailsStatus && (
+        <ZoneProfileData
+          LANGUAGE={LANGUAGE}
+          id={zoneId}
+          zoneDetailsData={zoneDetailsData.value}
+        />
+      )}
+
+      <DataErrorHandler
+        LANGUAGE={LANGUAGE}
+        hasData={!!zoneDetailsData?.value}
+        infoStatus={zoneDetailsStatus}
+      />
+
       <div className={styles.separator}>
         <Collapsable LANGUAGE={LANGUAGE} title={LANGUAGE.zones.tabs.map}>
           <div className={["containertabmap", styles.container].join(" ")}>
@@ -213,6 +230,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
           </div>
         </Collapsable>
       </div>
+
       <TabsContent
         tabOptions={zoneTabs}
         tabContents={[
