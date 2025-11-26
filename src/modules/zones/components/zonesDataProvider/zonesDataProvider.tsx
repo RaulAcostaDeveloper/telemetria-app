@@ -207,6 +207,29 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
 
   const allMarkers = [...formatedMarkersLoads, ...formatedMarkersUnloads];
 
+  const zoneCircle = useMemo(() => {
+    const zoneD = zoneDetailsData?.value;
+    return {
+      center: { lat: zoneD?.lat, lng: zoneD?.lon },
+      radius: zoneD?.radioZone,
+      color: zoneD?.color,
+      zoneName: zoneD?.zoneName,
+      zoneId: zoneD?.zoneId,
+      profileName: zoneD?.profileName,
+      country: zoneD?.country,
+      state: zoneD?.state,
+      city: zoneD?.city,
+      postalCode: zoneD?.postalCode,
+      idProfile: zoneD?.idProfile,
+      description: zoneD?.description,
+      chargeState: zoneD?.chargeState,
+      dischargeState: zoneD?.dischargeState,
+      idleState: zoneD?.idleState,
+      zoneProviderName: zoneD?.zoneProviderName,
+      zoneCategoryName: zoneD?.zoneCategoryName,
+    };
+  }, [zoneDetailsData]);
+
   return (
     <div className={styles.zonesDataProvider}>
       {zoneDetailsData?.value && zoneDetailsStatus && (
@@ -226,7 +249,11 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       <div className={styles.separator}>
         <Collapsable LANGUAGE={LANGUAGE} title={LANGUAGE.zones.tabs.map}>
           <div className={["containertabmap", styles.container].join(" ")}>
-            <ZonesMapTabSolo LANGUAGE={LANGUAGE} markersInZone={allMarkers} />
+            <ZonesMapTabSolo
+              LANGUAGE={LANGUAGE}
+              markersInZone={allMarkers}
+              zoneCircle={zoneCircle}
+            />
           </div>
         </Collapsable>
       </div>

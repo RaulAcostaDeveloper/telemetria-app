@@ -9,6 +9,7 @@ export interface ZoneDetailsValue {
   country: string;
   description: string;
   dischargeState: number;
+  idProfile: string;
   idleState: number;
   lat: number;
   lon: number;
