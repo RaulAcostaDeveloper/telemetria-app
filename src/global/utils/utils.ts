@@ -413,3 +413,11 @@ export function removeTimeAfterCommaOrT(time: string) {
     return time;
   }
 }
+
+export const hasLessThanOneDay = (startDate: string, endDate: string) => {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  const diffMs = end.getTime() - start.getTime();
+  const diffDays = diffMs / (1000 * 60 * 60 * 24);
+  return !(diffDays > 1);
+};

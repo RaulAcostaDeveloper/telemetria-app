@@ -1,8 +1,11 @@
-import LoaderAnimation from "../loaderAnimation/loaderAnimation";
-import { ErrorMessage } from "../errorMessage/errorMessage";
+"use client";
+import { useSelector } from "react-redux";
+
 import { LanguageInterface } from "../../language/constants/language.model";
+import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
-import styles from "./dataErrorHandler.module.css";
+import { decideFeedback } from "./decideFeedBack";
+import { hasLessThanOneDay } from "@/global/utils/utils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -10,41 +13,20 @@ interface Props {
   infoStatus: SERVICE_STATUS;
 }
 
-const decideFeedback = ({ LANGUAGE, hasData, infoStatus }: Props) => {
-  switch (infoStatus) {
-    case SERVICE_STATUS.loading:
-      return (
-        <div>
-          <LoaderAnimation />
-        </div>
-      );
-    case SERVICE_STATUS.succeeded:
-      return (
-        hasData === false && (
-          <ErrorMessage
-            message={LANGUAGE.notifications.nullValue}
-            LANGUAGE={LANGUAGE}
-          />
-        )
-      );
-    case SERVICE_STATUS.failed:
-      return (
-        <div>
-          <ErrorMessage LANGUAGE={LANGUAGE} />
-          <div className={styles.onErrorAndTry}>
-            <LoaderAnimation cellSize={10} />
-          </div>
-        </div>
-      );
-    default:
-      break;
-  }
-};
-
 export const DataErrorHandler = ({
   LANGUAGE,
   hasData,
   infoStatus,
 }: Props): JSX.Element => {
-  return <div>{decideFeedback({ LANGUAGE, hasData, infoStatus })}</div>;
+  const { startDate, endDate } = useSelector(
+    (state: RootState) => state.calendar
+  );
+
+  const lessThanOneDay = hasLessThanOneDay(startDate, endDate);
+
+  return (
+    <div>
+      {decideFeedback({ LANGUAGE, hasData, infoStatus, lessThanOneDay })}
+    </div>
+  );
 };

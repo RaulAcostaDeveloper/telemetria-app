@@ -21,6 +21,7 @@ export interface LanguageInterface {
     genericServiceError: string;
     nullValue: string;
     graphicError: string;
+    lessThanOneDay: string;
   };
   header: {
     backButton: {
