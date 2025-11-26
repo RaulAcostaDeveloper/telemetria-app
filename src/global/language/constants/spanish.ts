@@ -21,6 +21,8 @@ export const SPANISH: LanguageInterface = {
     genericServiceError: "Error al obtener datos, reintentando...",
     nullValue: "No hay información en este periodo de tiempo",
     graphicError: "No se pudo mostrar el gráfico",
+    lessThanOneDay:
+      "Por favor selecciona un rango de fechas mayor a un día para visualizar datos",
   },
   header: {
     backButton: {

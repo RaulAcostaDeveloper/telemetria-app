@@ -21,6 +21,8 @@ export const ENGLISH: LanguageInterface = {
     genericServiceError: "Failed to fetch data, trying again...",
     nullValue: "No information for this time period",
     graphicError: "Unable to display the chart",
+    lessThanOneDay:
+      "Please select a date range of more than one day to visualize data",
   },
   header: {
     backButton: {
