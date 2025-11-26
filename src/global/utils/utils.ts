@@ -368,6 +368,8 @@ export function getMedian2d(orderedValues: number[]): number {
   }
   if (final) {
     return parseFloat(final.toFixed(2));
+  } else if (orderedValues[0]) {
+    return orderedValues[0];
   } else {
     return 0;
   }
