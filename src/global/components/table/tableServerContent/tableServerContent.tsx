@@ -27,6 +27,7 @@ interface Props {
   handleMinMaxFilter: ({ colIndex, min, max }: MinMaxFilter) => void;
   handleSelectorFilter: ({ colIndex, value }: SelectorFilter) => void;
   idKey?: string;
+  idZone?: string;
   minMaxFilters: MinMaxFilter[];
   modalOption?: MODAL_OPTION;
   resetFilters: () => void;
@@ -58,6 +59,7 @@ export const TableServerContent = ({
   handleMinMaxFilter,
   handleSelectorFilter,
   idKey,
+  idZone,
   minMaxFilters,
   modalOption,
   resetFilters,
@@ -140,6 +142,7 @@ export const TableServerContent = ({
               deleteFunction={deleteFunction}
               filteredData={filteredData}
               idKey={idKey}
+              idZone={idZone}
               modalOption={modalOption}
               showActions={showActions}
               showDelete={showDelete}

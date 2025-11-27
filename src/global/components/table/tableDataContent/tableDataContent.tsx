@@ -14,6 +14,7 @@ interface Props {
   deleteFunction?: (idElement: string | number) => void;
   filteredData: dataTable;
   idKey?: string;
+  idZone?: string;
   modalOption?: MODAL_OPTION;
   showActions?: boolean;
   showDelete?: boolean;
@@ -33,6 +34,7 @@ export const TableDataContent = ({
   deleteFunction,
   filteredData,
   idKey,
+  idZone,
   modalOption,
   showActions,
   showDelete,
@@ -171,6 +173,7 @@ export const TableDataContent = ({
                 dataObject={dataObject}
                 deleteFunction={deleteFunction}
                 idKey={idKey}
+                idZone={idZone}
                 modalOption={modalOption}
                 showDelete={showDelete}
                 showEdit={showEdit}

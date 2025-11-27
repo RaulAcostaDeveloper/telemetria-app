@@ -19,6 +19,7 @@ interface Props {
   data: dataTable;
   deleteFunction?: (idElement: string | number) => void;
   idKey?: string;
+  idZone?: string;
   modalOption?: MODAL_OPTION;
   showCreateButton?: boolean;
   showDelete?: boolean;
@@ -39,6 +40,7 @@ export const Table = ({
   data,
   deleteFunction,
   idKey,
+  idZone,
   modalOption,
   showCreateButton,
   showDelete,
@@ -244,6 +246,7 @@ export const Table = ({
         handleMinMaxFilter={handleMinMaxFilter}
         handleSelectorFilter={handleSelectorFilter}
         idKey={idKey}
+        idZone={idZone}
         minMaxFilters={minMaxFilters}
         modalOption={modalOption}
         resetFilters={resetFilters}

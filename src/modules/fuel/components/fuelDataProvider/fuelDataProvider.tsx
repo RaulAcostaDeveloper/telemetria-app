@@ -139,7 +139,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
     },
     {
       columnName: `${LANGUAGE.zones.tabs.loadTable.loadValue} (L)`,
-      defaultSpace: 2,
+      defaultSpace: 3,
       orderColumn: true,
       minMaxFilter: true,
     },
@@ -159,6 +159,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
       charge: value.magnitude,
       finalFuel: value.finalFuel,
       imei: value.imeiClean,
+      idZone: value.zoneId,
     }));
   }, [fuelSummaryData]);
 
@@ -179,7 +180,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
     },
     {
       columnName: `${LANGUAGE.zones.tabs.unloadTable.loadValue} (L)`,
-      defaultSpace: 2,
+      defaultSpace: 3,
       orderColumn: true,
       minMaxFilter: true,
     },
@@ -199,6 +200,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
       discharge: value.magnitude,
       finalFuel: value.finalFuel,
       imei: value.imeiClean,
+      idZone: value.zoneId,
     }));
   }, [fuelSummaryData]);
 
@@ -259,6 +261,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                       columns={fuelReportChargesColumns}
                       data={fuelReportCharges}
                       idKey="imei"
+                      idZone="idZone"
                       showViewModal
                       showGoFuel
                       showGoOBD
@@ -279,6 +282,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                       columns={fuelReportDischargesColumns}
                       data={fuelReportDischarges}
                       idKey="imei"
+                      idZone="idZone"
                       showViewModal
                       showGoFuel
                       showGoOBD

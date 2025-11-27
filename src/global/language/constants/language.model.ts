@@ -100,6 +100,7 @@ export interface LanguageInterface {
       viewDetail: string;
       goFuelReport: string;
       goObdReport: string;
+      goZoneReport: string;
       goGenericReport: string;
       noImei: string;
       cleanFilters: string;

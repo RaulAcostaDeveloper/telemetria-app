@@ -123,6 +123,7 @@ export const SPANISH: LanguageInterface = {
       goFuelReport: "Ir a reporte de combustible",
       goObdReport: "Ir a reporte de OBD",
       goGenericReport: "Ir al reporte",
+      goZoneReport: "Ir a la zona",
       cleanFilters: "Limpiar",
       goPage: "Ir a la página",
       noFilters: "No hay filtros para esta tabla",

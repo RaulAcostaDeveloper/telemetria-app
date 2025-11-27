@@ -21,6 +21,7 @@ interface Props {
   dataObject: { [key: string]: PrimitiveValue };
   deleteFunction?: (idElement: string | number) => void;
   idKey?: string;
+  idZone?: string;
   modalOption?: MODAL_OPTION;
   showDelete?: boolean;
   showEdit?: boolean;
@@ -38,6 +39,7 @@ export const TableActions = ({
   dataObject,
   deleteFunction,
   idKey,
+  idZone,
   modalOption,
   showDelete,
   showEdit,
@@ -64,7 +66,7 @@ export const TableActions = ({
   useEffect(() => {
     if (
       idKey &&
-      dataObject[idKey] !== null &&
+      dataObject[idKey] &&
       dataObject[idKey].toString().length > 10
     ) {
       setImei(dataObject[idKey].toString());
@@ -120,6 +122,15 @@ export const TableActions = ({
             alt="car services"
           />
         </TableActionLink>
+      )}
+
+      {idZone && (
+        <TableActionLink
+          hasCompleteRoute={idZone ? true : false}
+          title={LANGUAGE.table.actions.goZoneReport}
+          Icon={ArrowRightAltIcon}
+          href={`/zones/zone/${dataObject[idZone ?? ""] ?? ""}`}
+        />
       )}
 
       {showGoGenericReport && viewPath && (
