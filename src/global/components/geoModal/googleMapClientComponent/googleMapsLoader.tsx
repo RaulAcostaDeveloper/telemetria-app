@@ -99,7 +99,12 @@ export const GoogleMapsLoader = ({
       {center && <Marker position={center} />}
       {places &&
         places.map((p) => (
-          <Marker key={p.id} position={p.position} title={p.title} />
+          <Marker
+            key={p.id}
+            position={p.position}
+            title={p.title}
+            icon={p.icon}
+          />
         ))}
     </GoogleMap>
   );
