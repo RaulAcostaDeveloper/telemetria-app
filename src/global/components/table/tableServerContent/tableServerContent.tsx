@@ -26,7 +26,9 @@ interface Props {
   filteredData: dataTable;
   handleMinMaxFilter: ({ colIndex, min, max }: MinMaxFilter) => void;
   handleSelectorFilter: ({ colIndex, value }: SelectorFilter) => void;
+  idImei?: string;
   idKey?: string;
+  idZone?: string;
   minMaxFilters: MinMaxFilter[];
   modalOption?: MODAL_OPTION;
   resetFilters: () => void;
@@ -36,9 +38,7 @@ interface Props {
   showCreateButton?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
-  showGoFuel?: boolean;
   showGoGenericReport?: boolean;
-  showGoOBD?: boolean;
   showGoPageView?: boolean;
   showViewModal?: boolean;
   tableHasFilters: boolean;
@@ -57,7 +57,9 @@ export const TableServerContent = ({
   filteredData,
   handleMinMaxFilter,
   handleSelectorFilter,
+  idImei,
   idKey,
+  idZone,
   minMaxFilters,
   modalOption,
   resetFilters,
@@ -67,9 +69,7 @@ export const TableServerContent = ({
   showCreateButton,
   showDelete,
   showEdit,
-  showGoFuel,
   showGoGenericReport,
-  showGoOBD,
   showGoPageView,
   showViewModal,
   tableHasFilters,
@@ -77,14 +77,15 @@ export const TableServerContent = ({
   viewPath,
   windowMaxSize,
 }: Props) => {
-  const showActions =
+  const showActions = Boolean(
     showDelete ||
-    showEdit ||
-    showGoFuel ||
-    showGoOBD ||
-    showGoPageView ||
-    showViewModal ||
-    showGoGenericReport;
+      showEdit ||
+      idImei ||
+      idZone ||
+      showGoPageView ||
+      showViewModal ||
+      showGoGenericReport
+  );
   return (
     <>
       <div className={styles.inside}>
@@ -139,14 +140,14 @@ export const TableServerContent = ({
               columns={columns}
               deleteFunction={deleteFunction}
               filteredData={filteredData}
+              idImei={idImei}
               idKey={idKey}
+              idZone={idZone}
               modalOption={modalOption}
               showActions={showActions}
               showDelete={showDelete}
               showEdit={showEdit}
-              showGoFuel={showGoFuel}
               showGoGenericReport={showGoGenericReport}
-              showGoOBD={showGoOBD}
               showGoPageView={showGoPageView}
               showViewModal={showViewModal}
               viewPath={viewPath}

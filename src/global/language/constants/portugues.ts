@@ -121,6 +121,7 @@ export const PORTUGUES: LanguageInterface = {
       viewDetail: "Ver detalhes",
       goFuelReport: "Ir para relatório de combustível",
       goObdReport: "Ir para relatório de OBD",
+      goZoneReport: "Ir para zona",
       goGenericReport: "Ir para relatório",
       cleanFilters: "Limpar",
       goPage: "Ir para a página",

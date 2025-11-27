@@ -20,13 +20,13 @@ interface Props {
   LANGUAGE: LanguageInterface;
   dataObject: { [key: string]: PrimitiveValue };
   deleteFunction?: (idElement: string | number) => void;
+  idImei?: string;
   idKey?: string;
+  idZone?: string;
   modalOption?: MODAL_OPTION;
   showDelete?: boolean;
   showEdit?: boolean;
-  showGoFuel?: boolean;
   showGoGenericReport?: boolean;
-  showGoOBD?: boolean;
   showGoPageView?: boolean;
   showViewModal?: boolean;
   viewPath?: string;
@@ -37,18 +37,17 @@ export const TableActions = ({
   LANGUAGE,
   dataObject,
   deleteFunction,
+  idImei,
   idKey,
+  idZone,
   modalOption,
   showDelete,
   showEdit,
-  showGoFuel,
   showGoGenericReport,
-  showGoOBD,
   showGoPageView,
   showViewModal,
   viewPath,
 }: Props) => {
-  const [imei, setImei] = useState<string | number>();
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
   const [viewModal, setViewModal] = useState<boolean>(false);
@@ -60,16 +59,6 @@ export const TableActions = ({
       setShowDeleteModal(false);
     }
   }, []);
-
-  useEffect(() => {
-    if (
-      idKey &&
-      dataObject[idKey] !== null &&
-      dataObject[idKey].toString().length > 10
-    ) {
-      setImei(dataObject[idKey].toString());
-    }
-  }, [dataObject, idKey]);
 
   useEffect(() => {
     document.addEventListener("keydown", escFunction, false);
@@ -96,22 +85,22 @@ export const TableActions = ({
         />
       )}
 
-      {showGoFuel && (
+      {idImei && (
         <TableActionLink
-          hasCompleteRoute={imei ? true : false}
+          hasCompleteRoute={idImei ? true : false}
           noImeiTitle={LANGUAGE.table.actions.noImei}
           title={LANGUAGE.table.actions.goFuelReport}
           Icon={LocalGasStationIcon}
-          href={"/fuel/vehicle/" + imei}
+          href={`/fuel/vehicle/${dataObject[idImei ?? ""]}`}
         />
       )}
 
-      {showGoOBD && (
+      {idImei && (
         <TableActionLink
-          hasCompleteRoute={imei ? true : false}
+          hasCompleteRoute={idImei ? true : false}
           noImeiTitle={LANGUAGE.table.actions.noImei}
           title={LANGUAGE.table.actions.goObdReport}
-          href={"/telemetry/vehicle/" + imei}
+          href={`/telemetry/vehicle/${dataObject[idImei ?? ""]}`}
         >
           <Image
             src={"/png/car-gps.png"}
@@ -120,6 +109,15 @@ export const TableActions = ({
             alt="car services"
           />
         </TableActionLink>
+      )}
+
+      {idZone && (
+        <TableActionLink
+          hasCompleteRoute={idZone ? true : false}
+          title={LANGUAGE.table.actions.goZoneReport}
+          Icon={ArrowRightAltIcon}
+          href={`/zones/zone/${dataObject[idZone ?? ""] ?? ""}`}
+        />
       )}
 
       {showGoGenericReport && viewPath && (
