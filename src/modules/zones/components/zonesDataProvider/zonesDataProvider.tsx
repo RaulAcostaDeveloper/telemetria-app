@@ -189,19 +189,23 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
 
   let formatedMarkersLoads: MarkerData[] = [];
   if (loadsSingle) {
+    const imgLoad = "/png/marker-gray-pump-green.png";
     formatedMarkersLoads = loadsSingle.map((v) => ({
       id: v.idIndexEvent as string,
       position: { lat: v.lat, lng: v.lng },
       title: v.address,
+      icon: imgLoad,
     }));
   }
 
   let formatedMarkersUnloads: MarkerData[] = [];
   if (unloadsSingle) {
+    const imgUnload = "./png/marker-gray-pump-red.png";
     formatedMarkersUnloads = unloadsSingle.map((v) => ({
       id: v.idIndexEvent as string,
       position: { lat: v.lat, lng: v.lng },
       title: v.address,
+      icon: imgUnload,
     }));
   }
 
