@@ -21,6 +21,8 @@ export const SPANISH: LanguageInterface = {
     genericServiceError: "Error al obtener datos, reintentando...",
     nullValue: "No hay información en este periodo de tiempo",
     graphicError: "No se pudo mostrar el gráfico",
+    lessThanOneDay:
+      "Por favor selecciona un rango de fechas mayor a un día para visualizar datos",
   },
   header: {
     backButton: {
@@ -121,6 +123,7 @@ export const SPANISH: LanguageInterface = {
       goFuelReport: "Ir a reporte de combustible",
       goObdReport: "Ir a reporte de OBD",
       goGenericReport: "Ir al reporte",
+      goZoneReport: "Ir a la zona",
       cleanFilters: "Limpiar",
       goPage: "Ir a la página",
       noFilters: "No hay filtros para esta tabla",

@@ -84,7 +84,7 @@ export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
       totalEvents: value.totalEvents,
       loadedLiters: value.loadedLiters,
       unloadedLiters: value.unloadedLiters,
-      id: value.zoneId,
+      idZone: value.zoneId,
     }));
   }, [zonesSummaryData]);
 
@@ -98,8 +98,7 @@ export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
             data={zonesData}
             LANGUAGE={LANGUAGE}
             showGoGenericReport
-            idKey="id"
-            viewPath="/zones/zone/"
+            idZone="idZone"
             showEdit
             modalOption={MODAL_OPTION.ZONE}
           />

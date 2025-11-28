@@ -18,14 +18,14 @@ interface Props {
   columns: columnsTable;
   data: dataTable;
   deleteFunction?: (idElement: string | number) => void;
+  idImei?: string;
   idKey?: string;
+  idZone?: string;
   modalOption?: MODAL_OPTION;
   showCreateButton?: boolean;
   showDelete?: boolean;
   showEdit?: boolean;
-  showGoFuel?: boolean;
   showGoGenericReport?: boolean;
-  showGoOBD?: boolean;
   showGoPageView?: boolean;
   showViewModal?: boolean;
   title?: string;
@@ -38,14 +38,14 @@ export const Table = ({
   columns,
   data,
   deleteFunction,
+  idImei,
   idKey,
+  idZone,
   modalOption,
   showCreateButton,
   showDelete,
   showEdit,
-  showGoFuel,
   showGoGenericReport,
-  showGoOBD,
   showGoPageView,
   showViewModal,
   title,
@@ -243,7 +243,9 @@ export const Table = ({
         filteredData={filteredData}
         handleMinMaxFilter={handleMinMaxFilter}
         handleSelectorFilter={handleSelectorFilter}
+        idImei={idImei}
         idKey={idKey}
+        idZone={idZone}
         minMaxFilters={minMaxFilters}
         modalOption={modalOption}
         resetFilters={resetFilters}
@@ -253,9 +255,7 @@ export const Table = ({
         showCreateButton={showCreateButton}
         showDelete={showDelete}
         showEdit={showEdit}
-        showGoFuel={showGoFuel}
         showGoGenericReport={showGoGenericReport}
-        showGoOBD={showGoOBD}
         showGoPageView={showGoPageView}
         showViewModal={showViewModal}
         tableHasFilters={tableHasFilters}

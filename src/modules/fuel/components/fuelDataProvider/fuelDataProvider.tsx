@@ -159,6 +159,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
       charge: value.magnitude,
       finalFuel: value.finalFuel,
       imei: value.imeiClean,
+      idZone: value.zoneId,
     }));
   }, [fuelSummaryData]);
 
@@ -199,6 +200,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
       discharge: value.magnitude,
       finalFuel: value.finalFuel,
       imei: value.imeiClean,
+      idZone: value.zoneId,
     }));
   }, [fuelSummaryData]);
 
@@ -239,9 +241,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                       LANGUAGE={LANGUAGE}
                       columns={vehiclesColumns}
                       data={vehiclesReport}
-                      idKey="imei"
-                      showGoFuel
-                      showGoOBD
+                      idImei="imei"
                     />
                   )}
 
@@ -258,10 +258,9 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                       LANGUAGE={LANGUAGE}
                       columns={fuelReportChargesColumns}
                       data={fuelReportCharges}
-                      idKey="imei"
+                      idZone="idZone"
                       showViewModal
-                      showGoFuel
-                      showGoOBD
+                      idImei="imei"
                     />
                   )}
 
@@ -278,10 +277,9 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                       LANGUAGE={LANGUAGE}
                       columns={fuelReportDischargesColumns}
                       data={fuelReportDischarges}
-                      idKey="imei"
+                      idZone="idZone"
                       showViewModal
-                      showGoFuel
-                      showGoOBD
+                      idImei="imei"
                     />
                   )}
 

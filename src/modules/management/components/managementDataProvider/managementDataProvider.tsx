@@ -296,9 +296,8 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
                   columns={vehicleColumns}
                   data={vehiclesTableData}
                   idKey="imeIs"
+                  idImei="imeIs"
                   modalOption={MODAL_OPTION.VEHICLES}
-                  showGoFuel
-                  showGoOBD
                   showViewModal
                 />
               )}

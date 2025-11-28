@@ -165,9 +165,7 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
                 LANGUAGE={LANGUAGE}
                 columns={teleVehiclesOBDColumns}
                 data={teleVehiclesOBDData}
-                showGoFuel
-                showGoOBD
-                idKey="imei"
+                idImei="imei"
                 windowMaxSize={50}
               />
             )}
