@@ -1,5 +1,5 @@
 "use client";
-import { useMemo } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { LocalGasStation } from "@mui/icons-material";
@@ -45,6 +45,9 @@ type WithZoneId = { zoneId: string };
 //zoneId de fuelSummary
 export const ZonesDataProvider = ({ zoneId }: Props) => {
   const LANGUAGE = useLanguage();
+  const [isProfileDataOpen, setIsProfileDataOpen] = useState<boolean>(true);
+  const hasRunRef = useRef(false);
+
   let forTableLoads: dataTable = [];
   let forTableUnloads: dataTable = [];
 
@@ -91,6 +94,21 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       minMaxFilter: true,
     },
   ];
+
+  const handleDischargesRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (!node) return;
+
+      if (hasRunRef.current) {
+        // ya se ejecutó una vez
+        return;
+      }
+
+      hasRunRef.current = true;
+      setIsProfileDataOpen(false);
+    },
+    [setIsProfileDataOpen]
+  );
 
   const loadsSummary = useMemo(() => {
     return fuelSummaryData?.value?.charges.map((v) => ({
@@ -241,6 +259,8 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
           LANGUAGE={LANGUAGE}
           id={zoneId}
           zoneDetailsData={zoneDetailsData.value}
+          isProfileDataOpen={isProfileDataOpen}
+          setIsProfileDataOpen={setIsProfileDataOpen}
         />
       )}
 
@@ -284,22 +304,24 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
             />
           </div>,
           <div key={1}>
-            {unloadsSingle && (
-              <Table
-                LANGUAGE={LANGUAGE}
-                columns={unloadsZoneColumns}
-                data={forTableUnloads}
-                idKey="imei"
-                showViewModal
-                modalOption={MODAL_OPTION.ZONEUNLOAD}
-              />
-            )}
+            <div ref={handleDischargesRef}>
+              {unloadsSingle && (
+                <Table
+                  LANGUAGE={LANGUAGE}
+                  columns={unloadsZoneColumns}
+                  data={forTableUnloads}
+                  idKey="imei"
+                  showViewModal
+                  modalOption={MODAL_OPTION.ZONEUNLOAD}
+                />
+              )}
 
-            <DataErrorHandler
-              LANGUAGE={LANGUAGE}
-              hasData={!!unloadsSingle}
-              infoStatus={fuelSummaryStatus}
-            />
+              <DataErrorHandler
+                LANGUAGE={LANGUAGE}
+                hasData={!!unloadsSingle}
+                infoStatus={fuelSummaryStatus}
+              />
+            </div>
           </div>,
         ]}
       />
