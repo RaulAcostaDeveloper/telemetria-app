@@ -487,6 +487,13 @@ export interface LanguageInterface {
       discharged: string;
       zoneModalTitle: string;
     };
+    zoneMap: {
+      zonePopup: {
+        address: string;
+        magnitude: string;
+        coordinates: string;
+      };
+    };
     tabs: {
       map: string;
       load: string;

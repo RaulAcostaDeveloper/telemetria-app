@@ -6,6 +6,8 @@ import { LanguageInterface } from "@/global/language/constants/language.model";
 import LoaderAnimation from "../../loaderAnimation/loaderAnimation";
 import { MarkerData, ZoneDetail } from "./googleMapClientComponent";
 
+import styles from "./googleMapsLoader.module.css";
+
 interface Center {
   lat: number;
   lng: number;
@@ -88,13 +90,28 @@ export const GoogleMapsLoader = ({
   const handleMarkerClick = (marker: MarkerData) => {
     if (!mapRef.current || !markerRef.current || !infoRef.current) return;
 
-    infoRef.current.setContent(
-      `<div style="font-size: 2rem; color: #333;">
-        <div>Dirección: ${marker.title}</div>
-        <div>Coordenadas: ${marker.position.lat}, ${marker.position.lng}</div>
-        <div>Magnitud: ${marker.magnitude}</div>
-      <div/>`
-    );
+    // TODO: agregar fechas, valor inicial, valor final
+    const contentHTML = `
+      <div class="${styles.containerinfo}">
+        <div class="${styles.frameInfo}" style="font-size: 2rem;">
+          <div class="${styles.rowInfo}">
+            <div>${LANGUAGE.zones.zoneMap.zonePopup.address}:</div>
+            <div>${marker.title}</div>
+          </div>
+          <div class="${styles.rowInfo}">
+            <div>${LANGUAGE.zones.zoneMap.zonePopup.magnitude}:</div>
+            <div>${marker.magnitude} lts.</div>
+          </div>
+          <div class="${styles.rowInfo}">
+            <div>${LANGUAGE.zones.zoneMap.zonePopup.coordinates}:</div>
+            <div>${marker.position.lat}, ${marker.position.lng}</div>
+          </div>
+        </div>
+      </div>`;
+
+    infoRef.current.setContent(contentHTML);
+    infoRef.current.setHeaderDisabled(true); //Deshabilita botón de cerrar.
+
     if (infoBoxOpen) {
       infoRef.current.close();
     } else {
