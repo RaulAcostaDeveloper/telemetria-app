@@ -139,7 +139,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
     },
     {
       columnName: `${LANGUAGE.zones.tabs.loadTable.loadValue} (L)`,
-      defaultSpace: 2,
+      defaultSpace: 3,
       orderColumn: true,
       minMaxFilter: true,
     },
@@ -179,7 +179,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
     },
     {
       columnName: `${LANGUAGE.zones.tabs.unloadTable.loadValue} (L)`,
-      defaultSpace: 2,
+      defaultSpace: 3,
       orderColumn: true,
       minMaxFilter: true,
     },
