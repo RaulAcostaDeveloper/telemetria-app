@@ -23,6 +23,9 @@ export const SPANISH: LanguageInterface = {
     graphicError: "No se pudo mostrar el gráfico",
     lessThanOneDay:
       "Por favor selecciona un rango de fechas mayor a un día para visualizar datos",
+    confirmation: "Confirmación",
+    savedData: "Se han guardado tus cambios",
+    noChanges: "No hay cambios",
   },
   header: {
     backButton: {

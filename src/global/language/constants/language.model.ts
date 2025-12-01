@@ -22,6 +22,9 @@ export interface LanguageInterface {
     nullValue: string;
     graphicError: string;
     lessThanOneDay: string;
+    confirmation: string;
+    savedData: string;
+    noChanges: string;
   };
   header: {
     backButton: {

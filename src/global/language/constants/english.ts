@@ -23,6 +23,9 @@ export const ENGLISH: LanguageInterface = {
     graphicError: "Unable to display the chart",
     lessThanOneDay:
       "Please select a date range of more than one day to visualize data",
+    confirmation: "Confirmation",
+    noChanges: "No changes detected",
+    savedData: "The changes have been saved",
   },
   header: {
     backButton: {
