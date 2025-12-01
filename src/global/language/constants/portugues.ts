@@ -22,6 +22,9 @@ export const PORTUGUES: LanguageInterface = {
     graphicError: "Não foi possível apresentar o gráfico",
     lessThanOneDay:
       "Selecione um intervalo de datas superior a um dia para visualizar os dados",
+    savedData: "As alterações foram salvas",
+    confirmation: "Confirmação",
+    noChanges: "Nenhuma alteração detectada",
   },
   header: {
     backButton: {
