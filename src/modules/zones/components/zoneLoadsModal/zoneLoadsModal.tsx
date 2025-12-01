@@ -13,7 +13,7 @@ export const ZoneLoadsModal = ({ LANGUAGE, closeModal, dataObject }: Props) => {
   const geoModalData = {
     lat: dataObject.lat as number,
     lon: dataObject.lng as number,
-    title: dataObject.title as string,
+    title: LANGUAGE.zones.tabs.loadTable.loadValue,
     rows: [] as TooltipGeoField[],
   };
   return (
