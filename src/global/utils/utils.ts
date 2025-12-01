@@ -421,3 +421,12 @@ export const hasLessThanOneDay = (startDate: string, endDate: string) => {
   const diffDays = diffMs / (1000 * 60 * 60 * 24);
   return !(diffDays > 1);
 };
+
+export const legibleDate = (date: Date, locale: string): string => {
+  return new Intl.DateTimeFormat(locale, {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(date);
+  // Falta que ponga también la hora si viene
+};
