@@ -1,6 +1,6 @@
 import { LanguageInterface } from "../language/constants/language.model";
 import { ndIfEmpty } from "./ndIfEmpty";
-import { formatDateTime } from "./utils";
+import { formatDateTime } from "./dateUtils";
 
 type StringObject = Record<string, string>;
 

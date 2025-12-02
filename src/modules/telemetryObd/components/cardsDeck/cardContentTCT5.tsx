@@ -5,8 +5,9 @@ import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ObdRollupDataValues } from "@/global/redux/serviceSlices/obdRollupSlice";
 import {
   format2DecimalsString,
+  getAverage,
   getMedian2d,
-} from "../../../../global/utils/utils";
+} from "@/global/utils/mathUtils";
 
 interface Props {
   data: ObdRollupDataValues;
@@ -48,6 +49,11 @@ export default function CardContentTCT5({ data, LANGUAGE }: Props) {
   const titleValueSubtitle = {
     text: LANGUAGE.teleOBD.charts.subtitleDistance,
     value: getMedian2d(ascendingDistance),
+  };
+
+  const averageTitleValueSubtitle = {
+    text: LANGUAGE.teleOBD.charts.average,
+    value: getAverage(magnitudes),
   };
 
   // Array de objetos con 1. rango a usar. 2. vehiculos que entran en dicho rango.
@@ -111,6 +117,10 @@ export default function CardContentTCT5({ data, LANGUAGE }: Props) {
       <h3>{LANGUAGE.teleOBD.charts.titleDistance}</h3>
       <h4>
         {titleValueSubtitle.text}: <span>{titleValueSubtitle.value}</span> km
+      </h4>
+      <h4>
+        {averageTitleValueSubtitle.text}:{" "}
+        <span>{averageTitleValueSubtitle.value}</span> h
       </h4>
       <ChartColInterval
         langSelection={langSelection}

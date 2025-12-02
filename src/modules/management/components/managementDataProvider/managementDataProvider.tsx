@@ -16,7 +16,7 @@ import {
   deviceStatusTranslator,
   formatDateTime,
   removeTimeAfterCommaOrT,
-} from "@/global/utils/utils";
+} from "@/global/utils/dateUtils";
 import {
   DirectionsCar,
   DeviceHub,

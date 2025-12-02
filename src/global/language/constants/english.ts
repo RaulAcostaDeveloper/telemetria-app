@@ -449,6 +449,7 @@ export const ENGLISH: LanguageInterface = {
       titleIdle: "Engine parked time",
       subtitleDistance: "Median distance traveled",
       subtitleDriven: "Median driving time",
+      average: "Average",
       subtitleIdle: "Median engine parked time",
       titleTooltipDistance: "Distance Traveled",
       titleTooltipDriven: "Driven Time",

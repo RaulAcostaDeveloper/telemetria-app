@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   calculatePredefinedDateRange,
   toLocalISOString,
-} from "@/global/utils/utils";
+} from "@/global/utils/dateUtils";
 import { setDateRange } from "@/global/redux/slices/calendarSlice";
 import styles from "./Calendar.module.css";
 import { LanguageInterface } from "../../language/constants/language.model";

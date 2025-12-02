@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getDevices } from "@/modules/management/services/devices/devices";
-import { toLocalDateTime } from "@/global/utils/utils";
+import { toLocalDateTime } from "@/global/utils/dateUtils";
 
 export type statusNum = "0" | "1" | "2" | "3";
 

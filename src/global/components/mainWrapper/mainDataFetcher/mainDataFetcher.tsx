@@ -13,7 +13,7 @@ import { fetchVehicles } from "@/global/redux/serviceSlices/vehiclesSlice";
 import { fetchZoneCategories } from "@/global/redux/serviceSlices/zoneCategoriesSlice";
 import { fetchZoneProviders } from "@/global/redux/serviceSlices/zoneProvidersSlice";
 import { fetchZonesSummary } from "@/global/redux/serviceSlices/zonesSummary";
-import { formatToLocalIso8601 } from "../../../utils/utils";
+import { formatToLocalIso8601 } from "../../../utils/dateUtils";
 import { useAuth } from "@/modules/auth/utils";
 
 export const MainDataFetcher = () => {

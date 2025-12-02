@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getLastFuelReport } from "@/modules/fuel/services/lastFuelReport/lastFuelReport";
-import { toLocalDateTime } from "@/global/utils/utils";
+import { toLocalDateTime } from "@/global/utils/dateUtils";
 
 export const fetchLastFuelReport = createAsyncThunk(
   "lastFuelReportStatus/fetch",

@@ -5,7 +5,7 @@ import { LanguageInterface } from "../../language/constants/language.model";
 import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { decideFeedback } from "./decideFeedBack";
-import { hasLessThanOneDay } from "@/global/utils/utils";
+import { hasLessThanOneDay } from "@/global/utils/dateUtils";
 
 interface Props {
   LANGUAGE: LanguageInterface;

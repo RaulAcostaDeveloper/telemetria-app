@@ -448,6 +448,7 @@ export const PORTUGUES: LanguageInterface = {
       titleIdle: "Tempo parado",
       subtitleDistance: "Distância média percorrida",
       subtitleDriven: "Tempo médio de condução",
+      average: "Média",
       subtitleIdle: "Tempo médio parado",
       titleTooltipDistance: "Distância percorrida",
       titleTooltipDriven: "Tempo de condução",

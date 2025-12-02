@@ -18,7 +18,7 @@ import {
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 import { ZoneProfileData } from "../zoneProfileData/zoneProfileData";
 import { ZonesMapTabSolo } from "../zonesMapTabSolo/zonesMapTabSolo";
-import { formatDateTime } from "@/global/utils/utils";
+import { formatDateTime } from "@/global/utils/dateUtils";
 import { MarkerData } from "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent";
 
 import styles from "./zonesDataProvider.module.css";

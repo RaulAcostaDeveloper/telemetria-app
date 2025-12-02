@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getDrivers } from "@/modules/management/services/drivers/drivers";
-import { toLocalDateTime } from "@/global/utils/utils";
+import { toLocalDateTime } from "@/global/utils/dateUtils";
 
 interface Drivers {
   id: number;

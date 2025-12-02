@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getFuelData } from "@/modules/fuel/services/fuelData/fuelData";
-import { toLocalDateTime } from "@/global/utils/utils";
+import { toLocalDateTime } from "@/global/utils/dateUtils";
 
 interface LevelMessages {
   eventId: number;
