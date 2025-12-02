@@ -5,8 +5,9 @@ import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ObdRollupDataValues } from "@/global/redux/serviceSlices/obdRollupSlice";
 import {
   format2DecimalsString,
+  getAverage,
   getMedian2d,
-} from "../../../../global/utils/utils";
+} from "@/global/utils/mathUtils";
 
 interface Props {
   data: ObdRollupDataValues;
@@ -21,7 +22,7 @@ interface rangeNHours {
 
 export default function CardContentDrivenTime({ data, LANGUAGE }: Props) {
   const hours: number[] = data.details.map(
-    (value) => value.driverTime as number
+    (value) => Number(value.driverTime) as number
   );
 
   /*   const average =
@@ -44,6 +45,11 @@ export default function CardContentDrivenTime({ data, LANGUAGE }: Props) {
   const titleValueSubtitle = {
     text: LANGUAGE.teleOBD.charts.subtitleDriven,
     value: getMedian2d(ascendingHours),
+  };
+
+  const averageTitleValueSubtitle = {
+    text: LANGUAGE.teleOBD.charts.average,
+    value: getAverage(hours),
   };
 
   // Array de objetos con 1. rango a usar. 2. cantidad de vehiculos que entran en dicho rango.
@@ -73,9 +79,10 @@ export default function CardContentDrivenTime({ data, LANGUAGE }: Props) {
   });
 
   const top5HoursData = [];
+
   for (let index = 0; index < top5Hours.length; index++) {
     const pivot = data.details.filter(
-      (value) => top5Hours[index] === value.driverTime
+      (value) => top5Hours[index] === Number(value.driverTime)
     )[0];
     const pivotClean = {
       plate: pivot.plate as string,
@@ -104,6 +111,10 @@ export default function CardContentDrivenTime({ data, LANGUAGE }: Props) {
       <h3>{LANGUAGE.teleOBD.charts.titleDriven}</h3>
       <h4>
         {titleValueSubtitle.text}: <span>{titleValueSubtitle.value}</span> h
+      </h4>
+      <h4>
+        {averageTitleValueSubtitle.text}:{" "}
+        <span>{averageTitleValueSubtitle.value}</span> h
       </h4>
       <ChartColInterval
         langSelection={langSelection}

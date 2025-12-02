@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getObdTravelMetrics } from "@/modules/telemetryObd/services/travel-metrics/travel-metrics";
-import { toLocalDateTime } from "@/global/utils/utils";
+import { toLocalDateTime } from "@/global/utils/dateUtils";
 
 interface ObdTravelMetricsTimeTraveledDetails {
   lat: number;

@@ -17,7 +17,7 @@ import { fetchPostZoneProfile } from "@/global/redux/serviceSlices/postZoneProfi
 import { fetchPutZoneProfile } from "@/global/redux/serviceSlices/putZoneProfile";
 import { fetchZoneDetails } from "@/global/redux/serviceSlices/zoneDetails";
 import { fetchZonesSummary } from "@/global/redux/serviceSlices/zonesSummary";
-import { formatToLocalIso8601 } from "@/global/utils/utils";
+import { formatToLocalIso8601 } from "@/global/utils/dateUtils";
 import { getCategories } from "./categories";
 import { isDifferentProfile } from "../../utils/compareProfileObjects";
 import { useAuth } from "@/modules/auth/utils";

@@ -450,6 +450,7 @@ export const SPANISH: LanguageInterface = {
       subtitleDistance: "Distancia mediana recorrida",
       subtitleDriven: "Tiempo mediano de conducción",
       subtitleIdle: "Tiempo mediano detenido",
+      average: "Promedio",
       titleTooltipDistance: "Distancia recorrida",
       titleTooltipDriven: "Tiempo conducido",
       titleTooltipIdle: "Tiempo detenido",

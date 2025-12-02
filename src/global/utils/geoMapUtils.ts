@@ -1,5 +1,5 @@
 import { LanguageInterface } from "@/global/language/constants/language.model";
-import { formatDateTime } from "@/global/utils/utils";
+import { formatDateTime } from "@/global/utils/dateUtils";
 import { ndIfEmpty } from "./ndIfEmpty";
 
 export type DataObject = Record<string, string | number>;

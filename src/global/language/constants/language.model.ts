@@ -428,6 +428,7 @@ export interface LanguageInterface {
       titleIdle: string;
       subtitleDistance: string;
       subtitleDriven: string;
+      average: string;
       subtitleIdle: string;
       titleTooltipDistance: string;
       titleTooltipDriven: string;
