@@ -79,7 +79,6 @@ export default function CardContentDrivenTime({ data, LANGUAGE }: Props) {
   });
 
   const top5HoursData = [];
-  console.log("data.details ", data.details);
 
   for (let index = 0; index < top5Hours.length; index++) {
     const pivot = data.details.filter(
