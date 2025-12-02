@@ -13,7 +13,6 @@ import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { Table, TabsContent } from "@/global/components";
 import {
-  deviceStatusTranslator,
   formatDateTime,
   removeTimeAfterCommaOrT,
 } from "@/global/utils/dateUtils";
@@ -23,6 +22,7 @@ import {
   AccountBox,
   Groups,
 } from "@mui/icons-material";
+import { deviceStatusTranslator } from "@/global/utils/stringUtils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
