@@ -236,9 +236,10 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     const imgLoad = "/png/marker-gray-pump-green.png";
     formatedMarkersLoads = loadsSingle.map((v) => ({
       id: v.idIndexEvent as string,
+      icon: imgLoad,
       position: { lat: v.lat, lng: v.lng },
       title: v.address,
-      icon: imgLoad,
+      magnitude: v.magnitude,
     }));
   }
 
@@ -247,9 +248,10 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     const imgUnload = "./png/marker-gray-pump-red.png";
     formatedMarkersUnloads = unloadsSingle.map((v) => ({
       id: v.idIndexEvent as string,
+      icon: imgUnload,
       position: { lat: v.lat, lng: v.lng },
       title: v.address,
-      icon: imgUnload,
+      magnitude: v.magnitude,
     }));
   }
 

@@ -118,4 +118,7 @@ button {
   --copy-icon-white: url("../../public/svg/copy-white.svg"), auto;
 }
 
+:root {
+  --info-each-row: rgb(242, 242, 242);
+}
 /* TO DO añadir variables para bordes, etc. */
