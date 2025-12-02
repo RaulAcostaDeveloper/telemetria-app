@@ -1,0 +1,30 @@
+.containerInfo {
+  max-width: 100%;
+}
+.frameInfo {
+  width: 300px;
+  padding: 1rem;
+  font-size: 2rem;
+}
+.rowInfo {
+  width: 300px;
+  max-width: 100%;
+  display: flex;
+  font-size: 2rem;
+  line-height: 1.1;
+  padding-top: 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom-style: solid;
+  border-bottom-color: var(--info-each-row);
+  border-bottom-width: 2px;
+}
+.rowInfo div:first-child {
+  width: 10rem;
+  min-width: 10rem;
+  font-weight: bold;
+  text-align: left;
+}
+.rowInfo div:nth-child(2) {
+  text-align: left;
+  text-overflow: ellipsis;
+}

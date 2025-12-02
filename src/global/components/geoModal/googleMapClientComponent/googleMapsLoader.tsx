@@ -1,9 +1,11 @@
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
-import { MutableRefObject, useEffect, useRef } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import LoaderAnimation from "../../loaderAnimation/loaderAnimation";
 import { MarkerData, ZoneDetail } from "./googleMapClientComponent";
+
+import styles from "./googleMapsLoader.module.css";
 
 interface Center {
   lat: number;
@@ -31,8 +33,11 @@ export const GoogleMapsLoader = ({
   setMapLoaded,
 }: Props) => {
   const circleRef = useRef<google.maps.Circle | null>(null);
+  const markerRef = useRef<google.maps.Marker | null>(null);
+  const infoRef = useRef<google.maps.InfoWindow | null>(null);
+  const directoryMarkersRef = useRef<Record<string, google.maps.Marker>>({});
   const [language, region] = LANGUAGE.localeLanguage.split("-");
-
+  const [infoBoxOpen, setInfoBoxOpen] = useState(false);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: googleApiKey as string,
     language,
@@ -41,6 +46,12 @@ export const GoogleMapsLoader = ({
 
   const onLoad = (map: google.maps.Map) => {
     mapRef.current = map;
+
+    //Genera la instancia para tener referencia al Popup.
+    if (!infoRef.current) {
+      infoRef.current = new google.maps.InfoWindow();
+    }
+
     // Ajusta zoom/centro a todos los puntos
     if (places && places.length) {
       const bounds = new google.maps.LatLngBounds();
@@ -104,6 +115,59 @@ export const GoogleMapsLoader = ({
             position={p.position}
             title={p.title}
             icon={p.icon}
+            onLoad={(marker) => {
+              markerRef.current = marker;
+
+              directoryMarkersRef.current[p.id] = marker; //Obtengo referencia de cada marker.
+
+              if (!infoRef.current) {
+                infoRef.current = new google.maps.InfoWindow({
+                  content: `<div style="font-size: 12px; color: #333;"></div>`,
+                });
+
+                // Sincroniza el estado de infoBoxOpen con cerrar la ventana por botón de X.
+                infoRef.current.addListener("closeclick", () => {
+                  setInfoBoxOpen(false);
+                });
+              }
+            }}
+            onClick={() => {
+              const targetMarker = directoryMarkersRef.current[p.id];
+
+              if (!targetMarker || !infoRef.current || !mapRef.current) return;
+
+              infoRef.current.setContent(
+                `<div class="${styles.containerinfo}">
+                  <div class="${styles.frameInfo}" style="font-size: 2rem;">
+                    <div class="${styles.rowInfo}">
+                      <div>${LANGUAGE.zones.zoneMap.zonePopup.address}:</div>
+                      <div>${p.title}</div>
+                    </div>
+                    <div class="${styles.rowInfo}">
+                      <div>${LANGUAGE.zones.zoneMap.zonePopup.magnitude}:</div>
+                      <div>${p.magnitude} lts.</div>
+                    </div>
+                    <div class="${styles.rowInfo}">
+                      <div>${LANGUAGE.zones.zoneMap.zonePopup.coordinates}:</div>
+                      <div>${p.position.lat}, ${p.position.lng}</div>
+                    </div>
+                  </div>
+                </div>`
+              );
+
+              if (infoBoxOpen) {
+                infoRef.current.close();
+              } else {
+                infoRef.current.open({
+                  map: mapRef.current,
+                  anchor: targetMarker,
+                });
+              }
+
+              //infoRef.current.setHeaderDisabled(true); //Deshabilita botón de cerrar. */
+
+              setInfoBoxOpen((prev) => !prev);
+            }}
           />
         ))}
     </GoogleMap>

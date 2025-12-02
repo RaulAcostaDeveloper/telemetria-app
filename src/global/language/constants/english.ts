@@ -512,6 +512,13 @@ export const ENGLISH: LanguageInterface = {
       charged: "Liters loaded",
       discharged: "Liters unloaded",
     },
+    zoneMap: {
+      zonePopup: {
+        address: "Address",
+        magnitude: "Litres",
+        coordinates: "Coordinates",
+      },
+    },
     tabs: {
       map: "Map",
       load: "Load",

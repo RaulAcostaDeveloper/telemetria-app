@@ -12,6 +12,7 @@ export interface MarkerData {
   position: { lat: number; lng: number };
   title: string;
   icon?: string | google.maps.Icon | google.maps.Symbol;
+  magnitude: number;
 }
 
 export interface ZoneDetail {
