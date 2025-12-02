@@ -155,6 +155,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       final: v.finalFuel,
       lat: v.lat,
       lng: v.lng,
+      imeiClean: v.imeiClean,
     }));
   }, [loadsSingle]);
 
@@ -226,6 +227,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       final: v.finalFuel,
       lat: v.lat,
       lng: v.lng,
+      imeiClean: v.imeiClean,
     }));
   }, [unloadsSingle]);
 
@@ -316,6 +318,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
                 columns={loadsZoneColumns}
                 data={forTableLoads}
                 idKey="imei"
+                idImei="imeiClean"
                 showViewModal
                 modalOption={MODAL_OPTION.ZONELOAD}
               />
@@ -335,6 +338,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
                   columns={unloadsZoneColumns}
                   data={forTableUnloads}
                   idKey="imei"
+                  idImei="imei"
                   showViewModal
                   modalOption={MODAL_OPTION.ZONEUNLOAD}
                 />
