@@ -22,6 +22,9 @@ export const PORTUGUES: LanguageInterface = {
     graphicError: "Não foi possível apresentar o gráfico",
     lessThanOneDay:
       "Selecione um intervalo de datas superior a um dia para visualizar os dados",
+    savedData: "As alterações foram salvas",
+    confirmation: "Confirmação",
+    noChanges: "Nenhuma alteração detectada",
   },
   header: {
     backButton: {
@@ -445,6 +448,7 @@ export const PORTUGUES: LanguageInterface = {
       titleIdle: "Tempo parado",
       subtitleDistance: "Distância média percorrida",
       subtitleDriven: "Tempo médio de condução",
+      average: "Média",
       subtitleIdle: "Tempo médio parado",
       titleTooltipDistance: "Distância percorrida",
       titleTooltipDriven: "Tempo de condução",
@@ -507,6 +511,13 @@ export const PORTUGUES: LanguageInterface = {
       events: "Total de eventos",
       charged: "Litros abastecidos",
       discharged: "Litros descarregados",
+    },
+    zoneMap: {
+      zonePopup: {
+        address: "Endereço",
+        magnitude: "Litros",
+        coordinates: "Coordenadas",
+      },
     },
     tabs: {
       map: "Mapa",

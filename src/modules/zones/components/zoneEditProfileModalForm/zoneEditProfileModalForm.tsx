@@ -2,7 +2,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import CheckIcon from "@mui/icons-material/Check";
+
 import LoaderAnimation from "@/global/components/loaderAnimation/loaderAnimation";
+import styles from "./zoneEditProfileModalForm.module.css";
 import { AppDispatch, RootState } from "@/global/redux/store";
 import { FetcherProfileData } from "./fetchetProfileData/fetcherProfileData";
 import { LanguageInterface } from "@/global/language/constants/language.model";
@@ -12,10 +15,12 @@ import { PutProfile } from "../../services/putProfile/putProfile";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { fetchPostZoneProfile } from "@/global/redux/serviceSlices/postZoneProfile";
 import { fetchPutZoneProfile } from "@/global/redux/serviceSlices/putZoneProfile";
+import { fetchZoneDetails } from "@/global/redux/serviceSlices/zoneDetails";
+import { fetchZonesSummary } from "@/global/redux/serviceSlices/zonesSummary";
+import { formatToLocalIso8601 } from "@/global/utils/dateUtils";
 import { getCategories } from "./categories";
 import { isDifferentProfile } from "../../utils/compareProfileObjects";
 import { useAuth } from "@/modules/auth/utils";
-import { fetchZoneDetails } from "@/global/redux/serviceSlices/zoneDetails";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -32,6 +37,18 @@ export const ZoneEditProfileModalForm = ({
   const { isAuthenticated, logoutState } = useAuth();
 
   const [isPut, setIsPut] = useState<boolean>(false);
+
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] =
+    useState<boolean>(false);
+
+  const [isNoChangesModalOpen, setisNoChangesModalOpen] =
+    useState<boolean>(false);
+
+  const [isFormOpen, setIsFormOpen] = useState<boolean>(true);
+
+  const { startDate, endDate } = useSelector(
+    (state: RootState) => state.calendar
+  );
 
   const { putZoneProfileStatus } = useSelector(
     (state: RootState) => state.putZoneProfile
@@ -89,8 +106,10 @@ export const ZoneEditProfileModalForm = ({
         })
       ) {
         dispatch(fetchPutZoneProfile(updated));
+        setIsConfirmationModalOpen(true);
       } else {
-        closeModal();
+        // No hubo cambios
+        setisNoChangesModalOpen(true);
       }
     } else {
       // POST
@@ -108,28 +127,35 @@ export const ZoneEditProfileModalForm = ({
           logoutState,
         })
       );
+      setIsConfirmationModalOpen(true);
     }
+    // Solo dejar los modales de confirmación al enviar
+    setIsFormOpen(false);
   };
 
   useEffect(() => {
-    if (
-      postZoneProfileStatus === SERVICE_STATUS.succeeded ||
-      putZoneProfileStatus === SERVICE_STATUS.succeeded
-    ) {
-      closeModal();
+    if (isConfirmationModalOpen) {
       setTimeout(() => {
         // Actualizar con los nuevos datos
-        if (isAuthenticated && id) {
+        if (isAuthenticated && id && startDate && endDate) {
           dispatch(
             fetchZoneDetails({
               id: id.toString(),
               logoutState,
             })
           );
+          // Actualiza la tabla
+          dispatch(
+            fetchZonesSummary({
+              startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
+              endDate: formatToLocalIso8601(endDate),
+              logoutState,
+            })
+          );
         }
       }, 2000);
     }
-  }, [postZoneProfileStatus, putZoneProfileStatus]);
+  }, [isConfirmationModalOpen]);
 
   useEffect(() => {
     // Inicializar con datos
@@ -182,45 +208,75 @@ export const ZoneEditProfileModalForm = ({
   }, [zoneCategoriesData]);
 
   return (
-    <Modal
-      LANGUAGE={LANGUAGE}
-      closeModal={closeModal}
-      title={LANGUAGE.table.actions.addProfileToZone}
-    >
-      <FetcherProfileData id={id} />
-      {/* Cargar datos del formulario */}
-      {postZoneProfileStatus === SERVICE_STATUS.loading ||
-      putZoneProfileStatus === SERVICE_STATUS.loading ||
-      zoneProfileDetailsStatus === SERVICE_STATUS.loading ||
-      zoneCategoriesStatus === SERVICE_STATUS.loading ||
-      zoneProvidersStatus === SERVICE_STATUS.loading ? (
-        <LoaderAnimation />
-      ) : (
-        <ProfileForm
+    <>
+      {isFormOpen && (
+        <Modal
           LANGUAGE={LANGUAGE}
-          authCharges={authCharges}
-          authDisharges={authDisharges}
-          authRalenti={authRalenti}
-          categoryId={categoryId}
           closeModal={closeModal}
-          color={color}
-          description={description}
-          name={name}
-          onConfirm={onConfirm}
-          providerId={providerId}
-          setAuthCharges={setAuthCharges}
-          setAuthDisharges={setAuthDisharges}
-          setAuthRalenti={setAuthRalenti}
-          setCategoryId={setCategoryId}
-          setColor={setColor}
-          setDescription={setDescription}
-          setName={setName}
-          setProviderId={setProviderId}
-          zoneCategoriesData={zoneCategoriesData}
-          zoneCategoriesStatus={zoneCategoriesStatus}
-          zoneProvidersData={zoneProvidersData}
-        />
+          title={LANGUAGE.table.actions.addProfileToZone}
+        >
+          <FetcherProfileData id={id} />
+          {/* Cargar datos del formulario */}
+          {postZoneProfileStatus === SERVICE_STATUS.loading ||
+          putZoneProfileStatus === SERVICE_STATUS.loading ||
+          zoneProfileDetailsStatus === SERVICE_STATUS.loading ||
+          zoneCategoriesStatus === SERVICE_STATUS.loading ||
+          zoneProvidersStatus === SERVICE_STATUS.loading ? (
+            <LoaderAnimation />
+          ) : (
+            <ProfileForm
+              LANGUAGE={LANGUAGE}
+              authCharges={authCharges}
+              authDisharges={authDisharges}
+              authRalenti={authRalenti}
+              categoryId={categoryId}
+              closeModal={closeModal}
+              color={color}
+              description={description}
+              name={name}
+              onConfirm={onConfirm}
+              providerId={providerId}
+              setAuthCharges={setAuthCharges}
+              setAuthDisharges={setAuthDisharges}
+              setAuthRalenti={setAuthRalenti}
+              setCategoryId={setCategoryId}
+              setColor={setColor}
+              setDescription={setDescription}
+              setName={setName}
+              setProviderId={setProviderId}
+              zoneCategoriesData={zoneCategoriesData}
+              zoneCategoriesStatus={zoneCategoriesStatus}
+              zoneProvidersData={zoneProvidersData}
+            />
+          )}
+        </Modal>
       )}
-    </Modal>
+
+      {isConfirmationModalOpen && (
+        <Modal
+          LANGUAGE={LANGUAGE}
+          closeModal={closeModal}
+          title={LANGUAGE.notifications.confirmation}
+        >
+          <div className={styles.notificationModalInfo}>
+            <p>{LANGUAGE.notifications.savedData}</p>
+            <CheckIcon sx={{ fontSize: "2rem" }} />
+          </div>
+        </Modal>
+      )}
+
+      {isNoChangesModalOpen && (
+        <Modal
+          LANGUAGE={LANGUAGE}
+          closeModal={closeModal}
+          title={LANGUAGE.notifications.confirmation}
+        >
+          <div className={styles.notificationModalInfo}>
+            <p>{LANGUAGE.notifications.noChanges}</p>
+            <CheckIcon sx={{ fontSize: "2rem" }} />
+          </div>
+        </Modal>
+      )}
+    </>
   );
 };

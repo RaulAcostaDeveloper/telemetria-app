@@ -22,6 +22,9 @@ export interface LanguageInterface {
     nullValue: string;
     graphicError: string;
     lessThanOneDay: string;
+    confirmation: string;
+    savedData: string;
+    noChanges: string;
   };
   header: {
     backButton: {
@@ -425,6 +428,7 @@ export interface LanguageInterface {
       titleIdle: string;
       subtitleDistance: string;
       subtitleDriven: string;
+      average: string;
       subtitleIdle: string;
       titleTooltipDistance: string;
       titleTooltipDriven: string;
@@ -487,6 +491,13 @@ export interface LanguageInterface {
       charged: string;
       discharged: string;
       zoneModalTitle: string;
+    };
+    zoneMap: {
+      zonePopup: {
+        address: string;
+        magnitude: string;
+        coordinates: string;
+      };
     };
     tabs: {
       map: string;

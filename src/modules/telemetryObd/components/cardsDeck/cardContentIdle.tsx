@@ -5,8 +5,9 @@ import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ObdRollupDataValues } from "@/global/redux/serviceSlices/obdRollupSlice";
 import {
   format2DecimalsString,
+  getAverage,
   getMedian2d,
-} from "../../../../global/utils/utils";
+} from "@/global/utils/mathUtils";
 
 interface Props {
   data: ObdRollupDataValues;
@@ -25,7 +26,7 @@ interface rangeNVehicles {
  */
 export default function CardContentIdle({ data, LANGUAGE }: Props) {
   const magnitudes: number[] = data.details.map(
-    (value) => value.driverIdleTime as number
+    (value) => Number(value.driverIdleTime) as number
   );
 
   const compareNumbers = (a: number, b: number) => {
@@ -47,6 +48,11 @@ export default function CardContentIdle({ data, LANGUAGE }: Props) {
   const titleValueSubtitle = {
     text: LANGUAGE.teleOBD.charts.subtitleIdle,
     value: getMedian2d(ascendingIdle),
+  };
+
+  const averageTitleValueSubtitle = {
+    text: LANGUAGE.teleOBD.charts.average,
+    value: getAverage(magnitudes),
   };
 
   // Array de objetos con 1. rango a usar. 2. vehiculos que entran en dicho rango.
@@ -78,7 +84,7 @@ export default function CardContentIdle({ data, LANGUAGE }: Props) {
   const top5IdleData = [];
   for (let index = 0; index < top5Idle.length; index++) {
     const pivot = data.details.filter(
-      (value) => top5Idle[index] === value.driverIdleTime
+      (value) => top5Idle[index] === Number(value.driverIdleTime)
     )[0];
     const pivotClean = {
       plate: pivot.plate as string,
@@ -107,6 +113,10 @@ export default function CardContentIdle({ data, LANGUAGE }: Props) {
       <h3>{LANGUAGE.teleOBD.charts.titleIdle}</h3>
       <h4>
         {titleValueSubtitle.text}: <span>{titleValueSubtitle.value}</span> h
+      </h4>
+      <h4>
+        {averageTitleValueSubtitle.text}:{" "}
+        <span>{averageTitleValueSubtitle.value}</span> h
       </h4>
       <ChartColInterval
         langSelection={langSelection}

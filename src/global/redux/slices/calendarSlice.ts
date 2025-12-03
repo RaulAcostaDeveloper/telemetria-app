@@ -5,7 +5,7 @@ import {
   localStorageSetItem,
 } from "@/global/localStorage/utils/storageService";
 import { STORAGE_KEYS } from "@/global/localStorage/constants/storageKeys";
-import { toLocalISOString } from "@/global/utils/utils";
+import { toLocalISOString } from "@/global/utils/dateUtils";
 
 // NOTA: startDate (desde) es la fecha más lejana. endDate (hasta) es la fecha más cercana.
 

@@ -11,7 +11,7 @@ import { CalendarToday } from "@mui/icons-material";
 import { HeaderBackButton } from "./headerBackButton/headerBackButton";
 import { HeaderTextContent } from "./headerTextContent/headerTextContent";
 import { LanguageInterface } from "../../language/constants/language.model";
-import { formatDateTime } from "@/global/utils/utils";
+import { formatDateTime } from "@/global/utils/dateUtils";
 import { LanguageButton } from "./languageButton/languageButton";
 
 interface CalendarState {

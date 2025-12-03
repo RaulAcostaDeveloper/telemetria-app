@@ -1,4 +1,4 @@
-import { toLocalDateTime } from "@/global/utils/utils";
+import { toLocalDateTime } from "@/global/utils/dateUtils";
 import styles from "./zoneSingleInfo.module.css";
 import { zoneDataMock } from "@/global/dataMock/z0n3sD4t4M0ck";
 

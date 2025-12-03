@@ -17,7 +17,7 @@ export const ZoneUnloadsModal = ({
   const geoModalData = {
     lat: dataObject.lat as number,
     lon: dataObject.lng as number,
-    title: dataObject.title as string,
+    title: LANGUAGE.zones.tabs.unloadTable.loadValue,
     rows: [] as TooltipGeoField[],
   };
   return (

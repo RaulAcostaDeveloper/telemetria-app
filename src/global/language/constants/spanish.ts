@@ -23,6 +23,9 @@ export const SPANISH: LanguageInterface = {
     graphicError: "No se pudo mostrar el gráfico",
     lessThanOneDay:
       "Por favor selecciona un rango de fechas mayor a un día para visualizar datos",
+    confirmation: "Confirmación",
+    savedData: "Se han guardado tus cambios",
+    noChanges: "No hay cambios",
   },
   header: {
     backButton: {
@@ -447,6 +450,7 @@ export const SPANISH: LanguageInterface = {
       subtitleDistance: "Distancia mediana recorrida",
       subtitleDriven: "Tiempo mediano de conducción",
       subtitleIdle: "Tiempo mediano detenido",
+      average: "Promedio",
       titleTooltipDistance: "Distancia recorrida",
       titleTooltipDriven: "Tiempo conducido",
       titleTooltipIdle: "Tiempo detenido",
@@ -508,6 +512,13 @@ export const SPANISH: LanguageInterface = {
       events: "Total eventos",
       charged: "Litros cargados",
       discharged: "Litros descargados",
+    },
+    zoneMap: {
+      zonePopup: {
+        address: "Dirección",
+        magnitude: "Litros",
+        coordinates: "Coordenadas",
+      },
     },
     tabs: {
       map: "Mapa",

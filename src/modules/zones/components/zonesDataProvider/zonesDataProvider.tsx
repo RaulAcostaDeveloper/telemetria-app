@@ -8,7 +8,6 @@ import { Table, TabsContent } from "@/global/components";
 import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import {
   columnsTable,
-  dataTable,
   MODAL_OPTION,
 } from "@/global/components/table/table.model";
 import { RootState } from "@/global/redux/store";
@@ -19,7 +18,7 @@ import {
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 import { ZoneProfileData } from "../zoneProfileData/zoneProfileData";
 import { ZonesMapTabSolo } from "../zonesMapTabSolo/zonesMapTabSolo";
-import { formatDateTime } from "@/global/utils/utils";
+import { formatDateTime } from "@/global/utils/dateUtils";
 import { MarkerData } from "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent";
 
 import styles from "./zonesDataProvider.module.css";
@@ -47,9 +46,6 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
   const LANGUAGE = useLanguage();
   const [isProfileDataOpen, setIsProfileDataOpen] = useState<boolean>(true);
   const hasRunRef = useRef(false);
-
-  let forTableLoads: dataTable = [];
-  let forTableUnloads: dataTable = [];
 
   const { fuelSummaryData, fuelSummaryStatus } = useSelector(
     (state: RootState) => state.fuelSummary
@@ -88,7 +84,19 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       orderColumn: true,
     },
     {
+      columnName: `${LANGUAGE.fuelVehicle.vehicleReports.fuelStart} (L)`,
+      defaultSpace: 3,
+      orderColumn: true,
+      minMaxFilter: true,
+    },
+    {
       columnName: `${LANGUAGE.zones.tabs.loadTable.loadValue} (L)`,
+      defaultSpace: 3,
+      orderColumn: true,
+      minMaxFilter: true,
+    },
+    {
+      columnName: `${LANGUAGE.fuelVehicle.vehicleReports.fuelEnd} (L)`,
       defaultSpace: 3,
       orderColumn: true,
       minMaxFilter: true,
@@ -138,15 +146,18 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
   const loadsSingle: ChargesVarLng[] | undefined =
     loadsSummary && findWithZoneId(loadsSummary);
 
-  if (loadsSingle) {
-    forTableLoads = loadsSingle.map((v) => ({
+  const forTableLoads = useMemo(() => {
+    return loadsSingle?.map((v) => ({
       imei: v.imei,
       dateGps: v.dateGps,
+      initial: v.initialFuel,
       magnitude: v.magnitude,
+      final: v.finalFuel,
       lat: v.lat,
       lng: v.lng,
+      imeiClean: v.imeiClean,
     }));
-  }
+  }, [loadsSingle]);
 
   const unloadsZoneColumns: columnsTable = [
     {
@@ -160,7 +171,19 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       orderColumn: true,
     },
     {
+      columnName: `${LANGUAGE.fuelVehicle.vehicleReports.fuelStart} (L)`,
+      defaultSpace: 3,
+      orderColumn: true,
+      minMaxFilter: true,
+    },
+    {
       columnName: `${LANGUAGE.zones.tabs.unloadTable.loadValue} (L)`,
+      defaultSpace: 3,
+      orderColumn: true,
+      minMaxFilter: true,
+    },
+    {
+      columnName: `${LANGUAGE.fuelVehicle.vehicleReports.fuelEnd} (L)`,
       defaultSpace: 3,
       orderColumn: true,
       minMaxFilter: true,
@@ -195,24 +218,28 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
   const unloadsSingle: DischargesVarLng[] | undefined =
     unloadsSummary && findWithZoneId(unloadsSummary);
 
-  if (unloadsSingle) {
-    forTableUnloads = unloadsSingle.map((v) => ({
+  const forTableUnloads = useMemo(() => {
+    return unloadsSingle?.map((v) => ({
       imei: v.imei,
       dateGps: v.dateGps,
+      initial: v.initialFuel,
       magnitude: v.magnitude,
+      final: v.finalFuel,
       lat: v.lat,
       lng: v.lng,
+      imeiClean: v.imeiClean,
     }));
-  }
+  }, [unloadsSingle]);
 
   let formatedMarkersLoads: MarkerData[] = [];
   if (loadsSingle) {
     const imgLoad = "/png/marker-gray-pump-green.png";
     formatedMarkersLoads = loadsSingle.map((v) => ({
       id: v.idIndexEvent as string,
+      icon: imgLoad,
       position: { lat: v.lat, lng: v.lng },
       title: v.address,
-      icon: imgLoad,
+      magnitude: v.magnitude,
     }));
   }
 
@@ -221,9 +248,10 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     const imgUnload = "./png/marker-gray-pump-red.png";
     formatedMarkersUnloads = unloadsSingle.map((v) => ({
       id: v.idIndexEvent as string,
+      icon: imgUnload,
       position: { lat: v.lat, lng: v.lng },
       title: v.address,
-      icon: imgUnload,
+      magnitude: v.magnitude,
     }));
   }
 
@@ -286,12 +314,13 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
         tabOptions={zoneTabs}
         tabContents={[
           <div key={0}>
-            {loadsSingle && (
+            {loadsSingle && forTableLoads && (
               <Table
                 LANGUAGE={LANGUAGE}
                 columns={loadsZoneColumns}
                 data={forTableLoads}
                 idKey="imei"
+                idImei="imeiClean"
                 showViewModal
                 modalOption={MODAL_OPTION.ZONELOAD}
               />
@@ -305,12 +334,13 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
           </div>,
           <div key={1}>
             <div ref={handleDischargesRef}>
-              {unloadsSingle && (
+              {unloadsSingle && forTableUnloads && (
                 <Table
                   LANGUAGE={LANGUAGE}
                   columns={unloadsZoneColumns}
                   data={forTableUnloads}
                   idKey="imei"
+                  idImei="imei"
                   showViewModal
                   modalOption={MODAL_OPTION.ZONEUNLOAD}
                 />

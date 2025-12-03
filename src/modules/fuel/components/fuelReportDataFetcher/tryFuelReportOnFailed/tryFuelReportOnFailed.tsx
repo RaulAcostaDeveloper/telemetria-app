@@ -7,7 +7,7 @@ import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes"
 import { fetchFuelData } from "@/global/redux/serviceSlices/fuelDataSlice";
 import { fetchFuelPerformance } from "@/global/redux/serviceSlices/fuelPerformanceSlice";
 import { fetchLastFuelReport } from "@/global/redux/serviceSlices/lastFuelReportSlice";
-import { formatToLocalIso8601 } from "@/global/utils/utils";
+import { formatToLocalIso8601 } from "@/global/utils/dateUtils";
 import { useAuth } from "@/modules/auth/utils";
 
 interface Props {

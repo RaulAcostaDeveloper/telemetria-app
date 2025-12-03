@@ -17,7 +17,7 @@ import {
 import { AppDispatch, RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { TryFuelReportOnFailed } from "./tryFuelReportOnFailed/tryFuelReportOnFailed";
-import { formatToLocalIso8601 } from "@/global/utils/utils";
+import { formatToLocalIso8601 } from "@/global/utils/dateUtils";
 import { useAuth } from "@/modules/auth/utils";
 
 interface Props {

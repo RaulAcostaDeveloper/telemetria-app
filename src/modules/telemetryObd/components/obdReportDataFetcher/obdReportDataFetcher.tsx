@@ -8,7 +8,7 @@ import {
 } from "@/global/redux/serviceSlices/obdTravelMetricsSlice";
 import { AppDispatch, RootState } from "@/global/redux/store";
 import { TryObdReportOnFailed } from "./tryObdReportOnFailed/tryObdReportOnFailed";
-import { formatToLocalIso8601 } from "@/global/utils/utils";
+import { formatToLocalIso8601 } from "@/global/utils/dateUtils";
 import { useAuth } from "@/modules/auth/utils";
 
 interface Props {

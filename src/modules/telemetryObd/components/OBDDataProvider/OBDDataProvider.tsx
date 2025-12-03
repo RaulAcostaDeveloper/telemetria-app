@@ -19,7 +19,7 @@ import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { Table } from "@/global/components";
 import { columnsTable } from "@/global/components/table/table.model";
-import { formatNumberWithCommas } from "@/global/utils/utils";
+import { formatNumberWithCommas } from "@/global/utils/stringUtils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -174,7 +174,7 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
 
       <DataErrorHandler
         LANGUAGE={LANGUAGE}
-        hasData={!!obdRollupData}
+        hasData={!!obdRollupData?.value}
         infoStatus={obdRollupStatus}
       />
     </div>

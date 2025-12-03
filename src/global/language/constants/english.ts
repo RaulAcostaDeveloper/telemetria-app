@@ -23,6 +23,9 @@ export const ENGLISH: LanguageInterface = {
     graphicError: "Unable to display the chart",
     lessThanOneDay:
       "Please select a date range of more than one day to visualize data",
+    confirmation: "Confirmation",
+    noChanges: "No changes detected",
+    savedData: "The changes have been saved",
   },
   header: {
     backButton: {
@@ -446,6 +449,7 @@ export const ENGLISH: LanguageInterface = {
       titleIdle: "Engine parked time",
       subtitleDistance: "Median distance traveled",
       subtitleDriven: "Median driving time",
+      average: "Average",
       subtitleIdle: "Median engine parked time",
       titleTooltipDistance: "Distance Traveled",
       titleTooltipDriven: "Driven Time",
@@ -508,6 +512,13 @@ export const ENGLISH: LanguageInterface = {
       events: "Total events",
       charged: "Liters loaded",
       discharged: "Liters unloaded",
+    },
+    zoneMap: {
+      zonePopup: {
+        address: "Address",
+        magnitude: "Litres",
+        coordinates: "Coordinates",
+      },
     },
     tabs: {
       map: "Map",

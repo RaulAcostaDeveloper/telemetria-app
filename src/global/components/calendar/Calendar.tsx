@@ -10,7 +10,7 @@ import {
   isPast90Days,
   parseTime,
   toLocalISOString,
-} from "@/global/utils/utils";
+} from "@/global/utils/dateUtils";
 
 import { ButtonTypes } from "../generalButton/generalButton.model";
 import { GeneralButton } from "../generalButton/generalButton";

@@ -9,7 +9,7 @@ import { ButtonTypes } from "../../generalButton/generalButton.model";
 import { GeneralButton } from "../../generalButton/generalButton";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { columnsTable, dataTable } from "../table.model";
-import { toKebabCase } from "@/global/utils/utils";
+import { toKebabCase } from "@/global/utils/stringUtils";
 
 type HeaderCSV = {
   label: string;
