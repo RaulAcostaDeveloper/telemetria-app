@@ -52,7 +52,9 @@ const GeoModal = ({
       title={
         isGeoModalData(geoModalData)
           ? geoModalData.title
-          : geoModalData[0].title
+          : geoModalData[0].icon === "/png/marker-gray-pump-green.png"
+          ? LANGUAGE.zones.tabs.load
+          : LANGUAGE.zones.tabs.unload
       }
     >
       <div className={styles.bottom}>

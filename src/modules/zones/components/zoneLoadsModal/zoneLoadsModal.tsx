@@ -12,7 +12,7 @@ interface Props {
 
 export const ZoneLoadsModal = ({ LANGUAGE, closeModal, dataObject }: Props) => {
   const imgLoad = "/png/marker-gray-pump-green.png";
-  //Es importante pasar geoModalData a un array para el proceso de distincion en GoogleMapClientComponent
+  //Es importante que geoModalData quede en array para el proceso de distincion en GoogleMapClientComponent
   const geoModalData = [
     {
       icon: imgLoad,

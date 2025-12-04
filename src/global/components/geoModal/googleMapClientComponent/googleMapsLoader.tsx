@@ -137,7 +137,7 @@ export const GoogleMapsLoader = ({
 
             infoRef.current.setContent(
               `<div class="${styles.containerinfo}">
-                <div class="${styles.frameInfo}" style="font-size: 2rem;">
+                <div class="${styles.frameInfo}" style="font-size: 1.5rem;">
                   <div class="${styles.rowInfo}">
                     <div>${LANGUAGE.zones.zoneMap.zonePopup.address}:</div>
                     <div>${places[0].title}</div>
@@ -148,7 +148,7 @@ export const GoogleMapsLoader = ({
                   </div>
                   <div class="${styles.rowInfo}">
                     <div>${LANGUAGE.zones.zoneMap.zonePopup.coordinates}:</div>
-                    <div>${places[0].position.lat}, ${places[0].position.lng}</div>
+                    <div>${places[0].position.lat},</br>${places[0].position.lng}</div>
                   </div>
                 </div>
               </div>`

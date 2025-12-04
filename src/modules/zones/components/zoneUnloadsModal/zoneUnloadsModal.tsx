@@ -16,7 +16,7 @@ export const ZoneUnloadsModal = ({
   dataObject,
 }: Props) => {
   const imgUnload = "/png/marker-gray-pump-red.png";
-  //Es importante pasar geoModalData a un array para el proceso de distincion en GoogleMapClientComponent
+  //Es importante que geoModalData quede en array para el proceso de distincion en GoogleMapClientComponent
   const geoModalData = [
     {
       icon: imgUnload,
