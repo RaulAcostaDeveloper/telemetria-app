@@ -207,6 +207,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       lat: v.lat,
       lng: v.lng,
       imeiClean: v.imeiClean,
+      address: v.address,
 
       //Datos de zona
       center: `${v.center.lat},${v.center.lng}`, //si el formato solo acepta llave:valor, llave:valor le damos.
@@ -290,6 +291,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       lat: v.lat,
       lng: v.lng,
       imeiClean: v.imeiClean,
+      address: v.address,
 
       //Datos de zona
       center: `${v.center.lat},${v.center.lng}`, //si el formato solo acepta llave:valor, llave:valor le damos.
@@ -313,7 +315,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
 
   let formatedMarkersUnloads: MarkerData[] = [];
   if (unloadsSingle) {
-    const imgUnload = "./png/marker-gray-pump-red.png";
+    const imgUnload = "/png/marker-gray-pump-red.png";
     formatedMarkersUnloads = unloadsSingle.map((v) => ({
       id: v.idIndexEvent as string,
       icon: imgUnload,

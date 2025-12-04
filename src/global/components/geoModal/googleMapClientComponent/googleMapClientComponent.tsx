@@ -12,7 +12,11 @@ export interface MarkerData {
   position: { lat: number; lng: number };
   title: string;
   icon?: string | google.maps.Icon | google.maps.Symbol;
-  magnitude: number;
+  magnitude?: number;
+  address?: string;
+  dateGps?: string;
+  initial?: number;
+  final?: number;
 }
 
 export interface ZoneDetail {
@@ -90,6 +94,9 @@ const GoogleMapClientComponent = ({
     places = undefined;
   } else {
     places = geoModalData;
+    if (!places.length) {
+      places = [...places];
+    } //Si no viene como array y solo es 1 objeto
     center = undefined;
   }
 

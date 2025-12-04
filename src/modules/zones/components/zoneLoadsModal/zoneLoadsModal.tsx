@@ -11,14 +11,29 @@ interface Props {
 }
 
 export const ZoneLoadsModal = ({ LANGUAGE, closeModal, dataObject }: Props) => {
-  const geoModalData = {
-    lat: dataObject.lat as number,
-    lon: dataObject.lng as number,
-    title: LANGUAGE.zones.tabs.loadTable.loadValue,
-    rows: [] as TooltipGeoField[],
-  };
+  const imgLoad = "/png/marker-gray-pump-green.png";
+  //Es importante pasar geoModalData a un array para el proceso de distincion en GoogleMapClientComponent
+  const geoModalData = [
+    {
+      icon: imgLoad,
+      address: dataObject.address,
+      position: { lat: dataObject.lat, lng: dataObject.lng },
+      id: dataObject.imeiClean as string,
+      dateGps: dataObject.dateGps as string,
+      initial: dataObject.initial as number,
+      magnitude: dataObject.magnitude as number,
+      final: dataObject.final as number,
+      lat: dataObject.lat as number,
+      lon: dataObject.lng as number,
+      title: dataObject.address as string,
+      rows: [] as TooltipGeoField[],
+    },
+  ];
+
   let foreignCenter: { lat: number; lng: number };
+
   let zoneCircle: ZoneDetail | undefined = undefined;
+
   if (dataObject.center && "string" === typeof dataObject.center) {
     const latlng = dataObject.center.split(",");
     foreignCenter = { lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1]) };
