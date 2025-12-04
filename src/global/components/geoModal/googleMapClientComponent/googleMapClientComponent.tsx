@@ -22,20 +22,20 @@ export interface ZoneDetail {
   };
   radius: number | undefined;
   color: string | undefined;
-  zoneName: string | undefined;
-  zoneId: string | undefined;
-  profileName: string | undefined;
-  country: string | undefined;
-  state: string | undefined;
-  city: string | undefined;
-  postalCode: string | undefined;
-  idProfile: string | undefined;
-  description: string | undefined;
-  chargeState: number | undefined;
-  dischargeState: number | undefined;
-  idleState: number | undefined;
-  zoneProviderName: string | undefined;
-  zoneCategoryName: string | undefined;
+  zoneName?: string | undefined;
+  zoneId?: string | undefined;
+  profileName?: string | undefined;
+  country?: string | undefined;
+  state?: string | undefined;
+  city?: string | undefined;
+  postalCode?: string | undefined;
+  idProfile?: string | undefined;
+  description?: string | undefined;
+  chargeState?: number | undefined;
+  dischargeState?: number | undefined;
+  idleState?: number | undefined;
+  zoneProviderName?: string | undefined;
+  zoneCategoryName?: string | undefined;
 }
 
 interface Props {
