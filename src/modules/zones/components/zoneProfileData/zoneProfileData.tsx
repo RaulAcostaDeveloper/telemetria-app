@@ -1,46 +1,50 @@
+"use client";
+import { useEffect, useState } from "react";
+
 import styles from "./zoneProfileData.module.css";
 import { Collapsable } from "@/global/components/collapsable/collapsable";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ProfileInfo } from "./profileInfo/profileInfo";
 import { ProfileModalHandler } from "./profileModalHandler/profileModalHandlet";
+import { STORAGE_KEYS } from "@/global/localStorage/constants/storageKeys";
 import { ZoneDetailsValue } from "@/global/redux/serviceSlices/zoneDetails";
 import { getCategories } from "../zoneEditProfileModalForm/categories";
+import {
+  localStorageGetItem,
+  localStorageSetItem,
+} from "@/global/localStorage/utils/storageService";
 
 interface Props {
   LANGUAGE: LanguageInterface;
   id: string;
-  isProfileDataOpen: boolean;
   zoneDetailsData: ZoneDetailsValue;
-  setIsProfileDataOpen: (toggle: boolean) => void;
 }
 
-export const ZoneProfileData = ({
-  LANGUAGE,
-  id,
-  isProfileDataOpen,
-  zoneDetailsData,
-  setIsProfileDataOpen,
-}: Props) => {
-  // useEffect(() => {
-  //   const defaultValue: boolean = false;
-  //   const storedValue: boolean | null = localStorageGetItem(
-  //     STORAGE_KEYS.IS_OPEN_PROFILE_ZONE
-  //   );
-  //   if (storedValue) {
-  //     setIsProfileDataOpen(storedValue);
-  //   } else {
-  //     setIsProfileDataOpen(defaultValue);
-  //     localStorageSetItem(STORAGE_KEYS.IS_OPEN_PROFILE_ZONE, defaultValue);
-  //   }
-  // }, []);
+export const ZoneProfileData = ({ LANGUAGE, id, zoneDetailsData }: Props) => {
+  const [isProfileDataOpen, setIsProfileDataOpen] = useState<boolean | null>(
+    null
+  );
 
-  // useEffect(() => {
-  //   // Actualización del elemento en LocalStorage
-  //   // Usa el valor null para evita actualizarlo en el primer render
-  //   if (isProfileDataOpen !== null) {
-  //     localStorageSetItem(STORAGE_KEYS.IS_OPEN_PROFILE_ZONE, isProfileDataOpen);
-  //   }
-  // }, [isProfileDataOpen]);
+  useEffect(() => {
+    const defaultValue: boolean = false;
+    const storedValue: boolean | null = localStorageGetItem(
+      STORAGE_KEYS.IS_OPEN_PROFILE_ZONE
+    );
+    if (storedValue) {
+      setIsProfileDataOpen(storedValue);
+    } else {
+      setIsProfileDataOpen(defaultValue);
+      localStorageSetItem(STORAGE_KEYS.IS_OPEN_PROFILE_ZONE, defaultValue);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Actualización del elemento en LocalStorage
+    // Usa el valor null para evita actualizarlo en el primer render
+    if (isProfileDataOpen !== null) {
+      localStorageSetItem(STORAGE_KEYS.IS_OPEN_PROFILE_ZONE, isProfileDataOpen);
+    }
+  }, [isProfileDataOpen]);
 
   return (
     <div className={styles.container}>
