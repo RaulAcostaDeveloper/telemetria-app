@@ -197,22 +197,22 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
   const loadsSingle: ChargesVarLng[] | undefined =
     loadsSummary && findWithZoneId(loadsSummary);
 
+  // El orden de propiedades en forTableLoads será el usado en la tabla.
   const forTableLoads = useMemo(() => {
     return loadsSingle?.map((v) => ({
       imei: v.imei,
       dateGps: v.dateGps,
-      initial: v.initialFuel,
+      initialFuel: v.initialFuel,
       magnitude: v.magnitude,
-      final: v.finalFuel,
-      lat: v.lat,
-      lng: v.lng,
-      imeiClean: v.imeiClean,
-      address: v.address,
+      finalFuel: v.finalFuel,
 
+      address: v.address,
+      imeiClean: v.imeiClean,
+      position: `${v.lat},${v.lng}`,
       //Datos de zona
       center: `${v.center.lat},${v.center.lng}`, //si el formato solo acepta llave:valor, llave:valor le damos.
-      radius: v.radius,
       color: v.color,
+      radius: v.radius,
       zoneName: v.zoneName,
     }));
   }, [loadsSingle]);
@@ -281,22 +281,22 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
   const unloadsSingle: DischargesVarLng[] | undefined =
     unloadsSummary && findWithZoneId(unloadsSummary);
 
+  // El orden de propiedades en forTableLoads será el usado en la tabla.
   const forTableUnloads = useMemo(() => {
     return unloadsSingle?.map((v) => ({
       imei: v.imei,
       dateGps: v.dateGps,
-      initial: v.initialFuel,
+      initialFuel: v.initialFuel,
       magnitude: v.magnitude,
-      final: v.finalFuel,
-      lat: v.lat,
-      lng: v.lng,
-      imeiClean: v.imeiClean,
-      address: v.address,
+      finalFuel: v.finalFuel,
 
+      address: v.address,
+      imeiClean: v.imeiClean,
+      position: `${v.lat},${v.lng}`,
       //Datos de zona
       center: `${v.center.lat},${v.center.lng}`, //si el formato solo acepta llave:valor, llave:valor le damos.
-      radius: v.radius,
       color: v.color,
+      radius: v.radius,
       zoneName: v.zoneName,
     }));
   }, [unloadsSingle]);
@@ -308,7 +308,8 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       id: v.idIndexEvent as string,
       icon: imgLoad,
       position: { lat: v.lat, lng: v.lng },
-      title: v.address,
+      title: LANGUAGE.zones.tabs.loadTable.loadValue,
+      address: v.address,
       magnitude: v.magnitude,
     }));
   }
@@ -320,7 +321,8 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       id: v.idIndexEvent as string,
       icon: imgUnload,
       position: { lat: v.lat, lng: v.lng },
-      title: v.address,
+      title: LANGUAGE.zones.tabs.loadTable.loadValue,
+      address: v.address,
       magnitude: v.magnitude,
     }));
   }

@@ -8,15 +8,30 @@ import { LanguageInterface } from "@/global/language/constants/language.model";
 import { getEnvClient } from "@/global/utils/getEnviromentFromClient";
 
 export interface MarkerData {
-  id: number | string;
-  position: { lat: number; lng: number };
-  title: string;
-  icon?: string | google.maps.Icon | google.maps.Symbol;
-  magnitude?: number;
+  // Fruto de fuelSummaryData
   address?: string;
   dateGps?: string;
-  initial?: number;
-  final?: number;
+  deviceBattery?: number;
+  endDate?: string;
+  eventId?: number;
+  finalFuel?: number;
+  idIndexEvent?: string | undefined;
+  ignition?: true; //asi viene en fuelSummarySlice.ts
+  imei?: string; //placas + imei
+  imeiClean?: string; //solo imei
+  initialFuel?: number;
+  magnitude?: number;
+  mainPower?: number;
+  odometer?: number;
+  origin?: number;
+  position: { lat: number; lng: number };
+  speed?: number;
+  startDate?: string;
+  zoneId?: string; //Existe en zoneCircle y fuelSummaryData. Se unifica en .filter()
+  icon?: string | google.maps.Icon | google.maps.Symbol;
+
+  id: number | string;
+  title?: string; //tooltip information when hover. Marker component property. Default = "".
 }
 
 export interface ZoneDetail {
@@ -24,27 +39,28 @@ export interface ZoneDetail {
     lat: number | undefined;
     lng: number | undefined;
   };
-  radius: number | undefined;
-  color: string | undefined;
-  zoneName?: string | undefined;
-  zoneId?: string | undefined;
-  profileName?: string | undefined;
-  country?: string | undefined;
-  state?: string | undefined;
-  city?: string | undefined;
-  postalCode?: string | undefined;
-  idProfile?: string | undefined;
-  description?: string | undefined;
   chargeState?: number | undefined;
+  city?: string | undefined;
+  color: string | undefined;
+  country?: string | undefined;
+  description?: string | undefined;
   dischargeState?: number | undefined;
   idleState?: number | undefined;
-  zoneProviderName?: string | undefined;
+  idProfile?: string | undefined;
+  postalCode?: string | undefined;
+  profileName?: string | undefined;
+  radius: number | undefined;
+  state?: string | undefined;
   zoneCategoryName?: string | undefined;
+  zoneId?: string | undefined;
+  zoneName?: string | undefined;
+  zoneProviderName?: string | undefined;
 }
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  geoModalData: GeoModalData | MarkerData[];
+  geoModalData?: GeoModalData;
+  markersData?: MarkerData[];
   mapType: "roadmap" | "satellite";
   zoneCircle?: ZoneDetail;
 }
@@ -56,6 +72,7 @@ interface Center {
 const GoogleMapClientComponent = ({
   LANGUAGE,
   geoModalData,
+  markersData,
   mapType,
   zoneCircle,
 }: Props) => {
@@ -77,12 +94,8 @@ const GoogleMapClientComponent = ({
     })();
   }, []);
 
-  function isGeoModalData(g: GeoModalData | MarkerData[]): g is GeoModalData {
-    return (g as GeoModalData).rows !== undefined;
-  }
-
   // Configuración de la API y el idioma del mapa
-  if (isGeoModalData(geoModalData)) {
+  if (geoModalData) {
     // eslint-disable-next-line prefer-const
     // eslint-disable-next-line react-hooks/rules-of-hooks
     center = useMemo(() => {
@@ -92,8 +105,8 @@ const GoogleMapClientComponent = ({
       };
     }, [geoModalData]);
     places = undefined;
-  } else {
-    places = geoModalData;
+  } else if (markersData) {
+    places = markersData;
     if (!places.length) {
       places = [...places];
     } //Si no viene como array y solo es 1 objeto

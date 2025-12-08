@@ -6,8 +6,8 @@ import styles from "./geoModalZone.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { Modal } from "@/global/components";
 import { TooltipGeoField } from "@/global/utils/geoMapUtils";
-import { markerData } from "../zonesMapTabSolo/zonesMapTabSolo";
 import { ndIfEmpty } from "@/global/utils/ndIfEmpty";
+import { MarkerData } from "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent";
 
 const GoogleMapClientOnly = dynamic(
   () =>
@@ -18,7 +18,7 @@ const GoogleMapClientOnly = dynamic(
 );
 
 export interface GeoZonesModalData {
-  markersInZone: markerData[];
+  markersInZone: MarkerData[];
   title: string;
   rows: TooltipGeoField[];
 }
@@ -74,7 +74,7 @@ const GeoModalZone = ({
             <GoogleMapClientOnly
               LANGUAGE={LANGUAGE}
               mapType={"satellite"}
-              geoModalData={geoModalData.markersInZone}
+              markersData={geoModalData.markersInZone}
             />
           </div>
         </div>

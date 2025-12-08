@@ -140,7 +140,7 @@ export const GoogleMapsLoader = ({
                 <div class="${styles.frameInfo}" style="font-size: 1.5rem;">
                   <div class="${styles.rowInfo}">
                     <div>${LANGUAGE.zones.zoneMap.zonePopup.address}:</div>
-                    <div>${places[0].title}</div>
+                    <div>${places[0].address}</div>
                   </div>
                   <div class="${styles.rowInfo}">
                     <div>${LANGUAGE.zones.zoneMap.zonePopup.magnitude}:</div>
@@ -201,7 +201,7 @@ export const GoogleMapsLoader = ({
                   <div class="${styles.frameInfo}" style="font-size: 2rem;">
                     <div class="${styles.rowInfo}">
                       <div>${LANGUAGE.zones.zoneMap.zonePopup.address}:</div>
-                      <div>${p.title}</div>
+                      <div>${p.address}</div>
                     </div>
                     <div class="${styles.rowInfo}">
                       <div>${LANGUAGE.zones.zoneMap.zonePopup.magnitude}:</div>

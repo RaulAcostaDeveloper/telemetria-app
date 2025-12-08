@@ -27,7 +27,8 @@ export interface GeoModalData {
 interface Props {
   LANGUAGE: LanguageInterface;
   closeModal: () => void;
-  geoModalData: GeoModalData | MarkerData[];
+  geoModalData?: GeoModalData;
+  markersData?: MarkerData[];
   height?: number;
   width?: number;
   zoneCircle?: ZoneDetail;
@@ -37,28 +38,21 @@ const GeoModal = ({
   LANGUAGE,
   closeModal,
   geoModalData,
+  markersData,
   height,
   width,
   zoneCircle,
 }: Props) => {
-  function isGeoModalData(g: GeoModalData | MarkerData[]): g is GeoModalData {
-    return (g as GeoModalData).rows !== undefined;
-  }
-
   return (
     <Modal
       LANGUAGE={LANGUAGE}
       closeModal={closeModal}
       title={
-        isGeoModalData(geoModalData)
-          ? geoModalData.title
-          : geoModalData[0].icon === "/png/marker-gray-pump-green.png"
-          ? LANGUAGE.zones.tabs.load
-          : LANGUAGE.zones.tabs.unload
+        geoModalData ? geoModalData.title : markersData && markersData[0].title
       }
     >
       <div className={styles.bottom}>
-        {isGeoModalData(geoModalData) && geoModalData.rows.length > 0 && (
+        {geoModalData && geoModalData.rows.length > 0 && (
           <div className={styles.rows}>
             {geoModalData.rows.map((row, index) => (
               <div className={styles.row} key={index}>
@@ -87,6 +81,7 @@ const GeoModal = ({
             <GoogleMapClientOnly
               LANGUAGE={LANGUAGE}
               geoModalData={geoModalData}
+              markersData={markersData}
               mapType={"satellite"}
               zoneCircle={zoneCircle}
             />

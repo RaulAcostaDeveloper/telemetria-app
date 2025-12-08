@@ -1,5 +1,8 @@
-import GeoModal from "@/global/components/geoModal/geoModal";
-import { ZoneDetail } from "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent";
+import GeoModal, { GeoModalData } from "@/global/components/geoModal/geoModal";
+import {
+  MarkerData,
+  ZoneDetail,
+} from "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent";
 import { PrimitiveValue } from "@/global/components/table/table.model";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { TooltipGeoField } from "@/global/utils/geoMapUtils";
@@ -12,23 +15,40 @@ interface Props {
 
 export const ZoneLoadsModal = ({ LANGUAGE, closeModal, dataObject }: Props) => {
   const imgLoad = "/png/marker-gray-pump-green.png";
-  //Es importante que geoModalData quede en array para el proceso de distincion en GoogleMapClientComponent
-  const geoModalData = [
-    {
-      icon: imgLoad,
-      address: dataObject.address,
-      position: { lat: dataObject.lat, lng: dataObject.lng },
-      id: dataObject.imeiClean as string,
-      dateGps: dataObject.dateGps as string,
-      initial: dataObject.initial as number,
-      magnitude: dataObject.magnitude as number,
-      final: dataObject.final as number,
+  let geoModalData: GeoModalData | undefined = undefined;
+  let markersData: MarkerData[] | undefined = undefined;
+
+  if (dataObject.rows) {
+    geoModalData = {
       lat: dataObject.lat as number,
       lon: dataObject.lng as number,
-      title: dataObject.address as string,
+      title: LANGUAGE.zones.tabs.loadTable.loadValue,
       rows: [] as TooltipGeoField[],
-    },
-  ];
+    };
+  } else {
+    let position: { lat: number; lng: number };
+    if (dataObject.position && "string" === typeof dataObject.position) {
+      const latlng = dataObject.position.split(",");
+      position = { lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1]) };
+      markersData = [];
+      markersData = [
+        {
+          address: dataObject.address as string,
+          dateGps: dataObject.dateGps as string,
+          finalFuel: dataObject.finalFuel as number,
+          icon: imgLoad,
+          id: dataObject.imeiClean as number | string,
+          initialFuel: dataObject.initialFuel as number,
+          magnitude: dataObject.magnitude as number,
+          position: {
+            lat: position.lat,
+            lng: position.lng,
+          },
+          title: LANGUAGE.zones.tabs.loadTable.loadValue as string,
+        },
+      ];
+    }
+  }
 
   let foreignCenter: { lat: number; lng: number };
 
@@ -60,12 +80,14 @@ export const ZoneLoadsModal = ({ LANGUAGE, closeModal, dataObject }: Props) => {
       zoneCategoryName: dataObject.zoneCategoryName as string,
     };
   }
+
   return (
     <>
       <GeoModal
         LANGUAGE={LANGUAGE}
         closeModal={closeModal}
         geoModalData={geoModalData}
+        markersData={markersData}
         zoneCircle={zoneCircle}
       />
     </>
