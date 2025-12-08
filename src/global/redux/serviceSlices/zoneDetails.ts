@@ -21,6 +21,7 @@ export interface ZoneDetailsValue {
   zoneId: string;
   zoneName: string;
   zoneProviderName: string;
+  zoneCateogryid: string;
 }
 
 interface Data {
