@@ -104,8 +104,12 @@ export const GoogleMapsLoader = ({
       mapContainerStyle={{ width: "100%", height: "100%" }}
       center={center}
       zoom={5}
-      mapTypeId={mapType}
       onLoad={onLoad}
+      options={{
+        gestureHandling: "greedy",
+        zoomControl: true,
+        mapTypeId: mapType,
+      }}
     >
       {center && !zoneCircle && <Marker position={center} />}
       {places?.length === 1 && (

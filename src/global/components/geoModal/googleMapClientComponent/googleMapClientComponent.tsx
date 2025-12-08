@@ -116,23 +116,26 @@ const GoogleMapClientComponent = ({
   useEffect(() => {
     // Efecto de zoom
     if (mapLoaded && mapRef.current && !hasAnimatedRef.current && center) {
-      hasAnimatedRef.current = true;
+      mapRef.current.setZoom(20); // Quitar si se desea el efecto de zoom "lento" al abrir
 
-      mapRef.current.panTo(center);
-      mapRef.current.setZoom(5);
+      // Efecto de zoom "lento" al abrir
+      // hasAnimatedRef.current = true;
 
-      let zoomLevel = 10;
-      const targetZoom = 16;
-      const interval = setInterval(() => {
-        if (mapRef.current && zoomLevel < targetZoom) {
-          zoomLevel += 1;
-          mapRef.current.setZoom(zoomLevel);
-        } else {
-          clearInterval(interval);
-        }
-      }, 200);
+      // mapRef.current.panTo(center);
+      // mapRef.current.setZoom(5);
 
-      return () => clearInterval(interval);
+      // let zoomLevel = 10;
+      // const targetZoom = 20;
+      // const interval = setInterval(() => {
+      //   if (mapRef.current && zoomLevel < targetZoom) {
+      //     zoomLevel += 1;
+      //     mapRef.current.setZoom(zoomLevel);
+      //   } else {
+      //     clearInterval(interval);
+      //   }
+      // }, 200);
+
+      // return () => clearInterval(interval);
     }
   }, [center, mapLoaded]);
 

@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
 import { LocalGasStation } from "@mui/icons-material";
@@ -67,8 +67,6 @@ type WithZoneId = { zoneId: string };
 //zoneId de fuelSummary
 export const ZonesDataProvider = ({ zoneId }: Props) => {
   const LANGUAGE = useLanguage();
-  const [isProfileDataOpen, setIsProfileDataOpen] = useState<boolean>(true);
-  const hasRunRef = useRef(false);
 
   const { fuelSummaryData, fuelSummaryStatus } = useSelector(
     (state: RootState) => state.fuelSummary
@@ -336,8 +334,6 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
           LANGUAGE={LANGUAGE}
           id={zoneId}
           zoneDetailsData={zoneDetailsData.value}
-          isProfileDataOpen={isProfileDataOpen}
-          setIsProfileDataOpen={setIsProfileDataOpen}
         />
       )}
 
@@ -382,7 +378,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
             />
           </div>,
           <div key={1}>
-            <div ref={handleDischargesRef}>
+            <div>
               {unloadsSingle && forTableUnloads && (
                 <Table
                   LANGUAGE={LANGUAGE}
