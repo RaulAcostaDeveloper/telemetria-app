@@ -19,6 +19,7 @@ import { useLanguage } from "@/global/language/components/languageProvider/langu
 import { ZoneProfileData } from "../zoneProfileData/zoneProfileData";
 import { ZonesMapTabSolo } from "../zonesMapTabSolo/zonesMapTabSolo";
 import { formatDateTime } from "@/global/utils/dateUtils";
+import { omitProperty } from "@/global/utils/objectUtils";
 import { MarkerData } from "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent";
 
 import styles from "./zonesDataProvider.module.css";
@@ -28,13 +29,35 @@ interface Props {
   zoneId: string;
 }
 
+interface ZoneCircleNoId {
+  center: {
+    lat: number | undefined;
+    lng: number | undefined;
+  };
+  chargeState: number | undefined;
+  city: string | undefined;
+  color: string | undefined;
+  country: string | undefined;
+  description: string | undefined;
+  dischargeState: number | undefined;
+  idleState: number | undefined;
+  idProfile: string | undefined;
+  postalCode: string | undefined;
+  profileName: string | undefined;
+  radius: number | undefined;
+  state: string | undefined;
+  zoneCategoryName: string | undefined;
+  zoneName: string | undefined;
+  zoneProviderName: string | undefined;
+}
+
 // google maps utiliza "lng" en vez de "lon"
-interface ChargesVarLng extends Omit<Charges, "lon"> {
+interface ChargesVarLng extends ZoneCircleNoId, Omit<Charges, "lon"> {
   lng: number;
 }
 
 // google maps utiliza "lng" en vez de "lon"
-interface DischargesVarLng extends Omit<Discharges, "lon"> {
+interface DischargesVarLng extends ZoneCircleNoId, Omit<Discharges, "lon"> {
   lng: number;
 }
 
@@ -101,44 +124,94 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     },
   ];
 
+  const handleDischargesRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (!node) return;
+
+      if (hasRunRef.current) {
+        // ya se ejecutó una vez
+        return;
+      }
+
+      hasRunRef.current = true;
+      setIsProfileDataOpen(false);
+    },
+    [setIsProfileDataOpen]
+  );
+
+  const zoneCircle = useMemo(() => {
+    const zoneD = zoneDetailsData?.value;
+    return {
+      center: { lat: zoneD?.lat, lng: zoneD?.lon },
+      radius: zoneD?.radioZone,
+      color: zoneD?.color,
+      zoneName: zoneD?.zoneName,
+      zoneId: zoneD?.zoneId,
+      profileName: zoneD?.profileName,
+      country: zoneD?.country,
+      state: zoneD?.state,
+      city: zoneD?.city,
+      postalCode: zoneD?.postalCode,
+      idProfile: zoneD?.idProfile,
+      description: zoneD?.description,
+      chargeState: zoneD?.chargeState,
+      dischargeState: zoneD?.dischargeState,
+      idleState: zoneD?.idleState,
+      zoneProviderName: zoneD?.zoneProviderName,
+      zoneCategoryName: zoneD?.zoneCategoryName,
+    };
+  }, [zoneDetailsData]);
+
   const loadsSummary = useMemo(() => {
-    return fuelSummaryData?.value?.charges.map((v) => ({
-      address: v.address,
-      dateGps: formatDateTime(v.dateGps),
-      deviceBattery: v.deviceBattery,
-      endDate: v.endDate,
-      eventId: v.eventId,
-      finalFuel: v.finalFuel,
-      idIndexEvent: v.idIndexEvent,
-      ignition: v.ignition,
-      imei: v.imei,
-      imeiClean: v.imeiClean,
-      initialFuel: v.initialFuel,
-      lat: v.lat,
-      lng: v.lon,
-      magnitude: v.magnitude,
-      mainPower: v.mainPower,
-      odometer: v.odometer,
-      origin: v.origin,
-      speed: v.speed,
-      startDate: v.startDate,
-      zoneId: v.zoneId,
-    }));
-  }, [fuelSummaryData]);
+    return fuelSummaryData?.value?.charges.map((v) => {
+      const zoneCircleNoId: ZoneCircleNoId = omitProperty(zoneCircle, "zoneId");
+
+      return {
+        address: v.address,
+        dateGps: formatDateTime(v.dateGps),
+        deviceBattery: v.deviceBattery,
+        endDate: v.endDate,
+        eventId: v.eventId,
+        finalFuel: v.finalFuel,
+        idIndexEvent: v.idIndexEvent,
+        ignition: v.ignition,
+        imei: v.imei,
+        imeiClean: v.imeiClean,
+        initialFuel: v.initialFuel,
+        lat: v.lat,
+        lng: v.lon,
+        magnitude: v.magnitude,
+        mainPower: v.mainPower,
+        odometer: v.odometer,
+        origin: v.origin,
+        speed: v.speed,
+        startDate: v.startDate,
+        zoneId: v.zoneId,
+        ...zoneCircleNoId,
+      };
+    });
+  }, [fuelSummaryData, zoneCircle]);
 
   const loadsSingle: ChargesVarLng[] | undefined =
     loadsSummary && findWithZoneId(loadsSummary);
 
+  // El orden de propiedades en forTableLoads será el usado en la tabla.
   const forTableLoads = useMemo(() => {
     return loadsSingle?.map((v) => ({
       imei: v.imei,
       dateGps: v.dateGps,
-      initial: v.initialFuel,
+      initialFuel: v.initialFuel,
       magnitude: v.magnitude,
-      final: v.finalFuel,
-      lat: v.lat,
-      lng: v.lng,
+      finalFuel: v.finalFuel,
+
+      address: v.address,
       imeiClean: v.imeiClean,
+      position: `${v.lat},${v.lng}`,
+      //Datos de zona
+      center: `${v.center.lat},${v.center.lng}`, //si el formato solo acepta llave:valor, llave:valor le damos.
+      color: v.color,
+      radius: v.radius,
+      zoneName: v.zoneName,
     }));
   }, [loadsSingle]);
 
@@ -174,43 +247,55 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
   ];
 
   const unloadsSummary = useMemo(() => {
-    return fuelSummaryData?.value?.discharges.map((v) => ({
-      address: v.address,
-      dateGps: v.dateGps,
-      deviceBattery: v.deviceBattery,
-      endDate: v.endDate,
-      eventId: v.eventId,
-      finalFuel: v.finalFuel,
-      idIndexEvent: v.idIndexEvent,
-      ignition: v.ignition,
-      imei: v.imei,
-      imeiClean: v.imeiClean,
-      initialFuel: v.initialFuel,
-      lat: v.lat,
-      lng: v.lon,
-      magnitude: v.magnitude,
-      mainPower: v.mainPower,
-      odometer: v.odometer,
-      origin: v.origin,
-      speed: v.speed,
-      startDate: v.startDate,
-      zoneId: v.zoneId,
-    }));
-  }, [fuelSummaryData]);
+    return fuelSummaryData?.value?.discharges.map((v) => {
+      const zoneCircleNoId: ZoneCircleNoId = omitProperty(zoneCircle, "zoneId");
+
+      return {
+        address: v.address,
+        dateGps: v.dateGps,
+        deviceBattery: v.deviceBattery,
+        endDate: v.endDate,
+        eventId: v.eventId,
+        finalFuel: v.finalFuel,
+        idIndexEvent: v.idIndexEvent,
+        ignition: v.ignition,
+        imei: v.imei,
+        imeiClean: v.imeiClean,
+        initialFuel: v.initialFuel,
+        lat: v.lat,
+        lng: v.lon,
+        magnitude: v.magnitude,
+        mainPower: v.mainPower,
+        odometer: v.odometer,
+        origin: v.origin,
+        speed: v.speed,
+        startDate: v.startDate,
+        zoneId: v.zoneId,
+        ...zoneCircleNoId,
+      };
+    });
+  }, [fuelSummaryData, zoneCircle]);
 
   const unloadsSingle: DischargesVarLng[] | undefined =
     unloadsSummary && findWithZoneId(unloadsSummary);
 
+  // El orden de propiedades en forTableLoads será el usado en la tabla.
   const forTableUnloads = useMemo(() => {
     return unloadsSingle?.map((v) => ({
       imei: v.imei,
       dateGps: v.dateGps,
-      initial: v.initialFuel,
+      initialFuel: v.initialFuel,
       magnitude: v.magnitude,
-      final: v.finalFuel,
-      lat: v.lat,
-      lng: v.lng,
+      finalFuel: v.finalFuel,
+
+      address: v.address,
       imeiClean: v.imeiClean,
+      position: `${v.lat},${v.lng}`,
+      //Datos de zona
+      center: `${v.center.lat},${v.center.lng}`, //si el formato solo acepta llave:valor, llave:valor le damos.
+      color: v.color,
+      radius: v.radius,
+      zoneName: v.zoneName,
     }));
   }, [unloadsSingle]);
 
@@ -221,47 +306,26 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       id: v.idIndexEvent as string,
       icon: imgLoad,
       position: { lat: v.lat, lng: v.lng },
-      title: v.address,
+      title: LANGUAGE.zones.tabs.loadTable.loadValue,
+      address: v.address,
       magnitude: v.magnitude,
     }));
   }
 
   let formatedMarkersUnloads: MarkerData[] = [];
   if (unloadsSingle) {
-    const imgUnload = "./png/marker-gray-pump-red.png";
+    const imgUnload = "/png/marker-gray-pump-red.png";
     formatedMarkersUnloads = unloadsSingle.map((v) => ({
       id: v.idIndexEvent as string,
       icon: imgUnload,
       position: { lat: v.lat, lng: v.lng },
-      title: v.address,
+      title: LANGUAGE.zones.tabs.unloadTable.loadValue,
+      address: v.address,
       magnitude: v.magnitude,
     }));
   }
 
   const allMarkers = [...formatedMarkersLoads, ...formatedMarkersUnloads];
-
-  const zoneCircle = useMemo(() => {
-    const zoneD = zoneDetailsData?.value;
-    return {
-      center: { lat: zoneD?.lat, lng: zoneD?.lon },
-      radius: zoneD?.radioZone,
-      color: zoneD?.color,
-      zoneName: zoneD?.zoneName,
-      zoneId: zoneD?.zoneId,
-      profileName: zoneD?.profileName,
-      country: zoneD?.country,
-      state: zoneD?.state,
-      city: zoneD?.city,
-      postalCode: zoneD?.postalCode,
-      idProfile: zoneD?.idProfile,
-      description: zoneD?.description,
-      chargeState: zoneD?.chargeState,
-      dischargeState: zoneD?.dischargeState,
-      idleState: zoneD?.idleState,
-      zoneProviderName: zoneD?.zoneProviderName,
-      zoneCategoryName: zoneD?.zoneCategoryName,
-    };
-  }, [zoneDetailsData]);
 
   return (
     <div className={styles.zonesDataProvider}>
@@ -321,7 +385,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
                   columns={unloadsZoneColumns}
                   data={forTableUnloads}
                   idKey="imei"
-                  idImei="imei"
+                  idImei="imeiClean"
                   showViewModal
                   modalOption={MODAL_OPTION.ZONEUNLOAD}
                 />

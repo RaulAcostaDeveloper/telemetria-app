@@ -111,8 +111,68 @@ export const GoogleMapsLoader = ({
         mapTypeId: mapType,
       }}
     >
-      {center && <Marker position={center} />}
+      {center && !zoneCircle && <Marker position={center} />}
+      {places?.length === 1 && (
+        <Marker
+          key={places[0].id}
+          position={places[0].position}
+          title={places[0].title}
+          icon={places[0].icon}
+          onLoad={(marker) => {
+            markerRef.current = marker;
+
+            directoryMarkersRef.current[places[0].id] = marker;
+
+            if (!infoRef.current) {
+              infoRef.current = new google.maps.InfoWindow({
+                content: `<div style="font-size: 12px; color: #333;"></div>`,
+              });
+
+              // Sincroniza el estado de infoBoxOpen con cerrar la ventana por botón de X.
+              infoRef.current.addListener("closeclick", () => {
+                setInfoBoxOpen(false);
+              });
+            }
+          }}
+          onClick={() => {
+            const targetMarker = directoryMarkersRef.current[places[0].id];
+
+            if (!targetMarker || !infoRef.current || !mapRef.current) return;
+
+            infoRef.current.setContent(
+              `<div class="${styles.containerinfo}">
+                <div class="${styles.frameInfo}" style="font-size: 1.5rem;">
+                  <div class="${styles.rowInfo}">
+                    <div>${LANGUAGE.zones.zoneMap.zonePopup.address}:</div>
+                    <div>${places[0].address}</div>
+                  </div>
+                  <div class="${styles.rowInfo}">
+                    <div>${LANGUAGE.zones.zoneMap.zonePopup.magnitude}:</div>
+                    <div>${places[0].magnitude} lts.</div>
+                  </div>
+                  <div class="${styles.rowInfo}">
+                    <div>${LANGUAGE.zones.zoneMap.zonePopup.coordinates}:</div>
+                    <div>${places[0].position.lat},</br>${places[0].position.lng}</div>
+                  </div>
+                </div>
+              </div>`
+            );
+
+            if (infoBoxOpen) {
+              infoRef.current.close();
+            } else {
+              infoRef.current.open({
+                map: mapRef.current,
+                anchor: targetMarker,
+              });
+            }
+
+            setInfoBoxOpen((prev) => !prev);
+          }}
+        />
+      )}
       {places &&
+        places?.length > 1 &&
         places.map((p) => (
           <Marker
             key={p.id}
@@ -145,7 +205,7 @@ export const GoogleMapsLoader = ({
                   <div class="${styles.frameInfo}" style="font-size: 2rem;">
                     <div class="${styles.rowInfo}">
                       <div>${LANGUAGE.zones.zoneMap.zonePopup.address}:</div>
-                      <div>${p.title}</div>
+                      <div>${p.address}</div>
                     </div>
                     <div class="${styles.rowInfo}">
                       <div>${LANGUAGE.zones.zoneMap.zonePopup.magnitude}:</div>
