@@ -124,21 +124,6 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     },
   ];
 
-  const handleDischargesRef = useCallback(
-    (node: HTMLDivElement | null) => {
-      if (!node) return;
-
-      if (hasRunRef.current) {
-        // ya se ejecutó una vez
-        return;
-      }
-
-      hasRunRef.current = true;
-      setIsProfileDataOpen(false);
-    },
-    [setIsProfileDataOpen]
-  );
-
   const zoneCircle = useMemo(() => {
     const zoneD = zoneDetailsData?.value;
     return {
