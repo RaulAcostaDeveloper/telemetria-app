@@ -321,7 +321,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       id: v.idIndexEvent as string,
       icon: imgUnload,
       position: { lat: v.lat, lng: v.lng },
-      title: LANGUAGE.zones.tabs.loadTable.loadValue,
+      title: LANGUAGE.zones.tabs.unloadTable.loadValue,
       address: v.address,
       magnitude: v.magnitude,
     }));

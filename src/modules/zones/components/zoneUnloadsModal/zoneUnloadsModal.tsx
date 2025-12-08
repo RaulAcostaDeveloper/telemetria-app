@@ -34,6 +34,7 @@ export const ZoneUnloadsModal = ({
     let position: { lat: number; lng: number };
     if (dataObject.position && "string" === typeof dataObject.position) {
       const latlng = dataObject.position.split(",");
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       position = { lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1]) };
       markersData = [];
       //if(dataObject.address){ markersData[0].address = dataObject.address}
