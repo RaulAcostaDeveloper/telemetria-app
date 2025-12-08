@@ -4,6 +4,7 @@ import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ProfileInfo } from "./profileInfo/profileInfo";
 import { ProfileModalHandler } from "./profileModalHandler/profileModalHandlet";
 import { ZoneDetailsValue } from "@/global/redux/serviceSlices/zoneDetails";
+import { getCategories } from "../zoneEditProfileModalForm/categories";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -61,12 +62,11 @@ export const ZoneProfileData = ({
             />
             <ProfileInfo
               title={LANGUAGE.zones.zoneProfileForm.category}
-              value={zoneDetailsData.zoneCategoryName}
-              // Cuando añadan el categoryId en los detalles de la zona
-              // {
-              //   getCategories(LANGUAGE).find((item) => item.id === "targetId")
-              //     ?.name
-              // }
+              value={
+                getCategories(LANGUAGE).find(
+                  (item) => item.id === zoneDetailsData.zoneCateogryid
+                )?.name
+              }
             />
             <ProfileInfo
               title={LANGUAGE.zones.zoneProfileForm.provider}
