@@ -26,12 +26,12 @@ button {
 
 /* Variables de colores de la empresa (theme) */
 :root {
-  --company-color-1: #e8f7ff;
-  --company-color-2: #bdd5e1;
-  --company-color-3: #8ed2ef;
-  --company-color-4: #37718e;
-  --company-color-5: #254e70;
-  --company-color-6: #113154;
+  --company-color-1: #ffffff;
+  --company-color-2: #2ba7a7;
+  --company-color-3: #008c8b;
+  --company-color-4: #006770;
+  --company-color-5: #003b46;
+  --company-color-6: #070f12;
 }
 
 /*  Variables de colores de la empresa (theme) obscurecidas 10% (hovers) */

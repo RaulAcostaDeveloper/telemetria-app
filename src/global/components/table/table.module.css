@@ -6,6 +6,9 @@
   border-radius: 4px;
   display: flex;
   justify-content: space-evenly;
+
+  /* Aguanta resolución movile */
+  max-width: 90vw;
 }
 
 /* Estilos del scrollbar */
