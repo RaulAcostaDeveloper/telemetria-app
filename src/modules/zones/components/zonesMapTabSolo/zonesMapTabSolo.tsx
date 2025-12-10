@@ -3,13 +3,13 @@ import { LanguageInterface } from "@/global/language/constants/language.model";
 import {
   MarkerData,
   ZoneDetail,
-} from "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent";
+} from "../geoModalZone/googleMaps/googleMapClientComponentZone/googleMapClientComponentZone";
 import styles from "./zonesMapTabSolo.module.css";
 
-const GoogleMapClientComponent = dynamic(
+const GoogleMapClientComponentZone = dynamic(
   () =>
     import(
-      "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent"
+      "../geoModalZone/googleMaps/googleMapClientComponentZone/googleMapClientComponentZone"
     ),
   { ssr: false }
 );
@@ -27,7 +27,7 @@ export const ZonesMapTabSolo = ({
 }: Props) => {
   return (
     <div className={["containermap", styles.container].join(" ")}>
-      <GoogleMapClientComponent
+      <GoogleMapClientComponentZone
         LANGUAGE={LANGUAGE}
         markersData={markersInZone}
         mapType={"satellite"}

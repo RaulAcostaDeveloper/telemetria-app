@@ -2,10 +2,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
-import {
-  columnsTable,
-  MODAL_OPTION,
-} from "@/global/components/table/table.model";
+import { columnsTable } from "@/global/components/table/table.model";
 import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { RootState } from "@/global/redux/store";
@@ -101,7 +98,6 @@ export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
             idKey="idZone"
             idZone="idZone"
             showEdit
-            modalOption={MODAL_OPTION.ZONE}
           />
         )}
 
