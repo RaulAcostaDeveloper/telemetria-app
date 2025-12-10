@@ -61,10 +61,12 @@ export const TableActions = ({
   }, []);
 
   useEffect(() => {
-    document.addEventListener("keydown", escFunction, false);
-    return () => {
-      document.removeEventListener("keydown", escFunction, false);
-    };
+    if (typeof window !== "undefined") {
+      document.addEventListener("keydown", escFunction, false);
+      return () => {
+        document.removeEventListener("keydown", escFunction, false);
+      };
+    }
   }, [escFunction]);
 
   return (

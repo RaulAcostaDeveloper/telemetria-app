@@ -70,11 +70,13 @@ export const TableFiltersButton = ({
   }, []);
 
   useEffect(() => {
-    document.addEventListener("keydown", escFunction, false);
+    if (typeof window !== "undefined") {
+      document.addEventListener("keydown", escFunction, false);
 
-    return () => {
-      document.removeEventListener("keydown", escFunction, false);
-    };
+      return () => {
+        document.removeEventListener("keydown", escFunction, false);
+      };
+    }
   }, [escFunction]);
 
   const filtersOn: boolean = columns.some(

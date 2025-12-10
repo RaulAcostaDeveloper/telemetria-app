@@ -31,33 +31,35 @@ export const Matrix = () => {
     }
   }, []);
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      const keyPressed = event.key.toLowerCase();
-      if (validKeys.includes(keyPressed)) {
-        setTeclasPresionadas((prevState) => ({
-          ...prevState,
-          [keyPressed]: true, // 👈 usar keyPressed en minúscula
-        }));
-      }
-    };
+    if (typeof window !== "undefined") {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        const keyPressed = event.key.toLowerCase();
+        if (validKeys.includes(keyPressed)) {
+          setTeclasPresionadas((prevState) => ({
+            ...prevState,
+            [keyPressed]: true, // 👈 usar keyPressed en minúscula
+          }));
+        }
+      };
 
-    const handleKeyUp = (event: KeyboardEvent) => {
-      const keyPressed = event.key.toLowerCase();
-      if (validKeys.includes(keyPressed)) {
-        setTeclasPresionadas((prevState) => ({
-          ...prevState,
-          [keyPressed]: false, // 👈 usar keyPressed en minúscula
-        }));
-      }
-    };
+      const handleKeyUp = (event: KeyboardEvent) => {
+        const keyPressed = event.key.toLowerCase();
+        if (validKeys.includes(keyPressed)) {
+          setTeclasPresionadas((prevState) => ({
+            ...prevState,
+            [keyPressed]: false, // 👈 usar keyPressed en minúscula
+          }));
+        }
+      };
 
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
+      window.addEventListener("keydown", handleKeyDown);
+      window.addEventListener("keyup", handleKeyUp);
 
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
-    };
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+        window.removeEventListener("keyup", handleKeyUp);
+      };
+    }
   }, []);
 
   useEffect(() => {

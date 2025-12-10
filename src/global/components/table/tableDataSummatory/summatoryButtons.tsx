@@ -5,6 +5,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import styles from "./tableDataSummatory.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { dataTable, PrimitiveValue } from "../table.model";
+import { formatNumberWithCommas } from "@/global/utils/stringUtils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -82,7 +83,7 @@ export const SummatoryButtons = ({
               }
             />
           </p>
-          <span>{sum}</span>
+          <span>{formatNumberWithCommas(sum)}</span>
         </button>
       )}
 
@@ -101,7 +102,7 @@ export const SummatoryButtons = ({
               }
             />
           </p>
-          <span>{average}</span>
+          <span>{formatNumberWithCommas(average)}</span>
         </button>
       )}
     </>

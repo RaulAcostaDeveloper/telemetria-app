@@ -35,7 +35,7 @@ export const TableDataSummatory = ({
         };
         return (
           <div key={el.columnName + index} style={defaultSpace}>
-            {el.showTotal && (
+            {el.showTotal && filteredData.length > 0 && (
               <SummatoryButtons
                 LANGUAGE={LANGUAGE}
                 filteredData={filteredData}
