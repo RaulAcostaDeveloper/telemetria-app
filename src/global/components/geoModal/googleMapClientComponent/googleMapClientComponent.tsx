@@ -7,81 +7,21 @@ import { GoogleMapsLoader } from "./googleMapsLoader";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { getEnvClient } from "@/global/utils/getEnviromentFromClient";
 
-export interface MarkerData {
-  // Fruto de fuelSummaryData
-  address?: string;
-  dateGps?: string;
-  deviceBattery?: number;
-  endDate?: string;
-  eventId?: number;
-  finalFuel?: number;
-  idIndexEvent?: string | undefined;
-  ignition?: true; //asi viene en fuelSummarySlice.ts
-  imei?: string; //placas + imei
-  imeiClean?: string; //solo imei
-  initialFuel?: number;
-  magnitude?: number;
-  mainPower?: number;
-  odometer?: number;
-  origin?: number;
-  position: { lat: number; lng: number };
-  speed?: number;
-  startDate?: string;
-  zoneId?: string; //Existe en zoneCircle y fuelSummaryData. Se unifica en .filter()
-  icon?: string | google.maps.Icon | google.maps.Symbol;
-
-  id: number | string;
-  title?: string; //tooltip information when hover. Marker component property. Default = "".
-}
-
-export interface ZoneDetail {
-  center: {
-    lat: number | undefined;
-    lng: number | undefined;
-  };
-  chargeState?: number | undefined;
-  city?: string | undefined;
-  color: string | undefined;
-  country?: string | undefined;
-  description?: string | undefined;
-  dischargeState?: number | undefined;
-  idleState?: number | undefined;
-  idProfile?: string | undefined;
-  postalCode?: string | undefined;
-  profileName?: string | undefined;
-  radius: number | undefined;
-  state?: string | undefined;
-  zoneCategoryName?: string | undefined;
-  zoneId?: string | undefined;
-  zoneName?: string | undefined;
-  zoneProviderName?: string | undefined;
-}
-
 interface Props {
   LANGUAGE: LanguageInterface;
-  geoModalData?: GeoModalData;
-  markersData?: MarkerData[];
+  geoModalData: GeoModalData;
   mapType: "roadmap" | "satellite";
-  zoneCircle?: ZoneDetail;
-}
-interface Center {
-  lat: number;
-  lng: number;
 }
 
 const GoogleMapClientComponent = ({
   LANGUAGE,
   geoModalData,
-  markersData,
   mapType,
-  zoneCircle,
 }: Props) => {
   const [googleApiKey, setGoogleApiKey] = useState<string | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
   const mapRef = useRef<google.maps.Map | null>(null);
   const hasAnimatedRef = useRef(false);
-  let center: Center | undefined;
-  let places: MarkerData[] | undefined;
 
   useEffect(() => {
     (async () => {
@@ -95,23 +35,12 @@ const GoogleMapClientComponent = ({
   }, []);
 
   // Configuración de la API y el idioma del mapa
-  if (geoModalData) {
-    // eslint-disable-next-line prefer-const
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    center = useMemo(() => {
-      return {
-        lat: geoModalData.lat,
-        lng: geoModalData.lon,
-      };
-    }, [geoModalData]);
-    places = undefined;
-  } else if (markersData) {
-    places = markersData;
-    if (!places.length) {
-      places = [...places];
-    } //Si no viene como array y solo es 1 objeto
-    center = undefined;
-  }
+  const center = useMemo(() => {
+    return {
+      lat: geoModalData.lat,
+      lng: geoModalData.lon,
+    };
+  }, [geoModalData.lat, geoModalData.lon]);
 
   useEffect(() => {
     // Efecto de zoom
@@ -153,11 +82,9 @@ const GoogleMapClientComponent = ({
         <GoogleMapsLoader
           LANGUAGE={LANGUAGE}
           center={center}
-          places={places}
           googleApiKey={googleApiKey}
           mapRef={mapRef}
           mapType={mapType}
-          zoneCircle={zoneCircle}
           setMapLoaded={setMapLoaded}
         />
       )}

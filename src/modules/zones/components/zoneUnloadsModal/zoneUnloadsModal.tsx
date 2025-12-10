@@ -1,11 +1,10 @@
-import GeoModal, { GeoModalData } from "@/global/components/geoModal/geoModal";
 import {
   MarkerData,
   ZoneDetail,
-} from "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent";
+} from "../geoModalZone/googleMaps/googleMapClientComponentZone/googleMapClientComponentZone";
 import { PrimitiveValue } from "@/global/components/table/table.model";
 import { LanguageInterface } from "@/global/language/constants/language.model";
-import { TooltipGeoField } from "@/global/utils/geoMapUtils";
+import GeoModalZone from "../geoModalZone/geoModalZone";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -19,42 +18,29 @@ export const ZoneUnloadsModal = ({
   dataObject,
 }: Props) => {
   const imgUnload = "/png/marker-gray-pump-red.png";
-  let geoModalData: GeoModalData | undefined = undefined;
   let markersData: MarkerData[] | undefined = undefined;
-  //Es importante que geoModalData quede en array para el proceso de distincion en GoogleMapClientComponent
+  let position: { lat: number; lng: number };
 
-  if (dataObject.rows) {
-    geoModalData = {
-      lat: dataObject.lat as number,
-      lon: dataObject.lng as number,
-      title: LANGUAGE.zones.tabs.unloadTable.loadValue,
-      rows: [] as TooltipGeoField[],
-    };
-  } else {
-    let position: { lat: number; lng: number };
-    if (dataObject.position && "string" === typeof dataObject.position) {
-      const latlng = dataObject.position.split(",");
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      position = { lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1]) };
-      markersData = [];
-      //if(dataObject.address){ markersData[0].address = dataObject.address}
-      markersData = [
-        {
-          address: dataObject.address as string,
-          dateGps: dataObject.dateGps as string,
-          finalFuel: dataObject.finalFuel as number,
-          icon: imgUnload,
-          id: dataObject.imeiClean as number | string,
-          initialFuel: dataObject.initialFuel as number,
-          magnitude: dataObject.magnitude as number,
-          position: {
-            lat: dataObject.lat as number,
-            lng: dataObject.lng as number,
-          },
-          title: LANGUAGE.zones.tabs.unloadTable.loadValue,
+  if (dataObject.position && "string" === typeof dataObject.position) {
+    const latlng = dataObject.position.split(",");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    position = { lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1]) };
+    markersData = [
+      {
+        address: dataObject.address as string,
+        dateGps: dataObject.dateGps as string,
+        finalFuel: dataObject.finalFuel as number,
+        icon: imgUnload,
+        id: dataObject.imeiClean as number | string,
+        initialFuel: dataObject.initialFuel as number,
+        magnitude: dataObject.magnitude as number,
+        position: {
+          lat: dataObject.lat as number,
+          lng: dataObject.lng as number,
         },
-      ];
-    }
+        title: LANGUAGE.zones.tabs.unloadTable.loadValue,
+      },
+    ];
   }
 
   let foreignCenter: { lat: number; lng: number };
@@ -90,10 +76,9 @@ export const ZoneUnloadsModal = ({
 
   return (
     <>
-      <GeoModal
+      <GeoModalZone
         LANGUAGE={LANGUAGE}
         closeModal={closeModal}
-        geoModalData={geoModalData}
         markersData={markersData}
         zoneCircle={zoneCircle}
       />

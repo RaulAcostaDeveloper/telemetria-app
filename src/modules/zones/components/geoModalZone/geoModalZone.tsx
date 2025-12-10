@@ -5,58 +5,43 @@ import dynamic from "next/dynamic";
 import styles from "./geoModalZone.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { Modal } from "@/global/components";
-import { TooltipGeoField } from "@/global/utils/geoMapUtils";
-import { ndIfEmpty } from "@/global/utils/ndIfEmpty";
-import { MarkerData } from "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent";
+import {
+  MarkerData,
+  ZoneDetail,
+} from "./googleMaps/googleMapClientComponentZone/googleMapClientComponentZone";
 
-const GoogleMapClientOnly = dynamic(
+const GoogleMapClientComponentZone = dynamic(
   () =>
     import(
-      "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent"
+      "./googleMaps/googleMapClientComponentZone/googleMapClientComponentZone"
     ),
   { ssr: false }
 );
 
-export interface GeoZonesModalData {
-  markersInZone: MarkerData[];
-  title: string;
-  rows: TooltipGeoField[];
-}
-
 interface Props {
   LANGUAGE: LanguageInterface;
   closeModal: () => void;
-  geoModalData: GeoZonesModalData;
+  markersData?: MarkerData[];
   height?: number;
   width?: number;
+  zoneCircle?: ZoneDetail;
 }
 
 const GeoModalZone = ({
   LANGUAGE,
   closeModal,
-  geoModalData,
+  markersData,
   height,
   width,
+  zoneCircle,
 }: Props) => {
   return (
     <Modal
       LANGUAGE={LANGUAGE}
       closeModal={closeModal}
-      title={geoModalData.title}
+      title={markersData && markersData[0].title}
     >
       <div className={styles.bottom}>
-        {geoModalData.rows.length > 0 && (
-          <div className={styles.rows}>
-            {geoModalData.rows.map((row, index) => (
-              <div className={styles.row} key={index}>
-                <span className={styles.label}>{row.label}:</span>
-                <span className={styles.value}>
-                  {ndIfEmpty(String(row.value))}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
         <div
           className={styles.mapSide}
           style={{
@@ -71,10 +56,11 @@ const GeoModalZone = ({
               ...(height !== undefined && { height: `${height}px` }),
             }}
           >
-            <GoogleMapClientOnly
+            <GoogleMapClientComponentZone
               LANGUAGE={LANGUAGE}
+              markersData={markersData}
               mapType={"satellite"}
-              markersData={geoModalData.markersInZone}
+              zoneCircle={zoneCircle}
             />
           </div>
         </div>
