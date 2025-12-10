@@ -20,7 +20,7 @@ import { ZoneProfileData } from "../zoneProfileData/zoneProfileData";
 import { ZonesMapTabSolo } from "../zonesMapTabSolo/zonesMapTabSolo";
 import { formatDateTime } from "@/global/utils/dateUtils";
 import { omitProperty } from "@/global/utils/objectUtils";
-import { MarkerData } from "@/global/components/geoModal/googleMapClientComponent/googleMapClientComponent";
+import { MarkerData } from "../geoModalZone/googleMaps/googleMapClientComponentZone/googleMapClientComponentZone";
 
 import styles from "./zonesDataProvider.module.css";
 import { Collapsable } from "@/global/components/collapsable/collapsable";

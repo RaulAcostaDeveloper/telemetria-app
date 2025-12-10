@@ -7,10 +7,6 @@ import { LanguageInterface } from "../../language/constants/language.model";
 import { Modal } from "../modal/modal";
 import { TooltipGeoField } from "../../utils/geoMapUtils";
 import { ndIfEmpty } from "@/global/utils/ndIfEmpty";
-import {
-  MarkerData,
-  ZoneDetail,
-} from "./googleMapClientComponent/googleMapClientComponent";
 
 const GoogleMapClientOnly = dynamic(
   () => import("./googleMapClientComponent/googleMapClientComponent"),
@@ -27,29 +23,23 @@ export interface GeoModalData {
 interface Props {
   LANGUAGE: LanguageInterface;
   closeModal: () => void;
-  geoModalData?: GeoModalData;
-  markersData?: MarkerData[];
+  geoModalData: GeoModalData;
   height?: number;
   width?: number;
-  zoneCircle?: ZoneDetail;
 }
 
 const GeoModal = ({
   LANGUAGE,
   closeModal,
   geoModalData,
-  markersData,
   height,
   width,
-  zoneCircle,
 }: Props) => {
   return (
     <Modal
       LANGUAGE={LANGUAGE}
       closeModal={closeModal}
-      title={
-        geoModalData ? geoModalData.title : markersData && markersData[0].title
-      }
+      title={geoModalData.title}
     >
       <div className={styles.bottom}>
         {geoModalData && geoModalData.rows.length > 0 && (
@@ -81,9 +71,7 @@ const GeoModal = ({
             <GoogleMapClientOnly
               LANGUAGE={LANGUAGE}
               geoModalData={geoModalData}
-              markersData={markersData}
               mapType={"satellite"}
-              zoneCircle={zoneCircle}
             />
           </div>
         </div>
