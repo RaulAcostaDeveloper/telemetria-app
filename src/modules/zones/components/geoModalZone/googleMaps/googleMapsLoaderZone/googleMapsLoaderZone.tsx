@@ -167,11 +167,20 @@ export const GoogleMapsLoaderZone = ({
                   </div>
                   <div class="${styles.rowInfo}">
                     <div>${LANGUAGE.zones.zoneMap.zonePopup.coordinates}:</div>
-                    <div>${places[0].position.lat},</br>${places[0].position.lng}</div>
+                    <div>${places[0].position.lat}, ${places[0].position.lng}</div>
                   </div>
                 </div>
               </div>`
             );
+
+            // Construcción del popup header
+            const header = document.createElement("div");
+            header.style.textAlign = "center";
+            const title = document.createElement("span");
+            title.textContent = places[0].title ? places[0].title : "";
+            title.style.fontSize = "2rem";
+            header.appendChild(title);
+            infoRef.current?.setHeaderContent(header);
 
             if (infoBoxOpen) {
               infoRef.current.close();
@@ -245,6 +254,15 @@ export const GoogleMapsLoaderZone = ({
                   </div>
                 </div>`
               );
+
+              //Construcción del popup header
+              const header = document.createElement("div");
+              header.style.textAlign = "center";
+              const title = document.createElement("span");
+              title.textContent = p.title ? p.title : "";
+              title.style.fontSize = "2rem";
+              header.appendChild(title);
+              infoRef.current?.setHeaderContent(header);
 
               if (infoBoxOpen) {
                 infoRef.current.close();
