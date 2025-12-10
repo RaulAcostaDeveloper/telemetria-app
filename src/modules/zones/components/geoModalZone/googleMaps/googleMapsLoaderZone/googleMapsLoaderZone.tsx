@@ -94,12 +94,13 @@ export const GoogleMapsLoaderZone = ({
     };
   }, []);
 
-  if (!isLoaded)
+  if (!isLoaded) {
     return (
       <div>
         <LoaderAnimation />
       </div>
     );
+  }
 
   return (
     <GoogleMap
@@ -151,6 +152,18 @@ export const GoogleMapsLoaderZone = ({
                   <div class="${styles.rowInfo}">
                     <div>${LANGUAGE.zones.zoneMap.zonePopup.magnitude}:</div>
                     <div>${places[0].magnitude} lts.</div>
+                  </div>
+                  <div class="${styles.rowInfo}">
+                    <div>${LANGUAGE.zones.zoneMap.zonePopup.initialFuel}:</div>
+                    <div>${places[0].initialFuel} lts.</div>
+                  </div>
+                  <div class="${styles.rowInfo}">
+                    <div>${LANGUAGE.zones.zoneMap.zonePopup.finalFuel}:</div>
+                    <div>${places[0].finalFuel} lts.</div>
+                  </div>
+                  <div class="${styles.rowInfo}">
+                    <div>${LANGUAGE.zones.zoneMap.zonePopup.dateGps}:</div>
+                    <div>${places[0].dateGps}</div>
                   </div>
                   <div class="${styles.rowInfo}">
                     <div>${LANGUAGE.zones.zoneMap.zonePopup.coordinates}:</div>
@@ -212,6 +225,18 @@ export const GoogleMapsLoaderZone = ({
                     <div class="${styles.rowInfo}">
                       <div>${LANGUAGE.zones.zoneMap.zonePopup.magnitude}:</div>
                       <div>${p.magnitude} lts.</div>
+                    </div>
+                    <div class="${styles.rowInfo}">
+                      <div>${LANGUAGE.zones.zoneMap.zonePopup.initialFuel}:</div>
+                      <div>${p.initialFuel} lts.</div>
+                    </div>
+                    <div class="${styles.rowInfo}">
+                      <div>${LANGUAGE.zones.zoneMap.zonePopup.finalFuel}:</div>
+                      <div>${p.finalFuel} lts.</div>
+                    </div>
+                    <div class="${styles.rowInfo}">
+                      <div>${LANGUAGE.zones.zoneMap.zonePopup.dateGps}:</div>
+                      <div>${p.dateGps}</div>
                     </div>
                     <div class="${styles.rowInfo}">
                       <div>${LANGUAGE.zones.zoneMap.zonePopup.coordinates}:</div>
