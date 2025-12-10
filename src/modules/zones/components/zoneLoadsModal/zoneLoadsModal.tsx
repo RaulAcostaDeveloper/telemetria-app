@@ -76,6 +76,8 @@ export const ZoneLoadsModal = ({ LANGUAGE, closeModal, dataObject }: Props) => {
         closeModal={closeModal}
         markersData={markersData}
         zoneCircle={zoneCircle}
+        height={720}
+        width={800}
       />
     </>
   );
