@@ -51,3 +51,27 @@ export function deviceStatusTranslator(
   }
   return translatedStatus;
 }
+
+/**
+ * Construye una nueva cadena que agrega </br> cada que se supera la
+ * longitud de la cadena en el numero dado por "position"
+ * Ej: brEveryNPositions("abcdefghijklmnopqrstuvwxzy1234567890", 15)
+ * Resultado: abcdefghijklmno</br>pqrstuvwxyz123</br>4567890
+ * @param str - cadena de texto a alterar
+ * @param position - Posición que usaremos como multiplo
+ * @returns Cadena con adicion de </br> en cada posicion multiplo de position.
+ */
+export function brEveryNPositions(str: string, position: number) {
+  let result = "";
+
+  for (let i = 0; i < str.length; i++) {
+    result += str[i];
+
+    // Al llegar a tantos caracteres → agregar </br>
+    if ((i + 1) % position === 0 && i !== str.length - 1) {
+      result += "</br>";
+    }
+  }
+
+  return result;
+}

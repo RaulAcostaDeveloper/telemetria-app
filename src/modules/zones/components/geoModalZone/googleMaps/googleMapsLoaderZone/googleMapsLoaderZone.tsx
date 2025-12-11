@@ -181,6 +181,7 @@ export const GoogleMapsLoaderZone = ({
             const title = document.createElement("span");
             title.textContent = places[0].title ? places[0].title : "";
             title.style.fontSize = "2rem";
+            title.style.fontWeight = "bold";
             header.appendChild(title);
             infoRef.current?.setHeaderContent(header);
 
