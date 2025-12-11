@@ -496,6 +496,11 @@ export interface LanguageInterface {
       zonePopup: {
         address: string;
         magnitude: string;
+        initialFuel: string;
+        finalFuel: string;
+        dateGps: string;
+        startDate: string;
+        endDate: string;
         coordinates: string;
       };
     };

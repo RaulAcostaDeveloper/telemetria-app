@@ -1,6 +1,7 @@
 import { LanguageInterface } from "../language/constants/language.model";
 import { ndIfEmpty } from "./ndIfEmpty";
 import { formatDateTime } from "./dateUtils";
+import { brEveryNPositions } from "./stringUtils";
 
 type StringObject = Record<string, string>;
 
@@ -23,6 +24,8 @@ function buildTooltipSection(
   separator?: Separator
 ): string {
   let stringHTML = "";
+  //Agrego </br> cada 25 posiciones si el string excede la posicion.
+  value = brEveryNPositions(value, 25);
   if (separator && index + 1 === separator.position) {
     stringHTML += `
     <div style="font-size: 18px; padding-top: 0.5em; text-align: center;">
@@ -31,11 +34,30 @@ function buildTooltipSection(
     `;
   }
   stringHTML += `
-  <div style="width: 100%; font-size: 18px; display: flex; justify-content: space-between;">
-    <strong style="margin-right: 10px;">${label}:</strong> <p>${value}</p>
+  <div style="
+    width: 300px; 
+    max-width: 100%;
+    font-size: 1.8rem;
+    display: flex;
+    
+    line-height: 1.1;
+    padding-top: 0.8rem;
+    padding-bottom: 0.4rem;
+    border-bottom-style: solid;
+    border-bottom-color: var(--info-each-row);
+    border-bottom-width: 2px;
+    ">
+    <div style="
+      width: 50%;
+      min-width: 10rem;
+      font-weight: bold; 
+      text-align: left;
+    ">${label}:</div> <div style="
+      width: 50%;
+      text-align: left;
+    ">${value}</div>
   </div>
   `;
-
   return stringHTML;
 }
 
@@ -54,15 +76,19 @@ export function createTooltipFormatter(
       )
       .join("");
 
-    const titleHTML = `<div style="width: 100%; font-size: 16px; font-weight: bold; display: inline-block; text-align: center;">
+    const titleHTML = `<div style="width: 100%; font-size: 2rem; font-weight: bold; display: inline-block; text-align: center;">
           ${title}
         </div>`;
 
     return `
-      <div>
-        <div style="width: auto; padding: 7px; font-size: 14px; display: flex; flex-direction: column; gap: 5px;">
-        ${titleHTML}
-        ${content}
+      <div style="max-width: 100%; background-color: #fff">
+        <div style="
+          width: 100%; 
+          padding: 7px; 
+          font-size: 1.8rem;
+        ">
+          ${titleHTML}
+          ${content}
         </div>
       <div>
     `;

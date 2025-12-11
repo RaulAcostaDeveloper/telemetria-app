@@ -294,6 +294,9 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       title: LANGUAGE.zones.tabs.loadTable.loadValue,
       address: v.address,
       magnitude: v.magnitude,
+      dateGps: v.dateGps,
+      initialFuel: v.initialFuel,
+      finalFuel: v.finalFuel,
     }));
   }
 
@@ -307,6 +310,9 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       title: LANGUAGE.zones.tabs.unloadTable.loadValue,
       address: v.address,
       magnitude: v.magnitude,
+      dateGps: v.dateGps,
+      initialFuel: v.initialFuel,
+      finalFuel: v.finalFuel,
     }));
   }
 

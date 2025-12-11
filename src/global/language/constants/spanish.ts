@@ -517,6 +517,11 @@ export const SPANISH: LanguageInterface = {
       zonePopup: {
         address: "Dirección",
         magnitude: "Litros",
+        initialFuel: "L. iniciales",
+        finalFuel: "L. finales",
+        dateGps: "Fecha",
+        startDate: "Fecha inicial",
+        endDate: "Fecha final",
         coordinates: "Coordenadas",
       },
     },

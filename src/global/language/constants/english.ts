@@ -517,6 +517,11 @@ export const ENGLISH: LanguageInterface = {
       zonePopup: {
         address: "Address",
         magnitude: "Litres",
+        initialFuel: "Initial L.",
+        finalFuel: "Final L.",
+        dateGps: "Date",
+        startDate: "Start Date",
+        endDate: "End Date",
         coordinates: "Coordinates",
       },
     },

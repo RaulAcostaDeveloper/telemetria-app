@@ -94,12 +94,13 @@ export const GoogleMapsLoaderZone = ({
     };
   }, []);
 
-  if (!isLoaded)
+  if (!isLoaded) {
     return (
       <div>
         <LoaderAnimation />
       </div>
     );
+  }
 
   return (
     <GoogleMap
@@ -153,12 +154,36 @@ export const GoogleMapsLoaderZone = ({
                     <div>${places[0].magnitude} lts.</div>
                   </div>
                   <div class="${styles.rowInfo}">
+                    <div>${LANGUAGE.zones.zoneMap.zonePopup.initialFuel}:</div>
+                    <div>${places[0].initialFuel} lts.</div>
+                  </div>
+                  <div class="${styles.rowInfo}">
+                    <div>${LANGUAGE.zones.zoneMap.zonePopup.finalFuel}:</div>
+                    <div>${places[0].finalFuel} lts.</div>
+                  </div>
+                  <div class="${styles.rowInfo}">
+                    <div>${LANGUAGE.zones.zoneMap.zonePopup.dateGps}:</div>
+                    <div>${places[0].dateGps}</div>
+                  </div>
+                  <div class="${styles.rowInfo}">
                     <div>${LANGUAGE.zones.zoneMap.zonePopup.coordinates}:</div>
-                    <div>${places[0].position.lat},</br>${places[0].position.lng}</div>
+                    <div>${places[0].position.lat}, ${places[0].position.lng}</div>
                   </div>
                 </div>
               </div>`
             );
+
+            // Construcción del popup header
+            const header = document.createElement("div");
+            header.style.textAlign = "center";
+            header.style.marginTop = "-5px";
+            header.style.marginRight = "-48px"; //Tamaño que tomó el icono de cerrar.
+            const title = document.createElement("span");
+            title.textContent = places[0].title ? places[0].title : "";
+            title.style.fontSize = "2rem";
+            title.style.fontWeight = "bold";
+            header.appendChild(title);
+            infoRef.current?.setHeaderContent(header);
 
             if (infoBoxOpen) {
               infoRef.current.close();
@@ -214,12 +239,35 @@ export const GoogleMapsLoaderZone = ({
                       <div>${p.magnitude} lts.</div>
                     </div>
                     <div class="${styles.rowInfo}">
+                      <div>${LANGUAGE.zones.zoneMap.zonePopup.initialFuel}:</div>
+                      <div>${p.initialFuel} lts.</div>
+                    </div>
+                    <div class="${styles.rowInfo}">
+                      <div>${LANGUAGE.zones.zoneMap.zonePopup.finalFuel}:</div>
+                      <div>${p.finalFuel} lts.</div>
+                    </div>
+                    <div class="${styles.rowInfo}">
+                      <div>${LANGUAGE.zones.zoneMap.zonePopup.dateGps}:</div>
+                      <div>${p.dateGps}</div>
+                    </div>
+                    <div class="${styles.rowInfo}">
                       <div>${LANGUAGE.zones.zoneMap.zonePopup.coordinates}:</div>
                       <div>${p.position.lat}, ${p.position.lng}</div>
                     </div>
                   </div>
                 </div>`
               );
+
+              //Construcción del popup header
+              const header = document.createElement("div");
+              header.style.textAlign = "center";
+              header.style.marginTop = "-5px";
+              header.style.marginRight = "-48px"; //Tamaño que tomó el icono de cerrar.
+              const title = document.createElement("span");
+              title.textContent = p.title ? p.title : "";
+              title.style.fontSize = "2rem";
+              header.appendChild(title);
+              infoRef.current?.setHeaderContent(header);
 
               if (infoBoxOpen) {
                 infoRef.current.close();
