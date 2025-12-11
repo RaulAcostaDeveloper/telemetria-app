@@ -38,11 +38,11 @@
 }
 
 .fixedDatesContainer li:hover {
-  background-color: var(--company-color-1-dark);
+  background-color: var(--company-color-1);
 }
 
 .fixedDatesContainer li.selectedFilter {
-  background-color: var(--company-color-6);
+  background-color: var(--company-color-5);
   color: white;
 }
 
@@ -227,6 +227,10 @@
   background-color: white;
 }
 
+.containerInput:focus-visible {
+  outline-color: #cccccc99;
+}
+
 .todayButtonContainer {
   display: flex;
   justify-content: space-between;
@@ -386,7 +390,7 @@
 }
 
 .selectedFilter {
-  background-color: var(--company-color-6);
+  background-color: var(--company-color-5);
   color: white;
 }
 .errorMessage {

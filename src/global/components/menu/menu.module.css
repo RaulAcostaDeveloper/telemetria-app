@@ -1,6 +1,6 @@
 .menu {
   position: fixed;
-  background-color: var(--company-color-6);
+  background-color: var(--company-color-5);
   display: flex;
   flex-direction: column;
   height: 100vh;
