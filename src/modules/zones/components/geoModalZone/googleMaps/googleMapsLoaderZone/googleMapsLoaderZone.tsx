@@ -176,6 +176,8 @@ export const GoogleMapsLoaderZone = ({
             // Construcción del popup header
             const header = document.createElement("div");
             header.style.textAlign = "center";
+            header.style.marginTop = "-5px";
+            header.style.marginRight = "-48px"; //Tamaño que tomó el icono de cerrar.
             const title = document.createElement("span");
             title.textContent = places[0].title ? places[0].title : "";
             title.style.fontSize = "2rem";
@@ -258,6 +260,8 @@ export const GoogleMapsLoaderZone = ({
               //Construcción del popup header
               const header = document.createElement("div");
               header.style.textAlign = "center";
+              header.style.marginTop = "-5px";
+              header.style.marginRight = "-48px"; //Tamaño que tomó el icono de cerrar.
               const title = document.createElement("span");
               title.textContent = p.title ? p.title : "";
               title.style.fontSize = "2rem";
