@@ -5,7 +5,7 @@ import styles from "./zoneProfileData.module.css";
 import { Collapsable } from "@/global/components/collapsable/collapsable";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ProfileInfo } from "./profileInfo/profileInfo";
-import { ProfileModalHandler } from "./profileModalHandler/profileModalHandlet";
+import { ProfileModalHandler } from "./profileModalHandler/profileModalHandler";
 import { STORAGE_KEYS } from "@/global/localStorage/constants/storageKeys";
 import { ZoneDetailsValue } from "@/global/redux/serviceSlices/zoneDetails";
 import { getCategories } from "../zoneEditProfileModalForm/categories";
