@@ -1,5 +1,5 @@
 "use client";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import CheckIcon from "@mui/icons-material/Check";
@@ -26,14 +26,12 @@ interface Props {
   LANGUAGE: LanguageInterface;
   closeModal: () => void;
   id: string;
-  setUpdatesTracker: Dispatch<SetStateAction<number>>;
 }
 
 export const ZoneEditProfileModalForm = ({
   LANGUAGE,
   closeModal,
   id,
-  setUpdatesTracker,
 }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const { isAuthenticated, logoutState } = useAuth();
@@ -156,11 +154,6 @@ export const ZoneEditProfileModalForm = ({
           );
         }
       }, 2000);
-
-      setTimeout(() => {
-        // Actualiza mapa colapsable, debe ser en una duración posterior al setTimeout de los dispatch.
-        setUpdatesTracker((n: number) => n + 1);
-      }, 2500);
     }
   }, [isConfirmationModalOpen]);
 

@@ -1,5 +1,5 @@
 "use client";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./zoneProfileData.module.css";
 import { Collapsable } from "@/global/components/collapsable/collapsable";
@@ -18,15 +18,9 @@ interface Props {
   LANGUAGE: LanguageInterface;
   id: string;
   zoneDetailsData: ZoneDetailsValue;
-  setUpdatesTracker: Dispatch<SetStateAction<number>>;
 }
 
-export const ZoneProfileData = ({
-  LANGUAGE,
-  id,
-  zoneDetailsData,
-  setUpdatesTracker,
-}: Props) => {
+export const ZoneProfileData = ({ LANGUAGE, id, zoneDetailsData }: Props) => {
   const [isProfileDataOpen, setIsProfileDataOpen] = useState<boolean | null>(
     null
   );
@@ -113,11 +107,7 @@ export const ZoneProfileData = ({
             />
           </div>
           <div className={styles.buttonSection}>
-            <ProfileModalHandler
-              LANGUAGE={LANGUAGE}
-              id={id}
-              setUpdatesTracker={setUpdatesTracker}
-            />
+            <ProfileModalHandler LANGUAGE={LANGUAGE} id={id} />
           </div>
         </div>
       </Collapsable>

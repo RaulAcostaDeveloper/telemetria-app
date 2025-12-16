@@ -1,5 +1,5 @@
 "use client";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 
@@ -10,14 +10,9 @@ import { ZoneEditProfileModalForm } from "../../zoneEditProfileModalForm/zoneEdi
 interface Props {
   LANGUAGE: LanguageInterface;
   id: string;
-  setUpdatesTracker: Dispatch<SetStateAction<number>>;
 }
 
-export const ProfileModalHandler = ({
-  LANGUAGE,
-  id,
-  setUpdatesTracker,
-}: Props) => {
+export const ProfileModalHandler = ({ LANGUAGE, id }: Props) => {
   const [isOpenForm, setIsOpenForm] = useState(false);
 
   return (
@@ -33,7 +28,6 @@ export const ProfileModalHandler = ({
           LANGUAGE={LANGUAGE}
           closeModal={() => setIsOpenForm(false)}
           id={id}
-          setUpdatesTracker={setUpdatesTracker}
         />
       )}
     </div>
