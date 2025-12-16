@@ -32,7 +32,7 @@ export const ZonesMapTabSolo = ({
       <GoogleMapClientComponentZone
         LANGUAGE={LANGUAGE}
         markersData={markersInZone}
-        mapType={"satellite"}
+        mapType={"roadmap"}
         zoneCircle={zoneCircle}
       />
     </div>

@@ -59,7 +59,7 @@ const GeoModalZone = ({
             <GoogleMapClientComponentZone
               LANGUAGE={LANGUAGE}
               markersData={markersData}
-              mapType={"satellite"}
+              mapType={"roadmap"}
               zoneCircle={zoneCircle}
             />
           </div>
