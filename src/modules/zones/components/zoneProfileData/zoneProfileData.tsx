@@ -1,11 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import styles from "./zoneProfileData.module.css";
 import { Collapsable } from "@/global/components/collapsable/collapsable";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { ProfileInfo } from "./profileInfo/profileInfo";
-import { ProfileModalHandler } from "./profileModalHandler/profileModalHandlet";
+import { ProfileModalHandler } from "./profileModalHandler/profileModalHandler";
 import { STORAGE_KEYS } from "@/global/localStorage/constants/storageKeys";
 import { ZoneDetailsValue } from "@/global/redux/serviceSlices/zoneDetails";
 import { getCategories } from "../zoneEditProfileModalForm/categories";
@@ -18,9 +18,15 @@ interface Props {
   LANGUAGE: LanguageInterface;
   id: string;
   zoneDetailsData: ZoneDetailsValue;
+  setUpdatesTracker: Dispatch<SetStateAction<number>>;
 }
 
-export const ZoneProfileData = ({ LANGUAGE, id, zoneDetailsData }: Props) => {
+export const ZoneProfileData = ({
+  LANGUAGE,
+  id,
+  zoneDetailsData,
+  setUpdatesTracker,
+}: Props) => {
   const [isProfileDataOpen, setIsProfileDataOpen] = useState<boolean | null>(
     null
   );
@@ -107,7 +113,11 @@ export const ZoneProfileData = ({ LANGUAGE, id, zoneDetailsData }: Props) => {
             />
           </div>
           <div className={styles.buttonSection}>
-            <ProfileModalHandler LANGUAGE={LANGUAGE} id={id} />
+            <ProfileModalHandler
+              LANGUAGE={LANGUAGE}
+              id={id}
+              setUpdatesTracker={setUpdatesTracker}
+            />
           </div>
         </div>
       </Collapsable>

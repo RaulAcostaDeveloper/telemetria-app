@@ -1,5 +1,5 @@
 "use client";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { LocalGasStation } from "@mui/icons-material";
@@ -67,6 +67,7 @@ type WithZoneId = { zoneId: string };
 //zoneId de fuelSummary
 export const ZonesDataProvider = ({ zoneId }: Props) => {
   const LANGUAGE = useLanguage();
+  const [updatesTracker, setUpdatesTracker] = useState(0);
 
   const { fuelSummaryData, fuelSummaryStatus } = useSelector(
     (state: RootState) => state.fuelSummary
@@ -325,6 +326,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
           LANGUAGE={LANGUAGE}
           id={zoneId}
           zoneDetailsData={zoneDetailsData.value}
+          setUpdatesTracker={setUpdatesTracker}
         />
       )}
 
@@ -341,6 +343,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
               LANGUAGE={LANGUAGE}
               markersInZone={allMarkers}
               zoneCircle={zoneCircle}
+              key={updatesTracker}
             />
           </div>
         </Collapsable>
