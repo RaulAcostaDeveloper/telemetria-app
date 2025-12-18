@@ -15,23 +15,25 @@ export const MenuHeader = ({ isOpen, setIsOpen, LANGUAGE }: Props) => {
       onClick={() => setIsOpen(!isOpen)}
       title={isOpen ? LANGUAGE.menu.titles.close : LANGUAGE.menu.titles.open}
     >
-      {isOpen ? (
-        // IMAGEN PROPORCIÓN LOGO 6:1
-        <Image
-          alt={LANGUAGE.menu.titles.logo}
-          height={38}
-          src={"/png/imagotipo_transtelemetrix_blanco.png"}
-          width={228}
-        />
-      ) : (
-        // IMAGEN PROPORCIÓN LOGO 1:1
-        <Image
-          alt={LANGUAGE.menu.titles.logo}
-          height={50}
-          src={"/svg/Isotipo_transtelemetris.svg"}
-          width={50}
-        />
-      )}
+      <div className={styles.container}>
+        {isOpen ? (
+          // IMAGEN PROPORCIÓN LOGO 6:1
+          <Image
+            alt={LANGUAGE.menu.titles.logo}
+            height={26}
+            src={"/png/Imagotipo_color-5-textLarge.png"}
+            width={83}
+          />
+        ) : (
+          // IMAGEN PROPORCIÓN LOGO 1:1
+          <Image
+            alt={LANGUAGE.menu.titles.logo}
+            height={30}
+            src={"/svg/mini_Imagotipo_color-5.svg"}
+            width={30}
+          />
+        )}
+      </div>
     </div>
   );
 };
