@@ -129,7 +129,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
             <Image
               alt={LANGUAGE.menu.titles.logo}
               height={100}
-              src={"/svg/Imagotipo_Black_transtelemetris.svg"}
+              src={"/svg/Imagotipo_color-3.svg"}
               width={460}
             />
           </div>
@@ -179,6 +179,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
           )}
 
           <GeneralButton
+            buttonStyle={styles.buttonStyle}
             callback={onClickGetToken}
             title={LANGUAGE.auth.authForm.loginButton}
             type={ButtonTypes.CONFIRM}
