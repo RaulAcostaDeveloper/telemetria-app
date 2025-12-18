@@ -129,7 +129,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
             <Image
               alt={LANGUAGE.menu.titles.logo}
               height={100}
-              src={"/svg/Imagotipo_color-3.svg"}
+              src={"/svg/Imagotipo_color-4.svg"}
               width={460}
             />
           </div>
