@@ -101,7 +101,7 @@ const GoogleMapClientComponentZone = ({
   useEffect(() => {
     // Efecto de zoom
     if (mapLoaded && mapRef.current && !hasAnimatedRef.current && center) {
-      mapRef.current.setZoom(20); // Quitar si se desea el efecto de zoom "lento" al abrir
+      mapRef.current.setZoom(19); // Quitar si se desea el efecto de zoom "lento" al abrir
     }
   }, [center, mapLoaded]);
 

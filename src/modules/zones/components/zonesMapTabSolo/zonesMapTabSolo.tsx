@@ -25,7 +25,7 @@ export const ZonesMapTabSolo = ({
   LANGUAGE,
   markersInZone,
   zoneCircle,
-  key,
+  key = 0,
 }: Props) => {
   return (
     <div className={["containermap", styles.container].join(" ")} key={key}>

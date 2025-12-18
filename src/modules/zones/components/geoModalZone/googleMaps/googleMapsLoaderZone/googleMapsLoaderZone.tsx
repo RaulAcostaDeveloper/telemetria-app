@@ -59,9 +59,14 @@ export const GoogleMapsLoaderZone = ({
       const bounds = new google.maps.LatLngBounds();
       places.forEach((p) => bounds.extend(p.position));
       map.fitBounds(bounds);
+
+      //Si se quiere forzar el zoom y no seguir a .fitBounds()
+      google.maps.event.addListenerOnce(map, "bounds_changed", () => {
+        map.setZoom(19);
+      });
     } else if (center) {
       map.setCenter(center);
-      map.setZoom(5);
+      map.setZoom(19);
       setMapLoaded(true);
     }
 
@@ -106,7 +111,7 @@ export const GoogleMapsLoaderZone = ({
     <GoogleMap
       mapContainerStyle={{ width: "100%", height: "100%" }}
       center={center}
-      zoom={5}
+      zoom={15}
       onLoad={onLoad}
       options={{
         gestureHandling: "greedy",
