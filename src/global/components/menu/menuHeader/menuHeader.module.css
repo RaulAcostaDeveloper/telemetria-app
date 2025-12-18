@@ -9,6 +9,24 @@
 }
 
 .isOpen {
-  padding-left: 10px;
-  justify-content: left;
+  justify-content: center;
+}
+
+.container {
+  background-color: white;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.container img {
+  margin: 10px;
+}
+
+.isOpen .container {
+  width: 90%;
+}
+
+.isOpen .container img {
+  margin: 5px;
 }

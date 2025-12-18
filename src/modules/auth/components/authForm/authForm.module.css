@@ -99,3 +99,11 @@
   margin-left: 5px;
   padding-top: 2px;
 }
+
+button.buttonStyle {
+  background-color: var(--company-color-4);
+}
+
+button.buttonStyle:hover {
+  background-color: var(--company-color-4-dark);
+}

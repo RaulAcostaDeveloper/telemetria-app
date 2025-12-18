@@ -10,7 +10,7 @@ import { CacheCleaner, MainWrapper } from "@/global/components";
 import { ReduxProvider } from "@/global/redux/provider/reduxProvider/ReduxProvider";
 
 export const metadata: Metadata = {
-  title: "Core - Transtelemetrix",
+  title: "Altara One",
   description:
     "Advanced web app for real-time monitoring and historial analysis of vehicle fleets",
 };
