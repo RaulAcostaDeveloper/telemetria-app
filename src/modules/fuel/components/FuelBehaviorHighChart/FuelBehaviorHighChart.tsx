@@ -592,6 +592,7 @@ export const FuelBehaviorHighChart = ({
     performancesBetweenChargesData,
     performancesBetweenChargesTooltipFields,
     plotBands,
+    handleClicGeoData,
   ]);
 
   return (
