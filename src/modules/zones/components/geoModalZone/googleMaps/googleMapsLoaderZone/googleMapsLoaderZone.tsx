@@ -1,5 +1,11 @@
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import {
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import LoaderAnimation from "@/global/components/loaderAnimation/loaderAnimation";
@@ -8,6 +14,8 @@ import {
   ZoneDetail,
 } from "../googleMapClientComponentZone/googleMapClientComponentZone";
 import styles from "./googleMapsLoaderZone.module.css";
+
+type MapTypeId = google.maps.MapTypeId | string;
 
 interface Center {
   lat: number;
@@ -38,8 +46,10 @@ export const GoogleMapsLoaderZone = ({
   const markerRef = useRef<google.maps.Marker | null>(null);
   const infoRef = useRef<google.maps.InfoWindow | null>(null);
   const directoryMarkersRef = useRef<Record<string, google.maps.Marker>>({});
+  const mapTypeListenerRef = useRef<google.maps.MapsEventListener | null>(null);
   const [language, region] = LANGUAGE.localeLanguage.split("-");
   const [infoBoxOpen, setInfoBoxOpen] = useState(false);
+  const [mapTypeId, setMapTypeId] = useState<MapTypeId>("roadmap");
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: googleApiKey as string,
     language,
@@ -48,6 +58,19 @@ export const GoogleMapsLoaderZone = ({
 
   const onLoad = (map: google.maps.Map) => {
     mapRef.current = map;
+
+    //Proceso para persistencia de tipo de mapa
+    let validationMapType = "roadmap";
+    if (undefined !== map.getMapTypeId()) {
+      validationMapType = map.getMapTypeId() as string;
+    } else {
+      validationMapType = "roadmap";
+    }
+    setMapTypeId(validationMapType);
+
+    mapTypeListenerRef.current = map.addListener("maptypeid_changed", () => {
+      setMapTypeId(map.getMapTypeId() as string);
+    });
 
     //Genera la instancia para tener referencia al Popup.
     if (!infoRef.current) {
@@ -99,6 +122,12 @@ export const GoogleMapsLoaderZone = ({
     };
   }, []);
 
+  const onUnmount = useCallback(() => {
+    mapTypeListenerRef.current?.remove();
+    mapTypeListenerRef.current = null;
+    mapRef.current = null;
+  }, []);
+
   if (!isLoaded) {
     return (
       <div>
@@ -116,8 +145,9 @@ export const GoogleMapsLoaderZone = ({
       options={{
         gestureHandling: "greedy",
         zoomControl: true,
-        mapTypeId: mapType,
+        mapTypeId: mapTypeId,
       }}
+      onUnmount={onUnmount}
     >
       {center && !zoneCircle && <Marker position={center} />}
       {places?.length === 1 && (
