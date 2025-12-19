@@ -60,7 +60,7 @@ export const GoogleMapsLoaderZone = ({
     mapRef.current = map;
 
     //Proceso para persistencia de tipo de mapa
-    let validationMapType = "roadmap";
+    let validationMapType: string = mapType;
     if (undefined !== map.getMapTypeId()) {
       validationMapType = map.getMapTypeId() as string;
     } else {
