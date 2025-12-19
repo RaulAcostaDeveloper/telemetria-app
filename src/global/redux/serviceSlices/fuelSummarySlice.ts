@@ -125,12 +125,14 @@ const fuelSummaryFormatter = (
       idIndexEvent: `${i}-${v.eventId}`,
       imei: `${getPlateFromImei(devices, v.imei)} (${v.imei})`,
       imeiClean: v.imei,
+      dateGps: toLocalDateTime(v.dateGps),
     }));
     const discharges = data.value.discharges.map((v, i) => ({
       ...v,
       idIndexEvent: `${i}-${v.eventId}`,
       imei: `${getPlateFromImei(devices, v.imei)} (${v.imei})`,
       imeiClean: v.imei,
+      dateGps: toLocalDateTime(v.dateGps),
     }));
 
     //const discharges
