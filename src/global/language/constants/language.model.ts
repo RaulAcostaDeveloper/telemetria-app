@@ -25,6 +25,7 @@ export interface LanguageInterface {
     confirmation: string;
     savedData: string;
     noChanges: string;
+    noRegisters: string;
   };
   header: {
     backButton: {

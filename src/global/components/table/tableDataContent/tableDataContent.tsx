@@ -2,10 +2,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import styles from "./tableDataContent.module.css";
+import { ErrorMessage } from "../../errorMessage/errorMessage";
 import { LanguageInterface } from "../../../language/constants/language.model";
+import { MODAL_OPTION, columnsTable, dataTable } from "../table.model";
 import { TableActions } from "../tableActions/tableActions";
 import { TableDataProp } from "../tableDataProp/tableDataProp";
-import { MODAL_OPTION, columnsTable, dataTable } from "../table.model";
 import { ndIfEmpty } from "@/global/utils/ndIfEmpty";
 
 interface Props {
@@ -141,50 +142,57 @@ export const TableDataContent = ({
         <div className={styles.scrollUp}>&uarr;&#8593;&#8593;</div>
       )}
 
-      <div className={styles.dataContent} ref={insideDataTable}>
-        {reducedData.map((dataObject, dataIndex) => (
-          // Registros de la tabla
-          <div key={dataIndex} className={styles.dataObject}>
-            {columns.map((col, colIndex) => {
-              // Espacio que se le indicó en la columna
-              const defaultSpace = {
-                width: columns[colIndex].defaultSpace
-                  ? `${columns[colIndex].defaultSpace * 50}px`
-                  : "fit-content",
-              };
-              const dataValues = Object.values(dataObject);
-              return (
-                <div key={colIndex} style={defaultSpace}>
-                  <TableDataProp
-                    LANGUAGE={LANGUAGE}
-                    value={ndIfEmpty(dataValues[colIndex])}
-                    defaultSpace={defaultSpace}
-                  />
-                </div>
-              );
-            })}
+      {reducedData.length > 0 ? (
+        <div className={styles.dataContent} ref={insideDataTable}>
+          {reducedData.map((dataObject, dataIndex) => (
+            // Registros de la tabla
+            <div key={dataIndex} className={styles.dataObject}>
+              {columns.map((col, colIndex) => {
+                // Espacio que se le indicó en la columna
+                const defaultSpace = {
+                  width: columns[colIndex].defaultSpace
+                    ? `${columns[colIndex].defaultSpace * 50}px`
+                    : "fit-content",
+                };
+                const dataValues = Object.values(dataObject);
+                return (
+                  <div key={colIndex} style={defaultSpace}>
+                    <TableDataProp
+                      LANGUAGE={LANGUAGE}
+                      value={ndIfEmpty(dataValues[colIndex])}
+                      defaultSpace={defaultSpace}
+                    />
+                  </div>
+                );
+              })}
 
-            {/* Acciones de los registros */}
-            {showActions && (
-              <TableActions
-                LANGUAGE={LANGUAGE}
-                dataObject={dataObject}
-                deleteFunction={deleteFunction}
-                idImei={idImei}
-                idKey={idKey}
-                idZone={idZone}
-                modalOption={modalOption}
-                showDelete={showDelete}
-                showEdit={showEdit}
-                showGoGenericReport={showGoGenericReport}
-                showGoPageView={showGoPageView}
-                showViewModal={showViewModal}
-                viewPath={viewPath}
-              />
-            )}
-          </div>
-        ))}
-      </div>
+              {/* Acciones de los registros */}
+              {showActions && (
+                <TableActions
+                  LANGUAGE={LANGUAGE}
+                  dataObject={dataObject}
+                  deleteFunction={deleteFunction}
+                  idImei={idImei}
+                  idKey={idKey}
+                  idZone={idZone}
+                  modalOption={modalOption}
+                  showDelete={showDelete}
+                  showEdit={showEdit}
+                  showGoGenericReport={showGoGenericReport}
+                  showGoPageView={showGoPageView}
+                  showViewModal={showViewModal}
+                  viewPath={viewPath}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <ErrorMessage
+          message={LANGUAGE.notifications.noRegisters}
+          LANGUAGE={LANGUAGE}
+        />
+      )}
 
       {canScrollDown && (
         <div className={styles.scrollDown}>&#8595;&#8595;&#8595;</div>

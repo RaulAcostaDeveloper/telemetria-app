@@ -26,6 +26,7 @@ export const ENGLISH: LanguageInterface = {
     confirmation: "Confirmation",
     noChanges: "No changes detected",
     savedData: "The changes have been saved",
+    noRegisters: "There are no records that match the search parameters",
   },
   header: {
     backButton: {
