@@ -85,7 +85,7 @@ export const GoogleMapsLoaderZone = ({
 
       //Si se quiere forzar el zoom y no seguir a .fitBounds()
       google.maps.event.addListenerOnce(map, "bounds_changed", () => {
-        map.setZoom(19);
+        map.setZoom(18);
       });
     } else if (center) {
       map.setCenter(center);
