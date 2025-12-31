@@ -156,6 +156,7 @@ export const PORTUGUES: LanguageInterface = {
       performance: "Rendimento (L)",
       distance: "Distância (Km)",
       timeTraveled: "Horas trabalhadas (H)",
+      speed: "Velocidade (Km/h)",
     },
     titles: {
       charges: "Abastecimentos",
@@ -164,6 +165,7 @@ export const PORTUGUES: LanguageInterface = {
       fuelVariationCAN: "Nível de combustível",
       performancesBetweenCharges: "Rendimento entre abastecimentos",
       dailyPerformance: "Rendimento diário",
+      speed: "Velocidade",
       engineOff: "Motor desligado",
       engineOnIdle: "Motor ligado e parado",
       engineOnMoving: "Motor ligado em movimento",
@@ -202,6 +204,7 @@ export const PORTUGUES: LanguageInterface = {
         titleFuelVariation: "Nível de combustível",
         titlePerformanceBetween: "Rendimento entre cargas",
         titlePerformanceDaily: "Rendimento diário",
+        titleSpeed: "Velocidade",
         subtitleCharges: "Combustível",
         subtitleDischarges: "Combustível",
         subtitleFuelVariationCAN: "Combustível",
