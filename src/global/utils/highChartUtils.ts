@@ -430,6 +430,27 @@ export function getTimeTraveledTooltipFields(
   ];
 }
 
+export function getSpeedTooltipFields(
+  LANGUAGE: LanguageInterface
+): TooltipField[] {
+  return [
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.speed,
+      value: (data) => `${ndIfEmpty(data.speed)}  km/h`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.lat,
+      value: (data) =>
+        typeof data.lat === "number" ? String(data.lat) : data.lat ?? "",
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.lon,
+      value: (data) =>
+        typeof data.lon === "number" ? String(data.lon) : data.lon ?? "",
+    },
+  ];
+}
+
 /* export function getDrivenTooltipFields(
   LANGUAGE: LanguageInterface
 ): TooltipField[] {

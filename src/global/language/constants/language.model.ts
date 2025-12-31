@@ -135,6 +135,7 @@ export interface LanguageInterface {
       performance: string;
       distance: string;
       timeTraveled: string;
+      speed: string;
     };
     titles: {
       charges: string;
@@ -143,6 +144,7 @@ export interface LanguageInterface {
       fuelVariationCAN: string;
       performancesBetweenCharges: string;
       dailyPerformance: string;
+      speed: string;
       engineOff: string;
       engineOnIdle: string;
       engineOnMoving: string;
@@ -181,6 +183,7 @@ export interface LanguageInterface {
         titleFuelVariation: string;
         titlePerformanceBetween: string;
         titlePerformanceDaily: string;
+        titleSpeed: string;
         subtitleCharges: string;
         subtitleDischarges: string;
         subtitleFuelVariationCAN: string;

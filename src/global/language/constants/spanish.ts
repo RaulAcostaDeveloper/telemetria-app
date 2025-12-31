@@ -156,6 +156,7 @@ export const SPANISH: LanguageInterface = {
       performance: "Rendimiento (L)",
       distance: "Distancia (Km)",
       timeTraveled: "Horas trabajadas (H)",
+      speed: "Velocidad (Km/h)",
     },
     titles: {
       charges: "Cargas",
@@ -164,6 +165,7 @@ export const SPANISH: LanguageInterface = {
       fuelVariationCAN: "Nivel de combustible",
       performancesBetweenCharges: "Rendimiento entre cargas",
       dailyPerformance: "Rendimiento diario",
+      speed: "Velocidad",
       engineOff: "Motor apagado",
       engineOnIdle: "Motor encendido y estacionado",
       engineOnMoving: "Motor encendido y en movimiento",
@@ -202,6 +204,7 @@ export const SPANISH: LanguageInterface = {
         titleFuelVariation: "Nivel de combustible",
         titlePerformanceBetween: "Rendimiento entre cargas",
         titlePerformanceDaily: "Rendimiento diario",
+        titleSpeed: "Velocidad",
         subtitleCharges: "Combustible",
         subtitleDischarges: "Combustible",
         subtitleFuelVariationCAN: "Combustible",

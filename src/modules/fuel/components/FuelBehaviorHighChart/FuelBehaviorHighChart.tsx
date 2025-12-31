@@ -7,6 +7,7 @@ import {
   getDisChargesTooltipFields,
   getLevelMessagesTooltipFields,
   getPerformancesBetweenChargesTooltipFields,
+  getSpeedTooltipFields,
 } from "@/global/utils/highChartUtils";
 import {
   getLabelsForChargeGeoMap,
@@ -53,6 +54,10 @@ export const FuelBehaviorHighChart = ({
 
   const performancesBetweenChargesTooltipFields = useMemo(() => {
     return getPerformancesBetweenChargesTooltipFields(LANGUAGE);
+  }, [LANGUAGE]);
+
+  const speedTooltipFields = useMemo(() => {
+    return getSpeedTooltipFields(LANGUAGE);
   }, [LANGUAGE]);
 
   const chargesData = useMemo(() => {
@@ -145,6 +150,20 @@ export const FuelBehaviorHighChart = ({
           mainPower: c.externalPower,
           tanks: c.tanks,
           currentLevelSmoothly: c.canCurrentLevelSmoothly,
+        },
+      }))
+      .sort((a, b) => a.x - b.x);
+  }, [fuelDataData]);
+
+  const speedData = useMemo(() => {
+    return fuelDataData.levelMessages
+      .map((s) => ({
+        x: new Date(s.dateGps).getTime(),
+        y: s.speed,
+        custom: {
+          speed: s.speed,
+          lat: s.lat,
+          lon: s.lon,
         },
       }))
       .sort((a, b) => a.x - b.x);
@@ -322,6 +341,22 @@ export const FuelBehaviorHighChart = ({
           },
           opposite: true,
         },
+        {
+          labels: {
+            style: {
+              fontSize: "14px",
+              fontWeight: "bold",
+            },
+          },
+          title: {
+            text: LANGUAGE.highCharts.axisTitles.speed,
+            style: {
+              fontSize: "13px",
+              fontWeight: "bold",
+            },
+          },
+          opposite: false,
+        },
       ],
       series: [
         {
@@ -481,6 +516,23 @@ export const FuelBehaviorHighChart = ({
             ),
           },
         },
+        {
+          yAxis: 2,
+          name: LANGUAGE.highCharts.titles.speed,
+          type: "line",
+          data: speedData,
+          color: "#8b00f5",
+          lineWidth: 2,
+          visible: false,
+          showInNavigator: true,
+          cursor: "pointer",
+          tooltip: {
+            pointFormatter: createTooltipFormatter(
+              LANGUAGE.highCharts.tooltips.fuel.titleSpeed,
+              speedTooltipFields
+            ),
+          },
+        },
       ],
       tooltip: {
         split: false,
@@ -585,9 +637,11 @@ export const FuelBehaviorHighChart = ({
     dailyPerformancesData,
     disChargesData,
     dischargesTooltipFields,
+    speedTooltipFields,
     fuelDataData,
     levelMessagesCANData,
     levelMessagesData,
+    speedData,
     levelMessagesTooltipFields,
     performancesBetweenChargesData,
     performancesBetweenChargesTooltipFields,

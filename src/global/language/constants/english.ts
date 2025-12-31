@@ -156,6 +156,7 @@ export const ENGLISH: LanguageInterface = {
       performance: "Performance (L)",
       distance: "Distance (Km)",
       timeTraveled: "Working hours (H)",
+      speed: "Speed (Km/h)",
     },
     titles: {
       charges: "Refuels",
@@ -164,6 +165,7 @@ export const ENGLISH: LanguageInterface = {
       fuelVariationCAN: "Fuel level",
       performancesBetweenCharges: "Performance between charges",
       dailyPerformance: "Daily performance",
+      speed: "Speed",
       engineOff: "Engine off",
       engineOnIdle: "Engine parked",
       engineOnMoving: "Engine running (moving)",
@@ -202,6 +204,7 @@ export const ENGLISH: LanguageInterface = {
         titleFuelVariation: "Fuel level",
         titlePerformanceBetween: "Performance Between Charges",
         titlePerformanceDaily: "Daily Performance",
+        titleSpeed: "Speed",
         subtitleCharges: "Fuel",
         subtitleDischarges: "Fuel",
         subtitleFuelVariationCAN: "Fuel",
