@@ -110,24 +110,6 @@ export function getChargesTooltipFields(
       value: (data) => `${formatDateTime(data.endDate)}`,
     },
     {
-      label: LANGUAGE.highCharts.tooltips.lat,
-      value: (data) =>
-        typeof data.lat === "number" ? String(data.lat) : data.lat ?? "",
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.lon,
-      value: (data) =>
-        typeof data.lon === "number" ? String(data.lon) : data.lon ?? "",
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.odometer,
-      value: (data) => `${ndIfEmpty(data.odometer)} Km`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.speed,
-      value: (data) => `${ndIfEmpty(data.speed)}  Km/h`,
-    },
-    {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
       value: (data) =>
         `${
@@ -143,10 +125,6 @@ export function getChargesTooltipFields(
     {
       label: LANGUAGE.highCharts.tooltips.fuel.mainPower,
       value: (data) => `${ndIfEmpty(data.mainPower)} (V)`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.address,
-      value: (data) => `${ndIfEmpty(data.address)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
@@ -180,24 +158,6 @@ export function getDisChargesTooltipFields(
       value: (data) => `${formatDateTime(data.endDate)}`,
     },
     {
-      label: LANGUAGE.highCharts.tooltips.lat,
-      value: (data) =>
-        typeof data.lat === "number" ? String(data.lat) : data.lat ?? "",
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.lon,
-      value: (data) =>
-        typeof data.lon === "number" ? String(data.lon) : data.lon ?? "",
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.odometer,
-      value: (data) => `${ndIfEmpty(data.odometer)} Km`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.speed,
-      value: (data) => `${ndIfEmpty(data.speed)}  km/h`,
-    },
-    {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
       value: (data) =>
         `${
@@ -213,10 +173,6 @@ export function getDisChargesTooltipFields(
     {
       label: LANGUAGE.highCharts.tooltips.fuel.mainPower,
       value: (data) => `${ndIfEmpty(data.mainPower)} (V)`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.address,
-      value: (data) => `${ndIfEmpty(data.address)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
@@ -246,22 +202,8 @@ export function getLevelMessagesTooltipFields(
       value: (data) => `${formatDateTime(data.dateGps)}`,
     },
     {
-      label: LANGUAGE.highCharts.tooltips.lat,
-      value: (data) =>
-        typeof data.lat === "number" ? String(data.lat) : data.lat ?? "",
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.lon,
-      value: (data) =>
-        typeof data.lon === "number" ? String(data.lon) : data.lon ?? "",
-    },
-    {
       label: LANGUAGE.highCharts.tooltips.fuel.odometer,
       value: (data) => `${ndIfEmpty(data.odometer)} Km`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.fuel.speed,
-      value: (data) => `${ndIfEmpty(data.speed)}  km/h`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
@@ -351,16 +293,6 @@ export function getRPMTooltipFields(
       value: (data) => `${formatDateTime(data.dateGps)}`,
     },
     {
-      label: LANGUAGE.highCharts.tooltips.lat,
-      value: (data) =>
-        typeof data.lat === "number" ? String(data.lat) : data.lat ?? "",
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.lon,
-      value: (data) =>
-        typeof data.lon === "number" ? String(data.lon) : data.lon ?? "",
-    },
-    {
       label: LANGUAGE.highCharts.tooltips.rpm.rpm,
       value: (data) => `${ndIfEmpty(data.value)}`,
       separator: {
@@ -378,16 +310,6 @@ export function getDistanceTooltipFields(
     {
       label: LANGUAGE.highCharts.tooltips.date,
       value: (data) => `${formatDateTime(data.dateGps)}`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.lat,
-      value: (data) =>
-        typeof data.lat === "number" ? String(data.lat) : data.lat ?? "",
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.lon,
-      value: (data) =>
-        typeof data.lon === "number" ? String(data.lon) : data.lon ?? "",
     },
     {
       label: LANGUAGE.highCharts.tooltips.distance.distanceTraveled,
@@ -409,16 +331,6 @@ export function getTimeTraveledTooltipFields(
       value: (data) => `${formatDateTime(data.dateGps)}`,
     },
     {
-      label: LANGUAGE.highCharts.tooltips.lat,
-      value: (data) =>
-        typeof data.lat === "number" ? String(data.lat) : data.lat ?? "",
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.lon,
-      value: (data) =>
-        typeof data.lon === "number" ? String(data.lon) : data.lon ?? "",
-    },
-    {
       label: LANGUAGE.highCharts.tooltips.timeTraveled.timeTraveled,
       value: (data) => `${ndIfEmpty(data.value)} H`,
       separator: {
@@ -435,18 +347,12 @@ export function getSpeedTooltipFields(
 ): TooltipField[] {
   return [
     {
+      label: LANGUAGE.highCharts.tooltips.date,
+      value: (data) => `${formatDateTime(data.dateGps)}`,
+    },
+    {
       label: LANGUAGE.highCharts.tooltips.fuel.speed,
       value: (data) => `${ndIfEmpty(data.speed)}  km/h`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.lat,
-      value: (data) =>
-        typeof data.lat === "number" ? String(data.lat) : data.lat ?? "",
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.lon,
-      value: (data) =>
-        typeof data.lon === "number" ? String(data.lon) : data.lon ?? "",
     },
   ];
 }
