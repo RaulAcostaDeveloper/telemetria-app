@@ -161,6 +161,7 @@ export const FuelBehaviorHighChart = ({
         x: new Date(s.dateGps).getTime(),
         y: s.speed,
         custom: {
+          dateGps: s.dateGps,
           speed: s.speed,
           lat: s.lat,
           lon: s.lon,
@@ -537,7 +538,7 @@ export const FuelBehaviorHighChart = ({
       tooltip: {
         split: false,
         useHTML: true,
-        shared: false,
+        shared: true,
         borderRadius: 6,
         padding: 10,
         shadow: true,
