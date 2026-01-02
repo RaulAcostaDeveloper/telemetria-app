@@ -12,10 +12,7 @@ import { LanguageInterface } from "@/global/language/constants/language.model";
 import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { Table, TabsContent } from "@/global/components";
-import {
-  formatDateTime,
-  removeTimeAfterCommaOrT,
-} from "@/global/utils/dateUtils";
+import { legibleDate, removeMidnightHour } from "@/global/utils/dateUtils";
 import {
   DirectionsCar,
   DeviceHub,
@@ -169,7 +166,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     },
     {
       columnName: LANGUAGE.management.tableColumns.type,
-      defaultSpace: 4,
+      defaultSpace: 3,
       orderColumn: true,
       filterSelector: true,
     },
@@ -179,11 +176,11 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
     }, */
     {
       columnName: LANGUAGE.management.tableColumns.phoneNumber,
-      defaultSpace: 4,
+      defaultSpace: 2,
     },
     {
       columnName: LANGUAGE.management.tableColumns.registrationDate,
-      defaultSpace: 4,
+      defaultSpace: 5,
     },
   ];
 
@@ -197,8 +194,8 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       type: value.type,
       /* createdAt: formatDateTime(value.createdAt), */
       phoneNumber: value.phoneNumber,
-      registrationDate: removeTimeAfterCommaOrT(
-        formatDateTime(value.registrationDate)
+      registrationDate: removeMidnightHour(
+        legibleDate(value.registrationDate, LANGUAGE.localeLanguage)
       ),
     }));
   }, [devicesData]);
@@ -275,7 +272,9 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       lastName: value.lastName,
       email: value.email,
       address: value.address,
-      entryDate: formatDateTime(value.entryDate),
+      entryDate: removeMidnightHour(
+        legibleDate(value.entryDate, LANGUAGE.localeLanguage)
+      ),
       alias: value.alias,
       groupName: value.groupName,
       license: value.license,

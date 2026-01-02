@@ -1,5 +1,5 @@
 import { LanguageInterface } from "@/global/language/constants/language.model";
-import { formatDateTime } from "@/global/utils/dateUtils";
+import { legibleDate } from "@/global/utils/dateUtils";
 import { ndIfEmpty } from "./ndIfEmpty";
 
 export type DataObject = Record<string, string | number>;
@@ -16,7 +16,7 @@ export function getLabelsForChargeGeoMap(
   return [
     {
       label: LANGUAGE.highCharts.tooltips.date,
-      value: `${formatDateTime(data.dateGps.toString())}`,
+      value: `${legibleDate(data.dateGps.toString(), LANGUAGE.localeLanguage)}`,
     },
     { label: LANGUAGE.highCharts.tooltips.lat, value: `${data.lat}` },
     { label: LANGUAGE.highCharts.tooltips.lon, value: `${data.lon}` },
@@ -70,7 +70,7 @@ export function getLabelsForDischargeGeoMap(
   return [
     {
       label: LANGUAGE.highCharts.tooltips.date,
-      value: `${formatDateTime(data.dateGps.toString())}`,
+      value: `${legibleDate(data.dateGps.toString(), LANGUAGE.localeLanguage)}`,
     },
     { label: LANGUAGE.highCharts.tooltips.lat, value: `${data.lat}` },
     { label: LANGUAGE.highCharts.tooltips.lon, value: `${data.lon}` },
@@ -124,7 +124,7 @@ export function getLabelsForLevelMessagesGeoMap(
   return [
     {
       label: LANGUAGE.highCharts.tooltips.date,
-      value: `${formatDateTime(data.dateGps.toString())}`,
+      value: `${legibleDate(data.dateGps.toString(), LANGUAGE.localeLanguage)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.lat,
@@ -169,7 +169,7 @@ export function getLabelsForRPMGeoMap(
   return [
     {
       label: LANGUAGE.highCharts.tooltips.date,
-      value: `${formatDateTime(data.dateGps.toString())}`,
+      value: `${legibleDate(data.dateGps.toString(), LANGUAGE.localeLanguage)}`,
     },
     { label: LANGUAGE.highCharts.tooltips.lat, value: `${data.lat}` },
     { label: LANGUAGE.highCharts.tooltips.lon, value: `${data.lon}` },
@@ -187,7 +187,7 @@ export function getLabelsForDistanceGeoMap(
   return [
     {
       label: LANGUAGE.highCharts.tooltips.date,
-      value: `${formatDateTime(data.dateGps.toString())}`,
+      value: `${legibleDate(data.dateGps.toString(), LANGUAGE.localeLanguage)}`,
     },
     { label: LANGUAGE.highCharts.tooltips.lat, value: `${data.lat}` },
     { label: LANGUAGE.highCharts.tooltips.lon, value: `${data.lon}` },
@@ -205,7 +205,7 @@ export function getLabelsForTimeTraveledGeoMap(
   return [
     {
       label: LANGUAGE.highCharts.tooltips.date,
-      value: `${formatDateTime(data.dateGps.toString())}`,
+      value: `${legibleDate(data.dateGps.toString(), LANGUAGE.localeLanguage)}`,
     },
     { label: LANGUAGE.highCharts.tooltips.lat, value: `${data.lat}` },
     { label: LANGUAGE.highCharts.tooltips.lon, value: `${data.lon}` },

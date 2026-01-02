@@ -12,6 +12,7 @@ import { FuelDataReport } from "./fuelDataReport/fuelDataReport";
 import { FuelNowVehicleTank } from "./fuelNowVehicleTank/fuelNowVehicleTank";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { LastFuelReportValues } from "@/global/redux/serviceSlices/lastFuelReportSlice";
+import { legibleDate } from "@/global/utils/dateUtils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -26,21 +27,9 @@ export const FuelNowContainer = ({
   lastFuelReportData,
   setIsModalOpen,
 }: Props) => {
-  const dateGps = new Date(lastFuelReportData.dateGps);
-
-  const dateOptions: Intl.DateTimeFormatOptions = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  };
-
-  const dateGpsReadable = dateGps.toLocaleString(
-    LANGUAGE.localeLanguage,
-    dateOptions
+  const dateGpsReadable = legibleDate(
+    lastFuelReportData.dateGps,
+    LANGUAGE.localeLanguage
   );
 
   const tankValues = lastFuelReportData.tanksLevels

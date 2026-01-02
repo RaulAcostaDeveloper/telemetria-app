@@ -15,6 +15,7 @@ import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { Table, TabsContent } from "@/global/components";
 import { columnsTable } from "@/global/components/table/table.model";
+import { legibleDate } from "@/global/utils/dateUtils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -60,7 +61,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.lastFuelLevel,
-      defaultSpace: 5,
+      defaultSpace: 3,
       orderColumn: true,
       minMaxFilter: true,
       showTotal: false,
@@ -102,7 +103,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.lastReportDate,
-      defaultSpace: 4,
+      defaultSpace: 5,
       orderColumn: true,
     },
   ];
@@ -117,7 +118,9 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
       fuelUnloadCount: value.fuelUnloadCount,
       fuelLoaded: value.fuelLoaded,
       fuelUnloaded: value.fuelUnloaded,
-      lastReportDate: value.lastReportDate,
+      lastReportDate: value.lastReportDate
+        ? legibleDate(value.lastReportDate, LANGUAGE.localeLanguage)
+        : "",
       imei: value.imei,
     }));
   }, [fuelSummaryData]);
@@ -129,7 +132,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
     },
     {
       columnName: LANGUAGE.zones.tabs.loadTable.date,
-      defaultSpace: 4,
+      defaultSpace: 5,
     },
     {
       columnName: `${LANGUAGE.fuelVehicle.vehicleReports.fuelStart} (L)`,
@@ -154,7 +157,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
   const fuelReportCharges = useMemo(() => {
     return fuelSummaryData?.value?.charges.map((value) => ({
       vehicle: value.imei,
-      date: value.dateGps,
+      date: legibleDate(value.dateGps, LANGUAGE.localeLanguage),
       initialFuel: value.initialFuel,
       charge: value.magnitude,
       finalFuel: value.finalFuel,
@@ -170,7 +173,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
     },
     {
       columnName: LANGUAGE.zones.tabs.loadTable.date,
-      defaultSpace: 4,
+      defaultSpace: 5,
     },
     {
       columnName: `${LANGUAGE.fuelVehicle.vehicleReports.fuelStart} (L)`,
@@ -195,7 +198,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
   const fuelReportDischarges = useMemo(() => {
     return fuelSummaryData?.value?.discharges.map((value) => ({
       vehicle: value.imei,
-      date: value.dateGps,
+      date: legibleDate(value.dateGps, LANGUAGE.localeLanguage),
       initialFuel: value.initialFuel,
       discharge: value.magnitude,
       finalFuel: value.finalFuel,
