@@ -308,18 +308,6 @@ export function parseTime(date: Date): TimeParts {
   return { hour, minute, second, meridiem };
 }
 
-export function removeTimeAfterCommaOrT(time: string) {
-  const positionT = time.indexOf("T");
-  const positionComma = time.indexOf(",");
-  if (positionT > 0) {
-    return time.slice(0, positionT);
-  } else if (positionComma > 0) {
-    return time.slice(0, positionComma);
-  } else {
-    return time;
-  }
-}
-
 export const hasLessThanOneDay = (startDate: string, endDate: string) => {
   const start = new Date(startDate);
   const end = new Date(endDate);
@@ -328,11 +316,25 @@ export const hasLessThanOneDay = (startDate: string, endDate: string) => {
   return !(diffDays > 1);
 };
 
-export const legibleDate = (date: Date, locale: string): string => {
-  return new Intl.DateTimeFormat(locale, {
-    day: "numeric",
-    month: "long",
+// Retorna un string legible, por ejemplo: "martes, 9 de septiembre de 2025, 00:00"
+export const legibleDate = (date: string, locale: string): string => {
+  const dateFormat = new Date(date);
+
+  const dateOptions: Intl.DateTimeFormatOptions = {
+    weekday: "long",
     year: "numeric",
-  }).format(date);
-  // Falta que ponga también la hora si viene
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  };
+
+  return dateFormat.toLocaleString(locale, dateOptions);
 };
+
+// Elimina la hora 00:00.
+// Útil para cuando la fecha viene sin hora, y este la asume en 00:00
+export function removeMidnightHour(formattedDate: string): string {
+  return formattedDate.replace(/,\s*00:00$/, "");
+}

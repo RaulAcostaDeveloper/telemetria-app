@@ -1,6 +1,6 @@
 import { LanguageInterface } from "../language/constants/language.model";
 import { ndIfEmpty } from "./ndIfEmpty";
-import { formatDateTime } from "./dateUtils";
+import { legibleDate } from "./dateUtils";
 import { brEveryNPositions } from "./stringUtils";
 
 type StringObject = Record<string, string>;
@@ -103,11 +103,12 @@ export function getChargesTooltipFields(
   return [
     {
       label: LANGUAGE.highCharts.tooltips.startDate,
-      value: (data) => `${formatDateTime(data.startDate)}`,
+      value: (data) =>
+        `${legibleDate(data.startDate, LANGUAGE.localeLanguage)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.endDate,
-      value: (data) => `${formatDateTime(data.endDate)}`,
+      value: (data) => `${legibleDate(data.endDate, LANGUAGE.localeLanguage)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
@@ -151,11 +152,12 @@ export function getDisChargesTooltipFields(
   return [
     {
       label: LANGUAGE.highCharts.tooltips.startDate,
-      value: (data) => `${formatDateTime(data.startDate)}`,
+      value: (data) =>
+        `${legibleDate(data.startDate, LANGUAGE.localeLanguage)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.endDate,
-      value: (data) => `${formatDateTime(data.endDate)}`,
+      value: (data) => `${legibleDate(data.endDate, LANGUAGE.localeLanguage)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
@@ -199,7 +201,7 @@ export function getLevelMessagesTooltipFields(
   return [
     {
       label: LANGUAGE.highCharts.tooltips.date,
-      value: (data) => `${formatDateTime(data.dateGps)}`,
+      value: (data) => `${legibleDate(data.dateGps, LANGUAGE.localeLanguage)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.odometer,
@@ -243,11 +245,12 @@ export function getPerformancesBetweenChargesTooltipFields(
   return [
     {
       label: LANGUAGE.highCharts.tooltips.startDate,
-      value: (data) => `${formatDateTime(data.startDate)}`,
+      value: (data) =>
+        `${legibleDate(data.startDate, LANGUAGE.localeLanguage)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.endDate,
-      value: (data) => `${formatDateTime(data.dateGps)}`,
+      value: (data) => `${legibleDate(data.dateGps, LANGUAGE.localeLanguage)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.initialOdometer,
@@ -290,7 +293,7 @@ export function getRPMTooltipFields(
   return [
     {
       label: LANGUAGE.highCharts.tooltips.date,
-      value: (data) => `${formatDateTime(data.dateGps)}`,
+      value: (data) => `${legibleDate(data.dateGps, LANGUAGE.localeLanguage)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.rpm.rpm,
@@ -309,7 +312,7 @@ export function getDistanceTooltipFields(
   return [
     {
       label: LANGUAGE.highCharts.tooltips.date,
-      value: (data) => `${formatDateTime(data.dateGps)}`,
+      value: (data) => `${legibleDate(data.dateGps, LANGUAGE.localeLanguage)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.distance.distanceTraveled,
@@ -328,7 +331,7 @@ export function getTimeTraveledTooltipFields(
   return [
     {
       label: LANGUAGE.highCharts.tooltips.date,
-      value: (data) => `${formatDateTime(data.dateGps)}`,
+      value: (data) => `${legibleDate(data.dateGps, LANGUAGE.localeLanguage)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.timeTraveled.timeTraveled,
@@ -348,7 +351,7 @@ export function getSpeedTooltipFields(
   return [
     {
       label: LANGUAGE.highCharts.tooltips.date,
-      value: (data) => `${formatDateTime(data.dateGps)}`,
+      value: (data) => `${legibleDate(data.dateGps, LANGUAGE.localeLanguage)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.speed,
