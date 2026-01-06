@@ -18,17 +18,17 @@ interface Props {
   LANGUAGE: LanguageInterface;
   markersInZone: MarkerData[];
   zoneCircle?: ZoneDetail;
-  key: number;
+  keyNum: number;
 }
 
 export const ZonesMapTabSolo = ({
   LANGUAGE,
   markersInZone,
   zoneCircle,
-  key = 0,
+  keyNum,
 }: Props) => {
   return (
-    <div className={["containermap", styles.container].join(" ")} key={key}>
+    <div className={["containermap", styles.container].join(" ")} key={keyNum}>
       <GoogleMapClientComponentZone
         LANGUAGE={LANGUAGE}
         markersData={markersInZone}
