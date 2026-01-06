@@ -348,7 +348,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
               LANGUAGE={LANGUAGE}
               markersInZone={allMarkers}
               zoneCircle={zoneCircle}
-              key={updatesTracker}
+              keyNum={updatesTracker}
             />
           </div>
         </Collapsable>
