@@ -56,6 +56,34 @@ export const GoogleMapsLoaderZone = ({
     region,
   });
 
+  const fitMapToCircle = (circle: google.maps.Circle) => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    const center = circle.getCenter();
+    const radius = circle.getRadius(); // metros
+    if (!center || !radius) return;
+
+    // Crear bounds aproximados a partir del centro y el radio
+    const bounds = new google.maps.LatLngBounds();
+
+    // Desplazamientos en grados (aprox)
+    const latOffset = radius / 1000 / 111; // 1° lat ≈ 111 km
+    const lngOffset =
+      radius / 1000 / (111 * Math.cos((center.lat() * Math.PI) / 180));
+
+    bounds.extend({
+      lat: center.lat() + latOffset,
+      lng: center.lng() + lngOffset,
+    });
+    bounds.extend({
+      lat: center.lat() - latOffset,
+      lng: center.lng() - lngOffset,
+    });
+
+    map.fitBounds(bounds);
+  };
+
   const onLoad = (map: google.maps.Map) => {
     mapRef.current = map;
 
@@ -77,8 +105,12 @@ export const GoogleMapsLoaderZone = ({
       infoRef.current = new google.maps.InfoWindow();
     }
 
+    // Ajusta zoom/centro al circulo de la zona
+    if (circleRef.current) {
+      fitMapToCircle(circleRef.current);
+    }
     // Ajusta zoom/centro a todos los puntos
-    if (places && places.length) {
+    else if (places && places.length) {
       const bounds = new google.maps.LatLngBounds();
       places.forEach((p) => bounds.extend(p.position));
       map.fitBounds(bounds);
