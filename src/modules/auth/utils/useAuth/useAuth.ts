@@ -1,6 +1,7 @@
+"use client";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import {
   fetchLogin,
@@ -15,6 +16,7 @@ import { fetchBrands } from "@/global/redux/serviceSlices/brandsSlice";
 export const useAuth = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
+  const pathname = usePathname();
 
   const [isLoginForm, setIsLoginForm] = useState(false);
   const [isFromFirstSession, setIsFromFirstSession] = useState(false);
@@ -81,7 +83,12 @@ export const useAuth = () => {
   const loginState = () => {
     // Actualizar el estado de redux
     dispatch(loginAction());
-    router.push("/home");
+
+    if (pathname && pathname !== "/" && pathname !== "/login") {
+      router.push(pathname);
+    } else {
+      router.push("/home");
+    }
   };
 
   const logoutState = (isPushedLogin = true) => {
@@ -96,7 +103,7 @@ export const useAuth = () => {
   return {
     isAuthenticated,
     logoutState,
-    tryLoginHook,
     tryFirstServerSession,
+    tryLoginHook,
   };
 };
