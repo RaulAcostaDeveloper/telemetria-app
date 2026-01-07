@@ -11,14 +11,18 @@ import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes"
 
 interface Props {
   LANGUAGE: LanguageInterface;
+  isFuelNowSyncronizing: boolean;
   isModalOpen: boolean;
   setGeoModalData: (data: GeoModalData) => void;
+  setIsFuelNowSyncronizing: (toggle: boolean) => void;
   setIsModalOpen: (toggle: boolean) => void;
 }
 export const FuelNowTab = ({
   LANGUAGE,
+  isFuelNowSyncronizing,
   isModalOpen,
   setGeoModalData,
+  setIsFuelNowSyncronizing,
   setIsModalOpen,
 }: Props) => {
   const { lastFuelReportData, lastFuelReportStatus } = useSelector(
@@ -43,8 +47,10 @@ export const FuelNowTab = ({
           <>
             <FuelNowContainer
               LANGUAGE={LANGUAGE}
+              isFuelNowSyncronizing={isFuelNowSyncronizing}
               isModalOpen={isModalOpen}
               lastFuelReportData={lastFuelReportData.value}
+              setIsFuelNowSyncronizing={setIsFuelNowSyncronizing}
               setIsModalOpen={setIsModalOpen}
             />
           </>

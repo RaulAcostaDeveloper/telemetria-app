@@ -12,24 +12,39 @@ import { FuelDataReport } from "./fuelDataReport/fuelDataReport";
 import { FuelNowVehicleTank } from "./fuelNowVehicleTank/fuelNowVehicleTank";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { LastFuelReportValues } from "@/global/redux/serviceSlices/lastFuelReportSlice";
-import { legibleDate } from "@/global/utils/dateUtils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
+  isFuelNowSyncronizing: boolean;
   isModalOpen: boolean;
   lastFuelReportData: LastFuelReportValues;
+  setIsFuelNowSyncronizing: (toggle: boolean) => void;
   setIsModalOpen: (toggle: boolean) => void;
 }
 
 export const FuelNowContainer = ({
   LANGUAGE,
+  isFuelNowSyncronizing,
   isModalOpen,
   lastFuelReportData,
+  setIsFuelNowSyncronizing,
   setIsModalOpen,
 }: Props) => {
-  const dateGpsReadable = legibleDate(
-    lastFuelReportData.dateGps,
-    LANGUAGE.localeLanguage
+  const dateGps = new Date(lastFuelReportData.dateGps);
+
+  const dateOptions: Intl.DateTimeFormatOptions = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  };
+
+  const dateGpsReadable = dateGps.toLocaleString(
+    LANGUAGE.localeLanguage,
+    dateOptions
   );
 
   const tankValues = lastFuelReportData.tanksLevels
@@ -49,7 +64,18 @@ export const FuelNowContainer = ({
 
   return (
     <div>
-      <div className={styles.openMapContainer}>
+      <div className={styles.headerButtonsContainer}>
+        <GeneralButton
+          type={ButtonTypes.USER_ACTION}
+          title={
+            isFuelNowSyncronizing
+              ? LANGUAGE.fuelVehicle.fuelNow.stopSynchronization
+              : LANGUAGE.fuelVehicle.fuelNow.startSynchronization
+          }
+          callback={() => setIsFuelNowSyncronizing(!isFuelNowSyncronizing)}
+          Icon={<AddLocationAltIcon />}
+        />
+
         <GeneralButton
           type={ButtonTypes.SUCCESS}
           title={`${

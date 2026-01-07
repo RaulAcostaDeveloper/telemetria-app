@@ -1,5 +1,4 @@
-import { FuelReportDataFetcher } from "@/modules/fuel/components/fuelReportDataFetcher/fuelReportDataFetcher";
-import { FuelReportDataProvider } from "@/modules/fuel/components";
+import { FuelReportContainer } from "@/modules/fuel/components/fuelReportContainer/fuelReportContainer";
 
 interface Page {
   params: {
@@ -10,10 +9,5 @@ interface Page {
 export default function FuelVehicle({ params }: Page) {
   const { imei } = params; // imei del vehiculo
 
-  return (
-    <>
-      <FuelReportDataFetcher imei={imei} />
-      <FuelReportDataProvider />
-    </>
-  );
+  return <FuelReportContainer imei={imei} />;
 }

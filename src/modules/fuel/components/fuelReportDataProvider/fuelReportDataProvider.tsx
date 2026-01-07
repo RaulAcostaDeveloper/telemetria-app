@@ -20,7 +20,15 @@ export interface OBValue {
   speed: number;
 }
 
-export const FuelReportDataProvider = () => {
+interface Props {
+  isFuelNowSyncronizing: boolean;
+  setIsFuelNowSyncronizing: (toggle: boolean) => void;
+}
+
+export const FuelReportDataProvider = ({
+  isFuelNowSyncronizing,
+  setIsFuelNowSyncronizing,
+}: Props) => {
   const LANGUAGE = useLanguage();
 
   // Operational Behavior (Estacionado, apagado, Avanzando, apagado y avanzando)
@@ -137,8 +145,10 @@ export const FuelReportDataProvider = () => {
           <div key={2}>
             <FuelNowTab
               LANGUAGE={LANGUAGE}
+              isFuelNowSyncronizing={isFuelNowSyncronizing}
               isModalOpen={isModalOpen}
               setGeoModalData={setGeoModalData}
+              setIsFuelNowSyncronizing={setIsFuelNowSyncronizing}
               setIsModalOpen={setIsModalOpen}
             />
           </div>,
