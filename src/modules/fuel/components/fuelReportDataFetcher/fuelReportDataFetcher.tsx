@@ -116,7 +116,7 @@ export const FuelReportDataFetcher = ({
             })
           );
         }
-      }, 4000);
+      }, 20000);
     }
   };
 
