@@ -349,6 +349,8 @@ export const ENGLISH: LanguageInterface = {
       tank: "Tank",
       showLocation: "Show map",
       hideLocation: "Hide map",
+      stopSynchronization: "Stop synchronization",
+      startSynchronization: "Start synchronization",
     },
     fuelChargesLabels: {
       eventId: "Event ID",

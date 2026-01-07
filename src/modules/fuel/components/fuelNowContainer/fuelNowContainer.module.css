@@ -1,8 +1,7 @@
-.openMapContainer {
+.headerButtonsContainer {
   display: flex;
-  justify-content: right;
-  margin-top: 10px;
-  margin-right: 10px;
+  justify-content: space-between;
+  margin: 10px 20px;
 }
 
 .fuelNowContainer {

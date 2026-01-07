@@ -328,6 +328,8 @@ export interface LanguageInterface {
       tank: string;
       showLocation: string;
       hideLocation: string;
+      stopSynchronization: string;
+      startSynchronization: string;
     };
     fuelChargesLabels: {
       eventId: string;

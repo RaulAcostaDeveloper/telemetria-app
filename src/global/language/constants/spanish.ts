@@ -350,6 +350,8 @@ export const SPANISH: LanguageInterface = {
       tank: "Tanque",
       showLocation: "Mostrar mapa",
       hideLocation: "Ocultar mapa",
+      stopSynchronization: "Detener sincronización",
+      startSynchronization: "Iniciar sincronización",
     },
     fuelChargesLabels: {
       eventId: "Evento ID",
