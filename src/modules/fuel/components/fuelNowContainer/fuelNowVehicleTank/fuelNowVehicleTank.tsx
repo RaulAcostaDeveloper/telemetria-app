@@ -18,24 +18,22 @@ export const FuelNowVehicleTank = ({
 }: Props) => {
   return (
     <>
-      <>
-        {tankValues && 1 < averageTankSize ? (
-          <>
-            {tankValues.map((value, index) => (
-              <div key={index} className={styles.graphic}>
-                <GaugeGraphic
-                  value={value}
-                  metric="L"
-                  max={averageTankSize}
-                  title={title + " " + (index + 1)}
-                />
-              </div>
-            ))}
-          </>
-        ) : (
-          <ErrorMessage message={LANGUAGE.notifications.graphicError} />
-        )}
-      </>
+      {tankValues && averageTankSize > 1 ? (
+        <>
+          {tankValues.map((value, index) => (
+            <div key={index} className={styles.graphic}>
+              <GaugeGraphic
+                value={value}
+                metric="L"
+                max={averageTankSize}
+                title={title + " " + (index + 1)}
+              />
+            </div>
+          ))}
+        </>
+      ) : (
+        <ErrorMessage message={LANGUAGE.notifications.graphicError} />
+      )}
     </>
   );
 };

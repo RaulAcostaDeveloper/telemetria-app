@@ -4,9 +4,9 @@ import ElectricCarIcon from "@mui/icons-material/ElectricCar";
 import HistoryIcon from "@mui/icons-material/History";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import NoCrashIcon from "@mui/icons-material/NoCrash";
-import { SpeedRounded } from "@mui/icons-material";
 import PanToolIcon from "@mui/icons-material/PanTool";
 import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
+import SpeedRounded from "@mui/icons-material/SpeedRounded";
 
 import styles from "./fuelNowContainer.module.css";
 import { ButtonTypes, GeneralButton } from "@/global/components";
