@@ -1,6 +1,7 @@
 "use client";
 import { useSelector } from "react-redux";
 
+import styles from "./dataErrorHandler.module.css";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
@@ -25,7 +26,7 @@ export const DataErrorHandler = ({
   const lessThanOneDay = hasLessThanOneDay(startDate, endDate);
 
   return (
-    <div>
+    <div className={styles.center}>
       {decideFeedback({ LANGUAGE, hasData, infoStatus, lessThanOneDay })}
     </div>
   );

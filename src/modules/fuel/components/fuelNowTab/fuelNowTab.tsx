@@ -7,7 +7,6 @@ import { FuelNowContainer } from "../fuelNowContainer/fuelNowContainer";
 import { GeoModalData } from "@/global/components/geoModal/geoModal";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { RootState } from "@/global/redux/store";
-import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -42,19 +41,18 @@ export const FuelNowTab = ({
 
   return (
     <>
-      {lastFuelReportStatus === SERVICE_STATUS.succeeded &&
-        lastFuelReportData?.value && (
-          <>
-            <FuelNowContainer
-              LANGUAGE={LANGUAGE}
-              isFuelNowSyncronizing={isFuelNowSyncronizing}
-              isModalOpen={isModalOpen}
-              lastFuelReportData={lastFuelReportData.value}
-              setIsFuelNowSyncronizing={setIsFuelNowSyncronizing}
-              setIsModalOpen={setIsModalOpen}
-            />
-          </>
-        )}
+      {lastFuelReportData?.value && (
+        <>
+          <FuelNowContainer
+            LANGUAGE={LANGUAGE}
+            isFuelNowSyncronizing={isFuelNowSyncronizing}
+            isModalOpen={isModalOpen}
+            lastFuelReportData={lastFuelReportData.value}
+            setIsFuelNowSyncronizing={setIsFuelNowSyncronizing}
+            setIsModalOpen={setIsModalOpen}
+          />
+        </>
+      )}
 
       <DataErrorHandler
         LANGUAGE={LANGUAGE}
