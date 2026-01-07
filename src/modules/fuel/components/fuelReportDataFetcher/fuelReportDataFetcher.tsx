@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -22,9 +22,15 @@ import { useAuth } from "@/modules/auth/utils";
 
 interface Props {
   imei: string;
+  isFuelNowSyncronizing: boolean;
 }
 
-export const FuelReportDataFetcher = ({ imei }: Props) => {
+export const FuelReportDataFetcher = ({
+  imei,
+  isFuelNowSyncronizing,
+}: Props) => {
+  const fuelNowIntervalRef = useRef<number | null>(null);
+
   const dispatch = useDispatch<AppDispatch>();
 
   const { isAuthenticated, logoutState } = useAuth();
@@ -76,26 +82,51 @@ export const FuelReportDataFetcher = ({ imei }: Props) => {
   }, [isAuthenticated, startDate, endDate, imei]);
 
   useEffect(() => {
-    // Tener la data actualizada cada 10 segundos
-    const intervalId = setInterval(() => {
-      if (
-        isAuthenticated &&
-        imei.length > 10 &&
-        lastFuelReportStatus === SERVICE_STATUS.succeeded // si el anterior llamado es succeeded entonces sigue
-      ) {
-        dispatch(
-          fetchLastFuelReport({
-            imei: imei, // imei.toString(),
-            logoutState,
-          })
-        );
-      }
-    }, 20000);
+    // Controla la ejecución del intervalo
+    if (isFuelNowSyncronizing) {
+      startFuelNowInterval(isAuthenticated, lastFuelReportStatus);
+    } else {
+      stopFuelNowInterval();
+    }
 
     return () => {
-      clearTimeout(intervalId);
+      stopFuelNowInterval();
     };
-  }, [isAuthenticated, imei, lastFuelReportStatus]);
+  }, [isFuelNowSyncronizing, isAuthenticated, lastFuelReportStatus]);
+
+  const startFuelNowInterval = (
+    isAuthenticated: boolean,
+    lastFuelReportStatus: SERVICE_STATUS
+  ) => {
+    if (fuelNowIntervalRef.current) return; // Si ya existe, no iniciarlo
+
+    if (typeof window !== "undefined") {
+      fuelNowIntervalRef.current = window.setInterval(() => {
+        if (
+          isAuthenticated &&
+          imei.length > 10 &&
+          // Si el anterior llamado es succeeded entonces continúa la ejecución
+          // Si el anterior llamado no es succeeded, deja que haga el <TryFuel
+          lastFuelReportStatus === SERVICE_STATUS.succeeded
+        ) {
+          dispatch(
+            fetchLastFuelReport({
+              imei: imei,
+              logoutState,
+            })
+          );
+        }
+      }, 4000);
+    }
+  };
+
+  const stopFuelNowInterval = () => {
+    if (fuelNowIntervalRef.current) {
+      // Si existe, detenerlo
+      clearInterval(fuelNowIntervalRef.current);
+      fuelNowIntervalRef.current = null;
+    }
+  };
 
   return <TryFuelReportOnFailed imei={imei} />;
 };

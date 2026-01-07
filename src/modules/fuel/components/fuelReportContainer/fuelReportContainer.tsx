@@ -12,7 +12,10 @@ export const FuelReportContainer = ({ imei }: Props) => {
 
   return (
     <>
-      <FuelReportDataFetcher imei={imei} />
+      <FuelReportDataFetcher
+        imei={imei}
+        isFuelNowSyncronizing={isFuelNowSyncronizing}
+      />
       <FuelReportDataProvider
         isFuelNowSyncronizing={isFuelNowSyncronizing}
         setIsFuelNowSyncronizing={setIsFuelNowSyncronizing}
