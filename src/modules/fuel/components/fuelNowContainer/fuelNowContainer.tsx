@@ -5,6 +5,8 @@ import HistoryIcon from "@mui/icons-material/History";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import NoCrashIcon from "@mui/icons-material/NoCrash";
 import { SpeedRounded } from "@mui/icons-material";
+import PanToolIcon from "@mui/icons-material/PanTool";
+import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
 
 import styles from "./fuelNowContainer.module.css";
 import { ButtonTypes, GeneralButton } from "@/global/components";
@@ -73,7 +75,13 @@ export const FuelNowContainer = ({
               : LANGUAGE.fuelVehicle.fuelNow.startSynchronization
           }
           callback={() => setIsFuelNowSyncronizing(!isFuelNowSyncronizing)}
-          Icon={<AddLocationAltIcon />}
+          Icon={
+            isFuelNowSyncronizing ? (
+              <PanToolIcon />
+            ) : (
+              <PlayCircleFilledWhiteIcon />
+            )
+          }
         />
 
         <GeneralButton
