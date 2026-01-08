@@ -292,7 +292,7 @@ export const SPANISH: LanguageInterface = {
       plate: "Placa",
       fuelLoadCount: "Cargas",
       fuelUnloadCount: "Descargas",
-      performanceOdometer: "Rendimiento (Odo)",
+      performanceOdometer: "Rendimiento (Odo Km/L)",
       performanceHorometer: "Rendimiento (Horo)",
       fuelLoaded: "Combustible cargado",
       fuelUnloaded: "Combustible descargado",

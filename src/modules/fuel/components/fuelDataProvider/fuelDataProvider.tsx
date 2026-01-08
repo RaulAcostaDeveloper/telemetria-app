@@ -51,7 +51,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
   const vehiclesColumns: columnsTable = [
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.name,
-      defaultSpace: 2,
+      defaultSpace: 3,
       orderColumn: true,
     },
     {

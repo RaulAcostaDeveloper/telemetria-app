@@ -70,13 +70,13 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
       let count = 0;
 
       if (i === 0) {
-        label = `< ${upper.toFixed(2)}L`;
+        label = `< ${upper}L`;
         count = allValues.filter((v) => v < upper).length;
       } else if (i === segmentsCount - 1) {
-        label = `> ${lower.toFixed(2)}L`;
+        label = `> ${lower}L`;
         count = allValues.filter((v) => v >= lower).length;
       } else {
-        label = `${lower.toFixed(2)}L – ${upper.toFixed(2)}L`;
+        label = `${lower}L – ${upper}L`;
         count = allValues.filter((v) => v >= lower && v < upper).length;
       }
 

@@ -131,7 +131,7 @@ export function getChargesTooltipFields(
       label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
       value: (data) => `${ndIfEmpty(data.initialFuel)} L`,
       separator: {
-        position: 11,
+        position: 6,
         subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleCharges,
       },
     },
@@ -180,7 +180,7 @@ export function getDisChargesTooltipFields(
       label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
       value: (data) => `${ndIfEmpty(data.initialFuel)} L`,
       separator: {
-        position: 11,
+        position: 6,
         subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleDischarges,
       },
     },
@@ -228,7 +228,7 @@ export function getLevelMessagesTooltipFields(
       label: LANGUAGE.highCharts.tooltips.fuel.tanksSum,
       value: (data) => `${ndIfEmpty(data.currentLevelSmoothly)} (L)`,
       separator: {
-        position: 9,
+        position: 6,
         subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleFuelVariationCAN,
       },
     },

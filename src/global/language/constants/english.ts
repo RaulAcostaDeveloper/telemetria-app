@@ -291,7 +291,7 @@ export const ENGLISH: LanguageInterface = {
       plate: "Plate",
       fuelLoadCount: "Refuels",
       fuelUnloadCount: "Discharges",
-      performanceOdometer: "Performance (Odo)",
+      performanceOdometer: "Performance (Odo Km/L)",
       performanceHorometer: "Performance (Horo)",
       fuelLoaded: "Fuel filled",
       fuelUnloaded: "Fuel drained",

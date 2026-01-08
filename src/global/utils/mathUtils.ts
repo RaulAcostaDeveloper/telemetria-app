@@ -45,3 +45,16 @@ export function format2DecimalsString(value: number): string {
   const trunc = Math.trunc(value * 100) / 100;
   return trunc.toFixed(2);
 }
+
+export const formatTankValuesToInt = (
+  tanks?: string | null
+): string | null | undefined => {
+  if (!tanks) return tanks; // Devuelve Null
+
+  // tanks pero enteros
+  return tanks
+    .split(",")
+    .map((v) => Math.round(Number(v.trim())))
+    .filter((v) => !Number.isNaN(v))
+    .join(", ");
+};
