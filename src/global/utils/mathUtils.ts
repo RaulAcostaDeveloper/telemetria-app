@@ -53,8 +53,8 @@ export const formatTankValuesToInt = (
 
   // tanks pero enteros
   return tanks
-    .split(",")
+    .split("|")
     .map((v) => Math.round(Number(v.trim())))
     .filter((v) => !Number.isNaN(v))
-    .join(", ");
+    .join("|");
 };
