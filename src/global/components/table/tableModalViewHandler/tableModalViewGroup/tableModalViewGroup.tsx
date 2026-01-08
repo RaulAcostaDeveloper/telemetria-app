@@ -109,19 +109,19 @@ export const TableModalViewGroup = ({
               LANGUAGE={LANGUAGE}
               columns={vehicleColumns}
               data={vehiclesTableData}
-              idKey="imeIs"
+              idImei="imeIs"
               modalOption={MODAL_OPTION.VEHICLES}
-              showGoFuel
-              showGoOBD
               showViewModal
             />
           )}
 
-        <DataErrorHandler
-          LANGUAGE={LANGUAGE}
-          hasData={!!vehiclesTableData}
-          infoStatus={vehiclesStatus}
-        />
+        {vehiclesStatus !== SERVICE_STATUS.succeeded && (
+          <DataErrorHandler
+            LANGUAGE={LANGUAGE}
+            hasData={!!vehiclesTableData}
+            infoStatus={vehiclesStatus}
+          />
+        )}
       </div>
     </Modal>
   );

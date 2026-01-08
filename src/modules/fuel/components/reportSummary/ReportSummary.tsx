@@ -29,8 +29,10 @@ const ReportSummary = ({ summaryValues }: Props) => {
           <h4>{LANGUAGE.fuel.summaryReports.labels.inventory}</h4>
           <span>
             {summaryValues.inventory
-              ? `${formatNumberWithCommas(summaryValues.inventory)}  L`
-              : "0,00  L"}
+              ? `${formatNumberWithCommas(
+                  Math.round(summaryValues.inventory)
+                )}  L`
+              : "0  L"}
           </span>
         </div>
       </div>
@@ -57,8 +59,10 @@ const ReportSummary = ({ summaryValues }: Props) => {
           <h4>{LANGUAGE.fuel.summaryReports.labels.fuelCharged}</h4>
           <span>
             {summaryValues.fuelCharged
-              ? `${formatNumberWithCommas(summaryValues.fuelCharged)}  L`
-              : "0,00  L"}
+              ? `${formatNumberWithCommas(
+                  Math.round(summaryValues.fuelCharged)
+                )}  L`
+              : "0  L"}
           </span>
         </div>
       </div>
@@ -70,8 +74,10 @@ const ReportSummary = ({ summaryValues }: Props) => {
           <h4>{LANGUAGE.fuel.summaryReports.labels.fuelDischarged}</h4>
           <span>
             {summaryValues.fuelDischarged
-              ? `${formatNumberWithCommas(summaryValues.fuelDischarged)}  L`
-              : "0,00  L"}
+              ? `${formatNumberWithCommas(
+                  Math.round(summaryValues.fuelDischarged)
+                )}  L`
+              : "0  L"}
           </span>
         </div>
       </div>

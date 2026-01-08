@@ -156,6 +156,10 @@ export function getLabelsForLevelMessagesGeoMap(
       value: `${ndIfEmpty(data.mainPower)} (V)`,
     },
     {
+      label: LANGUAGE.highCharts.tooltips.fuel.tanksSum,
+      value: `${ndIfEmpty(data.currentLevelSmoothly)} (L)`,
+    },
+    {
       label: LANGUAGE.highCharts.tooltips.fuel.tanks,
       value: `${ndIfEmpty(data.tanks)} (L)`,
     },

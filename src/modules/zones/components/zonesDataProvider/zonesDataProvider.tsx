@@ -18,7 +18,7 @@ import {
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 import { ZoneProfileData } from "../zoneProfileData/zoneProfileData";
 import { ZonesMapTabSolo } from "../zonesMapTabSolo/zonesMapTabSolo";
-import { formatDateTime } from "@/global/utils/dateUtils";
+import { formatDateTime, legibleDate } from "@/global/utils/dateUtils";
 import { omitProperty } from "@/global/utils/objectUtils";
 import { MarkerData } from "../geoModalZone/googleMaps/googleMapClientComponentZone/googleMapClientComponentZone";
 
@@ -102,7 +102,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     },
     {
       columnName: LANGUAGE.zones.tabs.loadTable.date,
-      defaultSpace: 4,
+      defaultSpace: 5,
       orderColumn: true,
     },
     {
@@ -113,7 +113,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     },
     {
       columnName: `${LANGUAGE.zones.tabs.loadTable.loadValue} (L)`,
-      defaultSpace: 3,
+      defaultSpace: 2,
       orderColumn: true,
       minMaxFilter: true,
     },
@@ -185,7 +185,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
   const forTableLoads = useMemo(() => {
     return loadsSingle?.map((v) => ({
       imei: v.imei,
-      dateGps: v.dateGps,
+      dateGps: legibleDate(v.dateGps, LANGUAGE.localeLanguage),
       initialFuel: v.initialFuel,
       magnitude: v.magnitude,
       finalFuel: v.finalFuel,
@@ -209,7 +209,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     },
     {
       columnName: LANGUAGE.zones.tabs.unloadTable.date,
-      defaultSpace: 4,
+      defaultSpace: 5,
       orderColumn: true,
     },
     {
@@ -220,7 +220,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
     },
     {
       columnName: `${LANGUAGE.zones.tabs.unloadTable.loadValue} (L)`,
-      defaultSpace: 3,
+      defaultSpace: 2,
       orderColumn: true,
       minMaxFilter: true,
     },
@@ -269,7 +269,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
   const forTableUnloads = useMemo(() => {
     return unloadsSingle?.map((v) => ({
       imei: v.imei,
-      dateGps: v.dateGps,
+      dateGps: legibleDate(v.dateGps, LANGUAGE.localeLanguage),
       initialFuel: v.initialFuel,
       magnitude: v.magnitude,
       finalFuel: v.finalFuel,
@@ -295,7 +295,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       title: LANGUAGE.zones.tabs.loadTable.loadValue,
       address: v.address,
       magnitude: v.magnitude,
-      dateGps: v.dateGps,
+      dateGps: legibleDate(v.dateGps, LANGUAGE.localeLanguage),
       initialFuel: v.initialFuel,
       finalFuel: v.finalFuel,
     }));
@@ -311,7 +311,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       title: LANGUAGE.zones.tabs.unloadTable.loadValue,
       address: v.address,
       magnitude: v.magnitude,
-      dateGps: v.dateGps,
+      dateGps: legibleDate(v.dateGps, LANGUAGE.localeLanguage),
       initialFuel: v.initialFuel,
       finalFuel: v.finalFuel,
     }));

@@ -16,9 +16,10 @@ import {
 } from "@/global/utils/geoMapUtils";
 import { FuelDataValues } from "@/global/redux/serviceSlices/fuelDataSlice";
 import { GeoModalData } from "@/global/components/geoModal/geoModal";
+import { HighchartNext } from "@/global/components/highchartNext/highchartNext";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { OBValue } from "../fuelReportDataProvider/fuelReportDataProvider";
-import { HighchartNext } from "@/global/components/highchartNext/highchartNext";
+import { formatTankValuesToInt } from "@/global/utils/mathUtils";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -70,12 +71,12 @@ export const FuelBehaviorHighChart = ({
           dateGps: c.dateGps,
           deviceBattery: c.deviceBattery,
           endDate: c.endDate,
-          finalFuel: c.finalFuel,
+          finalFuel: c.finalFuel != null ? Math.round(c.finalFuel) : null,
           ignition: Boolean(c.ignition),
-          initialFuel: c.initialFuel,
+          initialFuel: c.initialFuel != null ? Math.round(c.initialFuel) : null,
           lat: c.lat,
           lon: c.lon,
-          magnitude: c.magnitude,
+          magnitude: c.magnitude != null ? Math.round(c.magnitude) : null,
           mainPower: c.mainPower,
           odometer: c.odometer,
           origin: c.origin,
@@ -97,12 +98,12 @@ export const FuelBehaviorHighChart = ({
           deviceBattery: c.deviceBattery,
           endDate: c.endDate,
           eventId: c.eventId,
-          finalFuel: c.finalFuel,
+          finalFuel: c.finalFuel != null ? Math.round(c.finalFuel) : null,
           ignition: Boolean(c.ignition),
-          initialFuel: c.initialFuel,
+          initialFuel: c.initialFuel != null ? Math.round(c.initialFuel) : null,
           lat: c.lat,
           lon: c.lon,
-          magnitude: c.magnitude,
+          magnitude: c.magnitude != null ? Math.round(c.magnitude) : null,
           mainPower: c.mainPower,
           odometer: c.odometer,
           origin: c.origin,
@@ -127,8 +128,11 @@ export const FuelBehaviorHighChart = ({
           ignition: Boolean(c.ignition),
           deviceBattery: c.deviceBattery,
           mainPower: c.externalPower,
-          tanks: c.tanks,
-          currentLevelSmoothly: c.sensorCurrentLevelSmoothly,
+          tanks: formatTankValuesToInt(c.tanks),
+          currentLevelSmoothly:
+            c.sensorCurrentLevelSmoothly != null
+              ? Math.round(c.sensorCurrentLevelSmoothly)
+              : null,
         },
       }))
       .sort((a, b) => a.x - b.x);
@@ -148,8 +152,11 @@ export const FuelBehaviorHighChart = ({
           ignition: Boolean(c.ignition),
           deviceBattery: c.deviceBattery,
           mainPower: c.externalPower,
-          tanks: c.tanks,
-          currentLevelSmoothly: c.canCurrentLevelSmoothly,
+          tanks: formatTankValuesToInt(c.tanks),
+          currentLevelSmoothly:
+            c.canCurrentLevelSmoothly != null
+              ? Math.round(c.canCurrentLevelSmoothly)
+              : null,
         },
       }))
       .sort((a, b) => a.x - b.x);
@@ -180,9 +187,11 @@ export const FuelBehaviorHighChart = ({
           startDate: c.startDatePerformance,
           dateGps: c.endDatePerformance,
           averagePerformance: c.averagePerformance,
-          fuelConsumed: c.fuelConsumed,
-          initialLevel: c.initialLevel,
-          finalLevel: c.finalLevel,
+          fuelConsumed:
+            c.fuelConsumed != null ? Math.round(c.fuelConsumed) : null,
+          initialLevel:
+            c.initialLevel != null ? Math.round(c.initialLevel) : null,
+          finalLevel: c.finalLevel != null ? Math.round(c.finalLevel) : null,
           initialOdometer: c.initialOdometer,
           finalOdometer: c.finalOdometer,
           kilometersTraveled: c.kilometersTraveled,
@@ -200,9 +209,11 @@ export const FuelBehaviorHighChart = ({
           startDate: c.startDate,
           dateGps: c.endDate,
           averagePerformance: c.averagePerformance,
-          fuelConsumed: c.fuelConsumed,
-          initialLevel: c.initialLevel,
-          finalLevel: c.finalLevel,
+          fuelConsumed:
+            c.fuelConsumed != null ? Math.round(c.fuelConsumed) : null,
+          initialLevel:
+            c.initialLevel != null ? Math.round(c.initialLevel) : null,
+          finalLevel: c.finalLevel != null ? Math.round(c.finalLevel) : null,
           initialOdometer: c.initialOdometer,
           finalOdometer: c.finalOdometer,
           kilometersTraveled: c.kilometersTraveled,
