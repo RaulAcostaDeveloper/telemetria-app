@@ -26,6 +26,8 @@ export const PORTUGUES: LanguageInterface = {
     confirmation: "Confirmação",
     noChanges: "Nenhuma alteração detectada",
     noRegisters: "Não há registros que correspondam aos parâmetros de busca",
+    dateRangeSelected:
+      "Foi selecionado um intervalo de tempo para as consultas",
   },
   header: {
     backButton: {

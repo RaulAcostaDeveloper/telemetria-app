@@ -5,6 +5,9 @@ export const ToastAlertConfig = () => {
   return (
     <Toaster
       position="top-right"
+      containerStyle={{
+        top: 60, // px desde el borde superior
+      }}
       toastOptions={{
         duration: 3000,
         style: {

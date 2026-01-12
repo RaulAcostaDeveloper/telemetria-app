@@ -60,7 +60,7 @@ export const FuelReportDataProvider = ({
         ? LANGUAGE.fuelVehicle.fuelNow.startedSynch
         : LANGUAGE.fuelVehicle.fuelNow.stoppedSynch
     );
-  }, [isFuelNowSyncronizing]);
+  }, [isFuelNowSyncronizing, LANGUAGE]);
 
   useEffect(() => {
     const engineOff: OBValue[] = [];

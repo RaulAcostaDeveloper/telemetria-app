@@ -28,6 +28,8 @@ export const SPANISH: LanguageInterface = {
     noChanges: "No hay cambios",
     noRegisters:
       "No hay registros que coincidan con los parámetros de busqueda",
+    dateRangeSelected:
+      "Se ha seleccionado un rango de tiempo para las consultas",
   },
   header: {
     backButton: {
