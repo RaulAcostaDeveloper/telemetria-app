@@ -38,7 +38,7 @@ export const ZoneEditProfileModalForm = ({
 
   const [isPut, setIsPut] = useState<boolean>(false);
 
-  const [isConfirmationModalOpen, setIsConfirmationModalOpen] =
+  const [changesHaveBeenMade, setChangesHaveBeenMade] =
     useState<boolean>(false);
 
   const [isFormOpen, setIsFormOpen] = useState<boolean>(true);
@@ -104,7 +104,7 @@ export const ZoneEditProfileModalForm = ({
       ) {
         dispatch(fetchPutZoneProfile(updated));
         toast.success(LANGUAGE.notifications.savedData);
-        setIsConfirmationModalOpen(true);
+        setChangesHaveBeenMade(true);
         closeModal();
       } else {
         // No hubo cambios
@@ -128,21 +128,24 @@ export const ZoneEditProfileModalForm = ({
         })
       );
       toast.success(LANGUAGE.notifications.savedData);
-      setIsConfirmationModalOpen(true);
+      setChangesHaveBeenMade(true);
     }
     // Solo dejar los modales de confirmación al enviar
     setIsFormOpen(false);
   };
 
   useEffect(() => {
+    if (!id) {
+      console.warn("El Id de la zona no existe");
+    }
     return () => {
       // Reiniciar el estado al desmontar
       dispatch(resetZoneProfileDetailsSlice());
     };
-  }, []);
+  }, [id]);
 
   useEffect(() => {
-    if (isConfirmationModalOpen) {
+    if (changesHaveBeenMade) {
       setTimeout(() => {
         // Actualizar con los nuevos datos
         if (isAuthenticated && id && startDate && endDate) {
@@ -163,7 +166,7 @@ export const ZoneEditProfileModalForm = ({
         }
       }, 2000);
     }
-  }, [isConfirmationModalOpen]);
+  }, [changesHaveBeenMade]);
 
   useEffect(() => {
     // Inicializar con datos
