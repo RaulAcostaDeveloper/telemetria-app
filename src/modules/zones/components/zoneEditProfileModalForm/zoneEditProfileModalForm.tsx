@@ -1,11 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import CheckIcon from "@mui/icons-material/Check";
+import toast from "react-hot-toast";
 
 import LoaderAnimation from "@/global/components/loaderAnimation/loaderAnimation";
-import styles from "./zoneEditProfileModalForm.module.css";
 import { AppDispatch, RootState } from "@/global/redux/store";
 import { FetcherProfileData } from "./fetchetProfileData/fetcherProfileData";
 import { LanguageInterface } from "@/global/language/constants/language.model";
@@ -39,9 +37,6 @@ export const ZoneEditProfileModalForm = ({
   const [isPut, setIsPut] = useState<boolean>(false);
 
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] =
-    useState<boolean>(false);
-
-  const [isNoChangesModalOpen, setisNoChangesModalOpen] =
     useState<boolean>(false);
 
   const [isFormOpen, setIsFormOpen] = useState<boolean>(true);
@@ -106,10 +101,11 @@ export const ZoneEditProfileModalForm = ({
         })
       ) {
         dispatch(fetchPutZoneProfile(updated));
+        toast.success(LANGUAGE.notifications.savedData);
         setIsConfirmationModalOpen(true);
       } else {
         // No hubo cambios
-        setisNoChangesModalOpen(true);
+        toast.success(LANGUAGE.notifications.noChanges);
       }
     } else {
       // POST
@@ -127,6 +123,7 @@ export const ZoneEditProfileModalForm = ({
           logoutState,
         })
       );
+      toast.success(LANGUAGE.notifications.savedData);
       setIsConfirmationModalOpen(true);
     }
     // Solo dejar los modales de confirmación al enviar
@@ -249,32 +246,6 @@ export const ZoneEditProfileModalForm = ({
               zoneProvidersData={zoneProvidersData}
             />
           )}
-        </Modal>
-      )}
-
-      {isConfirmationModalOpen && (
-        <Modal
-          LANGUAGE={LANGUAGE}
-          closeModal={closeModal}
-          title={LANGUAGE.notifications.confirmation}
-        >
-          <div className={styles.notificationModalInfo}>
-            <p>{LANGUAGE.notifications.savedData}</p>
-            <CheckIcon sx={{ fontSize: "2rem" }} />
-          </div>
-        </Modal>
-      )}
-
-      {isNoChangesModalOpen && (
-        <Modal
-          LANGUAGE={LANGUAGE}
-          closeModal={closeModal}
-          title={LANGUAGE.notifications.confirmation}
-        >
-          <div className={styles.notificationModalInfo}>
-            <p>{LANGUAGE.notifications.noChanges}</p>
-            <CheckIcon sx={{ fontSize: "2rem" }} />
-          </div>
         </Modal>
       )}
     </>
