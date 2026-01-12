@@ -1,6 +1,7 @@
 import { Toaster } from "react-hot-toast";
 
 export const ToastAlertConfig = () => {
+  // Documentación: https://react-hot-toast.com/
   return (
     <Toaster
       position="top-right"

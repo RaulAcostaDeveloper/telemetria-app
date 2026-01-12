@@ -350,6 +350,8 @@ export const PORTUGUES: LanguageInterface = {
       hideLocation: "Ocultar mapa",
       stopSynchronization: "Interromper sincronização",
       startSynchronization: "Iniciar sincronização",
+      startedSynch: "A sincronização foi iniciada",
+      stoppedSynch: "A sincronização foi interrompida",
     },
     fuelChargesLabels: {
       eventId: "ID do evento",

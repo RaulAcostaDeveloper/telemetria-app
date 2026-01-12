@@ -13,6 +13,7 @@ import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { TabsContent } from "@/global/components";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
+import toast from "react-hot-toast";
 
 export interface OBValue {
   startDate: string;
@@ -52,6 +53,14 @@ export const FuelReportDataProvider = ({
     { text: LANGUAGE.fuelVehicle.tabs.reports, icon: ListAlt },
     { text: LANGUAGE.fuelVehicle.tabs.fuelNow, icon: LocalGasStation },
   ];
+
+  useEffect(() => {
+    toast.success(
+      isFuelNowSyncronizing
+        ? LANGUAGE.fuelVehicle.fuelNow.startedSynch
+        : LANGUAGE.fuelVehicle.fuelNow.stoppedSynch
+    );
+  }, [isFuelNowSyncronizing]);
 
   useEffect(() => {
     const engineOff: OBValue[] = [];

@@ -330,6 +330,8 @@ export interface LanguageInterface {
       hideLocation: string;
       stopSynchronization: string;
       startSynchronization: string;
+      stoppedSynch: string;
+      startedSynch: string;
     };
     fuelChargesLabels: {
       eventId: string;

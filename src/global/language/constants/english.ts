@@ -351,6 +351,8 @@ export const ENGLISH: LanguageInterface = {
       hideLocation: "Hide map",
       stopSynchronization: "Stop synchronization",
       startSynchronization: "Start synchronization",
+      startedSynch: "Synchronization has started",
+      stoppedSynch: "Synchronization has stopped",
     },
     fuelChargesLabels: {
       eventId: "Event ID",
