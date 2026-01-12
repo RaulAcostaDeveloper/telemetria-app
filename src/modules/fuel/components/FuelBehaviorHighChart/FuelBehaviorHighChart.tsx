@@ -368,6 +368,7 @@ export const FuelBehaviorHighChart = ({
             },
           },
           opposite: false,
+          max: 250,
         },
       ],
       series: [
@@ -533,7 +534,7 @@ export const FuelBehaviorHighChart = ({
           name: LANGUAGE.highCharts.titles.speed,
           type: "line",
           data: speedData,
-          color: "#8b00f5",
+          color: "#b3e207",
           lineWidth: 2,
           visible: false,
           showInNavigator: true,
