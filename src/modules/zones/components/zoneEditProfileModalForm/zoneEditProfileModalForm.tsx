@@ -18,7 +18,9 @@ import { fetchZonesSummary } from "@/global/redux/serviceSlices/zonesSummary";
 import { formatToLocalIso8601 } from "@/global/utils/dateUtils";
 import { getCategories } from "./categories";
 import { isDifferentProfile } from "../../utils/compareProfileObjects";
+import { resetZoneProfileDetailsSlice } from "@/global/redux/serviceSlices/zoneProfileDetailsSlice";
 import { useAuth } from "@/modules/auth/utils";
+import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -131,6 +133,13 @@ export const ZoneEditProfileModalForm = ({
   };
 
   useEffect(() => {
+    return () => {
+      // Reiniciar el estado al desmontar
+      dispatch(resetZoneProfileDetailsSlice());
+    };
+  }, []);
+
+  useEffect(() => {
     if (isConfirmationModalOpen) {
       setTimeout(() => {
         // Actualizar con los nuevos datos
@@ -221,30 +230,42 @@ export const ZoneEditProfileModalForm = ({
           zoneProvidersStatus === SERVICE_STATUS.loading ? (
             <LoaderAnimation />
           ) : (
-            <ProfileForm
-              LANGUAGE={LANGUAGE}
-              authCharges={authCharges}
-              authDisharges={authDisharges}
-              authRalenti={authRalenti}
-              categoryId={categoryId}
-              closeModal={closeModal}
-              color={color}
-              description={description}
-              name={name}
-              onConfirm={onConfirm}
-              providerId={providerId}
-              setAuthCharges={setAuthCharges}
-              setAuthDisharges={setAuthDisharges}
-              setAuthRalenti={setAuthRalenti}
-              setCategoryId={setCategoryId}
-              setColor={setColor}
-              setDescription={setDescription}
-              setName={setName}
-              setProviderId={setProviderId}
-              zoneCategoriesData={zoneCategoriesData}
-              zoneCategoriesStatus={zoneCategoriesStatus}
-              zoneProvidersData={zoneProvidersData}
-            />
+            <>
+              {/* Atender este problema en otra tarea */}
+              {/* Caso 429 no es manejado correctamente */}
+              {zoneProfileDetailsStatus === SERVICE_STATUS.failed ? (
+                <DataErrorHandler
+                  LANGUAGE={LANGUAGE}
+                  hasData={true}
+                  infoStatus={zoneProfileDetailsStatus}
+                />
+              ) : (
+                <ProfileForm
+                  LANGUAGE={LANGUAGE}
+                  authCharges={authCharges}
+                  authDisharges={authDisharges}
+                  authRalenti={authRalenti}
+                  categoryId={categoryId}
+                  closeModal={closeModal}
+                  color={color}
+                  description={description}
+                  name={name}
+                  onConfirm={onConfirm}
+                  providerId={providerId}
+                  setAuthCharges={setAuthCharges}
+                  setAuthDisharges={setAuthDisharges}
+                  setAuthRalenti={setAuthRalenti}
+                  setCategoryId={setCategoryId}
+                  setColor={setColor}
+                  setDescription={setDescription}
+                  setName={setName}
+                  setProviderId={setProviderId}
+                  zoneCategoriesData={zoneCategoriesData}
+                  zoneCategoriesStatus={zoneCategoriesStatus}
+                  zoneProvidersData={zoneProvidersData}
+                />
+              )}
+            </>
           )}
         </Modal>
       )}
