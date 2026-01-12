@@ -105,9 +105,11 @@ export const ZoneEditProfileModalForm = ({
         dispatch(fetchPutZoneProfile(updated));
         toast.success(LANGUAGE.notifications.savedData);
         setIsConfirmationModalOpen(true);
+        closeModal();
       } else {
         // No hubo cambios
         toast.success(LANGUAGE.notifications.noChanges);
+        closeModal();
       }
     } else {
       // POST
