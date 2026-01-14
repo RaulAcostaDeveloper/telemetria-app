@@ -102,13 +102,8 @@ export function getChargesTooltipFields(
 ): TooltipField[] {
   return [
     {
-      label: LANGUAGE.highCharts.tooltips.startDate,
-      value: (data) =>
-        `${legibleDate(data.startDate, LANGUAGE.localeLanguage)}`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.endDate,
-      value: (data) => `${legibleDate(data.endDate, LANGUAGE.localeLanguage)}`,
+      label: LANGUAGE.highCharts.tooltips.date,
+      value: (data) => `${legibleDate(data.dateGps, LANGUAGE.localeLanguage)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
@@ -128,12 +123,21 @@ export function getChargesTooltipFields(
       value: (data) => `${ndIfEmpty(data.mainPower)} (V)`,
     },
     {
-      label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
-      value: (data) => `${ndIfEmpty(data.initialFuel)} L`,
+      label: LANGUAGE.highCharts.tooltips.startDate,
+      value: (data) =>
+        `${legibleDate(data.startDate, LANGUAGE.localeLanguage)}`,
       separator: {
-        position: 6,
+        position: 5,
         subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleCharges,
       },
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.endDate,
+      value: (data) => `${legibleDate(data.endDate, LANGUAGE.localeLanguage)}`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
+      value: (data) => `${ndIfEmpty(data.initialFuel)} L`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.finalFuel,
@@ -151,13 +155,8 @@ export function getDisChargesTooltipFields(
 ): TooltipField[] {
   return [
     {
-      label: LANGUAGE.highCharts.tooltips.startDate,
-      value: (data) =>
-        `${legibleDate(data.startDate, LANGUAGE.localeLanguage)}`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.endDate,
-      value: (data) => `${legibleDate(data.endDate, LANGUAGE.localeLanguage)}`,
+      label: LANGUAGE.highCharts.tooltips.date,
+      value: (data) => `${legibleDate(data.dateGps, LANGUAGE.localeLanguage)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.ignition,
@@ -177,13 +176,23 @@ export function getDisChargesTooltipFields(
       value: (data) => `${ndIfEmpty(data.mainPower)} (V)`,
     },
     {
-      label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
-      value: (data) => `${ndIfEmpty(data.initialFuel)} L`,
+      label: LANGUAGE.highCharts.tooltips.startDate,
+      value: (data) =>
+        `${legibleDate(data.startDate, LANGUAGE.localeLanguage)}`,
       separator: {
-        position: 6,
+        position: 5,
         subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleDischarges,
       },
     },
+    {
+      label: LANGUAGE.highCharts.tooltips.endDate,
+      value: (data) => `${legibleDate(data.endDate, LANGUAGE.localeLanguage)}`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.initialFuel,
+      value: (data) => `${ndIfEmpty(data.initialFuel)} L`,
+    },
+
     {
       label: LANGUAGE.highCharts.tooltips.fuel.finalFuel,
       value: (data) => `${ndIfEmpty(data.finalFuel)} L`,
@@ -225,12 +234,16 @@ export function getLevelMessagesTooltipFields(
       value: (data) => `${ndIfEmpty(data.mainPower)} (V)`,
     },
     {
-      label: LANGUAGE.highCharts.tooltips.fuel.tanksSum,
-      value: (data) => `${ndIfEmpty(data.currentLevelSmoothly)} (L)`,
+      label: LANGUAGE.highCharts.tooltips.fuel.speed,
+      value: (data) => `${ndIfEmpty(data.speed)}  km/h`,
       separator: {
         position: 6,
         subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleFuelVariationCAN,
       },
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.tanksSum,
+      value: (data) => `${ndIfEmpty(data.currentLevelSmoothly)} (L)`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.tanks,
@@ -244,12 +257,7 @@ export function getPerformancesBetweenChargesTooltipFields(
 ): TooltipField[] {
   return [
     {
-      label: LANGUAGE.highCharts.tooltips.startDate,
-      value: (data) =>
-        `${legibleDate(data.startDate, LANGUAGE.localeLanguage)}`,
-    },
-    {
-      label: LANGUAGE.highCharts.tooltips.endDate,
+      label: LANGUAGE.highCharts.tooltips.date,
       value: (data) => `${legibleDate(data.dateGps, LANGUAGE.localeLanguage)}`,
     },
     {
@@ -265,12 +273,21 @@ export function getPerformancesBetweenChargesTooltipFields(
       value: (data) => `${data.kilometersTraveled} Km`,
     },
     {
-      label: LANGUAGE.highCharts.tooltips.fuel.averagePerformance,
-      value: (data) => `${ndIfEmpty(data.averagePerformance)}  Km/L`,
+      label: LANGUAGE.highCharts.tooltips.startDate,
+      value: (data) =>
+        `${legibleDate(data.startDate, LANGUAGE.localeLanguage)}`,
       separator: {
-        position: 6,
+        position: 5,
         subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitlePerformanceBetween,
       },
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.endDate,
+      value: (data) => `${legibleDate(data.dateGps, LANGUAGE.localeLanguage)}`,
+    },
+    {
+      label: LANGUAGE.highCharts.tooltips.fuel.averagePerformance,
+      value: (data) => `${ndIfEmpty(data.averagePerformance)}  Km/L`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.fuelConsumed,

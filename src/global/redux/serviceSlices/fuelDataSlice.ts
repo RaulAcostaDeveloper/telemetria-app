@@ -67,7 +67,6 @@ interface DailyPerformances {
   startDate: string;
   endDate: string;
   averagePerformance: number | null;
-  createdAt: string;
   updateAt: string;
   fuelConsumed: number | null;
   initialLevel: number | null;
