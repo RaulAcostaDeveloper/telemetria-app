@@ -1,5 +1,5 @@
 "use client";
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import {
   createTooltipFormatter,
@@ -15,7 +15,7 @@ import {
   getLabelsForLevelMessagesGeoMap,
 } from "@/global/utils/geoMapUtils";
 import { FuelDataValues } from "@/global/redux/serviceSlices/fuelDataSlice";
-import { GeoModalData } from "@/global/components/geoModal/geoModal";
+import GeoModal, { GeoModalData } from "@/global/components/geoModal/geoModal";
 import { HighchartNext } from "@/global/components/highchartNext/highchartNext";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { OBValue } from "../fuelReportDataProvider/fuelReportDataProvider";
@@ -24,9 +24,8 @@ import { formatTankValuesToInt } from "@/global/utils/mathUtils";
 interface Props {
   LANGUAGE: LanguageInterface;
   fuelDataData: FuelDataValues;
-  handleClicGeoData: (geoModalData: GeoModalData) => void;
   opBEngineOff: OBValue[];
-  opBEngineOffCoasting: OBValue[];
+  /* opBEngineOffCoasting: OBValue[]; */
   opBEngineOnIdle: OBValue[];
   opBEngineOnMoving: OBValue[];
 }
@@ -34,12 +33,19 @@ interface Props {
 export const FuelBehaviorHighChart = ({
   LANGUAGE,
   fuelDataData,
-  handleClicGeoData,
   opBEngineOff,
   // opBEngineOffCoasting,
   opBEngineOnIdle,
   opBEngineOnMoving,
 }: Props) => {
+  const [geoModalData, setGeoModalData] = useState<GeoModalData>();
+  const [isModalFuelOpen, setIsModalFuelOpen] = useState(false);
+
+  const handleClicGeoData = useCallback((geoModalData: GeoModalData) => {
+    setGeoModalData(geoModalData);
+    setIsModalFuelOpen(true);
+  }, []);
+
   // Tooltip de cada serie
   const chargesTooltipFields = useMemo(() => {
     return getChargesTooltipFields(LANGUAGE);
@@ -664,6 +670,13 @@ export const FuelBehaviorHighChart = ({
   return (
     <>
       <HighchartNext isStock chartStockOptions={chartOptions} />
+      {isModalFuelOpen && geoModalData && (
+        <GeoModal
+          LANGUAGE={LANGUAGE}
+          closeModal={() => setIsModalFuelOpen(false)}
+          geoModalData={geoModalData}
+        />
+      )}
     </>
   );
 };
