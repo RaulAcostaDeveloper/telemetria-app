@@ -418,9 +418,9 @@ export const FuelBehaviorHighChart = ({
           pointWidth: 20,
           name: LANGUAGE.highCharts.titles.disCharges,
           data: disChargesData,
+          marker: { enabled: false, symbol: "diamond" },
           color: "#ff2033",
           showInNavigator: true,
-          cursor: "pointer",
           point: {
             events: {
               click: (e: Highcharts.PointClickEventObject) => {
@@ -448,10 +448,10 @@ export const FuelBehaviorHighChart = ({
           name: LANGUAGE.highCharts.titles.fuelVariationCAN,
           type: "line",
           data: levelMessagesCANData,
+          marker: { enabled: false, symbol: "diamond" },
           color: "#f77f00",
           lineWidth: 2,
           showInNavigator: true,
-          cursor: "pointer",
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titleFuelVariationCAN,
@@ -479,10 +479,10 @@ export const FuelBehaviorHighChart = ({
           name: LANGUAGE.highCharts.titles.fuelVariation,
           type: "line",
           data: levelMessagesData,
+          marker: { enabled: false, symbol: "diamond" },
           color: "#006af5",
           lineWidth: 2,
           showInNavigator: true,
-          cursor: "pointer",
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titleFuelVariation,
