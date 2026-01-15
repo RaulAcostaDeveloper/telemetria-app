@@ -317,20 +317,34 @@ export const hasLessThanOneDay = (startDate: string, endDate: string) => {
 };
 
 // Retorna un string legible, por ejemplo: "martes, 9 de septiembre de 2025, 00:00"
+// Si el date no contiene la hora, no la asume
 export const legibleDate = (date: string, locale: string): string => {
-  const dateFormat = new Date(date);
+  const hasTime = date.includes("T");
 
-  const dateOptions: Intl.DateTimeFormatOptions = {
+  let dateFormat: Date;
+
+  if (hasTime) {
+    // Instante temporal real (respeta zona horaria)
+    dateFormat = new Date(date);
+  } else {
+    // Fecha lógica (NO UTC, NO corrimientos)
+    const [year, month, day] = date.split("-").map(Number);
+    dateFormat = new Date(year, month - 1, day);
+  }
+
+  const options: Intl.DateTimeFormatOptions = {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
+    ...(hasTime && {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }),
   };
 
-  return dateFormat.toLocaleString(locale, dateOptions);
+  return dateFormat.toLocaleString(locale, options);
 };
 
 // Elimina la hora 00:00.
