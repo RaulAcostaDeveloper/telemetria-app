@@ -67,8 +67,6 @@ interface DailyPerformances {
   startDate: string;
   endDate: string;
   averagePerformance: number | null;
-  createdAt: string;
-  updateAt: string;
   fuelConsumed: number | null;
   initialLevel: number | null;
   finalLevel: number | null;
@@ -166,7 +164,6 @@ const fuelDataFormatter = (data: FuelDataData | null): FuelDataData | null => {
     const dailyPerformances = data.value.dailyPerformances.map(
       (dailyPerformances) => ({
         ...dailyPerformances,
-        updateAt: toLocalDateTime(dailyPerformances.updateAt),
         endDate: toLocalDateTime(dailyPerformances.endDate),
         startDate: toLocalDateTime(dailyPerformances.startDate),
       })

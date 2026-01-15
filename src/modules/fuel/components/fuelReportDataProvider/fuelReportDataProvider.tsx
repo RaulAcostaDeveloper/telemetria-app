@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 import GeoModal, { GeoModalData } from "@/global/components/geoModal/geoModal";
 import styles from "./fuelReportDataProvider.module.css";
@@ -13,7 +14,7 @@ import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { TabsContent } from "@/global/components";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
-import toast from "react-hot-toast";
+import { FuelBehaviorHighChart } from "../FuelBehaviorHighChart/FuelBehaviorHighChart";
 
 export interface OBValue {
   startDate: string;
@@ -36,7 +37,7 @@ export const FuelReportDataProvider = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [geoModalData, setGeoModalData] = useState<GeoModalData>();
   const [opBEngineOff, setOpBEngineOff] = useState<OBValue[]>([]);
-  const [opBEngineOffCoast, setOpBEngineOffCoast] = useState<OBValue[]>([]);
+  /* const [opBEngineOffCoast, setOpBEngineOffCoast] = useState<OBValue[]>([]); */
   const [opBEngineOnIdle, setOpBEngineOnIdle] = useState<OBValue[]>([]);
   const [opBEngineOnMoving, setOpBEngineOnMoving] = useState<OBValue[]>([]);
 
@@ -103,7 +104,7 @@ export const FuelReportDataProvider = ({
     });
 
     setOpBEngineOff(engineOff);
-    setOpBEngineOffCoast(engineOffCoasting);
+    /* setOpBEngineOffCoast(engineOffCoasting); */
     setOpBEngineOnIdle(engineOnIdle);
     setOpBEngineOnMoving(engineOnMoving);
   }, [fuelDataData]);
@@ -117,14 +118,16 @@ export const FuelReportDataProvider = ({
             {fuelDataStatus === SERVICE_STATUS.succeeded &&
               fuelDataData?.value && (
                 <>
-                  <FuelBehaviorTab
-                    LANGUAGE={LANGUAGE}
-                    fuelDataData={fuelDataData.value}
-                    opBEngineOff={opBEngineOff}
-                    opBEngineOffCoasting={opBEngineOffCoast}
-                    opBEngineOnIdle={opBEngineOnIdle}
-                    opBEngineOnMoving={opBEngineOnMoving}
-                  />
+                  <FuelBehaviorTab LANGUAGE={LANGUAGE}>
+                    <FuelBehaviorHighChart
+                      LANGUAGE={LANGUAGE}
+                      fuelDataData={fuelDataData.value}
+                      opBEngineOff={opBEngineOff}
+                      /* opBEngineOffCoasting={opBEngineOffCoasting} */
+                      opBEngineOnIdle={opBEngineOnIdle}
+                      opBEngineOnMoving={opBEngineOnMoving}
+                    />
+                  </FuelBehaviorTab>
                 </>
               )}
 

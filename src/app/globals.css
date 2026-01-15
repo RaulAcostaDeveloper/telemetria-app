@@ -91,14 +91,14 @@ button {
 /* Transición del color base para la animación del loader*/
 :root {
   --cell-color9: hwb(189 0% 77%);
-  --cell-color8: hwb(189 0% 59%);
-  --cell-color7: hwb(189 0% 60%);
-  --cell-color6: hwb(189 1% 45%);
-  --cell-color5: hwb(187 0% 62%);
-  --cell-color4: hwb(189 0% 55%);
-  --cell-color3: hwb(189 30% 34%);
-  --cell-color2: hwb(183 0% 61%);
-  --cell-color1: hwb(189 2% 60%);
+  --cell-color8: hwb(189 0% 74%);
+  --cell-color7: hwb(189 0% 71%);
+  --cell-color6: hwb(189 0% 68%);
+  --cell-color5: hwb(189 0% 65%);
+  --cell-color4: hwb(189 0% 62%);
+  --cell-color3: hwb(189 0% 59%);
+  --cell-color2: hwb(189 0% 56%);
+  --cell-color1: hwb(189 0% 53%);
 }
 
 /* Variables de color para sombras */

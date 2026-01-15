@@ -1,33 +1,15 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styles from "./fuelBehaviorTab.module.css";
 
-import GeoModal, { GeoModalData } from "@/global/components/geoModal/geoModal";
-import { FuelBehaviorHighChart } from "../FuelBehaviorHighChart/FuelBehaviorHighChart";
-import { FuelDataValues } from "@/global/redux/serviceSlices/fuelDataSlice";
 import { LanguageInterface } from "@/global/language/constants/language.model";
-import { OBValue } from "../fuelReportDataProvider/fuelReportDataProvider";
 import { ToggleButton } from "../FuelBehaviorHighChart/toggleButton/toggleButton";
 
 interface Props {
   LANGUAGE: LanguageInterface;
-  fuelDataData: FuelDataValues;
-  opBEngineOff: OBValue[];
-  opBEngineOffCoasting: OBValue[];
-  opBEngineOnIdle: OBValue[];
-  opBEngineOnMoving: OBValue[];
+  children: React.ReactNode;
 }
 
-export const FuelBehaviorTab = ({
-  LANGUAGE,
-  fuelDataData,
-  opBEngineOff,
-  opBEngineOffCoasting,
-  opBEngineOnIdle,
-  opBEngineOnMoving,
-}: Props) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [geoModalData, setGeoModalData] = useState<GeoModalData>();
-
+export const FuelBehaviorTab = ({ LANGUAGE, children }: Props) => {
   // Operational Behavior (Estacionado, apagado, Avanzando, apagado y avanzando)
 
   const [showOpBEngineOff, setShowOpBEngineOff] = useState<boolean>(true);
@@ -36,11 +18,6 @@ export const FuelBehaviorTab = ({
   const [showOpBEngineOnIdle, setShowOpBEngineOnIdle] = useState<boolean>(true);
   const [showOpBEngineOnMoving, setShowOpBEngineOnMoving] =
     useState<boolean>(true);
-
-  const handleClicGeoData = (geoModalData: GeoModalData) => {
-    setGeoModalData(geoModalData);
-    setIsModalOpen(true);
-  };
 
   return (
     <div>
@@ -51,15 +28,7 @@ export const FuelBehaviorTab = ({
         ${showOpBEngineOnMoving ? "" : styles.hideOpBEngineOnMoving}
         `}
       >
-        <FuelBehaviorHighChart
-          LANGUAGE={LANGUAGE}
-          fuelDataData={fuelDataData}
-          handleClicGeoData={handleClicGeoData}
-          opBEngineOff={opBEngineOff}
-          opBEngineOffCoasting={opBEngineOffCoasting}
-          opBEngineOnIdle={opBEngineOnIdle}
-          opBEngineOnMoving={opBEngineOnMoving}
-        />
+        {children}
       </div>
 
       <div className={styles.toggleButtonsGroup}>
@@ -88,14 +57,6 @@ export const FuelBehaviorTab = ({
           activeColor="#e6fb99"
         />
       </div>
-
-      {isModalOpen && geoModalData && (
-        <GeoModal
-          LANGUAGE={LANGUAGE}
-          closeModal={() => setIsModalOpen(false)}
-          geoModalData={geoModalData}
-        />
-      )}
     </div>
   );
 };
