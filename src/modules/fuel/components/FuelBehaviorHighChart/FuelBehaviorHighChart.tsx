@@ -191,7 +191,8 @@ export const FuelBehaviorHighChart = ({
         y: c.averagePerformance,
         custom: {
           startDate: c.startDatePerformance,
-          dateGps: c.endDatePerformance,
+          endDate: c.endDatePerformance,
+          dateGps: c.startDatePerformance,
           averagePerformance: c.averagePerformance,
           fuelConsumed:
             c.fuelConsumed != null ? Math.round(c.fuelConsumed) : null,
@@ -213,7 +214,8 @@ export const FuelBehaviorHighChart = ({
         y: c.averagePerformance,
         custom: {
           startDate: c.startDate,
-          dateGps: c.endDate,
+          endDate: c.endDate,
+          dateGps: c.startDate,
           averagePerformance: c.averagePerformance,
           fuelConsumed:
             c.fuelConsumed != null ? Math.round(c.fuelConsumed) : null,
@@ -556,7 +558,7 @@ export const FuelBehaviorHighChart = ({
       tooltip: {
         split: false,
         useHTML: true,
-        shared: true,
+        shared: false,
         borderRadius: 6,
         padding: 10,
         shadow: true,
