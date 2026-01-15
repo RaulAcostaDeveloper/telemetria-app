@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 import GeoModal, { GeoModalData } from "@/global/components/geoModal/geoModal";
 import styles from "./fuelReportDataProvider.module.css";
@@ -53,6 +54,14 @@ export const FuelReportDataProvider = ({
     { text: LANGUAGE.fuelVehicle.tabs.reports, icon: ListAlt },
     { text: LANGUAGE.fuelVehicle.tabs.fuelNow, icon: LocalGasStation },
   ];
+
+  useEffect(() => {
+    toast.success(
+      isFuelNowSyncronizing
+        ? LANGUAGE.fuelVehicle.fuelNow.startedSynch
+        : LANGUAGE.fuelVehicle.fuelNow.stoppedSynch
+    );
+  }, [isFuelNowSyncronizing, LANGUAGE]);
 
   useEffect(() => {
     const engineOff: OBValue[] = [];

@@ -27,6 +27,7 @@ export const ENGLISH: LanguageInterface = {
     noChanges: "No changes detected",
     savedData: "The changes have been saved",
     noRegisters: "There are no records that match the search parameters",
+    dateRangeSelected: "A time range has been selected for the queries",
   },
   header: {
     backButton: {
@@ -351,6 +352,8 @@ export const ENGLISH: LanguageInterface = {
       hideLocation: "Hide map",
       stopSynchronization: "Stop synchronization",
       startSynchronization: "Start synchronization",
+      startedSynch: "Synchronization has started",
+      stoppedSynch: "Synchronization has stopped",
     },
     fuelChargesLabels: {
       eventId: "Event ID",

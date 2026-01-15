@@ -21,6 +21,7 @@ import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { SPANISH } from "../../language/constants/spanish";
 import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
+import { ToastAlertConfig } from "../toastAlertConfig/toastAlertConfig";
 import { useAuth } from "../../../modules/auth/utils";
 
 interface Props {
@@ -111,6 +112,7 @@ export const MainWrapper = ({ children }: Props) => {
     </div>
   ) : (
     <div className={`${styles.mainWrapper}`}>
+      <ToastAlertConfig />
       {isAuthenticated && <MainDataFetcher />}
       {isAuthenticated && (
         <Menu

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
+import toast from "react-hot-toast";
 
 import Calendar from "@/global/components/calendar/Calendar";
 import HeaderVehicleFilter from "./headerVehicleFilter/headerVehicleFilter";
@@ -10,9 +11,9 @@ import styles from "./header.module.css";
 import { CalendarToday } from "@mui/icons-material";
 import { HeaderBackButton } from "./headerBackButton/headerBackButton";
 import { HeaderTextContent } from "./headerTextContent/headerTextContent";
+import { LanguageButton } from "./languageButton/languageButton";
 import { LanguageInterface } from "../../language/constants/language.model";
 import { formatDateTime } from "@/global/utils/dateUtils";
-import { LanguageButton } from "./languageButton/languageButton";
 
 interface CalendarState {
   endDate: string | null;
@@ -37,17 +38,21 @@ export const Header = ({ isMenuOpen, LANGUAGE }: Props) => {
     (state: RootState) => state.calendar
   );
 
+  const defaultISO = new Date().toISOString();
+  const start = formatDateTime(reduxStartDate ?? defaultISO);
+  const end = formatDateTime(reduxEndDate ?? defaultISO);
+
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    toast.success(LANGUAGE.notifications.dateRangeSelected);
+  }, [start, end]);
+
   const toggleContainer = (): void => {
     setShowCalendar((prev) => !prev);
   };
-
-  const defaultISO = new Date().toISOString();
-  const start = formatDateTime(reduxStartDate ?? defaultISO);
-  const end = formatDateTime(reduxEndDate ?? defaultISO);
 
   return (
     <>

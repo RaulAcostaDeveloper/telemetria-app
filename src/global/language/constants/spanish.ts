@@ -28,6 +28,8 @@ export const SPANISH: LanguageInterface = {
     noChanges: "No hay cambios",
     noRegisters:
       "No hay registros que coincidan con los parámetros de busqueda",
+    dateRangeSelected:
+      "Se ha seleccionado un rango de tiempo para las consultas",
   },
   header: {
     backButton: {
@@ -352,6 +354,8 @@ export const SPANISH: LanguageInterface = {
       hideLocation: "Ocultar mapa",
       stopSynchronization: "Detener sincronización",
       startSynchronization: "Iniciar sincronización",
+      startedSynch: "La sincronización ha iniciado",
+      stoppedSynch: "La sincronización se ha detenido",
     },
     fuelChargesLabels: {
       eventId: "Evento ID",

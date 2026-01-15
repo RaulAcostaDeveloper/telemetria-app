@@ -26,6 +26,7 @@ export interface LanguageInterface {
     savedData: string;
     noChanges: string;
     noRegisters: string;
+    dateRangeSelected: string;
   };
   header: {
     backButton: {
@@ -330,6 +331,8 @@ export interface LanguageInterface {
       hideLocation: string;
       stopSynchronization: string;
       startSynchronization: string;
+      stoppedSynch: string;
+      startedSynch: string;
     };
     fuelChargesLabels: {
       eventId: string;

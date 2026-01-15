@@ -1,11 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import CheckIcon from "@mui/icons-material/Check";
+import toast from "react-hot-toast";
 
 import LoaderAnimation from "@/global/components/loaderAnimation/loaderAnimation";
-import styles from "./zoneEditProfileModalForm.module.css";
 import { AppDispatch, RootState } from "@/global/redux/store";
 import { FetcherProfileData } from "./fetchetProfileData/fetcherProfileData";
 import { LanguageInterface } from "@/global/language/constants/language.model";
@@ -20,7 +18,9 @@ import { fetchZonesSummary } from "@/global/redux/serviceSlices/zonesSummary";
 import { formatToLocalIso8601 } from "@/global/utils/dateUtils";
 import { getCategories } from "./categories";
 import { isDifferentProfile } from "../../utils/compareProfileObjects";
+import { resetZoneProfileDetailsSlice } from "@/global/redux/serviceSlices/zoneProfileDetailsSlice";
 import { useAuth } from "@/modules/auth/utils";
+import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -38,10 +38,7 @@ export const ZoneEditProfileModalForm = ({
 
   const [isPut, setIsPut] = useState<boolean>(false);
 
-  const [isConfirmationModalOpen, setIsConfirmationModalOpen] =
-    useState<boolean>(false);
-
-  const [isNoChangesModalOpen, setisNoChangesModalOpen] =
+  const [changesHaveBeenMade, setChangesHaveBeenMade] =
     useState<boolean>(false);
 
   const [isFormOpen, setIsFormOpen] = useState<boolean>(true);
@@ -106,10 +103,13 @@ export const ZoneEditProfileModalForm = ({
         })
       ) {
         dispatch(fetchPutZoneProfile(updated));
-        setIsConfirmationModalOpen(true);
+        toast.success(LANGUAGE.notifications.savedData);
+        setChangesHaveBeenMade(true);
+        closeModal();
       } else {
         // No hubo cambios
-        setisNoChangesModalOpen(true);
+        toast.success(LANGUAGE.notifications.noChanges);
+        closeModal();
       }
     } else {
       // POST
@@ -127,14 +127,25 @@ export const ZoneEditProfileModalForm = ({
           logoutState,
         })
       );
-      setIsConfirmationModalOpen(true);
+      toast.success(LANGUAGE.notifications.savedData);
+      setChangesHaveBeenMade(true);
     }
     // Solo dejar los modales de confirmación al enviar
     setIsFormOpen(false);
   };
 
   useEffect(() => {
-    if (isConfirmationModalOpen) {
+    if (!id) {
+      console.warn("El Id de la zona no existe");
+    }
+    return () => {
+      // Reiniciar el estado al desmontar
+      dispatch(resetZoneProfileDetailsSlice());
+    };
+  }, [id]);
+
+  useEffect(() => {
+    if (changesHaveBeenMade) {
       setTimeout(() => {
         // Actualizar con los nuevos datos
         if (isAuthenticated && id && startDate && endDate) {
@@ -155,7 +166,7 @@ export const ZoneEditProfileModalForm = ({
         }
       }, 2000);
     }
-  }, [isConfirmationModalOpen]);
+  }, [changesHaveBeenMade]);
 
   useEffect(() => {
     // Inicializar con datos
@@ -224,57 +235,43 @@ export const ZoneEditProfileModalForm = ({
           zoneProvidersStatus === SERVICE_STATUS.loading ? (
             <LoaderAnimation />
           ) : (
-            <ProfileForm
-              LANGUAGE={LANGUAGE}
-              authCharges={authCharges}
-              authDisharges={authDisharges}
-              authRalenti={authRalenti}
-              categoryId={categoryId}
-              closeModal={closeModal}
-              color={color}
-              description={description}
-              name={name}
-              onConfirm={onConfirm}
-              providerId={providerId}
-              setAuthCharges={setAuthCharges}
-              setAuthDisharges={setAuthDisharges}
-              setAuthRalenti={setAuthRalenti}
-              setCategoryId={setCategoryId}
-              setColor={setColor}
-              setDescription={setDescription}
-              setName={setName}
-              setProviderId={setProviderId}
-              zoneCategoriesData={zoneCategoriesData}
-              zoneCategoriesStatus={zoneCategoriesStatus}
-              zoneProvidersData={zoneProvidersData}
-            />
+            <>
+              {/* Atender este problema en otra tarea */}
+              {/* Caso 429 no es manejado correctamente */}
+              {zoneProfileDetailsStatus === SERVICE_STATUS.failed ? (
+                <DataErrorHandler
+                  LANGUAGE={LANGUAGE}
+                  hasData={true}
+                  infoStatus={zoneProfileDetailsStatus}
+                />
+              ) : (
+                <ProfileForm
+                  LANGUAGE={LANGUAGE}
+                  authCharges={authCharges}
+                  authDisharges={authDisharges}
+                  authRalenti={authRalenti}
+                  categoryId={categoryId}
+                  closeModal={closeModal}
+                  color={color}
+                  description={description}
+                  name={name}
+                  onConfirm={onConfirm}
+                  providerId={providerId}
+                  setAuthCharges={setAuthCharges}
+                  setAuthDisharges={setAuthDisharges}
+                  setAuthRalenti={setAuthRalenti}
+                  setCategoryId={setCategoryId}
+                  setColor={setColor}
+                  setDescription={setDescription}
+                  setName={setName}
+                  setProviderId={setProviderId}
+                  zoneCategoriesData={zoneCategoriesData}
+                  zoneCategoriesStatus={zoneCategoriesStatus}
+                  zoneProvidersData={zoneProvidersData}
+                />
+              )}
+            </>
           )}
-        </Modal>
-      )}
-
-      {isConfirmationModalOpen && (
-        <Modal
-          LANGUAGE={LANGUAGE}
-          closeModal={closeModal}
-          title={LANGUAGE.notifications.confirmation}
-        >
-          <div className={styles.notificationModalInfo}>
-            <p>{LANGUAGE.notifications.savedData}</p>
-            <CheckIcon sx={{ fontSize: "2rem" }} />
-          </div>
-        </Modal>
-      )}
-
-      {isNoChangesModalOpen && (
-        <Modal
-          LANGUAGE={LANGUAGE}
-          closeModal={closeModal}
-          title={LANGUAGE.notifications.confirmation}
-        >
-          <div className={styles.notificationModalInfo}>
-            <p>{LANGUAGE.notifications.noChanges}</p>
-            <CheckIcon sx={{ fontSize: "2rem" }} />
-          </div>
         </Modal>
       )}
     </>
