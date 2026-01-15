@@ -46,6 +46,8 @@ export const FuelBehaviorHighChart = ({
     setIsModalFuelOpen(true);
   }, []);
 
+  const sensorOrCAN = fuelDataData.showData.isSensor ? "sensor" : "can";
+
   // Tooltip de cada serie
   const chargesTooltipFields = useMemo(() => {
     return getChargesTooltipFields(LANGUAGE);
@@ -124,7 +126,10 @@ export const FuelBehaviorHighChart = ({
     return fuelDataData.levelMessages
       .map((c) => ({
         x: new Date(c.dateGps).getTime(),
-        y: c.sensorCurrentLevelSmoothly,
+        y:
+          sensorOrCAN === "sensor"
+            ? c.sensorCurrentLevelSmoothly
+            : c.canCurrentLevelSmoothly,
         custom: {
           dateGps: c.dateGps,
           lat: c.lat,
@@ -142,31 +147,7 @@ export const FuelBehaviorHighChart = ({
         },
       }))
       .sort((a, b) => a.x - b.x);
-  }, [fuelDataData]);
-
-  const levelMessagesCANData = useMemo(() => {
-    return fuelDataData.levelMessages
-      .map((c) => ({
-        x: new Date(c.dateGps).getTime(),
-        y: c.canCurrentLevelSmoothly,
-        custom: {
-          dateGps: c.dateGps,
-          lat: c.lat,
-          lon: c.lon,
-          odometer: c.odometer,
-          speed: c.speed,
-          ignition: Boolean(c.ignition),
-          deviceBattery: c.deviceBattery,
-          mainPower: c.externalPower,
-          tanks: formatTankValuesToInt(c.tanks),
-          currentLevelSmoothly:
-            c.canCurrentLevelSmoothly != null
-              ? Math.round(c.canCurrentLevelSmoothly)
-              : null,
-        },
-      }))
-      .sort((a, b) => a.x - b.x);
-  }, [fuelDataData]);
+  }, [fuelDataData, sensorOrCAN]);
 
   const speedData = useMemo(() => {
     return fuelDataData.levelMessages
@@ -280,37 +261,6 @@ export const FuelBehaviorHighChart = ({
   }, [opBEngineOff, opBEngineOnMoving, opBEngineOnIdle]);
 
   const chartOptions = useMemo(() => {
-    // @ts-expect-error //No se puede determinar el tipo de Chart
-    const removeSeries = (chart) => {
-      const serieFuelCAN = chart.series.find(
-        (serie: { name: string }) =>
-          serie.name === LANGUAGE.highCharts.titles.fuelVariationCAN
-      );
-
-      const serieFuelSensor = chart.series.find(
-        (serie: { name: string }) =>
-          serie.name === LANGUAGE.highCharts.titles.fuelVariation
-      );
-
-      if (fuelDataData.showData.isSensor) {
-        if (serieFuelCAN) {
-          serieFuelCAN.remove(false);
-          chart.redraw();
-        }
-      } else if (fuelDataData.showData.isCAN) {
-        if (serieFuelSensor) {
-          serieFuelSensor.remove(false);
-          chart.redraw();
-        }
-      } else {
-        if (serieFuelSensor && serieFuelCAN) {
-          serieFuelSensor.remove(false);
-          serieFuelCAN.remove(false);
-          chart.redraw();
-        }
-      }
-    };
-
     return {
       xAxis: {
         type: "datetime",
@@ -418,9 +368,9 @@ export const FuelBehaviorHighChart = ({
           pointWidth: 20,
           name: LANGUAGE.highCharts.titles.disCharges,
           data: disChargesData,
+          marker: { enabled: false, symbol: "diamond" },
           color: "#ff2033",
           showInNavigator: true,
-          cursor: "pointer",
           point: {
             events: {
               click: (e: Highcharts.PointClickEventObject) => {
@@ -445,47 +395,21 @@ export const FuelBehaviorHighChart = ({
         },
         {
           yAxis: 0,
-          name: LANGUAGE.highCharts.titles.fuelVariationCAN,
-          type: "line",
-          data: levelMessagesCANData,
-          color: "#f77f00",
-          lineWidth: 2,
-          showInNavigator: true,
-          cursor: "pointer",
-          tooltip: {
-            pointFormatter: createTooltipFormatter(
-              LANGUAGE.highCharts.tooltips.fuel.titleFuelVariationCAN,
-              levelMessagesTooltipFields
-            ),
-          },
-          point: {
-            events: {
-              click: (e: Highcharts.PointClickEventObject) => {
-                const message = (
-                  e.point.options as { custom: { lat: number; lon: number } }
-                ).custom;
-                handleClicGeoData({
-                  title: LANGUAGE.geoModalTitles.levelMessageTitle,
-                  lat: message.lat,
-                  lon: message.lon,
-                  rows: getLabelsForLevelMessagesGeoMap(LANGUAGE, message),
-                });
-              },
-            },
-          },
-        },
-        {
-          yAxis: 0,
-          name: LANGUAGE.highCharts.titles.fuelVariation,
+          name:
+            sensorOrCAN === "sensor"
+              ? LANGUAGE.highCharts.titles.fuelVariation
+              : LANGUAGE.highCharts.titles.fuelVariationCAN,
           type: "line",
           data: levelMessagesData,
+          marker: { enabled: false, symbol: "diamond" },
           color: "#006af5",
           lineWidth: 2,
           showInNavigator: true,
-          cursor: "pointer",
           tooltip: {
             pointFormatter: createTooltipFormatter(
-              LANGUAGE.highCharts.tooltips.fuel.titleFuelVariation,
+              sensorOrCAN === "sensor"
+                ? LANGUAGE.highCharts.tooltips.fuel.titleFuelVariation
+                : LANGUAGE.highCharts.tooltips.fuel.titleFuelVariationCAN,
               levelMessagesTooltipFields
             ),
           },
@@ -574,11 +498,7 @@ export const FuelBehaviorHighChart = ({
         height: 600,
         // panning: true,
         events: {
-          render: function () {
-            // eslint-disable-next-line @typescript-eslint/no-this-alias
-            const chart = this;
-            removeSeries(chart);
-          },
+          render: function () {},
         },
       },
       legend: {
@@ -659,8 +579,6 @@ export const FuelBehaviorHighChart = ({
     disChargesData,
     dischargesTooltipFields,
     speedTooltipFields,
-    fuelDataData,
-    levelMessagesCANData,
     levelMessagesData,
     speedData,
     levelMessagesTooltipFields,
@@ -668,6 +586,7 @@ export const FuelBehaviorHighChart = ({
     performancesBetweenChargesTooltipFields,
     plotBands,
     handleClicGeoData,
+    sensorOrCAN,
   ]);
 
   return (
