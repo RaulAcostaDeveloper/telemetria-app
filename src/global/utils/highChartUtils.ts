@@ -283,7 +283,7 @@ export function getPerformancesBetweenChargesTooltipFields(
     },
     {
       label: LANGUAGE.highCharts.tooltips.endDate,
-      value: (data) => `${legibleDate(data.dateGps, LANGUAGE.localeLanguage)}`,
+      value: (data) => `${legibleDate(data.endDate, LANGUAGE.localeLanguage)}`,
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.averagePerformance,
