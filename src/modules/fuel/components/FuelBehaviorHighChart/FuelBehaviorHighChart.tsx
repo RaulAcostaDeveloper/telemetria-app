@@ -303,7 +303,7 @@ export const FuelBehaviorHighChart = ({
             },
           },
           title: {
-            text: LANGUAGE.highCharts.axisTitles.performance,
+            text: "", // Se controla en la serie
             style: {
               fontSize: "13px",
               fontWeight: "bold",
@@ -358,7 +358,7 @@ export const FuelBehaviorHighChart = ({
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titleCharges,
-              chargesTooltipFields
+              chargesTooltipFields,
             ),
           },
         },
@@ -389,7 +389,7 @@ export const FuelBehaviorHighChart = ({
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titleDischarges,
-              dischargesTooltipFields
+              dischargesTooltipFields,
             ),
           },
         },
@@ -410,7 +410,7 @@ export const FuelBehaviorHighChart = ({
               sensorOrCAN === "sensor"
                 ? LANGUAGE.highCharts.tooltips.fuel.titleFuelVariation
                 : LANGUAGE.highCharts.tooltips.fuel.titleFuelVariationCAN,
-              levelMessagesTooltipFields
+              levelMessagesTooltipFields,
             ),
           },
           point: {
@@ -441,8 +441,20 @@ export const FuelBehaviorHighChart = ({
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titlePerformanceBetween,
-              performancesBetweenChargesTooltipFields
+              performancesBetweenChargesTooltipFields,
             ),
+          },
+          // Ocultar y mostrar el Título del eje Y
+          events: {
+            show(this: Highcharts.Series) {
+              this.chart.yAxis[1].setTitle(
+                { text: LANGUAGE.highCharts.axisTitles.performance },
+                false,
+              );
+            },
+            hide(this: Highcharts.Series) {
+              this.chart.yAxis[1].setTitle({ text: "" }, false);
+            },
           },
         },
         {
@@ -457,8 +469,20 @@ export const FuelBehaviorHighChart = ({
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titlePerformanceDaily,
-              performancesBetweenChargesTooltipFields
+              performancesBetweenChargesTooltipFields,
             ),
+          },
+          // Ocultar y mostrar el Título del eje Y
+          events: {
+            show(this: Highcharts.Series) {
+              this.chart.yAxis[1].setTitle(
+                { text: LANGUAGE.highCharts.axisTitles.performance },
+                false,
+              );
+            },
+            hide(this: Highcharts.Series) {
+              this.chart.yAxis[1].setTitle({ text: "" }, false);
+            },
           },
         },
         {
@@ -474,7 +498,7 @@ export const FuelBehaviorHighChart = ({
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titleSpeed,
-              speedTooltipFields
+              speedTooltipFields,
             ),
           },
         },
