@@ -27,19 +27,19 @@ interface Props {
 
 export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   const { vehiclesData, vehiclesStatus } = useSelector(
-    (state: RootState) => state.vehicles
+    (state: RootState) => state.vehicles,
   );
 
   const { driversData, driversStatus } = useSelector(
-    (state: RootState) => state.drivers
+    (state: RootState) => state.drivers,
   );
 
   const { devicesData, devicesStatus } = useSelector(
-    (state: RootState) => state.devices
+    (state: RootState) => state.devices,
   );
 
   const { groupsData, groupsStatus } = useSelector(
-    (state: RootState) => state.groups
+    (state: RootState) => state.groups,
   );
 
   const fuelTabs = [
@@ -195,7 +195,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       /* createdAt: formatDateTime(value.createdAt), */
       phoneNumber: value.phoneNumber,
       registrationDate: removeMidnightHour(
-        legibleDate(value.registrationDate, LANGUAGE.localeLanguage)
+        legibleDate(value.registrationDate, LANGUAGE.localeLanguage),
       ),
     }));
   }, [devicesData]);
@@ -273,7 +273,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
       email: value.email,
       address: value.address,
       entryDate: removeMidnightHour(
-        legibleDate(value.entryDate, LANGUAGE.localeLanguage)
+        legibleDate(value.entryDate, LANGUAGE.localeLanguage),
       ),
       alias: value.alias,
       groupName: value.groupName,
@@ -305,6 +305,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
               LANGUAGE={LANGUAGE}
               hasData={!!vehiclesTableData}
               infoStatus={vehiclesStatus}
+              statusCode={vehiclesData?.statusCode}
             />
           </div>,
           <div key={2}>
@@ -322,6 +323,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
               LANGUAGE={LANGUAGE}
               hasData={!!devicesTableData}
               infoStatus={devicesStatus}
+              statusCode={devicesData?.statusCode}
             />
           </div>,
           <div key={3}>
@@ -339,6 +341,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
               LANGUAGE={LANGUAGE}
               hasData={!!driversTableData}
               infoStatus={driversStatus}
+              statusCode={driversData?.statusCode}
             />
           </div>,
           <div key={4}>
@@ -359,6 +362,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
               LANGUAGE={LANGUAGE}
               hasData={!!groupsTableData}
               infoStatus={groupsStatus}
+              statusCode={groupsData?.statusCode}
             />
           </div>,
         ]}

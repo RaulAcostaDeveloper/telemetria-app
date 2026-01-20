@@ -242,7 +242,7 @@ export const ZoneEditProfileModalForm = ({
                   LANGUAGE={LANGUAGE}
                   hasData={false}
                   infoStatus={zoneProfileDetailsStatus}
-                  codeStatus={zoneProfileDetailsData?.statusCode}
+                  statusCode={zoneProfileDetailsData?.statusCode}
                 />
               ) : (
                 <ProfileForm

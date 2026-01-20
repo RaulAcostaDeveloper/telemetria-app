@@ -12,14 +12,14 @@ interface Props {
   LANGUAGE: LanguageInterface;
   hasData: boolean;
   infoStatus: SERVICE_STATUS;
-  codeStatus?: number;
+  statusCode?: number;
 }
 
 export const DataErrorHandler = ({
   LANGUAGE,
   hasData,
   infoStatus,
-  codeStatus,
+  statusCode,
 }: Props): JSX.Element => {
   const { startDate, endDate } = useSelector(
     (state: RootState) => state.calendar,
@@ -34,7 +34,7 @@ export const DataErrorHandler = ({
         hasData,
         infoStatus,
         lessThanOneDay,
-        codeStatus,
+        statusCode,
       })}
     </div>
   );

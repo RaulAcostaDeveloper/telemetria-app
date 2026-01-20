@@ -9,7 +9,7 @@ interface Props {
   hasData: boolean;
   lessThanOneDay: boolean;
   infoStatus: SERVICE_STATUS;
-  codeStatus?: number;
+  statusCode?: number;
 }
 
 export const decideFeedback = ({
@@ -17,7 +17,7 @@ export const decideFeedback = ({
   hasData,
   lessThanOneDay,
   infoStatus,
-  codeStatus,
+  statusCode,
 }: Props) => {
   switch (infoStatus) {
     case SERVICE_STATUS.loading:
@@ -26,7 +26,7 @@ export const decideFeedback = ({
       return (
         hasData === false && (
           <>
-            {codeStatus === 429 && (
+            {statusCode === 429 && (
               <ErrorMessage
                 message={LANGUAGE.notifications.tooManyRequest}
                 message2={LANGUAGE.notifications.pleaseReTry}
@@ -42,7 +42,7 @@ export const decideFeedback = ({
             )}
 
             {/* Caso genérico */}
-            {codeStatus !== 429 && !lessThanOneDay && (
+            {statusCode !== 429 && !lessThanOneDay && (
               <ErrorMessage
                 message={LANGUAGE.notifications.nullValue}
                 LANGUAGE={LANGUAGE}
