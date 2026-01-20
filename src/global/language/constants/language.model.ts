@@ -28,6 +28,7 @@ export interface LanguageInterface {
     noRegisters: string;
     dateRangeSelected: string;
     tooManyRequest: string;
+    pleaseReTry: string;
   };
   header: {
     backButton: {

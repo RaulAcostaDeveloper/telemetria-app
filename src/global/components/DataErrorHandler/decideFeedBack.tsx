@@ -29,6 +29,7 @@ export const decideFeedback = ({
             {codeStatus === 429 && (
               <ErrorMessage
                 message={LANGUAGE.notifications.tooManyRequest}
+                message2={LANGUAGE.notifications.pleaseReTry}
                 LANGUAGE={LANGUAGE}
               />
             )}
