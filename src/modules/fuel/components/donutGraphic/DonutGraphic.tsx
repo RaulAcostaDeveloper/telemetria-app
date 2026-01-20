@@ -26,19 +26,19 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
       allValues = devices
         .map((d) => d.lastFuelLevel)
         .filter(
-          (v): v is number => typeof v === "number" && Number.isFinite(v)
+          (v): v is number => typeof v === "number" && Number.isFinite(v),
         );
     } else if (selectedMetric === "Cargado") {
       allValues = devices
         .map((d) => d.fuelLoaded)
         .filter(
-          (v): v is number => typeof v === "number" && Number.isFinite(v)
+          (v): v is number => typeof v === "number" && Number.isFinite(v),
         );
     } else if (selectedMetric === "Descargado") {
       allValues = devices
         .map((d) => d.fuelUnloaded)
         .filter(
-          (v): v is number => typeof v === "number" && Number.isFinite(v)
+          (v): v is number => typeof v === "number" && Number.isFinite(v),
         );
     } else {
       allValues = [];
@@ -64,8 +64,8 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
     const binsAsc: Bin[] = [];
 
     for (let i = 0; i < segmentsCount; i++) {
-      const lower = thresholds[i];
-      const upper = thresholds[i + 1];
+      const lower = Math.round(thresholds[i]);
+      const upper = Math.round(thresholds[i + 1]);
       let label: string;
       let count = 0;
 
