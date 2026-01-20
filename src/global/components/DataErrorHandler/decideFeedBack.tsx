@@ -9,6 +9,7 @@ interface Props {
   hasData: boolean;
   lessThanOneDay: boolean;
   infoStatus: SERVICE_STATUS;
+  codeStatus?: number;
 }
 
 export const decideFeedback = ({
@@ -16,6 +17,7 @@ export const decideFeedback = ({
   hasData,
   lessThanOneDay,
   infoStatus,
+  codeStatus,
 }: Props) => {
   switch (infoStatus) {
     case SERVICE_STATUS.loading:
@@ -24,12 +26,22 @@ export const decideFeedback = ({
       return (
         hasData === false && (
           <>
-            {lessThanOneDay ? (
+            {codeStatus === 429 && (
+              <ErrorMessage
+                message={LANGUAGE.notifications.tooManyRequest}
+                LANGUAGE={LANGUAGE}
+              />
+            )}
+
+            {lessThanOneDay && (
               <ErrorMessage
                 message={LANGUAGE.notifications.lessThanOneDay}
                 LANGUAGE={LANGUAGE}
               />
-            ) : (
+            )}
+
+            {/* Caso genérico */}
+            {codeStatus !== 429 && !lessThanOneDay && (
               <ErrorMessage
                 message={LANGUAGE.notifications.nullValue}
                 LANGUAGE={LANGUAGE}

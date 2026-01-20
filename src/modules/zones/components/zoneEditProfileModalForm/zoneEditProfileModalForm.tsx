@@ -236,13 +236,13 @@ export const ZoneEditProfileModalForm = ({
             <LoaderAnimation />
           ) : (
             <>
-              {/* Atender este problema en otra tarea */}
-              {/* Caso 429 no es manejado correctamente */}
-              {zoneProfileDetailsStatus === SERVICE_STATUS.failed ? (
+              {/* No puede ser !== 200 porque debe soportar 204 (formulario vacío) */}
+              {zoneProfileDetailsData?.statusCode === 429 ? (
                 <DataErrorHandler
                   LANGUAGE={LANGUAGE}
-                  hasData={true}
+                  hasData={false}
                   infoStatus={zoneProfileDetailsStatus}
+                  codeStatus={zoneProfileDetailsData?.statusCode}
                 />
               ) : (
                 <ProfileForm

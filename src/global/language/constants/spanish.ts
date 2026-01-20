@@ -30,6 +30,8 @@ export const SPANISH: LanguageInterface = {
       "No hay registros que coincidan con los parámetros de busqueda",
     dateRangeSelected:
       "Se ha seleccionado un rango de tiempo para las consultas",
+    tooManyRequest:
+      "Se alcanzó el número de peticiones. Por favor, intente de nuevo después de unos segundos.",
   },
   header: {
     backButton: {

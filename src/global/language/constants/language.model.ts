@@ -27,6 +27,7 @@ export interface LanguageInterface {
     noChanges: string;
     noRegisters: string;
     dateRangeSelected: string;
+    tooManyRequest: string;
   };
   header: {
     backButton: {

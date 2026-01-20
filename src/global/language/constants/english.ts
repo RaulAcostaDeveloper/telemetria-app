@@ -28,6 +28,8 @@ export const ENGLISH: LanguageInterface = {
     savedData: "The changes have been saved",
     noRegisters: "There are no records that match the search parameters",
     dateRangeSelected: "A time range has been selected for the queries",
+    tooManyRequest:
+      "The maximum number of requests has been reached. Please try again after a few seconds",
   },
   header: {
     backButton: {
