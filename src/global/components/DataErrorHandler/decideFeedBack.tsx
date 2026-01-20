@@ -19,11 +19,7 @@ export const decideFeedback = ({
 }: Props) => {
   switch (infoStatus) {
     case SERVICE_STATUS.loading:
-      return (
-        <div>
-          <LoaderAnimation />
-        </div>
-      );
+      return <LoaderAnimation />;
     case SERVICE_STATUS.succeeded:
       return (
         hasData === false && (
@@ -44,12 +40,12 @@ export const decideFeedback = ({
       );
     case SERVICE_STATUS.failed:
       return (
-        <div>
+        <>
           <ErrorMessage LANGUAGE={LANGUAGE} />
           <div className={styles.onErrorAndTry}>
             <LoaderAnimation cellSize={10} />
           </div>
-        </div>
+        </>
       );
     default:
       break;

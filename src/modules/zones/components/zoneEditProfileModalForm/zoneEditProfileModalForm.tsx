@@ -44,26 +44,26 @@ export const ZoneEditProfileModalForm = ({
   const [isFormOpen, setIsFormOpen] = useState<boolean>(true);
 
   const { startDate, endDate } = useSelector(
-    (state: RootState) => state.calendar
+    (state: RootState) => state.calendar,
   );
 
   const { putZoneProfileStatus } = useSelector(
-    (state: RootState) => state.putZoneProfile
+    (state: RootState) => state.putZoneProfile,
   );
   const { postZoneProfileStatus } = useSelector(
-    (state: RootState) => state.postZoneProfile
+    (state: RootState) => state.postZoneProfile,
   );
 
   const { zoneCategoriesData, zoneCategoriesStatus } = useSelector(
-    (state: RootState) => state.zoneCategories
+    (state: RootState) => state.zoneCategories,
   );
 
   const { zoneProvidersData, zoneProvidersStatus } = useSelector(
-    (state: RootState) => state.zoneProviders
+    (state: RootState) => state.zoneProviders,
   );
 
   const { zoneProfileDetailsData, zoneProfileDetailsStatus } = useSelector(
-    (state: RootState) => state.zoneProfileDetails
+    (state: RootState) => state.zoneProfileDetails,
   );
 
   const [authCharges, setAuthCharges] = useState<string>("");
@@ -125,7 +125,7 @@ export const ZoneEditProfileModalForm = ({
           zoneId: id,
           zoneCategoryId: categoryId,
           logoutState,
-        })
+        }),
       );
       toast.success(LANGUAGE.notifications.savedData);
       setChangesHaveBeenMade(true);
@@ -153,7 +153,7 @@ export const ZoneEditProfileModalForm = ({
             fetchZoneDetails({
               id: id.toString(),
               logoutState,
-            })
+            }),
           );
           // Actualiza la tabla
           dispatch(
@@ -161,7 +161,7 @@ export const ZoneEditProfileModalForm = ({
               startDate: formatToLocalIso8601(startDate), // formatToLocalIso8601(startDate),
               endDate: formatToLocalIso8601(endDate),
               logoutState,
-            })
+            }),
           );
         }
       }, 2000);
@@ -189,7 +189,7 @@ export const ZoneEditProfileModalForm = ({
     // Validar que tengamos los ID correctos de categorías
 
     const zoneIds = new Set(
-      zoneCategoriesData?.value?.zoneCategories?.map((c) => c.id) ?? []
+      zoneCategoriesData?.value?.zoneCategories?.map((c) => c.id) ?? [],
     );
     const categoryIds = new Set(getCategories(LANGUAGE).map((c) => c.id));
 
