@@ -261,6 +261,11 @@ export const FuelBehaviorHighChart = ({
   }, [opBEngineOff, opBEngineOnMoving, opBEngineOnIdle]);
 
   const chartOptions = useMemo(() => {
+    // Performance between chargers On en la gráfica
+    // Para controlar título del eje Y "Performance"
+    let isPerfBetwChargOn: boolean = false;
+    let isDailyPerformanceOn: boolean = false;
+
     return {
       xAxis: {
         type: "datetime",
@@ -303,7 +308,7 @@ export const FuelBehaviorHighChart = ({
             },
           },
           title: {
-            text: LANGUAGE.highCharts.axisTitles.performance,
+            text: "", // Se controla en la serie
             style: {
               fontSize: "13px",
               fontWeight: "bold",
@@ -445,6 +450,22 @@ export const FuelBehaviorHighChart = ({
               performancesBetweenChargesTooltipFields,
             ),
           },
+          // Toggle del Título "Performance"
+          events: {
+            show(this: Highcharts.Series) {
+              isPerfBetwChargOn = true;
+              this.chart.yAxis[1].setTitle(
+                { text: LANGUAGE.highCharts.axisTitles.performance },
+                false,
+              );
+            },
+            hide(this: Highcharts.Series) {
+              isPerfBetwChargOn = false;
+              if (!isDailyPerformanceOn) {
+                this.chart.yAxis[1].setTitle({ text: "" }, false);
+              }
+            },
+          },
         },
         {
           yAxis: 1,
@@ -460,6 +481,22 @@ export const FuelBehaviorHighChart = ({
               LANGUAGE.highCharts.tooltips.fuel.titlePerformanceDaily,
               performancesBetweenChargesTooltipFields,
             ),
+          },
+          // Toggle del Título "Performance"
+          events: {
+            show(this: Highcharts.Series) {
+              isDailyPerformanceOn = true;
+              this.chart.yAxis[1].setTitle(
+                { text: LANGUAGE.highCharts.axisTitles.performance },
+                false,
+              );
+            },
+            hide(this: Highcharts.Series) {
+              isDailyPerformanceOn = false;
+              if (!isPerfBetwChargOn) {
+                this.chart.yAxis[1].setTitle({ text: "" }, false);
+              }
+            },
           },
         },
         {

@@ -12,7 +12,7 @@ import { FuelDataReport } from "./fuelDataReport/fuelDataReport";
 import { FuelNowVehicleTank } from "./fuelNowVehicleTank/fuelNowVehicleTank";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { LastFuelReportValues } from "@/global/redux/serviceSlices/lastFuelReportSlice";
-import { ToggleButton } from "../FuelBehaviorHighChart/toggleButton/toggleButton";
+import { ToggleButton } from "../../../../global/components/toggleButton/toggleButton";
 
 interface Props {
   LANGUAGE: LanguageInterface;
