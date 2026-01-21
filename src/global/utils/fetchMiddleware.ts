@@ -22,6 +22,14 @@ const fetchResponse = async ({ fullUrl, options, logoutState }: fetchProps) => {
       };
     }
 
+    if (429 === response.status) {
+      return {
+        statusCode: response.status,
+        message: "Too many request",
+        value: null,
+      };
+    }
+
     if (response.ok) {
       if (response.status !== 200) {
         return {
@@ -39,7 +47,7 @@ const fetchResponse = async ({ fullUrl, options, logoutState }: fetchProps) => {
         value: result.value,
       };
     } else {
-      throw new Error("Error al obtener servicio.");
+      throw new Error("No se está manejando el caso de error en servicio.");
     }
   } catch {
     throw new Error("Error al obtener servicio.");

@@ -70,11 +70,11 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
   const [updatesTracker, setUpdatesTracker] = useState(0);
 
   const { fuelSummaryData, fuelSummaryStatus } = useSelector(
-    (state: RootState) => state.fuelSummary
+    (state: RootState) => state.fuelSummary,
   );
 
   const { zoneDetailsData, zoneDetailsStatus } = useSelector(
-    (state: RootState) => state.zoneDetails
+    (state: RootState) => state.zoneDetails,
   );
 
   function findWithZoneId<T extends WithZoneId>(arrObj: T[]): T[] | undefined {
@@ -339,6 +339,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
         LANGUAGE={LANGUAGE}
         hasData={!!zoneDetailsData?.value}
         infoStatus={zoneDetailsStatus}
+        statusCode={zoneDetailsData?.statusCode}
       />
 
       <div className={styles.separator}>
@@ -374,6 +375,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
               LANGUAGE={LANGUAGE}
               hasData={!!loadsSingle}
               infoStatus={fuelSummaryStatus}
+              statusCode={fuelSummaryData?.statusCode}
             />
           </div>,
           <div key={1}>
@@ -394,6 +396,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
                 LANGUAGE={LANGUAGE}
                 hasData={!!unloadsSingle}
                 infoStatus={fuelSummaryStatus}
+                statusCode={fuelSummaryData?.statusCode}
               />
             </div>
           </div>,

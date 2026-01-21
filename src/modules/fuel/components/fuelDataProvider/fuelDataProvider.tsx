@@ -24,7 +24,7 @@ interface Props {
 
 export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
   const { fuelSummaryData, fuelSummaryStatus } = useSelector(
-    (state: RootState) => state.fuelSummary
+    (state: RootState) => state.fuelSummary,
   );
 
   const tabOptions = [
@@ -230,6 +230,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
           LANGUAGE={LANGUAGE}
           hasData={!!fuelSummaryData?.value}
           infoStatus={fuelSummaryStatus}
+          statusCode={fuelSummaryData?.statusCode}
         />
       </div>
       {!hideTabs && (
@@ -252,6 +253,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                   LANGUAGE={LANGUAGE}
                   hasData={!!vehiclesReport}
                   infoStatus={fuelSummaryStatus}
+                  statusCode={fuelSummaryData?.statusCode}
                 />
               </div>,
               <div key={2}>
@@ -271,6 +273,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                   LANGUAGE={LANGUAGE}
                   hasData={!!fuelReportCharges}
                   infoStatus={fuelSummaryStatus}
+                  statusCode={fuelSummaryData?.statusCode}
                 />
               </div>,
               <div key={3}>
@@ -290,6 +293,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                   LANGUAGE={LANGUAGE}
                   hasData={!!fuelReportDischarges}
                   infoStatus={fuelSummaryStatus}
+                  statusCode={fuelSummaryData?.statusCode}
                 />
               </div>,
               <div key={4}>

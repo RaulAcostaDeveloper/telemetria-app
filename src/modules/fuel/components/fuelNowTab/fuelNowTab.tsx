@@ -25,7 +25,7 @@ export const FuelNowTab = ({
   setIsModalOpen,
 }: Props) => {
   const { lastFuelReportData, lastFuelReportStatus } = useSelector(
-    (state: RootState) => state.lastFuelReport
+    (state: RootState) => state.lastFuelReport,
   );
 
   useEffect(() => {
@@ -58,6 +58,7 @@ export const FuelNowTab = ({
         LANGUAGE={LANGUAGE}
         hasData={!!lastFuelReportData?.value}
         infoStatus={lastFuelReportStatus}
+        statusCode={lastFuelReportData?.statusCode}
       />
     </>
   );

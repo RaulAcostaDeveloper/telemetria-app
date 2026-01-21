@@ -28,6 +28,8 @@ export const PORTUGUES: LanguageInterface = {
     noRegisters: "Não há registros que correspondam aos parâmetros de busca",
     dateRangeSelected:
       "Foi selecionado um intervalo de tempo para as consultas",
+    tooManyRequest: "O número máximo de solicitações foi atingido.",
+    pleaseReTry: "Por favor, tente novamente após alguns segundos.",
   },
   header: {
     backButton: {
