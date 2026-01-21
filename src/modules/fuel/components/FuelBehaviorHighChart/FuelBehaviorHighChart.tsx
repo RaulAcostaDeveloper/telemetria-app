@@ -261,6 +261,11 @@ export const FuelBehaviorHighChart = ({
   }, [opBEngineOff, opBEngineOnMoving, opBEngineOnIdle]);
 
   const chartOptions = useMemo(() => {
+    // Performance between chargers On en la gráfica
+    // Para controlar título del eje Y "Performance"
+    let isPerfBetwChargOn: boolean = false;
+    let isDailyPerformanceOn: boolean = false;
+
     return {
       xAxis: {
         type: "datetime",
@@ -445,16 +450,20 @@ export const FuelBehaviorHighChart = ({
               performancesBetweenChargesTooltipFields,
             ),
           },
-          // Ocultar y mostrar el Título del eje Y
+          // Toggle del Título "Performance"
           events: {
             show(this: Highcharts.Series) {
+              isPerfBetwChargOn = true;
               this.chart.yAxis[1].setTitle(
                 { text: LANGUAGE.highCharts.axisTitles.performance },
                 false,
               );
             },
             hide(this: Highcharts.Series) {
-              this.chart.yAxis[1].setTitle({ text: "" }, false);
+              isPerfBetwChargOn = false;
+              if (!isDailyPerformanceOn) {
+                this.chart.yAxis[1].setTitle({ text: "" }, false);
+              }
             },
           },
         },
@@ -473,16 +482,20 @@ export const FuelBehaviorHighChart = ({
               performancesBetweenChargesTooltipFields,
             ),
           },
-          // Ocultar y mostrar el Título del eje Y
+          // Toggle del Título "Performance"
           events: {
             show(this: Highcharts.Series) {
+              isDailyPerformanceOn = true;
               this.chart.yAxis[1].setTitle(
                 { text: LANGUAGE.highCharts.axisTitles.performance },
                 false,
               );
             },
             hide(this: Highcharts.Series) {
-              this.chart.yAxis[1].setTitle({ text: "" }, false);
+              isDailyPerformanceOn = false;
+              if (!isPerfBetwChargOn) {
+                this.chart.yAxis[1].setTitle({ text: "" }, false);
+              }
             },
           },
         },
