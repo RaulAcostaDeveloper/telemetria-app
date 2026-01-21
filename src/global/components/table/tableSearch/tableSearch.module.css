@@ -21,23 +21,22 @@
   border-radius: 4px;
   font-size: 1.5rem;
   color: rgba(0, 0, 0, 0.7);
-  -webkit-box-shadow: 2px 2px 5px 0px var(--shadow-bold);
-  -moz-box-shadow: 2px 2px 5px 0px var(--shadow-bold);
-  box-shadow: 2px 2px 5px 0px var(--shadow-bold);
+  -webkit-box-shadow: 2px 2px 5px 0px var(--shadow-soft);
+  -moz-box-shadow: 2px 2px 5px 0px var(--shadow-soft);
+  box-shadow: 2px 2px 5px 0px var(--shadow-soft);
+  transition: 0.5s;
 }
 
 .input:not(:placeholder-shown) {
-  -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-4);
-  -moz-box-shadow: 2px 2px 5px 0px var(--company-color-4);
-  box-shadow: 2px 2px 5px 0px var(--company-color-4);
+  box-shadow: 0 6px 18px var(--shadow-soft);
 }
 
 .input:focus {
   outline: none;
+  box-shadow: 0 6px 18px var(--shadow-soft);
+  transform: translateY(-1px);
 }
 
 .input:hover {
-  -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-4);
-  -moz-box-shadow: 2px 2px 5px 0px var(--company-color-4);
-  box-shadow: 2px 2px 5px 0px var(--company-color-4);
+  box-shadow: 0 6px 18px var(--shadow-soft);
 }
