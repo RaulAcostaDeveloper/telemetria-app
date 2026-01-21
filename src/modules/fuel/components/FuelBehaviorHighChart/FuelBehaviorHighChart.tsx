@@ -311,17 +311,18 @@ export const FuelBehaviorHighChart = ({
           },
           opposite: true,
         },
+        // Speed
         {
           labels: {
             style: {
-              fontSize: "14px",
+              fontSize: "0px",
               fontWeight: "bold",
             },
           },
           title: {
-            text: LANGUAGE.highCharts.axisTitles.speed,
+            text: "", // LANGUAGE.highCharts.axisTitles.speed,
             style: {
-              fontSize: "13px",
+              fontSize: "0px",
               fontWeight: "bold",
             },
           },

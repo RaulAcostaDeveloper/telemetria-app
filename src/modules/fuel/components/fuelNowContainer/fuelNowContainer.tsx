@@ -4,8 +4,6 @@ import ElectricCarIcon from "@mui/icons-material/ElectricCar";
 import HistoryIcon from "@mui/icons-material/History";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import NoCrashIcon from "@mui/icons-material/NoCrash";
-import PanToolIcon from "@mui/icons-material/PanTool";
-import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
 import SpeedRounded from "@mui/icons-material/SpeedRounded";
 
 import styles from "./fuelNowContainer.module.css";
@@ -14,6 +12,7 @@ import { FuelDataReport } from "./fuelDataReport/fuelDataReport";
 import { FuelNowVehicleTank } from "./fuelNowVehicleTank/fuelNowVehicleTank";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { LastFuelReportValues } from "@/global/redux/serviceSlices/lastFuelReportSlice";
+import { ToggleButton } from "../FuelBehaviorHighChart/toggleButton/toggleButton";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -46,7 +45,7 @@ export const FuelNowContainer = ({
 
   const dateGpsReadable = dateGps.toLocaleString(
     LANGUAGE.localeLanguage,
-    dateOptions
+    dateOptions,
   );
 
   const tankValues = lastFuelReportData.tanksLevels
@@ -67,21 +66,15 @@ export const FuelNowContainer = ({
   return (
     <div>
       <div className={styles.headerButtonsContainer}>
-        <GeneralButton
-          type={ButtonTypes.USER_ACTION}
+        <ToggleButton
+          action={() => setIsFuelNowSyncronizing(!isFuelNowSyncronizing)}
           title={
             isFuelNowSyncronizing
               ? LANGUAGE.fuelVehicle.fuelNow.stopSynchronization
               : LANGUAGE.fuelVehicle.fuelNow.startSynchronization
           }
-          callback={() => setIsFuelNowSyncronizing(!isFuelNowSyncronizing)}
-          Icon={
-            isFuelNowSyncronizing ? (
-              <PanToolIcon />
-            ) : (
-              <PlayCircleFilledWhiteIcon />
-            )
-          }
+          isOn={isFuelNowSyncronizing}
+          activeColor="#198754"
         />
 
         <GeneralButton
