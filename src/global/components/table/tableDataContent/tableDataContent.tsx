@@ -146,7 +146,14 @@ export const TableDataContent = ({
         <div className={styles.dataContent} ref={insideDataTable}>
           {reducedData.map((dataObject, dataIndex) => (
             // Registros de la tabla
-            <div key={dataIndex} className={styles.dataObject}>
+            <div
+              key={dataIndex}
+              className={`
+               ${styles.dataObject}
+               ${dataIndex === 0 ? styles.firstItem : ""} 
+               ${dataIndex + 1 === reducedData.length ? styles.lastItem : ""}
+               `}
+            >
               {columns.map((col, colIndex) => {
                 // Espacio que se le indicó en la columna
                 const defaultSpace = {

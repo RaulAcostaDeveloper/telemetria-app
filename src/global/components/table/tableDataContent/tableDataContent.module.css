@@ -22,6 +22,15 @@
   background-color: var(--company-color-1);
 }
 
+.firstItem {
+  padding-top: 5px;
+}
+
+.lastItem {
+  border: none;
+  padding-bottom: 5px;
+}
+
 .scrollUp {
   position: absolute;
   top: 0;
