@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./fuelBehaviorTab.module.css";
 
 import { LanguageInterface } from "@/global/language/constants/language.model";
-import { ToggleButton } from "../FuelBehaviorHighChart/toggleButton/toggleButton";
+import { ToggleButton } from "../../../../global/components/toggleButton/toggleButton";
 
 interface Props {
   LANGUAGE: LanguageInterface;
