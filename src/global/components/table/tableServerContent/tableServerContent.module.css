@@ -12,13 +12,10 @@
 
 .tableContent {
   width: max-content;
-  border-left: 1px solid rgba(0, 0, 0, 0.2);
+
   border-radius: 4px;
   display: flex;
   margin-bottom: 10px;
-  -webkit-box-shadow: 2px 2px 5px 0px var(--shadow-bold);
-  -moz-box-shadow: 2px 2px 5px 0px var(--shadow-bold);
-  box-shadow: 2px 2px 5px 0px var(--shadow-bold);
 }
 
 .inside {
