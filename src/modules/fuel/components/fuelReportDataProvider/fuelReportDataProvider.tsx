@@ -42,11 +42,11 @@ export const FuelReportDataProvider = ({
   const [opBEngineOnMoving, setOpBEngineOnMoving] = useState<OBValue[]>([]);
 
   const { fuelDataData, fuelDataStatus } = useSelector(
-    (state: RootState) => state.fuelData
+    (state: RootState) => state.fuelData,
   );
 
   const { fuelPerformanceData, fuelPerformanceStatus } = useSelector(
-    (state: RootState) => state.fuelPerformance
+    (state: RootState) => state.fuelPerformance,
   );
 
   const vehicleTabs = [
@@ -59,7 +59,7 @@ export const FuelReportDataProvider = ({
     toast.success(
       isFuelNowSyncronizing
         ? LANGUAGE.fuelVehicle.fuelNow.startedSynch
-        : LANGUAGE.fuelVehicle.fuelNow.stoppedSynch
+        : LANGUAGE.fuelVehicle.fuelNow.stoppedSynch,
     );
   }, [isFuelNowSyncronizing, LANGUAGE]);
 
@@ -135,6 +135,7 @@ export const FuelReportDataProvider = ({
               LANGUAGE={LANGUAGE}
               hasData={!!fuelDataData?.value}
               infoStatus={fuelDataStatus}
+              statusCode={fuelDataData?.statusCode}
             />
           </div>,
           <div key={1}>
@@ -152,6 +153,7 @@ export const FuelReportDataProvider = ({
               LANGUAGE={LANGUAGE}
               hasData={!!fuelPerformanceData?.value}
               infoStatus={fuelPerformanceStatus}
+              statusCode={fuelPerformanceData?.statusCode}
             />
           </div>,
           <div key={2}>

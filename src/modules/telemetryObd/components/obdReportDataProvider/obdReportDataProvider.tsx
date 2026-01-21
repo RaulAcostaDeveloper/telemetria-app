@@ -29,11 +29,11 @@ export const ObdReportDataProvider = () => {
   const [driverDistance, setDriverDistance] = useState<ObdChartPoint[]>([]);
 
   const { obdTravelMetricsData, obdTravelMetricsStatus } = useSelector(
-    (state: RootState) => state.obdTravelMetrics
+    (state: RootState) => state.obdTravelMetrics,
   );
 
   const { vehicleByImeiData, vehicleByImeiStatus } = useSelector(
-    (state: RootState) => state.vehicleByImei
+    (state: RootState) => state.vehicleByImei,
   );
 
   const tabOptions = [
@@ -134,6 +134,7 @@ export const ObdReportDataProvider = () => {
                 obdTravelMetricsData.value.timeTraveledDetails.length > 0
               }
               infoStatus={obdTravelMetricsStatus}
+              statusCode={obdTravelMetricsData?.statusCode}
             />
           </div>,
           <div key={2}>
@@ -155,6 +156,7 @@ export const ObdReportDataProvider = () => {
                 obdTravelMetricsData.value.timeTraveledDetails.length > 0
               }
               infoStatus={obdTravelMetricsStatus}
+              statusCode={obdTravelMetricsData?.statusCode}
             />
           </div>,
           <div key={3}>
@@ -176,6 +178,7 @@ export const ObdReportDataProvider = () => {
                 obdTravelMetricsData.value.timeTraveledDetails.length > 0
               }
               infoStatus={obdTravelMetricsStatus}
+              statusCode={obdTravelMetricsData?.statusCode}
             />
           </div>,
           <div key={4}>
@@ -194,6 +197,7 @@ export const ObdReportDataProvider = () => {
               LANGUAGE={LANGUAGE}
               hasData={!!obdTravelMetricsData?.value}
               infoStatus={obdTravelMetricsStatus}
+              statusCode={obdTravelMetricsData?.statusCode}
             />
           </div>,
         ]}

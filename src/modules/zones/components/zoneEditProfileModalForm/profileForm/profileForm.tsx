@@ -173,6 +173,7 @@ export const ProfileForm = ({
         LANGUAGE={LANGUAGE}
         hasData={!!zoneCategoriesData?.value}
         infoStatus={zoneCategoriesStatus}
+        statusCode={zoneCategoriesData?.statusCode}
       />
     </>
   );

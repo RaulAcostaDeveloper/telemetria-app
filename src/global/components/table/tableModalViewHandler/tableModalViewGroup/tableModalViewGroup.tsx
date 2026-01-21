@@ -33,14 +33,14 @@ export const TableModalViewGroup = ({
   const [groupsVehicles, setGroupsVehicles] = useState<Vehicles[]>([]);
 
   const { vehiclesData, vehiclesStatus } = useSelector(
-    (state: RootState) => state.vehicles
+    (state: RootState) => state.vehicles,
   );
 
   useEffect(() => {
     if (!vehiclesData || null === vehiclesData?.value || !dataObject?.id)
       return;
     const filtered: Vehicles[] = vehiclesData.value.vehicles.filter(
-      (vehicle) => vehicle.group[0].id === dataObject.id
+      (vehicle) => vehicle.group[0].id === dataObject.id,
     );
     setGroupsVehicles(filtered);
   }, [vehiclesData, dataObject]);
@@ -120,6 +120,7 @@ export const TableModalViewGroup = ({
             LANGUAGE={LANGUAGE}
             hasData={!!vehiclesTableData}
             infoStatus={vehiclesStatus}
+            statusCode={vehiclesData?.statusCode}
           />
         )}
       </div>

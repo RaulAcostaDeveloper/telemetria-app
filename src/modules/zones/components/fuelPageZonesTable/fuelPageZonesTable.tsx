@@ -18,7 +18,7 @@ interface Props {
 
 export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
   const { zonesSummaryData, zonesSummaryStatus } = useSelector(
-    (state: RootState) => state.zonesSummary
+    (state: RootState) => state.zonesSummary,
   );
 
   const zonesTableColumns: columnsTable = [
@@ -109,6 +109,7 @@ export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
         LANGUAGE={LANGUAGE}
         hasData={!!zonesSummaryData?.value}
         infoStatus={zonesSummaryStatus}
+        statusCode={zonesSummaryData?.statusCode}
       />
     </div>
   );

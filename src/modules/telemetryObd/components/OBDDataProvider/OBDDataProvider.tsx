@@ -28,7 +28,7 @@ interface Props {
 
 export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
   const { obdRollupData, obdRollupStatus } = useSelector(
-    (state: RootState) => state.obdRollup
+    (state: RootState) => state.obdRollup,
   );
 
   const teleVehiclesOBDData = useMemo(() => {
@@ -105,7 +105,7 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
                   Icon={DirectionsCarFilledIcon}
                   LANGUAGE={LANGUAGE}
                   data={formatNumberWithCommas(
-                    obdRollupData.value.unitsAnalyzed
+                    obdRollupData.value.unitsAnalyzed,
                   )}
                   title={LANGUAGE.fuel.summaryReports.labels.unitsAnalyzed}
                 />
@@ -132,7 +132,7 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
                   LANGUAGE={LANGUAGE}
                   data={
                     formatNumberWithCommas(
-                      obdRollupData.value.driverIdleTime ?? 0
+                      obdRollupData.value.driverIdleTime ?? 0,
                     ) + " h"
                   }
                   title={LANGUAGE.teleOBD.resumes.timeIdle}
@@ -176,6 +176,7 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
         LANGUAGE={LANGUAGE}
         hasData={!!obdRollupData?.value}
         infoStatus={obdRollupStatus}
+        statusCode={obdRollupData?.statusCode}
       />
     </div>
   );

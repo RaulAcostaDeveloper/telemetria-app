@@ -12,22 +12,30 @@ interface Props {
   LANGUAGE: LanguageInterface;
   hasData: boolean;
   infoStatus: SERVICE_STATUS;
+  statusCode?: number;
 }
 
 export const DataErrorHandler = ({
   LANGUAGE,
   hasData,
   infoStatus,
+  statusCode,
 }: Props): JSX.Element => {
   const { startDate, endDate } = useSelector(
-    (state: RootState) => state.calendar
+    (state: RootState) => state.calendar,
   );
 
   const lessThanOneDay = hasLessThanOneDay(startDate, endDate);
 
   return (
     <div className={styles.center}>
-      {decideFeedback({ LANGUAGE, hasData, infoStatus, lessThanOneDay })}
+      {decideFeedback({
+        LANGUAGE,
+        hasData,
+        infoStatus,
+        lessThanOneDay,
+        statusCode,
+      })}
     </div>
   );
 };

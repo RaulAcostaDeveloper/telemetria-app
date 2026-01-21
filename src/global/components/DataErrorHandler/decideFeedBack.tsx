@@ -9,6 +9,7 @@ interface Props {
   hasData: boolean;
   lessThanOneDay: boolean;
   infoStatus: SERVICE_STATUS;
+  statusCode?: number;
 }
 
 export const decideFeedback = ({
@@ -16,24 +17,32 @@ export const decideFeedback = ({
   hasData,
   lessThanOneDay,
   infoStatus,
+  statusCode,
 }: Props) => {
   switch (infoStatus) {
     case SERVICE_STATUS.loading:
-      return (
-        <div>
-          <LoaderAnimation />
-        </div>
-      );
+      return <LoaderAnimation />;
     case SERVICE_STATUS.succeeded:
       return (
         hasData === false && (
           <>
-            {lessThanOneDay ? (
+            {statusCode === 429 && (
+              <ErrorMessage
+                message={LANGUAGE.notifications.tooManyRequest}
+                message2={LANGUAGE.notifications.pleaseReTry}
+                LANGUAGE={LANGUAGE}
+              />
+            )}
+
+            {lessThanOneDay && (
               <ErrorMessage
                 message={LANGUAGE.notifications.lessThanOneDay}
                 LANGUAGE={LANGUAGE}
               />
-            ) : (
+            )}
+
+            {/* Caso genérico */}
+            {statusCode !== 429 && !lessThanOneDay && (
               <ErrorMessage
                 message={LANGUAGE.notifications.nullValue}
                 LANGUAGE={LANGUAGE}
@@ -44,12 +53,12 @@ export const decideFeedback = ({
       );
     case SERVICE_STATUS.failed:
       return (
-        <div>
+        <>
           <ErrorMessage LANGUAGE={LANGUAGE} />
           <div className={styles.onErrorAndTry}>
             <LoaderAnimation cellSize={10} />
           </div>
-        </div>
+        </>
       );
     default:
       break;
