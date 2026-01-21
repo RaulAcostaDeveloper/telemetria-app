@@ -109,7 +109,7 @@ export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
         LANGUAGE={LANGUAGE}
         hasData={!!zonesSummaryData?.value}
         infoStatus={zonesSummaryStatus}
-        codeStatus={zonesSummaryData?.statusCode}
+        statusCode={zonesSummaryData?.statusCode}
       />
     </div>
   );
