@@ -56,12 +56,12 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.plate,
-      defaultSpace: 3,
+      defaultSpace: 2,
       orderColumn: true,
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.lastFuelLevel,
-      defaultSpace: 3,
+      defaultSpace: 4,
       orderColumn: true,
       minMaxFilter: true,
       showTotal: false,
@@ -82,7 +82,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
     },
     {
       columnName: LANGUAGE.fuel.vehiclesTableColumns.fuelUnloadCount,
-      defaultSpace: 2,
+      defaultSpace: 3,
       orderColumn: true,
       showTotal: false,
       minMaxFilter: true,
