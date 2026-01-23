@@ -35,7 +35,7 @@ export const Header = ({ isMenuOpen, LANGUAGE }: Props) => {
   const pathname = usePathname();
 
   const { startDate: reduxStartDate, endDate: reduxEndDate } = useSelector(
-    (state: RootState) => state.calendar
+    (state: RootState) => state.calendar,
   );
 
   const defaultISO = new Date().toISOString();

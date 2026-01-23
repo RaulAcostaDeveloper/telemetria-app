@@ -54,7 +54,7 @@ export const Table = ({
 }: Props) => {
   const [columnOrdered, setColumnOrdered] = useState<SelectorOrdered>({
     colIndex: 0,
-    value: true,
+    value: false,
   });
   const [filterSelectors, setFilterSelectors] = useState<SelectorFilter[]>([]);
   const [minMaxFilters, setMinMaxFilters] = useState<MinMaxFilter[]>([]);
@@ -74,7 +74,7 @@ export const Table = ({
       (column) =>
         column.filterSelector === true ||
         column.minMaxFilter === true ||
-        column.textFilter === true
+        column.textFilter === true,
     );
     setTableHasFilters(hasFilters);
   }, [columns]);
@@ -176,7 +176,7 @@ export const Table = ({
       const existing = filtros.find((filtro) => filtro.colIndex === colIndex);
       if (existing) {
         return filtros.map((filtro) =>
-          filtro.colIndex === colIndex ? { ...filtro, value } : filtro
+          filtro.colIndex === colIndex ? { ...filtro, value } : filtro,
         );
       }
 
@@ -189,7 +189,7 @@ export const Table = ({
       const existing = filtros.find((filtro) => filtro.colIndex === colIndex);
       if (existing) {
         return filtros.map((filtro) =>
-          filtro.colIndex === colIndex ? { ...filtro, min, max } : filtro
+          filtro.colIndex === colIndex ? { ...filtro, min, max } : filtro,
         );
       }
       return [...filtros, { colIndex, min, max }];
@@ -198,11 +198,11 @@ export const Table = ({
 
   const resetFilters = () => {
     setFilterSelectors((prev) =>
-      prev.map((filter) => ({ ...filter, value: "" }))
+      prev.map((filter) => ({ ...filter, value: "" })),
     );
 
     setMinMaxFilters((prev) =>
-      prev.map((filter) => ({ ...filter, min: undefined, max: undefined }))
+      prev.map((filter) => ({ ...filter, min: undefined, max: undefined })),
     );
   };
 
@@ -213,7 +213,7 @@ export const Table = ({
           colIndex,
           value: "",
         };
-      }
+      },
     );
     const filterMinMaxEmpty: MinMaxFilter[] = columns.map(
       (column, colIndex) => {
@@ -222,7 +222,7 @@ export const Table = ({
           min: undefined,
           max: undefined,
         };
-      }
+      },
     );
     setFilterSelectors(filterSelectorsEmpty);
     setMinMaxFilters(filterMinMaxEmpty);

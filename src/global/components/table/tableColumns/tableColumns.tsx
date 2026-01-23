@@ -1,6 +1,5 @@
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import StraightIcon from "@mui/icons-material/Straight";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 
 import styles from "./tableColumns.module.css";
 import { LanguageInterface } from "../../../language/constants/language.model";
@@ -55,12 +54,20 @@ export const TableColumns = ({
 
         const renderSortIcon = () => {
           if (!column.orderColumn) return null;
-          if (!isOrderedSelected)
-            return <ArrowRightIcon sx={{ fontSize: "2rem", color: "white" }} />;
-          return isAscendant ? (
-            <ArrowDropUpIcon sx={{ fontSize: "2rem", color: "white" }} />
-          ) : (
-            <ArrowDropDownIcon sx={{ fontSize: "2rem", color: "white" }} />
+          return (
+            <>
+              {isOrderedSelected ? (
+                <StraightIcon
+                  sx={{
+                    fontSize: "1.5rem",
+                    color: "white",
+                    rotate: `${isAscendant ? "" : "180deg"}`,
+                  }}
+                />
+              ) : (
+                <UnfoldMoreIcon sx={{ fontSize: "1.5rem", color: "white" }} />
+              )}
+            </>
           );
         };
 

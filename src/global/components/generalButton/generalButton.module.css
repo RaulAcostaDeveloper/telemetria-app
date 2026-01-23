@@ -10,9 +10,9 @@
   padding: 10px 5px;
   border: none;
   border-radius: 4px;
-  -webkit-box-shadow: 2px 2px 5px 0px var(--shadow-bold);
-  -moz-box-shadow: 2px 2px 5px 0px var(--shadow-bold);
-  box-shadow: 2px 2px 5px 0px var(--shadow-bold);
+  -webkit-box-shadow: 2px 2px 5px 0px var(--shadow-soft);
+  -moz-box-shadow: 2px 2px 5px 0px var(--shadow-soft);
+  box-shadow: 2px 2px 5px 0px var(--shadow-soft);
   transition: 0.5s;
 }
 

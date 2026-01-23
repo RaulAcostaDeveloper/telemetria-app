@@ -3,11 +3,11 @@ import { PrimitiveValue } from "../components/table/table.model";
 export const NO_DATA = "ND";
 
 export function ndIfEmpty(
-  value: PrimitiveValue | undefined
+  value: PrimitiveValue | undefined,
 ): string | number | boolean {
   if (value === undefined || value === null) return NO_DATA;
   if (typeof value === "string") {
-    if (value.trim().length > 0 === false) {
+    if (value.trim().length === 0) {
       return NO_DATA;
     }
   }

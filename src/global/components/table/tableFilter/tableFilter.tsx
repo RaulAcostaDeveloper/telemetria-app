@@ -1,6 +1,7 @@
 import styles from "./tableFilter.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { PrimitiveValue, SelectorFilter } from "../table.model";
+import { ndIfEmpty } from "@/global/utils/ndIfEmpty";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -35,8 +36,13 @@ export const TableFilter = ({
     >
       <option value="">{LANGUAGE.table.actions.any}</option>
       {options.map((opt, index) => (
-        <option key={index} value={opt?.toString() ?? ""}>
-          {opt}
+        <option
+          key={index}
+          // He hecho que si viene ND entonces no haga el filtro
+          // Porque los valores actuales de "ND" no son "ND", si no "", null, undefined, "  ", etc
+          value={ndIfEmpty(opt) === "ND" ? "" : opt?.toString()}
+        >
+          {ndIfEmpty(opt)}
         </option>
       ))}
     </select>
