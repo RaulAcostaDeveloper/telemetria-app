@@ -163,7 +163,11 @@ export const TableDataContent = ({
                 };
                 const dataValues = Object.values(dataObject);
                 return (
-                  <div key={colIndex} style={defaultSpace}>
+                  <div
+                    key={colIndex}
+                    style={defaultSpace}
+                    className={`${colIndex === 0 ? styles.firstColumn : ""}`}
+                  >
                     <TableDataProp
                       LANGUAGE={LANGUAGE}
                       value={ndIfEmpty(dataValues[colIndex])}
