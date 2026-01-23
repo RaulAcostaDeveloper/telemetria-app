@@ -7,7 +7,7 @@ export function ndIfEmpty(
 ): string | number | boolean {
   if (value === undefined || value === null) return NO_DATA;
   if (typeof value === "string") {
-    if (value.trim().length > 0 === false) {
+    if (value.trim().length === 0) {
       return NO_DATA;
     }
   }

@@ -26,9 +26,20 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   color: rgba(0, 0, 0, 0.753);
-  -webkit-box-shadow: 2px 2px 5px 0px var(--shadow-bold);
-  -moz-box-shadow: 2px 2px 5px 0px var(--shadow-bold);
-  box-shadow: 2px 2px 5px 0px var(--shadow-bold);
+  -webkit-box-shadow: 2px 2px 5px 0px var(--shadow-soft);
+  -moz-box-shadow: 2px 2px 5px 0px var(--shadow-soft);
+  box-shadow: 2px 2px 5px 0px var(--shadow-soft);
+  transition: 0.5s;
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: 0 6px 18px var(--shadow-soft);
+  transform: translateY(-1px);
+}
+
+.input:hover {
+  box-shadow: 0 6px 18px var(--shadow-soft);
 }
 
 .input[type="number"]::-webkit-inner-spin-button,
@@ -41,19 +52,6 @@
   -moz-appearance: textfield;
 }
 
-.input:focus {
-  outline: none;
-}
-
-.input:hover {
-  -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-4);
-  -moz-box-shadow: 2px 2px 5px 0px var(--company-color-4);
-  box-shadow: 2px 2px 5px 0px var(--company-color-4);
-}
-
 .selectedOption {
-  border: 2px solid var(--company-color-4);
-  -webkit-box-shadow: 2px 2px 5px 0px var(--company-color-4);
-  -moz-box-shadow: 2px 2px 5px 0px var(--company-color-4);
-  box-shadow: 2px 2px 5px 0px var(--company-color-4);
+  border: 1px solid rgba(0, 0, 0, 0.156);
 }
