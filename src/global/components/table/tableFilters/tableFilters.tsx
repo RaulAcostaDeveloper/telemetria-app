@@ -25,7 +25,7 @@ interface Props {
 
 const getAllUniqueFilterValues = (
   columns: columnsTable,
-  data: dataTable
+  data: dataTable,
 ): PrimitiveValue[][] => {
   if (!data.length) {
     return columns.map(() => []);
@@ -56,7 +56,7 @@ export const TableFilters = ({
 }: Props) => {
   const uniqueFilterValues = useMemo(
     () => getAllUniqueFilterValues(columns, data),
-    [columns, data]
+    [columns, data],
   );
 
   // Índices de columnas que tienen filtro
@@ -70,9 +70,6 @@ export const TableFilters = ({
 
   return (
     <div className={styles.tableFilters}>
-      <div className={styles.tableFiltersTitle}>
-        <h3>{LANGUAGE.table.formTitles.filters}</h3>
-      </div>
       <div className={styles.tableFiltersBody}>
         {columns.map((col, colIndex) => (
           <div key={colIndex}>

@@ -13,6 +13,7 @@ import {
   columnsTable,
   dataTable,
 } from "../table.model";
+import { Modal } from "../../modal/modal";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -80,7 +81,7 @@ export const TableFiltersButton = ({
   }, [escFunction]);
 
   const filtersOn: boolean = columns.some(
-    (column) => "filterSelector" in column || "minMaxFilter" in column
+    (column) => "filterSelector" in column || "minMaxFilter" in column,
   );
 
   return (
@@ -96,51 +97,57 @@ export const TableFiltersButton = ({
         Icon={<FilterAltIcon />}
       />
       {isOpen && (
-        <div className={styles.filtersContainer}>
-          <div ref={filtersRef} className={`${styles.filtersContent}`}>
-            {filtersOn ? (
-              <>
-                <TableFilters
-                  LANGUAGE={LANGUAGE}
-                  columns={columns}
-                  data={data}
-                  minMaxFilters={minMaxFilters}
-                  handleMinMaxFilter={handleMinMaxFilter}
-                  handleSelectorFilter={handleSelectorFilter}
-                  filterSelectors={filterSelectors}
-                />
-                <div className={styles.buttonsContainer}>
-                  <GeneralButton
-                    type={ButtonTypes.WARNING}
-                    callback={resetFilters}
-                    title={LANGUAGE.table.actions.cleanFilters}
-                    placeholder={LANGUAGE.table.actions.cleanFilters}
+        <Modal
+          title={LANGUAGE.table.formTitles.filters}
+          closeModal={() => setIsOpen(false)}
+          LANGUAGE={LANGUAGE}
+        >
+          <div className={styles.filtersContainer}>
+            <div ref={filtersRef} className={`${styles.filtersContent}`}>
+              {filtersOn ? (
+                <>
+                  <TableFilters
+                    LANGUAGE={LANGUAGE}
+                    columns={columns}
+                    data={data}
+                    minMaxFilters={minMaxFilters}
+                    handleMinMaxFilter={handleMinMaxFilter}
+                    handleSelectorFilter={handleSelectorFilter}
+                    filterSelectors={filterSelectors}
                   />
-                  <GeneralButton
-                    type={ButtonTypes.CONFIRM}
-                    callback={() => setIsOpen(!isOpen)}
-                    title={LANGUAGE.table.actions.agree}
-                    placeholder={LANGUAGE.table.actions.agree}
-                  />
+                  <div className={styles.buttonsContainer}>
+                    <GeneralButton
+                      type={ButtonTypes.WARNING}
+                      callback={resetFilters}
+                      title={LANGUAGE.table.actions.cleanFilters}
+                      placeholder={LANGUAGE.table.actions.cleanFilters}
+                    />
+                    <GeneralButton
+                      type={ButtonTypes.CONFIRM}
+                      callback={() => setIsOpen(!isOpen)}
+                      title={LANGUAGE.table.actions.agree}
+                      placeholder={LANGUAGE.table.actions.agree}
+                    />
+                  </div>
+                </>
+              ) : (
+                <div className={styles.noFiltersContainer}>
+                  <p className={styles.noFiltersTitle}>
+                    {LANGUAGE.table.actions.noFilters}
+                  </p>
+                  <div className={styles.closeButton}>
+                    <GeneralButton
+                      type={ButtonTypes.NEUTRAL}
+                      callback={() => setIsOpen(!isOpen)}
+                      title={LANGUAGE.table.actions.close}
+                      placeholder={LANGUAGE.table.actions.close}
+                    />
+                  </div>
                 </div>
-              </>
-            ) : (
-              <div className={styles.noFiltersContainer}>
-                <p className={styles.noFiltersTitle}>
-                  {LANGUAGE.table.actions.noFilters}
-                </p>
-                <div className={styles.closeButton}>
-                  <GeneralButton
-                    type={ButtonTypes.NEUTRAL}
-                    callback={() => setIsOpen(!isOpen)}
-                    title={LANGUAGE.table.actions.close}
-                    placeholder={LANGUAGE.table.actions.close}
-                  />
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
-        </div>
+        </Modal>
       )}
     </div>
   );
