@@ -156,9 +156,18 @@ export const FuelBehaviorHighChart = ({
         y: s.speed,
         custom: {
           dateGps: s.dateGps,
-          speed: s.speed,
           lat: s.lat,
           lon: s.lon,
+          odometer: s.odometer,
+          speed: s.speed,
+          ignition: Boolean(s.ignition),
+          deviceBattery: s.deviceBattery,
+          mainPower: s.externalPower,
+          tanks: formatTankValuesToInt(s.tanks),
+          currentLevelSmoothly:
+            s.sensorCurrentLevelSmoothly != null
+              ? Math.round(s.sensorCurrentLevelSmoothly)
+              : null,
         },
       }))
       .sort((a, b) => a.x - b.x);
@@ -514,6 +523,21 @@ export const FuelBehaviorHighChart = ({
               LANGUAGE.highCharts.tooltips.fuel.titleSpeed,
               speedTooltipFields,
             ),
+          },
+          point: {
+            events: {
+              click: (e: Highcharts.PointClickEventObject) => {
+                const message = (
+                  e.point.options as { custom: { lat: number; lon: number } }
+                ).custom;
+                handleClicGeoData({
+                  title: LANGUAGE.geoModalTitles.levelMessageTitle,
+                  lat: message.lat,
+                  lon: message.lon,
+                  rows: getLabelsForLevelMessagesGeoMap(LANGUAGE, message),
+                });
+              },
+            },
           },
         },
       ],
