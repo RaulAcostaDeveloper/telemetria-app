@@ -12,12 +12,13 @@ interface Props {
 export const FuelBehaviorTab = ({ LANGUAGE, children }: Props) => {
   // Operational Behavior (Estacionado, apagado, Avanzando, apagado y avanzando)
 
-  const [showOpBEngineOff, setShowOpBEngineOff] = useState<boolean>(true);
+  const [showOpBEngineOff, setShowOpBEngineOff] = useState<boolean>(false);
   // const [showOpBEngineOffCoast, setShowOpBEngineOffCoast] =
-  //   useState<boolean>(true);
-  const [showOpBEngineOnIdle, setShowOpBEngineOnIdle] = useState<boolean>(true);
+  //   useState<boolean>(false);
+  const [showOpBEngineOnIdle, setShowOpBEngineOnIdle] =
+    useState<boolean>(false);
   const [showOpBEngineOnMoving, setShowOpBEngineOnMoving] =
-    useState<boolean>(true);
+    useState<boolean>(false);
 
   return (
     <div>
