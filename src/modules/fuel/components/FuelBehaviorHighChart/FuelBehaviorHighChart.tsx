@@ -513,7 +513,7 @@ export const FuelBehaviorHighChart = ({
           name: LANGUAGE.highCharts.titles.speed,
           type: "line",
           data: speedData,
-          color: "#b3e207",
+          color: "#b45d0b",
           lineWidth: 2,
           visible: false,
           showInNavigator: true,
