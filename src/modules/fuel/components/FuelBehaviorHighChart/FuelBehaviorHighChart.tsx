@@ -405,6 +405,37 @@ export const FuelBehaviorHighChart = ({
             sensorOrCAN === "sensor"
               ? LANGUAGE.highCharts.titles.fuelVariation
               : LANGUAGE.highCharts.titles.fuelVariationCAN,
+          type: "areaspline",
+          data: levelMessagesData,
+          color: "#006af5",
+          lineWidth: 0,
+          fillOpacity: 1,
+          marker: { enabled: false },
+          showInLegend: false,
+          enableMouseTracking: false,
+          linkedTo:
+            sensorOrCAN === "sensor"
+              ? LANGUAGE.highCharts.titles.fuelVariation
+              : LANGUAGE.highCharts.titles.fuelVariationCAN,
+          zIndex: 2,
+          fillColor: {
+            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+            stops: [
+              [0, "rgba(0,106,245,0.12)"],
+              [1, "rgba(0,106,245,0.00)"],
+            ],
+          },
+        },
+        {
+          id:
+            sensorOrCAN === "sensor"
+              ? LANGUAGE.highCharts.titles.fuelVariation
+              : LANGUAGE.highCharts.titles.fuelVariationCAN,
+          yAxis: 0,
+          name:
+            sensorOrCAN === "sensor"
+              ? LANGUAGE.highCharts.titles.fuelVariation
+              : LANGUAGE.highCharts.titles.fuelVariationCAN,
           type: "line",
           data: levelMessagesData,
           marker: { enabled: false, symbol: "diamond" },
