@@ -21,7 +21,7 @@ function buildTooltipSection(
   label: string,
   value: string,
   index: number,
-  separator?: Separator
+  separator?: Separator,
 ): string {
   let stringHTML = "";
   //Agrego </br> cada 25 posiciones si el string excede la posicion.
@@ -63,16 +63,16 @@ function buildTooltipSection(
 
 export function createTooltipFormatter(
   title: string,
-  fields: TooltipField[]
+  fields: TooltipField[],
 ): (this: Highcharts.Point & { options: { custom: string } }) => string {
   return function (
-    this: Highcharts.Point & { options: { custom: string } }
+    this: Highcharts.Point & { options: { custom: string } },
   ): string {
     const c = this.options.custom;
 
     const content = fields
       .map(({ label, value, separator }, index) =>
-        buildTooltipSection(label, value(c), index, separator)
+        buildTooltipSection(label, value(c), index, separator),
       )
       .join("");
 
@@ -98,7 +98,7 @@ export function createTooltipFormatter(
 // Tooltips para diferentes series de datos
 
 export function getChargesTooltipFields(
-  LANGUAGE: LanguageInterface
+  LANGUAGE: LanguageInterface,
 ): TooltipField[] {
   return [
     {
@@ -123,11 +123,15 @@ export function getChargesTooltipFields(
       value: (data) => `${ndIfEmpty(data.mainPower)} (V)`,
     },
     {
+      label: LANGUAGE.highCharts.tooltips.fuel.speed,
+      value: (data) => `${ndIfEmpty(data.speed)}  km/h`,
+    },
+    {
       label: LANGUAGE.highCharts.tooltips.startDate,
       value: (data) =>
         `${legibleDate(data.startDate, LANGUAGE.localeLanguage)}`,
       separator: {
-        position: 5,
+        position: 6,
         subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleCharges,
       },
     },
@@ -151,7 +155,7 @@ export function getChargesTooltipFields(
 }
 
 export function getDisChargesTooltipFields(
-  LANGUAGE: LanguageInterface
+  LANGUAGE: LanguageInterface,
 ): TooltipField[] {
   return [
     {
@@ -176,11 +180,15 @@ export function getDisChargesTooltipFields(
       value: (data) => `${ndIfEmpty(data.mainPower)} (V)`,
     },
     {
+      label: LANGUAGE.highCharts.tooltips.fuel.speed,
+      value: (data) => `${ndIfEmpty(data.speed)}  km/h`,
+    },
+    {
       label: LANGUAGE.highCharts.tooltips.startDate,
       value: (data) =>
         `${legibleDate(data.startDate, LANGUAGE.localeLanguage)}`,
       separator: {
-        position: 5,
+        position: 6,
         subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleDischarges,
       },
     },
@@ -205,7 +213,7 @@ export function getDisChargesTooltipFields(
 }
 
 export function getLevelMessagesTooltipFields(
-  LANGUAGE: LanguageInterface
+  LANGUAGE: LanguageInterface,
 ): TooltipField[] {
   return [
     {
@@ -236,14 +244,14 @@ export function getLevelMessagesTooltipFields(
     {
       label: LANGUAGE.highCharts.tooltips.fuel.speed,
       value: (data) => `${ndIfEmpty(data.speed)}  km/h`,
-      separator: {
-        position: 6,
-        subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleFuelVariationCAN,
-      },
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.tanksSum,
       value: (data) => `${ndIfEmpty(data.currentLevelSmoothly)} (L)`,
+      separator: {
+        position: 7,
+        subtitle: LANGUAGE.highCharts.tooltips.fuel.subtitleFuelVariationCAN,
+      },
     },
     {
       label: LANGUAGE.highCharts.tooltips.fuel.tanks,
@@ -253,7 +261,7 @@ export function getLevelMessagesTooltipFields(
 }
 
 export function getPerformancesBetweenChargesTooltipFields(
-  LANGUAGE: LanguageInterface
+  LANGUAGE: LanguageInterface,
 ): TooltipField[] {
   return [
     {
@@ -305,7 +313,7 @@ export function getPerformancesBetweenChargesTooltipFields(
 }
 
 export function getRPMTooltipFields(
-  LANGUAGE: LanguageInterface
+  LANGUAGE: LanguageInterface,
 ): TooltipField[] {
   return [
     {
@@ -324,7 +332,7 @@ export function getRPMTooltipFields(
 }
 
 export function getDistanceTooltipFields(
-  LANGUAGE: LanguageInterface
+  LANGUAGE: LanguageInterface,
 ): TooltipField[] {
   return [
     {
@@ -343,7 +351,7 @@ export function getDistanceTooltipFields(
 }
 
 export function getTimeTraveledTooltipFields(
-  LANGUAGE: LanguageInterface
+  LANGUAGE: LanguageInterface,
 ): TooltipField[] {
   return [
     {
@@ -363,7 +371,7 @@ export function getTimeTraveledTooltipFields(
 }
 
 export function getSpeedTooltipFields(
-  LANGUAGE: LanguageInterface
+  LANGUAGE: LanguageInterface,
 ): TooltipField[] {
   return [
     {
