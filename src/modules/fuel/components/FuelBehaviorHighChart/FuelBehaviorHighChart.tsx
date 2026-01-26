@@ -405,6 +405,37 @@ export const FuelBehaviorHighChart = ({
             sensorOrCAN === "sensor"
               ? LANGUAGE.highCharts.titles.fuelVariation
               : LANGUAGE.highCharts.titles.fuelVariationCAN,
+          type: "areaspline",
+          data: levelMessagesData,
+          color: "#006af5",
+          lineWidth: 0,
+          fillOpacity: 1,
+          marker: { enabled: false },
+          showInLegend: false,
+          enableMouseTracking: false,
+          linkedTo:
+            sensorOrCAN === "sensor"
+              ? LANGUAGE.highCharts.titles.fuelVariation
+              : LANGUAGE.highCharts.titles.fuelVariationCAN,
+          zIndex: 2,
+          fillColor: {
+            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+            stops: [
+              [0, "rgba(0,106,245,0.12)"],
+              [1, "rgba(0,106,245,0.00)"],
+            ],
+          },
+        },
+        {
+          id:
+            sensorOrCAN === "sensor"
+              ? LANGUAGE.highCharts.titles.fuelVariation
+              : LANGUAGE.highCharts.titles.fuelVariationCAN,
+          yAxis: 0,
+          name:
+            sensorOrCAN === "sensor"
+              ? LANGUAGE.highCharts.titles.fuelVariation
+              : LANGUAGE.highCharts.titles.fuelVariationCAN,
           type: "line",
           data: levelMessagesData,
           marker: { enabled: false, symbol: "diamond" },
@@ -440,7 +471,7 @@ export const FuelBehaviorHighChart = ({
           name: LANGUAGE.highCharts.titles.performancesBetweenCharges,
           type: "line",
           data: performancesBetweenChargesData,
-          marker: { enabled: true, radius: 4, symbol: "square" },
+          marker: { enabled: false, symbol: "square" },
           color: "#f5c800",
           visible: false,
           showInNavigator: true,
@@ -472,7 +503,7 @@ export const FuelBehaviorHighChart = ({
           name: LANGUAGE.highCharts.titles.dailyPerformance,
           type: "line",
           data: dailyPerformancesData,
-          marker: { enabled: true, radius: 4, symbol: "circle" },
+          marker: { enabled: false, symbol: "circle" },
           color: "#8f07ff",
           visible: false,
           showInNavigator: true,
