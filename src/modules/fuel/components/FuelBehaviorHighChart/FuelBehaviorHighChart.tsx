@@ -548,6 +548,7 @@ export const FuelBehaviorHighChart = ({
           lineWidth: 2,
           visible: false,
           showInNavigator: true,
+          marker: { enabled: false, symbol: "triangle" },
           cursor: "pointer",
           tooltip: {
             pointFormatter: createTooltipFormatter(
