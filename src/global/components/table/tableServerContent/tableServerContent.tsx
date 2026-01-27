@@ -94,7 +94,7 @@ export const TableServerContent = ({
 
         {/* Búsqueda en la primer columna*/}
         <div className={`${styles.topActions}`}>
-          {data.length > 0 && (
+          {data.length > 1 && (
             <TableSearch
               LANGUAGE={LANGUAGE}
               setInputFilterValue={setInputFilterValue}
