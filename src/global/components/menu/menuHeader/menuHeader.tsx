@@ -21,7 +21,7 @@ export const MenuHeader = ({ isOpen, setIsOpen, LANGUAGE }: Props) => {
           <Image
             alt={LANGUAGE.menu.titles.logo}
             height={26}
-            src={"/png/Imagotipo_color-5-textLarge.png"}
+            src={"/svg/imagotipo_colorido_texto.svg"}
             width={83}
           />
         ) : (
@@ -29,7 +29,7 @@ export const MenuHeader = ({ isOpen, setIsOpen, LANGUAGE }: Props) => {
           <Image
             alt={LANGUAGE.menu.titles.logo}
             height={30}
-            src={"/svg/mini_Imagotipo_color-5.svg"}
+            src={"/svg/imagotipo_colorido.svg"}
             width={30}
           />
         )}
