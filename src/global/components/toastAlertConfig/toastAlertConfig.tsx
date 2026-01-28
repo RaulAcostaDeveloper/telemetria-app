@@ -4,7 +4,7 @@ export const ToastAlertConfig = () => {
   // Documentación: https://react-hot-toast.com/
   return (
     <Toaster
-      position="top-right"
+      position="bottom-right"
       containerStyle={{
         top: 60, // px desde el borde superior
       }}
