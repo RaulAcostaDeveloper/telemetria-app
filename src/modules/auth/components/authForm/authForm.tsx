@@ -29,7 +29,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
   const { tryLoginHook } = useAuth();
 
   const { loginStatus, loginServerData } = useSelector(
-    (state: RootState) => state.auth
+    (state: RootState) => state.auth,
   );
 
   useEffect(() => {
@@ -129,7 +129,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
             <Image
               alt={LANGUAGE.menu.titles.logo}
               height={100}
-              src={"/svg/Imagotipo_color-4.svg"}
+              src={"/svg/imagotipo_colorido_texto.svg"}
               width={460}
             />
           </div>

@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1180.5203 521.09998"
+   version="1.1"
+   id="svg9"
+   sodipodi:docname="ALTARA_logo.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   width="1180.5203"
+   height="521.09998"
+   inkscape:export-filename="ALTARA_logo.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview9"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.63592277"
+     inkscape:cx="559.03015"
+     inkscape:cy="183.19835"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="395"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="LOGO" />
+  <defs
+     id="defs1">
+    <style
+       id="style1">
+      .cls-1 {
+        fill: #439bd5;
+      }
+
+      .cls-2 {
+        letter-spacing: 0em;
+      }
+
+      .cls-3 {
+        fill: #257bbf;
+      }
+
+      .cls-4 {
+        letter-spacing: 0em;
+      }
+
+      .cls-5 {
+        fill: #144980;
+      }
+
+      .cls-6 {
+        fill: #0f4375;
+      }
+
+      .cls-7 {
+        fill: #3e95d2;
+      }
+
+      .cls-8 {
+        fill: #6cc4c7;
+      }
+
+      .cls-9 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-10 {
+        fill: #277bc0;
+      }
+
+      .cls-11 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-12 {
+        fill: #2874ba;
+      }
+
+      .cls-13 {
+        fill: #3a8bcb;
+      }
+
+      .cls-14 {
+        fill: #47a5dd;
+      }
+
+      .cls-15 {
+        fill: #1c2746;
+        font-size: 80.07px;
+      }
+
+      .cls-15, .cls-16 {
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: 700;
+      }
+
+      .cls-17 {
+        fill: #3185c6;
+      }
+
+      .cls-18 {
+        fill: #19a0c6;
+      }
+
+      .cls-19 {
+        fill: #1e65a2;
+      }
+
+      .cls-16 {
+        fill: #1b2b4c;
+        font-size: 159.69px;
+      }
+
+      .cls-20 {
+        fill: #4695d1;
+      }
+
+      .cls-21 {
+        fill: #1d64a2;
+      }
+
+      .cls-22 {
+        fill: #4fb9e8;
+      }
+
+      .cls-23 {
+        fill: #144f87;
+      }
+
+      .cls-24 {
+        fill: #12477e;
+      }
+
+      .cls-25 {
+        fill: #1e70b6;
+      }
+
+      .cls-26 {
+        fill: #3ebcd2;
+      }
+
+      .cls-27 {
+        fill: #4ba8de;
+      }
+
+      .cls-28 {
+        fill: #1d5a8f;
+      }
+
+      .cls-29 {
+        fill: #3786c7;
+      }
+
+      .cls-30 {
+        letter-spacing: -.06em;
+      }
+
+      .cls-31 {
+        fill: #44a6de;
+      }
+
+      .cls-32 {
+        fill: #62c3d5;
+      }
+
+      .cls-33 {
+        fill: #54baea;
+      }
+
+      .cls-34 {
+        fill: #1a609f;
+      }
+    </style>
+  </defs>
+  <g
+     id="LOGO"
+     transform="translate(-50.91,-86.35)">
+    <g
+       id="g1"
+       transform="translate(-6,58)">
+      <polygon
+         id="turquesa"
+         class="cls-8"
+         points="210.34,143.85 249.44,167.4 288.95,143.14 248.48,121.79 "
+         style="fill:#20b2aa;fill-opacity:1" />
+      <polygon
+         id="azul_oscuro-medio"
+         data-name="azul oscuro-medio"
+         class="cls-10"
+         points="249.44,167.4 250.4,367.92 289.43,367.51 288.95,143.14 "
+         style="fill:#0d3b3a;fill-opacity:1" />
+      <path
+         id="azul_claro-medio"
+         data-name="azul claro-medio"
+         class="cls-31"
+         d="m 210.34,143.85 -0.45,229.51 c 0,0 31.83,-7.06 40.3,-5.45 l -0.74,-200.52 -39.1,-23.55 z"
+         style="fill:#082e2d;fill-opacity:1" />
+      <polygon
+         id="azul_"
+         data-name="azul???"
+         class="cls-33"
+         points="114,201.33 159.31,178.6 196.46,202.41 160.85,227.11 "
+         style="fill:#1a8f8a;fill-opacity:1" />
+      <path
+         id="azul_rey"
+         data-name="azul rey"
+         class="cls-12"
+         d="m 160.85,227.14 -0.06,164.1 c 0,0 24.3,-14.94 36.47,-14.55 l -0.79,-174.28 z"
+         style="fill:#0d3b3a;fill-opacity:1" />
+      <polygon
+         id="azul_-2"
+         data-name="azul ?"
+         class="cls-1"
+         points="114,201.33 113.36,245.5 149.36,259.73 160.85,227.11 "
+         style="fill:#082e2d;fill-opacity:1" />
+      <polygon
+         id="azul_-3"
+         data-name="azul ?"
+         class="cls-1"
+         points="149.36,259.73 150.51,396.26 160.78,391.24 160.85,227.11 "
+         style="fill:#082e2d;fill-opacity:1" />
+      <path
+         id="azul_-4"
+         data-name="azul ??"
+         class="cls-27"
+         d="m 65.48,289.28 c 0,0 42.77,4.21 58.85,9.26 0,0 4.34,-24.13 12.32,-29.43 L 89.22,249.07 c 0,0 -25.66,31.85 -23.74,40.21 z"
+         style="fill:#1a8f8a;fill-opacity:1" />
+      <path
+         id="azul_oscuro-medio1"
+         data-name="azul oscuro-medio1"
+         class="cls-19"
+         d="m 123.99,336.26 0.86,-37.72 c 0,0 -49.51,-15.38 -59.37,-9.26 v 46.98 z"
+         style="fill:#0d3b3a;fill-opacity:1" />
+      <path
+         id="azul_oscuro1"
+         data-name="azul oscuro1"
+         class="cls-28"
+         d="m 138.51,359.24 c 0,0 -12.11,-22.98 -15.02,-22.98 0,0 0.83,-36.73 0.85,-37.72 0,-0.43 4.85,-30.83 12.32,-29.43 z"
+         style="fill:#0d3b3a;fill-opacity:1" />
+      <path
+         id="azul_oscuro_2"
+         data-name="azul oscuro 2"
+         class="cls-13"
+         d="m 58.91,348.69 c 0,0 16.68,43.4 25.7,46.3 l 51.23,-17.36 c 0,0 -17.53,-22.81 -18.21,-28.94 z"
+         style="fill:#1a8f8a;fill-opacity:1" />
+      <path
+         id="azul_oscuro-medio1-2"
+         data-name="azul oscuro-medio1"
+         class="cls-19"
+         d="m 58.91,349.88 v 100.77 c 0,0 17.19,40 25.36,38.47 l 0.34,-94.13 c 0,0 -21.11,-44.6 -25.7,-45.11 z"
+         style="fill:#082e2d;fill-opacity:1" />
+      <path
+         id="oazul_oscuro"
+         data-name="oazul oscuro"
+         class="cls-5"
+         d="m 104.53,440.6 c 0,0 19.74,-11.57 31.32,-12.77 v -50.21 l -51.23,17.36 -0.34,94.13 20.6,-5.45 -0.34,-43.06 z"
+         style="fill:#0d3b3a;fill-opacity:1" />
+      <polygon
+         id="azul_oscuro-medio-2"
+         data-name="azul oscuro-medio"
+         class="cls-3"
+         points="117.46,449.79 160.78,481.96 195.25,456.09 161.55,431.58 "
+         style="fill:#166e6a;fill-opacity:1" />
+      <polygon
+         id="azul_oscuro2"
+         data-name="azul oscuro2"
+         class="cls-24"
+         points="160.78,481.96 161.21,532.52 196.1,510.56 195.25,456.09 "
+         style="fill:#0d3b3a;fill-opacity:1" />
+      <polygon
+         id="azul_oscuro1-2"
+         data-name="azul oscuro1"
+         class="cls-34"
+         points="117.46,449.79 116.74,513.39 161.21,532.52 160.78,481.96 "
+         style="fill:#082e2d;fill-opacity:1" />
+      <polygon
+         id="azul_oscuro2-2"
+         data-name="azul oscuro2"
+         class="cls-29"
+         points="209.89,444.52 249.44,469.54 289.43,443.5 249.66,420.77 "
+         style="fill:#166e6a;fill-opacity:1" />
+      <polygon
+         id="azul_oscuro1-3"
+         data-name="azul oscuro1"
+         class="cls-6"
+         points="249,548.43 287.68,549.45 289.43,443.5 249.44,469.54 "
+         style="fill:#0d3b3a;fill-opacity:1" />
+      <polygon
+         id="azul_oscuro_medio"
+         data-name="azul oscuro medio"
+         class="cls-21"
+         points="209.89,544.35 249,548.43 249.44,469.54 209.89,444.52 "
+         style="fill:#082e2d;fill-opacity:1" />
+      <polygon
+         id="azul_claro_medio"
+         data-name="azul claro medio"
+         class="cls-20"
+         points="302.61,414.13 341.04,438.52 380.87,414.13 340.02,390.52 "
+         style="fill:#166e6a;fill-opacity:1" />
+      <polygon
+         id="azul-oscuro"
+         class="cls-23"
+         points="340.08,438.13 340.08,543.71 379.91,533.37 380.87,414.13 "
+         style="fill:#0d3b3a;fill-opacity:1" />
+      <polygon
+         id="azul_oscuro_medio-2"
+         data-name="azul oscuro medio"
+         class="cls-25"
+         points="302.55,413.73 302.55,521.22 340.08,543.71 340.72,437.73 "
+         style="fill:#082e2d;fill-opacity:1" />
+      <path
+         id="azul_claro-medio-2"
+         data-name="azul claro-medio"
+         class="cls-14"
+         d="m 378.31,351.07 41.23,25.53 c 0,0 36,-30 38.04,-34.6 l -49.02,-15.7 -30.26,24.77 z"
+         style="fill:#166e6a;fill-opacity:1" />
+      <path
+         id="azul_oscuro"
+         data-name="azul oscuro"
+         class="cls-34"
+         d="m 419.55,376.6 -0.89,142.6 c 0,0 38.55,-20.55 40.47,-27.06 L 457.6,342.01 c 0,0 -38.04,32.3 -38.04,34.6 z"
+         style="fill:#0d3b3a;fill-opacity:1" />
+      <polygon
+         id="azul_-5"
+         data-name="azul??"
+         class="cls-17"
+         points="418.65,519.2 419.55,376.6 378.31,351.07 378.31,396.13 393.38,406.22 394.14,504.9 "
+         style="fill:#082e2d;fill-opacity:1" />
+      <path
+         id="azu_"
+         data-name="azu?"
+         class="cls-22"
+         d="m 414.95,275.5 58.21,12.13 c 0,0 8.38,-26.89 10.34,-29.23 l 0.22,-13.66 h -57.54 c 0,0 -9.32,30.77 -11.23,30.77 z"
+         style="fill:#1a8f8a;fill-opacity:1" />
+      <polygon
+         id="azul_-6"
+         data-name="azul??"
+         class="cls-7"
+         points="414.95,314.69 472.84,329.66 473.17,287.62 414.95,275.5 "
+         style="fill:#082e2d;fill-opacity:1" />
+      <path
+         id="azul_rey-2"
+         data-name="azul rey"
+         class="cls-34"
+         d="m 471.76,470.69 c 0,0 9.83,-9.96 13.02,-20.55 l -1.06,-197.19 c 0,0 -2.88,8.84 -10.56,34.68 z"
+         style="fill:#0d3b3a;fill-opacity:1" />
+      <polygon
+         id="azul_-7"
+         data-name="azul???"
+         class="cls-18"
+         points="414.44,196.47 470.23,182.69 470.23,232.35 414.7,233.78 "
+         style="fill:#166e6a;fill-opacity:1" />
+      <path
+         id="azul_-8"
+         data-name="azul??"
+         class="cls-32"
+         d="m 394.65,167.11 19.79,29.36 55.79,-13.79 c 0,0 -31.15,-35.62 -34.21,-34.85 l -41.36,19.28 z"
+         style="fill:#20b2aa;fill-opacity:0.627451" />
+      <polygon
+         id="azul_-9"
+         data-name="azul???"
+         class="cls-26"
+         points="414.95,246.39 414.44,196.47 394.65,167.11 394.78,320.3 403.08,314.69 403.08,274.86 "
+         style="fill:#1a8f8a;fill-opacity:1" />
+      <path
+         id="azul_-10"
+         data-name="azul???"
+         class="cls-31"
+         d="m 341.8,28.35 -0.06,348.26 c 0,0 23.81,9.7 23.94,11.23 V 344.69 L 382.15,332.43 380.49,72.52 341.81,28.35 Z"
+         style="fill:#166e6a;fill-opacity:1" />
+      <polygon
+         id="turquesa-2"
+         data-name="turquesa"
+         class="cls-8"
+         points="301.72,72.52 341.8,28.35 341.74,377.11 301.72,367.92 "
+         style="fill:#20b2aa;fill-opacity:1" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:156.16px;font-family:'Gotham Bold';-inkscape-font-specification:'Gotham Bold, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:-5.05311px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#0d3b3a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-opacity:0.0691824;paint-order:stroke fill markers"
+       x="526.16687"
+       y="408.38159"
+       id="text1"
+       transform="scale(1.0232754,0.97725402)"><tspan
+         x="526.16687"
+         y="408.38159"
+         id="tspan2"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:156.16px;font-family:'Gotham Bold';-inkscape-font-specification:'Gotham Bold, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:-5.05311px;word-spacing:0px;text-anchor:start;fill:#0d3b3a;fill-opacity:1;stroke-width:0"
+         sodipodi:role="line">ALTARA</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:78.5877px;font-family:'Gotham Bold';-inkscape-font-specification:'Gotham Bold, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#0d3b3a;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-opacity:0.0691824;paint-order:stroke fill markers"
+       x="538.64447"
+       y="507.15851"
+       id="text1-4"
+       transform="scale(1.0122508,0.98789747)"><tspan
+         x="538.64447"
+         y="507.15851"
+         id="tspan2-5"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:78.5877px;font-family:'Gotham Bold';-inkscape-font-specification:'Gotham Bold, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start;fill:#0d3b3a;fill-opacity:1;stroke-width:0"
+         sodipodi:role="line">TECHNOLOGIES</tspan></text>
+  </g>
+</svg>
