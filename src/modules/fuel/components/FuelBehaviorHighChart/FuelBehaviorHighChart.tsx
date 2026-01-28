@@ -156,9 +156,18 @@ export const FuelBehaviorHighChart = ({
         y: s.speed,
         custom: {
           dateGps: s.dateGps,
-          speed: s.speed,
           lat: s.lat,
           lon: s.lon,
+          odometer: s.odometer,
+          speed: s.speed,
+          ignition: Boolean(s.ignition),
+          deviceBattery: s.deviceBattery,
+          mainPower: s.externalPower,
+          tanks: formatTankValuesToInt(s.tanks),
+          currentLevelSmoothly:
+            s.sensorCurrentLevelSmoothly != null
+              ? Math.round(s.sensorCurrentLevelSmoothly)
+              : null,
         },
       }))
       .sort((a, b) => a.x - b.x);
@@ -405,6 +414,37 @@ export const FuelBehaviorHighChart = ({
             sensorOrCAN === "sensor"
               ? LANGUAGE.highCharts.titles.fuelVariation
               : LANGUAGE.highCharts.titles.fuelVariationCAN,
+          type: "areaspline",
+          data: levelMessagesData,
+          color: "#006af5",
+          lineWidth: 0,
+          fillOpacity: 1,
+          marker: { enabled: false },
+          showInLegend: false,
+          enableMouseTracking: false,
+          linkedTo:
+            sensorOrCAN === "sensor"
+              ? LANGUAGE.highCharts.titles.fuelVariation
+              : LANGUAGE.highCharts.titles.fuelVariationCAN,
+          zIndex: 2,
+          fillColor: {
+            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+            stops: [
+              [0, "rgba(0,106,245,0.12)"],
+              [1, "rgba(0,106,245,0.00)"],
+            ],
+          },
+        },
+        {
+          id:
+            sensorOrCAN === "sensor"
+              ? LANGUAGE.highCharts.titles.fuelVariation
+              : LANGUAGE.highCharts.titles.fuelVariationCAN,
+          yAxis: 0,
+          name:
+            sensorOrCAN === "sensor"
+              ? LANGUAGE.highCharts.titles.fuelVariation
+              : LANGUAGE.highCharts.titles.fuelVariationCAN,
           type: "line",
           data: levelMessagesData,
           marker: { enabled: false, symbol: "diamond" },
@@ -440,7 +480,7 @@ export const FuelBehaviorHighChart = ({
           name: LANGUAGE.highCharts.titles.performancesBetweenCharges,
           type: "line",
           data: performancesBetweenChargesData,
-          marker: { enabled: true, radius: 4, symbol: "square" },
+          marker: { enabled: false, symbol: "square" },
           color: "#f5c800",
           visible: false,
           showInNavigator: true,
@@ -472,7 +512,7 @@ export const FuelBehaviorHighChart = ({
           name: LANGUAGE.highCharts.titles.dailyPerformance,
           type: "line",
           data: dailyPerformancesData,
-          marker: { enabled: true, radius: 4, symbol: "circle" },
+          marker: { enabled: false, symbol: "circle" },
           color: "#8f07ff",
           visible: false,
           showInNavigator: true,
@@ -504,16 +544,32 @@ export const FuelBehaviorHighChart = ({
           name: LANGUAGE.highCharts.titles.speed,
           type: "line",
           data: speedData,
-          color: "#b3e207",
+          color: "#b45d0b",
           lineWidth: 2,
           visible: false,
           showInNavigator: true,
+          marker: { enabled: false, symbol: "triangle" },
           cursor: "pointer",
           tooltip: {
             pointFormatter: createTooltipFormatter(
               LANGUAGE.highCharts.tooltips.fuel.titleSpeed,
               speedTooltipFields,
             ),
+          },
+          point: {
+            events: {
+              click: (e: Highcharts.PointClickEventObject) => {
+                const message = (
+                  e.point.options as { custom: { lat: number; lon: number } }
+                ).custom;
+                handleClicGeoData({
+                  title: LANGUAGE.geoModalTitles.levelMessageTitle,
+                  lat: message.lat,
+                  lon: message.lon,
+                  rows: getLabelsForLevelMessagesGeoMap(LANGUAGE, message),
+                });
+              },
+            },
           },
         },
       ],

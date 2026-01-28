@@ -79,12 +79,12 @@ export const TableServerContent = ({
 }: Props) => {
   const showActions = Boolean(
     showDelete ||
-      showEdit ||
-      idImei ||
-      idZone ||
-      showGoPageView ||
-      showViewModal ||
-      showGoGenericReport
+    showEdit ||
+    idImei ||
+    idZone ||
+    showGoPageView ||
+    showViewModal ||
+    showGoGenericReport,
   );
   return (
     <>
@@ -94,10 +94,13 @@ export const TableServerContent = ({
 
         {/* Búsqueda en la primer columna*/}
         <div className={`${styles.topActions}`}>
-          <TableSearch
-            LANGUAGE={LANGUAGE}
-            setInputFilterValue={setInputFilterValue}
-          />
+          {data.length > 1 && (
+            <TableSearch
+              LANGUAGE={LANGUAGE}
+              setInputFilterValue={setInputFilterValue}
+            />
+          )}
+
           {showCreateButton && (
             <TableAddNewButton LANGUAGE={LANGUAGE} modalOption={modalOption} />
           )}
