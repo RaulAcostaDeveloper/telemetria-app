@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
 import toast from "react-hot-toast";
@@ -42,12 +42,17 @@ export const Header = ({ isMenuOpen, LANGUAGE }: Props) => {
   const start = formatDateTime(reduxStartDate ?? defaultISO);
   const end = formatDateTime(reduxEndDate ?? defaultISO);
 
+  const notFirstRender = useRef(false);
+
   useEffect(() => {
     setMounted(true);
   }, []);
 
   useEffect(() => {
-    toast.success(LANGUAGE.notifications.dateRangeSelected);
+    if (notFirstRender.current === true) {
+      toast.success(LANGUAGE.notifications.dateRangeSelected);
+    }
+    notFirstRender.current = true;
   }, [start, end]);
 
   const toggleContainer = (): void => {
