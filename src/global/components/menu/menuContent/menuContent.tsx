@@ -1,9 +1,11 @@
 "use client";
+
 import AddCardIcon from "@mui/icons-material/AddCard";
-import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import HomeIcon from "@mui/icons-material/Home";
-import QueryStats from "@mui/icons-material/QueryStats";
+import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import LogoutIcon from "@mui/icons-material/Logout";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import QueryStats from "@mui/icons-material/QueryStats";
 
 import styles from "./menuContent.module.css";
 import { ButtonTypes } from "../../generalButton/generalButton.model";
@@ -29,6 +31,11 @@ export const MenuContent = ({ isOpen, LANGUAGE, logoutState }: Props) => {
       icon: HomeIcon,
       route: "/home",
       title: LANGUAGE.sectionName.home,
+    },
+    {
+      icon: PeopleAltIcon,
+      route: "/iam",
+      title: LANGUAGE.sectionName.iam,
     },
     {
       icon: AddCardIcon,
