@@ -553,4 +553,12 @@ export const ENGLISH: LanguageInterface = {
       },
     },
   },
+  iam: {
+    tabs: {
+      users: "Users",
+      accounts: "Accounts",
+      permissions: "Permissions",
+      roles: "Roles",
+    },
+  },
 };

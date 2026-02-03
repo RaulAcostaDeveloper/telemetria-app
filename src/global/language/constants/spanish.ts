@@ -555,4 +555,12 @@ export const SPANISH: LanguageInterface = {
       },
     },
   },
+  iam: {
+    tabs: {
+      users: "Usuarios",
+      accounts: "Cuentas",
+      permissions: "Permisos",
+      roles: "Roles",
+    },
+  },
 };

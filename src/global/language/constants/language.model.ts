@@ -532,4 +532,12 @@ export interface LanguageInterface {
       };
     };
   };
+  iam: {
+    tabs: {
+      users: string;
+      accounts: string;
+      permissions: string;
+      roles: string;
+    };
+  };
 }

@@ -553,4 +553,12 @@ export const PORTUGUES: LanguageInterface = {
       },
     },
   },
+  iam: {
+    tabs: {
+      users: "Usuários",
+      accounts: "Contas",
+      permissions: "Permissões",
+      roles: "Papéis",
+    },
+  },
 };
