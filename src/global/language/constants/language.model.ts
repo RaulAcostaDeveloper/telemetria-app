@@ -15,6 +15,7 @@ export interface LanguageInterface {
     management: string;
     fuel: string;
     telemetryobd: string;
+    iam: string;
   };
   notifications: {
     unexpectedError: string;

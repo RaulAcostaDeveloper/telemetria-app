@@ -20,9 +20,9 @@ export const MenuHeader = ({ isOpen, setIsOpen, LANGUAGE }: Props) => {
           // IMAGEN PROPORCIÓN LOGO 6:1
           <Image
             alt={LANGUAGE.menu.titles.logo}
-            height={26}
-            src={"/svg/imagotipo_colorido_texto.svg"}
-            width={83}
+            height={30}
+            src={"/png/Imagotipo_color-5-textLarge.png"}
+            width={85}
           />
         ) : (
           // IMAGEN PROPORCIÓN LOGO 1:1
