@@ -33,10 +33,6 @@ export const UsersTabContent = ({ LANGUAGE }: Props) => {
       columnName: LANGUAGE.iam.users.tableColumns.lastName,
       defaultSpace: 4,
     },
-    {
-      columnName: LANGUAGE.iam.users.tableColumns.createdAt,
-      defaultSpace: 4,
-    },
   ];
 
   const usersTableData = useMemo(() => {
@@ -46,7 +42,6 @@ export const UsersTabContent = ({ LANGUAGE }: Props) => {
       accountId: value.accountId, // buscar el account ID
       givenName: value.givenName,
       familyName: value.familyName,
-      createdAt: value.createdAt,
     }));
   }, []);
 
