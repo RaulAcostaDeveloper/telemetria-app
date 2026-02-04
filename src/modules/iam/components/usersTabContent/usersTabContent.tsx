@@ -15,23 +15,23 @@ export const UsersTabContent = ({ LANGUAGE }: Props) => {
   const usersTableColumns: columnsTable = [
     {
       columnName: LANGUAGE.iam.users.tableColumns.email,
-      defaultSpace: 4,
+      defaultSpace: 6,
     },
     {
       columnName: LANGUAGE.iam.users.tableColumns.userName,
-      defaultSpace: 4,
+      defaultSpace: 5,
     },
     {
       columnName: LANGUAGE.iam.users.tableColumns.account,
-      defaultSpace: 2,
+      defaultSpace: 4,
     },
     {
       columnName: LANGUAGE.iam.users.tableColumns.name,
-      defaultSpace: 4,
+      defaultSpace: 5,
     },
     {
       columnName: LANGUAGE.iam.users.tableColumns.lastName,
-      defaultSpace: 4,
+      defaultSpace: 5,
     },
   ];
 
