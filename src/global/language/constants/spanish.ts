@@ -562,5 +562,15 @@ export const SPANISH: LanguageInterface = {
       permissions: "Permisos",
       roles: "Roles",
     },
+    users: {
+      tableColumns: {
+        email: "Correo electrónico",
+        userName: "Nombre de usuario",
+        account: "Cuenta",
+        name: "Nombre",
+        lastName: "Apellidos",
+        createdAt: "Fecha de creación",
+      },
+    },
   },
 };

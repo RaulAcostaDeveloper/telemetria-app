@@ -25,6 +25,8 @@ export const HeaderTextContent = ({ LANGUAGE, currentUrl }: Props) => {
       return "single-zone";
     } else if (currentUrl.match(/home|s+/)) {
       return "home";
+    } else if (currentUrl.match(/iam|s+/)) {
+      return "iam";
     } else {
       return "";
     }
@@ -60,6 +62,12 @@ export const HeaderTextContent = ({ LANGUAGE, currentUrl }: Props) => {
         return (
           <div className={styles.platesAndName}>
             <span>{LANGUAGE.sectionName.home}</span>
+          </div>
+        );
+      case "iam":
+        return (
+          <div className={styles.platesAndName}>
+            <span>{LANGUAGE.sectionName.iam}</span>
           </div>
         );
       case "management":

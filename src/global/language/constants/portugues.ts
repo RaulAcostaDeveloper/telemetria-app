@@ -560,5 +560,15 @@ export const PORTUGUES: LanguageInterface = {
       permissions: "Permissões",
       roles: "Papéis",
     },
+    users: {
+      tableColumns: {
+        email: "E-mail",
+        userName: "Nome de usuário",
+        account: "Conta",
+        name: "Nome",
+        lastName: "Sobrenome",
+        createdAt: "Criado em",
+      },
+    },
   },
 };
