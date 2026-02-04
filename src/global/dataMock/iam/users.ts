@@ -1,0 +1,87 @@
+export interface IAmUsersDataMock {
+  accountId: string;
+  createdAt: string;
+  createdById: string;
+  deletedAt: string;
+  email: string;
+  familyName: string;
+  givenName: string;
+  password: string;
+  recoveryOtp: string;
+  totpKey: string;
+  updatedAt: string;
+  userName: string;
+}
+
+export const iAmUsersDataMock: IAmUsersDataMock[] = [
+  {
+    accountId: "id23423",
+    createdAt: "2026-01-28T19:01:09",
+    email: "emai1l@hotmail.com",
+    createdById: "",
+    familyName: "Apellido1",
+    givenName: "Nombre1",
+    userName: "nickname34",
+    deletedAt: "",
+    password: "",
+    recoveryOtp: "",
+    totpKey: "",
+    updatedAt: "2026-01-28T19:01:09",
+  },
+  {
+    createdById: "",
+    accountId: "id234231",
+    createdAt: "2026-01-28T19:01:09",
+    email: "email2@hotmail.com",
+    familyName: "Apellido2",
+    givenName: "Nombre2",
+    userName: "nickname34",
+    deletedAt: "",
+    password: "",
+    recoveryOtp: "",
+    totpKey: "",
+    updatedAt: "2026-01-28T19:01:09",
+  },
+  {
+    createdById: "",
+    accountId: "id234232",
+    createdAt: "2026-01-28T19:01:09",
+    email: "email3@hotmail.com",
+    familyName: "Apellido3",
+    givenName: "Nombre3",
+    userName: "nickname34",
+    deletedAt: "",
+    password: "",
+    recoveryOtp: "",
+    totpKey: "",
+    updatedAt: "2026-01-28T19:01:09",
+  },
+  {
+    createdById: "",
+    accountId: "id234233",
+    createdAt: "2026-01-28T19:01:09",
+    email: "email4@hotmail.com",
+    familyName: "Apellido4",
+    givenName: "Nombre4",
+    userName: "nickname34",
+    deletedAt: "",
+    password: "",
+    recoveryOtp: "",
+    totpKey: "",
+    updatedAt: "2026-01-28T19:01:09",
+  },
+  {
+    createdById: "",
+    accountId: "id234234",
+    createdAt: "2026-01-28T19:01:09",
+    email: "email5@hotmail.com",
+    familyName: "Apellido5",
+    givenName: "Nombre5",
+    userName: "nickname34",
+    deletedAt: "",
+    password: "",
+    recoveryOtp: "",
+    totpKey: "",
+    updatedAt: "2026-01-28T19:01:09",
+  },
+];

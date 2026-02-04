@@ -41,16 +41,16 @@ export const IAmMainContainer = ({ LANGUAGE }: Props) => {
         tabOptions={tabOptions}
         tabContents={[
           <div key={1}>
-            <UsersTabContent />
+            <UsersTabContent LANGUAGE={LANGUAGE} />
           </div>,
           <div key={2}>
-            <AccountsTabContent />
+            <AccountsTabContent LANGUAGE={LANGUAGE} />
           </div>,
           <div key={3}>
-            <PermissionsTabContent />
+            <PermissionsTabContent LANGUAGE={LANGUAGE} />
           </div>,
           <div key={4}>
-            <RolesTabContent />
+            <RolesTabContent LANGUAGE={LANGUAGE} />
           </div>,
         ]}
       />

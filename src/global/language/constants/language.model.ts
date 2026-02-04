@@ -539,5 +539,15 @@ export interface LanguageInterface {
       permissions: string;
       roles: string;
     };
+    users: {
+      tableColumns: {
+        email: string;
+        userName: string;
+        account: string;
+        name: string;
+        lastName: string;
+        createdAt: string;
+      };
+    };
   };
 }
