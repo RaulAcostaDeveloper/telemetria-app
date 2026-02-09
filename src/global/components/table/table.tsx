@@ -20,7 +20,6 @@ interface Props {
   deleteFunction?: (idElement: string | number) => void;
   idImei?: string;
   idKey?: string;
-  idZone?: string;
   modalOption?: MODAL_OPTION;
   showCreateButton?: boolean;
   showDelete?: boolean;
@@ -40,7 +39,6 @@ export const Table = ({
   deleteFunction,
   idImei,
   idKey,
-  idZone,
   modalOption,
   showCreateButton,
   showDelete,
@@ -245,7 +243,6 @@ export const Table = ({
         handleSelectorFilter={handleSelectorFilter}
         idImei={idImei}
         idKey={idKey}
-        idZone={idZone}
         minMaxFilters={minMaxFilters}
         modalOption={modalOption}
         resetFilters={resetFilters}

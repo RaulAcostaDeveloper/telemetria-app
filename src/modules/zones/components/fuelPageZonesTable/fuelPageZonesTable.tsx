@@ -99,7 +99,7 @@ export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
             LANGUAGE={LANGUAGE}
             showGoGenericReport
             idKey="idZone"
-            idZone="idZone"
+            viewPath="/zones/zone/"
             showEdit
             modalOption={MODAL_OPTION.ZONE}
           />

@@ -16,7 +16,6 @@ interface Props {
   filteredData: dataTable;
   idImei?: string;
   idKey?: string;
-  idZone?: string;
   modalOption?: MODAL_OPTION;
   showActions?: boolean;
   showDelete?: boolean;
@@ -35,7 +34,6 @@ export const TableDataContent = ({
   filteredData,
   idImei,
   idKey,
-  idZone,
   modalOption,
   showActions,
   showDelete,
@@ -185,7 +183,6 @@ export const TableDataContent = ({
                   deleteFunction={deleteFunction}
                   idImei={idImei}
                   idKey={idKey}
-                  idZone={idZone}
                   modalOption={modalOption}
                   showDelete={showDelete}
                   showEdit={showEdit}

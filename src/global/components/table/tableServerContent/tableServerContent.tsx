@@ -28,7 +28,6 @@ interface Props {
   handleSelectorFilter: ({ colIndex, value }: SelectorFilter) => void;
   idImei?: string;
   idKey?: string;
-  idZone?: string;
   minMaxFilters: MinMaxFilter[];
   modalOption?: MODAL_OPTION;
   resetFilters: () => void;
@@ -59,7 +58,6 @@ export const TableServerContent = ({
   handleSelectorFilter,
   idImei,
   idKey,
-  idZone,
   minMaxFilters,
   modalOption,
   resetFilters,
@@ -81,7 +79,6 @@ export const TableServerContent = ({
     showDelete ||
     showEdit ||
     idImei ||
-    idZone ||
     showGoPageView ||
     showViewModal ||
     showGoGenericReport,
@@ -145,7 +142,6 @@ export const TableServerContent = ({
               filteredData={filteredData}
               idImei={idImei}
               idKey={idKey}
-              idZone={idZone}
               modalOption={modalOption}
               showActions={showActions}
               showDelete={showDelete}
