@@ -1,20 +1,6 @@
-export interface IAmUsersDataMock {
-  accountId: string;
-  createdAt: string;
-  createdById: string;
-  deletedAt: string;
-  email: string;
-  familyName: string;
-  givenName: string;
-  password: string;
-  recoveryOtp: string;
-  totpKey: string;
-  updatedAt: string;
-  userName: string;
-  id: string;
-}
+import { User } from "@/global/redux/serviceSlices/userSlice";
 
-export const iAmUsersDataMock: IAmUsersDataMock[] = [
+export const iAmUsersDataMock: User[] = [
   {
     id: "124",
     accountId: "id23423",

@@ -32,6 +32,8 @@ export const HeaderTextWords = ({ LANGUAGE, section, url }: Props) => {
     (state: RootState) => state.zoneDetails,
   );
 
+  const { userData } = useSelector((state: RootState) => state.users);
+
   useEffect(() => {
     if (
       isAuthenticated &&
@@ -92,10 +94,10 @@ export const HeaderTextWords = ({ LANGUAGE, section, url }: Props) => {
         <span></span>
       )}
 
-      {"single-user" === section && (
+      {"single-user" === section && userData?.value && (
         <>
-          <span>Single</span>
-          <span> · user</span>
+          <span>{userData?.value?.userName}</span>
+          <span> · {userData?.value?.familyName}</span>
         </>
       )}
     </>
