@@ -53,7 +53,7 @@ export const UsersTabContent = ({ LANGUAGE }: Props) => {
         columns={usersTableColumns}
         data={usersTableData}
         idKey="userId"
-        showGoPageView
+        showGoGenericReport
         viewPath="/iam/user/"
       />
     </div>
