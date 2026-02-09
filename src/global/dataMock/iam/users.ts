@@ -11,10 +11,12 @@ export interface IAmUsersDataMock {
   totpKey: string;
   updatedAt: string;
   userName: string;
+  id: string;
 }
 
 export const iAmUsersDataMock: IAmUsersDataMock[] = [
   {
+    id: "124",
     accountId: "id23423",
     createdAt: "2026-01-28T19:01:09",
     email: "emai1l@hotmail.com",
@@ -29,6 +31,7 @@ export const iAmUsersDataMock: IAmUsersDataMock[] = [
     updatedAt: "2026-01-28T19:01:09",
   },
   {
+    id: "1204",
     createdById: "",
     accountId: "id234231",
     createdAt: "2026-01-28T19:01:09",
@@ -43,6 +46,7 @@ export const iAmUsersDataMock: IAmUsersDataMock[] = [
     updatedAt: "2026-01-28T19:01:09",
   },
   {
+    id: "1244",
     createdById: "",
     accountId: "id234232",
     createdAt: "2026-01-28T19:01:09",
@@ -57,6 +61,7 @@ export const iAmUsersDataMock: IAmUsersDataMock[] = [
     updatedAt: "2026-01-28T19:01:09",
   },
   {
+    id: "1624",
     createdById: "",
     accountId: "id234233",
     createdAt: "2026-01-28T19:01:09",
@@ -71,6 +76,7 @@ export const iAmUsersDataMock: IAmUsersDataMock[] = [
     updatedAt: "2026-01-28T19:01:09",
   },
   {
+    id: "1284",
     createdById: "",
     accountId: "id234234",
     createdAt: "2026-01-28T19:01:09",

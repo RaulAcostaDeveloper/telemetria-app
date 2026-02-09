@@ -42,6 +42,7 @@ export const UsersTabContent = ({ LANGUAGE }: Props) => {
       accountId: value.accountId, // buscar el account ID
       givenName: value.givenName,
       familyName: value.familyName,
+      userId: value.id,
     }));
   }, []);
 
@@ -51,6 +52,9 @@ export const UsersTabContent = ({ LANGUAGE }: Props) => {
         LANGUAGE={LANGUAGE}
         columns={usersTableColumns}
         data={usersTableData}
+        idKey="userId"
+        showGoGenericReport
+        viewPath="/iam/user/"
       />
     </div>
   );

@@ -22,7 +22,6 @@ interface Props {
   deleteFunction?: (idElement: string | number) => void;
   idImei?: string;
   idKey?: string;
-  idZone?: string;
   modalOption?: MODAL_OPTION;
   showDelete?: boolean;
   showEdit?: boolean;
@@ -39,7 +38,6 @@ export const TableActions = ({
   deleteFunction,
   idImei,
   idKey,
-  idZone,
   modalOption,
   showDelete,
   showEdit,
@@ -111,15 +109,6 @@ export const TableActions = ({
             alt="car services"
           />
         </TableActionLink>
-      )}
-
-      {idZone && (
-        <TableActionLink
-          hasCompleteRoute={idZone ? true : false}
-          title={LANGUAGE.table.actions.goZoneReport}
-          Icon={ArrowRightAltIcon}
-          href={`/zones/zone/${dataObject[idZone ?? ""] ?? ""}`}
-        />
       )}
 
       {showGoGenericReport && viewPath && (
