@@ -15,6 +15,8 @@ export const HeaderTextContent = ({ LANGUAGE, currentUrl }: Props) => {
       return "single-fuel";
     } else if (currentUrl.match(/telemetry\/vehicle/)) {
       return "single-telemetry";
+    } else if (currentUrl.match(/iam\/user/)) {
+      return "single-user";
     } else if (currentUrl.match(/management/)) {
       return "management";
     } else if (currentUrl.match(/fuel/)) {
@@ -23,9 +25,9 @@ export const HeaderTextContent = ({ LANGUAGE, currentUrl }: Props) => {
       return "telemetryobd";
     } else if (currentUrl.match(/zones\/zone/)) {
       return "single-zone";
-    } else if (currentUrl.match(/home|s+/)) {
+    } else if (currentUrl.match(/home/)) {
       return "home";
-    } else if (currentUrl.match(/iam|s+/)) {
+    } else if (currentUrl.match(/iam/)) {
       return "iam";
     } else {
       return "";
@@ -68,6 +70,16 @@ export const HeaderTextContent = ({ LANGUAGE, currentUrl }: Props) => {
         return (
           <div className={styles.platesAndName}>
             <span>{LANGUAGE.sectionName.iam}</span>
+          </div>
+        );
+      case "single-user":
+        return (
+          <div className={styles.platesAndName}>
+            <HeaderTextWords
+              LANGUAGE={LANGUAGE}
+              section={site}
+              url={currentUrl}
+            />
           </div>
         );
       case "management":
