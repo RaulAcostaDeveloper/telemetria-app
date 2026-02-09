@@ -17,6 +17,7 @@ import obdTravelMetricsSlice from "@/global/redux/serviceSlices/obdTravelMetrics
 import postZoneProfileSlice from "@/global/redux/serviceSlices/postZoneProfile";
 import putZoneProfileSlice from "@/global/redux/serviceSlices/putZoneProfile";
 import topFuelReportSlice from "@/global/redux/serviceSlices/topFuelReportSlice";
+import usersSlice from "@/global/redux/serviceSlices/userSlice";
 import vehicleByImeiSlice from "@/global/redux/serviceSlices/vehicleByImeiSlice";
 import vehiclesAllSlice from "@/global/redux/serviceSlices/vehiclesAllSlice";
 import vehiclesSlice from "@/global/redux/serviceSlices/vehiclesSlice";
@@ -45,6 +46,7 @@ export const store = configureStore({
     postZoneProfile: postZoneProfileSlice,
     putZoneProfile: putZoneProfileSlice,
     topFuelReport: topFuelReportSlice,
+    users: usersSlice,
     vehicleByImei: vehicleByImeiSlice,
     vehicles: vehiclesSlice,
     vehiclesAll: vehiclesAllSlice,

@@ -17,17 +17,22 @@ interface Props {
 
 export const HeaderTextWords = ({ LANGUAGE, section, url }: Props) => {
   const { isAuthenticated, logoutState } = useAuth();
+
   const dispatch = useDispatch<AppDispatch>();
+
   const segmentsURL = url.split("/").filter(Boolean);
+
   const lastSegmentURL = segmentsURL[segmentsURL.length - 1];
 
   const { vehicleByImeiData, vehicleByImeiStatus } = useSelector(
-    (state: RootState) => state.vehicleByImei
+    (state: RootState) => state.vehicleByImei,
   );
 
   const { zoneDetailsData } = useSelector(
-    (state: RootState) => state.zoneDetails
+    (state: RootState) => state.zoneDetails,
   );
+
+  const { userData } = useSelector((state: RootState) => state.users);
 
   useEffect(() => {
     if (
@@ -53,17 +58,19 @@ export const HeaderTextWords = ({ LANGUAGE, section, url }: Props) => {
 
   return (
     <>
+      {/* PENDIENTE cambiar esto para hacer un switch más limpio con las rutas */}
       {"single-zone" === section && (
         <>
           {zoneDetailsData?.value?.zoneName && (
             <span>{zoneDetailsData.value.zoneName}</span>
-          )}{" "}
+          )}
           {zoneDetailsData?.value?.profileName && (
             <span> · ({zoneDetailsData.value.profileName})</span>
           )}
         </>
       )}
-      {"single-zone" !== section &&
+
+      {("single-telemetry" === section || "single-fuel" === section) &&
       vehicleByImeiStatus === SERVICE_STATUS.succeeded &&
       vehicleByImeiData ? (
         <>
@@ -85,6 +92,13 @@ export const HeaderTextWords = ({ LANGUAGE, section, url }: Props) => {
         <span>{LANGUAGE.sectionName.telemetryobd}</span>
       ) : (
         <span></span>
+      )}
+
+      {"single-user" === section && userData?.value && (
+        <>
+          <span>{userData?.value?.userName}</span>
+          <span> · {userData?.value?.familyName}</span>
+        </>
       )}
     </>
   );
