@@ -1,0 +1,41 @@
+.inputNormal {
+  font-size: 2rem;
+}
+
+.inputNormal label {
+  font-weight: 600;
+  display: block;
+}
+
+.inputNormal .input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: 2px 2px 5px 0px var(--shadow-soft);
+  -moz-box-shadow: 2px 2px 5px 0px var(--shadow-soft);
+  box-shadow: 2px 2px 5px 0px var(--shadow-soft);
+  transition: 0.2s;
+}
+
+.inputNormal .input:not(:placeholder-shown),
+.inputNormal .input:focus,
+.inputNormal .input:hover {
+  box-shadow: 0 6px 18px var(--shadow-soft);
+  outline: none;
+}
+
+.withValue {
+  /* Pendiente */
+}
+
+.inputLarge {
+  width: 100%;
+}
+
+.inputLarge .textarea {
+  width: 100%;
+  height: 60px;
+  resize: vertical;
+}

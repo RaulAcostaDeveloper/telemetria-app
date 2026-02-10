@@ -1,5 +1,6 @@
 "use client";
 
+import { UserPageContainer } from "@/modules/iam/components/userPageContainer/userPageContainer";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 
 interface Page {
@@ -13,5 +14,5 @@ export default function User({ params }: Page) {
 
   const LANGUAGE = useLanguage();
 
-  return <div>Page</div>;
+  return <UserPageContainer LANGUAGE={LANGUAGE} userId={id} />;
 }

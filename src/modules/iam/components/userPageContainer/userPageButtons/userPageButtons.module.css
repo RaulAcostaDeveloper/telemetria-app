@@ -1,0 +1,15 @@
+.userPageButtons {
+  margin: 20px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonStyle {
+  width: 180px;
+  height: 45px;
+}
+
+.titleStyle {
+  font-size: 1.5rem;
+}
