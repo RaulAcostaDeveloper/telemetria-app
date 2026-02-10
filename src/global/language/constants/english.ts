@@ -569,6 +569,10 @@ export const ENGLISH: LanguageInterface = {
         lastName: "Last name",
         createdAt: "Created at",
       },
+      userForm: {
+        saveChanges: "Save changes",
+        deleteUser: "Delete user",
+      },
     },
   },
 };

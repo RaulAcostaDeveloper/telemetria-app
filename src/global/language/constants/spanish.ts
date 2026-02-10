@@ -571,6 +571,10 @@ export const SPANISH: LanguageInterface = {
         lastName: "Apellidos",
         createdAt: "Fecha de creación",
       },
+      userForm: {
+        saveChanges: "Guardar cambios",
+        deleteUser: "Eliminar usuario",
+      },
     },
   },
 };

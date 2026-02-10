@@ -22,13 +22,13 @@ export const UserPageInputs = ({
   return (
     <div className={styles.userPageInputs}>
       <Input
-        title={LANGUAGE.zones.zoneProfileForm.name}
+        title={LANGUAGE.iam.users.tableColumns.userName}
         name="usernNameUserForm"
         value={nickName}
         set={setNickname}
       />
       <Input
-        title={LANGUAGE.zones.zoneProfileForm.name}
+        title={LANGUAGE.iam.users.tableColumns.name}
         name="familyNameUserForm"
         value={familyName}
         set={setFamilyName}

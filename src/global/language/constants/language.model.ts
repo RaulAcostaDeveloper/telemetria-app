@@ -548,6 +548,10 @@ export interface LanguageInterface {
         lastName: string;
         createdAt: string;
       };
+      userForm: {
+        saveChanges: string;
+        deleteUser: string;
+      };
     };
   };
 }

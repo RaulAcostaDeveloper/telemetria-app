@@ -569,6 +569,10 @@ export const PORTUGUES: LanguageInterface = {
         lastName: "Sobrenome",
         createdAt: "Criado em",
       },
+      userForm: {
+        saveChanges: "Salvar alterações",
+        deleteUser: "Eliminar usuário",
+      },
     },
   },
 };

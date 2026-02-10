@@ -33,6 +33,7 @@ export const UserPageForm = ({ userId, LANGUAGE }: Props) => {
         setFamilyName={setFamilyName}
       />
       <UserPageButtons
+        LANGUAGE={LANGUAGE}
         nickName={nickName}
         familyName={familyName}
         onDelete={onDelete}
