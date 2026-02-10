@@ -1,4 +1,4 @@
-import { Input } from "@/global/components/formElements/Input/Input";
+import { Input } from "@/global/components/formElements/Input/input";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 
 interface Props {

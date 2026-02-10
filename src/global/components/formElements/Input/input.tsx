@@ -31,7 +31,7 @@ export const Input = ({
           value={value}
           onChange={(e) => set(e.target.value)}
           className={` ${styles.input} ${styles.textarea} ${
-            value !== "" ? styles.withValue : ""
+            value && value?.length > 0 ? styles.withValue : ""
           }`}
         />
       ) : (
@@ -41,7 +41,7 @@ export const Input = ({
           id={name}
           value={value}
           onChange={(e) => set(e.target.value)}
-          className={` ${styles.input} ${value !== "" ? styles.withValue : ""}`}
+          className={` ${styles.input} ${value && value?.length > 0 ? styles.withValue : ""}`}
         />
       )}
     </div>
