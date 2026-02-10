@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { DeleteConfirmationModal } from "./deleteConfirmationModal/deleteConfirmationModal";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { UserPageButtons } from "../userPageButtons/userPageButtons";
 import { UserPageInputs } from "./userPageInputs/userPageInputs";
@@ -14,8 +15,13 @@ interface Props {
 export const UserPageForm = ({ userId, LANGUAGE }: Props) => {
   const [nickName, setNickName] = useState<string>();
   const [familyName, setFamilyName] = useState<string>();
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
-  const onDelete = () => {
+  const openDeleteConfirmationModal = () => {
+    setShowDeleteConfirmation(true);
+  };
+
+  const onDeleteUser = () => {
     console.log("userId ", userId);
   };
 
@@ -32,13 +38,22 @@ export const UserPageForm = ({ userId, LANGUAGE }: Props) => {
         familyName={familyName}
         setFamilyName={setFamilyName}
       />
+
       <UserPageButtons
         LANGUAGE={LANGUAGE}
         nickName={nickName}
         familyName={familyName}
-        onDelete={onDelete}
+        onDelete={openDeleteConfirmationModal}
         onSafe={onSafe}
       />
+
+      {showDeleteConfirmation && (
+        <DeleteConfirmationModal
+          LANGUAGE={LANGUAGE}
+          closeModal={() => setShowDeleteConfirmation(false)}
+          deleteFunction={onDeleteUser}
+        />
+      )}
     </div>
   );
 };

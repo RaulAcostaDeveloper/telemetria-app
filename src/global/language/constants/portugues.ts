@@ -572,6 +572,8 @@ export const PORTUGUES: LanguageInterface = {
       userForm: {
         saveChanges: "Salvar alterações",
         deleteUser: "Eliminar usuário",
+        deleteUserConfirmation:
+          "Tem certeza de que deseja excluir este usuário?",
       },
     },
   },

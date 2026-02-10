@@ -551,6 +551,7 @@ export interface LanguageInterface {
       userForm: {
         saveChanges: string;
         deleteUser: string;
+        deleteUserConfirmation: string;
       };
     };
   };
