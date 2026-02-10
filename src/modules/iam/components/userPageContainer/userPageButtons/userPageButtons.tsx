@@ -22,6 +22,8 @@ export const UserPageButtons = ({
         title="Delete user"
         type={ButtonTypes.DANGER}
         callback={onDelete}
+        buttonStyle={styles.buttonStyle}
+        titleStyle={styles.titleStyle}
       />
 
       <GeneralButton
@@ -29,6 +31,8 @@ export const UserPageButtons = ({
         type={ButtonTypes.SUCCESS}
         callback={onSafe}
         disabled={!(nickName && familyName)}
+        buttonStyle={styles.buttonStyle}
+        titleStyle={styles.titleStyle}
       />
     </div>
   );

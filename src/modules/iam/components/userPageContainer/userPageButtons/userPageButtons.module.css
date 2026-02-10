@@ -4,3 +4,12 @@
   display: flex;
   justify-content: space-between;
 }
+
+.buttonStyle {
+  width: 200px;
+  height: 50px;
+}
+
+.titleStyle {
+  font-size: 2rem;
+}

@@ -1,3 +1,4 @@
+import styles from "./userPageInputs.module.css";
 import { Input } from "@/global/components/formElements/Input/input";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 
@@ -19,7 +20,7 @@ export const UserPageInputs = ({
   setFamilyName,
 }: Props) => {
   return (
-    <div>
+    <div className={styles.userPageInputs}>
       <Input
         title={LANGUAGE.zones.zoneProfileForm.name}
         name="usernNameUserForm"
