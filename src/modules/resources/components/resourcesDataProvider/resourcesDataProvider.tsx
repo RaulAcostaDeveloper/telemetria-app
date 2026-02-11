@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
-import styles from "./managementDataProvider.module.css";
+import styles from "./resourcesDataProvider.module.css";
 import {
   MODAL_OPTION,
   columnsTable,
@@ -25,7 +25,7 @@ interface Props {
   LANGUAGE: LanguageInterface;
 }
 
-export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
+export const ResourcesDataProvider = ({ LANGUAGE }: Props) => {
   const { vehiclesData, vehiclesStatus } = useSelector(
     (state: RootState) => state.vehicles,
   );
@@ -44,19 +44,19 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
 
   const fuelTabs = [
     {
-      text: LANGUAGE.management.tabs.vehicles,
+      text: LANGUAGE.resources.tabs.vehicles,
       icon: DirectionsCar,
     },
     {
-      text: LANGUAGE.management.tabs.devices,
+      text: LANGUAGE.resources.tabs.devices,
       icon: DeviceHub,
     },
     {
-      text: LANGUAGE.management.tabs.drivers,
+      text: LANGUAGE.resources.tabs.drivers,
       icon: AccountBox,
     },
     {
-      text: LANGUAGE.management.tabs.groups,
+      text: LANGUAGE.resources.tabs.groups,
       icon: Groups,
     },
   ];
@@ -65,53 +65,53 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   // En grupo, poder filtrar por nombre del grupo
   const vehicleColumns: columnsTable = [
     {
-      columnName: LANGUAGE.management.tableColumns.plates,
+      columnName: LANGUAGE.resources.tableColumns.plates,
       defaultSpace: 2,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.alias,
+      columnName: LANGUAGE.resources.tableColumns.alias,
       defaultSpace: 3,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.brand,
+      columnName: LANGUAGE.resources.tableColumns.brand,
       defaultSpace: 3,
       filterSelector: true,
       orderColumn: true,
     },
 
     {
-      columnName: LANGUAGE.management.tableColumns.model,
+      columnName: LANGUAGE.resources.tableColumns.model,
       defaultSpace: 2,
       orderColumn: true,
       filterSelector: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.year,
+      columnName: LANGUAGE.resources.tableColumns.year,
       defaultSpace: 2,
       orderColumn: true,
       minMaxFilter: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.vehicleType,
+      columnName: LANGUAGE.resources.tableColumns.vehicleType,
       defaultSpace: 4,
       orderColumn: true,
       filterSelector: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.driver,
+      columnName: LANGUAGE.resources.tableColumns.driver,
       defaultSpace: 4,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.groupName,
+      columnName: LANGUAGE.resources.tableColumns.groupName,
       defaultSpace: 3,
       filterSelector: true,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.serialNumber,
+      columnName: LANGUAGE.resources.tableColumns.serialNumber,
       defaultSpace: 4,
       orderColumn: true,
     },
@@ -138,48 +138,48 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   // falta numero de teléfono, fecha de registro, poner tarjeta SIM
   const devicesColumns: columnsTable = [
     {
-      columnName: LANGUAGE.management.tableColumns.imei,
+      columnName: LANGUAGE.resources.tableColumns.imei,
       defaultSpace: 3,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.model,
+      columnName: LANGUAGE.resources.tableColumns.model,
       defaultSpace: 2,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.brand,
+      columnName: LANGUAGE.resources.tableColumns.brand,
       defaultSpace: 3,
       orderColumn: true,
       filterSelector: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.status,
+      columnName: LANGUAGE.resources.tableColumns.status,
       defaultSpace: 2,
       filterSelector: true,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.name,
+      columnName: LANGUAGE.resources.tableColumns.name,
       defaultSpace: 4,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.type,
+      columnName: LANGUAGE.resources.tableColumns.type,
       defaultSpace: 3,
       orderColumn: true,
       filterSelector: true,
     },
     /*     {
-      columnName: LANGUAGE.management.tableColumns.createdAt,
+      columnName: LANGUAGE.resources.tableColumns.createdAt,
       defaultSpace: 4,
     }, */
     {
-      columnName: LANGUAGE.management.tableColumns.phoneNumber,
+      columnName: LANGUAGE.resources.tableColumns.phoneNumber,
       defaultSpace: 2,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.registrationDate,
+      columnName: LANGUAGE.resources.tableColumns.registrationDate,
       defaultSpace: 5,
     },
   ];
@@ -202,11 +202,11 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
 
   const groupsColumns: columnsTable = [
     {
-      columnName: LANGUAGE.management.tableColumns.id,
+      columnName: LANGUAGE.resources.tableColumns.id,
       defaultSpace: 1,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.names,
+      columnName: LANGUAGE.resources.tableColumns.names,
       defaultSpace: 4,
       orderColumn: true,
     },
@@ -224,43 +224,43 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   // mostrar el modal con vehículos del grupo
   const driversColumns: columnsTable = [
     {
-      columnName: LANGUAGE.management.tableColumns.names,
+      columnName: LANGUAGE.resources.tableColumns.names,
       defaultSpace: 3,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.lastnames,
+      columnName: LANGUAGE.resources.tableColumns.lastnames,
       defaultSpace: 3,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.email,
+      columnName: LANGUAGE.resources.tableColumns.email,
       defaultSpace: 4,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.address,
+      columnName: LANGUAGE.resources.tableColumns.address,
       defaultSpace: 4,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.entryDate,
+      columnName: LANGUAGE.resources.tableColumns.entryDate,
       defaultSpace: 4,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.alias,
+      columnName: LANGUAGE.resources.tableColumns.alias,
       defaultSpace: 2,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.groupName,
+      columnName: LANGUAGE.resources.tableColumns.groupName,
       defaultSpace: 2,
       orderColumn: true,
       filterSelector: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.license,
+      columnName: LANGUAGE.resources.tableColumns.license,
       defaultSpace: 3,
       orderColumn: true,
     },
@@ -282,7 +282,7 @@ export const ManagementDataProvider = ({ LANGUAGE }: Props) => {
   }, [driversData]);
 
   return (
-    <div className={styles.managementDataProvider}>
+    <div className={styles.resourcesDataProvider}>
       <TabsContent
         tabOptions={fuelTabs}
         tabContents={[

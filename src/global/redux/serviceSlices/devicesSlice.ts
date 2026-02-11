@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "./types/serviceTypes";
-import { getDevices } from "@/modules/management/services/devices/devices";
+import { getDevices } from "@/modules/resources/services/devices/devices";
 import { toLocalDateTime } from "@/global/utils/dateUtils";
 
 export type statusNum = "0" | "1" | "2" | "3";
@@ -38,7 +38,7 @@ export const fetchDevices = createAsyncThunk(
   "devices/fetch",
   async (logoutState: () => void) => {
     return getDevices({ logoutState });
-  }
+  },
 );
 
 const devicesFormatter = (data: DevicesData | null): DevicesData | null => {

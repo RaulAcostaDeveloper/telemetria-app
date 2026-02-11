@@ -39,8 +39,8 @@ export const MenuContent = ({ isOpen, LANGUAGE, logoutState }: Props) => {
     },
     {
       icon: AddCardIcon,
-      route: "/management",
-      title: LANGUAGE.sectionName.management,
+      route: "/resources",
+      title: LANGUAGE.sectionName.resources,
     },
     {
       icon: LocalGasStationIcon,

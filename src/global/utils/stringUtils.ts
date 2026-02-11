@@ -35,15 +35,15 @@ export function formatNumberWithCommas(value: number): string {
 
 export function deviceStatusTranslator(
   status: statusNum,
-  LANGUAGE: LanguageInterface
+  LANGUAGE: LanguageInterface,
 ) {
   let translatedStatus;
   switch (status) {
     case "0":
-      translatedStatus = LANGUAGE.management.dataProvider.inactive;
+      translatedStatus = LANGUAGE.resources.dataProvider.inactive;
       break;
     case "1":
-      translatedStatus = LANGUAGE.management.dataProvider.active;
+      translatedStatus = LANGUAGE.resources.dataProvider.active;
       break;
     default:
       translatedStatus = NO_DATA;

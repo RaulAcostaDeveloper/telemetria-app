@@ -12,7 +12,7 @@ export const ENGLISH: LanguageInterface = {
   },
   sectionName: {
     home: "Home",
-    management: "Resources",
+    resources: "Resources",
     fuel: "Fuel",
     telemetryobd: "Telemetry",
     iam: "Access control",
@@ -38,7 +38,7 @@ export const ENGLISH: LanguageInterface = {
     },
     vehicleFilter: {
       actionFuelTitle: "Go to fuel report",
-      actionManagementTitle: "Go to vehicle management",
+      actionResourcesTitle: "Go to vehicle resources",
       actionTelemetryTitle: "Go to telemetry report",
       inputPlaceholder: "Search vehicle...",
       inputNoMatch: "No matches found",
@@ -386,7 +386,7 @@ export const ENGLISH: LanguageInterface = {
       totalEngineHours: "Total engine hours",
     },
   },
-  management: {
+  resources: {
     tabs: {
       vehicles: "Vehicles",
       devices: "Devices",

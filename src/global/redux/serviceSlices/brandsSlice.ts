@@ -1,6 +1,6 @@
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getBrands } from "@/modules/management/services/brands/brands";
+import { getBrands } from "@/modules/resources/services/brands/brands";
 
 export interface Brand {
   id: number;

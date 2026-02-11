@@ -21,48 +21,48 @@ export const TableModalViewVehicle = ({
     <Modal
       LANGUAGE={LANGUAGE}
       closeModal={closeModal}
-      title={LANGUAGE.management.tableColumns.vehicleInformation}
+      title={LANGUAGE.resources.tableColumns.vehicleInformation}
     >
       <div className={styles.container}>
         <div className={styles.leftSide}>
           <div>
-            <h4>{LANGUAGE.management.tableColumns.imei}</h4>
+            <h4>{LANGUAGE.resources.tableColumns.imei}</h4>
             <p>{ndIfEmpty(dataObject.imeIs)}</p>
           </div>
           <div>
-            <h4>{LANGUAGE.management.tableColumns.plates}</h4>
+            <h4>{LANGUAGE.resources.tableColumns.plates}</h4>
             <p>{ndIfEmpty(dataObject.plate)}</p>
           </div>
           <div>
-            <h4>{LANGUAGE.management.tableColumns.name}</h4>
+            <h4>{LANGUAGE.resources.tableColumns.name}</h4>
             <p>{ndIfEmpty(dataObject.name)}</p>
           </div>
           <div>
-            <h4>{LANGUAGE.management.tableColumns.brand}</h4>
+            <h4>{LANGUAGE.resources.tableColumns.brand}</h4>
             <p>{ndIfEmpty(dataObject.brand)}</p>
           </div>
           <div>
-            <h4>{LANGUAGE.management.tableColumns.model}</h4>
+            <h4>{LANGUAGE.resources.tableColumns.model}</h4>
             <p>{ndIfEmpty(dataObject.model)}</p>
           </div>
           <div>
-            <h4>{LANGUAGE.management.tableColumns.year}</h4>
+            <h4>{LANGUAGE.resources.tableColumns.year}</h4>
             <p>{ndIfEmpty(dataObject.year)}</p>
           </div>
           <div>
-            <h4>{LANGUAGE.management.tableColumns.vehicleType}</h4>
+            <h4>{LANGUAGE.resources.tableColumns.vehicleType}</h4>
             <p>{ndIfEmpty(dataObject.vehicleType)}</p>
           </div>
           <div>
-            <h4>{LANGUAGE.management.tableColumns.driver}</h4>
+            <h4>{LANGUAGE.resources.tableColumns.driver}</h4>
             <p>{ndIfEmpty(dataObject.driver)}</p>
           </div>
           <div>
-            <h4>{LANGUAGE.management.tableColumns.groupName}</h4>
+            <h4>{LANGUAGE.resources.tableColumns.groupName}</h4>
             <p>{ndIfEmpty(dataObject.groupName)}</p>
           </div>
           <div>
-            <h4>{LANGUAGE.management.tableColumns.serialNumber}</h4>
+            <h4>{LANGUAGE.resources.tableColumns.serialNumber}</h4>
             <p>{ndIfEmpty(dataObject.serialNumber)}</p>
           </div>
         </div>

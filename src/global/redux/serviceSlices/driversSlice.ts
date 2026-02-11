@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "./types/serviceTypes";
-import { getDrivers } from "@/modules/management/services/drivers/drivers";
+import { getDrivers } from "@/modules/resources/services/drivers/drivers";
 import { toLocalDateTime } from "@/global/utils/dateUtils";
 
 interface Drivers {
@@ -35,7 +35,7 @@ export const fetchDrivers = createAsyncThunk(
   "drivers/fetch",
   async (logoutState: () => void) => {
     return getDrivers({ logoutState });
-  }
+  },
 );
 
 const driversFormatter = (data: DriversData | null): DriversData | null => {

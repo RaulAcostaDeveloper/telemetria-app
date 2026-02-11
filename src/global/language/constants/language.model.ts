@@ -12,7 +12,7 @@ export interface LanguageInterface {
   };
   sectionName: {
     home: string;
-    management: string;
+    resources: string;
     fuel: string;
     telemetryobd: string;
     iam: string;
@@ -37,7 +37,7 @@ export interface LanguageInterface {
     };
     vehicleFilter: {
       actionFuelTitle: string;
-      actionManagementTitle: string;
+      actionResourcesTitle: string;
       actionTelemetryTitle: string;
       inputPlaceholder: string;
       inputNoMatch: string;
@@ -365,7 +365,7 @@ export interface LanguageInterface {
       totalEngineHours: string;
     };
   };
-  management: {
+  resources: {
     tabs: {
       vehicles: string;
       devices: string;

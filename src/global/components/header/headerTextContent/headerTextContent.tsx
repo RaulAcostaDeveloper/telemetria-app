@@ -17,8 +17,8 @@ export const HeaderTextContent = ({ LANGUAGE, currentUrl }: Props) => {
       return "single-telemetry";
     } else if (currentUrl.match(/iam\/user/)) {
       return "single-user";
-    } else if (currentUrl.match(/management/)) {
-      return "management";
+    } else if (currentUrl.match(/resources/)) {
+      return "resources";
     } else if (currentUrl.match(/fuel/)) {
       return "fuel";
     } else if (currentUrl.match(/telemetry/)) {
@@ -82,10 +82,10 @@ export const HeaderTextContent = ({ LANGUAGE, currentUrl }: Props) => {
             />
           </div>
         );
-      case "management":
+      case "resources":
         return (
           <div className={styles.platesAndName}>
-            <span>{LANGUAGE.sectionName.management}</span>
+            <span>{LANGUAGE.sectionName.resources}</span>
           </div>
         );
       case "fuel":

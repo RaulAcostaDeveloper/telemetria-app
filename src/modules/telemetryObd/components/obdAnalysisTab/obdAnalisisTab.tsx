@@ -25,7 +25,7 @@ export const ObdAnalysisTab = ({
         value: vehicleByImeiData.name,
       },
       {
-        title: LANGUAGE.management.tableColumns.year,
+        title: LANGUAGE.resources.tableColumns.year,
         value: vehicleByImeiData.year,
       },
       {

@@ -30,7 +30,7 @@ De todos modos comparto las instrucciones de uso del componente:
     o	Leer las instrucciones centro de ExampleTableForm para poder activar/desactivar el botón y definir una función de crear
 •	showGoPageView: Opcional: Mostrar la acción "Ver" para ir a una ruta especificada en viewPath
     o	Nota, si se pasa idKey va a tomar el id en la ruta /12412, entonces preparar la ruta para que reciba o ignore el id  
-•	viewPath: Opcional: Ruta de la pantalla para "showView". Ejemplo: "/management/vehicle/"
+•	viewPath: Opcional: Ruta de la pantalla para "showView". Ejemplo: "/resources/vehicle/"
 •	showGoFuel: Opcional: acción para ir a /fuel/vehicle/[id]
 •	showGoOBD: Opcional: acción para ir a /telemetry/vehicle/[id]
     o	 Requerido si se usó showView

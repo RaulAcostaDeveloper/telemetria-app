@@ -11,7 +11,7 @@ export const PORTUGUES: LanguageInterface = {
   },
   sectionName: {
     home: "Início",
-    management: "Recursos",
+    resources: "Recursos",
     fuel: "Combustível",
     telemetryobd: "Telemetria",
     iam: "Controle de acesso",
@@ -38,7 +38,7 @@ export const PORTUGUES: LanguageInterface = {
     },
     vehicleFilter: {
       actionFuelTitle: "Ir para o relatório de combustível",
-      actionManagementTitle: "Ir para a gestão do veículo",
+      actionResourcesTitle: "Ir para a gestão do veículo",
       actionTelemetryTitle: "Ir para o relatório de telemetria",
       inputPlaceholder: "Buscar veículo...",
       inputNoMatch: "Nenhuma correspondência",
@@ -386,7 +386,7 @@ export const PORTUGUES: LanguageInterface = {
       totalEngineHours: "Total de horas do motor",
     },
   },
-  management: {
+  resources: {
     tabs: {
       vehicles: "Veículos",
       devices: "Dispositivos",

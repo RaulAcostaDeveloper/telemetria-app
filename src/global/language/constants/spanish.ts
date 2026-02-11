@@ -12,7 +12,7 @@ export const SPANISH: LanguageInterface = {
   },
   sectionName: {
     home: "Inicio",
-    management: "Recursos",
+    resources: "Recursos",
     fuel: "Combustible",
     telemetryobd: "Telemetría",
     iam: "Control de acceso",
@@ -40,7 +40,7 @@ export const SPANISH: LanguageInterface = {
     },
     vehicleFilter: {
       actionFuelTitle: "Ir al reporte de combustible",
-      actionManagementTitle: "Ir a la gestión del vehículo",
+      actionResourcesTitle: "Ir a la gestión del vehículo",
       actionTelemetryTitle: "Ir al reporte de telemetría",
       inputPlaceholder: "Buscar vehiculo...",
       inputNoMatch: "No hay coincidencias",
@@ -388,7 +388,7 @@ export const SPANISH: LanguageInterface = {
       totalEngineHours: "Total de horas del motor",
     },
   },
-  management: {
+  resources: {
     tabs: {
       vehicles: "Vehículos",
       devices: "Dispositivos",
