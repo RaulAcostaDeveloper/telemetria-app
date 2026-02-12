@@ -113,6 +113,8 @@ export const PORTUGUES: LanguageInterface = {
       saveEdit: "Salvar edição",
       saveNew: "Salvar item",
       filtersButton: "Filtros",
+      hidePassword: "Ocultar senha",
+      showPassword: "Mostrar senha",
     },
     actions: {
       addProfileToZone: "Editar o perfil da zona",
@@ -569,12 +571,16 @@ export const PORTUGUES: LanguageInterface = {
         name: "Nome",
         lastName: "Sobrenome",
         createdAt: "Criado em",
+        password: "Senha",
       },
       userForm: {
         saveChanges: "Salvar alterações",
         deleteUser: "Eliminar usuário",
         deleteUserConfirmation:
           "Tem certeza de que deseja excluir este usuário?",
+      },
+      createUserForm: {
+        title: "Criar um novo usuário",
       },
     },
   },

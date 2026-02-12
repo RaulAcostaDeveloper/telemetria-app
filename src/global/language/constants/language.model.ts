@@ -92,6 +92,8 @@ export interface LanguageInterface {
       saveEdit: string;
       saveNew: string;
       filtersButton: string;
+      hidePassword: string;
+      showPassword: string;
     };
     actions: {
       addProfileToZone: string;
@@ -548,11 +550,15 @@ export interface LanguageInterface {
         name: string;
         lastName: string;
         createdAt: string;
+        password: string;
       };
       userForm: {
         saveChanges: string;
         deleteUser: string;
         deleteUserConfirmation: string;
+      };
+      createUserForm: {
+        title: string;
       };
     };
   };
