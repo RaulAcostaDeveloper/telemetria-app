@@ -47,29 +47,29 @@ export const TableModalViewGroup = ({
 
   const vehicleColumns: columnsTable = [
     {
-      columnName: LANGUAGE.management.tableColumns.plates,
+      columnName: LANGUAGE.resources.tableColumns.plates,
       defaultSpace: 2,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.alias,
+      columnName: LANGUAGE.resources.tableColumns.alias,
       defaultSpace: 3,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.brand,
+      columnName: LANGUAGE.resources.tableColumns.brand,
       defaultSpace: 3,
       filterSelector: true,
       orderColumn: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.model,
+      columnName: LANGUAGE.resources.tableColumns.model,
       defaultSpace: 2,
       orderColumn: true,
       filterSelector: true,
     },
     {
-      columnName: LANGUAGE.management.tableColumns.year,
+      columnName: LANGUAGE.resources.tableColumns.year,
       defaultSpace: 2,
       orderColumn: true,
       minMaxFilter: true,
@@ -98,7 +98,7 @@ export const TableModalViewGroup = ({
       LANGUAGE={LANGUAGE}
       closeModal={closeModal}
       title={
-        LANGUAGE.management.tableColumns.groupVehicles + " " + dataObject.group
+        LANGUAGE.resources.tableColumns.groupVehicles + " " + dataObject.group
       }
     >
       <div className={styles.container}>

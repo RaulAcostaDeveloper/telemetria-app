@@ -157,7 +157,7 @@ const DonutGraphic: React.FC<DonutGraphicProps> = ({ devices }) => {
           return (
             `<div style="text-align: center;">` +
             `<span>${this.name}</span><br/>` +
-            `<span>${LANGUAGE.management.tabs.vehicles}: ${this.y}</span>` +
+            `<span>${LANGUAGE.resources.tabs.vehicles}: ${this.y}</span>` +
             `</div>`
           );
         },
