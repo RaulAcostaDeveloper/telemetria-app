@@ -16,6 +16,7 @@ export const ENGLISH: LanguageInterface = {
     fuel: "Fuel",
     telemetryobd: "Telemetry",
     iam: "Access control",
+    management: "Management",
   },
   notifications: {
     unexpectedError: "Unexpected error",
