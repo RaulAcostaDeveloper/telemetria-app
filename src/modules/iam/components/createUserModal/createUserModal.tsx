@@ -4,11 +4,11 @@ import { useState } from "react";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CloseIcon from "@mui/icons-material/Close";
 
+import styles from "./createUserModal.module.css";
 import { ButtonTypes, GeneralButton, Modal } from "@/global/components";
 import { Input } from "@/global/components/formElements/Input/input";
 import { LanguageInterface } from "@/global/language/constants/language.model";
-
-import styles from "./createUserModal.module.css";
+import { Select } from "@/global/components/formElements/Select/Select";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -16,12 +16,12 @@ interface Props {
 }
 
 export const CreateUserModal = ({ LANGUAGE, closeModal }: Props) => {
-  const [accountOption, setAccountOption] = useState<string>();
-  const [email, setEmail] = useState<string>();
-  const [familyLastName, setFamilyLastName] = useState<string>();
-  const [familyName, setFamilyName] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  const [userName, setUserName] = useState<string>();
+  const [accountOption, setAccountOption] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [familyLastName, setFamilyLastName] = useState<string>("");
+  const [familyName, setFamilyName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
 
   return (
     <Modal
@@ -59,12 +59,13 @@ export const CreateUserModal = ({ LANGUAGE, closeModal }: Props) => {
               LANGUAGE={LANGUAGE}
             />
           </div>
-          <Input
-            title={LANGUAGE.iam.users.tableColumns.account}
-            name="accountOptionProfile"
+          <Select
+            title={LANGUAGE.zones.zoneProfileForm.category}
+            selectTitle={LANGUAGE.zones.zoneProfileForm.selectAnOption}
+            name="category"
             value={accountOption}
             set={setAccountOption}
-            LANGUAGE={LANGUAGE}
+            options={[]}
           />
         </div>
         <div className={styles.row}>

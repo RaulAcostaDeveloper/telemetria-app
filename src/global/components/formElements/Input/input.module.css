@@ -1,5 +1,6 @@
 .inputNormal {
   font-size: 2rem;
+  min-width: 214px;
 }
 
 .inputNormal label {
@@ -55,4 +56,19 @@
   border: none;
   cursor: pointer;
   font-size: 2rem;
+}
+
+/* For Select */
+
+.selectInput {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-position: right 5px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.selectInput option {
+  font-size: 1.2rem;
 }
