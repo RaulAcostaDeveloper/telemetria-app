@@ -29,6 +29,8 @@ export const HeaderTextContent = ({ LANGUAGE, currentUrl }: Props) => {
       return "home";
     } else if (currentUrl.match(/iam/)) {
       return "iam";
+    } else if (currentUrl.match(/management/)) {
+      return "management";
     } else {
       return "";
     }
@@ -80,6 +82,12 @@ export const HeaderTextContent = ({ LANGUAGE, currentUrl }: Props) => {
               section={site}
               url={currentUrl}
             />
+          </div>
+        );
+      case "management":
+        return (
+          <div className={styles.platesAndName}>
+            <span>{LANGUAGE.sectionName.management}</span>
           </div>
         );
       case "resources":
