@@ -36,4 +36,5 @@ export enum MODAL_OPTION {
   ZONE = "zone",
   ZONELOAD = "zone-load",
   ZONEUNLOAD = "zone-unload",
+  USER = "user",
 }

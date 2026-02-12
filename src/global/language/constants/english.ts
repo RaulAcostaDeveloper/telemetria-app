@@ -112,6 +112,8 @@ export const ENGLISH: LanguageInterface = {
       saveEdit: "Save edit",
       saveNew: "Save item",
       filtersButton: "Filters",
+      hidePassword: "Hide password",
+      showPassword: "Show password",
     },
     actions: {
       addProfileToZone: "Edit zone's profile",
@@ -568,11 +570,15 @@ export const ENGLISH: LanguageInterface = {
         name: "Name",
         lastName: "Last name",
         createdAt: "Created at",
+        password: "Password",
       },
       userForm: {
         saveChanges: "Save changes",
         deleteUser: "Delete user",
         deleteUserConfirmation: "Are you sure you want to delete this user?",
+      },
+      createUserForm: {
+        title: "Create a new user",
       },
     },
   },

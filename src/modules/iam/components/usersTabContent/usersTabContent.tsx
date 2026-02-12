@@ -4,7 +4,10 @@ import { useMemo } from "react";
 
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { Table } from "@/global/components";
-import { columnsTable } from "@/global/components/table/table.model";
+import {
+  columnsTable,
+  MODAL_OPTION,
+} from "@/global/components/table/table.model";
 import { iAmUsersDataMock } from "@/global/dataMock/iam/users";
 
 interface Props {
@@ -55,6 +58,8 @@ export const UsersTabContent = ({ LANGUAGE }: Props) => {
         idKey="userId"
         showGoGenericReport
         viewPath="/iam/user/"
+        showCreateButton
+        modalOption={MODAL_OPTION.USER}
       />
     </div>
   );

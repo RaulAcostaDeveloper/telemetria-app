@@ -1,6 +1,6 @@
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { MODAL_OPTION } from "../table.model";
-import { TableModalCreateVehicle } from "./tableModalCreateVehicle/tableModalCreateVehicle";
+import { CreateUserModal } from "@/modules/iam/components/createUserModal/createUserModal";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -14,10 +14,8 @@ export const TableModalCreateHandler = ({
   modalOption,
 }: Props) => {
   switch (modalOption) {
-    case MODAL_OPTION.VEHICLES:
-      return (
-        <TableModalCreateVehicle LANGUAGE={LANGUAGE} closeModal={closeModal} />
-      );
+    case MODAL_OPTION.USER:
+      return <CreateUserModal LANGUAGE={LANGUAGE} closeModal={closeModal} />;
     default:
       return <div></div>;
   }

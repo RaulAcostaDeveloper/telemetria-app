@@ -114,6 +114,8 @@ export const SPANISH: LanguageInterface = {
       saveEdit: "Guardar edición",
       saveNew: "Guardar elemento",
       filtersButton: "Filtros",
+      hidePassword: "Ocultar contraseña",
+      showPassword: "Mostrar contraseña",
     },
     actions: {
       addProfileToZone: "Editar el perfil de la zona",
@@ -570,11 +572,15 @@ export const SPANISH: LanguageInterface = {
         name: "Nombre",
         lastName: "Apellidos",
         createdAt: "Fecha de creación",
+        password: "Contraseña",
       },
       userForm: {
         saveChanges: "Guardar cambios",
         deleteUser: "Eliminar usuario",
         deleteUserConfirmation: "¿Seguro que quieres eliminar este usuario?",
+      },
+      createUserForm: {
+        title: "Crear un nuevo usuario",
       },
     },
   },

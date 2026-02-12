@@ -1,14 +1,15 @@
+import { LanguageInterface } from "@/global/language/constants/language.model";
 import styles from "./input.module.css";
+import { InputPassword } from "./InputPassword/inputPassword";
 
 interface InputProps {
   title: string;
   name: string;
   value: string | undefined;
   set: (value: string) => void;
-  //   Input color
-  isColor?: boolean;
-  //   Input large text
+  type?: "text" | "password" | "color";
   isLarge?: boolean;
+  LANGUAGE: LanguageInterface;
 }
 
 export const Input = ({
@@ -16,15 +17,17 @@ export const Input = ({
   name,
   value,
   set,
-  isColor,
+  type,
   isLarge,
+  LANGUAGE,
 }: InputProps) => {
   return (
     <div
       className={`${styles.inputNormal} ${isLarge ? styles.inputLarge : ""}`}
     >
       <label htmlFor={name}>{title}</label>
-      {isLarge ? (
+
+      {isLarge && (
         <textarea
           name={name}
           id={name}
@@ -34,9 +37,18 @@ export const Input = ({
             value && value?.length > 0 ? styles.withValue : ""
           }`}
         />
+      )}
+
+      {type === "password" ? (
+        <InputPassword
+          value={value}
+          name={name}
+          set={set}
+          LANGUAGE={LANGUAGE}
+        />
       ) : (
         <input
-          type={`${isColor ? "color" : "text"}`}
+          type={type ?? "text"}
           name={name}
           id={name}
           value={value}
