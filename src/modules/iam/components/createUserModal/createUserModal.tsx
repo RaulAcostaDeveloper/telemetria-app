@@ -16,6 +16,10 @@ interface Props {
 }
 
 export const CreateUserModal = ({ LANGUAGE, closeModal }: Props) => {
+  const [accountOption, setAccountOption] = useState<string>();
+  const [email, setEmail] = useState<string>();
+  const [familyLastName, setFamilyLastName] = useState<string>();
+  const [familyName, setFamilyName] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [userName, setUserName] = useState<string>();
 
@@ -38,7 +42,7 @@ export const CreateUserModal = ({ LANGUAGE, closeModal }: Props) => {
           </div>
           <Input
             title={LANGUAGE.iam.users.tableColumns.password}
-            name="nameProfile"
+            name="passwordProfile"
             value={password}
             set={setPassword}
             type="password"
@@ -49,17 +53,17 @@ export const CreateUserModal = ({ LANGUAGE, closeModal }: Props) => {
           <div className={styles.leftItem}>
             <Input
               title={LANGUAGE.iam.users.tableColumns.email}
-              name="nameProfile"
-              value={userName}
-              set={setUserName}
+              name="emailProfile"
+              value={email}
+              set={setEmail}
               LANGUAGE={LANGUAGE}
             />
           </div>
           <Input
             title={LANGUAGE.iam.users.tableColumns.account}
-            name="nameProfile"
-            value={userName}
-            set={setUserName}
+            name="accountOptionProfile"
+            value={accountOption}
+            set={setAccountOption}
             LANGUAGE={LANGUAGE}
           />
         </div>
@@ -67,17 +71,17 @@ export const CreateUserModal = ({ LANGUAGE, closeModal }: Props) => {
           <div className={styles.leftItem}>
             <Input
               title={LANGUAGE.iam.users.tableColumns.name}
-              name="nameProfile"
-              value={userName}
-              set={setUserName}
+              name="familyNameProfile"
+              value={familyName}
+              set={setFamilyName}
               LANGUAGE={LANGUAGE}
             />
           </div>
           <Input
             title={LANGUAGE.iam.users.tableColumns.lastName}
-            name="nameProfile"
-            value={userName}
-            set={setUserName}
+            name="familyLastNameProfile"
+            value={familyLastName}
+            set={setFamilyLastName}
             LANGUAGE={LANGUAGE}
           />
         </div>
