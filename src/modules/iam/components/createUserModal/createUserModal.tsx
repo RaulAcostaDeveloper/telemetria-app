@@ -97,7 +97,7 @@ export const CreateUserModal = ({ LANGUAGE, closeModal }: Props) => {
         />
         <GeneralButton
           Icon={<AddIcon />}
-          callback={() => {}}
+          callback={() => closeModal()} // Pendiente función
           title={LANGUAGE.table.buttons.create}
           type={ButtonTypes.CONFIRM}
           disabled={
