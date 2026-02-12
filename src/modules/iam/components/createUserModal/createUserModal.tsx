@@ -100,6 +100,16 @@ export const CreateUserModal = ({ LANGUAGE, closeModal }: Props) => {
           callback={() => {}}
           title={LANGUAGE.table.buttons.create}
           type={ButtonTypes.CONFIRM}
+          disabled={
+            !(
+              accountOption &&
+              userName &&
+              familyLastName &&
+              familyName &&
+              email &&
+              password
+            )
+          }
         />
       </div>
     </Modal>
