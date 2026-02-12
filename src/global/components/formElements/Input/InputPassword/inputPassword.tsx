@@ -28,7 +28,6 @@ export const InputPassword = ({ name, value, set, LANGUAGE }: Props) => {
         onChange={(e) => set(e.target.value)}
         className={`${styles.input} ${value ? styles.withValue : ""}`}
         required
-        autoComplete={"current-password"}
       />
 
       <button

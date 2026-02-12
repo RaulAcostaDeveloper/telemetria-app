@@ -7,7 +7,7 @@ interface InputProps {
   name: string;
   value: string | undefined;
   set: (value: string) => void;
-  type?: "text" | "password" | "color";
+  type?: "text" | "password" | "color"; // Text por default
   isLarge?: boolean;
   LANGUAGE: LanguageInterface;
 }

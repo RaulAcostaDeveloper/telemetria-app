@@ -1,14 +1,14 @@
 "use client";
 import { useState } from "react";
 
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 
 import styles from "./createUserModal.module.css";
 import { ButtonTypes, GeneralButton, Modal } from "@/global/components";
 import { Input } from "@/global/components/formElements/Input/input";
 import { LanguageInterface } from "@/global/language/constants/language.model";
-import { Select } from "@/global/components/formElements/Select/Select";
+import { Select } from "@/global/components/formElements/Select/select";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -21,7 +21,7 @@ export const CreateUserModal = ({ LANGUAGE, closeModal }: Props) => {
   const [familyLastName, setFamilyLastName] = useState<string>("");
   const [familyName, setFamilyName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [userName, setUserName] = useState<string>("");
+  const [userNameProfile, setUserNameProfile] = useState<string>("");
 
   return (
     <Modal
@@ -35,8 +35,8 @@ export const CreateUserModal = ({ LANGUAGE, closeModal }: Props) => {
             <Input
               title={LANGUAGE.iam.users.tableColumns.userName}
               name="nameProfile"
-              value={userName}
-              set={setUserName}
+              value={userNameProfile}
+              set={setUserNameProfile}
               LANGUAGE={LANGUAGE}
             />
           </div>
@@ -65,7 +65,7 @@ export const CreateUserModal = ({ LANGUAGE, closeModal }: Props) => {
             name="category"
             value={accountOption}
             set={setAccountOption}
-            options={[]}
+            options={["account1"]}
           />
         </div>
         <div className={styles.row}>
@@ -96,14 +96,14 @@ export const CreateUserModal = ({ LANGUAGE, closeModal }: Props) => {
           type={ButtonTypes.NEUTRAL}
         />
         <GeneralButton
-          Icon={<AddCircleOutlineIcon />}
+          Icon={<AddIcon />}
           callback={() => {}}
           title={LANGUAGE.table.buttons.create}
           type={ButtonTypes.CONFIRM}
           disabled={
             !(
               accountOption &&
-              userName &&
+              userNameProfile &&
               familyLastName &&
               familyName &&
               email &&
