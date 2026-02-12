@@ -3,6 +3,7 @@
 import AddCardIcon from "@mui/icons-material/AddCard";
 import HomeIcon from "@mui/icons-material/Home";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
+import Assignment from "@mui/icons-material/Assignment";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import QueryStats from "@mui/icons-material/QueryStats";
@@ -38,9 +39,14 @@ export const MenuContent = ({ isOpen, LANGUAGE, logoutState }: Props) => {
       title: LANGUAGE.sectionName.iam,
     },
     {
-      icon: AddCardIcon,
+      icon: Assignment,
       route: "/management",
       title: LANGUAGE.sectionName.management,
+    },
+    {
+      icon: AddCardIcon,
+      route: "/resources",
+      title: LANGUAGE.sectionName.resources,
     },
     {
       icon: LocalGasStationIcon,

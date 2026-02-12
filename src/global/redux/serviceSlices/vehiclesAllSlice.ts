@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { SERVICE_STATUS } from "./types/serviceTypes";
-import { getVehiclesAll } from "@/modules/management/services/vehicles/vehiclesAll";
+import { getVehiclesAll } from "@/modules/resources/services/vehicles/vehiclesAll";
 
 interface Vehicle {
   id: string;
@@ -40,7 +40,7 @@ export const fetchVehiclesAll = createAsyncThunk(
   "vehiclesAll/fetch",
   async (logoutState: () => void) => {
     return getVehiclesAll({ logoutState });
-  }
+  },
 );
 
 const initialState: InitialState = {

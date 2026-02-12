@@ -1,1 +1,0 @@
-export * from "./managementDataProvider/managementDataProvider";
