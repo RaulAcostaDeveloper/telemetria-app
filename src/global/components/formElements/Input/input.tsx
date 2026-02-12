@@ -36,6 +36,7 @@ export const Input = ({
           className={` ${styles.input} ${styles.textarea} ${
             value && value?.length > 0 ? styles.withValue : ""
           }`}
+          autoComplete="off"
         />
       )}
 
@@ -54,6 +55,7 @@ export const Input = ({
           value={value}
           onChange={(e) => set(e.target.value)}
           className={` ${styles.input} ${value && value?.length > 0 ? styles.withValue : ""}`}
+          autoComplete="off"
         />
       )}
     </div>
