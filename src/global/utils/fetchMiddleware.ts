@@ -71,14 +71,14 @@ export async function fetchMiddleware({
 }: MiddlewareProps) {
   const { API_VERSION } = await getEnvClient();
 
-  const cacheData = await getCached(API_VERSION + cacheKey, forceRefresh);
+  const cacheData = await getCached(API_VERSION + cacheKey, false);
   if (cacheData) {
     // Si hay en caché, retorna lo de caché
     return cacheData;
   } else {
     // Si no, hace el fetch (con su propia lógica)
     const fetchData = await fetchResponse({ fullUrl, options, logoutState });
-    putCache(cacheKey, fetchData, forceRefresh);
+    putCache(cacheKey, fetchData, false);
     return fetchData;
   }
 }

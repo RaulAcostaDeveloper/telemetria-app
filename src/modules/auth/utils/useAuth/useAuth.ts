@@ -23,12 +23,12 @@ export const useAuth = () => {
 
   // Estados del slice
   const { isAuthenticated, loginServerData, loginStatus } = useSelector(
-    (state: RootState) => state.auth
+    (state: RootState) => state.auth,
   );
 
   //Usado para comprobar sesión activa economizando endpoint.
   const { brandsData, brandsStatus } = useSelector(
-    (state: RootState) => state.brands
+    (state: RootState) => state.brands,
   );
 
   useEffect(() => {
@@ -69,9 +69,11 @@ export const useAuth = () => {
   }, [isFromFirstSession, brandsData, brandsStatus]);
 
   const tryLoginHook = (encrypted: string) => {
-    // Llama al servicio
-    dispatch(fetchLogin({ encrypted }));
-    setIsLoginForm(true);
+    loginState(); // quitar esto y poner lo de abajo
+    router.push("/home");
+    // // Llama al servicio
+    // dispatch(fetchLogin({ encrypted }));
+    // setIsLoginForm(true);
   };
 
   // Prueba si trae la cookie, desde el primer render

@@ -63,12 +63,13 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
   }, [loginServerData, loginStatus]);
 
   const onClickGetToken = async () => {
-    const encrypted = await encryptUserAndPassword(`${name}:${password}`);
-    if (encrypted !== undefined) {
-      tryLoginHook(encrypted);
-    } else {
-      console.warn("ERROR: No se ha encriptado el usuario y contraseña");
-    }
+    tryLoginHook("encrypted"); // quitar esto y poner código debajo
+    // const encrypted = await encryptUserAndPassword(`${name}:${password}`);
+    // if (encrypted !== undefined) {
+    //   tryLoginHook(encrypted);
+    // } else {
+    //   console.warn("ERROR: No se ha encriptado el usuario y contraseña");
+    // }
   };
 
   function errorSelector() {
