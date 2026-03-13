@@ -4,5 +4,5 @@ import { useLanguage } from "@/global/language/components/languageProvider/langu
 export default function Management() {
   const LANGUAGE = useLanguage();
 
-  return <div LANGUAGE={LANGUAGE} />;
+  return <div></div>;
 }

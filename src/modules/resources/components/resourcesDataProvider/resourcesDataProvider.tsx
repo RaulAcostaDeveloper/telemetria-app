@@ -20,6 +20,10 @@ import {
   Groups,
 } from "@mui/icons-material";
 import { deviceStatusTranslator } from "@/global/utils/stringUtils";
+import { vehiclesDataMock } from "@/global/dataMock/vehicles";
+import { devicesDataMock } from "@/global/dataMock/devices";
+import { driversDataMock } from "@/global/dataMock/drivers";
+import { groupsDataMock } from "@/global/dataMock/groups";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -119,7 +123,7 @@ export const ResourcesDataProvider = ({ LANGUAGE }: Props) => {
 
   // Ejemplo de como añadir o quitar elementos en la tabla
   const vehiclesTableData = useMemo(() => {
-    return vehiclesData?.value?.vehicles.map((value) => ({
+    return vehiclesDataMock.map((value) => ({
       plate: value.plate,
       name: value.name,
       brand: value.brand,
@@ -185,7 +189,7 @@ export const ResourcesDataProvider = ({ LANGUAGE }: Props) => {
   ];
 
   const devicesTableData = useMemo(() => {
-    return devicesData?.value?.devices.map((value) => ({
+    return devicesDataMock.map((value) => ({
       imei: value.imei,
       model: value.model,
       brand: value.brand,
@@ -213,7 +217,7 @@ export const ResourcesDataProvider = ({ LANGUAGE }: Props) => {
   ];
 
   const groupsTableData = useMemo(() => {
-    return groupsData?.value?.groups.map((value) => ({
+    return groupsDataMock.map((value) => ({
       id: value.id,
       group: value.name,
     }));
@@ -267,7 +271,7 @@ export const ResourcesDataProvider = ({ LANGUAGE }: Props) => {
   ];
 
   const driversTableData = useMemo(() => {
-    return driversData?.value?.drivers.map((value) => ({
+    return driversDataMock.map((value) => ({
       name: value.name,
       lastName: value.lastName,
       email: value.email,
@@ -287,8 +291,9 @@ export const ResourcesDataProvider = ({ LANGUAGE }: Props) => {
         tabOptions={fuelTabs}
         tabContents={[
           <div key={1}>
-            {vehiclesStatus === SERVICE_STATUS.succeeded &&
-              vehiclesData?.value &&
+            {
+              // vehiclesStatus === SERVICE_STATUS.succeeded &&
+              // vehiclesData?.value &&
               vehiclesTableData && (
                 <Table
                   LANGUAGE={LANGUAGE}
@@ -299,54 +304,60 @@ export const ResourcesDataProvider = ({ LANGUAGE }: Props) => {
                   modalOption={MODAL_OPTION.VEHICLES}
                   showViewModal
                 />
-              )}
+              )
+            }
 
-            <DataErrorHandler
+            {/* <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!vehiclesTableData}
               infoStatus={vehiclesStatus}
               statusCode={vehiclesData?.statusCode}
-            />
+            /> */}
           </div>,
           <div key={2}>
-            {devicesStatus === SERVICE_STATUS.succeeded &&
-              devicesData?.value &&
+            {
+              // devicesStatus === SERVICE_STATUS.succeeded &&
+              //   devicesData?.value &&
               devicesTableData && (
                 <Table
                   LANGUAGE={LANGUAGE}
                   columns={devicesColumns}
                   data={devicesTableData}
                 />
-              )}
+              )
+            }
 
-            <DataErrorHandler
+            {/* <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!devicesTableData}
               infoStatus={devicesStatus}
               statusCode={devicesData?.statusCode}
-            />
+            /> */}
           </div>,
           <div key={3}>
-            {driversStatus === SERVICE_STATUS.succeeded &&
-              driversData?.value &&
+            {
+              // driversStatus === SERVICE_STATUS.succeeded &&
+              //   driversData?.value &&
               driversTableData && (
                 <Table
                   LANGUAGE={LANGUAGE}
                   columns={driversColumns}
                   data={driversTableData}
                 />
-              )}
+              )
+            }
 
-            <DataErrorHandler
+            {/* <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!driversTableData}
               infoStatus={driversStatus}
               statusCode={driversData?.statusCode}
-            />
+            /> */}
           </div>,
           <div key={4}>
-            {groupsStatus === SERVICE_STATUS.succeeded &&
-              groupsData?.value &&
+            {
+              // groupsStatus === SERVICE_STATUS.succeeded &&
+              //   groupsData?.value &&
               groupsTableData && (
                 <Table
                   LANGUAGE={LANGUAGE}
@@ -356,14 +367,15 @@ export const ResourcesDataProvider = ({ LANGUAGE }: Props) => {
                   modalOption={MODAL_OPTION.GROUPS}
                   showViewModal
                 />
-              )}
+              )
+            }
 
-            <DataErrorHandler
+            {/* <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!groupsTableData}
               infoStatus={groupsStatus}
               statusCode={groupsData?.statusCode}
-            />
+            /> */}
           </div>,
         ]}
       />

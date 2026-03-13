@@ -6,7 +6,7 @@ import { toLocalDateTime } from "@/global/utils/dateUtils";
 
 export type statusNum = "0" | "1" | "2" | "3";
 
-interface Devices {
+export interface Devices {
   id: number;
   name: string;
   type: string;

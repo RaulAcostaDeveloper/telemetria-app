@@ -4,7 +4,7 @@ import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getDrivers } from "@/modules/resources/services/drivers/drivers";
 import { toLocalDateTime } from "@/global/utils/dateUtils";
 
-interface Drivers {
+export interface Drivers {
   id: number;
   name: string;
   email: string;

@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getGroups } from "@/modules/resources/services/groups/groups";
 
-interface Groups {
+export interface Groups {
   id: number;
   name: string;
 }
