@@ -16,6 +16,7 @@ import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes"
 import { Table, TabsContent } from "@/global/components";
 import { columnsTable } from "@/global/components/table/table.model";
 import { legibleDate } from "@/global/utils/dateUtils";
+import { summaryFuelDataMock } from "@/global/dataMock/fuelSummary";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -109,7 +110,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
   ];
 
   const vehiclesReport = useMemo(() => {
-    return fuelSummaryData?.value?.devices.map((value) => ({
+    return summaryFuelDataMock.devices.map((value) => ({
       name: value.name,
       plate: value.plate,
       lastFuelLevel: value.lastFuelLevel,
@@ -155,7 +156,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
   ];
 
   const fuelReportCharges = useMemo(() => {
-    return fuelSummaryData?.value?.charges.map((value) => ({
+    return summaryFuelDataMock.charges.map((value) => ({
       vehicle: value.imei,
       date: legibleDate(value.dateGps, LANGUAGE.localeLanguage),
       initialFuel: value.initialFuel,
@@ -196,7 +197,7 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
   ];
 
   const fuelReportDischarges = useMemo(() => {
-    return fuelSummaryData?.value?.discharges.map((value) => ({
+    return summaryFuelDataMock.discharges.map((value) => ({
       vehicle: value.imei,
       date: legibleDate(value.dateGps, LANGUAGE.localeLanguage),
       initialFuel: value.initialFuel,
@@ -218,20 +219,23 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
         /> */}
 
       <div className={styles.topResumeData}>
-        {fuelSummaryStatus === SERVICE_STATUS.succeeded &&
+        <ReportSummary summaryValues={summaryFuelDataMock} />
+        <DonutGraphic devices={summaryFuelDataMock.devices} />
+        {/* {
+        fuelSummaryStatus === SERVICE_STATUS.succeeded &&
           fuelSummaryData?.value && (
             <>
               <ReportSummary summaryValues={fuelSummaryData.value} />
               <DonutGraphic devices={fuelSummaryData.value.devices} />
             </>
-          )}
+          )} */}
 
-        <DataErrorHandler
+        {/* <DataErrorHandler
           LANGUAGE={LANGUAGE}
           hasData={!!fuelSummaryData?.value}
           infoStatus={fuelSummaryStatus}
           statusCode={fuelSummaryData?.statusCode}
-        />
+        /> */}
       </div>
       {!hideTabs && (
         <div className={styles.fuelTabs}>
@@ -239,7 +243,8 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
             tabOptions={tabOptions}
             tabContents={[
               <div key={1}>
-                {fuelSummaryStatus === SERVICE_STATUS.succeeded &&
+                {
+                  // fuelSummaryStatus === SERVICE_STATUS.succeeded &&
                   vehiclesReport && (
                     <Table
                       LANGUAGE={LANGUAGE}
@@ -247,17 +252,19 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                       data={vehiclesReport}
                       idImei="imei"
                     />
-                  )}
+                  )
+                }
 
-                <DataErrorHandler
+                {/* <DataErrorHandler
                   LANGUAGE={LANGUAGE}
                   hasData={!!vehiclesReport}
                   infoStatus={fuelSummaryStatus}
                   statusCode={fuelSummaryData?.statusCode}
-                />
+                /> */}
               </div>,
               <div key={2}>
-                {fuelSummaryStatus === SERVICE_STATUS.succeeded &&
+                {
+                  // fuelSummaryStatus === SERVICE_STATUS.succeeded &&
                   fuelReportCharges && (
                     <Table
                       LANGUAGE={LANGUAGE}
@@ -267,34 +274,36 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                       showViewModal
                       idImei="imei"
                     />
-                  )}
+                  )
+                }
 
-                <DataErrorHandler
+                {/* <DataErrorHandler
                   LANGUAGE={LANGUAGE}
                   hasData={!!fuelReportCharges}
                   infoStatus={fuelSummaryStatus}
                   statusCode={fuelSummaryData?.statusCode}
-                />
+                /> */}
               </div>,
               <div key={3}>
-                {fuelSummaryStatus === SERVICE_STATUS.succeeded &&
+                {
+                  // fuelSummaryStatus === SERVICE_STATUS.succeeded &&
                   fuelReportDischarges && (
                     <Table
                       LANGUAGE={LANGUAGE}
                       columns={fuelReportDischargesColumns}
                       data={fuelReportDischarges}
-                      idZone="idZone"
                       showViewModal
                       idImei="imei"
                     />
-                  )}
+                  )
+                }
 
-                <DataErrorHandler
+                {/* <DataErrorHandler
                   LANGUAGE={LANGUAGE}
                   hasData={!!fuelReportDischarges}
                   infoStatus={fuelSummaryStatus}
                   statusCode={fuelSummaryData?.statusCode}
-                />
+                /> */}
               </div>,
               <div key={4}>
                 <FuelPageZonesTable LANGUAGE={LANGUAGE} />

@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getZonesSummary } from "@/modules/zones/services/zonesSummary/zonesSummary";
 
-interface Zone {
+export interface Zone {
   zoneName: string;
   zoneId: string;
   profileName: string;
@@ -44,7 +44,7 @@ export const fetchZonesSummary = createAsyncThunk(
     logoutState: () => void;
   }) => {
     return getZonesSummary({ startDate, endDate, logoutState });
-  }
+  },
 );
 
 const initialState: InitialState = {

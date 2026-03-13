@@ -11,6 +11,7 @@ import { LanguageInterface } from "@/global/language/constants/language.model";
 import { RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { Table } from "@/global/components";
+import { zonesDataMock } from "@/global/dataMock/zones";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -74,7 +75,7 @@ export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
   ];
 
   const zonesData = useMemo(() => {
-    return zonesSummaryData?.value?.zones.map((value) => ({
+    return zonesDataMock.map((value) => ({
       zoneName: value.zoneName,
       profileName: value.profileName,
       country: value.country,
@@ -90,8 +91,9 @@ export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
 
   return (
     <div>
-      {zonesSummaryStatus === SERVICE_STATUS.succeeded &&
-        zonesSummaryData?.value &&
+      {
+        // zonesSummaryStatus === SERVICE_STATUS.succeeded &&
+        //   zonesSummaryData?.value &&
         zonesData && (
           <Table
             columns={zonesTableColumns}
@@ -103,14 +105,15 @@ export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
             showEdit
             modalOption={MODAL_OPTION.ZONE}
           />
-        )}
+        )
+      }
 
-      <DataErrorHandler
+      {/* <DataErrorHandler
         LANGUAGE={LANGUAGE}
         hasData={!!zonesSummaryData?.value}
         infoStatus={zonesSummaryStatus}
         statusCode={zonesSummaryData?.statusCode}
-      />
+      /> */}
     </div>
   );
 };
