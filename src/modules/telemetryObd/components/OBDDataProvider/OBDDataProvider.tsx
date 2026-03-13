@@ -20,6 +20,10 @@ import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes"
 import { Table } from "@/global/components";
 import { columnsTable } from "@/global/components/table/table.model";
 import { formatNumberWithCommas } from "@/global/utils/stringUtils";
+import {
+  obdRollupDataValuesDataMock,
+  obdRollupDetailsDataMock,
+} from "@/global/dataMock/obdRollup";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -32,7 +36,7 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
   );
 
   const teleVehiclesOBDData = useMemo(() => {
-    return obdRollupData?.value?.details.map((value) => ({
+    return obdRollupDetailsDataMock.map((value) => ({
       name: value.name,
       plate: value.plate,
       driverDistance: value.driverDistance,
@@ -94,9 +98,10 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
 
   return (
     <div className={styles.telemetryObd}>
-      {obdRollupStatus === SERVICE_STATUS.succeeded &&
-        obdRollupData &&
-        obdRollupData.value &&
+      {
+        // obdRollupStatus === SERVICE_STATUS.succeeded &&
+        //   obdRollupData &&
+        //   obdRollupData.value &&
         teleVehiclesOBDData && (
           <>
             <section>
@@ -105,7 +110,7 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
                   Icon={DirectionsCarFilledIcon}
                   LANGUAGE={LANGUAGE}
                   data={formatNumberWithCommas(
-                    obdRollupData.value.unitsAnalyzed,
+                    obdRollupDataValuesDataMock.unitsAnalyzed,
                   )}
                   title={LANGUAGE.fuel.summaryReports.labels.unitsAnalyzed}
                 />
@@ -113,8 +118,9 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
                   Icon={NorthEastIcon}
                   LANGUAGE={LANGUAGE}
                   data={
-                    formatNumberWithCommas(obdRollupData.value.driverDistance) +
-                    " km"
+                    formatNumberWithCommas(
+                      obdRollupDataValuesDataMock.driverDistance,
+                    ) + " km"
                   }
                   title={LANGUAGE.teleOBD.resumes.distance}
                 />
@@ -122,8 +128,9 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
                   Icon={AccessTimeIcon}
                   LANGUAGE={LANGUAGE}
                   data={
-                    formatNumberWithCommas(obdRollupData.value.driverTime) +
-                    " h"
+                    formatNumberWithCommas(
+                      obdRollupDataValuesDataMock.driverTime,
+                    ) + " h"
                   }
                   title={LANGUAGE.teleOBD.resumes.timeDriven}
                 />
@@ -132,7 +139,7 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
                   LANGUAGE={LANGUAGE}
                   data={
                     formatNumberWithCommas(
-                      obdRollupData.value.driverIdleTime ?? 0,
+                      obdRollupDataValuesDataMock.driverIdleTime ?? 0,
                     ) + " h"
                   }
                   title={LANGUAGE.teleOBD.resumes.timeIdle}
@@ -142,19 +149,19 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
             <section className={styles.cardssection}>
               <CardGenThird>
                 <CardContentTCT5
-                  data={obdRollupData.value}
+                  data={obdRollupDataValuesDataMock}
                   LANGUAGE={LANGUAGE}
                 />
               </CardGenThird>
               <CardGenThird>
                 <CardContentDrivenTime
-                  data={obdRollupData.value}
+                  data={obdRollupDataValuesDataMock}
                   LANGUAGE={LANGUAGE}
                 />
               </CardGenThird>
               <CardGenThird>
                 <CardContentIdle
-                  data={obdRollupData.value}
+                  data={obdRollupDataValuesDataMock}
                   LANGUAGE={LANGUAGE}
                 />
               </CardGenThird>
@@ -170,14 +177,15 @@ export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
               />
             )}
           </>
-        )}
+        )
+      }
 
-      <DataErrorHandler
+      {/* <DataErrorHandler
         LANGUAGE={LANGUAGE}
         hasData={!!obdRollupData?.value}
         infoStatus={obdRollupStatus}
         statusCode={obdRollupData?.statusCode}
-      />
+      /> */}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getObdRollup } from "@/modules/telemetryObd/services/rollup/rollup";
 
-interface ObdRollupDetails {
+export interface ObdRollupDetails {
   name: string;
   plate: string;
   driverDistance: null | number; // totalDistance
@@ -46,7 +46,7 @@ export const fetchObdRollup = createAsyncThunk(
     logoutState: () => void;
   }) => {
     return getObdRollup({ startDate, endDate, logoutState });
-  }
+  },
 );
 
 const initialState: InitialState = {
