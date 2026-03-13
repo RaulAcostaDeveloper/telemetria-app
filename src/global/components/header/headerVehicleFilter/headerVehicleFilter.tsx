@@ -15,6 +15,7 @@ import styles from "./headerVehicleFilter.module.css";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { RootState } from "@/global/redux/store";
 import { Vehicles } from "@/global/redux/serviceSlices/vehiclesSlice";
+import { vehiclesDataMock } from "@/global/dataMock/vehicles";
 
 type Action = { label: string; routePrefix: string; title: string };
 const iconMapping: { [key: string]: JSX.Element } = {
@@ -63,13 +64,13 @@ const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
   }, [pathname]);
 
   /** Filtra todos los resultados que coincidan por "plate" */
-  const filteredByPlate = vehiclesData?.value?.vehicles?.filter((vehicle) =>
+  const filteredByPlate = vehiclesDataMock.filter((vehicle) =>
     vehicle.plate.toLowerCase().includes(query.toLowerCase()),
   );
   /** Filtra todos los resultados que coincidan por el primer "imeIs" en el array.
    *   Ejemplo imei con proposito de saber que teclear en input: 868689060250000 */
-  const filteredByImei = vehiclesData?.value?.vehicles?.filter((vehicle) =>
-    vehicle.imeIs[0].toLowerCase().includes(query.toLowerCase()),
+  const filteredByImei = vehiclesDataMock.filter((vehicle) =>
+    vehicle.imeIs[0]?.toLowerCase().includes(query.toLowerCase()),
   );
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
