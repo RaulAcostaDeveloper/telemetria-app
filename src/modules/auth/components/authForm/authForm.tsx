@@ -63,7 +63,7 @@ export const AuthForm = ({ LANGUAGE }: Props) => {
   }, [loginServerData, loginStatus]);
 
   const onClickGetToken = async () => {
-    tryLoginHook("encrypted"); // quitar esto y poner código debajo
+    tryLoginHook(); // quitar esto y poner código debajo
     // const encrypted = await encryptUserAndPassword(`${name}:${password}`);
     // if (encrypted !== undefined) {
     //   tryLoginHook(encrypted);
