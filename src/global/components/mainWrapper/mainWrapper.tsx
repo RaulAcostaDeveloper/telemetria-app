@@ -23,6 +23,7 @@ import { SPANISH } from "../../language/constants/spanish";
 import { STORAGE_KEYS } from "../../localStorage/constants/storageKeys";
 import { ToastAlertConfig } from "../toastAlertConfig/toastAlertConfig";
 import { useAuth } from "../../../modules/auth/utils";
+import { MainFooter } from "../mainFooter/mainFooter";
 
 interface Props {
   children: React.ReactNode;
@@ -35,7 +36,7 @@ export const MainWrapper = ({ children }: Props) => {
 
   // Opción del lenguaje (ejemplo inglés, español, etc.)
   const languageSelected = useSelector(
-    (state: RootState) => state.languageOption.languageSelected
+    (state: RootState) => state.languageOption.languageSelected,
   );
 
   // Usuario autenticado a nivel estado de la aplicación
@@ -71,7 +72,7 @@ export const MainWrapper = ({ children }: Props) => {
   useEffect(() => {
     const defaultValue: boolean = false;
     const storedValue: boolean | null = localStorageGetItem(
-      STORAGE_KEYS.MENU_OPEN
+      STORAGE_KEYS.MENU_OPEN,
     );
 
     if (storedValue) {
@@ -131,6 +132,7 @@ export const MainWrapper = ({ children }: Props) => {
         {/* Contenido de la página */}
         <LanguageContext.Provider value={LANGUAGE}>
           <PageContainer>{children}</PageContainer>
+          <MainFooter />
         </LanguageContext.Provider>
       </div>
     </div>
