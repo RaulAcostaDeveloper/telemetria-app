@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 
 import CheckLogin from "@/modules/auth/components/checkLogin/checkLogin";
-import encryptUserAndPassword from "../../utils/cryptoReference/cryptoReference";
+// import encryptUserAndPassword from "../../utils/cryptoReference/cryptoReference";
 import styles from "./authForm.module.css";
 import { ButtonTypes } from "@/global/components/generalButton/generalButton.model";
 import { ErrorMessage } from "@/global/components/errorMessage/errorMessage";

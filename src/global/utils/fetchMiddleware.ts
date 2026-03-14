@@ -66,7 +66,7 @@ export async function fetchMiddleware({
   cacheKey,
   fullUrl,
   options,
-  forceRefresh,
+  // forceRefresh,
   logoutState,
 }: MiddlewareProps) {
   const { API_VERSION } = await getEnvClient();

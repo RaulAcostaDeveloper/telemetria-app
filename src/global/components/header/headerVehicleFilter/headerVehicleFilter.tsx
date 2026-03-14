@@ -35,7 +35,7 @@ interface Props {
 const HeaderVehicleFilter: React.FC<Props> = ({ LANGUAGE }) => {
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-  const { vehiclesData } = useSelector((state: RootState) => state.vehicles);
+  // const { vehiclesData } = useSelector((state: RootState) => state.vehicles);
   const containerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 

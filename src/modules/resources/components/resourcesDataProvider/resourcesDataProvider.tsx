@@ -7,10 +7,8 @@ import {
   MODAL_OPTION,
   columnsTable,
 } from "@/global/components/table/table.model";
-import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { RootState } from "@/global/redux/store";
-import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { Table, TabsContent } from "@/global/components";
 import { legibleDate, removeMidnightHour } from "@/global/utils/dateUtils";
 import {
@@ -30,21 +28,13 @@ interface Props {
 }
 
 export const ResourcesDataProvider = ({ LANGUAGE }: Props) => {
-  const { vehiclesData, vehiclesStatus } = useSelector(
-    (state: RootState) => state.vehicles,
-  );
+  const { vehiclesData } = useSelector((state: RootState) => state.vehicles);
 
-  const { driversData, driversStatus } = useSelector(
-    (state: RootState) => state.drivers,
-  );
+  const { driversData } = useSelector((state: RootState) => state.drivers);
 
-  const { devicesData, devicesStatus } = useSelector(
-    (state: RootState) => state.devices,
-  );
+  const { devicesData } = useSelector((state: RootState) => state.devices);
 
-  const { groupsData, groupsStatus } = useSelector(
-    (state: RootState) => state.groups,
-  );
+  const { groupsData } = useSelector((state: RootState) => state.groups);
 
   const fuelTabs = [
     {

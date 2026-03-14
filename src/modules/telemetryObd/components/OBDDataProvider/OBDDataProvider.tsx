@@ -12,11 +12,9 @@ import CardContentIdle from "@/modules/telemetryObd/components/cardsDeck/cardCon
 import CardContentTCT5 from "@/modules/telemetryObd/components/cardsDeck/cardContentTCT5";
 import CardGenThird from "@/modules/telemetryObd/components/cardsDeck/cardGenThird";
 import styles from "./OBDDataProvider.module.css";
-import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import { FuelDataReport } from "@/modules/fuel/components/fuelNowContainer/fuelDataReport/fuelDataReport";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { RootState } from "@/global/redux/store";
-import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { Table } from "@/global/components";
 import { columnsTable } from "@/global/components/table/table.model";
 import { formatNumberWithCommas } from "@/global/utils/stringUtils";
@@ -31,9 +29,7 @@ interface Props {
 }
 
 export const OBDDataProvider = ({ LANGUAGE, hideTable = false }: Props) => {
-  const { obdRollupData, obdRollupStatus } = useSelector(
-    (state: RootState) => state.obdRollup,
-  );
+  const { obdRollupData } = useSelector((state: RootState) => state.obdRollup);
 
   const teleVehiclesOBDData = useMemo(() => {
     return obdRollupDetailsDataMock.map((value) => ({

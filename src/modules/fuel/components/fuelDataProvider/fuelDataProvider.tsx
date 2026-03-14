@@ -8,11 +8,11 @@ import { LocalShipping, LocalGasStation, Map } from "@mui/icons-material";
 import DonutGraphic from "@/modules/fuel/components/donutGraphic/DonutGraphic";
 import ReportSummary from "@/modules/fuel/components/reportSummary/ReportSummary";
 import styles from "./fuelDataProvider.module.css";
-import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
+// import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import { FuelPageZonesTable } from "@/modules/zones/components/fuelPageZonesTable/fuelPageZonesTable";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { RootState } from "@/global/redux/store";
-import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
+// import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { Table, TabsContent } from "@/global/components";
 import { columnsTable } from "@/global/components/table/table.model";
 import { legibleDate } from "@/global/utils/dateUtils";
@@ -24,7 +24,7 @@ interface Props {
 }
 
 export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
-  const { fuelSummaryData, fuelSummaryStatus } = useSelector(
+  const { fuelSummaryData } = useSelector(
     (state: RootState) => state.fuelSummary,
   );
 
@@ -270,7 +270,6 @@ export const FuelDataProvider = ({ LANGUAGE, hideTabs = false }: Props) => {
                       LANGUAGE={LANGUAGE}
                       columns={fuelReportChargesColumns}
                       data={fuelReportCharges}
-                      idZone="idZone"
                       showViewModal
                       idImei="imei"
                     />

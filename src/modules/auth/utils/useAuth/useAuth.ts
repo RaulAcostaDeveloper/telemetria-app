@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { usePathname, useRouter } from "next/navigation";
 
 import {
-  fetchLogin,
   loginAction,
   logoutAction,
 } from "@/global/redux/serviceSlices/authSlice";
@@ -18,7 +17,7 @@ export const useAuth = () => {
   const dispatch = useDispatch<AppDispatch>();
   const pathname = usePathname();
 
-  const [isLoginForm, setIsLoginForm] = useState(false);
+  const [isLoginForm] = useState(false);
   const [isFromFirstSession, setIsFromFirstSession] = useState(false);
 
   // Estados del slice
@@ -68,7 +67,7 @@ export const useAuth = () => {
     }
   }, [isFromFirstSession, brandsData, brandsStatus]);
 
-  const tryLoginHook = (encrypted: string) => {
+  const tryLoginHook = () => {
     loginState(); // quitar esto y poner lo de abajo
     router.push("/home");
     // // Llama al servicio

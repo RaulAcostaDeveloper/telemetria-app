@@ -6,10 +6,8 @@ import {
   columnsTable,
   MODAL_OPTION,
 } from "@/global/components/table/table.model";
-import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { RootState } from "@/global/redux/store";
-import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { Table } from "@/global/components";
 import { zonesDataMock } from "@/global/dataMock/zones";
 
@@ -18,7 +16,7 @@ interface Props {
 }
 
 export const FuelPageZonesTable = ({ LANGUAGE }: Props) => {
-  const { zonesSummaryData, zonesSummaryStatus } = useSelector(
+  const { zonesSummaryData } = useSelector(
     (state: RootState) => state.zonesSummary,
   );
 
