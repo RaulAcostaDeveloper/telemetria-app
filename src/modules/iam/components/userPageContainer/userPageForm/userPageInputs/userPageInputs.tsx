@@ -26,12 +26,14 @@ export const UserPageInputs = ({
         name="usernNameUserForm"
         value={nickName}
         set={setNickname}
+        LANGUAGE={LANGUAGE}
       />
       <Input
         title={LANGUAGE.iam.users.tableColumns.name}
         name="familyNameUserForm"
         value={familyName}
         set={setFamilyName}
+        LANGUAGE={LANGUAGE}
       />
     </div>
   );
