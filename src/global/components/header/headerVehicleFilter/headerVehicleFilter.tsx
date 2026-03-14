@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSelector } from "react-redux";
 
 import {
   LocalGasStation as LocalGasStationIcon,
@@ -13,7 +12,6 @@ import {
 import styles from "./headerVehicleFilter.module.css";
 // Tipado
 import { LanguageInterface } from "@/global/language/constants/language.model";
-import { RootState } from "@/global/redux/store";
 import { Vehicles } from "@/global/redux/serviceSlices/vehiclesSlice";
 import { vehiclesDataMock } from "@/global/dataMock/vehicles";
 
