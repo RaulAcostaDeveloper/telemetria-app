@@ -9,8 +9,8 @@ import {
 } from "@/global/redux/serviceSlices/authSlice";
 import { AppDispatch, RootState } from "@/global/redux/store";
 import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
-import { callLogout } from "@/global/redux/serviceSlices/logoutSlice";
-import { fetchBrands } from "@/global/redux/serviceSlices/brandsSlice";
+// import { callLogout } from "@/global/redux/serviceSlices/logoutSlice";
+// import { fetchBrands } from "@/global/redux/serviceSlices/brandsSlice";
 
 export const useAuth = () => {
   const router = useRouter();
