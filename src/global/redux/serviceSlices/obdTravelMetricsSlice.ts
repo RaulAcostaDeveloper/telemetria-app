@@ -4,7 +4,7 @@ import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getObdTravelMetrics } from "@/modules/telemetryObd/services/travel-metrics/travel-metrics";
 import { toLocalDateTime } from "@/global/utils/dateUtils";
 
-interface ObdTravelMetricsTimeTraveledDetails {
+export interface ObdTravelMetricsTimeTraveledDetails {
   lat: number;
   lon: number;
   dateGPS: string;
@@ -56,18 +56,18 @@ export const fetchObdTravelMetrics = createAsyncThunk(
     logoutState: () => void;
   }) => {
     return getObdTravelMetrics({ imei, startDate, endDate, logoutState });
-  }
+  },
 );
 
 const travelMetricsFormatter = (
-  data: ObdTravelMetricsData | null
+  data: ObdTravelMetricsData | null,
 ): ObdTravelMetricsData | null => {
   if (data && data.value) {
     const timeTraveledDetails = data.value.timeTraveledDetails.map(
       (messages) => ({
         ...messages,
         dateGPS: toLocalDateTime(messages.dateGPS),
-      })
+      }),
     );
 
     return {
