@@ -1,0 +1,28 @@
+import { LastFuelReportValues } from "../redux/serviceSlices/lastFuelReportSlice";
+
+export const lastFuelReportDataMock: LastFuelReportValues = {
+  id: "lfr_001",
+  lmId: "lm_010",
+  accountId: 5001,
+  deviceId: "862095040123456",
+  eventId: 10,
+  dateGps: "2026-03-15T10:08:55Z",
+  dateSvr: "2026-03-15T10:08:57Z",
+  lat: 19.1767,
+  lon: -96.137,
+  address: "Zona Plaza Américas, Boca del Río, Veracruz",
+  speed: 0,
+  course: 180,
+  height: 8,
+  odometer: 120390,
+  hourmeter: null,
+  externalPower: 12.0,
+  bckBatPercentaje: 82,
+  ignition: false,
+  tanksLevels: "64.1",
+  adcVoltages: null,
+  canCurrentLevel: 63,
+  dateAvl: "2026-03-15T10:08:56Z",
+  sensorCurrentLevel: 62,
+  maxFuelCapacity: 100,
+};

@@ -1,20 +1,22 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
 import GeoModal, { GeoModalData } from "@/global/components/geoModal/geoModal";
 import styles from "./fuelReportDataProvider.module.css";
-import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
+// import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import { FuelBehaviorTab } from "@/modules/fuel/components/fuelBehaviorTab/fuelBehaviorTab";
 import { FuelNowTab } from "../fuelNowTab/fuelNowTab";
 import { FuelPerformanceMetrics } from "@/modules/fuel/components";
 import { Insights, ListAlt, LocalGasStation } from "@mui/icons-material";
-import { RootState } from "@/global/redux/store";
-import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
+// import { RootState } from "@/global/redux/store";
+// import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { TabsContent } from "@/global/components";
 import { useLanguage } from "@/global/language/components/languageProvider/languageProvider";
 import { FuelBehaviorHighChart } from "../FuelBehaviorHighChart/FuelBehaviorHighChart";
+import { fuelDataValuesDataMock } from "@/global/dataMock/fuelData";
+import { fuelPerformanceDataMock } from "@/global/dataMock/fuelPerformance";
 
 export interface OBValue {
   startDate: string;
@@ -41,13 +43,13 @@ export const FuelReportDataProvider = ({
   const [opBEngineOnIdle, setOpBEngineOnIdle] = useState<OBValue[]>([]);
   const [opBEngineOnMoving, setOpBEngineOnMoving] = useState<OBValue[]>([]);
 
-  const { fuelDataData, fuelDataStatus } = useSelector(
-    (state: RootState) => state.fuelData,
-  );
+  // const { fuelDataData, fuelDataStatus } = useSelector(
+  //   (state: RootState) => state.fuelData,
+  // );
 
-  const { fuelPerformanceData, fuelPerformanceStatus } = useSelector(
-    (state: RootState) => state.fuelPerformance,
-  );
+  // const { fuelPerformanceData, fuelPerformanceStatus } = useSelector(
+  //   (state: RootState) => state.fuelPerformance,
+  // );
 
   const vehicleTabs = [
     { text: LANGUAGE.fuelVehicle.tabs.behavior, icon: Insights },
@@ -69,7 +71,7 @@ export const FuelReportDataProvider = ({
     const engineOnIdle: OBValue[] = [];
     const engineOnMoving: OBValue[] = [];
 
-    const levelMessages = fuelDataData?.value?.levelMessages;
+    const levelMessages = fuelDataValuesDataMock.levelMessages;
     if (!levelMessages) return;
 
     levelMessages.forEach((el, i) => {
@@ -107,7 +109,7 @@ export const FuelReportDataProvider = ({
     /* setOpBEngineOffCoast(engineOffCoasting); */
     setOpBEngineOnIdle(engineOnIdle);
     setOpBEngineOnMoving(engineOnMoving);
-  }, [fuelDataData]);
+  }, [fuelDataValuesDataMock]);
 
   return (
     <div className={styles.fuelReportDataProvider}>
@@ -115,46 +117,50 @@ export const FuelReportDataProvider = ({
         tabOptions={vehicleTabs}
         tabContents={[
           <div key={0}>
-            {fuelDataStatus === SERVICE_STATUS.succeeded &&
-              fuelDataData?.value && (
-                <>
-                  <FuelBehaviorTab LANGUAGE={LANGUAGE}>
-                    <FuelBehaviorHighChart
-                      LANGUAGE={LANGUAGE}
-                      fuelDataData={fuelDataData.value}
-                      opBEngineOff={opBEngineOff}
-                      /* opBEngineOffCoasting={opBEngineOffCoasting} */
-                      opBEngineOnIdle={opBEngineOnIdle}
-                      opBEngineOnMoving={opBEngineOnMoving}
-                    />
-                  </FuelBehaviorTab>
-                </>
-              )}
+            {
+              // fuelDataStatus === SERVICE_STATUS.succeeded &&
+              //   fuelDataData?.value && (
+              <>
+                <FuelBehaviorTab LANGUAGE={LANGUAGE}>
+                  <FuelBehaviorHighChart
+                    LANGUAGE={LANGUAGE}
+                    fuelDataData={fuelDataValuesDataMock}
+                    opBEngineOff={opBEngineOff}
+                    /* opBEngineOffCoasting={opBEngineOffCoasting} */
+                    opBEngineOnIdle={opBEngineOnIdle}
+                    opBEngineOnMoving={opBEngineOnMoving}
+                  />
+                </FuelBehaviorTab>
+              </>
+              // )
+            }
 
-            <DataErrorHandler
+            {/* <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!fuelDataData?.value}
               infoStatus={fuelDataStatus}
               statusCode={fuelDataData?.statusCode}
-            />
+            /> */}
           </div>,
           <div key={1}>
-            {fuelPerformanceStatus === SERVICE_STATUS.succeeded &&
-              fuelPerformanceData?.value && (
-                <>
-                  <FuelPerformanceMetrics
-                    LANGUAGE={LANGUAGE}
-                    fuelPerformanceData={fuelPerformanceData.value}
-                  />
-                </>
-              )}
+            {
+              // fuelPerformanceStatus === SERVICE_STATUS.succeeded &&
+              //   fuelPerformanceData?.value && (
+              <>
+                <FuelPerformanceMetrics
+                  LANGUAGE={LANGUAGE}
+                  fuelPerformanceData={fuelPerformanceDataMock}
+                />
+              </>
+              // )
+            }
 
-            <DataErrorHandler
+            {/* <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!fuelPerformanceData?.value}
               infoStatus={fuelPerformanceStatus}
               statusCode={fuelPerformanceData?.statusCode}
-            />
+            /> */}
           </div>,
           <div key={2}>
             <FuelNowTab

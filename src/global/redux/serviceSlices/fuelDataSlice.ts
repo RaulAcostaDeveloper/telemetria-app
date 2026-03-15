@@ -4,7 +4,7 @@ import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getFuelData } from "@/modules/fuel/services/fuelData/fuelData";
 import { toLocalDateTime } from "@/global/utils/dateUtils";
 
-interface LevelMessages {
+export interface LevelMessages {
   eventId: number;
   dateGps: string;
   dateServer: string;
@@ -23,7 +23,7 @@ interface LevelMessages {
   tanks: string;
 }
 
-interface Charges {
+export interface Charges {
   address: string;
   dateGps: string;
   deviceBattery: number | null;
@@ -43,7 +43,7 @@ interface Charges {
   startDate: string;
 }
 
-interface Discharges {
+export interface Discharges {
   address: string;
   dateGps: string;
   deviceBattery: number | null;
@@ -63,7 +63,7 @@ interface Discharges {
   startDate: string;
 }
 
-interface DailyPerformances {
+export interface DailyPerformances {
   startDate: string;
   endDate: string;
   averagePerformance: number | null;
@@ -75,7 +75,7 @@ interface DailyPerformances {
   kilometersTraveled: number;
 }
 
-interface PerformancesBetweenCharges {
+export interface PerformancesBetweenCharges {
   endDatePerformance: string;
   startDatePerformance: string;
   fuelConsumed: number | null;
@@ -94,7 +94,7 @@ interface PerformancesBetweenCharges {
 //   status: number; // estados: estacionado, encendido y en movimiento
 // }
 
-interface ShowFuelDataSelection {
+export interface ShowFuelDataSelection {
   isCAN: boolean;
   isSensor: boolean;
 }
@@ -135,7 +135,7 @@ export const fetchFuelData = createAsyncThunk(
     logoutState: () => void;
   }) => {
     return getFuelData({ imei, startDate, endDate, logoutState });
-  }
+  },
 );
 
 const fuelDataFormatter = (data: FuelDataData | null): FuelDataData | null => {
@@ -166,7 +166,7 @@ const fuelDataFormatter = (data: FuelDataData | null): FuelDataData | null => {
         ...dailyPerformances,
         endDate: toLocalDateTime(dailyPerformances.endDate),
         startDate: toLocalDateTime(dailyPerformances.startDate),
-      })
+      }),
     );
 
     const performancesBetweenCharges =
@@ -174,12 +174,12 @@ const fuelDataFormatter = (data: FuelDataData | null): FuelDataData | null => {
         (performancesBetweenCharges) => ({
           ...performancesBetweenCharges,
           endDatePerformance: toLocalDateTime(
-            performancesBetweenCharges.endDatePerformance
+            performancesBetweenCharges.endDatePerformance,
           ),
           startDatePerformance: toLocalDateTime(
-            performancesBetweenCharges.startDatePerformance
+            performancesBetweenCharges.startDatePerformance,
           ),
-        })
+        }),
       );
 
     return {
