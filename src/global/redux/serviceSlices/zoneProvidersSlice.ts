@@ -3,12 +3,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SERVICE_STATUS } from "./types/serviceTypes";
 import { getZoneProviders } from "@/modules/zones/services/providers/providers";
 
-interface ZoneTypes {
+export interface ZoneTypes {
   name: string;
   id: string;
 }
 
-interface ArrayProviders {
+export interface ArrayProviders {
   zoneTypes: ZoneTypes[];
 }
 
@@ -27,7 +27,7 @@ export const fetchZoneProviders = createAsyncThunk(
   "zoneProviders/fetch",
   async (logoutState: () => void) => {
     return getZoneProviders({ logoutState });
-  }
+  },
 );
 
 const initialState: InitialState = {

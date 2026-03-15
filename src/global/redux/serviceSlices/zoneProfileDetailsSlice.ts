@@ -20,7 +20,7 @@ export interface ZoneProfileDetailsExtends {
   zoneProviderName: string;
 }
 
-interface ZoneProfileDetailsValue {
+export interface ZoneProfileDetailsValue {
   zoneProfileDetailsExtends: ZoneProfileDetailsExtends[];
 }
 
@@ -39,7 +39,7 @@ export const fetchZoneProfileDetails = createAsyncThunk(
   "zoneProfileDetails/fetch",
   async ({ id, logoutState }: { id: string; logoutState: () => void }) => {
     return getZoneProfileDetails({ id, logoutState });
-  }
+  },
 );
 
 const initialState: InitialState = {

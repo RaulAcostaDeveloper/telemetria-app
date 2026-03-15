@@ -1,16 +1,13 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
 
 import { LocalGasStation } from "@mui/icons-material";
 
 import { Table, TabsContent } from "@/global/components";
-import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
 import {
   columnsTable,
   MODAL_OPTION,
 } from "@/global/components/table/table.model";
-import { RootState } from "@/global/redux/store";
 import {
   Charges,
   Discharges,
@@ -24,6 +21,8 @@ import { MarkerData } from "../geoModalZone/googleMaps/googleMapClientComponentZ
 
 import styles from "./zonesDataProvider.module.css";
 import { Collapsable } from "@/global/components/collapsable/collapsable";
+import { zoneDetailsDataMock } from "@/global/dataMock/zoneDetails";
+import { summaryFuelDataMock } from "@/global/dataMock/fuelSummary";
 
 interface Props {
   zoneId: string;
@@ -68,14 +67,6 @@ type WithZoneId = { zoneId: string };
 export const ZonesDataProvider = ({ zoneId }: Props) => {
   const LANGUAGE = useLanguage();
   const [updatesTracker, setUpdatesTracker] = useState(0);
-
-  const { fuelSummaryData, fuelSummaryStatus } = useSelector(
-    (state: RootState) => state.fuelSummary,
-  );
-
-  const { zoneDetailsData, zoneDetailsStatus } = useSelector(
-    (state: RootState) => state.zoneDetails,
-  );
 
   function findWithZoneId<T extends WithZoneId>(arrObj: T[]): T[] | undefined {
     return arrObj.filter((v) => v.zoneId === zoneId);
@@ -126,7 +117,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
   ];
 
   const zoneCircle = useMemo(() => {
-    const zoneD = zoneDetailsData?.value;
+    const zoneD = zoneDetailsDataMock;
     return {
       center: { lat: zoneD?.lat, lng: zoneD?.lon },
       radius: zoneD?.radioZone,
@@ -146,10 +137,10 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
       zoneProviderName: zoneD?.zoneProviderName,
       zoneCategoryName: zoneD?.zoneCategoryName,
     };
-  }, [zoneDetailsData]);
+  }, [zoneDetailsDataMock]);
 
   const loadsSummary = useMemo(() => {
-    return fuelSummaryData?.value?.charges.map((v) => {
+    return summaryFuelDataMock.charges.map((v) => {
       const zoneCircleNoId: ZoneCircleNoId = omitProperty(zoneCircle, "zoneId");
 
       return {
@@ -176,7 +167,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
         ...zoneCircleNoId,
       };
     });
-  }, [fuelSummaryData, zoneCircle]);
+  }, [summaryFuelDataMock, zoneCircle]);
 
   const loadsSingle: ChargesVarLng[] | undefined =
     loadsSummary && findWithZoneId(loadsSummary);
@@ -233,7 +224,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
   ];
 
   const unloadsSummary = useMemo(() => {
-    return fuelSummaryData?.value?.discharges.map((v) => {
+    return summaryFuelDataMock.discharges.map((v) => {
       const zoneCircleNoId: ZoneCircleNoId = omitProperty(zoneCircle, "zoneId");
 
       return {
@@ -260,7 +251,7 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
         ...zoneCircleNoId,
       };
     });
-  }, [fuelSummaryData, zoneCircle]);
+  }, [summaryFuelDataMock, zoneCircle]);
 
   const unloadsSingle: DischargesVarLng[] | undefined =
     unloadsSummary && findWithZoneId(unloadsSummary);
@@ -320,27 +311,27 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
   const allMarkers = [...formatedMarkersLoads, ...formatedMarkersUnloads];
 
   useEffect(() => {
-    if (zoneDetailsData) {
+    if (zoneDetailsDataMock) {
       setUpdatesTracker((t) => t + 1);
     }
-  }, [zoneDetailsData]);
+  }, [zoneDetailsDataMock]);
 
   return (
     <div className={styles.zonesDataProvider}>
-      {zoneDetailsData?.value && zoneDetailsStatus && (
+      {zoneDetailsDataMock && (
         <ZoneProfileData
           LANGUAGE={LANGUAGE}
           id={zoneId}
-          zoneDetailsData={zoneDetailsData.value}
+          zoneDetailsData={zoneDetailsDataMock}
         />
       )}
 
-      <DataErrorHandler
+      {/* <DataErrorHandler
         LANGUAGE={LANGUAGE}
-        hasData={!!zoneDetailsData?.value}
+        hasData={!!zoneDetailsDataMock}
         infoStatus={zoneDetailsStatus}
-        statusCode={zoneDetailsData?.statusCode}
-      />
+        statusCode={zoneDetailsDataMocksCode}
+      /> */}
 
       <div className={styles.separator}>
         <Collapsable LANGUAGE={LANGUAGE} title={LANGUAGE.zones.tabs.map}>
@@ -371,12 +362,12 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
               />
             )}
 
-            <DataErrorHandler
+            {/* <DataErrorHandler
               LANGUAGE={LANGUAGE}
               hasData={!!loadsSingle}
               infoStatus={fuelSummaryStatus}
               statusCode={fuelSummaryData?.statusCode}
-            />
+            /> */}
           </div>,
           <div key={1}>
             <div>
@@ -392,12 +383,12 @@ export const ZonesDataProvider = ({ zoneId }: Props) => {
                 />
               )}
 
-              <DataErrorHandler
+              {/* <DataErrorHandler
                 LANGUAGE={LANGUAGE}
                 hasData={!!unloadsSingle}
                 infoStatus={fuelSummaryStatus}
                 statusCode={fuelSummaryData?.statusCode}
-              />
+              /> */}
             </div>
           </div>,
         ]}

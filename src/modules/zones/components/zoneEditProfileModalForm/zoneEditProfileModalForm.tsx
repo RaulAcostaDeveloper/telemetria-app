@@ -3,14 +3,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
-import LoaderAnimation from "@/global/components/loaderAnimation/loaderAnimation";
 import { AppDispatch, RootState } from "@/global/redux/store";
 import { FetcherProfileData } from "./fetchetProfileData/fetcherProfileData";
 import { LanguageInterface } from "@/global/language/constants/language.model";
 import { Modal } from "@/global/components";
 import { ProfileForm } from "./profileForm/profileForm";
 import { PutProfile } from "../../services/putProfile/putProfile";
-import { SERVICE_STATUS } from "@/global/redux/serviceSlices/types/serviceTypes";
 import { fetchPostZoneProfile } from "@/global/redux/serviceSlices/postZoneProfile";
 import { fetchPutZoneProfile } from "@/global/redux/serviceSlices/putZoneProfile";
 import { fetchZoneDetails } from "@/global/redux/serviceSlices/zoneDetails";
@@ -20,7 +18,7 @@ import { getCategories } from "./categories";
 import { isDifferentProfile } from "../../utils/compareProfileObjects";
 import { resetZoneProfileDetailsSlice } from "@/global/redux/serviceSlices/zoneProfileDetailsSlice";
 import { useAuth } from "@/modules/auth/utils";
-import { DataErrorHandler } from "@/global/components/DataErrorHandler/DataErrorHandler";
+import { zoneProfileDetailsDataDataMock } from "@/global/dataMock/zoneProfileDetails";
 
 interface Props {
   LANGUAGE: LanguageInterface;
@@ -47,23 +45,8 @@ export const ZoneEditProfileModalForm = ({
     (state: RootState) => state.calendar,
   );
 
-  const { putZoneProfileStatus } = useSelector(
-    (state: RootState) => state.putZoneProfile,
-  );
-  const { postZoneProfileStatus } = useSelector(
-    (state: RootState) => state.postZoneProfile,
-  );
-
   const { zoneCategoriesData, zoneCategoriesStatus } = useSelector(
     (state: RootState) => state.zoneCategories,
-  );
-
-  const { zoneProvidersData, zoneProvidersStatus } = useSelector(
-    (state: RootState) => state.zoneProviders,
-  );
-
-  const { zoneProfileDetailsData, zoneProfileDetailsStatus } = useSelector(
-    (state: RootState) => state.zoneProfileDetails,
   );
 
   const [authCharges, setAuthCharges] = useState<string>("");
@@ -77,7 +60,7 @@ export const ZoneEditProfileModalForm = ({
 
   const onConfirm = () => {
     const profileDetails =
-      zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0];
+      zoneProfileDetailsDataDataMock.zoneProfileDetailsExtends[0];
 
     if (isPut && profileDetails) {
       // PUT
@@ -170,8 +153,8 @@ export const ZoneEditProfileModalForm = ({
 
   useEffect(() => {
     // Inicializar con datos
-    if (zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0]) {
-      const data = zoneProfileDetailsData?.value?.zoneProfileDetailsExtends[0];
+    if (zoneProfileDetailsDataDataMock.zoneProfileDetailsExtends[0]) {
+      const data = zoneProfileDetailsDataDataMock.zoneProfileDetailsExtends[0];
       setIsPut(true);
 
       setName(data.nick);
@@ -183,7 +166,7 @@ export const ZoneEditProfileModalForm = ({
       setColor(data.color);
       setDescription(data.description);
     }
-  }, [zoneProfileDetailsData]);
+  }, [zoneProfileDetailsDataDataMock]);
 
   useEffect(() => {
     // Validar que tengamos los ID correctos de categorías
@@ -227,51 +210,29 @@ export const ZoneEditProfileModalForm = ({
           title={LANGUAGE.table.actions.addProfileToZone}
         >
           <FetcherProfileData id={id} />
-          {/* Cargar datos del formulario */}
-          {postZoneProfileStatus === SERVICE_STATUS.loading ||
-          putZoneProfileStatus === SERVICE_STATUS.loading ||
-          zoneProfileDetailsStatus === SERVICE_STATUS.loading ||
-          zoneCategoriesStatus === SERVICE_STATUS.loading ||
-          zoneProvidersStatus === SERVICE_STATUS.loading ? (
-            <LoaderAnimation />
-          ) : (
-            <>
-              {/* No puede ser !== 200 porque debe soportar 204 (formulario vacío) */}
-              {zoneProfileDetailsData?.statusCode === 429 ? (
-                <DataErrorHandler
-                  LANGUAGE={LANGUAGE}
-                  hasData={false}
-                  infoStatus={zoneProfileDetailsStatus}
-                  statusCode={zoneProfileDetailsData?.statusCode}
-                />
-              ) : (
-                <ProfileForm
-                  LANGUAGE={LANGUAGE}
-                  authCharges={authCharges}
-                  authDisharges={authDisharges}
-                  authRalenti={authRalenti}
-                  categoryId={categoryId}
-                  closeModal={closeModal}
-                  color={color}
-                  description={description}
-                  name={name}
-                  onConfirm={onConfirm}
-                  providerId={providerId}
-                  setAuthCharges={setAuthCharges}
-                  setAuthDisharges={setAuthDisharges}
-                  setAuthRalenti={setAuthRalenti}
-                  setCategoryId={setCategoryId}
-                  setColor={setColor}
-                  setDescription={setDescription}
-                  setName={setName}
-                  setProviderId={setProviderId}
-                  zoneCategoriesData={zoneCategoriesData}
-                  zoneCategoriesStatus={zoneCategoriesStatus}
-                  zoneProvidersData={zoneProvidersData}
-                />
-              )}
-            </>
-          )}
+          <ProfileForm
+            LANGUAGE={LANGUAGE}
+            authCharges={authCharges}
+            authDisharges={authDisharges}
+            authRalenti={authRalenti}
+            categoryId={categoryId}
+            closeModal={closeModal}
+            color={color}
+            description={description}
+            name={name}
+            onConfirm={onConfirm}
+            providerId={providerId}
+            setAuthCharges={setAuthCharges}
+            setAuthDisharges={setAuthDisharges}
+            setAuthRalenti={setAuthRalenti}
+            setCategoryId={setCategoryId}
+            setColor={setColor}
+            setDescription={setDescription}
+            setName={setName}
+            setProviderId={setProviderId}
+            zoneCategoriesData={zoneCategoriesData}
+            zoneCategoriesStatus={zoneCategoriesStatus}
+          />
         </Modal>
       )}
     </>
