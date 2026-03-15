@@ -52,18 +52,20 @@ export const useAuth = () => {
 
   useEffect(() => {
     if (isFromFirstSession) {
-      if (
-        200 === brandsData?.statusCode &&
-        brandsStatus === SERVICE_STATUS.succeeded
-      ) {
-        loginState();
-      } else if (
-        brandsStatus !== SERVICE_STATUS.idle &&
-        brandsStatus !== SERVICE_STATUS.loading &&
-        200 !== brandsData?.statusCode
-      ) {
-        logoutState();
-      }
+      logoutState();
+
+      // if (
+      //   200 === brandsData?.statusCode &&
+      //   brandsStatus === SERVICE_STATUS.succeeded
+      // ) {
+      //   loginState();
+      // } else if (
+      //   brandsStatus !== SERVICE_STATUS.idle &&
+      //   brandsStatus !== SERVICE_STATUS.loading &&
+      //   200 !== brandsData?.statusCode
+      // ) {
+      //   logoutState();
+      // }
     }
   }, [isFromFirstSession, brandsData, brandsStatus]);
 
@@ -77,7 +79,7 @@ export const useAuth = () => {
 
   // Prueba si trae la cookie, desde el primer render
   const tryFirstServerSession = () => {
-    dispatch(fetchBrands());
+    // dispatch(fetchBrands());
     setIsFromFirstSession(true);
   };
 
@@ -96,7 +98,7 @@ export const useAuth = () => {
     // Actualizar el estado de redux
     dispatch(logoutAction());
     if (isPushedLogin) {
-      dispatch(callLogout());
+      // dispatch(callLogout());
       router.push("/login");
     }
   };
